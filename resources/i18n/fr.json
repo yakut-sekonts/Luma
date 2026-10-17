@@ -469,6 +469,10 @@
     "Sampled color": "Couleur échantillonnée",
     "Sampling…": "Échantillonnage…",
     "Selection component": "Composant de sélection",
-    "Subtract": "Soustraire"
+    "Subtract": "Soustraire",
+    "Preset actions": "Actions des préréglages",
+    "Rotate crop left 90°": "Tourner le recadrage de 90° à gauche",
+    "Rotate crop right 90°": "Tourner le recadrage de 90° à droite",
+    "Enable white balance": "Activer la balance des blancs"
   }
 }

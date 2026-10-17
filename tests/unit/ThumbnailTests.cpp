@@ -178,8 +178,16 @@ class ManualResponse final : public QQuickImageResponse {
         return error_;
     }
     void complete(bool error = false) {
-        error_ = error ? "Synthetic thumbnail failure" : QString();
-        emit finished();
+        // The test driver runs on the GUI thread; the response belongs to the image
+        // reader. Queue completion after that thread has registered the response.
+        require(QMetaObject::invokeMethod(
+                    this,
+                    [this, error] {
+                        error_ = error ? "Synthetic thumbnail failure" : QString();
+                        emit finished();
+                    },
+                    Qt::QueuedConnection),
+                "Cannot queue the controlled thumbnail completion.");
     }
 
   private:
@@ -218,14 +226,21 @@ void sourceBindings(const QString &qmlPath) {
     auto *provider = new ManualProvider;
     engine.addImageProvider("controlled", provider);
     QQmlComponent component(&engine);
-    component.setData(("import QtQuick\nimport QtQuick.Controls\nimport \"" +
-                       QUrl::fromLocalFile(qmlPath).toString() +
-                       "\"\nApplicationWindow { width: 200; height: 240; visible: true; PhotoCard "
-                       "{objectName: \"card\"; anchors.fill: parent; index: 0; assetID: \"a\"; "
-                       "filename: \"test\"; thumbnailURL: \"image://controlled/old\"; rating: 0; "
-                       "flagValue: 0; colorLabel: \"\"; selected: false; activePhoto: false} }")
-                          .toUtf8(),
-                      QUrl());
+    component.setData(
+        ("import QtQuick\nimport QtQuick.Controls\nimport \"" +
+         QUrl::fromLocalFile(qmlPath).toString() +
+         "\"\nApplicationWindow { id: fixtureWindow; width: 200; height: 240; "
+         "visible: true; property var observedThumbnail: null; "
+         "property int errorTransitions: 0; property url lastErrorSource; "
+         "Connections { target: fixtureWindow.observedThumbnail; "
+         "function onStatusChanged() { if (fixtureWindow.observedThumbnail.status === Image.Error) "
+         "{ fixtureWindow.lastErrorSource = fixtureWindow.observedThumbnail.source; "
+         "fixtureWindow.errorTransitions++; } } } PhotoCard "
+         "{objectName: \"card\"; anchors.fill: parent; index: 0; assetID: \"a\"; "
+         "filename: \"test\"; thumbnailURL: \"image://controlled/old\"; rating: 0; "
+         "flagValue: 0; colorLabel: \"\"; selected: false; activePhoto: false} }")
+            .toUtf8(),
+        QUrl());
     wait([&] { return component.status() != QQmlComponent::Loading; });
     if (component.isError())
         throw std::runtime_error(component.errorString().toStdString());
@@ -236,6 +251,13 @@ void sourceBindings(const QString &qmlPath) {
     auto *timer = window->findChild<QObject *>("thumbnailRetryTimer");
     auto *quick = qobject_cast<QQuickWindow *>(window.get());
     require(card && image && timer && quick, "PhotoCard test controls are missing.");
+    require(timer->property("interval").toInt() == 1500,
+            "Production thumbnail retry interval changed.");
+    // This fixture triggers the retry itself to verify its source binding. Keep the
+    // production timer from consuming Image.Error before a delayed test observer.
+    require(timer->setProperty("interval", 60000), "Cannot isolate the manual retry fixture.");
+    require(window->setProperty("observedThumbnail", QVariant::fromValue(image)),
+            "Cannot observe the thumbnail error transition.");
     wait([&] { return provider->count() == 1; });
     card->setProperty("thumbnailURL", "image://controlled/new");
     wait([&] { return provider->count() == 2; });
@@ -250,8 +272,26 @@ void sourceBindings(const QString &qmlPath) {
             "Late original thumbnail replaced a newer edited source.");
     card->setProperty("thumbnailURL", "image://controlled/failure");
     wait([&] { return provider->count() == 3; });
+    const int errorBaseline = window->property("errorTransitions").toInt();
+    require(errorBaseline == 0, "An unrelated thumbnail failed before the error fixture.");
     provider->response(2)->complete(true);
-    wait([&] { return image->property("status").toInt() == 3; });
+    try {
+        wait([&] { return image->property("status").toInt() == 3; });
+    } catch (...) {
+        std::cerr << "Thumbnail failure observer status=" << image->property("status").toInt()
+                  << " transitions=" << window->property("errorTransitions").toInt()
+                  << " source=" << image->property("source").toUrl().toString().toStdString()
+                  << " requests=" << provider->count()
+                  << " response_alive=" << static_cast<bool>(provider->response(2))
+                  << " warnings=" << warnings.join('\n').toStdString() << '\n';
+        throw;
+    }
+    require(window->property("errorTransitions").toInt() == errorBaseline + 1 &&
+                window->property("lastErrorSource").toUrl().toString() ==
+                    "image://controlled/failure",
+            "The expected thumbnail Error transition/source was not observed.");
+    require(image->property("status").toInt() == 3 && provider->count() == 3,
+            "Manual retry fixture did not retain the observed thumbnail error.");
     require(QMetaObject::invokeMethod(timer, "triggered"), "Cannot trigger thumbnail retry.");
     wait([&] { return provider->count() == 4; });
     require(image->property("source").toUrl().toString().contains("retry=1"),

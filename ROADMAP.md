@@ -139,3 +139,14 @@ missing-file relinking, recovery, fault injection, UI/performance regression tes
 🗓 Planned. All workflows in requirement §100 pass on supported hardware,
 including local masks, presets, batch sync, export and restart. Signing,
 notarization, release checksums and known issues accompany the release.
+
+
+## After 1.0 — Frontend redesign
+
+Planned after the qualified 1.0 release, as requested on 2026-10-17. Use
+[Impeccable](https://github.com/pbakaus/impeccable) and
+[Taste Skill](https://github.com/Leonxlnx/taste-skill) as design guidance for the
+Qt/QML macOS interface. Begin with an audit of the existing product, then choose
+the visual direction and validate the revised workflows before publication.
+See [redesign direction](docs/POST_1_0_REDESIGN.md). Existing phase order and
+qualification-before-release policy continue to apply.

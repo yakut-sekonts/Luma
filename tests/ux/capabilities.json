@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "completed_phases": ["0.1", "0.2", "0.3", "0.4", "0.5"],
+  "capabilities": {
+    "library": true, "develop": true, "presets": true, "batch": true,
+    "advanced_export": true, "localization": true, "local_masks": true,
+    "brush": true, "range_masks": true, "mask_composition": true,
+    "depth_map": false, "mask_duplicate": false,
+    "metal": false, "progressive": false, "true_one_to_one": false,
+    "ai": false, "merge": false, "catalog_backup": false, "relink": false,
+    "developer_id_notarization": false
+  }
+}

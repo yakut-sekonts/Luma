@@ -1,0 +1,5392 @@
+[
+  {
+    "id": "UX-APP-001",
+    "severity": "P0",
+    "scope": "ALL",
+    "mode": "BLOCKING",
+    "scenario": "50 последовательных запусков и штатных закрытий → 0 crash, каталог каждый раз доступен."
+  },
+  {
+    "id": "UX-APP-002",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "запуск с empty catalog → окно появляется, нет зависшего busy state."
+  },
+  {
+    "id": "UX-APP-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "запуск с последней активной фотографией → active photo восстанавливается без flash чужого preview."
+  },
+  {
+    "id": "UX-APP-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "последний source отсутствует → приложение открывается и сообщает проблему, не зависает."
+  },
+  {
+    "id": "UX-APP-005",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "STRESS",
+    "scenario": "быстро открыть/закрыть приложение 20 раз → нет locked SQLite/zombie process."
+  },
+  {
+    "id": "UX-APP-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Cmd+Q в idle → штатное закрытие без лишнего confirmation."
+  },
+  {
+    "id": "UX-APP-007",
+    "severity": "P0",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Cmd+Q во время autosave → safe wait; edits после restart сохранены."
+  },
+  {
+    "id": "UX-APP-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "закрытие во время import → UI показывает ожидаемое wait/cancel state, no hard hang."
+  },
+  {
+    "id": "UX-APP-009",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "закрытие во время export queue → queue корректно завершается/отменяется."
+  },
+  {
+    "id": "UX-APP-010",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "закрытие во время batch → atomic commit/rollback."
+  },
+  {
+    "id": "UX-APP-011",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "close одновременно при save + export → no deadlock между контроллерами."
+  },
+  {
+    "id": "UX-APP-012",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "resize min→fullscreen→min 50 раз → layout не разваливается."
+  },
+  {
+    "id": "UX-APP-013",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "1000×640 → все критические действия доступны."
+  },
+  {
+    "id": "UX-APP-014",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "ширины 899/900/999/1000/1199/1200/1450 → no layout oscillation."
+  },
+  {
+    "id": "UX-APP-015",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "fullscreen enter/exit 50 раз → валидные scroll positions."
+  },
+  {
+    "id": "UX-APP-016",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "minimize во время background op и restore → операция продолжает жить."
+  },
+  {
+    "id": "UX-APP-017",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "deactivate app mid-drag → gesture завершается или отменяется безопасно."
+  },
+  {
+    "id": "UX-APP-018",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "PERF_LOCAL",
+    "scenario": "cold/warm startup p50/p95/p99."
+  },
+  {
+    "id": "UX-APP-019",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "STRESS",
+    "scenario": "2 часа idle с открытым Develop → нет неограниченного RSS growth."
+  },
+  {
+    "id": "UX-APP-020",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "CHAOS",
+    "scenario": "5 000 случайных resize/mode/dialog действий → no crash/hang."
+  },
+  {
+    "id": "UX-NAV-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Library→Develop→Library 100 раз → нет blank/stuck states."
+  },
+  {
+    "id": "UX-NAV-002",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "p95 Library↔Develop с loaded photo."
+  },
+  {
+    "id": "UX-NAV-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Develop без active photo → консистентный empty-state."
+  },
+  {
+    "id": "UX-NAV-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Open Photo cancel → 0 side effects."
+  },
+  {
+    "id": "UX-NAV-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "drag-and-drop supported file → открывается ровно один asset."
+  },
+  {
+    "id": "UX-NAV-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "drag unsupported file → понятная ошибка, no crash."
+  },
+  {
+    "id": "UX-NAV-007",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "filename 255 chars в top bar → elide, controls не вытесняются."
+  },
+  {
+    "id": "UX-NAV-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Undo/Redo enabled state соответствует фактическим stacks."
+  },
+  {
+    "id": "UX-NAV-009",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "shortcut и toolbar Undo/Redo дают идентичный state."
+  },
+  {
+    "id": "UX-NAV-010",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Export availability корректна при 0/1/N selection."
+  },
+  {
+    "id": "UX-NAV-011",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Settings open/close 50 раз → no popup/focus leak."
+  },
+  {
+    "id": "UX-NAV-012",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "UpdateBell open/close while editing → edit state unaffected."
+  },
+  {
+    "id": "UX-NAV-013",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Original shortcut во время busy не меняет скрытый state."
+  },
+  {
+    "id": "UX-NAV-014",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "200 быстрых top-bar clicks → no duplicate modal/action."
+  },
+  {
+    "id": "UX-NAV-015",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "status line updates не меняют высоту layout."
+  },
+  {
+    "id": "UX-LIB-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "scroll 1 000-photo grid top→bottom→top → no crash/permanent blank cells."
+  },
+  {
+    "id": "UX-LIB-002",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "warmed wheel scroll 30 s → frame/stall metrics в budget."
+  },
+  {
+    "id": "UX-LIB-003",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "trackpad-like pixel scroll с momentum → no jump назад."
+  },
+  {
+    "id": "UX-LIB-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "fast scroll пока thumbnails грузятся → late thumbnail попадает только в свою card."
+  },
+  {
+    "id": "UX-LIB-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "scroll away before thumbnail completion, затем back → stale response не подменяет новый."
+  },
+  {
+    "id": "UX-LIB-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "thumbnail error → retry bounded, grid responsive."
+  },
+  {
+    "id": "UX-LIB-007",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "recycled delegate не наследует retryCount другого asset."
+  },
+  {
+    "id": "UX-LIB-008",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "resize 4↔5↔4 columns → viewport остаётся около того же logical asset."
+  },
+  {
+    "id": "UX-LIB-009",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "resize вокруг cell breakpoint 50 раз → no relayout loop/flicker."
+  },
+  {
+    "id": "UX-LIB-010",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "selected asset после дальнего scroll остаётся selected."
+  },
+  {
+    "id": "UX-LIB-011",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "active border отображается только у active asset."
+  },
+  {
+    "id": "UX-LIB-012",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "100k metadata fixture → UI не создаёт 100k QML delegates."
+  },
+  {
+    "id": "UX-LIB-013",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "STRESS",
+    "scenario": "10 минут scroll → RSS/object count reaches plateau."
+  },
+  {
+    "id": "UX-LIB-014",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "filter change during fast scroll → no out-of-range access."
+  },
+  {
+    "id": "UX-LIB-015",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "clear filter after filtered scroll → valid model/scroll state."
+  },
+  {
+    "id": "UX-LIB-016",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "empty filtered result → no phantom scrollbar range."
+  },
+  {
+    "id": "UX-LIB-017",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "import adds rows while scrolling → scroll не сбрасывается в начало."
+  },
+  {
+    "id": "UX-LIB-018",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "edited thumbnail invalidated offscreen → при возвращении новый saved edit."
+  },
+  {
+    "id": "UX-LIB-019",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "thumbnail invalidation не вызывает full model reset/jank."
+  },
+  {
+    "id": "UX-LIB-020",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "CHAOS",
+    "scenario": "10 000 random scroll/select/filter actions → invariants model/selection."
+  },
+  {
+    "id": "UX-SEL-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "single click card → select, не open Develop."
+  },
+  {
+    "id": "UX-SEL-002",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "double-click card → ровно один activate/open."
+  },
+  {
+    "id": "UX-SEL-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "double-click не создаёт неправильный intermediate selection."
+  },
+  {
+    "id": "UX-SEL-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Cmd-click toggle selection."
+  },
+  {
+    "id": "UX-SEL-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Shift-click contiguous range."
+  },
+  {
+    "id": "UX-SEL-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Shift-click после filter change использует валидный anchor."
+  },
+  {
+    "id": "UX-SEL-007",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Cmd+A выбирает filtered set, а не hidden rows."
+  },
+  {
+    "id": "UX-SEL-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Clear Selection не меняет active photo без причины."
+  },
+  {
+    "id": "UX-SEL-009",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "rating 0–5 применяется к selection ровно один раз."
+  },
+  {
+    "id": "UX-SEL-010",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "P/X/U работают только вне editable field."
+  },
+  {
+    "id": "UX-SEL-011",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "typing P/X/U/1 в search field не меняет metadata."
+  },
+  {
+    "id": "UX-SEL-012",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "label update не сбрасывает selection."
+  },
+  {
+    "id": "UX-SEL-013",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "rating/flag update не сбрасывает scroll."
+  },
+  {
+    "id": "UX-SEL-014",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Add to collection затрагивает только selected assets."
+  },
+  {
+    "id": "UX-SEL-015",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Remove from collection не удаляет asset/edit."
+  },
+  {
+    "id": "UX-SEL-016",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "100 быстрых кликов по разным cards → final selection соответствует последнему input."
+  },
+  {
+    "id": "UX-SEL-017",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "filmstrip single click активирует один раз."
+  },
+  {
+    "id": "UX-SEL-018",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "modified filmstrip click не делает нежелательный activate."
+  },
+  {
+    "id": "UX-SEL-019",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "selected/active border не остаётся на recycled card."
+  },
+  {
+    "id": "UX-SEL-020",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "CHAOS",
+    "scenario": "random click/doubleclick/modifier sequences replayable by seed."
+  },
+  {
+    "id": "UX-FLT-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "filename search realtime → correct count, no input lag."
+  },
+  {
+    "id": "UX-FLT-002",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "100k fixture, 20 typed chars → per-keystroke latency."
+  },
+  {
+    "id": "UX-FLT-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "rapid backspace to empty → full result restored."
+  },
+  {
+    "id": "UX-FLT-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Cyrillic search."
+  },
+  {
+    "id": "UX-FLT-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Unicode/emoji path search."
+  },
+  {
+    "id": "UX-FLT-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "1024-char search input → no hang/overflow."
+  },
+  {
+    "id": "UX-FLT-007",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "combined search+rating+flag+label+collection."
+  },
+  {
+    "id": "UX-FLT-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "200 rapid filter changes → final model matches UI controls."
+  },
+  {
+    "id": "UX-FLT-009",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "filter changes не steal focus из search."
+  },
+  {
+    "id": "UX-FLT-010",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "create/rename collection + restart → persists."
+  },
+  {
+    "id": "UX-FLT-011",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "duplicate/empty collection names deterministic UX."
+  },
+  {
+    "id": "UX-FLT-012",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Delete Collection Cancel → 0 state changes."
+  },
+  {
+    "id": "UX-FLT-013",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Delete Collection confirmed → assets/edits remain."
+  },
+  {
+    "id": "UX-FLT-014",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "500 collections scroll remains responsive."
+  },
+  {
+    "id": "UX-FLT-015",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "long collection names не перекрывают controls."
+  },
+  {
+    "id": "UX-IMP-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "open Import then Cancel → 0 side effects."
+  },
+  {
+    "id": "UX-IMP-002",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Add 100 supported files → progress visible, UI responsive."
+  },
+  {
+    "id": "UX-IMP-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Copy 100 files → source hashes unchanged."
+  },
+  {
+    "id": "UX-IMP-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "cancel at ~10/50/90% → valid checkpoints, no half rows."
+  },
+  {
+    "id": "UX-IMP-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "repeated Cancel is idempotent."
+  },
+  {
+    "id": "UX-IMP-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "second import while first active → safely blocked/queued."
+  },
+  {
+    "id": "UX-IMP-007",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "duplicates skip → messaging/counts understandable."
+  },
+  {
+    "id": "UX-IMP-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "duplicates allowed → deterministic no overwrite."
+  },
+  {
+    "id": "UX-IMP-009",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "recursive deep folder tree."
+  },
+  {
+    "id": "UX-IMP-010",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "inaccessible subfolder → valid files continue; report contains failed path."
+  },
+  {
+    "id": "UX-IMP-011",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "source disappears mid-import → no hang."
+  },
+  {
+    "id": "UX-IMP-012",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "destination becomes read-only mid-Copy → clean per-file rollback/error."
+  },
+  {
+    "id": "UX-IMP-013",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "corrupt image mixed with valid → valid continue."
+  },
+  {
+    "id": "UX-IMP-014",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "unsupported file selected through All files → readable failure."
+  },
+  {
+    "id": "UX-IMP-015",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "long path/error → dialog remains usable."
+  },
+  {
+    "id": "UX-IMP-016",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Import errors report is scrollable/selectable."
+  },
+  {
+    "id": "UX-IMP-017",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "close import dialog while native FileDialog open → no orphan modal."
+  },
+  {
+    "id": "UX-IMP-018",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "import 1 000 files → main-loop max stall + cancel latency."
+  },
+  {
+    "id": "UX-IMP-019",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "STRESS",
+    "scenario": "import/cancel/reimport same fixture 50 cycles → no journal leak."
+  },
+  {
+    "id": "UX-IMP-020",
+    "severity": "P0",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "force terminate during Copy then restart recovery → catalog/source intact."
+  },
+  {
+    "id": "UX-DSC-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "scroll top→bottom→top → every panel reachable."
+  },
+  {
+    "id": "UX-DSC-002",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "continuous fast scroll 30 s → jank/stalls measured."
+  },
+  {
+    "id": "UX-DSC-003",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "scroll while pointer crosses Slider → page scroll не должен случайно менять value."
+  },
+  {
+    "id": "UX-DSC-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "drag slider then wheel → only intended input changes value."
+  },
+  {
+    "id": "UX-DSC-005",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "dynamic panel height change while deep-scrolled → no large unexpected jump."
+  },
+  {
+    "id": "UX-DSC-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "photo change while deep-scrolled → controls immediately show new photo state."
+  },
+  {
+    "id": "UX-DSC-007",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "right panel 250↔400 px while scrolled → no clipped controls."
+  },
+  {
+    "id": "UX-DSC-008",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "language switch while deep-scrolled → valid relayout/scroll range."
+  },
+  {
+    "id": "UX-DSC-009",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "keyboard-focused control remains reachable/visible."
+  },
+  {
+    "id": "UX-DSC-010",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "STRESS",
+    "scenario": "5 000 scroll events + 1 000 panel interactions → no hang/object leak."
+  },
+  {
+    "id": "UX-SLD-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Exposure min→max→0 drag → thumb follows pointer; final value exact."
+  },
+  {
+    "id": "UX-SLD-002",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "pointer→thumb and pointer→preview p95."
+  },
+  {
+    "id": "UX-SLD-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "continuous drag = one Undo unit."
+  },
+  {
+    "id": "UX-SLD-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Undo after drag restores exact prior parameter/render state."
+  },
+  {
+    "id": "UX-SLD-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "double click resets default once."
+  },
+  {
+    "id": "UX-SLD-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "double click does not leave dangling beginEdit/endEdit."
+  },
+  {
+    "id": "UX-SLD-007",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "disable correction retains parameter but removes effect."
+  },
+  {
+    "id": "UX-SLD-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "re-enable restores retained effect."
+  },
+  {
+    "id": "UX-SLD-009",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "app deactivation mid-drag safely finalizes/cancels gesture."
+  },
+  {
+    "id": "UX-SLD-010",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "photo switch mid-drag → no edit leaks to next asset."
+  },
+  {
+    "id": "UX-SLD-011",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Library switch mid-drag → one valid finalization."
+  },
+  {
+    "id": "UX-SLD-012",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "drag during autosave → latest value not lost."
+  },
+  {
+    "id": "UX-SLD-013",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "STRESS",
+    "scenario": "1 000 rapid alternating Exposure values → persisted final = last input."
+  },
+  {
+    "id": "UX-SLD-014",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "STRESS",
+    "scenario": "storm across all Basic controls → no multi-second stale render backlog."
+  },
+  {
+    "id": "UX-SLD-015",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "WB As Shot/Custom semantics consistent with enabled controls."
+  },
+  {
+    "id": "UX-SLD-016",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Custom WB survives switch away/back and restart."
+  },
+  {
+    "id": "UX-SLD-017",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "numeric labels never NaN/Inf/-0.00."
+  },
+  {
+    "id": "UX-SLD-018",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "min/max clamp predictable."
+  },
+  {
+    "id": "UX-SLD-019",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Reset All does not touch selection/metadata."
+  },
+  {
+    "id": "UX-SLD-020",
+    "severity": "P0",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "edit 20 controls, immediate quit/restart → internally consistent saved state."
+  },
+  {
+    "id": "UX-PRV-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Develop↔Original 100 toggles → no stale image."
+  },
+  {
+    "id": "UX-PRV-002",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "Original toggle p95."
+  },
+  {
+    "id": "UX-PRV-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Original mode не мутирует edits/history."
+  },
+  {
+    "id": "UX-PRV-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "preset hover → Original → leave → restore exact pre-hover state."
+  },
+  {
+    "id": "UX-PRV-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "switch photo while old decode active → late old result never replaces new."
+  },
+  {
+    "id": "UX-PRV-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Cancel decode → stable previous/empty state."
+  },
+  {
+    "id": "UX-PRV-007",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "cancel/load-completion race → no crash."
+  },
+  {
+    "id": "UX-PRV-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "STRESS",
+    "scenario": "rapidly activate 100 filmstrip photos → final preview/metadata = final asset."
+  },
+  {
+    "id": "UX-PRV-009",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "cached switch p50/p95."
+  },
+  {
+    "id": "UX-PRV-010",
+    "severity": "P2",
+    "scope": "TARGET",
+    "mode": "REGRESSION",
+    "scenario": "true 1:1 zoom → absent = NOT_IMPLEMENTED roadmap gap."
+  },
+  {
+    "id": "UX-PRV-011",
+    "severity": "P2",
+    "scope": "TARGET",
+    "mode": "REGRESSION",
+    "scenario": "arbitrary zoom/pan with correct overlay coordinates."
+  },
+  {
+    "id": "UX-PRV-012",
+    "severity": "P2",
+    "scope": "TARGET",
+    "mode": "REGRESSION",
+    "scenario": "double-click Fit↔1:1."
+  },
+  {
+    "id": "UX-PRV-013",
+    "severity": "P0",
+    "scope": "ALL",
+    "mode": "BLOCKING",
+    "scenario": "preview asset A + metadata asset B никогда не допускается."
+  },
+  {
+    "id": "UX-PRV-014",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "no white flash during dark-theme rerender."
+  },
+  {
+    "id": "UX-PRV-015",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "STRESS",
+    "scenario": "30 min photo switching+edits → no stale render backlog."
+  },
+  {
+    "id": "UX-ADV-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "add/move/delete curve point → pointer capture valid; one gesture=one Undo."
+  },
+  {
+    "id": "UX-ADV-002",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "curve point dragged beyond bounds → safe clamp."
+  },
+  {
+    "id": "UX-ADV-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "rapid RGB/R/G/B switch during drag → no stale binding/crash."
+  },
+  {
+    "id": "UX-ADV-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "parametric curve drag/Undo/Redo."
+  },
+  {
+    "id": "UX-ADV-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "HSL band switch during rapid slider use."
+  },
+  {
+    "id": "UX-ADV-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "targeted tone click+vertical drag → correct group changes."
+  },
+  {
+    "id": "UX-ADV-007",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "targeted HSL click+drag."
+  },
+  {
+    "id": "UX-ADV-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "targeted click outside painted image → no edit."
+  },
+  {
+    "id": "UX-ADV-009",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "photo switch cancels targeted gesture."
+  },
+  {
+    "id": "UX-ADV-010",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "targeted tool never competes with Crop/Guided pointer ownership."
+  },
+  {
+    "id": "UX-ADV-011",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Original disables targeted mutation."
+  },
+  {
+    "id": "UX-ADV-012",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "targeted drag latency."
+  },
+  {
+    "id": "UX-ADV-013",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "STRESS",
+    "scenario": "500 Curve/HSL edits → Undo all → Redo all; state hash identical."
+  },
+  {
+    "id": "UX-ADV-014",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "photo switch clears transient selected curve point state."
+  },
+  {
+    "id": "UX-ADV-015",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "export immediately after targeted edit uses final saved state."
+  },
+  {
+    "id": "UX-CRP-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "drag each crop grip."
+  },
+  {
+    "id": "UX-CRP-002",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "move crop frame."
+  },
+  {
+    "id": "UX-CRP-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "no zero/negative-size crop."
+  },
+  {
+    "id": "UX-CRP-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Free↔Original↔1:1↔4:3↔3:2↔16:9."
+  },
+  {
+    "id": "UX-CRP-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "custom ratios 1:100 and 100:1 remain valid/manipulable."
+  },
+  {
+    "id": "UX-CRP-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "swap ratio orientation."
+  },
+  {
+    "id": "UX-CRP-007",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "quarter-turn while Crop active."
+  },
+  {
+    "id": "UX-CRP-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "horizontal/vertical flip with crop."
+  },
+  {
+    "id": "UX-CRP-009",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Straighten drag = one Undo."
+  },
+  {
+    "id": "UX-CRP-010",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Done/Cancel leaves no transient overlay residue."
+  },
+  {
+    "id": "UX-CRP-011",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Original while Crop active has defined non-destructive behavior."
+  },
+  {
+    "id": "UX-CRP-012",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "photo switch exits transient crop interaction."
+  },
+  {
+    "id": "UX-CRP-013",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "preset hover while Crop active does not corrupt crop mode."
+  },
+  {
+    "id": "UX-CRP-014",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "guide overlay changes display only, no history/autosave."
+  },
+  {
+    "id": "UX-CRP-015",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "crop drag frame pacing."
+  },
+  {
+    "id": "UX-CRP-016",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "STRESS",
+    "scenario": "1 000 random valid crop drags with geometry invariants."
+  },
+  {
+    "id": "UX-CRP-017",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "export immediately after Done uses final geometry."
+  },
+  {
+    "id": "UX-CRP-018",
+    "severity": "P0",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "restart reproduces crop geometry exactly."
+  },
+  {
+    "id": "UX-TRN-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "each manual Transform control drag/Undo."
+  },
+  {
+    "id": "UX-TRN-002",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "extreme valid values remain finite."
+  },
+  {
+    "id": "UX-TRN-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Auto runs async; UI responsive; Cancel available."
+  },
+  {
+    "id": "UX-TRN-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Auto cancellation race near completion."
+  },
+  {
+    "id": "UX-TRN-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "uncertain Auto refusal → no edit/history entry."
+  },
+  {
+    "id": "UX-TRN-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Guided vertical pair interaction."
+  },
+  {
+    "id": "UX-TRN-007",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Guided horizontal pair interaction."
+  },
+  {
+    "id": "UX-TRN-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "invalid/degenerate guides → safe refusal."
+  },
+  {
+    "id": "UX-TRN-009",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "leave Guided mid-drag → transient endpoints cleared."
+  },
+  {
+    "id": "UX-TRN-010",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Crop and Guided cannot own pointer simultaneously."
+  },
+  {
+    "id": "UX-TRN-011",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Constrain Crop toggle no stale geometry."
+  },
+  {
+    "id": "UX-TRN-012",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "photo switch cancels Auto/Guided transient state."
+  },
+  {
+    "id": "UX-TRN-013",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "Auto causes no main-loop stall >250 ms."
+  },
+  {
+    "id": "UX-TRN-014",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "STRESS",
+    "scenario": "Auto/cancel 100 cycles."
+  },
+  {
+    "id": "UX-TRN-015",
+    "severity": "P0",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "restart reproduces Transform state."
+  },
+  {
+    "id": "UX-LNS-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "known lens auto profile displayed/applied safely."
+  },
+  {
+    "id": "UX-LNS-002",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "unknown lens never silently maps to arbitrary profile."
+  },
+  {
+    "id": "UX-LNS-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "manual profile search typing responsive."
+  },
+  {
+    "id": "UX-LNS-004",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "full profile DB search latency."
+  },
+  {
+    "id": "UX-LNS-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "rapid profile switching → final choice wins."
+  },
+  {
+    "id": "UX-LNS-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "distortion/vignetting gesture = one Undo."
+  },
+  {
+    "id": "UX-LNS-007",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "CA toggle no stale preview."
+  },
+  {
+    "id": "UX-LNS-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "disable Optics retains values but removes effect."
+  },
+  {
+    "id": "UX-LNS-009",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "optics subset in Copy/Paste/Preset independent."
+  },
+  {
+    "id": "UX-LNS-010",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "profile selection persists restart."
+  },
+  {
+    "id": "UX-DTL-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "sharpening sliders normal drag."
+  },
+  {
+    "id": "UX-DTL-002",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Option-drag shows expected diagnostic."
+  },
+  {
+    "id": "UX-DTL-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "release Option restores normal preview."
+  },
+  {
+    "id": "UX-DTL-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "app deactivation while Option held restores normal state."
+  },
+  {
+    "id": "UX-DTL-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "photo switch clears diagnostic state."
+  },
+  {
+    "id": "UX-DTL-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "export while diagnostic visible exports normal render, not diagnostic."
+  },
+  {
+    "id": "UX-DTL-007",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "preset hover while diagnostic active does not persist diagnostic."
+  },
+  {
+    "id": "UX-DTL-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "luminance NR enable/disable retains values."
+  },
+  {
+    "id": "UX-DTL-009",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "color NR enable/disable retains values."
+  },
+  {
+    "id": "UX-DTL-010",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "expensive NR slider storm remains controllable."
+  },
+  {
+    "id": "UX-DTL-011",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "STRESS",
+    "scenario": "200 NR/sharpen edits then immediate export."
+  },
+  {
+    "id": "UX-DTL-012",
+    "severity": "P0",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "restart reproduces Detail state."
+  },
+  {
+    "id": "UX-PRS-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "create preset with subset."
+  },
+  {
+    "id": "UX-PRS-002",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "rename/edit/delete user preset."
+  },
+  {
+    "id": "UX-PRS-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "built-in preset cannot be renamed/deleted."
+  },
+  {
+    "id": "UX-PRS-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "hover preview does not save edits/history."
+  },
+  {
+    "id": "UX-PRS-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "pointer leave restores exact pre-hover render."
+  },
+  {
+    "id": "UX-PRS-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "hover A→B→C rapidly → stale A/B never replaces C."
+  },
+  {
+    "id": "UX-PRS-007",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "click preset after hover = one Undo."
+  },
+  {
+    "id": "UX-PRS-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Undo preset restores complete prior subset."
+  },
+  {
+    "id": "UX-PRS-009",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "JSON export/import roundtrip."
+  },
+  {
+    "id": "UX-PRS-010",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "invalid JSON → actionable error, existing presets intact."
+  },
+  {
+    "id": "UX-PRS-011",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "corrupt preset store on startup not silently overwritten."
+  },
+  {
+    "id": "UX-PRS-012",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "512 presets panel remains scrollable/responsive."
+  },
+  {
+    "id": "UX-PRS-013",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "rapid hover 100 presets → latency/stalls measured."
+  },
+  {
+    "id": "UX-PRS-014",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "built-in filter repeated application idempotent."
+  },
+  {
+    "id": "UX-PRS-015",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Natural affects only declared groups."
+  },
+  {
+    "id": "UX-PRS-016",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "single-photo preset affects only expected asset."
+  },
+  {
+    "id": "UX-PRS-017",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Copy settings A → switch B → Paste correct subset."
+  },
+  {
+    "id": "UX-PRS-018",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "restart Copy snapshot semantics match documented behavior."
+  },
+  {
+    "id": "UX-PRS-019",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "STRESS",
+    "scenario": "1 000 create/delete/rename operations → storage integrity."
+  },
+  {
+    "id": "UX-PRS-020",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "CHAOS",
+    "scenario": "hover/click/Undo/photo-switch random sequence."
+  },
+  {
+    "id": "UX-BAT-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "batch preset on N selection → all N atomic."
+  },
+  {
+    "id": "UX-BAT-002",
+    "severity": "P0",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "injected failure mid-batch → rollback all."
+  },
+  {
+    "id": "UX-BAT-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Cancel batch → atomic rollback/defined cancel state."
+  },
+  {
+    "id": "UX-BAT-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "repeated Cancel idempotent."
+  },
+  {
+    "id": "UX-BAT-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "batch Undo restores all assets."
+  },
+  {
+    "id": "UX-BAT-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "batch Redo reapplies all assets."
+  },
+  {
+    "id": "UX-BAT-007",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "editor Undo vs batch Undo arbitration predictable."
+  },
+  {
+    "id": "UX-BAT-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "conflicting later edit causes safe refusal, not corruption."
+  },
+  {
+    "id": "UX-BAT-009",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "currently open affected asset refreshes correctly."
+  },
+  {
+    "id": "UX-BAT-010",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "selection/scroll position preserved across batch commit."
+  },
+  {
+    "id": "UX-BAT-011",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "responsiveness for 1/100/1k assets."
+  },
+  {
+    "id": "UX-BAT-012",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "close app mid-batch safe."
+  },
+  {
+    "id": "UX-BAT-013",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "updater restart mid-batch waits safely."
+  },
+  {
+    "id": "UX-BAT-014",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "STRESS",
+    "scenario": "100 apply/undo cycles → no catalog growth anomaly."
+  },
+  {
+    "id": "UX-BAT-015",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "no-op batch creates no misleading history operation."
+  },
+  {
+    "id": "UX-EXP-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "open/close Export panel 50 times → no state leak."
+  },
+  {
+    "id": "UX-EXP-002",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "invalid destination blocks Start with clear reason."
+  },
+  {
+    "id": "UX-EXP-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "long filename template does not break dialog."
+  },
+  {
+    "id": "UX-EXP-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "single export progress visible; UI responsive."
+  },
+  {
+    "id": "UX-EXP-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "queue N photos → correct completed/total/current file."
+  },
+  {
+    "id": "UX-EXP-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Pause means pause after current file and text matches behavior."
+  },
+  {
+    "id": "UX-EXP-007",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Resume continues next job."
+  },
+  {
+    "id": "UX-EXP-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Cancel safely stops queue."
+  },
+  {
+    "id": "UX-EXP-009",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "repeated Cancel idempotent."
+  },
+  {
+    "id": "UX-EXP-010",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "one failed file does not stop later jobs."
+  },
+  {
+    "id": "UX-EXP-011",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "failures list scrollable/readable."
+  },
+  {
+    "id": "UX-EXP-012",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Skip collision policy."
+  },
+  {
+    "id": "UX-EXP-013",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Unique collision policy."
+  },
+  {
+    "id": "UX-EXP-014",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Replace policy never resolves to original/catalog path."
+  },
+  {
+    "id": "UX-EXP-015",
+    "severity": "P0",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "export cannot overwrite original through symlink/alias/path normalization."
+  },
+  {
+    "id": "UX-EXP-016",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "edit changes after enqueue do not alter immutable queued snapshot."
+  },
+  {
+    "id": "UX-EXP-017",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "watermark changes after enqueue follow defined immutable semantics."
+  },
+  {
+    "id": "UX-EXP-018",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "close app during queue → explicit wait/cancel flow."
+  },
+  {
+    "id": "UX-EXP-019",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "autosave failure before export → Retry save path; no stale export."
+  },
+  {
+    "id": "UX-EXP-020",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "export under load → main-loop stall/input latency measured."
+  },
+  {
+    "id": "UX-EXP-021",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "export + Library scroll simultaneously."
+  },
+  {
+    "id": "UX-EXP-022",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "export + live Develop changes → queued snapshot unchanged."
+  },
+  {
+    "id": "UX-EXP-023",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "STRESS",
+    "scenario": "queue 500 fixtures with random pause/resume."
+  },
+  {
+    "id": "UX-EXP-024",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "STRESS",
+    "scenario": "100 start/cancel cycles → no orphan temp files."
+  },
+  {
+    "id": "UX-EXP-025",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "reusable settings persist according to design."
+  },
+  {
+    "id": "UX-EXP-026",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "conflicting resize inputs show deterministic derived size."
+  },
+  {
+    "id": "UX-EXP-027",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "metadata privacy toggles match resulting file."
+  },
+  {
+    "id": "UX-EXP-028",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "watermark file missing at execution → per-file failure, queue survives."
+  },
+  {
+    "id": "UX-EXP-029",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Unicode destination/name/watermark."
+  },
+  {
+    "id": "UX-EXP-030",
+    "severity": "P0",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "original SHA unchanged for every export format."
+  },
+  {
+    "id": "UX-UND-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "50 heterogeneous edits → Undo all exact reverse order."
+  },
+  {
+    "id": "UX-UND-002",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Redo all recreates final document hash."
+  },
+  {
+    "id": "UX-UND-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "new edit after Undo invalidates correct Redo branch."
+  },
+  {
+    "id": "UX-UND-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "no-op does not pollute history."
+  },
+  {
+    "id": "UX-UND-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "correction enable toggle Undo."
+  },
+  {
+    "id": "UX-UND-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Crop gesture one Undo."
+  },
+  {
+    "id": "UX-UND-007",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Guided/Auto Transform one Undo each."
+  },
+  {
+    "id": "UX-UND-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "preset application one Undo."
+  },
+  {
+    "id": "UX-UND-009",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "targeted adjustment one logical Undo."
+  },
+  {
+    "id": "UX-UND-010",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Reset All + Undo restores complete prior document."
+  },
+  {
+    "id": "UX-UND-011",
+    "severity": "P0",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "history never crosses asset boundary."
+  },
+  {
+    "id": "UX-UND-012",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "A→B→A switch respects per-session history semantics."
+  },
+  {
+    "id": "UX-UND-013",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "session-local history resets after restart as documented."
+  },
+  {
+    "id": "UX-UND-014",
+    "severity": "P0",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "force quit after completed autosave → saved edits survive."
+  },
+  {
+    "id": "UX-UND-015",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "kill during pending debounce → last committed state intact, DB valid."
+  },
+  {
+    "id": "UX-UND-016",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "STRESS",
+    "scenario": "history-cap boundary behavior deterministic."
+  },
+  {
+    "id": "UX-UND-017",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "CHAOS",
+    "scenario": "random edits/undo/redo with document-hash oracle."
+  },
+  {
+    "id": "UX-UND-018",
+    "severity": "P0",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "original SHA invariant throughout suite."
+  },
+  {
+    "id": "UX-REC-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "idle→saving→saved visual state transitions."
+  },
+  {
+    "id": "UX-REC-002",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "injected SQLite busy → UI responsive, retry/backoff."
+  },
+  {
+    "id": "UX-REC-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "injected save failure → visible error + Retry."
+  },
+  {
+    "id": "UX-REC-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Retry succeeds without duplicate history."
+  },
+  {
+    "id": "UX-REC-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "rapid repeated Retry → single safe flow."
+  },
+  {
+    "id": "UX-REC-006",
+    "severity": "P0",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "disk-full simulation during save → catalog remains readable."
+  },
+  {
+    "id": "UX-REC-007",
+    "severity": "P0",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "kill during catalog write → SQLite recovery/no corruption."
+  },
+  {
+    "id": "UX-REC-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "source removed while Develop open → committed edits preserved."
+  },
+  {
+    "id": "UX-REC-009",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "corrupt thumbnail cache → regenerate, app remains usable."
+  },
+  {
+    "id": "UX-REC-010",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "STRESS",
+    "scenario": "fault injection across save/import/export 100 cycles."
+  },
+  {
+    "id": "UX-REC-011",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "long localized error banner remains actionable."
+  },
+  {
+    "id": "UX-REC-012",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "stale error disappears after successful retry."
+  },
+  {
+    "id": "UX-LOC-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "runtime switch all available languages without restart."
+  },
+  {
+    "id": "UX-LOC-002",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "language switch не меняет edits/selection/filter values."
+  },
+  {
+    "id": "UX-LOC-003",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "каждая локаль на 1000×640: критические controls доступны."
+  },
+  {
+    "id": "UX-LOC-004",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "longest translations in Import/Export remain actionable."
+  },
+  {
+    "id": "UX-LOC-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "filename `%`, braces, Unicode treated as data."
+  },
+  {
+    "id": "UX-LOC-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "language persists restart."
+  },
+  {
+    "id": "UX-LOC-007",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "corrupt preferences → safe English fallback."
+  },
+  {
+    "id": "UX-LOC-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "preference write failure safe."
+  },
+  {
+    "id": "UX-UPD-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "update popup in idle does not block app."
+  },
+  {
+    "id": "UX-UPD-002",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "updater restart waits for autosave."
+  },
+  {
+    "id": "UX-UPD-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "updater restart waits for import/export/batch."
+  },
+  {
+    "id": "UX-UPD-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "user may cancel cancellable op while restart pending."
+  },
+  {
+    "id": "UX-UPD-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "update check failure does not block editor."
+  },
+  {
+    "id": "UX-UPD-006",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "update UI does not steal focus mid-slider drag."
+  },
+  {
+    "id": "UX-KEY-001",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Cmd+O."
+  },
+  {
+    "id": "UX-KEY-002",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Cmd+Z / Cmd+Shift+Z."
+  },
+  {
+    "id": "UX-KEY-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "Cmd+A in Library."
+  },
+  {
+    "id": "UX-KEY-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "P/X/U and 0–5 shortcuts."
+  },
+  {
+    "id": "UX-KEY-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "metadata shortcuts suppressed inside TextField/TextArea."
+  },
+  {
+    "id": "UX-KEY-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "backslash Original toggle."
+  },
+  {
+    "id": "UX-KEY-007",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "fullscreen shortcut."
+  },
+  {
+    "id": "UX-KEY-008",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "deterministic Tab order through primary controls."
+  },
+  {
+    "id": "UX-KEY-009",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "focused interactive control has visible focus indication."
+  },
+  {
+    "id": "UX-KEY-010",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "Enter/Space activates focused button once."
+  },
+  {
+    "id": "UX-KEY-011",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "Esc closes cancellable dialog but not mandatory safety wait."
+  },
+  {
+    "id": "UX-KEY-012",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "all icon-only buttons have Accessible.name."
+  },
+  {
+    "id": "UX-KEY-013",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "sliders expose accessible name/value/range."
+  },
+  {
+    "id": "UX-KEY-014",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "AX tree has no duplicate unlabeled primary controls."
+  },
+  {
+    "id": "UX-KEY-015",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "keyboard-only import→select→Develop→edit→export."
+  },
+  {
+    "id": "UX-KEY-016",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "focus not trapped in ScrollView."
+  },
+  {
+    "id": "UX-KEY-017",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "closing popup returns focus logically."
+  },
+  {
+    "id": "UX-KEY-018",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "CHAOS",
+    "scenario": "random modifier up/down around gestures → no stuck modifier state."
+  },
+  {
+    "id": "UX-MAC-001",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "Retina 2× pointer/render mapping."
+  },
+  {
+    "id": "UX-MAC-002",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "display scale/external monitor change → no crash/layout corruption."
+  },
+  {
+    "id": "UX-MAC-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "move window between displays → display profile update without stale asset."
+  },
+  {
+    "id": "UX-MAC-004",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "PERF_LOCAL",
+    "scenario": "display profile transition stall metrics."
+  },
+  {
+    "id": "UX-MAC-005",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "sleep/wake with open photo."
+  },
+  {
+    "id": "UX-MAC-006",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "sleep/wake during import/export."
+  },
+  {
+    "id": "UX-MAC-007",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "removable source disappears after Add import."
+  },
+  {
+    "id": "UX-MAC-008",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "removable destination disappears during Copy/export."
+  },
+  {
+    "id": "UX-MAC-009",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "Magic Mouse/trackpad momentum scroll does not modify slider accidentally."
+  },
+  {
+    "id": "UX-MAC-010",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "nested ScrollViews receive trackpad scrolling predictably."
+  },
+  {
+    "id": "UX-MAC-011",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "macOS appearance change never makes controls unreadable."
+  },
+  {
+    "id": "UX-MAC-012",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "Finder open-with file → one action/window, no duplicate open."
+  },
+  {
+    "id": "UX-PERF-001",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "PERF_LOCAL",
+    "scenario": "cold startup 20 runs."
+  },
+  {
+    "id": "UX-PERF-002",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "PERF_LOCAL",
+    "scenario": "warm startup 20 runs."
+  },
+  {
+    "id": "UX-PERF-003",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "initial 24 MP generated RAW preview 20 runs."
+  },
+  {
+    "id": "UX-PERF-004",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "cached image switch 100 samples."
+  },
+  {
+    "id": "UX-PERF-005",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "grid scroll 1k assets."
+  },
+  {
+    "id": "UX-PERF-006",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "search 100k metadata fixture."
+  },
+  {
+    "id": "UX-PERF-007",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "Basic slider preview latency."
+  },
+  {
+    "id": "UX-PERF-008",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "Noise Reduction slider latency."
+  },
+  {
+    "id": "UX-PERF-009",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "Crop drag frame pacing."
+  },
+  {
+    "id": "UX-PERF-010",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "Guided Transform drag frame pacing."
+  },
+  {
+    "id": "UX-PERF-011",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "import 1k UI responsiveness."
+  },
+  {
+    "id": "UX-PERF-012",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "PERF_LOCAL",
+    "scenario": "export while editing responsiveness."
+  },
+  {
+    "id": "UX-PERF-013",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "STRESS",
+    "scenario": "60 min realistic editing → RSS plateau."
+  },
+  {
+    "id": "UX-PERF-014",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "STRESS",
+    "scenario": "60 min Library scroll/search/select → bounded delegate/object count."
+  },
+  {
+    "id": "UX-PERF-015",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "STRESS",
+    "scenario": "500 photo switches → no linear memory growth."
+  },
+  {
+    "id": "UX-PERF-016",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "STRESS",
+    "scenario": "500 preset hovers → no linear memory growth."
+  },
+  {
+    "id": "UX-PERF-017",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "STRESS",
+    "scenario": "Export panel open/close 200 cycles."
+  },
+  {
+    "id": "UX-PERF-018",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "STRESS",
+    "scenario": "Import dialog open/cancel 200 cycles."
+  },
+  {
+    "id": "UX-PERF-019",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "PERF_LOCAL",
+    "scenario": "peak RSS recorded on 8 GB reference config."
+  },
+  {
+    "id": "UX-PERF-020",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "STRESS",
+    "scenario": "throttled/high-load CPU scenario → UI remains cancellable."
+  },
+  {
+    "id": "UX-RACE-001",
+    "severity": "P0",
+    "scope": "CURRENT",
+    "mode": "BLOCKING",
+    "scenario": "photo switch while old preview callback pending."
+  },
+  {
+    "id": "UX-RACE-002",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "thumbnail invalidation while request in flight."
+  },
+  {
+    "id": "UX-RACE-003",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "autosave completion after photo switch."
+  },
+  {
+    "id": "UX-RACE-004",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "preset hover completion after pointer leave."
+  },
+  {
+    "id": "UX-RACE-005",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "Auto Transform completion after cancel/switch."
+  },
+  {
+    "id": "UX-RACE-006",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "export snapshot while autosave debounce pending."
+  },
+  {
+    "id": "UX-RACE-007",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "batch commit while thumbnail workers render old revisions."
+  },
+  {
+    "id": "UX-RACE-008",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "filter change while Library page fetch pending."
+  },
+  {
+    "id": "UX-RACE-009",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "import row insert while selection operation runs."
+  },
+  {
+    "id": "UX-RACE-010",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "close request while multiple controllers emit close-ready."
+  },
+  {
+    "id": "UX-RACE-011",
+    "severity": "P1",
+    "scope": "CURRENT",
+    "mode": "STRESS",
+    "scenario": "randomized async completion ordering with injected delays."
+  },
+  {
+    "id": "UX-RACE-012",
+    "severity": "P0",
+    "scope": "ALL",
+    "mode": "CHAOS",
+    "scenario": "10k random legal actions + random worker delays; replayable."
+  },
+  {
+    "id": "UX-VIS-001",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "filename 255 chars in top bar/card/source label."
+  },
+  {
+    "id": "UX-VIS-002",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "path 1 000 chars."
+  },
+  {
+    "id": "UX-VIS-003",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "exporter current filename 255 chars."
+  },
+  {
+    "id": "UX-VIS-004",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "100-line export failures list."
+  },
+  {
+    "id": "UX-VIS-005",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "100-line import report."
+  },
+  {
+    "id": "UX-VIS-006",
+    "severity": "P2",
+    "scope": "CURRENT",
+    "mode": "REGRESSION",
+    "scenario": "status text changes no top-level geometry jump."
+  },
+  {
+    "id": "UX-VIS-007",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "all translations at minimum window."
+  },
+  {
+    "id": "UX-VIS-008",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "no text under another interactive control."
+  },
+  {
+    "id": "UX-VIS-009",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "no invisible hitbox after popup/panel close."
+  },
+  {
+    "id": "UX-VIS-010",
+    "severity": "P1",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "disabled button cannot activate through hidden shortcut/event."
+  },
+  {
+    "id": "UX-VIS-011",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "tooltip never blocks subsequent click."
+  },
+  {
+    "id": "UX-VIS-012",
+    "severity": "P2",
+    "scope": "ALL",
+    "mode": "REGRESSION",
+    "scenario": "scrollbar range/thumb updates after dynamic relayout."
+  },
+  {
+    "id": "UX-MSK-001",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "BLOCKING",
+    "scenario": "create first mask → visible in list/preview."
+  },
+  {
+    "id": "UX-MSK-002",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "BLOCKING",
+    "scenario": "multiple masks → correct active selection."
+  },
+  {
+    "id": "UX-MSK-003",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "rename mask."
+  },
+  {
+    "id": "UX-MSK-004",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "delete mask + Undo restores it."
+  },
+  {
+    "id": "UX-MSK-005",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "duplicate mask if supported."
+  },
+  {
+    "id": "UX-MSK-006",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "Invert = one Undo."
+  },
+  {
+    "id": "UX-MSK-007",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "Add/Subtract/Intersect hierarchy consistent."
+  },
+  {
+    "id": "UX-MSK-008",
+    "severity": "P0",
+    "scope": "0.5",
+    "mode": "BLOCKING",
+    "scenario": "restart preserves masks/effect exactly."
+  },
+  {
+    "id": "UX-MSK-009",
+    "severity": "P0",
+    "scope": "0.5",
+    "mode": "BLOCKING",
+    "scenario": "photo switch never shows previous photo mask overlay."
+  },
+  {
+    "id": "UX-MSK-010",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "Original hides local effect without mutating masks."
+  },
+  {
+    "id": "UX-MSK-011",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "BLOCKING",
+    "scenario": "brush stroke follows pointer."
+  },
+  {
+    "id": "UX-MSK-012",
+    "severity": "P2",
+    "scope": "0.5",
+    "mode": "PERF_LOCAL",
+    "scenario": "pointer→overlay p95 target <=50 ms."
+  },
+  {
+    "id": "UX-MSK-013",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "BLOCKING",
+    "scenario": "continuous stroke = one Undo."
+  },
+  {
+    "id": "UX-MSK-014",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "release outside image safely finalizes."
+  },
+  {
+    "id": "UX-MSK-015",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "app deactivation mid-stroke safe."
+  },
+  {
+    "id": "UX-MSK-016",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "size/feather/flow changes behave immediately."
+  },
+  {
+    "id": "UX-MSK-017",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "fast zig-zag stroke has no giant missing segments."
+  },
+  {
+    "id": "UX-MSK-018",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "STRESS",
+    "scenario": "5 000 points / 500 strokes → bounded memory."
+  },
+  {
+    "id": "UX-MSK-019",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "outside-image brush makes no edit."
+  },
+  {
+    "id": "UX-MSK-020",
+    "severity": "P0",
+    "scope": "0.5",
+    "mode": "BLOCKING",
+    "scenario": "brush coordinates remain correct with Crop/Transform."
+  },
+  {
+    "id": "UX-MSK-021",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "BLOCKING",
+    "scenario": "Linear Gradient create/move/rotate/resize."
+  },
+  {
+    "id": "UX-MSK-022",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "BLOCKING",
+    "scenario": "Radial Gradient create/move/resize/rotate."
+  },
+  {
+    "id": "UX-MSK-023",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "handles never become permanently inaccessible."
+  },
+  {
+    "id": "UX-MSK-024",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "one gradient drag = one Undo."
+  },
+  {
+    "id": "UX-MSK-025",
+    "severity": "P2",
+    "scope": "0.5",
+    "mode": "PERF_LOCAL",
+    "scenario": "gradient drag frame pacing."
+  },
+  {
+    "id": "UX-MSK-026",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "BLOCKING",
+    "scenario": "Luminance Range eyedropper/selection."
+  },
+  {
+    "id": "UX-MSK-027",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "BLOCKING",
+    "scenario": "Color Range eyedropper/selection."
+  },
+  {
+    "id": "UX-MSK-028",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "click outside photo ignored."
+  },
+  {
+    "id": "UX-MSK-029",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "threshold drag = one Undo."
+  },
+  {
+    "id": "UX-MSK-030",
+    "severity": "P2",
+    "scope": "0.5",
+    "mode": "PERF_LOCAL",
+    "scenario": "range overlay update latency."
+  },
+  {
+    "id": "UX-MSK-031",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "BLOCKING",
+    "scenario": "overlay toggle affects display only."
+  },
+  {
+    "id": "UX-MSK-032",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "overlay color/opacity never affects export."
+  },
+  {
+    "id": "UX-MSK-033",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "BLOCKING",
+    "scenario": "local Exposure affects only masked area."
+  },
+  {
+    "id": "UX-MSK-034",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "local slider gesture = one Undo."
+  },
+  {
+    "id": "UX-MSK-035",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "switch active mask → controls update immediately, no stale values."
+  },
+  {
+    "id": "UX-MSK-036",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "disable mask retains data but removes effect."
+  },
+  {
+    "id": "UX-MSK-037",
+    "severity": "P0",
+    "scope": "0.5",
+    "mode": "BLOCKING",
+    "scenario": "export never contains editor overlay."
+  },
+  {
+    "id": "UX-MSK-038",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "REGRESSION",
+    "scenario": "preset/Original/Export transitions clear transient overlay state."
+  },
+  {
+    "id": "UX-MSK-039",
+    "severity": "P1",
+    "scope": "0.5",
+    "mode": "STRESS",
+    "scenario": "100 masks × 10 local parameters remains usable."
+  },
+  {
+    "id": "UX-MSK-040",
+    "severity": "P0",
+    "scope": "0.5",
+    "mode": "BLOCKING",
+    "scenario": "mask edit + immediate quit/restart → consistent document."
+  },
+  {
+    "id": "UX-P06-GPU-001",
+    "severity": "P0",
+    "scope": "0.6",
+    "mode": "BLOCKING",
+    "scenario": "включение Metal backend не меняет catalog/edit state."
+  },
+  {
+    "id": "UX-P06-GPU-002",
+    "severity": "P0",
+    "scope": "0.6",
+    "mode": "BLOCKING",
+    "scenario": "CPU и GPU render neutral image совпадают в утверждённой tolerance."
+  },
+  {
+    "id": "UX-P06-GPU-003",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "CPU/GPU tolerance: WB/Exposure/Tone."
+  },
+  {
+    "id": "UX-P06-GPU-004",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "CPU/GPU tolerance: Curves/HSL."
+  },
+  {
+    "id": "UX-P06-GPU-005",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "CPU/GPU tolerance: Sharpening/Noise Reduction."
+  },
+  {
+    "id": "UX-P06-GPU-006",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "CPU/GPU tolerance: Crop/Transform/Lens."
+  },
+  {
+    "id": "UX-P06-GPU-007",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "CPU/GPU tolerance: Local Adjustments / masks."
+  },
+  {
+    "id": "UX-P06-GPU-008",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "alpha PNG/TIFF одинаково трактуются CPU/GPU."
+  },
+  {
+    "id": "UX-P06-GPU-009",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "16-bit/high-dynamic-range pipeline остаётся finite."
+  },
+  {
+    "id": "UX-P06-GPU-010",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "Metal init failure → корректный fallback без blank preview."
+  },
+  {
+    "id": "UX-P06-GPU-011",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "GPU command failure → UI остаётся живым, пользователь видит ошибку/fallback."
+  },
+  {
+    "id": "UX-P06-GPU-012",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "sleep/wake пересоздаёт GPU resources без crash."
+  },
+  {
+    "id": "UX-P06-GPU-013",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "disconnect/reconnect display не оставляет preview black."
+  },
+  {
+    "id": "UX-P06-GPU-014",
+    "severity": "P2",
+    "scope": "0.6",
+    "mode": "GPU_PERF",
+    "scenario": "basic slider pointer→preview latency p50/p95/p99."
+  },
+  {
+    "id": "UX-P06-GPU-015",
+    "severity": "P2",
+    "scope": "0.6",
+    "mode": "GPU_PERF",
+    "scenario": "Crop/Transform drag frame pacing."
+  },
+  {
+    "id": "UX-P06-GPU-016",
+    "severity": "P2",
+    "scope": "0.6",
+    "mode": "GPU_PERF",
+    "scenario": "CPU vs Metal throughput report на одинаковых fixtures."
+  },
+  {
+    "id": "UX-P06-GPU-017",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "STRESS",
+    "scenario": "10 000 GPU renders без resource leak."
+  },
+  {
+    "id": "UX-P06-GPU-018",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "CHAOS",
+    "scenario": "random edits/photo switching при искусственно переставленном порядке GPU completions."
+  },
+  {
+    "id": "UX-P06-PRG-001",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "BLOCKING",
+    "scenario": "тяжёлая правка быстро даёт interaction preview, затем final-quality render."
+  },
+  {
+    "id": "UX-P06-PRG-002",
+    "severity": "P0",
+    "scope": "0.6",
+    "mode": "BLOCKING",
+    "scenario": "low-quality preview никогда не экспортируется как final output."
+  },
+  {
+    "id": "UX-P06-PRG-003",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "новая revision отменяет obsolete final render предыдущей revision."
+  },
+  {
+    "id": "UX-P06-PRG-004",
+    "severity": "P0",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "late render старой revision не заменяет новую картинку."
+  },
+  {
+    "id": "UX-P06-PRG-005",
+    "severity": "P2",
+    "scope": "0.6",
+    "mode": "GPU_PERF",
+    "scenario": "time-to-first-feedback."
+  },
+  {
+    "id": "UX-P06-PRG-006",
+    "severity": "P2",
+    "scope": "0.6",
+    "mode": "GPU_PERF",
+    "scenario": "time-to-final-quality."
+  },
+  {
+    "id": "UX-P06-PRG-007",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "Original toggle корректно взаимодействует с progressive queue."
+  },
+  {
+    "id": "UX-P06-PRG-008",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "preset hover progressive preview не сохраняется."
+  },
+  {
+    "id": "UX-P06-PRG-009",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "photo switch немедленно инвалидирует старые progressive stages."
+  },
+  {
+    "id": "UX-P06-PRG-010",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "STRESS",
+    "scenario": "1 000 быстрых slider changes не создают хвост устаревших render jobs."
+  },
+  {
+    "id": "UX-P06-ZOM-001",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "BLOCKING",
+    "scenario": "true 1:1 показывает заявленное pixel mapping."
+  },
+  {
+    "id": "UX-P06-ZOM-002",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "Fit → 1:1 → Fit сохраняет логический центр изображения."
+  },
+  {
+    "id": "UX-P06-ZOM-003",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "zoom around pointer сохраняет anchor."
+  },
+  {
+    "id": "UX-P06-ZOM-004",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "pan boundaries не позволяют потерять изображение вне canvas."
+  },
+  {
+    "id": "UX-P06-ZOM-005",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "photo switch имеет определённую политику reset/persist zoom."
+  },
+  {
+    "id": "UX-P06-ZOM-006",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "BLOCKING",
+    "scenario": "Crop coordinate mapping корректен на 1:1 и произвольном zoom."
+  },
+  {
+    "id": "UX-P06-ZOM-007",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "BLOCKING",
+    "scenario": "Guided Transform mapping корректен при zoom/pan."
+  },
+  {
+    "id": "UX-P06-ZOM-008",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "BLOCKING",
+    "scenario": "Brush/masks mapping корректен при zoom/pan."
+  },
+  {
+    "id": "UX-P06-ZOM-009",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "BLOCKING",
+    "scenario": "targeted tone/HSL mapping корректен при zoom/pan."
+  },
+  {
+    "id": "UX-P06-ZOM-010",
+    "severity": "P2",
+    "scope": "0.6",
+    "mode": "GPU_PERF",
+    "scenario": "pan frame pacing на 1:1 в течение 30 секунд."
+  },
+  {
+    "id": "UX-P06-ZOM-011",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "STRESS",
+    "scenario": "5 000 zoom/pan actions без drift/NaN."
+  },
+  {
+    "id": "UX-P06-ZOM-012",
+    "severity": "P2",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "trackpad pinch/scroll semantics предсказуемы."
+  },
+  {
+    "id": "UX-P06-LRU-001",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "BLOCKING",
+    "scenario": "preview cache соблюдает byte/item budget."
+  },
+  {
+    "id": "UX-P06-LRU-002",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "BLOCKING",
+    "scenario": "thumbnail cache bounded."
+  },
+  {
+    "id": "UX-P06-LRU-003",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "recently used item переживает нормальный pressure."
+  },
+  {
+    "id": "UX-P06-LRU-004",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "evicted item прозрачно регенерируется."
+  },
+  {
+    "id": "UX-P06-LRU-005",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "corrupted cache entry регенерируется без app-level error."
+  },
+  {
+    "id": "UX-P06-LRU-006",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "STRESS",
+    "scenario": "10k photo navigation не даёт linear memory growth."
+  },
+  {
+    "id": "UX-P06-LRU-007",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "STRESS",
+    "scenario": "cache churn + edits достигает memory plateau."
+  },
+  {
+    "id": "UX-P06-LRU-008",
+    "severity": "P2",
+    "scope": "0.6",
+    "mode": "GPU_PERF",
+    "scenario": "hit/miss latency baseline."
+  },
+  {
+    "id": "UX-P06-MEM-001",
+    "severity": "P0",
+    "scope": "0.6",
+    "mode": "BLOCKING",
+    "scenario": "memory warning не повреждает catalog/edit state."
+  },
+  {
+    "id": "UX-P06-MEM-002",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "BLOCKING",
+    "scenario": "reclaimable caches освобождаются под pressure."
+  },
+  {
+    "id": "UX-P06-MEM-003",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "качество preview может деградировать, но UI остаётся интерактивным."
+  },
+  {
+    "id": "UX-P06-MEM-004",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "export под memory pressure либо завершается, либо чисто падает с контролируемой ошибкой."
+  },
+  {
+    "id": "UX-P06-MEM-005",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "import под memory pressure остаётся cancellable."
+  },
+  {
+    "id": "UX-P06-MEM-006",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "REGRESSION",
+    "scenario": "большой mask document не приводит к crash."
+  },
+  {
+    "id": "UX-P06-MEM-007",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "SOAK",
+    "scenario": "2 часа realistic-use на 8 GB profile."
+  },
+  {
+    "id": "UX-P06-MEM-008",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "SOAK",
+    "scenario": "2 часа realistic-use на 16 GB profile."
+  },
+  {
+    "id": "UX-P06-MEM-009",
+    "severity": "P2",
+    "scope": "0.6",
+    "mode": "GPU_PERF",
+    "scenario": "peak RSS / compressed memory / swap / GPU memory report."
+  },
+  {
+    "id": "UX-P06-MEM-010",
+    "severity": "P1",
+    "scope": "0.6",
+    "mode": "STRESS",
+    "scenario": "100 больших изображений + edits + export при constrained memory."
+  },
+  {
+    "id": "UX-P07-PRV-001",
+    "severity": "P0",
+    "scope": "0.7",
+    "mode": "PRIVACY",
+    "scenario": "local-only mode делает zero network calls во всех AI workflow."
+  },
+  {
+    "id": "UX-P07-PRV-002",
+    "severity": "P0",
+    "scope": "0.7",
+    "mode": "PRIVACY",
+    "scenario": "cloud provider не может использоваться до explicit consent."
+  },
+  {
+    "id": "UX-P07-PRV-003",
+    "severity": "P0",
+    "scope": "0.7",
+    "mode": "PRIVACY",
+    "scenario": "Cancel в consent оставляет cloud provider disabled."
+  },
+  {
+    "id": "UX-P07-PRV-004",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "PRIVACY",
+    "scenario": "consent UI явно отражает тип передаваемых данных."
+  },
+  {
+    "id": "UX-P07-PRV-005",
+    "severity": "P0",
+    "scope": "0.7",
+    "mode": "PRIVACY",
+    "scenario": "выбор cloud provider не инициирует скрытую индексацию/загрузку существующего каталога."
+  },
+  {
+    "id": "UX-P07-PRV-006",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "provider unavailable не ломает обычный Develop/Library."
+  },
+  {
+    "id": "UX-P07-PRV-007",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "timeout/provider error остаётся cancellable."
+  },
+  {
+    "id": "UX-P07-PRV-008",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "auth failure изолирован и понятен пользователю."
+  },
+  {
+    "id": "UX-P07-PRV-009",
+    "severity": "P0",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "AI result привязан к exact asset ID + edit revision."
+  },
+  {
+    "id": "UX-P07-PRV-010",
+    "severity": "P0",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "late AI result photo A никогда не меняет photo B."
+  },
+  {
+    "id": "UX-P07-PRV-011",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "PRIVACY",
+    "scenario": "logs не содержат image bytes / credentials / provider secret."
+  },
+  {
+    "id": "UX-P07-PRV-012",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "CHAOS",
+    "scenario": "randomized provider delay/errors + photo switching."
+  },
+  {
+    "id": "UX-P07-DNS-001",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "BLOCKING",
+    "scenario": "AI denoise показывает явное processing state."
+  },
+  {
+    "id": "UX-P07-DNS-002",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "BLOCKING",
+    "scenario": "operation cancellable."
+  },
+  {
+    "id": "UX-P07-DNS-003",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "cancel оставляет предыдущий committed state."
+  },
+  {
+    "id": "UX-P07-DNS-004",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "photo switch отсоединяет старый result."
+  },
+  {
+    "id": "UX-P07-DNS-005",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "normal Develop после denoise следует pipeline contract."
+  },
+  {
+    "id": "UX-P07-DNS-006",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "Original bypasses result визуально, но не удаляет его."
+  },
+  {
+    "id": "UX-P07-DNS-007",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "export использует только committed denoise state."
+  },
+  {
+    "id": "UX-P07-DNS-008",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "BLOCKING",
+    "scenario": "committed denoise survives restart/reload."
+  },
+  {
+    "id": "UX-P07-DNS-009",
+    "severity": "P2",
+    "scope": "0.7",
+    "mode": "GPU_PERF",
+    "scenario": "inference latency by megapixels."
+  },
+  {
+    "id": "UX-P07-DNS-010",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "STRESS",
+    "scenario": "100 start/cancel cycles без memory leak."
+  },
+  {
+    "id": "UX-P07-DNS-011",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "insufficient memory → controlled refusal."
+  },
+  {
+    "id": "UX-P07-DNS-012",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "unsupported source clearly disables feature."
+  },
+  {
+    "id": "UX-P07-MSK-001",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "BLOCKING",
+    "scenario": "generate subject mask."
+  },
+  {
+    "id": "UX-P07-MSK-002",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "generate supported object/background/person masks."
+  },
+  {
+    "id": "UX-P07-MSK-003",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "BLOCKING",
+    "scenario": "AI mask входит в общий Local Adjustments mask lifecycle."
+  },
+  {
+    "id": "UX-P07-MSK-004",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "manual refinement of AI mask."
+  },
+  {
+    "id": "UX-P07-MSK-005",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "invert/add/subtract/intersect работает с AI mask."
+  },
+  {
+    "id": "UX-P07-MSK-006",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "rerun AI не уничтожает user-refined mask молча."
+  },
+  {
+    "id": "UX-P07-MSK-007",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "model/version change имеет явные semantics."
+  },
+  {
+    "id": "UX-P07-MSK-008",
+    "severity": "P0",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "async revision guard предотвращает stale mask."
+  },
+  {
+    "id": "UX-P07-MSK-009",
+    "severity": "P2",
+    "scope": "0.7",
+    "mode": "GPU_PERF",
+    "scenario": "time-to-first-overlay."
+  },
+  {
+    "id": "UX-P07-MSK-010",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "STRESS",
+    "scenario": "200 generate/delete/refine cycles."
+  },
+  {
+    "id": "UX-P07-REM-001",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "BLOCKING",
+    "scenario": "draw removal region → generate result."
+  },
+  {
+    "id": "UX-P07-REM-002",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "BLOCKING",
+    "scenario": "generation cancellable."
+  },
+  {
+    "id": "UX-P07-REM-003",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "BLOCKING",
+    "scenario": "one committed removal = predictable Undo unit."
+  },
+  {
+    "id": "UX-P07-REM-004",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "multiple regions maintain ordering/state."
+  },
+  {
+    "id": "UX-P07-REM-005",
+    "severity": "P0",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "late result cannot attach to another photo/revision."
+  },
+  {
+    "id": "UX-P07-REM-006",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "Crop/Transform change handles removal geometry safely."
+  },
+  {
+    "id": "UX-P07-REM-007",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "Original shows source without destructive deletion."
+  },
+  {
+    "id": "UX-P07-REM-008",
+    "severity": "P0",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "editor overlay never appears in export."
+  },
+  {
+    "id": "UX-P07-REM-009",
+    "severity": "P2",
+    "scope": "0.7",
+    "mode": "GPU_PERF",
+    "scenario": "generation/interaction latency."
+  },
+  {
+    "id": "UX-P07-REM-010",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "STRESS",
+    "scenario": "100 remove/Undo/Redo cycles."
+  },
+  {
+    "id": "UX-P07-SEM-001",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "BLOCKING",
+    "scenario": "deterministic fixture query returns expected semantic neighborhood."
+  },
+  {
+    "id": "UX-P07-SEM-002",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "semantic search combines with rating/flag/label/collection filters."
+  },
+  {
+    "id": "UX-P07-SEM-003",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "empty query has defined state."
+  },
+  {
+    "id": "UX-P07-SEM-004",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "typing query rapidly cancels/debounces old searches."
+  },
+  {
+    "id": "UX-P07-SEM-005",
+    "severity": "P0",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "late query A result cannot replace query B."
+  },
+  {
+    "id": "UX-P07-SEM-006",
+    "severity": "P2",
+    "scope": "0.7",
+    "mode": "PERF_LOCAL",
+    "scenario": "search latency at 10k/100k assets."
+  },
+  {
+    "id": "UX-P07-SEM-007",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "indexing progress не блокирует Library."
+  },
+  {
+    "id": "UX-P07-SEM-008",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "cancel/restart indexing leaves recoverable index."
+  },
+  {
+    "id": "UX-P07-SEM-009",
+    "severity": "P0",
+    "scope": "0.7",
+    "mode": "PRIVACY",
+    "scenario": "local semantic search делает zero network calls."
+  },
+  {
+    "id": "UX-P07-SEM-010",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "corrupt/missing index rebuild path."
+  },
+  {
+    "id": "UX-P07-SEM-011",
+    "severity": "P1",
+    "scope": "0.7",
+    "mode": "STRESS",
+    "scenario": "reindex after 10k metadata changes без catalog corruption."
+  },
+  {
+    "id": "UX-P07-SEM-012",
+    "severity": "P2",
+    "scope": "0.7",
+    "mode": "REGRESSION",
+    "scenario": "scoring refresh не сбрасывает selection/scroll неожиданно."
+  },
+  {
+    "id": "UX-P08-MRG-001",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "BLOCKING",
+    "scenario": "create merge job from multi-selection."
+  },
+  {
+    "id": "UX-P08-MRG-002",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "invalid selection/type/size rejected before destructive work."
+  },
+  {
+    "id": "UX-P08-MRG-003",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "BLOCKING",
+    "scenario": "current phase/progress visible."
+  },
+  {
+    "id": "UX-P08-MRG-004",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "BLOCKING",
+    "scenario": "cancel merge."
+  },
+  {
+    "id": "UX-P08-MRG-005",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "cancel cleans partial derived output/temp files."
+  },
+  {
+    "id": "UX-P08-MRG-006",
+    "severity": "P0",
+    "scope": "0.8",
+    "mode": "BLOCKING",
+    "scenario": "source originals unchanged."
+  },
+  {
+    "id": "UX-P08-MRG-007",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "app close during merge follows safe wait/cancel path."
+  },
+  {
+    "id": "UX-P08-MRG-008",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "restart after crash/cancel cleans/recover unfinished job."
+  },
+  {
+    "id": "UX-P08-MRG-009",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "BLOCKING",
+    "scenario": "successful result enters Library exactly once."
+  },
+  {
+    "id": "UX-P08-MRG-010",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "BLOCKING",
+    "scenario": "derived result independently editable/non-destructive."
+  },
+  {
+    "id": "UX-P08-MRG-011",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "STRESS",
+    "scenario": "repeated start/cancel no temp leak."
+  },
+  {
+    "id": "UX-P08-MRG-012",
+    "severity": "P2",
+    "scope": "0.8",
+    "mode": "PERF_LOCAL",
+    "scenario": "UI responsiveness during background merge."
+  },
+  {
+    "id": "UX-P08-HDR-001",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "BLOCKING",
+    "scenario": "merge valid 3-frame bracket."
+  },
+  {
+    "id": "UX-P08-HDR-002",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "5/7-frame bracket."
+  },
+  {
+    "id": "UX-P08-HDR-003",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "unordered inputs normalized/presented predictably."
+  },
+  {
+    "id": "UX-P08-HDR-004",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "incompatible dimensions handled clearly."
+  },
+  {
+    "id": "UX-P08-HDR-005",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "metadata mismatch warning without data loss."
+  },
+  {
+    "id": "UX-P08-HDR-006",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "BLOCKING",
+    "scenario": "alignment option affects derived result only."
+  },
+  {
+    "id": "UX-P08-HDR-007",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "BLOCKING",
+    "scenario": "deghost option exercised on moving-object fixture."
+  },
+  {
+    "id": "UX-P08-HDR-008",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "clipped/high-range inputs never produce NaN/Inf."
+  },
+  {
+    "id": "UX-P08-HDR-009",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "BLOCKING",
+    "scenario": "result has correct editable dynamic-range representation."
+  },
+  {
+    "id": "UX-P08-HDR-010",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "export HDR result to supported SDR/16-bit output path."
+  },
+  {
+    "id": "UX-P08-HDR-011",
+    "severity": "P2",
+    "scope": "0.8",
+    "mode": "PERF_LOCAL",
+    "scenario": "timings for 3/5/7 frames."
+  },
+  {
+    "id": "UX-P08-HDR-012",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "STRESS",
+    "scenario": "50 HDR jobs in session."
+  },
+  {
+    "id": "UX-P08-PAN-001",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "BLOCKING",
+    "scenario": "horizontal panorama."
+  },
+  {
+    "id": "UX-P08-PAN-002",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "BLOCKING",
+    "scenario": "vertical panorama."
+  },
+  {
+    "id": "UX-P08-PAN-003",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "shuffled input ordering deterministic or explicitly user-controlled."
+  },
+  {
+    "id": "UX-P08-PAN-004",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "insufficient overlap refused cleanly."
+  },
+  {
+    "id": "UX-P08-PAN-005",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "incompatible focal/orientation warning."
+  },
+  {
+    "id": "UX-P08-PAN-006",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "moving-object/deghost fixture."
+  },
+  {
+    "id": "UX-P08-PAN-007",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "extreme output dimensions do not break UI/layout."
+  },
+  {
+    "id": "UX-P08-PAN-008",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "transparent uncovered boundary preview is correct."
+  },
+  {
+    "id": "UX-P08-PAN-009",
+    "severity": "P2",
+    "scope": "0.8",
+    "mode": "PERF_LOCAL",
+    "scenario": "5/10/25-frame timings."
+  },
+  {
+    "id": "UX-P08-PAN-010",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "STRESS",
+    "scenario": "20 panorama jobs one session."
+  },
+  {
+    "id": "UX-P08-PAN-011",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "cancel at alignment/stitch/deghost phases."
+  },
+  {
+    "id": "UX-P08-PAN-012",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "BLOCKING",
+    "scenario": "panorama remains editable after restart."
+  },
+  {
+    "id": "UX-P08-ALG-001",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "BLOCKING",
+    "scenario": "alignment transform finite/bounded."
+  },
+  {
+    "id": "UX-P08-ALG-002",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "alignment failure creates no partial catalog result."
+  },
+  {
+    "id": "UX-P08-ALG-003",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "source IDs/revisions retained for derived result provenance."
+  },
+  {
+    "id": "UX-P08-DGH-001",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "BLOCKING",
+    "scenario": "deterministic deghost on/off fixture difference."
+  },
+  {
+    "id": "UX-P08-DGH-002",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "deghost controls have predictable history semantics."
+  },
+  {
+    "id": "UX-P08-DGH-003",
+    "severity": "P0",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "deghost preview/selection overlay never written into output."
+  },
+  {
+    "id": "UX-P08-FLT-001",
+    "severity": "P0",
+    "scope": "0.8",
+    "mode": "BLOCKING",
+    "scenario": "float output survives save/restart without precision-destructive conversion."
+  },
+  {
+    "id": "UX-P08-FLT-002",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "BLOCKING",
+    "scenario": "Develop sliders remain finite on float source."
+  },
+  {
+    "id": "UX-P08-FLT-003",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "Crop/Transform/Lens operate on float result."
+  },
+  {
+    "id": "UX-P08-FLT-004",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "Local Adjustments operate on float result."
+  },
+  {
+    "id": "UX-P08-FLT-005",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "thumbnails/previews have predictable display transform."
+  },
+  {
+    "id": "UX-P08-FLT-006",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "JPEG/PNG/TIFF/DNG export follows declared encoding/tone semantics."
+  },
+  {
+    "id": "UX-P08-FLT-007",
+    "severity": "P0",
+    "scope": "0.8",
+    "mode": "REGRESSION",
+    "scenario": "extreme edits do not propagate NaN/Inf."
+  },
+  {
+    "id": "UX-P08-FLT-008",
+    "severity": "P1",
+    "scope": "0.8",
+    "mode": "STRESS",
+    "scenario": "100 edit/undo cycles on large float merge."
+  },
+  {
+    "id": "UX-P09-CAT-001",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "open 10k catalog."
+  },
+  {
+    "id": "UX-P09-CAT-002",
+    "severity": "P2",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "10k startup/open metrics."
+  },
+  {
+    "id": "UX-P09-CAT-003",
+    "severity": "P2",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "10k grid scroll."
+  },
+  {
+    "id": "UX-P09-CAT-004",
+    "severity": "P2",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "10k search/filter latency."
+  },
+  {
+    "id": "UX-P09-CAT-005",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "STRESS",
+    "scenario": "10k one-hour Library workflow."
+  },
+  {
+    "id": "UX-P09-CAT-006",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "open 100k catalog."
+  },
+  {
+    "id": "UX-P09-CAT-007",
+    "severity": "P2",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "100k startup/open metrics."
+  },
+  {
+    "id": "UX-P09-CAT-008",
+    "severity": "P2",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "100k scroll/page fetch."
+  },
+  {
+    "id": "UX-P09-CAT-009",
+    "severity": "P2",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "100k combined search/filter."
+  },
+  {
+    "id": "UX-P09-CAT-010",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "STRESS",
+    "scenario": "100k one-hour realistic workload."
+  },
+  {
+    "id": "UX-P09-CAT-011",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "open 500k catalog without materializing all QML delegates."
+  },
+  {
+    "id": "UX-P09-CAT-012",
+    "severity": "P2",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "500k startup/open."
+  },
+  {
+    "id": "UX-P09-CAT-013",
+    "severity": "P2",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "500k search latency."
+  },
+  {
+    "id": "UX-P09-CAT-014",
+    "severity": "P2",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "500k filter latency."
+  },
+  {
+    "id": "UX-P09-CAT-015",
+    "severity": "P2",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "random navigation to distant rows."
+  },
+  {
+    "id": "UX-P09-CAT-016",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "STRESS",
+    "scenario": "500k two-hour Library workflow."
+  },
+  {
+    "id": "UX-P09-CAT-017",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "STRESS",
+    "scenario": "thumbnail worker backlog bounded."
+  },
+  {
+    "id": "UX-P09-CAT-018",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "STRESS",
+    "scenario": "RSS/QObject/delegate counts reach plateau."
+  },
+  {
+    "id": "UX-P09-CAT-019",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "collection operations atomic at scale."
+  },
+  {
+    "id": "UX-P09-CAT-020",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "batch metadata edit on large selection cancellable/progressed."
+  },
+  {
+    "id": "UX-P09-META-001",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "display complete supported metadata set without blocking Library."
+  },
+  {
+    "id": "UX-P09-META-002",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "Unicode metadata."
+  },
+  {
+    "id": "UX-P09-META-003",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "very long captions/fields."
+  },
+  {
+    "id": "UX-P09-META-004",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "mixed/common multi-selection states if supported."
+  },
+  {
+    "id": "UX-P09-META-005",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "metadata edit history follows product contract."
+  },
+  {
+    "id": "UX-P09-META-006",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "batch metadata write atomic."
+  },
+  {
+    "id": "UX-P09-META-007",
+    "severity": "P0",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "catalog-only metadata mode never silently rewrites original."
+  },
+  {
+    "id": "UX-P09-META-008",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "export metadata policy uses current supported metadata state correctly."
+  },
+  {
+    "id": "UX-P09-XMP-001",
+    "severity": "P0",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "sidecar write atomic."
+  },
+  {
+    "id": "UX-P09-XMP-002",
+    "severity": "P0",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "original hash unchanged in sidecar workflow."
+  },
+  {
+    "id": "UX-P09-XMP-003",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "read existing XMP."
+  },
+  {
+    "id": "UX-P09-XMP-004",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "external XMP modification → explicit conflict UX."
+  },
+  {
+    "id": "UX-P09-XMP-005",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "malformed XMP does not corrupt catalog."
+  },
+  {
+    "id": "UX-P09-XMP-006",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "unsupported fields handled/preserved according to contract."
+  },
+  {
+    "id": "UX-P09-XMP-007",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "filesystem case/path rules correct."
+  },
+  {
+    "id": "UX-P09-XMP-008",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "read-only sidecar error actionable."
+  },
+  {
+    "id": "UX-P09-XMP-009",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "batch XMP sync progress/cancel."
+  },
+  {
+    "id": "UX-P09-XMP-010",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "MIGRATION",
+    "scenario": "supported catalog edits ↔ XMP roundtrip."
+  },
+  {
+    "id": "UX-P09-XMP-011",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "STRESS",
+    "scenario": "10k sidecar read/write synthetic run."
+  },
+  {
+    "id": "UX-P09-XMP-012",
+    "severity": "P0",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "crash during sidecar atomic replace leaves valid old or new file, never torn partial."
+  },
+  {
+    "id": "UX-P09-BKP-001",
+    "severity": "P0",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "manual backup creates readable snapshot."
+  },
+  {
+    "id": "UX-P09-BKP-002",
+    "severity": "P0",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "restore reproduces catalog/edit state."
+  },
+  {
+    "id": "UX-P09-BKP-003",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "cancel backup leaves no false-success state."
+  },
+  {
+    "id": "UX-P09-BKP-004",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "backup does not freeze editor."
+  },
+  {
+    "id": "UX-P09-BKP-005",
+    "severity": "P0",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "disk-full preserves previous good backup."
+  },
+  {
+    "id": "UX-P09-BKP-006",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "corrupt backup rejected before restore."
+  },
+  {
+    "id": "UX-P09-BKP-007",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "restore over active catalog requires explicit safe UX."
+  },
+  {
+    "id": "UX-P09-BKP-008",
+    "severity": "P0",
+    "scope": "0.9",
+    "mode": "MIGRATION",
+    "scenario": "older compatible backup migrates safely."
+  },
+  {
+    "id": "UX-P09-BKP-009",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "retention/rotation never deletes only/newest valid backup."
+  },
+  {
+    "id": "UX-P09-BKP-010",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "SOAK",
+    "scenario": "repeated/scheduled backup workflow if implemented."
+  },
+  {
+    "id": "UX-P09-RLK-001",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "missing original visibly marked, edits remain intact."
+  },
+  {
+    "id": "UX-P09-RLK-002",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "relink single file by identity."
+  },
+  {
+    "id": "UX-P09-RLK-003",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "relink moved folder/tree."
+  },
+  {
+    "id": "UX-P09-RLK-004",
+    "severity": "P0",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "wrong same-name/different-hash file not silently relinked."
+  },
+  {
+    "id": "UX-P09-RLK-005",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "explicitly modified legitimate source has controlled resolution flow."
+  },
+  {
+    "id": "UX-P09-RLK-006",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "relink keeps edits/rating/collections."
+  },
+  {
+    "id": "UX-P09-RLK-007",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "relink invalidates/regenerates preview safely."
+  },
+  {
+    "id": "UX-P09-RLK-008",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "bulk 1k relink progress/cancel."
+  },
+  {
+    "id": "UX-P09-RLK-009",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "cancel bulk relink keeps completed mappings consistent."
+  },
+  {
+    "id": "UX-P09-RLK-010",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "STRESS",
+    "scenario": "repeated disconnect/reconnect external volume."
+  },
+  {
+    "id": "UX-P09-FLT-001",
+    "severity": "P0",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "process kill at catalog transaction checkpoints."
+  },
+  {
+    "id": "UX-P09-FLT-002",
+    "severity": "P0",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "kill during XMP replace."
+  },
+  {
+    "id": "UX-P09-FLT-003",
+    "severity": "P0",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "kill during backup."
+  },
+  {
+    "id": "UX-P09-FLT-004",
+    "severity": "P0",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "kill during relink commit."
+  },
+  {
+    "id": "UX-P09-FLT-005",
+    "severity": "P0",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "kill during batch commit."
+  },
+  {
+    "id": "UX-P09-FLT-006",
+    "severity": "P0",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "kill during merge result registration."
+  },
+  {
+    "id": "UX-P09-FLT-007",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "randomized SQLite busy/locked."
+  },
+  {
+    "id": "UX-P09-FLT-008",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "ENOSPC during save/import/export/backup."
+  },
+  {
+    "id": "UX-P09-FLT-009",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "permissions revoked mid-operation."
+  },
+  {
+    "id": "UX-P09-FLT-010",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "source disappears mid-read."
+  },
+  {
+    "id": "UX-P09-FLT-011",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "destination disappears mid-write."
+  },
+  {
+    "id": "UX-P09-FLT-012",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "REGRESSION",
+    "scenario": "worker delay/out-of-order completions."
+  },
+  {
+    "id": "UX-P09-FLT-013",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "CHAOS",
+    "scenario": "100k random actions + fault injection with deterministic replay."
+  },
+  {
+    "id": "UX-P09-FLT-014",
+    "severity": "P0",
+    "scope": "0.9",
+    "mode": "SOAK",
+    "scenario": "8-hour realistic session, catalog integrity preserved."
+  },
+  {
+    "id": "UX-P09-PERF-001",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "BLOCKING",
+    "scenario": "checked-in machine-readable baseline schema."
+  },
+  {
+    "id": "UX-P09-PERF-002",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "startup regression tracking."
+  },
+  {
+    "id": "UX-P09-PERF-003",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "Library scroll regression tracking."
+  },
+  {
+    "id": "UX-P09-PERF-004",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "search/filter regression tracking."
+  },
+  {
+    "id": "UX-P09-PERF-005",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "photo switch regression tracking."
+  },
+  {
+    "id": "UX-P09-PERF-006",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "Develop slider regression tracking."
+  },
+  {
+    "id": "UX-P09-PERF-007",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "mask brush regression tracking."
+  },
+  {
+    "id": "UX-P09-PERF-008",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "export throughput regression tracking."
+  },
+  {
+    "id": "UX-P09-PERF-009",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "peak RSS regression tracking."
+  },
+  {
+    "id": "UX-P09-PERF-010",
+    "severity": "P1",
+    "scope": "0.9",
+    "mode": "PERF_LOCAL",
+    "scenario": "main-loop stall regression tracking."
+  },
+  {
+    "id": "UX-P10-DAY-001",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "fresh install → import RAW → Develop → Local Mask → preset → export → quit → reopen → exact saved state."
+  },
+  {
+    "id": "UX-P10-DAY-002",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "fresh install → common image → edit → export → restart."
+  },
+  {
+    "id": "UX-P10-DAY-003",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "100-photo culling: import/rate/flag/filter/collection/develop/batch/export."
+  },
+  {
+    "id": "UX-P10-DAY-004",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "SOAK",
+    "scenario": "realistic 500-photo, 2-hour photographer session."
+  },
+  {
+    "id": "UX-P10-DAY-005",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "SOAK",
+    "scenario": "8-hour mixed Library/Develop/export session."
+  },
+  {
+    "id": "UX-P10-DAY-006",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "SOAK",
+    "scenario": "24-hour idle/background/wake/reuse survival."
+  },
+  {
+    "id": "UX-P10-DAY-007",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "unexpected kill after committed edits → safe restart."
+  },
+  {
+    "id": "UX-P10-DAY-008",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "machine restart between sessions → no lost committed data."
+  },
+  {
+    "id": "UX-P10-DAY-009",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "external volume missing → relink → continue editing."
+  },
+  {
+    "id": "UX-P10-DAY-010",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "restore catalog backup → continue work."
+  },
+  {
+    "id": "UX-P10-DAY-011",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "HDR/Panorama derived result participates in normal Library/Edit/Export."
+  },
+  {
+    "id": "UX-P10-DAY-012",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "AI provider offline does not block non-AI daily use."
+  },
+  {
+    "id": "UX-P10-DAY-013",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "language switch mid-project + restart."
+  },
+  {
+    "id": "UX-P10-DAY-014",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "full core workflow keyboard-only."
+  },
+  {
+    "id": "UX-P10-DAY-015",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "all original hashes unchanged after complete golden suite."
+  },
+  {
+    "id": "UX-P10-INS-001",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "clean supported macOS installs from DMG."
+  },
+  {
+    "id": "UX-P10-INS-002",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "drag-to-Applications workflow correct."
+  },
+  {
+    "id": "UX-P10-INS-003",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "app bundle signed with expected release identity."
+  },
+  {
+    "id": "UX-P10-INS-004",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "Gatekeeper assessment passes."
+  },
+  {
+    "id": "UX-P10-INS-005",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "notarization/stapling valid when required by release design."
+  },
+  {
+    "id": "UX-P10-INS-006",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "REGRESSION",
+    "scenario": "release runs without Qt SDK/Homebrew/dev toolchain."
+  },
+  {
+    "id": "UX-P10-INS-007",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "REGRESSION",
+    "scenario": "version consistent in UI/Finder/bundle metadata."
+  },
+  {
+    "id": "UX-P10-INS-008",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "REGRESSION",
+    "scenario": "app icon/DMG branding intact."
+  },
+  {
+    "id": "UX-P10-INS-009",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "REGRESSION",
+    "scenario": "minimum supported macOS enforced gracefully."
+  },
+  {
+    "id": "UX-P10-INS-010",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "REGRESSION",
+    "scenario": "unsupported architecture behavior explicit."
+  },
+  {
+    "id": "UX-P10-UPG-001",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "MIGRATION",
+    "scenario": "upgrade latest supported previous release → 1.0."
+  },
+  {
+    "id": "UX-P10-UPG-002",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "MIGRATION",
+    "scenario": "catalog migration preserves asset count/identity."
+  },
+  {
+    "id": "UX-P10-UPG-003",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "MIGRATION",
+    "scenario": "edit migration preserves rendered output in tolerance."
+  },
+  {
+    "id": "UX-P10-UPG-004",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "MIGRATION",
+    "scenario": "presets survive."
+  },
+  {
+    "id": "UX-P10-UPG-005",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "MIGRATION",
+    "scenario": "local masks survive."
+  },
+  {
+    "id": "UX-P10-UPG-006",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "MIGRATION",
+    "scenario": "collections/ratings/flags/labels survive."
+  },
+  {
+    "id": "UX-P10-UPG-007",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "MIGRATION",
+    "scenario": "compatible export settings survive."
+  },
+  {
+    "id": "UX-P10-UPG-008",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "MIGRATION",
+    "scenario": "XMP/metadata workflow remains consistent."
+  },
+  {
+    "id": "UX-P10-UPG-009",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "MIGRATION",
+    "scenario": "migration failure rolls back or keeps pre-migration backup."
+  },
+  {
+    "id": "UX-P10-UPG-010",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "MIGRATION",
+    "scenario": "unsupported newer schema refused safely by old reader."
+  },
+  {
+    "id": "UX-P10-UPG-011",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "Sparkle update signature validation."
+  },
+  {
+    "id": "UX-P10-UPG-012",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "update waits for save/import/export/batch/merge."
+  },
+  {
+    "id": "UX-P10-UPG-013",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "REGRESSION",
+    "scenario": "canceled update does not damage installation."
+  },
+  {
+    "id": "UX-P10-UPG-014",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "REGRESSION",
+    "scenario": "interrupted update recovery leaves valid old or new app."
+  },
+  {
+    "id": "UX-P10-UPG-015",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "REGRESSION",
+    "scenario": "update restart restores session/catalog state."
+  },
+  {
+    "id": "UX-P10-REL-001",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "SHA256SUMS matches every shipped artifact."
+  },
+  {
+    "id": "UX-P10-REL-002",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "BUILD_INFO commit equals release tag/head."
+  },
+  {
+    "id": "UX-P10-REL-003",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "appcast references exact published archive."
+  },
+  {
+    "id": "UX-P10-REL-004",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "appcast/archive signatures validate."
+  },
+  {
+    "id": "UX-P10-REL-005",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "REGRESSION",
+    "scenario": "DMG and ZIP contain same version/build."
+  },
+  {
+    "id": "UX-P10-REL-006",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "REGRESSION",
+    "scenario": "release notes match actual capabilities."
+  },
+  {
+    "id": "UX-P10-REL-007",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "REGRESSION",
+    "scenario": "known issues file present when there are accepted P2/P3 defects."
+  },
+  {
+    "id": "UX-P10-REL-008",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "REGRESSION",
+    "scenario": "third-party licenses packaged."
+  },
+  {
+    "id": "UX-P10-REL-009",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "REGRESSION",
+    "scenario": "no private test assets, secrets or signing material in release."
+  },
+  {
+    "id": "UX-P10-REL-010",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "published artifacts byte-identical to CI-verified artifacts by hash."
+  },
+  {
+    "id": "UX-P10-DAT-001",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "invariants after golden daily-use suite."
+  },
+  {
+    "id": "UX-P10-DAT-002",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "invariants after chaos suite."
+  },
+  {
+    "id": "UX-P10-DAT-003",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "invariants after fault-injection suite."
+  },
+  {
+    "id": "UX-P10-DAT-004",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "invariants after migration."
+  },
+  {
+    "id": "UX-P10-DAT-005",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "invariants after backup restore."
+  },
+  {
+    "id": "UX-P10-A11Y-001",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "keyboard-only golden workflow."
+  },
+  {
+    "id": "UX-P10-A11Y-002",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "BLOCKING",
+    "scenario": "primary controls have meaningful AX names/roles."
+  },
+  {
+    "id": "UX-P10-A11Y-003",
+    "severity": "P2",
+    "scope": "1.0",
+    "mode": "REGRESSION",
+    "scenario": "visible focus on primary keyboard-reachable controls."
+  },
+  {
+    "id": "UX-P10-A11Y-004",
+    "severity": "P2",
+    "scope": "1.0",
+    "mode": "REGRESSION",
+    "scenario": "all supported localizations keep core controls reachable."
+  },
+  {
+    "id": "UX-P10-A11Y-005",
+    "severity": "P2",
+    "scope": "1.0",
+    "mode": "REGRESSION",
+    "scenario": "minimum window can complete core workflow."
+  },
+  {
+    "id": "UX-P10-A11Y-006",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "REGRESSION",
+    "scenario": "modal/focus stack never traps user."
+  },
+  {
+    "id": "UX-P10-PERF-001",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "PERF_LOCAL",
+    "scenario": "critical p95 interaction regression <= approved threshold (default 25%)."
+  },
+  {
+    "id": "UX-P10-PERF-002",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "PERF_LOCAL",
+    "scenario": "no new main-thread stall >1 s in golden workflow."
+  },
+  {
+    "id": "UX-P10-PERF-003",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "PERF_LOCAL",
+    "scenario": "scroll jank within approved budget."
+  },
+  {
+    "id": "UX-P10-PERF-004",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "PERF_LOCAL",
+    "scenario": "peak RSS budget on 8 GB reference Mac."
+  },
+  {
+    "id": "UX-P10-PERF-005",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "PERF_LOCAL",
+    "scenario": "peak RSS budget on 16 GB reference Mac."
+  },
+  {
+    "id": "UX-P10-PERF-006",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "SOAK",
+    "scenario": "no linear RSS growth over 8-hour session."
+  },
+  {
+    "id": "UX-P10-CHA-001",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "CHAOS",
+    "scenario": "no P0 in 1M cumulative actions."
+  },
+  {
+    "id": "UX-P10-CHA-002",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "CHAOS",
+    "scenario": "every P1 has seed/replay and is reproducible."
+  },
+  {
+    "id": "UX-P10-CHA-003",
+    "severity": "P0",
+    "scope": "1.0",
+    "mode": "CHAOS",
+    "scenario": "data safety invariants after chaos."
+  },
+  {
+    "id": "UX-P10-SOK-001",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "SOAK",
+    "scenario": "8-hour editing session."
+  },
+  {
+    "id": "UX-P10-SOK-002",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "SOAK",
+    "scenario": "8-hour Library session."
+  },
+  {
+    "id": "UX-P10-SOK-003",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "SOAK",
+    "scenario": "overnight idle/sleep/wake/reuse."
+  },
+  {
+    "id": "UX-P10-SOK-004",
+    "severity": "P1",
+    "scope": "1.0",
+    "mode": "SOAK",
+    "scenario": "repeated import/edit/export cycles."
+  }
+]

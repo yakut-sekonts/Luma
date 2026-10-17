@@ -469,6 +469,10 @@
     "Sampled color": "Colore campionato",
     "Sampling…": "Campionamento…",
     "Selection component": "Componente selezione",
-    "Subtract": "Sottrai"
+    "Subtract": "Sottrai",
+    "Preset actions": "Azioni dei predefiniti",
+    "Rotate crop left 90°": "Ruota il ritaglio di 90° a sinistra",
+    "Rotate crop right 90°": "Ruota il ritaglio di 90° a destra",
+    "Enable white balance": "Attiva bilanciamento del bianco"
   }
 }

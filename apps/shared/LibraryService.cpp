@@ -9,36 +9,92 @@
 #include <csignal>
 #include <cstring>
 #include <fcntl.h>
+#include <map>
 #include <set>
 #include <unistd.h>
 
 namespace luma {
 namespace {
-std::vector<std::filesystem::path> discover(const std::vector<std::filesystem::path> &roots,
-                                            bool recursive, CancellationToken stop) {
+struct DiscoveryResult {
+    std::vector<std::filesystem::path> sources;
+    std::map<std::filesystem::path, std::string> failures;
+};
+DiscoveryResult discover(const std::vector<std::filesystem::path> &roots, bool recursive,
+                         CancellationToken stop) {
     std::set<std::filesystem::path> paths;
+    std::map<std::filesystem::path, std::string> failures;
+    auto failed = [&](const std::filesystem::path &path, const std::error_code &error) {
+        const auto normalized = path.lexically_normal();
+        paths.insert(normalized);
+        failures.try_emplace(normalized, "Cannot access import source: " + error.message());
+    };
+    auto file = [&](const std::filesystem::path &path) {
+        std::error_code error;
+        const auto canonical = std::filesystem::canonical(path, error);
+        if (error)
+            failed(path, error);
+        else {
+            paths.insert(canonical);
+            failures.erase(canonical);
+        }
+    };
     for (const auto &root : roots) {
         checkCancellation(stop);
-        if (std::filesystem::is_regular_file(root))
-            paths.insert(std::filesystem::canonical(root));
-        else if (std::filesystem::is_directory(root)) {
-            auto add = [&](const auto &entry) {
+        std::error_code error;
+        const auto status = std::filesystem::status(root, error);
+        if (error) {
+            failed(root, error);
+            continue;
+        }
+        if (std::filesystem::is_regular_file(status)) {
+            file(root);
+            continue;
+        }
+        if (!std::filesystem::is_directory(status)) {
+            failed(root, std::make_error_code(std::errc::no_such_file_or_directory));
+            continue;
+        }
+        // Open each directory independently. An increment failure in a recursive
+        // iterator can terminate the whole traversal and discard readable siblings.
+        std::vector<std::filesystem::path> directories{root};
+        while (!directories.empty()) {
+            checkCancellation(stop);
+            const auto directory = directories.back();
+            directories.pop_back();
+            std::filesystem::directory_iterator entry(directory, error), end;
+            if (error) {
+                failed(directory, error);
+                continue;
+            }
+            while (entry != end) {
                 checkCancellation(stop);
-                if (entry.is_regular_file() && PhotoDecoder::supportedExtension(entry.path()))
-                    paths.insert(std::filesystem::canonical(entry.path()));
-            };
-            if (recursive)
-                for (const auto &entry : std::filesystem::recursive_directory_iterator(root))
-                    add(entry);
-            else
-                for (const auto &entry : std::filesystem::directory_iterator(root))
-                    add(entry);
-        } else
-            throw std::runtime_error("Import source is missing: " + root.string());
+                const auto path = entry->path();
+                const auto linkStatus = entry->symlink_status(error);
+                if (error)
+                    failed(path, error);
+                else {
+                    const auto targetStatus =
+                        std::filesystem::is_symlink(linkStatus) ? entry->status(error) : linkStatus;
+                    if (error)
+                        failed(path, error);
+                    else if (std::filesystem::is_regular_file(targetStatus) &&
+                             PhotoDecoder::supportedExtension(path))
+                        file(path);
+                    else if (recursive && std::filesystem::is_directory(linkStatus))
+                        directories.push_back(path); // Never follow child directory symlinks.
+                }
+                entry.increment(error);
+                if (error) {
+                    failed(directory, error);
+                    break;
+                }
+            }
+        }
     }
+    checkCancellation(stop);
     if (paths.empty())
         throw std::runtime_error("No supported photos found in the selected sources.");
-    return {paths.begin(), paths.end()};
+    return {{paths.begin(), paths.end()}, std::move(failures)};
 }
 class Descriptor {
   public:
@@ -131,7 +187,8 @@ LibraryService::import(const std::vector<std::filesystem::path> &roots, ImportOp
                        const std::function<void(double, const std::string &)> &progress) const {
     if (options.mode != ImportMode::add && options.mode != ImportMode::copy)
         throw std::runtime_error("Invalid import mode.");
-    auto sources = discover(roots, options.recursive, stop);
+    const auto discovery = discover(roots, options.recursive, stop);
+    const auto &sources = discovery.sources;
     if (options.mode == ImportMode::copy) {
         if (options.destination.empty() || !std::filesystem::is_directory(options.destination))
             throw std::runtime_error("Choose an existing destination folder for Copy.");
@@ -139,11 +196,17 @@ LibraryService::import(const std::vector<std::filesystem::path> &roots, ImportOp
     }
     Catalog catalog(catalog_);
     const auto session = catalog.beginImport(options.mode, options.destination, sources, getpid(),
-                                             options.skipDuplicates);
+                                             options.skipDuplicates, discovery.failures);
     for (std::size_t index = 0; index < sources.size(); ++index) {
         if (stop.isCancelled())
             break;
         const auto &source = sources[index];
+        if (discovery.failures.contains(source)) {
+            if (progress)
+                progress(static_cast<double>(index + 1) / sources.size(),
+                         source.filename().string());
+            continue; // Already recorded atomically as failed when the session was created.
+        }
         try {
             const auto initialTime = std::filesystem::last_write_time(source);
             const auto size = std::filesystem::file_size(source);

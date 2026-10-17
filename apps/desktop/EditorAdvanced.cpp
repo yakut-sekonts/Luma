@@ -201,7 +201,7 @@ bool EditorController::beginTargeted(double x, double y) {
     }
 }
 void EditorController::adjustTargeted(double delta) {
-    if (!editable() || !targeted_)
+    if (!editable() || original_ || !targeted_)
         return;
     try {
         if (!std::isfinite(delta))

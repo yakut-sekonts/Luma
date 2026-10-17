@@ -4,6 +4,7 @@ import QtQuick.Layouts
 
 ColumnLayout {
     id: panel
+    objectName: "hsl.panel"
     property var bands: ["red", "orange", "yellow", "green", "aqua", "blue", "purple", "magenta"]
     property var colors: ["#d05e60", "#dc9757", "#d6c86a", "#80b678", "#6cbfbc", "#709acb",
         "#a088ce", "#c480b2"]
@@ -35,6 +36,7 @@ ColumnLayout {
             Button {
                 id: bandButton
                 required property int index
+                objectName: "hsl.band." + panel.bands[index]
                 implicitWidth: 25
                 implicitHeight: 26
                 Layout.fillWidth: true
@@ -82,6 +84,7 @@ ColumnLayout {
     RowLayout {
         ComboBox {
             id: targetMode
+            objectName: "hsl.targetMode"
             model: [qsTranslate("Luma", "Hue"), qsTranslate("Luma", "Saturation"), qsTranslate("Luma", "Luminance")]
             Layout.fillWidth: true
             enabled: editor.hasPhoto && !editor.busy && editor.correctionStates.hsl
@@ -90,6 +93,7 @@ ColumnLayout {
             Accessible.name: qsTranslate("Luma", "Targeted HSL parameter")
         }
         Button {
+            objectName: "hsl.target"
             text: "◎"
             checkable: true
             checked: editor.targetedTool.startsWith("hsl.")

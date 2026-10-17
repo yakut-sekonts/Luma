@@ -362,3 +362,18 @@ CropGeometry forward/inverse pair projects editing handles, cursor and gestures.
 The alpha-aware coverage overlay is excluded from export/thumbnail paths.
 Tool/selection/overlay state is transient. See
 [local mask workflow, limits and acceptance](docs/LOCAL_ADJUSTMENTS.md).
+
+## UX qualification
+
+The separate `luma_ux_tests` target loads production QML and controllers over an
+isolated generated-image catalog. Qt Test input drives native Quick windows;
+test identifiers add no shipping behavior. A parent Python process serializes
+screen access, supervises a UI heartbeat, records evidence, and validates SQLite
+and original hashes. Restart cases use separate OS processes. A test-only SQLite
+VFS supplies bounded, explicit storage faults without altering production I/O.
+
+The scenario inventory and capability manifest distinguish unexecuted tests from
+absent features. No unexecuted blocking case qualifies a release; every applicable
+blocking case requires three clean repetitions. See [ADR 0025](docs/adr/0025-ux-regression-release-gate.md)
+and [runner documentation](tests/ux/README.md). Local performance measurements are
+kept separate from hosted CI and from input dispatch timing.

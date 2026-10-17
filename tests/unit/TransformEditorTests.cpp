@@ -106,6 +106,20 @@ void transformEditorTests(const QString &source, const QString &root, const QStr
     require(editor.transformGuides()[0].toMap()["x1"].toDouble() > 0.27,
             "Actual pointer drag did not move a guide endpoint.");
     require(editor.currentSettings() == manual, "Transient guide drag entered autosave/history.");
+    for (int layout = 0; layout < 3; ++layout) {
+        editor.setGuideLayout(layout);
+        const auto defaults = editor.transformGuides();
+        editor.moveGuidePoint(0, 0, .4, .3);
+        require(editor.transformGuides() != defaults, "Draft guide fixture did not move.");
+        editor.setGuidedMode(false);
+        require(editor.transformGuides().isEmpty() && editor.currentSettings() == manual,
+                "Closing Guided retained a draft or changed persisted edits.");
+        editor.setGuidedMode(true);
+        wait([&] { return editor.guidedCanvasReady(); });
+        require(editor.transformGuideLayout() == layout && editor.transformGuides() == defaults &&
+                    child("transformGuideLayout")->property("currentIndex").toInt() == layout,
+                "Reopening Guided lost its selected layout or retained draft endpoints.");
+    }
     auto project = [](double x, double y) {
         const double d = 1 + 0.13 * x - 0.12 * y;
         return std::array<double, 2>{((0.85 * x - 0.06 * y) / d + 1) / 2,

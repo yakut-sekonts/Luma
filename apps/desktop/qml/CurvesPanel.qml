@@ -4,6 +4,7 @@ import QtQuick.Layouts
 
 ColumnLayout {
     id: panel
+    objectName: "curves.panel"
     property string channel: channels.currentValue ?? "rgb"
     property var points: editor.curvePoints[channel] ?? []
     property var samples: []
@@ -33,6 +34,11 @@ ColumnLayout {
     }
     Connections {
         target: editor
+        function onPhotoLoaded() {
+            curveGesture.dragging = false;
+            panel.selected = -1;
+            graph.requestPaint();
+        }
         function onStateChanged() {
             panel.refresh();
         }
@@ -56,6 +62,7 @@ ColumnLayout {
     }
     ComboBox {
         id: mode
+        objectName: "curves.mode"
         model: [qsTranslate("Luma", "Point"), qsTranslate("Luma", "Parametric")]
         Layout.fillWidth: true
         enabled: panel.available
@@ -66,6 +73,7 @@ ColumnLayout {
         visible: mode.currentIndex === 0
         ComboBox {
             id: channels
+            objectName: "curves.channel"
             Layout.fillWidth: true
             enabled: panel.available
             textRole: "label"
@@ -91,6 +99,7 @@ ColumnLayout {
             Accessible.name: qsTranslate("Luma", "Curve channel")
         }
         Button {
+            objectName: "curves.target"
             text: "◎"
             checkable: true
             checked: editor.targetedTool === "curve." + panel.channel
@@ -112,6 +121,7 @@ ColumnLayout {
     }
     Canvas {
         id: graph
+        objectName: "curves.graph"
         Layout.fillWidth: true
         Layout.preferredHeight: width
         opacity: panel.available ? 1 : 0.5
@@ -170,7 +180,9 @@ ColumnLayout {
                               }
         MouseArea {
             id: curveGesture
+            objectName: "curves.gesture"
             anchors.fill: parent
+            preventStealing: true
             enabled: panel.available && mode.currentIndex === 0
             property bool dragging: false
             property int pointCount: 0

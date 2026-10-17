@@ -81,6 +81,14 @@ void settingsTests(const QString &destination) {
     settings.naming = "{date}_{sequence}_{filename}";
     require(settings.filename("Фото.NEF", 12, "2026-10-14") == "2026-10-14_0012_Фото.jpg",
             "Export naming tokens changed.");
+    const auto literal = QString::fromUtf8("Снимок-%{filename}-{sequence}-{date}-🌅");
+    require(settings.filename(literal + ".png", 12, "2026-10-14") ==
+                "2026-10-14_0012_" + literal + ".jpg",
+            "Export reinterpreted naming tokens inside the source filename.");
+    settings.naming = "{filename}-{filename}-{date}-{sequence}";
+    require(settings.filename(literal + ".png", 7, "date-{sequence}") ==
+                literal + "-" + literal + "-date-{sequence}-0007.jpg",
+            "Export recursively expanded repeated source/date replacement values.");
     for (const auto &name : {"../{filename}", "{unknown}", "a/b", "a:b", ""}) {
         auto invalid = settings;
         invalid.naming = QString::fromUtf8(name);

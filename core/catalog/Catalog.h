@@ -5,6 +5,7 @@
 #include "core/metadata/PhotoMetadata.h"
 #include <filesystem>
 #include <functional>
+#include <map>
 #include <optional>
 #include <span>
 #include <string>
@@ -64,6 +65,8 @@ class Catalog {
                        const std::function<void()> &install);
     std::optional<AssetRecord> duplicate(const std::string &checksum, std::int64_t size) const;
     std::int64_t libraryCount(const LibraryFilter &filter = {}) const;
+    std::optional<std::int64_t> libraryIndex(const LibraryFilter &filter,
+                                             const std::string &assetID) const;
     std::vector<LibraryItem> libraryPage(const LibraryFilter &filter, int offset, int limit) const;
     std::vector<std::string> libraryIDs(const LibraryFilter &filter, int offset = 0,
                                         int limit = 2147483647) const;
@@ -78,7 +81,8 @@ class Catalog {
                               bool add);
     std::string beginImport(ImportMode mode, const std::filesystem::path &destination,
                             const std::vector<std::filesystem::path> &sources,
-                            std::int64_t ownerPID, bool skipDuplicates = true);
+                            std::int64_t ownerPID, bool skipDuplicates = true,
+                            const std::map<std::filesystem::path, std::string> &sourceErrors = {});
     bool claimImport(const std::string &id, std::int64_t previousPID, std::int64_t newPID);
     void stageImport(const ImportJournalItem &item);
     bool commitImport(const ImportJournalItem &item, const PhotoMetadata &metadata,

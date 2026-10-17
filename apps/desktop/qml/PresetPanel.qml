@@ -8,6 +8,16 @@ ColumnLayout {
     objectName: "presetPanel"
     property string selectedId: ""
     property var selected: null
+    property string hoverPreviewId: ""
+    function previewHoveredPreset(presetId) {
+        hoverPreviewId = presetId
+        presets.preview(presetId)
+    }
+    function clearHoveredPreview(presetId) {
+        if (presetId !== undefined && presetId !== hoverPreviewId) return
+        hoverPreviewId = ""
+        presets.clearPreview()
+    }
     function selection() {
         selected = null
         for (const item of presets.items) {
@@ -15,7 +25,7 @@ ColumnLayout {
         }
     }
     function openEditor(create) {
-        presets.clearPreview()
+        panel.clearHoveredPreview()
         editDialog.presetId = create ? "" : selectedId
         editDialog.copyMode = false
         nameField.text = create ? "" : selected.name
@@ -25,16 +35,16 @@ ColumnLayout {
         editDialog.open()
     }
     onSelectedIdChanged: selection()
-    onVisibleChanged: if (!visible) presets.clearPreview()
+    onVisibleChanged: if (!visible) panel.clearHoveredPreview()
     Connections { target: presets; function onItemsChanged() { panel.selection() } }
     spacing: 8
     TabBar {
         id: presetTabs
         objectName: "presetTabs"
         Layout.fillWidth: true
-        onCurrentIndexChanged: presets.clearPreview()
-        TabButton { text: qsTranslate("Luma", "Filters"); implicitWidth: 80; font.pixelSize: 11 }
-        TabButton { text: qsTranslate("Luma", "Presets"); implicitWidth: 80; font.pixelSize: 11 }
+        onCurrentIndexChanged: panel.clearHoveredPreview()
+        TabButton { objectName: "preset.tabs.filters"; text: qsTranslate("Luma", "Filters"); implicitWidth: 80; font.pixelSize: 11 }
+        TabButton { objectName: "preset.tabs.presets"; text: qsTranslate("Luma", "Presets"); implicitWidth: 80; font.pixelSize: 11 }
     }
     ListView {
         id: builtinList
@@ -49,8 +59,8 @@ ColumnLayout {
             width: builtinList.width; height: 30; text: modelData.name; hoverEnabled: true
             enabled: editor.hasPhoto && !editor.busy
             onHoveredChanged: {
-                if (hovered && enabled) presets.preview(modelData.id)
-                else if (!hovered) presets.clearPreview()
+                if (hovered && enabled) panel.previewHoveredPreset(modelData.id)
+                else if (!hovered) panel.clearHoveredPreview(modelData.id)
             }
             onClicked: presets.apply(modelData.id)
             ToolTip.visible: hovered; ToolTip.delay: 700
@@ -61,16 +71,17 @@ ColumnLayout {
     RowLayout {
         visible: presetTabs.currentIndex === 1
         Layout.fillWidth: true; spacing: 4
-        Button { objectName: "presetCreate"; implicitWidth: 36; text: "+"; enabled: editor.hasPhoto && !editor.busy; onClicked: panel.openEditor(true); ToolTip.visible: hovered; ToolTip.text: qsTranslate("Luma", "Save current settings") }
+        Button { objectName: "presetCreate"; Accessible.name: qsTranslate("Luma", "Save current settings"); implicitWidth: 36; text: "+"; enabled: editor.hasPhoto && !editor.busy; onClicked: panel.openEditor(true); ToolTip.visible: hovered; ToolTip.text: qsTranslate("Luma", "Save current settings") }
         Button { objectName: "presetImport"; text: qsTranslate("Luma", "Import"); onClicked: importDialog.open(); Layout.fillWidth: true }
-        Button { implicitWidth: 36; text: "⋯"; onClicked: actions.open()
+        Button { objectName: "preset.actions"; Accessible.name: qsTranslate("Luma", "Preset actions"); implicitWidth: 36; text: "⋯"; onClicked: actions.open()
             Menu {
                 id: actions
-                MenuItem { text: qsTranslate("Luma", "Edit / rename"); enabled: panel.selected !== null; onTriggered: panel.openEditor(false) }
-                MenuItem { text: qsTranslate("Luma", "Export JSON…"); enabled: panel.selected !== null; onTriggered: { exportDialog.presetId = panel.selectedId; exportDialog.open() } }
-                MenuItem { text: qsTranslate("Luma", "Delete…"); enabled: panel.selected !== null; onTriggered: deleteDialog.open() }
+                objectName: "preset.actions.menu"
+                MenuItem { objectName: "preset.actions.edit"; text: qsTranslate("Luma", "Edit / rename"); enabled: panel.selected !== null; onTriggered: panel.openEditor(false) }
+                MenuItem { objectName: "preset.actions.export"; text: qsTranslate("Luma", "Export JSON…"); enabled: panel.selected !== null; onTriggered: { exportDialog.presetId = panel.selectedId; exportDialog.open() } }
+                MenuItem { objectName: "preset.actions.delete"; text: qsTranslate("Luma", "Delete…"); enabled: panel.selected !== null; onTriggered: deleteDialog.open() }
                 MenuSeparator {}
-                MenuItem { text: qsTranslate("Luma", "Refresh"); onTriggered: presets.refresh() }
+                MenuItem { objectName: "preset.actions.refresh"; text: qsTranslate("Luma", "Refresh"); onTriggered: presets.refresh() }
             }
         }
     }
@@ -90,6 +101,7 @@ ColumnLayout {
         delegate: ItemDelegate {
             id: presetRow
             required property var modelData
+            objectName: "preset." + modelData.id
             width: list.width; height: 34; hoverEnabled: true
             contentItem: Label {
                 objectName: "presetTitle"
@@ -99,8 +111,8 @@ ColumnLayout {
             }
             text: modelData.name; highlighted: panel.selectedId === modelData.id
             onHoveredChanged: {
-                if (hovered && editor.hasPhoto && !editor.busy) presets.preview(modelData.id)
-                else if (!hovered) presets.clearPreview()
+                if (hovered && editor.hasPhoto && !editor.busy) panel.previewHoveredPreset(modelData.id)
+                else if (!hovered) panel.clearHoveredPreview(modelData.id)
             }
             onClicked: { panel.selectedId = modelData.id; presets.apply(modelData.id) }
             ToolTip.visible: hovered; ToolTip.delay: 700
@@ -113,15 +125,15 @@ ColumnLayout {
             color: "#858c97"; wrapMode: Text.Wrap; font.pixelSize: 11
         }
     }
-    Label { text: presets.error; visible: text.length > 0; color: "#ffc1bc"; wrapMode: Text.Wrap; Layout.fillWidth: true; font.pixelSize: 11 }
+    Label { objectName: "preset.error"; text: presets.error; visible: text.length > 0; color: "#ffc1bc"; wrapMode: Text.Wrap; Layout.fillWidth: true; font.pixelSize: 11 }
     Label { objectName: "presetImportNotice"; text: qsTranslate("Luma", presets.importNotice); textFormat: Text.PlainText; visible: text.length > 0; color: "#dfae77"; wrapMode: Text.Wrap; maximumLineCount: 4; elide: Text.ElideRight; Layout.fillWidth: true; font.pixelSize: 11 }
     Button { objectName: "presetImportDetails"; visible: presets.importNotice.length > 0; text: qsTranslate("Luma", "XMP compatibility"); Layout.fillWidth: true; onClicked: compatibilityDialog.open() }
     RowLayout {
         Layout.fillWidth: true; spacing: 4
-        Button { implicitWidth: 80; Layout.minimumWidth: 0; text: qsTranslate("Luma", "Copy…"); enabled: editor.hasPhoto && !editor.busy; Layout.fillWidth: true
-            onClicked: { presets.clearPreview(); editDialog.copyMode = true; editDialog.groups = 255; editDialog.open() }
+        Button { objectName: "preset.copy"; implicitWidth: 80; Layout.minimumWidth: 0; text: qsTranslate("Luma", "Copy…"); enabled: editor.hasPhoto && !editor.busy; Layout.fillWidth: true
+            onClicked: { panel.clearHoveredPreview(); editDialog.copyMode = true; editDialog.groups = 255; editDialog.open() }
         }
-        Button { implicitWidth: 80; Layout.minimumWidth: 0; text: qsTranslate("Luma", "Paste"); enabled: presets.hasCopiedSettings && editor.hasPhoto && !editor.busy; onClicked: presets.pasteSettings(); Layout.fillWidth: true }
+        Button { objectName: "preset.paste"; implicitWidth: 80; Layout.minimumWidth: 0; text: qsTranslate("Luma", "Paste"); enabled: presets.hasCopiedSettings && editor.hasPhoto && !editor.busy; onClicked: presets.pasteSettings(); Layout.fillWidth: true }
     }
     Dialog {
         id: editDialog
@@ -149,12 +161,12 @@ ColumnLayout {
                 }
             }
             CheckBox {
-                id: capture; visible: !editDialog.copyMode && editDialog.presetId.length > 0
+                id: capture; objectName: "preset.capture"; visible: !editDialog.copyMode && editDialog.presetId.length > 0
                 text: qsTranslate("Luma", "Replace settings with current edits")
                 enabled: editor.hasPhoto && !editor.busy
             }
             Label { visible: !editDialog.copyMode; text: qsTranslate("Luma", "Renaming or moving preserves settings. Replace with current edits to add new groups."); color: "#858c97"; wrapMode: Text.Wrap; Layout.fillWidth: true; font.pixelSize: 11 }
-            Label { text: presets.error; visible: text.length > 0; color: "#ffc1bc"; wrapMode: Text.Wrap; Layout.fillWidth: true }
+            Label { objectName: "preset.editorError"; text: presets.error; visible: text.length > 0; color: "#ffc1bc"; wrapMode: Text.Wrap; Layout.fillWidth: true }
         }
         footer: DialogButtonBox {
             Button { text: qsTranslate("Luma", "Cancel"); DialogButtonBox.buttonRole: DialogButtonBox.RejectRole; onClicked: editDialog.close() }
@@ -173,11 +185,15 @@ ColumnLayout {
     }
     Dialog {
         id: deleteDialog
+        objectName: "preset.deleteDialog"
         parent: Overlay.overlay; anchors.centerIn: parent; modal: true
         width: 360; implicitWidth: 360
         title: qsTranslate("Luma", "Delete preset?")
         property string presetId: ""
-        onOpened: presetId = panel.selectedId
+        onOpened: {
+            presetId = panel.selectedId
+            standardButton(Dialog.Ok).objectName = "preset.deleteConfirm"
+        }
         standardButtons: Dialog.Ok | Dialog.Cancel
         Label { textFormat: Text.PlainText; text: panel.selected ? panel.selected.name : ""; color: "#d5d8de" }
         onAccepted: presets.remove(presetId)
@@ -208,7 +224,7 @@ ColumnLayout {
         onAccepted: if (presets.importPreset(selectedFile)) { panel.selectedId = presets.importedId; presetTabs.currentIndex = 1 }
     }
     FileDialog {
-        id: exportDialog; property string presetId: ""
+        id: exportDialog; objectName: "presetExportDialog"; property string presetId: ""
         title: qsTranslate("Luma", "Export Luma preset"); fileMode: FileDialog.SaveFile
         nameFilters: ["Luma preset (*.json)"]; defaultSuffix: "json"
         onAccepted: presets.exportPreset(presetId, selectedFile)

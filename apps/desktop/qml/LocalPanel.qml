@@ -76,13 +76,13 @@ ColumnLayout {
                 onEditingFinished: if(panel.selected)editor.renameLocalMask(text)
                 Accessible.name: qsTranslate("Luma", "Mask name")
             }
-            LocalCheckBox {text: qsTranslate("Luma", "Enabled");checked: editor.localState.enabled ?? false;onToggled: editor.setLocalEnabled(checked)}
-            LocalCheckBox {text: qsTranslate("Luma", "Invert mask");checked: editor.localState.inverted ?? false;onToggled: editor.setLocalInverted(checked)}
+            LocalCheckBox {objectName:"localMaskEnabled";text: qsTranslate("Luma", "Enabled");checked: editor.localState.enabled ?? false;onToggled: editor.setLocalEnabled(checked)}
+            LocalCheckBox {objectName:"localMaskInvert";text: qsTranslate("Luma", "Invert mask");checked: editor.localState.inverted ?? false;onToggled: editor.setLocalInverted(checked)}
             RowLayout {
                 Layout.fillWidth: true; Layout.minimumWidth: 0; Layout.maximumWidth: panel.width
-                Button {text: "↑";implicitWidth:36;Layout.maximumWidth:36;Accessible.name:qsTranslate("Luma", "Move mask up");onClicked:editor.moveLocalMask(-1)}
-                Button {text: "↓";implicitWidth:36;Layout.maximumWidth:36;Accessible.name:qsTranslate("Luma", "Move mask down");onClicked:editor.moveLocalMask(1)}
-                Button {text:qsTranslate("Luma", "Delete mask");Layout.fillWidth:true;Layout.minimumWidth:0;onClicked:editor.removeLocalMask()}
+                Button {objectName:"localMaskUp";text: "↑";implicitWidth:36;Layout.maximumWidth:36;Accessible.name:qsTranslate("Luma", "Move mask up");onClicked:editor.moveLocalMask(-1)}
+                Button {objectName:"localMaskDown";text: "↓";implicitWidth:36;Layout.maximumWidth:36;Accessible.name:qsTranslate("Luma", "Move mask down");onClicked:editor.moveLocalMask(1)}
+                Button {objectName:"localMaskDelete";text:qsTranslate("Luma", "Delete mask");Layout.fillWidth:true;Layout.minimumWidth:0;onClicked:editor.removeLocalMask()}
             }
             ComboBox {
                 objectName: "localComponentChoice"
@@ -103,12 +103,12 @@ ColumnLayout {
                     onActivated:editor.setLocalComponentOperation(panel.operations[currentIndex])
                     Accessible.name:qsTranslate("Luma", "Component operation")
                 }
-                LocalCheckBox {text:qsTranslate("Luma", "Component enabled");checked:editor.localState.componentEnabled ?? true;onToggled:editor.setLocalComponentEnabled(checked)}
-                LocalCheckBox {text:qsTranslate("Luma", "Invert component");checked:editor.localState.componentInverted ?? false;onToggled:editor.setLocalComponentInverted(checked)}
+                LocalCheckBox {objectName:"localComponentEnabled";text:qsTranslate("Luma", "Component enabled");checked:editor.localState.componentEnabled ?? true;onToggled:editor.setLocalComponentEnabled(checked)}
+                LocalCheckBox {objectName:"localComponentInvert";text:qsTranslate("Luma", "Invert component");checked:editor.localState.componentInverted ?? false;onToggled:editor.setLocalComponentInverted(checked)}
                 RowLayout {
                     Layout.fillWidth:true;Layout.minimumWidth:0;Layout.maximumWidth:panel.width
-                    Button {text:"↑";implicitWidth:36;Layout.maximumWidth:36;Accessible.name:qsTranslate("Luma", "Move component up");onClicked:editor.moveLocalComponent(-1)}
-                    Button {text:"↓";implicitWidth:36;Layout.maximumWidth:36;Accessible.name:qsTranslate("Luma", "Move component down");onClicked:editor.moveLocalComponent(1)}
+                    Button {objectName:"localComponentUp";text:"↑";implicitWidth:36;Layout.maximumWidth:36;Accessible.name:qsTranslate("Luma", "Move component up");onClicked:editor.moveLocalComponent(-1)}
+                    Button {objectName:"localComponentDown";text:"↓";implicitWidth:36;Layout.maximumWidth:36;Accessible.name:qsTranslate("Luma", "Move component down");onClicked:editor.moveLocalComponent(1)}
                     Button {objectName:"localRemoveComponent";text:qsTranslate("Luma", "Remove component");Layout.fillWidth:true;Layout.minimumWidth:0;onClicked:editor.removeLocalComponent()}
                 }
             }
@@ -167,6 +167,7 @@ ColumnLayout {
                     model:["#ff2666","#00cbea","#67e26a"]
                     Button {
                         required property string modelData
+                        objectName:"localOverlayColor."+modelData
                         implicitWidth:28;implicitHeight:28;Layout.preferredWidth:28;Layout.maximumWidth:28
                         Accessible.name:qsTranslate("Luma", "Overlay color")+" "+modelData
                         onClicked:editor.localOverlayColor=modelData
@@ -175,7 +176,7 @@ ColumnLayout {
                 }
             }
             Label {text:qsTranslate("Luma", "Overlay opacity");font.pixelSize:11}
-            Slider {from:0;to:1;value:editor.localOverlayOpacity;onMoved:editor.localOverlayOpacity=value;Layout.fillWidth:true;Layout.minimumWidth:0;Accessible.name:qsTranslate("Luma", "Overlay opacity")}
+            Slider {objectName:"localOverlayOpacity";from:0;to:1;value:editor.localOverlayOpacity;onMoved:editor.localOverlayOpacity=value;Layout.fillWidth:true;Layout.minimumWidth:0;Accessible.name:qsTranslate("Luma", "Overlay opacity")}
             LocalSlider {parameter:"exposure";label:qsTranslate("Luma", "Exposure");minimum:-5;maximum:5;step:.01}
             LocalSlider {parameter:"contrast";label:qsTranslate("Luma", "Contrast")}
             LocalSlider {parameter:"highlights";label:qsTranslate("Luma", "Highlights")}

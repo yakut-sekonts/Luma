@@ -469,6 +469,10 @@
     "Sampled color": "Выбранный цвет",
     "Sampling…": "Взятие образца…",
     "Selection component": "Компонент выделения",
-    "Subtract": "Вычесть"
+    "Subtract": "Вычесть",
+    "Preset actions": "Действия с пресетами",
+    "Rotate crop left 90°": "Повернуть кадр на 90° влево",
+    "Rotate crop right 90°": "Повернуть кадр на 90° вправо",
+    "Enable white balance": "Включить баланс белого"
   }
 }

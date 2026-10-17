@@ -469,6 +469,10 @@
     "Sampled color": "Ընտրված գույնը",
     "Sampling…": "Նմուշառում…",
     "Selection component": "Ընտրության բաղադրիչ",
-    "Subtract": "Հանել"
+    "Subtract": "Հանել",
+    "Preset actions": "Նախադրվածքների գործողություններ",
+    "Rotate crop left 90°": "Պտտել կադրումը 90° ձախ",
+    "Rotate crop right 90°": "Պտտել կադրումը 90° աջ",
+    "Enable white balance": "Միացնել սպիտակի հաշվեկշիռը"
   }
 }

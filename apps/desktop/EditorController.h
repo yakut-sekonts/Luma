@@ -37,6 +37,7 @@ class EditorController final : public QObject {
                    NOTIFY stateChanged)
     Q_PROPERTY(QVariantMap transformState READ transformState NOTIFY stateChanged)
     Q_PROPERTY(QVariantList transformGuides READ transformGuides NOTIFY stateChanged)
+    Q_PROPERTY(int transformGuideLayout READ transformGuideLayout NOTIFY stateChanged)
     Q_PROPERTY(bool guidedMode READ guidedMode WRITE setGuidedMode NOTIFY stateChanged)
     Q_PROPERTY(bool guidedCanvasReady READ guidedCanvasReady NOTIFY stateChanged)
     Q_PROPERTY(bool transformAutoBusy READ transformAutoBusy NOTIFY stateChanged)
@@ -63,7 +64,7 @@ class EditorController final : public QObject {
     Q_PROPERTY(bool hasPhoto READ hasPhoto NOTIFY stateChanged)
     Q_PROPERTY(bool original READ original WRITE setOriginal NOTIFY stateChanged)
     Q_PROPERTY(double exposure READ exposure WRITE setExposure NOTIFY stateChanged)
-    Q_PROPERTY(double progress READ progress NOTIFY stateChanged)
+    Q_PROPERTY(double progress READ progress NOTIFY progressChanged)
     Q_PROPERTY(QString filename READ filename NOTIFY stateChanged)
     Q_PROPERTY(QString camera READ camera NOTIFY stateChanged)
     Q_PROPERTY(QString lens READ lens NOTIFY stateChanged)
@@ -162,6 +163,9 @@ class EditorController final : public QObject {
     Q_INVOKABLE void adjustLocalGesture(double x, double y);
     QVariantMap transformState() const;
     QVariantList transformGuides() const;
+    int transformGuideLayout() const {
+        return guideLayout_;
+    }
     bool guidedMode() const {
         return guidedMode_;
     }
@@ -283,6 +287,7 @@ class EditorController final : public QObject {
     Q_INVOKABLE void retrySave();
     Q_INVOKABLE void cancelLoad();
   signals:
+    void progressChanged();
     void stateChanged();
     void photoLoaded(const QString &id);
     void editsSaved(const QString &id);
@@ -323,6 +328,7 @@ class EditorController final : public QObject {
     bool guidedMode_ = false, guidedCanvasReady_ = false, transformAutoBusy_ = false;
     std::uint64_t transformAutoRevision_ = 0;
     std::vector<luma::PerspectiveGuide> guides_;
+    int guideLayout_ = 0;
     luma::JobHandle loadJob_;
     luma::CancellationSource loadCancellation_;
     luma::JobHandle exportJob_;
@@ -353,6 +359,7 @@ class EditorController final : public QObject {
     std::uint64_t loadRevision_ = 0;
     std::uint64_t renderRevision_ = 0;
     std::uint64_t imageRevision_ = 0;
+    bool previewReady_ = false;
     std::uint64_t editRevision_ = 0;
     QUrl deferredOpen_;
     LocalizedText status_ = QStringLiteral("Ready");

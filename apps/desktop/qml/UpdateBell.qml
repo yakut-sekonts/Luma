@@ -4,6 +4,7 @@ import QtQuick.Layouts
 
 Button {
     id: bell
+    objectName: "updates.bell"
     implicitWidth: 40
     implicitHeight: 36
     Accessible.name: updates.availableVersion.length ? qsTranslate("Luma", "Luma update available ")
@@ -48,6 +49,8 @@ Button {
     }
     Popup {
         id: notifications
+        objectName: "updates.popup"
+        focus: true
         x: bell.width - width
         y: bell.height + 8
         width: 340

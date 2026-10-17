@@ -90,6 +90,22 @@ target_compile_options(luma_cli PRIVATE -Wall -Wextra -Wpedantic -Werror)
 
 include(CTest)
 if(BUILD_TESTING)
+    add_executable(luma_ux_metric_tests tests/ux/DistributionTests.cpp)
+    target_include_directories(luma_ux_metric_tests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}")
+    target_compile_options(luma_ux_metric_tests PRIVATE -Wall -Wextra -Wpedantic -Werror)
+    add_test(NAME ux-metric-accounting COMMAND luma_ux_metric_tests)
+    add_test(NAME ux-runner-accounting COMMAND ${Python3_EXECUTABLE} "${CMAKE_SOURCE_DIR}/tests/ux/test_runner.py")
+    set_tests_properties(ux-runner-accounting PROPERTIES TIMEOUT 30 LABELS "ux;infrastructure")
+    set_tests_properties(ux-metric-accounting PROPERTIES LABELS "ux;infrastructure")
+    find_package(Qt6 6.10.3 REQUIRED COMPONENTS Test)
+    qt_add_executable(luma_ux_tests tests/ux/main.cpp tests/ux/UxContext.cpp tests/ux/UxPixels.cpp tests/ux/UxDriver.cpp tests/ux/UxMetrics.cpp tests/ux/SqliteFault.cpp tests/ux/RecoveryScenarios.cpp tests/ux/BasicScenarios.cpp tests/ux/LibraryScenarios.cpp tests/ux/MaskScenarios.cpp tests/ux/LifecycleScenarios.cpp tests/ux/ImportScenarios.cpp tests/ux/ExportScenarios.cpp tests/ux/RestartScenarios.cpp tests/ux/BatchScenarios.cpp tests/ux/GeometryScenarios.cpp tests/ux/CropScenarios.cpp tests/ux/AccessibilityScenarios.cpp tests/ux/LibraryScaleScenarios.cpp tests/ux/SelectionScenarios.cpp tests/ux/KeyboardScenarios.cpp tests/ux/NavigationScenarios.cpp tests/ux/FilterExtraScenarios.cpp tests/ux/DetailScenarios.cpp tests/ux/LensScenarios.cpp tests/ux/AdvancedScenarios.cpp tests/ux/PresetScenarios.cpp tests/ux/PresetExtraScenarios.cpp tests/ux/PresetRemainingScenarios.cpp tests/ux/HistoryStressScenarios.cpp tests/ux/ImportExtraScenarios.cpp tests/ux/CurrentPerformanceScenarios.cpp tests/ux/WhiteBalanceScenarios.cpp tests/ux/GestureRemainingScenarios.cpp tests/ux/VisualRemainingScenarios.cpp tests/ux/LibraryRemainingScenarios.cpp tests/ux/AppExtraScenarios.cpp tests/ux/ExportExtraScenarios.cpp tests/ux/PreviewExtraScenarios.cpp tests/ux/RecoveryExtraScenarios.cpp tests/ux/AsyncScenarios.cpp tests/ux/TransformScenarios.cpp tests/ux/TransformExtraScenarios.cpp tests/ux/LocalizationScenarios.cpp tests/ux/UpdaterScenarios.cpp
+        apps/desktop/ExportController.cpp apps/shared/ExportSettings.cpp
+        apps/desktop/BatchController.cpp apps/desktop/PresetController.cpp apps/shared/PresetStore.cpp apps/shared/XmpPresetImport.cpp apps/shared/BuiltinPresets.cpp
+        apps/desktop/EditorController.cpp apps/desktop/EditorTransform.cpp apps/desktop/EditorLens.cpp apps/desktop/EditorCrop.cpp apps/desktop/EditorLocal.cpp apps/desktop/EditorMaskComponents.cpp apps/desktop/EditorDetail.cpp apps/desktop/EditorAdvanced.cpp apps/desktop/EditorPresets.cpp
+        apps/desktop/PreviewProvider.cpp apps/desktop/ThumbnailProvider.cpp apps/desktop/LibraryModel.cpp apps/desktop/UpdateController.cpp)
+    target_link_libraries(luma_ux_tests PRIVATE luma_localization luma_services Qt6::Test Qt6::Quick Qt6::QuickControls2)
+    target_compile_definitions(luma_ux_tests PRIVATE LUMA_VERSION="${PROJECT_VERSION}")
+    target_compile_options(luma_ux_tests PRIVATE -Wall -Wextra -Wpedantic -Werror)
     qt_add_executable(luma_localization_tests tests/unit/LocalizationTests.cpp)
     target_link_libraries(luma_localization_tests PRIVATE luma_localization Qt6::Quick Qt6::QuickControls2)
     target_compile_options(luma_localization_tests PRIVATE -Wall -Wextra -Wpedantic -Werror)

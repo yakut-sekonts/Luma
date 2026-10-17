@@ -7,7 +7,7 @@ ColumnLayout {
     spacing: 8
     RowLayout {
         Layout.fillWidth: true
-        Label { text: qsTranslate("Luma", "DETAIL / SHARPENING"); color: "#858c97"; font.pixelSize: 10; font.letterSpacing: 1.5; Layout.fillWidth: true }
+        Label { objectName: "detail.heading"; text: qsTranslate("Luma", "DETAIL / SHARPENING"); color: "#858c97"; font.pixelSize: 10; font.letterSpacing: 1.5; Layout.fillWidth: true }
         CheckBox { objectName: "sharpenEnabled"; checked: editor.correctionStates.sharpening; enabled: editor.hasPhoto && !editor.busy; onToggled: editor.setCorrectionEnabled("sharpening", checked); Accessible.name: qsTranslate("Luma", "Enable sharpening") }
     }
     DevelopSlider { objectName: "sharpenAmount"; parameter: "sharpen.amount"; label: qsTranslate("Luma", "Amount"); minimum: 0; maximum: 150; correction: "sharpening"; allowDisable: false; detailDiagnostic: true }

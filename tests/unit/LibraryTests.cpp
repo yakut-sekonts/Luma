@@ -169,6 +169,31 @@ void importTests(const std::filesystem::path &root, const std::filesystem::path 
         require(luma::macos::sha256File(item.path) == item.checksum, "Copy checksum changed.");
     }
     require(luma::macos::sha256File(a) == hash, "Import modified original.");
+    // Discovery failures are durable in the initial transaction, before any file
+    // is processed; recovery must not reclassify them as queued cancellations.
+    const auto deniedPath = input / "denied-child";
+    const auto discoveryCatalog = root / "discovery-recovery.sqlite";
+    luma::Catalog discoveryDB(discoveryCatalog);
+    throws([&] {
+        discoveryDB.beginImport(luma::ImportMode::add, {}, {a}, getpid(), true,
+                                {{deniedPath, "permission denied"}});
+    });
+    require(discoveryDB.unfinishedImports().empty(), "Invalid discovery error created a session.");
+    const auto discoverySession =
+        discoveryDB.beginImport(luma::ImportMode::add, {}, {a, deniedPath}, 99999999, true,
+                                {{deniedPath, "permission denied"}});
+    require(discoveryDB.importSummary(discoverySession).failed == 1 &&
+                discoveryDB.importProblems(discoverySession) ==
+                    std::vector<std::string>{deniedPath.string() + "\npermission denied"},
+            "Initial discovery failure was not durable.");
+    const auto discoveryRecovery = luma::LibraryService(discoveryCatalog).recover();
+    require(discoveryRecovery.size() == 1 && discoveryRecovery.front().failed == 1 &&
+                discoveryRecovery.front().cancelled == 1 &&
+                discoveryDB.importProblems(discoverySession).front() ==
+                    deniedPath.string() + "\npermission denied" &&
+                discoveryDB.unfinishedImports().empty(),
+            "Recovery discarded a known discovery failure.");
+    discoveryDB.verify();
     // Simulate process death after filesystem installation but before DB checkpoint.
     const auto recoveryPath = root / "recovery.sqlite";
     luma::Catalog db(recoveryPath);
@@ -229,6 +254,83 @@ void importTests(const std::filesystem::path &root, const std::filesystem::path 
     db.finishImport(live, "cancelled");
     db.verify();
 }
+void viewportTests(const std::filesystem::path &root) {
+    const auto path = root / "viewport.sqlite";
+    luma::Catalog db(path);
+    sql(path, R"sql(BEGIN;
+        INSERT INTO assets(id,original_path,filename,extension,filesize,checksum,width,height,orientation)
+        VALUES('b-a','/fixture/b.dng','b.dng','dng',1,'b-a',16,16,0),
+              ('b-z','/fixture/B.dng','B.dng','dng',1,'b-z',16,16,0),
+              ('d','/fixture/d.dng','d.dng','dng',1,'d',16,16,0);
+        INSERT INTO edit_documents(asset_id) SELECT id FROM assets;COMMIT;)sql");
+    require(db.libraryIndex({}, "b-a") == 0 && db.libraryIndex({}, "b-z") == 1 &&
+                db.libraryIndex({}, "d") == 2,
+            "Viewport index lost NOCASE ordering or the stable ID tie-break.");
+    require(!db.libraryIndex({}, "missing") && !db.libraryIndex({}, ""),
+            "Absent viewport asset incorrectly resolved to a row.");
+    db.setRating({"b-z"}, 4);
+    db.setLabel({"b-z"}, "blue");
+    const auto collection = db.createCollection("Viewport");
+    db.collectionMembership(collection, {"b-z"}, true);
+    luma::LibraryFilter filtered;
+    filtered.search = "b.";
+    filtered.minimumRating = 4;
+    filtered.label = "blue";
+    filtered.collectionID = collection;
+    require(db.libraryIndex(filtered, "b-z") == 0 && !db.libraryIndex(filtered, "d"),
+            "Viewport index ignored the current metadata/search/collection filter.");
+    filtered.search = "%";
+    require(!db.libraryIndex(filtered, "b-z"), "Viewport search interpreted a literal wildcard.");
+    filtered.minimumRating = 6;
+    throws([&] { db.libraryIndex(filtered, ""); });
+
+    LibraryModel model(path);
+    QString requested = "d";
+    int restored = -2, restorations = 0;
+    QObject observer;
+    QObject::connect(&model, &LibraryModel::reloadStarted, &observer, [&](bool preserve) {
+        model.setViewportAnchor(preserve ? requested : QString{});
+    });
+    QObject::connect(&model, &LibraryModel::viewportRestored, &observer, [&](int row) {
+        restored = row;
+        ++restorations;
+    });
+    wait([&] { return !model.working() && !model.loading() && model.count() == 3; });
+    const auto refresh = [&] {
+        const int before = restorations;
+        model.refresh();
+        wait([&] { return restorations > before && !model.loading(); });
+        require(model.error().isEmpty(), "Viewport lookup failed the Library reload.");
+    };
+    refresh();
+    require(restored == 2, "Unchanged viewport asset did not resolve after reload.");
+    sql(path, R"sql(BEGIN;
+        INSERT INTO assets(id,original_path,filename,extension,filesize,checksum,width,height,orientation)
+        VALUES('a','/fixture/a.dng','a.dng','dng',1,'a',16,16,0);
+        INSERT INTO edit_documents(asset_id) VALUES('a');COMMIT;)sql");
+    refresh();
+    require(model.count() == 4 && restored == 3,
+            "Insert before the viewport retained a numeric row instead of the same asset.");
+    requested = "missing";
+    refresh();
+    require(restored == -1, "Missing viewport asset must not restore another photo.");
+    requested = "d";
+    const int beforeFilter = restorations;
+    model.filter("b.", 0, -2, "any", "");
+    wait([&] { return restorations > beforeFilter && !model.loading() && model.count() == 2; });
+    require(restored == -1, "Changing filters restored an anchor from the previous result.");
+    refresh();
+    require(restored == -1, "Filtered-out viewport asset must not restore another row.");
+    requested = "b-a";
+    const int beforeSuperseded = restorations;
+    model.refresh();
+    requested = "b-z";
+    model.refresh();
+    wait([&] { return restorations > beforeSuperseded && !model.loading(); });
+    require(restored == 1 && restorations == beforeSuperseded + 1,
+            "Superseded reload emitted a stale viewport restoration.");
+    db.verify();
+}
 void modelTests(const std::filesystem::path &root) {
     const auto path = root / "large.sqlite";
     {
@@ -263,14 +365,26 @@ void modelTests(const std::filesystem::path &root) {
     wait([&] { return model.selectedCount() == 6; });
     model.select(0, true, false);
     require(model.selectedCount() == 5, "Toggle selection failed.");
+    int metadataResets = 0;
+    QObject::connect(&model, &QAbstractItemModel::modelReset, &model, [&] { ++metadataResets; });
     model.rate(5);
     wait([&] { return !model.working() && !model.loading(); });
+    require(metadataResets == 0,
+            "Metadata update unnecessarily reset the unchanged Library model.");
+    require(model.data(model.index(1), LibraryModel::Rating).toInt() == 5,
+            "Metadata update left cached rating data stale.");
     luma::LibraryFilter rated;
     rated.minimumRating = 5;
     require(db.libraryCount(rated) == 5, "Model bulk edit lost selected assets.");
     model.filter("00000", 5, -2, "any", "");
     wait([&] { return model.count() == 5 && !model.loading(); });
     require(model.error().isEmpty(), "Model reported an error.");
+    model.data(model.index(0), LibraryModel::AssetID);
+    wait([&] { return !model.data(model.index(0), LibraryModel::AssetID).toString().isEmpty(); });
+    model.select(0);
+    model.rate(0);
+    wait([&] { return !model.working() && !model.loading() && model.count() == 4; });
+    require(metadataResets > 0, "A metadata filter retained an asset that no longer matches.");
     std::cout
         << "100k metadata rows: <=16 cached pages (2048 rows); selection and filters passed\n";
 }
@@ -284,6 +398,7 @@ int main(int argc, char **argv) {
     try {
         catalogTests(root, argv[1]);
         importTests(root, argv[1]);
+        viewportTests(root);
         modelTests(root);
         std::filesystem::remove_all(root);
         std::cout << "Library unit tests passed\n";

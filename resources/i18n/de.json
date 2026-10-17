@@ -469,6 +469,10 @@
     "Sampled color": "Aufgenommene Farbe",
     "Sampling…": "Aufnahme…",
     "Selection component": "Auswahlkomponente",
-    "Subtract": "Subtrahieren"
+    "Subtract": "Subtrahieren",
+    "Preset actions": "Aktionen für Vorgaben",
+    "Rotate crop left 90°": "Zuschnitt um 90° nach links drehen",
+    "Rotate crop right 90°": "Zuschnitt um 90° nach rechts drehen",
+    "Enable white balance": "Weißabgleich aktivieren"
   }
 }

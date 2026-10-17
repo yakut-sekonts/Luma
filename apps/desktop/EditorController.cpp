@@ -5,6 +5,8 @@
 #include <QMetaObject>
 #include <QPointer>
 #include <QScreen>
+#include <algorithm>
+#include <chrono>
 #include <cmath>
 
 namespace {
@@ -76,8 +78,8 @@ QString EditorController::sourcePath() const {
     return session_ ? QString::fromStdString(session_->asset.path.string()) : QString();
 }
 QString EditorController::previewUrl() const {
-    return imageRevision_ > 0 ? QStringLiteral("image://preview/current?v=%1").arg(imageRevision_)
-                              : QString();
+    return previewReady_ ? QStringLiteral("image://preview/current?v=%1").arg(imageRevision_)
+                         : QString();
 }
 
 void EditorController::setWindow(QQuickWindow *window) {
@@ -129,6 +131,7 @@ void EditorController::load(std::optional<std::filesystem::path> source) {
     ++renderRevision_;
     busy_ = true;
     progress_ = 0;
+    emit progressChanged();
     error_.clear();
     status_ = source ? QStringLiteral("Decoding image…") : QStringLiteral("Restoring session…");
     emit stateChanged();
@@ -136,20 +139,29 @@ void EditorController::load(std::optional<std::filesystem::path> source) {
     loadJob_ = ioJobs_.submit(luma::JobPriority::background, [this, self, source, revision, stop](
                                                                  const luma::JobContext &context) {
         try {
-            const auto progress = [self, revision, context](double value) {
-                context.setProgress(value);
-                if (self) {
-                    QMetaObject::invokeMethod(
-                        self,
-                        [self, revision, value] {
-                            if (self && self->loadRevision_ == revision) {
-                                self->progress_ = value;
-                                emit self->stateChanged();
-                            }
-                        },
-                        Qt::QueuedConnection);
-                }
-            };
+            const auto progress =
+                [self, revision, context,
+                 last = std::chrono::steady_clock::time_point{}](double value) mutable {
+                    context.setProgress(value);
+                    if (!std::isfinite(value))
+                        return;
+                    const auto now = std::chrono::steady_clock::now();
+                    if (value < 1 && now - last < std::chrono::milliseconds(50))
+                        return;
+                    last = now;
+                    value = std::clamp(value, 0.0, 1.0);
+                    if (self) {
+                        QMetaObject::invokeMethod(
+                            self,
+                            [self, revision, value] {
+                                if (self && self->loadRevision_ == revision) {
+                                    self->progress_ = value;
+                                    emit self->progressChanged();
+                                }
+                            },
+                            Qt::QueuedConnection);
+                    }
+                };
             auto result =
                 source ? std::optional<luma::PhotoSession>(service_.open(*source, stop, progress))
                        : service_.restore(stop, progress);
@@ -163,6 +175,7 @@ void EditorController::load(std::optional<std::filesystem::path> source) {
                         self->busy_ = false;
                         if (result) {
                             self->session_ = std::move(result);
+                            self->previewReady_ = false;
                             self->history_ = luma::EditHistory(self->session_->asset.edits);
                             self->original_ = false;
                             self->render();
@@ -389,16 +402,17 @@ void EditorController::resetEdits() {
     }
 }
 void EditorController::setOriginal(bool value) {
+    if (busy_)
+        return;
     setLocalMode(false);
     closeTransformTool();
     if (original_ == value || !session_) {
         return;
     }
-    presetPreview_.reset();
+    endEdit();
     original_ = value;
     if (value)
         cropMode_ = false;
-    clearDetailDiagnostic();
     emit stateChanged();
     render();
 }
@@ -461,6 +475,7 @@ void EditorController::render() {
                             }
                             self->provider_->update(std::move(owned));
                             ++self->imageRevision_;
+                            self->previewReady_ = true;
                             self->cropCanvasReady_ = self->cropMode_;
                             self->guidedCanvasReady_ = self->guidedMode_;
                             self->localCanvasReady_ = self->localMode_;

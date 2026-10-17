@@ -51,8 +51,8 @@ ColumnLayout {
     Button { objectName: "cropAspectSwap"; text: qsTranslate("Luma", "Swap aspect ratio"); enabled: panel.available && (editor.cropState.aspect ?? 0)>0; Layout.fillWidth: true; onClicked: editor.setParameter("crop.aspect", 1/editor.cropState.aspect) }
     RowLayout {
         Layout.fillWidth: true
-        Button { objectName: "cropRotateLeft"; text: "↶ 90°"; enabled: panel.available; Layout.fillWidth: true; onClicked: editor.rotateCrop(-1) }
-        Button { objectName: "cropRotateRight"; text: "↷ 90°"; enabled: panel.available; Layout.fillWidth: true; onClicked: editor.rotateCrop(1) }
+        Button { objectName: "cropRotateLeft"; Accessible.name: qsTranslate("Luma", "Rotate crop left 90°"); text: "↶ 90°"; enabled: panel.available; Layout.fillWidth: true; onClicked: editor.rotateCrop(-1) }
+        Button { objectName: "cropRotateRight"; Accessible.name: qsTranslate("Luma", "Rotate crop right 90°"); text: "↷ 90°"; enabled: panel.available; Layout.fillWidth: true; onClicked: editor.rotateCrop(1) }
     }
     RowLayout {
         CheckBox { objectName: "cropFlipHorizontal"; text: qsTranslate("Luma", "Flip H"); checked: editor.cropState.flipHorizontal ?? false; enabled: panel.available; onToggled: editor.setParameter("crop.flipHorizontal", checked ? 1 : 0) }

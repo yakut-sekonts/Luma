@@ -469,6 +469,10 @@
     "Sampled color": "采样颜色",
     "Sampling…": "正在采样…",
     "Selection component": "选区组件",
-    "Subtract": "减去"
+    "Subtract": "减去",
+    "Preset actions": "预设操作",
+    "Rotate crop left 90°": "将裁剪向左旋转 90°",
+    "Rotate crop right 90°": "将裁剪向右旋转 90°",
+    "Enable white balance": "启用白平衡"
   }
 }

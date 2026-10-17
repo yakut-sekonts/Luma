@@ -469,6 +469,10 @@
     "Sampled color": "Sampled color",
     "Sampling…": "Sampling…",
     "Selection component": "Selection component",
-    "Subtract": "Subtract"
+    "Subtract": "Subtract",
+    "Preset actions": "Preset actions",
+    "Rotate crop left 90°": "Rotate crop left 90°",
+    "Rotate crop right 90°": "Rotate crop right 90°",
+    "Enable white balance": "Enable white balance"
   }
 }

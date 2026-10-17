@@ -21,11 +21,13 @@ ColumnLayout {
         visible: editor.guidedMode
         Layout.fillWidth: true
         Label { text: qsTranslate("Luma", "Align guides with straight lines in the original photo."); wrapMode: Text.Wrap; color: "#c9d2dd"; font.pixelSize: 11; Layout.fillWidth: true }
-        ComboBox { objectName: "transformGuideLayout"; Layout.fillWidth: true; model: [qsTranslate("Luma", "2 vertical"), qsTranslate("Luma", "2 horizontal"), qsTranslate("Luma", "Vertical + horizontal")]; onActivated: function(index) { editor.setGuideLayout(index) }; Accessible.name: qsTranslate("Luma", "Guided correction directions") }
+        ComboBox { objectName: "transformGuideLayout"; Layout.fillWidth: true; model: [qsTranslate("Luma", "2 vertical"), qsTranslate("Luma", "2 horizontal"), qsTranslate("Luma", "Vertical + horizontal")]; currentIndex: editor.transformGuideLayout; onActivated: function(index) { editor.setGuideLayout(index) }; Accessible.name: qsTranslate("Luma", "Guided correction directions") }
         Button { objectName: "transformGuideApply"; text: qsTranslate("Luma", "Apply guides"); enabled: editor.guidedCanvasReady; Layout.fillWidth: true; onClicked: editor.applyGuides() }
     }
     ColumnLayout {
         Layout.fillWidth: true
+        Layout.minimumWidth: 0
+        Layout.maximumWidth: panel.width
         enabled: !editor.guidedMode
         DevelopSlider { objectName: "transformRotate"; parameter: "transform.rotate"; label: qsTranslate("Luma", "Rotate"); minimum: -45; maximum: 45; step: 0.05; correction: "transform"; allowDisable: false }
         DevelopSlider { objectName: "transformHorizontal"; parameter: "transform.horizontal"; label: qsTranslate("Luma", "Horizontal"); minimum: -100; maximum: 100; correction: "transform"; allowDisable: false }
@@ -34,7 +36,21 @@ ColumnLayout {
         DevelopSlider { objectName: "transformScale"; parameter: "transform.scale"; label: qsTranslate("Luma", "Scale"); minimum: 50; maximum: 200; defaultValue: 100; correction: "transform"; allowDisable: false }
         DevelopSlider { objectName: "transformXOffset"; parameter: "transform.xOffset"; label: qsTranslate("Luma", "X Offset"); minimum: -100; maximum: 100; correction: "transform"; allowDisable: false }
         DevelopSlider { objectName: "transformYOffset"; parameter: "transform.yOffset"; label: qsTranslate("Luma", "Y Offset"); minimum: -100; maximum: 100; correction: "transform"; allowDisable: false }
-        CheckBox { objectName: "transformConstrain"; text: qsTranslate("Luma", "Constrain Crop · remove empty edges"); checked: !!editor.parameters["transform.constrainCrop"]; enabled: editor.hasPhoto && !editor.busy; onToggled: editor.setParameter("transform.constrainCrop", checked ? 1 : 0) }
+        CheckBox {
+            id: constrain
+            objectName: "transformConstrain"
+            Layout.fillWidth: true; Layout.minimumWidth: 0
+            text: qsTranslate("Luma", "Constrain Crop · remove empty edges")
+            checked: !!editor.parameters["transform.constrainCrop"]
+            enabled: editor.hasPhoto && !editor.busy
+            onToggled: editor.setParameter("transform.constrainCrop", checked ? 1 : 0)
+            contentItem: Label {
+                text: constrain.text; font: constrain.font; color: constrain.palette.buttonText
+                verticalAlignment: Text.AlignVCenter; wrapMode: Text.Wrap
+                leftPadding: constrain.indicator && !constrain.mirrored ? constrain.indicator.width + constrain.spacing : 0
+                rightPadding: constrain.indicator && constrain.mirrored ? constrain.indicator.width + constrain.spacing : 0
+            }
+        }
     }
     Label { visible: !!editor.transformState.guided; text: qsTranslate("Luma", "Auto/Guided matrix applied; manual controls adjust it further."); wrapMode: Text.Wrap; Layout.fillWidth: true; color: "#c9d2dd"; font.pixelSize: 10 }
     Label { text: qsTranslate("Luma", "Actual scale: ") + Number(editor.transformState.effectiveScale || 100).toFixed(1) + "%"; color: "#858c97"; font.pixelSize: 10 }

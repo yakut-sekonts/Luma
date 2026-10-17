@@ -3,6 +3,7 @@ import QtQuick.Controls
 
 Rectangle {
     id: card
+    objectName: (compact ? "filmstrip.card." : "library.card.") + assetID
     required property int index
     required property string assetID
     required property string filename
@@ -39,7 +40,7 @@ Rectangle {
         id: caption
         anchors { left: parent.left; right: parent.right; bottom: parent.bottom; margins: 10 }
         spacing: 3
-        Label { width: parent.width; text: card.filename || "…"; color: "#dce0e8"; elide: Text.ElideMiddle; font.pixelSize: card.compact ? 10 : 12 }
+        Label { objectName: (card.compact ? "filmstrip.filename." : "library.filename.") + card.assetID; width: parent.width; text: card.filename || "…"; color: "#dce0e8"; elide: Text.ElideMiddle; font.pixelSize: card.compact ? 10 : 12 }
         Label { visible: !card.compact; text: (card.rating ? "★".repeat(card.rating) : "☆☆☆☆☆") + (card.flagValue === 1 ? "  Pick" : card.flagValue === -1 ? "  Reject" : ""); color: card.rating ? "#dfae77" : "#626c7b"; font.pixelSize: 12 }
     }
     Rectangle {
@@ -51,6 +52,7 @@ Rectangle {
     MouseArea {
         anchors.fill: parent
         onClicked: function(mouse) {
+            card.forceActiveFocus(Qt.MouseFocusReason)
             library.select(card.index, (mouse.modifiers & (Qt.ControlModifier | Qt.MetaModifier)) !== 0, (mouse.modifiers & Qt.ShiftModifier) !== 0)
             if (card.compact && mouse.modifiers === Qt.NoModifier && !editor.busy) library.activate(card.index)
         }

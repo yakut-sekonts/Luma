@@ -34,6 +34,7 @@ QVariantList EditorController::transformGuides() const {
 void EditorController::setGuideLayout(int layout) {
     if (!guidedMode_ || layout < 0 || layout > 2)
         return;
+    guideLayout_ = layout;
     guides_.clear();
     if (layout != 1) {
         guides_.push_back({luma::GuideAxis::vertical, {0.25, 0.15}, {0.25, 0.85}});
@@ -58,7 +59,9 @@ void EditorController::setGuidedMode(bool enabled) {
     guidedMode_ = enabled;
     guidedCanvasReady_ = false;
     if (enabled && guides_.empty())
-        setGuideLayout(0);
+        setGuideLayout(guideLayout_);
+    if (!enabled)
+        guides_.clear();
     render();
     emit stateChanged();
 }

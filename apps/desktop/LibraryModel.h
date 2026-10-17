@@ -82,6 +82,9 @@ class LibraryModel final : public QAbstractListModel {
     }
     void photoOpened(const QString &id);
     void refreshThumbnails(const QString &id = {});
+    Q_INVOKABLE void setViewportAnchor(const QString &assetID) {
+        viewportAnchor_ = assetID;
+    }
     Q_INVOKABLE void refresh();
     Q_INVOKABLE void filter(const QString &search, int rating, int flag, const QString &label,
                             const QString &collection);
@@ -102,6 +105,8 @@ class LibraryModel final : public QAbstractListModel {
     Q_INVOKABLE bool requestClose();
   signals:
     void stateChanged();
+    void reloadStarted(bool preserveViewport);
+    void viewportRestored(int row);
     void openRequested(const QUrl &url);
     void closeReady();
 
@@ -114,7 +119,7 @@ class LibraryModel final : public QAbstractListModel {
     std::map<int, std::vector<luma::LibraryItem>> pages_;
     std::deque<int> lru_;
     QSet<QString> selected_;
-    QString activeID_;
+    QString activeID_, viewportAnchor_;
     luma::LibraryFilter filter_;
     QTimer filterTimer_;
     QVariantList collections_;
@@ -130,6 +135,7 @@ class LibraryModel final : public QAbstractListModel {
     void reload(bool clear);
     void selectionChanged();
     void selectRange(int offset, int length, bool toggle);
-    void mutate(std::function<void(luma::Catalog &)> work);
+    void mutate(std::function<void(luma::Catalog &)> work, std::function<bool()> updateView = {});
+    bool refreshMetadata(const std::vector<std::string> &ids, int role, const QVariant &value);
     void checkClose();
 };

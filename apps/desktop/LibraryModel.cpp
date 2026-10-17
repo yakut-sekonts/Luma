@@ -184,6 +184,8 @@ void LibraryModel::page(int number) {
 void LibraryModel::reload(bool clear) {
     if (closing_)
         return;
+    emit reloadStarted(!clear);
+    const auto viewportAnchor = clear ? std::string{} : viewportAnchor_.toStdString();
     ++revision_;
     ++selectionRevision_;
     selecting_ = false;
@@ -209,43 +211,48 @@ void LibraryModel::reload(bool clear) {
     const auto path = catalog_;
     const auto filter = filter_;
     const QPointer<LibraryModel> self(this);
-    countJob_ = reads_.submit(
-        luma::JobPriority::background, [self, path, filter, revision](const auto &context) {
-            std::int64_t count = 0;
-            QVariantList collections;
-            QString error;
-            try {
-                if (context.stopToken().isCancelled())
-                    return;
-                luma::Catalog db(path);
-                count = db.libraryCount(filter);
-                if (count > std::numeric_limits<int>::max())
-                    throw std::runtime_error("Catalog exceeds the Qt model row limit.");
-                for (const auto &c : db.collections())
-                    collections.push_back(QVariantMap{{"id", QString::fromStdString(c.id)},
-                                                      {"name", QString::fromStdString(c.name)},
-                                                      {"count", static_cast<qlonglong>(c.count)}});
-            } catch (const std::exception &e) {
-                count = 0;
-                error = QString::fromUtf8(e.what());
-            }
-            if (self)
-                QMetaObject::invokeMethod(
-                    self,
-                    [self, count, collections, error, revision] {
-                        if (!self || self->revision_ != revision)
-                            return;
-                        self->beginResetModel();
-                        self->count_ = static_cast<int>(count);
-                        self->collections_ = collections;
-                        self->endResetModel();
-                        self->loading_ = false;
-                        if (!error.isEmpty())
-                            self->error_ = error;
-                        emit self->stateChanged();
-                    },
-                    Qt::QueuedConnection);
-        });
+    countJob_ = reads_.submit(luma::JobPriority::background, [self, path, filter, revision,
+                                                              viewportAnchor](const auto &context) {
+        std::int64_t count = 0;
+        int anchorRow = -1;
+        QVariantList collections;
+        QString error;
+        try {
+            if (context.stopToken().isCancelled())
+                return;
+            luma::Catalog db(path);
+            count = db.libraryCount(filter);
+            if (count > std::numeric_limits<int>::max())
+                throw std::runtime_error("Catalog exceeds the Qt model row limit.");
+            if (const auto index = db.libraryIndex(filter, viewportAnchor);
+                index && *index >= 0 && *index < count)
+                anchorRow = static_cast<int>(*index);
+            for (const auto &c : db.collections())
+                collections.push_back(QVariantMap{{"id", QString::fromStdString(c.id)},
+                                                  {"name", QString::fromStdString(c.name)},
+                                                  {"count", static_cast<qlonglong>(c.count)}});
+        } catch (const std::exception &e) {
+            count = 0;
+            error = QString::fromUtf8(e.what());
+        }
+        if (self)
+            QMetaObject::invokeMethod(
+                self,
+                [self, count, collections, error, revision, anchorRow] {
+                    if (!self || self->revision_ != revision)
+                        return;
+                    self->beginResetModel();
+                    self->count_ = static_cast<int>(count);
+                    self->collections_ = collections;
+                    self->endResetModel();
+                    self->loading_ = false;
+                    if (!error.isEmpty())
+                        self->error_ = error;
+                    emit self->viewportRestored(error.isEmpty() ? anchorRow : -1);
+                    emit self->stateChanged();
+                },
+                Qt::QueuedConnection);
+    });
 }
 void LibraryModel::refresh() {
     reload(false);
@@ -370,7 +377,8 @@ void LibraryModel::setExternalBusy(bool busy) {
     externalBusy_ = busy;
     emit stateChanged();
 }
-void LibraryModel::mutate(std::function<void(luma::Catalog &)> work) {
+void LibraryModel::mutate(std::function<void(luma::Catalog &)> work,
+                          std::function<bool()> updateView) {
     if (working())
         return;
     writing_ = true;
@@ -379,7 +387,8 @@ void LibraryModel::mutate(std::function<void(luma::Catalog &)> work) {
     const auto path = catalog_;
     const QPointer<LibraryModel> self(this);
     const auto operation = std::make_shared<std::function<void(luma::Catalog &)>>(std::move(work));
-    writes_.submit(luma::JobPriority::background, [self, path, operation](const auto &) {
+    const auto refresh = std::make_shared<std::function<bool()>>(std::move(updateView));
+    writes_.submit(luma::JobPriority::background, [self, path, operation, refresh](const auto &) {
         QString error;
         try {
             luma::Catalog db(path);
@@ -390,32 +399,81 @@ void LibraryModel::mutate(std::function<void(luma::Catalog &)> work) {
         if (self)
             QMetaObject::invokeMethod(
                 self,
-                [self, error] {
+                [self, error, refresh] {
                     if (!self)
                         return;
                     self->writing_ = false;
                     self->error_ = error;
-                    self->reload(false);
+                    if (!error.isEmpty() || !*refresh || !(*refresh)())
+                        self->reload(false);
                     emit self->stateChanged();
                     self->checkClose();
                 },
                 Qt::QueuedConnection);
     });
 }
+bool LibraryModel::refreshMetadata(const std::vector<std::string> &ids, int role,
+                                   const QVariant &value) {
+    // Membership/order must remain stable. A pending filter/selection needs its
+    // normal reload, and a matching metadata filter may remove changed assets.
+    if (loading_ || selecting_ || filterTimer_.isActive() ||
+        !std::is_sorted(ids.begin(), ids.end()) ||
+        (role != Rating && role != Flag && role != Label) ||
+        (role == Rating && filter_.minimumRating > 0) || (role == Flag && filter_.flag != -2) ||
+        (role == Label && filter_.label.has_value()))
+        return false;
+    ++revision_;
+    std::vector<int> pending;
+    pending.reserve(pageJobs_.size());
+    for (const auto &[number, job] : pageJobs_) {
+        job.cancel();
+        pending.push_back(number);
+    }
+    pageJobs_.clear();
+    const auto label = role == Label ? value.toString().toStdString() : std::string{};
+    for (auto &[number, rows] : pages_) {
+        int first = -1, last = -1;
+        for (std::size_t offset = 0; offset < rows.size(); ++offset) {
+            auto &item = rows[offset];
+            if (!std::binary_search(ids.begin(), ids.end(), item.id))
+                continue;
+            if (role == Rating)
+                item.rating = value.toInt();
+            else if (role == Flag)
+                item.flag = value.toInt();
+            else
+                item.label = label;
+            const int row = number * pageSize + static_cast<int>(offset);
+            if (first < 0)
+                first = row;
+            last = row;
+        }
+        if (first >= 0)
+            emit dataChanged(index(first), index(last), {role});
+    }
+    // Reissue in-flight reads after the commit; old callbacks carry the previous
+    // revision and cannot overwrite freshly updated cached metadata.
+    for (const auto number : pending)
+        page(number);
+    return true;
+}
 void LibraryModel::rate(int value) {
-    const auto ids = selectionIDs();
-    if (!ids.empty())
-        mutate([ids, value](auto &db) { db.setRating(ids, value); });
+    const auto ids = std::make_shared<const std::vector<std::string>>(selectionIDs());
+    if (!ids->empty())
+        mutate([ids, value](auto &db) { db.setRating(*ids, value); },
+               [this, ids, value] { return refreshMetadata(*ids, Rating, value); });
 }
 void LibraryModel::flag(int value) {
-    const auto ids = selectionIDs();
-    if (!ids.empty())
-        mutate([ids, value](auto &db) { db.setFlag(ids, value); });
+    const auto ids = std::make_shared<const std::vector<std::string>>(selectionIDs());
+    if (!ids->empty())
+        mutate([ids, value](auto &db) { db.setFlag(*ids, value); },
+               [this, ids, value] { return refreshMetadata(*ids, Flag, value); });
 }
 void LibraryModel::label(const QString &value) {
-    const auto ids = selectionIDs();
-    if (!ids.empty())
-        mutate([ids, value](auto &db) { db.setLabel(ids, value.toStdString()); });
+    const auto ids = std::make_shared<const std::vector<std::string>>(selectionIDs());
+    if (!ids->empty())
+        mutate([ids, value](auto &db) { db.setLabel(*ids, value.toStdString()); },
+               [this, ids, value] { return refreshMetadata(*ids, Label, value); });
 }
 void LibraryModel::createCollection(const QString &name) {
     mutate([name](auto &db) { db.createCollection(name.toStdString()); });

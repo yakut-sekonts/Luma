@@ -43,11 +43,24 @@ void ExportSettings::validate() const {
         throw std::runtime_error("Unknown export filename token.");
 }
 QString ExportSettings::filename(const QString &source, int sequence, const QString &date) const {
-    auto result = naming;
-    result.replace(QStringLiteral("{filename}"), QFileInfo(source).completeBaseName());
-    result.replace(QStringLiteral("{sequence}"),
-                   QStringLiteral("%1").arg(sequence, 4, 10, QChar('0')));
-    result.replace(QStringLiteral("{date}"), date);
+    // Parse the template once: replacement values are literal filename data.
+    static const QRegularExpression tokens(QStringLiteral("\\{(filename|sequence|date)\\}"));
+    auto matches = tokens.globalMatch(naming);
+    QString result;
+    qsizetype cursor = 0;
+    while (matches.hasNext()) {
+        const auto match = matches.next();
+        result += naming.sliced(cursor, match.capturedStart() - cursor);
+        const auto token = match.captured(1);
+        if (token == QStringLiteral("filename"))
+            result += QFileInfo(source).completeBaseName();
+        else if (token == QStringLiteral("sequence"))
+            result += QStringLiteral("%1").arg(sequence, 4, 10, QChar('0'));
+        else
+            result += date;
+        cursor = match.capturedEnd();
+    }
+    result += naming.sliced(cursor);
     if (result.isEmpty() || result == QStringLiteral(".") || result == QStringLiteral("..") ||
         result.toUtf8().size() > 230 ||
         result.contains(QRegularExpression(QStringLiteral("[\\x00-\\x1f/:\\\\]"))))

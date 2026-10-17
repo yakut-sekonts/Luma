@@ -18,6 +18,7 @@ Dialog {
     FolderDialog { id: folder; title: qsTranslate("Luma", "Export folder"); onAccepted: panel.update("destination", exporter.localPath(selectedFolder)) }
     FileDialog { id: watermarkFile; title: qsTranslate("Luma", "Watermark image"); nameFilters: [qsTranslate("Luma", "Images (*.png *.jpg *.jpeg *.tif *.tiff)")]; onAccepted: panel.update("watermarkImage", exporter.localPath(selectedFile)) }
     contentItem: ScrollView {
+        objectName: "export.scroll"
         clip: true
         contentWidth: availableWidth
         ColumnLayout {
@@ -36,12 +37,12 @@ Dialog {
             }
             Label { text: qsTranslate("Luma", "Destination folder") }
             RowLayout {
-                TextField { text: panel.form.destination; Layout.fillWidth: true; onEditingFinished: panel.update("destination", text) }
+                TextField { objectName: "export.destination"; text: panel.form.destination; Layout.fillWidth: true; onEditingFinished: panel.update("destination", text) }
                 Button { text: qsTranslate("Luma", "Choose…"); onClicked: folder.open() }
             }
             Label { text: qsTranslate("Luma", "Filename · {filename}, {sequence}, {date}"); font.pixelSize: 12 }
             TextField { objectName: "exportNaming"; text: panel.form.naming; Layout.fillWidth: true; onEditingFinished: panel.update("naming", text) }
-            ComboBox { model: [qsTranslate("Luma", "Existing files: skip"), qsTranslate("Luma", "Existing files: unique name"), qsTranslate("Luma", "Existing files: replace")]; currentIndex: panel.form.conflict; onActivated: panel.update("conflict", currentIndex); Layout.fillWidth: true }
+            ComboBox { objectName: "export.conflict"; model: [qsTranslate("Luma", "Existing files: skip"), qsTranslate("Luma", "Existing files: unique name"), qsTranslate("Luma", "Existing files: replace")]; currentIndex: panel.form.conflict; onActivated: panel.update("conflict", currentIndex); Layout.fillWidth: true }
             Label { visible: panel.form.conflict === 2; text: qsTranslate("Luma", "Files with matching names will be replaced."); color: "#ffc1bc"; wrapMode: Text.Wrap; Layout.fillWidth: true }
             ComboBox { objectName: "exportFormat"; model: ["JPEG", "PNG", "TIFF · 16 bit", "TIFF · 8 bit", qsTranslate("Luma", "DNG · processed Linear RGB")]; currentIndex: panel.form.format; onActivated: { panel.update("format", currentIndex); if (currentIndex !== 2 && currentIndex !== 3) panel.update("compression", 0) } Layout.fillWidth: true }
             Label { visible: panel.form.format === 4; text: qsTranslate("Luma", "DNG contains applied edits, not archived camera sensor data. Minimum 22 px on each side."); wrapMode: Text.Wrap; Layout.fillWidth: true; font.pixelSize: 12 }
@@ -91,9 +92,9 @@ Dialog {
         Label { text: qsTranslate("Luma", exporter.error); textFormat: Text.PlainText; visible: text.length > 0; color: "#ffc1bc"; wrapMode: Text.Wrap; Layout.fillWidth: true }
         RowLayout {
             Layout.alignment: Qt.AlignRight
-            Button { text: qsTranslate("Luma", "Close"); onClicked: panel.close() }
-            Button { text: qsTranslate("Luma", "Current photo"); enabled: editor.hasPhoto && !exporter.working; onClicked: { if (exporter.configure(panel.form)) { exporter.start(false); if (exporter.working) panel.close() } } }
-            Button { text: qsTranslate("Luma", "Selected photos"); enabled: library.selectedCount > 0 && !exporter.working; onClicked: { if (exporter.configure(panel.form)) { exporter.start(true); if (exporter.working) panel.close() } } }
+            Button { objectName: "export.close"; text: qsTranslate("Luma", "Close"); onClicked: panel.close() }
+            Button { objectName: "export.current"; text: qsTranslate("Luma", "Current photo"); enabled: editor.hasPhoto && !exporter.working; onClicked: { if (exporter.configure(panel.form)) { exporter.start(false); if (exporter.working) panel.close() } } }
+            Button { objectName: "export.selection"; text: qsTranslate("Luma", "Selected photos"); enabled: library.selectedCount > 0 && !exporter.working; onClicked: { if (exporter.configure(panel.form)) { exporter.start(true); if (exporter.working) panel.close() } } }
         }
     }
 }
