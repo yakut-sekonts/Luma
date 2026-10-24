@@ -1,0 +1,902 @@
+{
+  "status": "NOT_QUALIFIED",
+  "reproduced_defect": "Cancel cleared aiBusy while a real HDR worker was still held at catalog staging. The actual UpdateController delivered its installer callback before that worker terminated.",
+  "fix": "EditorController.readyForUpdate now combines pending GUI/save flags with mutex-protected JobManager.idle for all owned pools. Production and UX use the same readiness contract. A unit regression retains an old cancelled running worker while a newer queued handle already reaches cancelled.",
+  "reports": {
+    "ux-update-guard-repro": {
+      "path": "build-verify/ux-update-guard-repro/UX_REPORT.json",
+      "sha256": "0c8316eac404b40582170653106ac01423aaf5aa5a92d057ab76e9756a1f3d33",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "a498631284a34b20b81225f141a1032d6696bb87",
+        "worktree_dirty": true,
+        "source_tree_sha256": "665e68ca42f8a9f44577135e9d6df7bca1d205219edd6d39bc5d52b1bbe5edd2",
+        "test_executable_sha256": "220946c7ec9946ec0119d769d3f1de68c93637b7d6123ebbffab692e204cf545",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "220946c7ec9946ec0119d769d3f1de68c93637b7d6123ebbffab692e204cf545"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "FAIL": 1
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "a498631284a34b20b81225f141a1032d6696bb87",
+        "reason": ""
+      },
+      "results": [
+        {
+          "duration_ms": 1736,
+          "graphics_api": "software",
+          "id": "UX-P10-UPG-012",
+          "main_loop_stall_max_ms": 29,
+          "message": "P0 catalog integrity: unable to open database file",
+          "platform": "offscreen",
+          "status": "FAIL",
+          "warnings": [],
+          "child_pid": 54669,
+          "original_integrity": "PASS",
+          "stages": [
+            {
+              "duration_ms": 1736,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 29,
+              "message": "P0 catalog integrity: unable to open database file",
+              "platform": "offscreen",
+              "status": "FAIL",
+              "warnings": [],
+              "child_pid": 54669,
+              "variant": "save"
+            }
+          ]
+        }
+      ]
+    },
+    "ux-update-guard-repro-runtime": {
+      "path": "build-verify/ux-update-guard-repro-runtime/UX_REPORT.json",
+      "sha256": "6bb7595069e3b924e2395874b092cebf6e8e6e8b309eb762dfae299458e2f39d",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "a498631284a34b20b81225f141a1032d6696bb87",
+        "worktree_dirty": true,
+        "source_tree_sha256": "665e68ca42f8a9f44577135e9d6df7bca1d205219edd6d39bc5d52b1bbe5edd2",
+        "test_executable_sha256": "220946c7ec9946ec0119d769d3f1de68c93637b7d6123ebbffab692e204cf545",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "220946c7ec9946ec0119d769d3f1de68c93637b7d6123ebbffab692e204cf545"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "FAIL": 1
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "a498631284a34b20b81225f141a1032d6696bb87",
+        "reason": ""
+      },
+      "results": [
+        {
+          "duration_ms": 864,
+          "graphics_api": "software",
+          "id": "UX-P10-UPG-012",
+          "main_loop_stall_max_ms": 32,
+          "message": "Installer did not wait for a blocked active operation",
+          "platform": "offscreen",
+          "status": "FAIL",
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "child_pid": 54919,
+          "original_integrity": "PASS",
+          "stages": [
+            {
+              "duration_ms": 1280,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 32,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 54859,
+              "variant": "save"
+            },
+            {
+              "duration_ms": 811,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 20,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 54876,
+              "variant": "import"
+            },
+            {
+              "duration_ms": 635,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 21,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 54880,
+              "variant": "export"
+            },
+            {
+              "duration_ms": 968,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 27,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 54886,
+              "variant": "batch"
+            },
+            {
+              "duration_ms": 1330,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 29,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 54904,
+              "variant": "merge"
+            },
+            {
+              "duration_ms": 864,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 25,
+              "message": "Installer did not wait for a blocked active operation",
+              "platform": "offscreen",
+              "status": "FAIL",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 54919,
+              "variant": "merge-cancel"
+            }
+          ]
+        }
+      ]
+    },
+    "ux-update-guard-fixed": {
+      "path": "build-verify/ux-update-guard-fixed/UX_REPORT.json",
+      "sha256": "d6dcd8fc3dce0d505799f0e491dd9f34bcb3d999c6e3d58f8240d604011bb0f9",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "a498631284a34b20b81225f141a1032d6696bb87",
+        "worktree_dirty": true,
+        "source_tree_sha256": "39faee42bb92708ebf9723c144aef14aa9d83c353d65636afc0e8c9f84b17986",
+        "test_executable_sha256": "4018a0d04fe01257eb4035dd513d3c4b5c34d8b46bda672bad8ae0963c225c70",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "4018a0d04fe01257eb4035dd513d3c4b5c34d8b46bda672bad8ae0963c225c70"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "PASS": 3
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "a498631284a34b20b81225f141a1032d6696bb87",
+        "reason": ""
+      },
+      "results": [
+        {
+          "duration_ms": 987,
+          "graphics_api": "software",
+          "id": "UX-P10-UPG-012",
+          "main_loop_stall_max_ms": 68,
+          "message": "",
+          "platform": "offscreen",
+          "status": "PASS",
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "child_pid": 55822,
+          "original_integrity": "PASS",
+          "stages": [
+            {
+              "duration_ms": 1685,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 68,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55769,
+              "variant": "save"
+            },
+            {
+              "duration_ms": 723,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 23,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55781,
+              "variant": "import"
+            },
+            {
+              "duration_ms": 669,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 20,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55785,
+              "variant": "export"
+            },
+            {
+              "duration_ms": 971,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 22,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55789,
+              "variant": "batch"
+            },
+            {
+              "duration_ms": 1396,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 26,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55810,
+              "variant": "merge"
+            },
+            {
+              "duration_ms": 987,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 21,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55822,
+              "variant": "merge-cancel"
+            }
+          ]
+        },
+        {
+          "duration_ms": 1276,
+          "graphics_api": "software",
+          "id": "UX-P10-UPG-012",
+          "main_loop_stall_max_ms": 34,
+          "message": "",
+          "platform": "offscreen",
+          "status": "PASS",
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "child_pid": 55866,
+          "original_integrity": "PASS",
+          "stages": [
+            {
+              "duration_ms": 1202,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 34,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55828,
+              "variant": "save"
+            },
+            {
+              "duration_ms": 741,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 20,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55832,
+              "variant": "import"
+            },
+            {
+              "duration_ms": 644,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 24,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55836,
+              "variant": "export"
+            },
+            {
+              "duration_ms": 972,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 22,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55840,
+              "variant": "batch"
+            },
+            {
+              "duration_ms": 1127,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 30,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55852,
+              "variant": "merge"
+            },
+            {
+              "duration_ms": 1276,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 21,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55866,
+              "variant": "merge-cancel"
+            }
+          ]
+        },
+        {
+          "duration_ms": 982,
+          "graphics_api": "software",
+          "id": "UX-P10-UPG-012",
+          "main_loop_stall_max_ms": 42,
+          "message": "",
+          "platform": "offscreen",
+          "status": "PASS",
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "child_pid": 55922,
+          "original_integrity": "PASS",
+          "stages": [
+            {
+              "duration_ms": 1173,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 42,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55887,
+              "variant": "save"
+            },
+            {
+              "duration_ms": 728,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 21,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55894,
+              "variant": "import"
+            },
+            {
+              "duration_ms": 672,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 26,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55901,
+              "variant": "export"
+            },
+            {
+              "duration_ms": 1009,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 27,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55910,
+              "variant": "batch"
+            },
+            {
+              "duration_ms": 1076,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 28,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55916,
+              "variant": "merge"
+            },
+            {
+              "duration_ms": 982,
+              "graphics_api": "software",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 24,
+              "message": "",
+              "platform": "offscreen",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55922,
+              "variant": "merge-cancel"
+            }
+          ]
+        }
+      ]
+    },
+    "ux-update-guard-native": {
+      "path": "build-verify/ux-update-guard-native/UX_REPORT.json",
+      "sha256": "7db14ae43283fa4c93ffb8c9aaed6170a6c8c29b0662fb35063c677e1900e17d",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "a498631284a34b20b81225f141a1032d6696bb87",
+        "worktree_dirty": true,
+        "source_tree_sha256": "39faee42bb92708ebf9723c144aef14aa9d83c353d65636afc0e8c9f84b17986",
+        "test_executable_sha256": "4018a0d04fe01257eb4035dd513d3c4b5c34d8b46bda672bad8ae0963c225c70",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "4018a0d04fe01257eb4035dd513d3c4b5c34d8b46bda672bad8ae0963c225c70"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "PASS": 3
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "a498631284a34b20b81225f141a1032d6696bb87",
+        "reason": ""
+      },
+      "results": [
+        {
+          "duration_ms": 1956,
+          "graphics_api": "metal",
+          "id": "UX-P10-UPG-012",
+          "main_loop_stall_max_ms": 258,
+          "message": "",
+          "platform": "cocoa",
+          "status": "PASS",
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "child_pid": 56105,
+          "original_integrity": "PASS",
+          "stages": [
+            {
+              "duration_ms": 2341,
+              "graphics_api": "metal",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 258,
+              "message": "",
+              "platform": "cocoa",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 55989,
+              "variant": "save"
+            },
+            {
+              "duration_ms": 1427,
+              "graphics_api": "metal",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 153,
+              "message": "",
+              "platform": "cocoa",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 56027,
+              "variant": "import"
+            },
+            {
+              "duration_ms": 1416,
+              "graphics_api": "metal",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 138,
+              "message": "",
+              "platform": "cocoa",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 56046,
+              "variant": "export"
+            },
+            {
+              "duration_ms": 1341,
+              "graphics_api": "metal",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 114,
+              "message": "",
+              "platform": "cocoa",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 56060,
+              "variant": "batch"
+            },
+            {
+              "duration_ms": 1891,
+              "graphics_api": "metal",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 124,
+              "message": "",
+              "platform": "cocoa",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 56083,
+              "variant": "merge"
+            },
+            {
+              "duration_ms": 1956,
+              "graphics_api": "metal",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 178,
+              "message": "",
+              "platform": "cocoa",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 56105,
+              "variant": "merge-cancel"
+            }
+          ]
+        },
+        {
+          "duration_ms": 1791,
+          "graphics_api": "metal",
+          "id": "UX-P10-UPG-012",
+          "main_loop_stall_max_ms": 305,
+          "message": "",
+          "platform": "cocoa",
+          "status": "PASS",
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "child_pid": 56290,
+          "original_integrity": "PASS",
+          "stages": [
+            {
+              "duration_ms": 2751,
+              "graphics_api": "metal",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 305,
+              "message": "",
+              "platform": "cocoa",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 56142,
+              "variant": "save"
+            },
+            {
+              "duration_ms": 1462,
+              "graphics_api": "metal",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 152,
+              "message": "",
+              "platform": "cocoa",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 56167,
+              "variant": "import"
+            },
+            {
+              "duration_ms": 1278,
+              "graphics_api": "metal",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 130,
+              "message": "",
+              "platform": "cocoa",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 56195,
+              "variant": "export"
+            },
+            {
+              "duration_ms": 1749,
+              "graphics_api": "metal",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 140,
+              "message": "",
+              "platform": "cocoa",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 56231,
+              "variant": "batch"
+            },
+            {
+              "duration_ms": 2030,
+              "graphics_api": "metal",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 145,
+              "message": "",
+              "platform": "cocoa",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 56259,
+              "variant": "merge"
+            },
+            {
+              "duration_ms": 1791,
+              "graphics_api": "metal",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 177,
+              "message": "",
+              "platform": "cocoa",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 56290,
+              "variant": "merge-cancel"
+            }
+          ]
+        },
+        {
+          "duration_ms": 1897,
+          "graphics_api": "metal",
+          "id": "UX-P10-UPG-012",
+          "main_loop_stall_max_ms": 344,
+          "message": "",
+          "platform": "cocoa",
+          "status": "PASS",
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "child_pid": 56446,
+          "original_integrity": "PASS",
+          "stages": [
+            {
+              "duration_ms": 2629,
+              "graphics_api": "metal",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 344,
+              "message": "",
+              "platform": "cocoa",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 56313,
+              "variant": "save"
+            },
+            {
+              "duration_ms": 1804,
+              "graphics_api": "metal",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 309,
+              "message": "",
+              "platform": "cocoa",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 56356,
+              "variant": "import"
+            },
+            {
+              "duration_ms": 1349,
+              "graphics_api": "metal",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 139,
+              "message": "",
+              "platform": "cocoa",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 56382,
+              "variant": "export"
+            },
+            {
+              "duration_ms": 1304,
+              "graphics_api": "metal",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 115,
+              "message": "",
+              "platform": "cocoa",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 56396,
+              "variant": "batch"
+            },
+            {
+              "duration_ms": 1720,
+              "graphics_api": "metal",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 110,
+              "message": "",
+              "platform": "cocoa",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 56421,
+              "variant": "merge"
+            },
+            {
+              "duration_ms": 1897,
+              "graphics_api": "metal",
+              "id": "UX-P10-UPG-012",
+              "main_loop_stall_max_ms": 186,
+              "message": "",
+              "platform": "cocoa",
+              "status": "PASS",
+              "warnings": [],
+              "catalog_integrity": "PASS",
+              "child_pid": 56446,
+              "variant": "merge-cancel"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "limits": [
+    "Native SDK callback boundary only: no actual download or Sparkle install/relaunch.",
+    "32 owned small images and three actual RAW brackets; not stress or golden photographic qualification.",
+    "No other release gate is waived."
+  ],
+  "workflow_cleanup": "Denoise diagnostics is now manual-only; temporary qualification push trigger removed after hosted 9/9 confirmation.",
+  "first_reproduction_runtime_note": "First launch used system Python SQLite 3.54.0: child save PASS but supervisor read-only catalog open failed; remaining variants did not run. Retained as failure, not a product corruption claim. Configured .tools/venv Python SQLite 3.54.1 then reached all six variants: first five PASS and merge-cancel reproduced the premature installer callback. No SQLite workaround or gate relaxation was applied.",
+  "checks": {
+    "full_ctest": "69 PASS / 1 SKIP (private Nikon D7500 NEF unavailable), 70 listed, 115.00 seconds, no CLI exclusions",
+    "production_build": "221 targets PASS",
+    "format": "PASS",
+    "mandatory_affected_tidy": "PASS on eight affected translation units, all compile contexts; nonblocking diagnostics retained",
+    "runner_units": 45,
+    "merge_fixture_units": 5,
+    "quality_policy_units": 12,
+    "graph": {
+      "nodes": 7967,
+      "edges": 20757,
+      "self_loops": 4,
+      "dangling_endpoints": 0,
+      "exact_duplicates": 0,
+      "purpose": "navigation only"
+    },
+    "logs": {
+      ".tools/update-guard-production-build.log": "df6f636b512b14cd926930de0dc0b4cefea55db407454e6043d144a01fa166da",
+      ".tools/update-guard-ctest.log": "da96e246d5be4199497e76c74773391925ffea80bbe46a9ef477fd343ae82383",
+      ".tools/update-guard-tidy.log": "ed06082b0421832ea9b46606eb23069b93f2cb6e752549221c9bbe0553627595",
+      ".tools/update-guard-graph-diagnostics.log": "eb3a3771a7b46e0f54e3507631e56423368ddc7e7970b69a0b6e6cba09e77611"
+    }
+  },
+  "unadapted_applicable": {
+    "total": 310,
+    "blocking": 25
+  }
+}

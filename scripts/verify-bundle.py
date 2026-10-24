@@ -8,6 +8,7 @@ import sqlite3
 import subprocess
 import sys
 import tempfile
+from model_assets import digest, verify_artifacts
 
 root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(root / "tests/assets"))
@@ -21,6 +22,10 @@ with (app / "Contents/Info.plist").open("rb") as file:
 info = json.loads((app / "Contents/Resources/BUILD_INFO.json").read_text())
 assert info["version"] == version
 assert info["source_commit"] == subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
+models = app / "Contents/Resources/Models"
+model_manifest = verify_artifacts(models)
+assert info["bundled_models"] == model_manifest["models"]
+assert info["models_manifest_sha256"] == digest(models / "manifest.json")
 assert sdk.is_dir() and not hidden.exists()
 env = os.environ.copy()
 for name in ("QT_QPA_PLATFORM", "QT_QUICK_BACKEND", "QT_PLUGIN_PATH", "QML_IMPORT_PATH", "QML2_IMPORT_PATH", "DYLD_LIBRARY_PATH", "DYLD_FRAMEWORK_PATH"):
@@ -68,8 +73,10 @@ try:
             assert not any(token in result.stderr for token in ("ReferenceError","Unable to assign","Binding loop","TypeError")),result.stderr
         assert (mask_folder/"first.png").read_bytes()==(mask_folder/"second.png").read_bytes()
         with sqlite3.connect(mask_folder/"catalog.sqlite") as db:
-            assert db.execute("PRAGMA user_version").fetchone()==(11,)
-            assert db.execute("SELECT document FROM edit_local_masks").fetchone()[0].startswith("LUMA_LOCAL_MASKS 2 2\n")
+            catalog_schema = db.execute("PRAGMA user_version").fetchone()[0]
+            assert catalog_schema == 21, f"Unexpected installed catalog schema: {catalog_schema}"
+            masks = db.execute("SELECT document FROM edit_local_masks").fetchone()[0]
+            assert masks.startswith("LUMA_LOCAL_MASKS 3 2\n"), "Installed mask document lost its version or two saved masks"
         assert hashlib.sha256(raw.read_bytes()).hexdigest()==checksum
         xmp_folder = folder / "xmp"; xmp_folder.mkdir()
         xmp_file = xmp_folder / "Sparse.XMP"
@@ -87,7 +94,9 @@ try:
         with sqlite3.connect(xmp_catalog) as db:
             assert db.execute("SELECT exposure, contrast FROM edit_documents").fetchone() == (1.3, 37.0)
         imported = json.loads((xmp_folder / "presets.json").read_text())
-        assert imported["schemaVersion"] == 7 and imported["presets"][0]["preset"]["parameters"] == ["exposure"]
+        assert imported["schemaVersion"] == 9, f"Unexpected installed preset-library schema: {imported['schemaVersion']}"
+        sparse_preset = imported["presets"][0]["preset"]
+        assert sparse_preset["schemaVersion"] == 9 and sparse_preset["parameters"] == ["exposure"]
         assert hashlib.sha256(raw.read_bytes()).hexdigest() == checksum
         thumbnails = list((folder / "catalog.sqlite.luma-cache/thumbnails").glob("*.jpg"))
         assert len(thumbnails) >= 2 and all(p.name.endswith("-edited-v4.jpg") for p in thumbnails)

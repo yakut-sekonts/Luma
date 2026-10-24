@@ -238,7 +238,8 @@ void sourceBindings(const QString &qmlPath) {
          "fixtureWindow.errorTransitions++; } } } PhotoCard "
          "{objectName: \"card\"; anchors.fill: parent; index: 0; assetID: \"a\"; "
          "filename: \"test\"; thumbnailURL: \"image://controlled/old\"; rating: 0; "
-         "flagValue: 0; colorLabel: \"\"; selected: false; activePhoto: false} }")
+         "flagValue: 0; colorLabel: \"\"; selected: false; activePhoto: false; sourceMissing: "
+         "false} }")
             .toUtf8(),
         QUrl());
     wait([&] { return component.status() != QQmlComponent::Loading; });
@@ -372,11 +373,21 @@ void thumbnailTests(const QString &source, const QString &root, const QString &q
     });
     library.selectAll();
     wait([&] { return library.selectedCount() == 2 && !library.selecting(); });
-    QString initialURL;
-    wait([&] {
-        initialURL = library.data(library.index(0), LibraryModel::Thumbnail).toString();
-        return !initialURL.isEmpty();
-    });
+    const auto thumbnailURL = [&] {
+        QString url;
+        // Folder notifications can unload the asynchronous metadata page. An
+        // empty placeholder is neither a saved thumbnail nor invalidation.
+        wait([&] {
+            for (int row = 0; row < library.count(); ++row)
+                if (library.data(library.index(row), LibraryModel::AssetID).toString() == id) {
+                    url = library.data(library.index(row), LibraryModel::Thumbnail).toString();
+                    break;
+                }
+            return !url.isEmpty();
+        });
+        return url;
+    };
+    const auto initialURL = thumbnailURL();
     QStringList invalidatedIDs;
     QObject::connect(
         &library, &QAbstractItemModel::dataChanged,
@@ -387,50 +398,45 @@ void thumbnailTests(const QString &source, const QString &root, const QString &q
                         library.data(library.index(row), LibraryModel::AssetID).toString());
         });
     editor.setExposure(-0.4);
-    wait([&] {
-        return !editor.saving() &&
-               library.data(library.index(0), LibraryModel::Thumbnail).toString() != initialURL;
-    });
+    wait([&] { return !editor.saving(); });
+    require(thumbnailURL() != initialURL, "Autosave did not invalidate the active thumbnail.");
     require(library.selectedCount() == 2 && library.count() == 2,
             "Autosave thumbnail update reset the library selection/count.");
     require(invalidatedIDs == QStringList{id},
             "Autosave notified unrelated rows or missed the saved asset.");
-    const auto afterSave = library.data(library.index(0), LibraryModel::Thumbnail).toString();
+    const auto afterSave = thumbnailURL();
     sql(catalog, "CREATE TRIGGER thumb_fail_save BEFORE UPDATE ON edit_documents BEGIN SELECT "
                  "RAISE(ABORT,'Owned test save failure'); END");
     editor.setExposure(0.2);
     wait([&] { return !editor.error().isEmpty(); });
-    require(library.data(library.index(0), LibraryModel::Thumbnail).toString() == afterSave,
-            "Failed autosave invalidated saved thumbnails.");
+    require(thumbnailURL() == afterSave, "Failed autosave invalidated saved thumbnails.");
     sql(catalog, "DROP TRIGGER thumb_fail_save");
     editor.retrySave();
     wait([&] { return !editor.saving(); });
-    const auto afterRetry = library.data(library.index(0), LibraryModel::Thumbnail).toString();
+    const auto afterRetry = thumbnailURL();
     require(afterRetry != afterSave && editor.error().isEmpty(),
             "Successful autosave retry did not invalidate thumbnails.");
     presets.preview("builtin:warm-film");
-    require(library.data(library.index(0), LibraryModel::Thumbnail).toString() == afterRetry,
-            "Hover invalidated saved thumbnails.");
+    require(thumbnailURL() == afterRetry, "Hover invalidated saved thumbnails.");
     presets.clearPreview();
     batch.applyPreset("builtin:landscape");
     wait([&] { return !batch.working(); });
-    const auto afterBatch = library.data(library.index(0), LibraryModel::Thumbnail).toString();
+    const auto afterBatch = thumbnailURL();
     require(batch.error().isEmpty() && afterBatch != afterRetry && library.selectedCount() == 2,
             "Batch commit did not invalidate thumbnails or lost selection.");
     batch.undo();
     wait([&] { return !batch.working(); });
-    const auto afterUndo = library.data(library.index(0), LibraryModel::Thumbnail).toString();
+    const auto afterUndo = thumbnailURL();
     require(afterUndo != afterBatch && batch.error().isEmpty(),
             "Batch Undo did not invalidate thumbnails.");
     batch.redo();
     wait([&] { return !batch.working(); });
-    require(library.data(library.index(0), LibraryModel::Thumbnail).toString() != afterUndo,
+    const auto afterRedo = thumbnailURL();
+    require(batch.error().isEmpty() && afterRedo != afterUndo,
             "Batch Redo did not invalidate thumbnails.");
-    const auto afterRedo = library.data(library.index(0), LibraryModel::Thumbnail).toString();
     batch.applyPreset("builtin:landscape");
     wait([&] { return !batch.working(); });
-    require(batch.error().isEmpty() &&
-                library.data(library.index(0), LibraryModel::Thumbnail).toString() == afterRedo,
+    require(batch.error().isEmpty() && thumbnailURL() == afterRedo,
             "No-op batch invalidated unchanged thumbnails.");
     require(luma::macos::sha256File(path) == checksum &&
                 luma::macos::sha256File(copyPath) == checksum,

@@ -1,0 +1,1582 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-23T17:54:04.853574+00:00",
+  "base_commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+  "release_gate": "NOT_QUALIFIED",
+  "execution_location": "Local Apple M3 8 GiB; offscreen uses runner GITHUB_ACTIONS route, native uses Cocoa/Metal DPR2",
+  "scope": [
+    "Actual UI import and multi-selection, HDR/Panorama dialogs, progress phase, Cancel and completed real worker observation; storage holds apply only to the owned SQLite VFS.",
+    "Real three-frame Bayer DNG with EXIF shutters 1/500,1/125,4/125; independent Float32 LinearRaw TIFF parsing, finite values above SDR white, decoded HDR preservation, Develop edits/Undo/finite output and independent CPU preview.",
+    "Horizontal/vertical overlapping 256x192 PNG crops, expected 320x192 and 256x240 panorama, independent sRGB scene reconstruction with fixed .001 linear RGB budget; unrelated crops must refuse with visible error and clean catalog/files, then recover by opening an original.",
+    "Original hashes and source edit documents remain unchanged. Test-only friend copies the real merge JobHandle and observes termination; shipping symbol isolation is required."
+  ],
+  "fixes": {
+    "LUMA-BUG-060": "Recheck cancellation after potentially blocking derived journal staging and discard the uninstalled journal before cancellation exits. Preserve post-install commit semantics.",
+    "LUMA-BUG-061": "Coalesce actual per-row progress to at most one pending GUI dispatch rather than flooding all QML state bindings. Add localized alignment/merge/Float DNG write phase labels.",
+    "LUMA-BUG-062": "For panorama only, compare Vision homography and bounded coarse-to-subpixel translation candidates by ZNCC. Require >=25% sampled overlap, nontrivial texture and correlation>=.85. Bracket clipping makes this photometric gate unsuitable for HDR, which retains prior alignment."
+  },
+  "failures_and_intermediate": {
+    "ux-merge-baseline": {
+      "file": {
+        "path": "build-verify/ux-merge-baseline/UX_REPORT.json",
+        "sha256": "34dc9e5f7874e63976054084cc00574d69bc3dc6554018665e3bbd18051624ed",
+        "bytes": 15325
+      },
+      "summary": {
+        "FAIL": 4
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+        "worktree_dirty": true,
+        "source_tree_sha256": "cc96652315844355dec8a148580f3b45fed4017342a9a2fdc880dfd2523d182f",
+        "test_executable_sha256": "efd064d19d180cb7192f63f35380bc9fe461115093e74434b9ff321c2a7012de",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "efd064d19d180cb7192f63f35380bc9fe461115093e74434b9ff321c2a7012de"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P08-MRG-004",
+          "status": "FAIL",
+          "message": "Merge multi-selection failed",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 34,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T173203Z-92882/UX-P08-MRG-004/repeat-1"
+        },
+        {
+          "id": "UX-P08-HDR-001",
+          "status": "FAIL",
+          "message": "Merge multi-selection failed",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 22,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T173203Z-92882/UX-P08-HDR-001/repeat-1"
+        },
+        {
+          "id": "UX-P08-PAN-001",
+          "status": "FAIL",
+          "message": "Merge multi-selection failed",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 20,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T173203Z-92882/UX-P08-PAN-001/repeat-1"
+        },
+        {
+          "id": "UX-P08-PAN-002",
+          "status": "FAIL",
+          "message": "Merge multi-selection failed",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 20,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T173203Z-92882/UX-P08-PAN-002/repeat-1"
+        }
+      ]
+    },
+    "ux-merge-baseline-ready": {
+      "file": {
+        "path": "build-verify/ux-merge-baseline-ready/UX_REPORT.json",
+        "sha256": "2531307f6efdb350f8215fc95ba9b4a5df97a3bc6493736a3b679c9a515e9ded",
+        "bytes": 14201
+      },
+      "summary": {
+        "FAIL": 3,
+        "PASS": 1
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+        "worktree_dirty": true,
+        "source_tree_sha256": "5e23c80bc7d1fc84a4116198c0abb5036ed0bcc993a3be805ceaad6690addd05",
+        "test_executable_sha256": "c38577bb30d54f8bac4181e9a51d1b975f539e4a638c6659228c1f9ae3e885db",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "c38577bb30d54f8bac4181e9a51d1b975f539e4a638c6659228c1f9ae3e885db"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P08-MRG-004",
+          "status": "FAIL",
+          "message": "P0 hard hang: no main-loop heartbeat for >5s",
+          "platform": null,
+          "graphics_api": null,
+          "device_pixel_ratio": null,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": null,
+          "main_loop_stall_max_ms": null,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T173255Z-93081/UX-P08-MRG-004/repeat-1"
+        },
+        {
+          "id": "UX-P08-HDR-001",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 3051,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T173255Z-93081/UX-P08-HDR-001/repeat-1"
+        },
+        {
+          "id": "UX-P08-PAN-001",
+          "status": "FAIL",
+          "message": "Horizontal panorama lost the known 64-pixel overlap displacement",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 2164,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T173255Z-93081/UX-P08-PAN-001/repeat-1"
+        },
+        {
+          "id": "UX-P08-PAN-002",
+          "status": "FAIL",
+          "message": "Vertical panorama lost the known 48-pixel overlap displacement",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 1924,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T173255Z-93081/UX-P08-PAN-002/repeat-1"
+        }
+      ]
+    },
+    "ux-merge-cancel-baseline": {
+      "file": {
+        "path": "build-verify/ux-merge-cancel-baseline/UX_REPORT.json",
+        "sha256": "96e6e0c6fc009f5b80e4dd195f8964ead62cd2b5fe97a6c21262d4cd64701459",
+        "bytes": 8281
+      },
+      "summary": {
+        "FAIL": 1
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+        "worktree_dirty": true,
+        "source_tree_sha256": "87230d6894243f155d9d1a16dc13b0692e3ce1489a6aa828a2b5f358a6510d53",
+        "test_executable_sha256": "f89729cf5ec7101531566f1c92744abc72030355ff8adfcbbd6ac8c5be460619",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "f89729cf5ec7101531566f1c92744abc72030355ff8adfcbbd6ac8c5be460619"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P08-MRG-004",
+          "status": "FAIL",
+          "message": "Cancellation before install left a derived file, journal or catalog result",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 32,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T173552Z-93496/UX-P08-MRG-004/repeat-1"
+        }
+      ]
+    },
+    "ux-merge-fixed": {
+      "file": {
+        "path": "build-verify/ux-merge-fixed/UX_REPORT.json",
+        "sha256": "8de4ee1f182066e9d2f77aa71c12a531a4ff2091722822d88436cf0a487718f3",
+        "bytes": 15351
+      },
+      "summary": {
+        "FAIL": 2,
+        "PASS": 2
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+        "worktree_dirty": true,
+        "source_tree_sha256": "5da1a13c9d0de952ebd973050d7d173bc3f73c16e5bc27e9f54df65ca24bb907",
+        "test_executable_sha256": "4d5e06cc7d47f536a66e9120522941339d2cfc024a0f2f900c7279653fcd7471",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "4d5e06cc7d47f536a66e9120522941339d2cfc024a0f2f900c7279653fcd7471"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P08-MRG-004",
+          "status": "FAIL",
+          "message": "Merge failed before staging: Could not align these frames. Use images with sufficient overlap.",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 31,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T173925Z-94060/UX-P08-MRG-004/repeat-1"
+        },
+        {
+          "id": "UX-P08-HDR-001",
+          "status": "FAIL",
+          "message": "Merge failed before staging: Could not align these frames. Use images with sufficient overlap.",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 22,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T173925Z-94060/UX-P08-HDR-001/repeat-1"
+        },
+        {
+          "id": "UX-P08-PAN-001",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 27,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T173925Z-94060/UX-P08-PAN-001/repeat-1"
+        },
+        {
+          "id": "UX-P08-PAN-002",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 34,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T173925Z-94060/UX-P08-PAN-002/repeat-1"
+        }
+      ]
+    },
+    "ux-merge-ready": {
+      "file": {
+        "path": "build-verify/ux-merge-ready/UX_REPORT.json",
+        "sha256": "66944e35d48f0c169c6393f9b2d9ea0816c3f32906aea8cdb54d2dd32be421f0",
+        "bytes": 17386
+      },
+      "summary": {
+        "PASS": 5
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+        "worktree_dirty": true,
+        "source_tree_sha256": "a384036d164057bb9a24dfe896776bda3ebde62864e170532f70a27891fcf7dc",
+        "test_executable_sha256": "19e7e18103059a12b9569fb7a62d4a84bb4e70bf8e62c33fc236747ba2f22a8a",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "19e7e18103059a12b9569fb7a62d4a84bb4e70bf8e62c33fc236747ba2f22a8a"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P08-MRG-004",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 33,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174236Z-94496/UX-P08-MRG-004/repeat-1"
+        },
+        {
+          "id": "UX-P08-HDR-001",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 38,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174236Z-94496/UX-P08-HDR-001/repeat-1"
+        },
+        {
+          "id": "UX-P08-PAN-001",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 55,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174236Z-94496/UX-P08-PAN-001/repeat-1"
+        },
+        {
+          "id": "UX-P08-PAN-002",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 30,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174236Z-94496/UX-P08-PAN-002/repeat-1"
+        },
+        {
+          "id": "UX-P08-FLT-002",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 40,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174236Z-94496/UX-P08-FLT-002/repeat-1"
+        }
+      ]
+    },
+    "ux-merge-rejection": {
+      "file": {
+        "path": "build-verify/ux-merge-rejection/UX_REPORT.json",
+        "sha256": "d2e877f98dcdae8671f6010e0dfc98f918d3fdfbf324f26efbe32e9770910fe7",
+        "bytes": 18372
+      },
+      "summary": {
+        "FAIL": 6
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+        "worktree_dirty": true,
+        "source_tree_sha256": "08c1a5baa65118a320ec9aa5dfe63c29a193e0bf00101482df2caa263eedd84c",
+        "test_executable_sha256": "06128ec7421c1998237485b762ae8a80c48bb65d2b786924b0d3b8d09b987d6a",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "06128ec7421c1998237485b762ae8a80c48bb65d2b786924b0d3b8d09b987d6a"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P08-PAN-004",
+          "status": "FAIL",
+          "message": "Could not align these frames. Use images with sufficient overlap.",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 25,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174807Z-95599/UX-P08-PAN-004/repeat-1"
+        },
+        {
+          "id": "UX-P08-PAN-004",
+          "status": "FAIL",
+          "message": "Could not align these frames. Use images with sufficient overlap.",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 21,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174807Z-95599/UX-P08-PAN-004/repeat-2"
+        },
+        {
+          "id": "UX-P08-PAN-004",
+          "status": "FAIL",
+          "message": "Could not align these frames. Use images with sufficient overlap.",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 21,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174807Z-95599/UX-P08-PAN-004/repeat-3"
+        },
+        {
+          "id": "UX-P08-ALG-002",
+          "status": "FAIL",
+          "message": "Could not align these frames. Use images with sufficient overlap.",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 20,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174807Z-95599/UX-P08-ALG-002/repeat-1"
+        },
+        {
+          "id": "UX-P08-ALG-002",
+          "status": "FAIL",
+          "message": "Could not align these frames. Use images with sufficient overlap.",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 21,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174807Z-95599/UX-P08-ALG-002/repeat-2"
+        },
+        {
+          "id": "UX-P08-ALG-002",
+          "status": "FAIL",
+          "message": "Could not align these frames. Use images with sufficient overlap.",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 20,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174807Z-95599/UX-P08-ALG-002/repeat-3"
+        }
+      ]
+    }
+  },
+  "final_offscreen": {
+    "workflow": {
+      "file": {
+        "path": "build-verify/ux-merge-suite/UX_REPORT.json",
+        "sha256": "38e7ebe6c4ff7b570960126850f457eddc0e4a8ffd65c37040eba43c7064852c",
+        "bytes": 75986
+      },
+      "summary": {
+        "PASS": 36
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+        "worktree_dirty": true,
+        "source_tree_sha256": "8f413cdd973d808064f463f5d58c993636ade9876d2e557f7b5f62d53465220f",
+        "test_executable_sha256": "d47757947c20e16643488db1070ddbf9783dbc4e583621eca46727065fb3bb8c",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "d47757947c20e16643488db1070ddbf9783dbc4e583621eca46727065fb3bb8c"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P08-MRG-001",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 32,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-001/repeat-1"
+        },
+        {
+          "id": "UX-P08-MRG-001",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 35,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-001/repeat-2"
+        },
+        {
+          "id": "UX-P08-MRG-001",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 37,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-001/repeat-3"
+        },
+        {
+          "id": "UX-P08-MRG-003",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 35,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-003/repeat-1"
+        },
+        {
+          "id": "UX-P08-MRG-003",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 36,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-003/repeat-2"
+        },
+        {
+          "id": "UX-P08-MRG-003",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 44,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-003/repeat-3"
+        },
+        {
+          "id": "UX-P08-MRG-004",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 33,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-004/repeat-1"
+        },
+        {
+          "id": "UX-P08-MRG-004",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 33,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-004/repeat-2"
+        },
+        {
+          "id": "UX-P08-MRG-004",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 32,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-004/repeat-3"
+        },
+        {
+          "id": "UX-P08-MRG-005",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 32,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-005/repeat-1"
+        },
+        {
+          "id": "UX-P08-MRG-005",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 32,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-005/repeat-2"
+        },
+        {
+          "id": "UX-P08-MRG-005",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 32,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-005/repeat-3"
+        },
+        {
+          "id": "UX-P08-MRG-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 36,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-006/repeat-1"
+        },
+        {
+          "id": "UX-P08-MRG-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 37,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-006/repeat-2"
+        },
+        {
+          "id": "UX-P08-MRG-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 32,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-006/repeat-3"
+        },
+        {
+          "id": "UX-P08-MRG-009",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 36,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-009/repeat-1"
+        },
+        {
+          "id": "UX-P08-MRG-009",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 33,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-009/repeat-2"
+        },
+        {
+          "id": "UX-P08-MRG-009",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 40,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-009/repeat-3"
+        },
+        {
+          "id": "UX-P08-MRG-010",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 47,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-010/repeat-1"
+        },
+        {
+          "id": "UX-P08-MRG-010",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 32,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-010/repeat-2"
+        },
+        {
+          "id": "UX-P08-MRG-010",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 34,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-MRG-010/repeat-3"
+        },
+        {
+          "id": "UX-P08-HDR-001",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 38,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-HDR-001/repeat-1"
+        },
+        {
+          "id": "UX-P08-HDR-001",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 40,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-HDR-001/repeat-2"
+        },
+        {
+          "id": "UX-P08-HDR-001",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 45,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-HDR-001/repeat-3"
+        },
+        {
+          "id": "UX-P08-HDR-009",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 32,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-HDR-009/repeat-1"
+        },
+        {
+          "id": "UX-P08-HDR-009",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 43,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-HDR-009/repeat-2"
+        },
+        {
+          "id": "UX-P08-HDR-009",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 40,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-HDR-009/repeat-3"
+        },
+        {
+          "id": "UX-P08-PAN-001",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 37,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-PAN-001/repeat-1"
+        },
+        {
+          "id": "UX-P08-PAN-001",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 32,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-PAN-001/repeat-2"
+        },
+        {
+          "id": "UX-P08-PAN-001",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 34,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-PAN-001/repeat-3"
+        },
+        {
+          "id": "UX-P08-PAN-002",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 39,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-PAN-002/repeat-1"
+        },
+        {
+          "id": "UX-P08-PAN-002",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 38,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-PAN-002/repeat-2"
+        },
+        {
+          "id": "UX-P08-PAN-002",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 45,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-PAN-002/repeat-3"
+        },
+        {
+          "id": "UX-P08-FLT-002",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 58,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-FLT-002/repeat-1"
+        },
+        {
+          "id": "UX-P08-FLT-002",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 38,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-FLT-002/repeat-2"
+        },
+        {
+          "id": "UX-P08-FLT-002",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 69,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174551Z-95077/UX-P08-FLT-002/repeat-3"
+        }
+      ]
+    },
+    "rejection_recovery": {
+      "file": {
+        "path": "build-verify/ux-merge-rejection-recovery/UX_REPORT.json",
+        "sha256": "9ac71fc1690ee137efed3aa3bc0faafaa350f5801c55a230f44fc47a7abd4068",
+        "bytes": 17683
+      },
+      "summary": {
+        "PASS": 6
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+        "worktree_dirty": true,
+        "source_tree_sha256": "0884b4043d240fd927130c526429e146845b62571be384dd6ae576aa8db20890",
+        "test_executable_sha256": "6857a57fa50ffd89abf051f60de7f5f39302e1bc97197e311985a53ff60e99f3",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "6857a57fa50ffd89abf051f60de7f5f39302e1bc97197e311985a53ff60e99f3"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P08-PAN-004",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 27,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174904Z-95802/UX-P08-PAN-004/repeat-1"
+        },
+        {
+          "id": "UX-P08-PAN-004",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 27,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174904Z-95802/UX-P08-PAN-004/repeat-2"
+        },
+        {
+          "id": "UX-P08-PAN-004",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 39,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174904Z-95802/UX-P08-PAN-004/repeat-3"
+        },
+        {
+          "id": "UX-P08-ALG-002",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 27,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174904Z-95802/UX-P08-ALG-002/repeat-1"
+        },
+        {
+          "id": "UX-P08-ALG-002",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 26,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174904Z-95802/UX-P08-ALG-002/repeat-2"
+        },
+        {
+          "id": "UX-P08-ALG-002",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "warnings": [],
+          "main_loop_stall_max_ms": 26,
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174904Z-95802/UX-P08-ALG-002/repeat-3"
+        }
+      ]
+    }
+  },
+  "final_native": {
+    "file": {
+      "path": "build-verify/ux-merge-native/UX_REPORT.json",
+      "sha256": "9a84134e48e58b5acaa46a441f2648dbb461f596064d73cd1ef954533bba4608",
+      "bytes": 38952
+    },
+    "summary": {
+      "PASS": 14
+    },
+    "source_consistency": "PASS",
+    "original_hashes": "PASS",
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+      "reason": ""
+    },
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "5c5b6a89d9577e5a1c457c969f6e93b06983bab8",
+      "worktree_dirty": true,
+      "source_tree_sha256": "0884b4043d240fd927130c526429e146845b62571be384dd6ae576aa8db20890",
+      "test_executable_sha256": "6857a57fa50ffd89abf051f60de7f5f39302e1bc97197e311985a53ff60e99f3",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "6857a57fa50ffd89abf051f60de7f5f39302e1bc97197e311985a53ff60e99f3"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": false,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "results": [
+      {
+        "id": "UX-P08-MRG-001",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "warnings": [],
+        "main_loop_stall_max_ms": 221,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174924Z-95938/UX-P08-MRG-001/repeat-1"
+      },
+      {
+        "id": "UX-P08-MRG-003",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "warnings": [],
+        "main_loop_stall_max_ms": 165,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174924Z-95938/UX-P08-MRG-003/repeat-1"
+      },
+      {
+        "id": "UX-P08-MRG-004",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "warnings": [],
+        "main_loop_stall_max_ms": 167,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174924Z-95938/UX-P08-MRG-004/repeat-1"
+      },
+      {
+        "id": "UX-P08-MRG-005",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "warnings": [],
+        "main_loop_stall_max_ms": 174,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174924Z-95938/UX-P08-MRG-005/repeat-1"
+      },
+      {
+        "id": "UX-P08-MRG-006",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "warnings": [],
+        "main_loop_stall_max_ms": 169,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174924Z-95938/UX-P08-MRG-006/repeat-1"
+      },
+      {
+        "id": "UX-P08-MRG-009",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "warnings": [],
+        "main_loop_stall_max_ms": 165,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174924Z-95938/UX-P08-MRG-009/repeat-1"
+      },
+      {
+        "id": "UX-P08-MRG-010",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "warnings": [],
+        "main_loop_stall_max_ms": 163,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174924Z-95938/UX-P08-MRG-010/repeat-1"
+      },
+      {
+        "id": "UX-P08-HDR-001",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "warnings": [],
+        "main_loop_stall_max_ms": 197,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174924Z-95938/UX-P08-HDR-001/repeat-1"
+      },
+      {
+        "id": "UX-P08-HDR-009",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "warnings": [],
+        "main_loop_stall_max_ms": 163,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174924Z-95938/UX-P08-HDR-009/repeat-1"
+      },
+      {
+        "id": "UX-P08-PAN-001",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "warnings": [],
+        "main_loop_stall_max_ms": 119,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174924Z-95938/UX-P08-PAN-001/repeat-1"
+      },
+      {
+        "id": "UX-P08-PAN-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "warnings": [],
+        "main_loop_stall_max_ms": 140,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174924Z-95938/UX-P08-PAN-002/repeat-1"
+      },
+      {
+        "id": "UX-P08-PAN-004",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "warnings": [],
+        "main_loop_stall_max_ms": 249,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174924Z-95938/UX-P08-PAN-004/repeat-1"
+      },
+      {
+        "id": "UX-P08-ALG-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "warnings": [],
+        "main_loop_stall_max_ms": 155,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174924Z-95938/UX-P08-ALG-002/repeat-1"
+      },
+      {
+        "id": "UX-P08-FLT-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "warnings": [],
+        "main_loop_stall_max_ms": 164,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T174924Z-95938/UX-P08-FLT-002/repeat-1"
+      }
+    ]
+  },
+  "limitations": [
+    "Synthetic owned fixtures do not qualify all photographs, projections, deghosting, restart/crash recovery, large frame sequences or memory/performance.",
+    "Remaining applicable blocking IDs without adapters: 32. BUG045 and complete 1.0 release gate remain open.",
+    "Retained initial harness errors: async range selection checked too early, missing test header, expected visible rejection not recovered before runner final-error guard.",
+    "The initial global photometric validation wrongly refused clipped HDR brackets; the retained failing run precedes the explicit panorama mode correction."
+  ],
+  "hosted_ci": [
+    {
+      "source": "a056341",
+      "run": 39981301837,
+      "artifact_zip_sha256": "63d5054cfb7970a21d4f35632cce80614d91654ef9d61815660b2ea094256bbb",
+      "summary": {
+        "SKIPPED": 74,
+        "PASS": 243,
+        "NOT_IMPLEMENTED": 31
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "scope": "Earlier metadata/relink checkpoint; these merge fixes are not yet hosted-qualified"
+    },
+    {
+      "source": "282f781",
+      "run": 39986333285,
+      "artifact_zip_sha256": "18b1ef264cad28b40977e7e4dabd9b181507cb7dbb80d0308d33e8a51b784031",
+      "summary": {
+        "SKIPPED": 74,
+        "PASS": 243,
+        "NOT_IMPLEMENTED": 31
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "scope": "Earlier metadata/relink checkpoint; these merge fixes are not yet hosted-qualified"
+    }
+  ],
+  "validation": {
+    "full_build": "PASS",
+    "ctest": {
+      "passed": 13,
+      "failed": 0
+    },
+    "format": "PASS",
+    "blocking_clang_tidy": "PASS",
+    "nonblocking_tidy_warnings_retained": true,
+    "fixture_tests": 3
+  },
+  "logs": [
+    {
+      "path": ".tools/final-merge-app-build.log",
+      "sha256": "41adca110b1f576aac6b4dc43d72dab5ff87e2499d176705a95e6a94f441f419",
+      "bytes": 22931
+    },
+    {
+      "path": ".tools/final-merge-tidy.log",
+      "sha256": "3e9ea45a79b5d072afe95036085a1549b2657900405d8ef5a2b1f856374afa09",
+      "bytes": 30431
+    },
+    {
+      "path": ".tools/final-merge-format-verified.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".tools/final-merge-graph-diagnostics.log",
+      "sha256": "0c24e03bfbe285a5bc04fae859255861d78e64111cf3fa06274216d83cdad6a0",
+      "bytes": 1154
+    },
+    {
+      "path": ".tools/final-merge-ctest.log",
+      "sha256": "394ee6030d8d596b3e0545e737efe324120dced92d205d07833dbb2c012737b5",
+      "bytes": 1954
+    },
+    {
+      "path": ".tools/final-merge-fixtures-fixed.log",
+      "sha256": "e02e72962f0d6085e965760bc81b4a479137ab62f762fb95139733475a59bf76",
+      "bytes": 101
+    }
+  ]
+}

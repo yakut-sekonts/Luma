@@ -22,7 +22,26 @@ XMP preset import. Publication is approved after CI with
 [23 explicitly unqualified functional contracts](docs/releases/v0.5.1-quality.md);
 this is not a full UX qualification.
 
+Future releases, including 1.0, use the same open-source GitHub distribution:
+standalone DMG/ZIP, ad-hoc signing, explicit absence of Apple notarization and
+Sparkle-signed updates. Apple Developer Program membership is not required.
+The full pre-release QA gate remains required. See
+[release and first-launch policy](docs/OPEN_SOURCE_RELEASE.md).
+
 ## Included in source: phases 0.4–0.5
+
+The `codex/1.0-qualification` branch contains **0.6–0.9 development undergoing
+final qualification**: Metal/caches, local AI/retouch/search, HDR/panorama,
+metadata/XMP, backups/recovery, relinking, named versions, session History and
+RGB/luminance Histogram with clipping overlays, Auto WB and a neutral eyedropper.
+The eight remaining functional source blocks now include Presence, Point Color,
+Color Grading, Vignette/Grain, Smart Collections, linked Compare, Auto Adjust and
+advanced import with Move, naming, presets and a second backup. See the
+[completion ledger](docs/FUNCTIONAL_COMPLETION.md) and [behavior/limits](docs/adr/0030-functional-completion.md).
+These features are not in the published
+0.5.1 installer. See [final readiness](docs/FINAL_1_0_READINESS.md) before using
+or distributing a new build. Final testing and fixes are in progress; this is
+not yet a qualified 1.0 release.
 
 - ✅ CMake project and Qt/QML application shell.
 - ✅ Real sensor decode through LibRaw, with a project-owned floating-point Bayer pipeline.
@@ -119,9 +138,12 @@ licenses; see [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).
 
 Temperature spans 2000–25000 K and Tint spans −150…150. Manual WB uses a
 reference white-point approximation; As Shot uses the RAW camera gains.
-Auto WB, eyedropper, highlight reconstruction, persistent history, Versions,
-detail and calibrated camera profiles remain planned. Undo/Redo retains
-up to 200 operations in the current active-photo session. Double-click resets a
+The development branch adds Auto WB and a neutral eyedropper that resolve to
+Custom values with one-step Undo; see [behavior and limits](docs/PHASE9_DEVELOPMENT.md#auto-white-balance-and-neutral-eyedropper).
+Named versions and the session History browser also have source implementations.
+These additions remain unbuilt/unqualified; highlight reconstruction, persistent
+history and calibrated camera profiles are not claimed. Undo/Redo retains up to
+200 operations in the current active-photo session. Double-click resets a
 slider; Cmd+Z / Cmd+Shift+Z undo and redo.
 
 Export uses an immutable edit snapshot, the original resolution, sRGB and no

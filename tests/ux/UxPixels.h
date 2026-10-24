@@ -22,6 +22,13 @@ QImage fixtureReference(Context &context,
 QImage fixtureReference(Context &context, const luma::EditDocument &document,
                         const QString &sourcePath,
                         luma::DetailDiagnostic diagnostic = luma::DetailDiagnostic::none);
+// Independent CPU reference: RGB <= 1 only for Metal-eligible documents;
+// alpha, geometry, format, color space and DPR remain exact. CPU paths are exact.
+bool previewPixelsAgree(const QImage &actual, const QImage &expected, bool metalEligible);
+// Small acceptance/rejection controls, invoked by each affected scenario family.
+void checkPreviewPixelOracle();
+// Failure evidence only; never changes pixel acceptance or retries the scenario.
+void recordPreviewDifference(Context &context, const QImage &expected, const QString &reason);
 // Exact saved-document JPEG cache plus actual Image-node scene readback.
 // The URL generation is an invalidation counter, not the asset edit revision.
 void thumbnailCardPixels(Context &context, QQuickItem *card, const luma::AssetSnapshot &saved);

@@ -20,8 +20,7 @@ bool presetScenario(Context &c, const QString &id) {
                "subset preset editor opened");
         d.type("presetName", "UX subset 🌅");
         d.type("presetFolder", "UX folder");
-        for (int group = 1; group < 8; ++group)
-            d.click("presetGroup" + QString::number(group));
+        c.selectPresetGroups(static_cast<std::uint32_t>(luma::SettingsGroup::light));
         d.click("presetSave");
         d.wait(
             [&] {

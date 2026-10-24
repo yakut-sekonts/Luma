@@ -1,0 +1,287 @@
+{
+    "checks": [
+        {
+            "action": "single-click",
+            "after": {
+                "anchor": "cb0cdcda-4475-470f-948c-9afe094291d4",
+                "anchor_offset": -28,
+                "anchor_row": 148,
+                "content_y": 7798,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            },
+            "before": {
+                "anchor": "cb0cdcda-4475-470f-948c-9afe094291d4",
+                "anchor_offset": -27.777777777778283,
+                "anchor_row": 148,
+                "content_y": 7797.777777777778,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            }
+        },
+        {
+            "action": "single-click-motion",
+            "content_item_y": [
+                -7797.777777777778,
+                -7798
+            ],
+            "overflow": false
+        },
+        {
+            "action": "single-click",
+            "after": {
+                "anchor": "cb0cdcda-4475-470f-948c-9afe094291d4",
+                "anchor_offset": -28,
+                "anchor_row": 148,
+                "content_y": 7798,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            },
+            "before": {
+                "anchor": "cb0cdcda-4475-470f-948c-9afe094291d4",
+                "anchor_offset": -27.777777777778283,
+                "anchor_row": 148,
+                "content_y": 7797.777777777778,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            }
+        },
+        {
+            "action": "single-click-motion",
+            "content_item_y": [
+                -7798
+            ],
+            "overflow": false
+        },
+        {
+            "action": "open-and-return",
+            "after": {
+                "anchor": "cb0cdcda-4475-470f-948c-9afe094291d4",
+                "anchor_offset": -28,
+                "anchor_row": 148,
+                "content_y": 7798,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            },
+            "before": {
+                "anchor": "cb0cdcda-4475-470f-948c-9afe094291d4",
+                "anchor_offset": -27.777777777778283,
+                "anchor_row": 148,
+                "content_y": 7797.777777777778,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            }
+        },
+        {
+            "action": "keyboard-down",
+            "after": {
+                "anchor": "cb0cdcda-4475-470f-948c-9afe094291d4",
+                "anchor_offset": -41.65866666666625,
+                "anchor_row": 148,
+                "content_y": 7811.658666666666,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            },
+            "after_row": 159,
+            "before_row": 155,
+            "before_y": 7798
+        },
+        {
+            "action": "single-click",
+            "after": {
+                "anchor": "5938c503-0732-4a91-977f-224240e1ab93",
+                "anchor_offset": -64,
+                "anchor_row": 40,
+                "content_y": 2164,
+                "count": 76,
+                "height": 382,
+                "origin_y": 0
+            },
+            "before": {
+                "anchor": "5938c503-0732-4a91-977f-224240e1ab93",
+                "anchor_offset": -63.88888888888869,
+                "anchor_row": 40,
+                "content_y": 2163.8888888888887,
+                "count": 76,
+                "height": 382,
+                "origin_y": 0
+            }
+        },
+        {
+            "action": "single-click-motion",
+            "content_item_y": [
+                -2163.8888888888887,
+                -2164
+            ],
+            "overflow": false
+        },
+        {
+            "action": "single-click",
+            "after": {
+                "anchor": "5938c503-0732-4a91-977f-224240e1ab93",
+                "anchor_offset": -64,
+                "anchor_row": 40,
+                "content_y": 2164,
+                "count": 76,
+                "height": 382,
+                "origin_y": 0
+            },
+            "before": {
+                "anchor": "5938c503-0732-4a91-977f-224240e1ab93",
+                "anchor_offset": -63.88888888888869,
+                "anchor_row": 40,
+                "content_y": 2163.8888888888887,
+                "count": 76,
+                "height": 382,
+                "origin_y": 0
+            }
+        },
+        {
+            "action": "single-click-motion",
+            "content_item_y": [
+                -2164
+            ],
+            "overflow": false
+        },
+        {
+            "action": "open-and-return",
+            "after": {
+                "anchor": "5938c503-0732-4a91-977f-224240e1ab93",
+                "anchor_offset": -64,
+                "anchor_row": 40,
+                "content_y": 2164,
+                "count": 76,
+                "height": 382,
+                "origin_y": 0
+            },
+            "before": {
+                "anchor": "5938c503-0732-4a91-977f-224240e1ab93",
+                "anchor_offset": -63.88888888888869,
+                "anchor_row": 40,
+                "content_y": 2163.8888888888887,
+                "count": 76,
+                "height": 382,
+                "origin_y": 0
+            }
+        },
+        {
+            "action": "keyboard-down",
+            "after": {
+                "anchor": "5938c503-0732-4a91-977f-224240e1ab93",
+                "anchor_offset": -66.39199999999983,
+                "anchor_row": 40,
+                "content_y": 2166.392,
+                "count": 76,
+                "height": 382,
+                "origin_y": 0
+            },
+            "after_row": 51,
+            "before_row": 47,
+            "before_y": 2164
+        },
+        {
+            "action": "single-click",
+            "after": {
+                "anchor": "8a98ee0d-7f6a-4539-8c2d-08a60747aaa8",
+                "anchor_offset": -56,
+                "anchor_row": 100,
+                "content_y": 5306,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            },
+            "before": {
+                "anchor": "8a98ee0d-7f6a-4539-8c2d-08a60747aaa8",
+                "anchor_offset": -55.777777777777374,
+                "anchor_row": 100,
+                "content_y": 5305.777777777777,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            }
+        },
+        {
+            "action": "single-click-motion",
+            "content_item_y": [
+                -5305.777777777777,
+                -5306
+            ],
+            "overflow": false
+        },
+        {
+            "action": "single-click",
+            "after": {
+                "anchor": "8a98ee0d-7f6a-4539-8c2d-08a60747aaa8",
+                "anchor_offset": -56,
+                "anchor_row": 100,
+                "content_y": 5306,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            },
+            "before": {
+                "anchor": "8a98ee0d-7f6a-4539-8c2d-08a60747aaa8",
+                "anchor_offset": -55.777777777777374,
+                "anchor_row": 100,
+                "content_y": 5305.777777777777,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            }
+        },
+        {
+            "action": "single-click-motion",
+            "content_item_y": [
+                -5306
+            ],
+            "overflow": false
+        },
+        {
+            "action": "open-and-return",
+            "after": {
+                "anchor": "8a98ee0d-7f6a-4539-8c2d-08a60747aaa8",
+                "anchor_offset": -56,
+                "anchor_row": 100,
+                "content_y": 5306,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            },
+            "before": {
+                "anchor": "8a98ee0d-7f6a-4539-8c2d-08a60747aaa8",
+                "anchor_offset": -55.777777777777374,
+                "anchor_row": 100,
+                "content_y": 5305.777777777777,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            }
+        },
+        {
+            "action": "keyboard-down",
+            "after": {
+                "anchor": "8a98ee0d-7f6a-4539-8c2d-08a60747aaa8",
+                "anchor_offset": -64.95466666666653,
+                "anchor_row": 100,
+                "content_y": 5314.9546666666665,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            },
+            "after_row": 111,
+            "before_row": 107,
+            "before_y": 5306
+        }
+    ],
+    "native_file_chooser": "fixture-boundary",
+    "photos": 176,
+    "sort": "default filename/ID",
+    "status": "PASS"
+}

@@ -1,0 +1,620 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-24T01:43:49.419494+00:00",
+  "base_commit": "0acd71ae42543c4afce317717a341bbdbbd3b8d9",
+  "release_gate": "NOT_QUALIFIED",
+  "initial_stress": {
+    "file": {
+      "path": "build-verify/ux-implemented-stress/UX_REPORT.json",
+      "sha256": "03174b69282d41bf371dcece2de13084fc6b22206b573b0f5123df240f2d8b15",
+      "bytes": 89517
+    },
+    "summary": {
+      "PASS": 13,
+      "FAIL": 2
+    },
+    "source_consistency": "PASS",
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "0acd71ae42543c4afce317717a341bbdbbd3b8d9",
+      "worktree_dirty": false,
+      "source_tree_sha256": "b89956432aa9bb1d9907e4c47544695e507441231fe7967ec03d6973c1648fbb",
+      "test_executable_sha256": "61dcdbd158ea5fc5499323fb4d64f65159ec20d1f4153aabf0fec053f2cf47c6",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "61dcdbd158ea5fc5499323fb4d64f65159ec20d1f4153aabf0fec053f2cf47c6"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": true,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "0acd71ae42543c4afce317717a341bbdbbd3b8d9",
+      "reason": ""
+    },
+    "results": [
+      {
+        "id": "UX-APP-005",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T012211Z-37018/UX-APP-005/repeat-1",
+        "duration_ms": 365,
+        "rss_peak_mb": 103.6875,
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-IMP-019",
+        "status": "FAIL",
+        "message": "Repeated Cancel produced spurious errors or inconsistent cancelled counts",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T012211Z-37018/UX-IMP-019/repeat-1",
+        "duration_ms": 8114,
+        "rss_peak_mb": 144.0625,
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-SLD-013",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T012211Z-37018/UX-SLD-013/repeat-1",
+        "duration_ms": 27753,
+        "rss_peak_mb": 159.4375,
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-SLD-014",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T012211Z-37018/UX-SLD-014/repeat-1",
+        "duration_ms": 7028,
+        "rss_peak_mb": 164.1875,
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-PRV-008",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T012211Z-37018/UX-PRV-008/repeat-1",
+        "duration_ms": 7005,
+        "rss_peak_mb": 242.953125,
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-ADV-013",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T012211Z-37018/UX-ADV-013/repeat-1",
+        "duration_ms": 12474,
+        "rss_peak_mb": 179.265625,
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-TRN-014",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T012211Z-37018/UX-TRN-014/repeat-1",
+        "duration_ms": 7738,
+        "rss_peak_mb": 159.03125,
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-DTL-011",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T012211Z-37018/UX-DTL-011/repeat-1",
+        "duration_ms": 14308,
+        "rss_peak_mb": 169.625,
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-PRS-019",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T012211Z-37018/UX-PRS-019/repeat-1",
+        "duration_ms": 478201,
+        "rss_peak_mb": 147.578125,
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-BAT-014",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T012211Z-37018/UX-BAT-014/repeat-1",
+        "duration_ms": 20326,
+        "rss_peak_mb": 137.328125,
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-EXP-023",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T012211Z-37018/UX-EXP-023/repeat-1",
+        "duration_ms": 23226,
+        "rss_peak_mb": 183.84375,
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-EXP-024",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T012211Z-37018/UX-EXP-024/repeat-1",
+        "duration_ms": 26177,
+        "rss_peak_mb": 156.03125,
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-UND-016",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T012211Z-37018/UX-UND-016/repeat-1",
+        "duration_ms": 13609,
+        "rss_peak_mb": 141.65625,
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-PERF-017",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T012211Z-37018/UX-PERF-017/repeat-1",
+        "duration_ms": 9092,
+        "rss_peak_mb": 155.109375,
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-PERF-018",
+        "status": "FAIL",
+        "message": "Panel stress lost an actual Cancel/Close or changed form/document/history",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T012211Z-37018/UX-PERF-018/repeat-1",
+        "duration_ms": 1221,
+        "rss_peak_mb": 142.203125,
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      }
+    ]
+  },
+  "diagnostic": {
+    "file": {
+      "path": "build-verify/ux-stress-diagnostic/UX_REPORT.json",
+      "sha256": "9f1d409c3fa7e79982d1afe2105c436ecb282e4c4374a9bca287e0a93fd6e46a",
+      "bytes": 13077
+    },
+    "summary": {
+      "PASS": 2,
+      "FAIL": 1
+    },
+    "source_consistency": "PASS",
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "0acd71ae42543c4afce317717a341bbdbbd3b8d9",
+      "worktree_dirty": true,
+      "source_tree_sha256": "2259e3d1df1733cc752b16b9ff5467835aecdd313fb118d5fd870ee2d73fddb5",
+      "test_executable_sha256": "d7c202adff2ef244565cdb1094cdda0c4175bb25e380e8885c8a189b85b47469",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "d7c202adff2ef244565cdb1094cdda0c4175bb25e380e8885c8a189b85b47469"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": true,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "0acd71ae42543c4afce317717a341bbdbbd3b8d9",
+      "reason": ""
+    },
+    "results": [
+      {
+        "id": "UX-IMP-005",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T013430Z-39965/UX-IMP-005/repeat-1",
+        "duration_ms": 1117,
+        "rss_peak_mb": 116.390625,
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-IMP-019",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T013430Z-39965/UX-IMP-019/repeat-1",
+        "duration_ms": 22234,
+        "rss_peak_mb": 133.859375,
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-PERF-018",
+        "status": "FAIL",
+        "message": "Panel stress lost an actual Cancel/Close or changed form/document/history",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T013430Z-39965/UX-PERF-018/repeat-1",
+        "duration_ms": 1300,
+        "rss_peak_mb": 133.25,
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      }
+    ]
+  },
+  "panel_failure": {
+    "file": {
+      "path": "build-verify/ux-artifacts/20261024T013430Z-39965/UX-PERF-018/repeat-1/panel-stress-failure.json",
+      "sha256": "9dd2c4828c0198ac39457c91c8c9e88603856a8974b8e57c6441715bb9daf6dc",
+      "bytes": 522
+    },
+    "observations": {
+      "accepted": 0,
+      "checks": {
+        "accepted_empty": true,
+        "clicked_once": true,
+        "destination": true,
+        "document": true,
+        "duplicates": true,
+        "export_idle": true,
+        "import_idle": true,
+        "opened_once": true,
+        "recursive": true,
+        "redo": true,
+        "rejected_once": false,
+        "sources": true,
+        "undo": true
+      },
+      "clicked": 1,
+      "closed": 1,
+      "cycle": 1,
+      "opened": 1,
+      "rejected": 0,
+      "scenario": "UX-PERF-018"
+    }
+  },
+  "import_failure_image": {
+    "path": "build-verify/ux-artifacts/20261024T012211Z-37018/UX-IMP-019/repeat-1/failure.png",
+    "sha256": "8383f80c681e80511ee1aa8d98a2cd3d263bfdced29a08c90103997d38a74cc1",
+    "bytes": 251337
+  },
+  "changes": {
+    "import_harness": "Capture actual importing true-to-false UI completion before the directory watcher can replace shared status. Assert exact summary/errors and independent terminal SQL counters, files, originals and journal state.",
+    "import_cancel": "Use Dialog.reject() for Cancel. The pre-fix diagnostic records clicked=opened=closed=1, rejected=accepted=0 and all data/form/history checks true.",
+    "blocking_regression": "UX-IMP-001 covers real Cancel button and Escape separately, each rejecting/closing once with no acceptance or import side effects.",
+    "passive_diagnostics": "Panel stress writes per-field failure evidence without changing its assertions."
+  },
+  "retests": [
+    {
+      "file": {
+        "path": "build-verify/ux-stress-fixed/UX_REPORT.json",
+        "sha256": "a883a14d91039d0a2608df5beaecc555e883e79c763935c57561f9d7d782c5ac",
+        "bytes": 51818
+      },
+      "summary": {
+        "PASS": 12
+      },
+      "source_consistency": "PASS",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "0acd71ae42543c4afce317717a341bbdbbd3b8d9",
+        "worktree_dirty": true,
+        "source_tree_sha256": "2ea431e25f74e611a7a39376af62f57b5382a1a3cf441ab5b84556e99eb7eb08",
+        "test_executable_sha256": "d7c202adff2ef244565cdb1094cdda0c4175bb25e380e8885c8a189b85b47469",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "d7c202adff2ef244565cdb1094cdda0c4175bb25e380e8885c8a189b85b47469"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "0acd71ae42543c4afce317717a341bbdbbd3b8d9",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "UX-IMP-005",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T013527Z-40197/UX-IMP-005/repeat-1",
+          "duration_ms": 1101,
+          "rss_peak_mb": 120.671875,
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-IMP-005",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T013527Z-40197/UX-IMP-005/repeat-2",
+          "duration_ms": 860,
+          "rss_peak_mb": 122.546875,
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-IMP-005",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T013527Z-40197/UX-IMP-005/repeat-3",
+          "duration_ms": 799,
+          "rss_peak_mb": 125.328125,
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-IMP-019",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T013527Z-40197/UX-IMP-019/repeat-1",
+          "duration_ms": 23001,
+          "rss_peak_mb": 134.5625,
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-IMP-019",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T013527Z-40197/UX-IMP-019/repeat-2",
+          "duration_ms": 22667,
+          "rss_peak_mb": 138.078125,
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-IMP-019",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T013527Z-40197/UX-IMP-019/repeat-3",
+          "duration_ms": 22862,
+          "rss_peak_mb": 121.125,
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-PERF-017",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T013527Z-40197/UX-PERF-017/repeat-1",
+          "duration_ms": 9189,
+          "rss_peak_mb": 142.015625,
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-PERF-017",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T013527Z-40197/UX-PERF-017/repeat-2",
+          "duration_ms": 8917,
+          "rss_peak_mb": 154.875,
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-PERF-017",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T013527Z-40197/UX-PERF-017/repeat-3",
+          "duration_ms": 8951,
+          "rss_peak_mb": 139.671875,
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-PERF-018",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T013527Z-40197/UX-PERF-018/repeat-1",
+          "duration_ms": 8811,
+          "rss_peak_mb": 156.140625,
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-PERF-018",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T013527Z-40197/UX-PERF-018/repeat-2",
+          "duration_ms": 8917,
+          "rss_peak_mb": 156.3125,
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-PERF-018",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T013527Z-40197/UX-PERF-018/repeat-3",
+          "duration_ms": 8744,
+          "rss_peak_mb": 151.578125,
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        }
+      ]
+    },
+    {
+      "file": {
+        "path": "build-verify/ux-import-cancel-blocking/UX_REPORT.json",
+        "sha256": "3df3cc4465cc75b96612a9964c9ff777e78b5a22574334d370cb15306acd0dec",
+        "bytes": 12289
+      },
+      "summary": {
+        "PASS": 3
+      },
+      "source_consistency": "PASS",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "0acd71ae42543c4afce317717a341bbdbbd3b8d9",
+        "worktree_dirty": true,
+        "source_tree_sha256": "0dba61d1c0ee1395b50f2d9d168d8b467a8dccf14c08444f406eb7d8637f12a9",
+        "test_executable_sha256": "4247471a6c83e41da7ff7199047733174ac8303dd09b8b6c68face5122080930",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "4247471a6c83e41da7ff7199047733174ac8303dd09b8b6c68face5122080930"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "0acd71ae42543c4afce317717a341bbdbbd3b8d9",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "UX-IMP-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T013810Z-40828/UX-IMP-001/repeat-1",
+          "duration_ms": 584,
+          "rss_peak_mb": 104.0625,
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-IMP-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T013810Z-40828/UX-IMP-001/repeat-2",
+          "duration_ms": 370,
+          "rss_peak_mb": 103.96875,
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-IMP-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T013810Z-40828/UX-IMP-001/repeat-3",
+          "duration_ms": 476,
+          "rss_peak_mb": 97.5,
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "full_production_build": {
+      "status": "PASS",
+      "file": {
+        "path": ".tools/post-stress-production-build.log",
+        "sha256": "1673a1101d2863bc76fa8ba3c70d1f6fcdf5930c0da03ee275d3c61df513b4f8",
+        "bytes": 3360
+      }
+    },
+    "ctest": {
+      "PASS": 71,
+      "SKIPPED": 1,
+      "FAIL": 0,
+      "skip": "Unavailable private Nikon D7500 fixture",
+      "file": {
+        "path": ".tools/post-stress-ctest.log",
+        "sha256": "22bdc7d4a16f50bfded3d9c8b52357fd8165da9ced3148267f128e8ece4cff7a",
+        "bytes": 10441
+      }
+    },
+    "affected_mandatory_clang_tidy": {
+      "status": "PASS",
+      "advisories_retained": true,
+      "file": {
+        "path": ".tools/import-cancel-tidy.log",
+        "sha256": "693904ac3086f2775e39f45281ac3024a50c0a9ec3cd9844cb20866d8b117d9f",
+        "bytes": 34910
+      }
+    },
+    "format_and_diff": "PASS",
+    "graphify": {
+      "file": {
+        "path": ".tools/stress-graph.log",
+        "sha256": "8cb58da237f9187ac44bc387d53c8eba40cb9bad805a53ffaad19a89c8dea0a3",
+        "bytes": 2513
+      },
+      "scope": "Structural navigation only; QML inspected manually; self-loop warnings retained."
+    }
+  },
+  "limits": [
+    "Software/offscreen stress observations on the recorded 8 GiB M3; not Cocoa or performance SLO acceptance.",
+    "All 15 implemented stress IDs have passing observations across these source-bound checkpoints; this is not a single-source whole-inventory release run.",
+    "No native rerun while the UserNotificationCenter safety blocker awaits manual dismissal.",
+    "Remaining unadapted/long-running/hardware/installation/update/final-artifact gates and BUG045 remain open.",
+    "Existing local signed 0.9.0 candidate is source 91caa17 and predates this QML change; it is not the final release."
+  ]
+}

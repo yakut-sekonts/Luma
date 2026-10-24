@@ -1,0 +1,96 @@
+{
+  "status": "VISUALLY_OBSERVED_IN_SUPPLIED_RECORDING",
+  "source_name": "Запись экрана — 2026-10-20 в 17.33.02.mov",
+  "source_sha256": "bdc2a04c540a752faa653609bc190add4dea9ecfc9397b5ff2d69cd38a89dcfb",
+  "source_bytes": 25888106,
+  "duration_seconds": 24.821666666666665,
+  "application_label": "Luma 0.5.1",
+  "binary_identity": "Not available from video alone",
+  "surface": "Horizontal filmstrip in Develop; Library grid is not shown as the affected surface",
+  "observations": [
+    {
+      "seconds": 7.841666666666667,
+      "active_photo": "_DSC5590.NEF",
+      "left_visible": "_DSC5602.NEF",
+      "selected_target_visible": "_DSC5607.NEF"
+    },
+    {
+      "seconds": 12.025,
+      "active_photo": "_DSC5607.NEF",
+      "left_visible": "_DSC5557.NEF",
+      "observation": "Filmstrip returned to initial range after photo switch"
+    },
+    {
+      "seconds": 14.05,
+      "active_photo": "_DSC5607.NEF",
+      "left_visible": "_DSC5567.NEF",
+      "selected_target_visible": "_DSC5571.NEF"
+    },
+    {
+      "seconds": 16.191666666666666,
+      "active_photo": "_DSC5571.NEF",
+      "left_visible": "_DSC5557.NEF",
+      "observation": "A second photo switch again returned to initial range"
+    }
+  ],
+  "method": "Assistant inspection of AVFoundation-extracted frames; actual extraction times retained; no original build execution or root-cause proof claimed",
+  "frames": [
+    {
+      "actual_seconds": 0,
+      "file": "frame-00.png",
+      "height": 875,
+      "requested_seconds": 0,
+      "width": 1280,
+      "sha256": "932960d3d525abacb8082dd555d8c66d456794f4e065920a1da49229445bd79a"
+    },
+    {
+      "actual_seconds": 5.758333333333334,
+      "file": "frame-03.png",
+      "height": 875,
+      "requested_seconds": 6.205416666666667,
+      "width": 1280,
+      "sha256": "aa9ff3083d8811a6914019f27260fefa723066f5ba3167bd23bf70d1d78bf4d2"
+    },
+    {
+      "actual_seconds": 7.841666666666667,
+      "file": "frame-04.png",
+      "height": 875,
+      "requested_seconds": 8.273888888888889,
+      "width": 1280,
+      "sha256": "ce25dc384d0744133c0e2f3f075217ad3e1b0074a47426fcb4db5e4b4c9cb108"
+    },
+    {
+      "actual_seconds": 12.025,
+      "file": "frame-06.png",
+      "height": 875,
+      "requested_seconds": 12.410833333333334,
+      "width": 1280,
+      "sha256": "7390be79aed3de940dc5a56424cc7f830abf86501ea763c9d530585826acde73"
+    },
+    {
+      "actual_seconds": 14.05,
+      "file": "frame-07.png",
+      "height": 875,
+      "requested_seconds": 14.479305555555555,
+      "width": 1280,
+      "sha256": "dd1640a13043942ade6c434d9c8326157f141821da62aeaaf52fabb2607fa17b"
+    },
+    {
+      "actual_seconds": 16.191666666666666,
+      "file": "frame-08.png",
+      "height": 875,
+      "requested_seconds": 16.547777777777778,
+      "width": 1280,
+      "sha256": "424d9cb4c9e2c1ea421275f6968237e3ce041ed17a2548bb38ce1ef7e80a24b4"
+    },
+    {
+      "actual_seconds": 18.291666666666668,
+      "file": "frame-09.png",
+      "height": 875,
+      "requested_seconds": 18.616249999999997,
+      "width": 1280,
+      "sha256": "f84284226c34e94e84a0c3176d34b68b807af2de3bdc93153e3bcc8bb9a47e78"
+    }
+  ],
+  "privacy": "Original recording and extracted photographs remain local and are not committed or uploaded."
+}

@@ -1,0 +1,27 @@
+{
+  "scope": "source-dark-input-sanity",
+  "recipe_sha256": "b51acc6904130329ccc9a93039fe0eda333b8c744b30501d6f32fbaad1a8b9f7",
+  "model": "nafnet-sidd-width32-v2",
+  "cases": [
+    {
+      "sample": "near-black-noise",
+      "input_min": 0.0,
+      "input_max": 0.00108927465043962,
+      "input_mean": 0.0005001177778467536,
+      "output_min": 0.0,
+      "output_max": 0.6421715021133423,
+      "output_mean": 0.01730993203818798,
+      "fraction_output_above_input_max_plus_0_01": 0.2099939982096354
+    },
+    {
+      "sample": "black-with-impulse",
+      "input_min": 0.0,
+      "input_max": 0.0010000000474974513,
+      "input_mean": 3.814697446813398e-09,
+      "output_min": 0.0,
+      "output_max": 1.0,
+      "output_mean": 0.06513398140668869,
+      "fraction_output_above_input_max_plus_0_01": 0.34208043416341144
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "bundle_version": 4,
+  "delivery": "bundled-offline",
+  "models": [
+    {
+      "role": "denoise",
+      "id": "drunet-color-haar-mad-v1",
+      "display_name": "DRUNet Color · Luma 2",
+      "bundle": "LumaDenoise.mlmodelc",
+      "input": "noisy",
+      "output": "denoised",
+      "size": 512,
+      "halo": 64,
+      "license": "MIT",
+      "license_file": "DRUNet-LICENSE.txt",
+      "upstream": "https://github.com/cszn/DPIR/tree/15bca3fcc1f3cc51a1f99ccf027691e278c19354",
+      "source": {
+        "url": "https://github.com/cszn/KAIR/releases/download/v1.0/drunet_color.pth",
+        "filename": "drunet_color.pth",
+        "size": 130579305,
+        "sha256": "479abe3c5327dfd10ff54a80ec7d4098ca80752a5c9492cdff31cee430bec4b4"
+      },
+      "license_sha256": "afd973a2b98d60d178342477feed2c5673640288b0663e83e33e0e63ece9634c"
+    },
+    {
+      "role": "sky",
+      "id": "u2net-sky-v1",
+      "display_name": "U²-Net Sky · Luma 1",
+      "bundle": "LumaSky.mlmodelc",
+      "input": "image",
+      "output": "sky",
+      "size": 320,
+      "license": "MIT",
+      "license_file": "SkySeg-LICENSE.txt",
+      "upstream": "https://github.com/xiongzhu666/Sky-Segmentation-and-Post-processing/tree/1f7811b32b64ddc957269defff84bc87a3f0b74f",
+      "source": {
+        "url": "https://huggingface.co/JianyuanWang/skyseg/resolve/3ba8c6df1d9ba9ff26f637c7ba9568ac11a9aa7f/skyseg.onnx",
+        "filename": "skyseg.onnx",
+        "size": 175997079,
+        "sha256": "ab9c34c64c3d821220a2886a4a06da4642ffa14d5b30e8d5339056a089aa1d39"
+      },
+      "license_sha256": "d5bf18adf43d9688ed2908a916fe707882acc844cb51a393c91213d87bbf43ca"
+    }
+  ]
+}

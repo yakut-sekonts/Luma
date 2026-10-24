@@ -85,11 +85,14 @@ std::vector<float> filter(const std::vector<float> &guide, const std::vector<flo
 NoiseReductionPass::NoiseReductionPass(const FloatImage &input, const DevelopPipeline &pipeline,
                                        const EditDocument &edits, CancellationToken stop,
                                        double scale, DetailDiagnostic diagnostic,
-                                       const std::function<void(double)> &progress)
+                                       const std::function<void(double)> &progress,
+                                       std::span<const float> developedPixels)
     : width_(input.width), height_(input.height), diagnostic_(diagnostic) {
     edits.validate();
     input.validateCoverage();
     const auto count = pixelCount(width_, height_);
+    if (!developedPixels.empty() && developedPixels.size() != input.rgb.size())
+        throw std::runtime_error("Invalid accelerated noise reduction input.");
     if (input.rgb.size() != count * 3 || !std::isfinite(scale) || scale < 1.0 / 20000 || scale > 1)
         throw std::runtime_error("Invalid noise reduction image or scale.");
     checkCancellation(stop);
@@ -108,7 +111,11 @@ NoiseReductionPass::NoiseReductionPass(const FloatImage &input, const DevelopPip
         checkCancellation(stop);
         for (int x = 0; x < width_; ++x) {
             const auto i = (static_cast<std::size_t>(y) * width_ + x) * 3;
-            const auto rgb = pipeline.pixel({input.rgb[i], input.rgb[i + 1], input.rgb[i + 2]});
+            const auto rgb =
+                developedPixels.empty()
+                    ? pipeline.pixel({input.rgb[i], input.rgb[i + 1], input.rgb[i + 2]})
+                    : std::array{developedPixels[i], developedPixels[i + 1],
+                                 developedPixels[i + 2]};
             for (auto value : rgb)
                 if (!std::isfinite(value))
                     throw std::runtime_error("Non-finite noise reduction pixel.");

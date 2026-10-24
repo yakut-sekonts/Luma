@@ -9,6 +9,7 @@
 #include <QQmlComponent>
 #include <QQmlContext>
 #include <QQmlEngine>
+#include <QQmlPropertyMap>
 #include <QQuickStyle>
 #include <QTemporaryDir>
 #include <QThread>
@@ -54,6 +55,32 @@ int main(int argc, char **argv) {
             require(controller.language() == QStringLiteral("en") && !QFile::exists(path),
                     "Default must be English without startup writes.");
             engine.rootContext()->setContextProperty("localization", &controller);
+            // This test exercises language selection, not catalog/model actions.
+            // Supply the read-only state consumed by the expanded preferences UI.
+            QQmlPropertyMap editor, library, diagnostics;
+            for (const auto &name :
+                 {"saving", "metalPreview", "denoiseModelConfigured", "denoiseModelBundled",
+                  "skyModelConfigured", "skyModelBundled"})
+                editor.insert(name, false);
+            editor.insert("catalogPath", QString{});
+            editor.insert("previewCacheMiB", 64);
+            editor.insert("denoiseModelName", QString{});
+            editor.insert("skyModelName", QString{});
+            library.insert("working", false);
+            library.insert("backupSchedule", 0);
+            library.insert("backupKeep", 5);
+            library.insert("autoWriteXMP", false);
+            library.insert("backupFolder", QUrl{});
+            library.insert("status", QString{});
+            library.insert("error", QString{});
+            diagnostics.insert("snapshot", QVariantMap{});
+            diagnostics.insert("busy", false);
+            diagnostics.insert("localFolder", QUrl{});
+            diagnostics.insert("error", QString{});
+            diagnostics.insert("savedPath", QString{});
+            engine.rootContext()->setContextProperty("editor", &editor);
+            engine.rootContext()->setContextProperty("library", &library);
+            engine.rootContext()->setContextProperty("diagnostics", &diagnostics);
             QStringList warnings;
             QObject::connect(&engine, &QQmlEngine::warnings, [&](const QList<QQmlError> &errors) {
                 for (const auto &error : errors)

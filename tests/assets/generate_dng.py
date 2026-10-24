@@ -4,7 +4,8 @@ from pathlib import Path
 
 
 def create_dng(path: Path, *, maker="Luma", model="Synthetic Bayer Camera", lens=None,
-               focal=35, aperture=2.8, width=128, height=96, sample=None, orientation=1) -> None:
+               focal=35, aperture=2.8, width=128, height=96, sample=None, orientation=1, exif_ifd=False,
+               shutter=(1, 125)) -> None:
     entries = []
 
     def tag(identifier, kind, values):
@@ -38,9 +39,15 @@ def create_dng(path: Path, *, maker="Luma", model="Synthetic Bayer Camera", lens
     tag(50721, 10, [(32406, 10000), (-15372, 10000), (-4986, 10000), (-9689, 10000), (18758, 10000), (415, 10000), (557, 10000), (-2040, 10000), (10570, 10000)])
     tag(50719, 4, [0, 0])
     tag(50720, 4, [width, height])
-    tag(33434, 5, [(1, 125)])
+    tag(33434, 5, [shutter])
     tag(33437, 5, [(int(round(aperture * 100)), 100)])
     tag(37386, 5, [(int(round(focal * 100)), 100)])
+    exif_entries = []
+    if exif_ifd:
+        exif_tags = {33434, 33437, 34855, 37386, 42036}
+        exif_entries = sorted(entry for entry in entries if entry[0] in exif_tags)
+        entries = [entry for entry in entries if entry[0] not in exif_tags]
+        tag(34665, 4, [0])
     entries.sort()
     extra = bytearray()
     table = bytearray()
@@ -50,6 +57,8 @@ def create_dng(path: Path, *, maker="Luma", model="Synthetic Bayer Camera", lens
     for identifier, kind, count, data in entries:
         if identifier == 273:
             data = struct.pack("<I", image_start)
+        elif identifier == 34665:
+            data = struct.pack("<I", image_start + width * height * 2)
         if len(data) <= 4:
             inline = data.ljust(4, b"\0")
         else:
@@ -66,4 +75,18 @@ def create_dng(path: Path, *, maker="Luma", model="Synthetic Bayer Camera", lens
             brightness = 0.08 + 0.55 * x / (width - 1) if sample is None else sample(x, y)
             value = 512 + int(brightness * (16383 - 512) * [1, 0.95, 0.9][color])
             samples.extend(struct.pack("<H", value))
-    path.write_bytes(b"II" + struct.pack("<HIH", 42, 8, len(entries)) + table + b"\0" * 4 + extra + samples)
+    encoded = b"II" + struct.pack("<HIH", 42, 8, len(entries)) + table + b"\0" * 4 + extra + samples
+    if exif_ifd:
+        exif_table, exif_extra = bytearray(), bytearray()
+        exif_payload = len(encoded) + 2 + len(exif_entries) * 12 + 4
+        for identifier, kind, count, data in exif_entries:
+            if len(data) <= 4:
+                inline = data.ljust(4, b"\0")
+            else:
+                inline = struct.pack("<I", exif_payload + len(exif_extra))
+                exif_extra.extend(data)
+                if len(exif_extra) % 2:
+                    exif_extra.append(0)
+            exif_table.extend(struct.pack("<HHI", identifier, kind, count) + inline)
+        encoded += struct.pack("<H", len(exif_entries)) + exif_table + b"\0" * 4 + exif_extra
+    path.write_bytes(encoded)

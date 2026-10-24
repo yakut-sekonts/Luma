@@ -273,6 +273,27 @@ class CropDoneProfileTests(unittest.TestCase):
                          {'platform': 'cocoa', 'graphics_api': 'metal'})
         self.assertEqual(runner.NATIVE_ONLY_CONTRACTS['UX-MAC-001']['device_pixel_ratio'], 2)
 
+    def test_native_performance_contracts_never_execute_on_forced_offscreen(self):
+        identifiers = ['UX-NAV-002', 'UX-PRV-002', 'UX-ADV-012', 'UX-PERF-006']
+        with patch.dict(os.environ, {'GITHUB_ACTIONS': 'true'}):
+            outcome = self.run_cli(identifiers, quality=False, runs=3)
+            self.assertEqual(outcome['code'], 1)
+            self.assertEqual(outcome['calls'], [])
+            self.assertEqual(outcome['base_calls'], 0)
+            self.assertEqual(outcome['summary']['summary'], {'SKIPPED': 4})
+            self.assertEqual(outcome['summary']['execution_status'], 'INCOMPLETE')
+            self.assertEqual(outcome['summary']['release_gate'], 'NOT_QUALIFIED')
+            self.assertEqual(set(outcome['summary']['unsupported_backend']), set(identifiers))
+            for row in outcome['summary']['results']:
+                self.assertEqual(row['skip_reason'], 'unsupported_backend')
+                self.assertNotIn('child_pid', row)
+            for identifier in ('UX-FLT-002', 'UX-TRN-013'):
+                self.assertIsNone(runner.unsupported_backend_requirement(identifier))
+        with patch.dict(os.environ, {'GITHUB_ACTIONS': ''}):
+            for identifier in identifiers:
+                self.assertIsNone(runner.unsupported_backend_requirement(identifier))
+                self.assertEqual(runner.NATIVE_ONLY_CONTRACTS[identifier], {'platform': 'cocoa'})
+
 
 if __name__ == '__main__':
     unittest.main()

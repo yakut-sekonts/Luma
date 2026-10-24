@@ -1,0 +1,611 @@
+{
+  "schema": 1,
+  "scope": "three-developed-photographs-added-awgn-native-tiling",
+  "status": "FAIL",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "cases": [
+    {
+      "sample": "portrait-sigma-0.01",
+      "sigma_srgb": 0.01,
+      "fixture_sha256": "b7224c8c68fc7aaf76657b0d039e9fac69c00117d58523e5d2a11fe7cd2fbe61",
+      "shape": [
+        512,
+        512,
+        3
+      ],
+      "native": {
+        "alpha_preserved": true,
+        "contracts": {
+          "amount_zero_identity": true,
+          "cancelled_after_first_tile": true,
+          "half_amount_max_error": 2.9802322387695312e-08,
+          "invalid_amounts_rejected": true,
+          "pre_cancelled_rejected": true
+        },
+        "identifier": "coreml.linear-denoise.v1:drunet-color-haar-v1",
+        "input_unchanged": true,
+        "progress": [
+          0.25,
+          0.5,
+          0.75,
+          1
+        ],
+        "requested_compute_units": "ALL"
+      },
+      "numerics": {
+        "status": "PASS",
+        "max_absolute_error": 3.5762786865234375e-06,
+        "rmse": 3.4226484971931945e-07
+      },
+      "quality": {
+        "status": "FAIL",
+        "color": {
+          "linear": {
+            "input_mse_rgb": [
+              0.00017971025789880143,
+              0.00010727568399725501,
+              9.627502800743319e-05
+            ],
+            "output_mse_rgb": [
+              8.621834579640757e-05,
+              5.2158947075277744e-05,
+              0.00010478823535133715
+            ],
+            "all_channels_improved": false
+          },
+          "srgb": {
+            "input_mse_rgb": [
+              9.333221162231182e-05,
+              9.278905979210089e-05,
+              9.152795514643409e-05
+            ],
+            "output_mse_rgb": [
+              5.2517576098198164e-05,
+              5.589789686334975e-05,
+              0.00010214874256608357
+            ],
+            "all_channels_improved": false
+          }
+        },
+        "edge_errors": {
+          "vertical-all": {
+            "input_mse": 0.00018137036897995158,
+            "output_mse": 0.00012597905664295838,
+            "improved": true
+          },
+          "vertical-tile-seams": {
+            "input_mse": 0.00016152884949586458,
+            "output_mse": 0.00010976159436160684,
+            "improved": true
+          },
+          "horizontal-all": {
+            "input_mse": 0.0001815124428495406,
+            "output_mse": 0.00012597552481702305,
+            "improved": true
+          },
+          "horizontal-tile-seams": {
+            "input_mse": 0.00015803151737467757,
+            "output_mse": 7.550479868002301e-05,
+            "improved": true
+          }
+        }
+      },
+      "input_sha256": "de38d1927ef41cfb7a5ed594abca9da9435817c1d57d542b5db5ec44c50f2081",
+      "output_sha256": "9c05634c40670483a65465d268bad295fd0b8a2111c37b64a639a50f90a598d8",
+      "status": "FAIL"
+    },
+    {
+      "sample": "portrait-sigma-0.05",
+      "sigma_srgb": 0.05,
+      "fixture_sha256": "b7224c8c68fc7aaf76657b0d039e9fac69c00117d58523e5d2a11fe7cd2fbe61",
+      "shape": [
+        512,
+        512,
+        3
+      ],
+      "native": {
+        "alpha_preserved": true,
+        "identifier": "coreml.linear-denoise.v1:drunet-color-haar-v1",
+        "input_unchanged": true,
+        "progress": [
+          0.25,
+          0.5,
+          0.75,
+          1
+        ],
+        "requested_compute_units": "ALL"
+      },
+      "numerics": {
+        "status": "PASS",
+        "max_absolute_error": 3.039836883544922e-06,
+        "rmse": 3.4051363639738273e-07
+      },
+      "quality": {
+        "status": "PASS",
+        "color": {
+          "linear": {
+            "input_mse_rgb": [
+              0.0043906468557177135,
+              0.00266212074137762,
+              0.0023701805965792777
+            ],
+            "output_mse_rgb": [
+              0.00027846772817727067,
+              0.00017529224211464362,
+              0.000228821467147703
+            ],
+            "all_channels_improved": true
+          },
+          "srgb": {
+            "input_mse_rgb": [
+              0.0022714152896098202,
+              0.0022300231498083023,
+              0.0021894455787957864
+            ],
+            "output_mse_rgb": [
+              0.00023595428071989514,
+              0.00024594048304745197,
+              0.00031185377851107387
+            ],
+            "all_channels_improved": true
+          }
+        },
+        "edge_errors": {
+          "vertical-all": {
+            "input_mse": 0.004341194129497224,
+            "output_mse": 0.0002800797081114831,
+            "improved": true
+          },
+          "vertical-tile-seams": {
+            "input_mse": 0.003790743520958773,
+            "output_mse": 0.00027480335955120695,
+            "improved": true
+          },
+          "horizontal-all": {
+            "input_mse": 0.004343996110446433,
+            "output_mse": 0.00028853864421838813,
+            "improved": true
+          },
+          "horizontal-tile-seams": {
+            "input_mse": 0.0036649658591909468,
+            "output_mse": 0.00010956199621739542,
+            "improved": true
+          }
+        }
+      },
+      "input_sha256": "b842530c2ba7151c0f5bb358809c04b261da09707da37da5c802e49edccf5040",
+      "output_sha256": "52a490c4de109bc0d2a08deac468a27164ef01d06a7ed9c29240ad514d6f692b",
+      "status": "PASS"
+    },
+    {
+      "sample": "portrait-sigma-0",
+      "sigma_srgb": 0,
+      "fixture_sha256": "b7224c8c68fc7aaf76657b0d039e9fac69c00117d58523e5d2a11fe7cd2fbe61",
+      "shape": [
+        512,
+        512,
+        3
+      ],
+      "native": {
+        "alpha_preserved": true,
+        "identifier": "coreml.linear-denoise.v1:drunet-color-haar-v1",
+        "input_unchanged": true,
+        "progress": [
+          0.25,
+          0.5,
+          0.75,
+          1
+        ],
+        "requested_compute_units": "ALL"
+      },
+      "numerics": {
+        "status": "PASS",
+        "max_absolute_error": 3.2186508178710938e-06,
+        "rmse": 3.4220132541998e-07
+      },
+      "quality": {
+        "status": "OBSERVATIONAL",
+        "srgb_rmse_change": 0.007139704190194607,
+        "reason": "Developed photograph is not certified noiseless sensor ground truth."
+      },
+      "input_sha256": "f55f21d6f9a44a17a0391baf7883d75c7cce25f1e15be9dba810a1fb0baa8e65",
+      "output_sha256": "a5f02f5bdb9da9bb04cd8183ebae8982a0ebd1ca1c75b0b893c835f3c77303e4",
+      "status": "PASS"
+    },
+    {
+      "sample": "landscape-sigma-0.01",
+      "sigma_srgb": 0.01,
+      "fixture_sha256": "65f8cab61ebac24d87257397d9964af17e2972a5eb47d507ee44f3c0209c5b3d",
+      "shape": [
+        384,
+        512,
+        3
+      ],
+      "native": {
+        "alpha_preserved": true,
+        "identifier": "coreml.linear-denoise.v1:drunet-color-haar-v1",
+        "input_unchanged": true,
+        "progress": [
+          0.5,
+          1
+        ],
+        "requested_compute_units": "ALL"
+      },
+      "numerics": {
+        "status": "PASS",
+        "max_absolute_error": 2.86102294921875e-06,
+        "rmse": 3.1996292996330346e-07
+      },
+      "quality": {
+        "status": "FAIL",
+        "color": {
+          "linear": {
+            "input_mse_rgb": [
+              0.00012509846312511744,
+              0.00013408293567672075,
+              0.00014664439444568057
+            ],
+            "output_mse_rgb": [
+              0.00014393491642269827,
+              0.00011743612643698262,
+              0.00014007527586713063
+            ],
+            "all_channels_improved": false
+          },
+          "srgb": {
+            "input_mse_rgb": [
+              9.963352589826966e-05,
+              9.980210661845464e-05,
+              9.960492884958753e-05
+            ],
+            "output_mse_rgb": [
+              0.00013328123792597974,
+              0.00010876550500206438,
+              0.00013567438042430874
+            ],
+            "all_channels_improved": false
+          }
+        },
+        "edge_errors": {
+          "vertical-all": {
+            "input_mse": 0.00019951577961147685,
+            "output_mse": 0.0002235723600972071,
+            "improved": false
+          },
+          "horizontal-all": {
+            "input_mse": 0.00019924434039998024,
+            "output_mse": 0.00021276988237507597,
+            "improved": false
+          },
+          "horizontal-tile-seams": {
+            "input_mse": 0.00022251416600639078,
+            "output_mse": 0.00026905651378016733,
+            "improved": false
+          }
+        }
+      },
+      "input_sha256": "a4784255f7598cfb6322f7e6e084242917365d4edf604bc8a77874b1b5a896d3",
+      "output_sha256": "8453e2435daa3d966a1cc3fccc2de1e4bd57a1b64e74aa65a624c7727d27eb1b",
+      "status": "FAIL"
+    },
+    {
+      "sample": "landscape-sigma-0.05",
+      "sigma_srgb": 0.05,
+      "fixture_sha256": "65f8cab61ebac24d87257397d9964af17e2972a5eb47d507ee44f3c0209c5b3d",
+      "shape": [
+        384,
+        512,
+        3
+      ],
+      "native": {
+        "alpha_preserved": true,
+        "identifier": "coreml.linear-denoise.v1:drunet-color-haar-v1",
+        "input_unchanged": true,
+        "progress": [
+          0.5,
+          1
+        ],
+        "requested_compute_units": "ALL"
+      },
+      "numerics": {
+        "status": "PASS",
+        "max_absolute_error": 2.8014183044433594e-06,
+        "rmse": 3.201153656613729e-07
+      },
+      "quality": {
+        "status": "PASS",
+        "color": {
+          "linear": {
+            "input_mse_rgb": [
+              0.0030864986711677234,
+              0.003314172288468369,
+              0.0036086814712127237
+            ],
+            "output_mse_rgb": [
+              0.0005255178014821086,
+              0.00042528222781993335,
+              0.0004092587299288185
+            ],
+            "all_channels_improved": true
+          },
+          "srgb": {
+            "input_mse_rgb": [
+              0.002448972926623565,
+              0.002455902982589712,
+              0.0024177449797117305
+            ],
+            "output_mse_rgb": [
+              0.0005469135798105395,
+              0.0004608726199725529,
+              0.00045218630182449604
+            ],
+            "all_channels_improved": true
+          }
+        },
+        "edge_errors": {
+          "vertical-all": {
+            "input_mse": 0.004879639839234571,
+            "output_mse": 0.000800681261210692,
+            "improved": true
+          },
+          "horizontal-all": {
+            "input_mse": 0.004871159868893887,
+            "output_mse": 0.0006354338338623444,
+            "improved": true
+          },
+          "horizontal-tile-seams": {
+            "input_mse": 0.005393708255771856,
+            "output_mse": 0.0009169989188359902,
+            "improved": true
+          }
+        }
+      },
+      "input_sha256": "6de71374ce7c7c648111e41976a83e21cb98fc07814c6db6076d54e5d630ab49",
+      "output_sha256": "d007b595a3b714baa9a8d763ba6e269efc3d544eca6a9c3d81a7e92595ed8a64",
+      "status": "PASS"
+    },
+    {
+      "sample": "landscape-sigma-0",
+      "sigma_srgb": 0,
+      "fixture_sha256": "65f8cab61ebac24d87257397d9964af17e2972a5eb47d507ee44f3c0209c5b3d",
+      "shape": [
+        384,
+        512,
+        3
+      ],
+      "native": {
+        "alpha_preserved": true,
+        "identifier": "coreml.linear-denoise.v1:drunet-color-haar-v1",
+        "input_unchanged": true,
+        "progress": [
+          0.5,
+          1
+        ],
+        "requested_compute_units": "ALL"
+      },
+      "numerics": {
+        "status": "PASS",
+        "max_absolute_error": 2.86102294921875e-06,
+        "rmse": 3.2136460608604933e-07
+      },
+      "quality": {
+        "status": "OBSERVATIONAL",
+        "srgb_rmse_change": 0.00970491487532854,
+        "reason": "Developed photograph is not certified noiseless sensor ground truth."
+      },
+      "input_sha256": "ddea7cea78a1f525da8e8852e51b8483feadaba09574495b94c4f1b8d240d472",
+      "output_sha256": "f209719e6145af1f18ac21ef14095b685336a69a3c01aeed5b84b1662eafc40c",
+      "status": "PASS"
+    },
+    {
+      "sample": "night-sigma-0.01",
+      "sigma_srgb": 0.01,
+      "fixture_sha256": "a10274f9ca55d6dbd6f09de8473831bbd3349d604149b7d497390b5e37845985",
+      "shape": [
+        512,
+        384,
+        3
+      ],
+      "native": {
+        "alpha_preserved": true,
+        "identifier": "coreml.linear-denoise.v1:drunet-color-haar-v1",
+        "input_unchanged": true,
+        "progress": [
+          0.5,
+          1
+        ],
+        "requested_compute_units": "ALL"
+      },
+      "numerics": {
+        "status": "PASS",
+        "max_absolute_error": 3.337860107421875e-06,
+        "rmse": 1.3276519501509066e-07
+      },
+      "quality": {
+        "status": "PASS",
+        "color": {
+          "linear": {
+            "input_mse_rgb": [
+              3.3038872661240936e-05,
+              1.7681605038599726e-05,
+              4.931781429676321e-06
+            ],
+            "output_mse_rgb": [
+              1.808822310156142e-05,
+              9.453503158673229e-06,
+              2.6741158335209296e-06
+            ],
+            "all_channels_improved": true
+          },
+          "srgb": {
+            "input_mse_rgb": [
+              9.887692303747036e-05,
+              9.996836774900809e-05,
+              9.898879324314682e-05
+            ],
+            "output_mse_rgb": [
+              2.4625859153574932e-05,
+              2.2224040164130674e-05,
+              2.912646275699794e-05
+            ],
+            "all_channels_improved": true
+          }
+        },
+        "edge_errors": {
+          "vertical-all": {
+            "input_mse": 0.00019800096280993404,
+            "output_mse": 3.837488565257302e-05,
+            "improved": true
+          },
+          "vertical-tile-seams": {
+            "input_mse": 0.00018160125271750123,
+            "output_mse": 5.059613049484424e-05,
+            "improved": true
+          },
+          "horizontal-all": {
+            "input_mse": 0.00019872056025774555,
+            "output_mse": 3.9612605190363805e-05,
+            "improved": true
+          }
+        }
+      },
+      "input_sha256": "dedb97cfa082413d12e4aa9e0a938716f119aef73ea88c48f983439b6c705550",
+      "output_sha256": "b4106f9964b3a4c199df5ed0602fbccc3f14a0846bdf0ea18a1c050d0e93a910",
+      "status": "PASS"
+    },
+    {
+      "sample": "night-sigma-0.05",
+      "sigma_srgb": 0.05,
+      "fixture_sha256": "a10274f9ca55d6dbd6f09de8473831bbd3349d604149b7d497390b5e37845985",
+      "shape": [
+        512,
+        384,
+        3
+      ],
+      "native": {
+        "alpha_preserved": true,
+        "identifier": "coreml.linear-denoise.v1:drunet-color-haar-v1",
+        "input_unchanged": true,
+        "progress": [
+          0.5,
+          1
+        ],
+        "requested_compute_units": "ALL"
+      },
+      "numerics": {
+        "status": "PASS",
+        "max_absolute_error": 2.9802322387695312e-06,
+        "rmse": 1.3248578808960622e-07
+      },
+      "quality": {
+        "status": "PASS",
+        "color": {
+          "linear": {
+            "input_mse_rgb": [
+              0.0007699093580101852,
+              0.00043779631783884477,
+              0.00012177253394022614
+            ],
+            "output_mse_rgb": [
+              0.00018807196050611502,
+              9.901653297330324e-05,
+              2.1276390127404317e-05
+            ],
+            "all_channels_improved": true
+          },
+          "srgb": {
+            "input_mse_rgb": [
+              0.00216735625080548,
+              0.002180536003372011,
+              0.002079464734102627
+            ],
+            "output_mse_rgb": [
+              0.00018391144720432146,
+              0.00015613213790288566,
+              0.0001501973659629873
+            ],
+            "all_channels_improved": true
+          }
+        },
+        "edge_errors": {
+          "vertical-all": {
+            "input_mse": 0.00423243012077909,
+            "output_mse": 0.00018508007753234422,
+            "improved": true
+          },
+          "vertical-tile-seams": {
+            "input_mse": 0.003640170487238682,
+            "output_mse": 0.00029790099984012934,
+            "improved": true
+          },
+          "horizontal-all": {
+            "input_mse": 0.0042466923021614355,
+            "output_mse": 0.00020250903940997856,
+            "improved": true
+          }
+        }
+      },
+      "input_sha256": "a00a6fe44efa607d59799cb986dec5ba26cd184f4f84ab35f81804dceae87c84",
+      "output_sha256": "684a43f251570ac05404234bc88a2d07700e1ccd94047fa572adc8091fbee855",
+      "status": "PASS"
+    },
+    {
+      "sample": "night-sigma-0",
+      "sigma_srgb": 0,
+      "fixture_sha256": "a10274f9ca55d6dbd6f09de8473831bbd3349d604149b7d497390b5e37845985",
+      "shape": [
+        512,
+        384,
+        3
+      ],
+      "native": {
+        "alpha_preserved": true,
+        "identifier": "coreml.linear-denoise.v1:drunet-color-haar-v1",
+        "input_unchanged": true,
+        "progress": [
+          0.5,
+          1
+        ],
+        "requested_compute_units": "ALL"
+      },
+      "numerics": {
+        "status": "PASS",
+        "max_absolute_error": 2.9206275939941406e-06,
+        "rmse": 1.302887300289432e-07
+      },
+      "quality": {
+        "status": "OBSERVATIONAL",
+        "srgb_rmse_change": 0.003416887717321515,
+        "reason": "Developed photograph is not certified noiseless sensor ground truth."
+      },
+      "input_sha256": "4efaa8662ae2a226cb5d3829983d3ea46128e2d05236503d95fd64cc43512760",
+      "output_sha256": "a8a25fc35ae5d05393f7471d8a1335b96e6f53d8d296a5a8df372925bc776dff",
+      "status": "PASS"
+    }
+  ],
+  "sensor_noise_quality": "NOT_RUN",
+  "visual_review": "PENDING",
+  "compute_policy": "ALL; runtime CPU fallback possible, actual placement unobserved",
+  "validator_sha256": "2fb602238e070b5c69c6628caf1e7d94dc99cc4dee7b33df9ade3f4f27492762",
+  "probe_sha256": "af72890bc6f737ae5ecf78ecae555ebd68d523b1dd985e9f41a1f776759066cd",
+  "provider_source_sha256": "55f82d4110375a4f9efddc88ebbbc0392b896dc3e3ccc4903f717576ef99d43b",
+  "numerical_limits": {
+    "max_absolute_error": 0.0005,
+    "rmse": 5e-05
+  },
+  "manifest_sha256": "c24d8ba1159efcbafe040c478c7d3900a53ccc0c7a1b5b596dff760b9eb1422d",
+  "recipe_sha256": "a5d7fdb13840980f0c017dc0499ed20d3f9530ccf66a106a206d11361469ca2c",
+  "toolchain": {
+    "coremltools": "9.0",
+    "torch": "2.10.0",
+    "torchvision": "0.25.0",
+    "onnx": "1.17.0",
+    "onnx2torch": "1.5.15",
+    "numpy": "1.26.4",
+    "protobuf": "4.25.5",
+    "certifi": "2026.7.22"
+  },
+  "pillow": "13.0.0",
+  "model": "drunet-color-haar-v1",
+  "fixture_manifest_sha256": "af22d646a5404f99be9121ae28165ad5fac43cfbc69db8c6ae29903eb1b27579"
+}

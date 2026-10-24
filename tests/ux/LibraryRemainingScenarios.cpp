@@ -494,9 +494,10 @@ QList<QUrl> ownedAdds(Context &c, int count, const QString &prefix = "Z") {
 }
 void startImport(Context &c, const QList<QUrl> &sources) {
     auto &d = *c.driver;
-    require(c.window->property("libraryMode").toBool() &&
-                d.object("library.pane")->setProperty("sources", QVariant::fromValue(sources)),
-            "Cannot supply file-panel result to the actual Library Import dialog");
+    require(
+        c.window->property("libraryMode").toBool() &&
+            d.object("library.importDialog")->setProperty("sources", QVariant::fromValue(sources)),
+        "Cannot supply file-panel result to the actual Library Import dialog");
     d.click("library.importButton");
     d.wait([&] { return d.object("library.importDialog")->property("opened").toBool(); },
            "concurrent Add Import opened");

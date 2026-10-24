@@ -19,6 +19,7 @@ ColumnLayout {
         case "brush": return qsTranslate("Luma", "Brush")
         case "luminance": return qsTranslate("Luma", "Luminance range")
         case "color": return qsTranslate("Luma", "Color range")
+        case "bitmap": return qsTranslate("Luma", "AI selection")
         }
         return ""
     }
@@ -51,6 +52,42 @@ ColumnLayout {
             text: qsTranslate("Luma", "New mask")
             Layout.fillWidth: true; Layout.minimumWidth: 0; Layout.maximumWidth: panel.width
             onClicked: editor.addLocalMask(panel.kinds[newKind.currentIndex])
+        }
+        Label {
+            text: qsTranslate("Luma", "Local AI · photos stay on this Mac")
+            wrapMode: Text.Wrap; font.pixelSize: 11; color: "#858c97"
+            Layout.fillWidth: true
+        }
+        RowLayout {
+            Layout.fillWidth: true
+            Button { objectName: "localAI.subject"; text: qsTranslate("Luma", "Subject"); enabled: !editor.aiBusy; Layout.fillWidth: true; onClicked: editor.generateAIMask("subject") }
+            Button { text: qsTranslate("Luma", "Background"); enabled: !editor.aiBusy; Layout.fillWidth: true; onClicked: editor.generateAIMask("background") }
+        }
+        Button {
+            text: qsTranslate("Luma", "Select object")
+            enabled: !editor.aiBusy
+            Layout.fillWidth: true
+            onClicked: editor.beginAIObjectSelection()
+        }
+        Button {
+            text: qsTranslate("Luma", "Sky")
+            enabled: !editor.aiBusy && editor.skyModelConfigured
+            Layout.fillWidth: true
+            onClicked: editor.generateAIMask("sky")
+            ToolTip.visible: hovered && !editor.skyModelConfigured
+            ToolTip.text: qsTranslate("Luma", "Choose a compatible local Sky model in Settings.")
+        }
+        Label {
+            visible: editor.aiObjectPicking
+            text: qsTranslate("Luma", "Click the object in the photo.")
+            wrapMode: Text.Wrap; Layout.fillWidth: true; color: "#dfae77"
+        }
+        ProgressBar { visible: editor.aiBusy && editor.aiOperation === "AI selection"; value: editor.aiProgress; Layout.fillWidth: true }
+        Button {
+            text: qsTranslate("Luma", "Cancel")
+            visible: (editor.aiBusy && editor.aiOperation === "AI selection") || editor.aiObjectPicking
+            onClicked: editor.cancelAI()
+            Layout.fillWidth: true
         }
         ComboBox {
             objectName: "localMaskChoice"
@@ -156,7 +193,7 @@ ColumnLayout {
                 LocalSlider {visible:editor.localState.shape==="luminance";parameter:"rangeHigh";label:qsTranslate("Luma", "Luminance maximum");minimum:editor.localState.rangeLow ?? 0;maximum:100;step:.1}
                 LocalSlider {visible:editor.localState.shape==="color";parameter:"colorTolerance";label:qsTranslate("Luma", "Color tolerance");minimum:0;maximum:100;step:.1}
             }
-            LocalSlider {parameter:"feather";label:qsTranslate("Luma", "Feather");minimum:0;maximum:100}
+            LocalSlider {visible:editor.localState.shape!=="bitmap";parameter:"feather";label:qsTranslate("Luma", "Feather");minimum:0;maximum:100}
             LocalSlider {visible:editor.localState.shape==="radial";parameter:"angle";label:qsTranslate("Luma", "Rotation");minimum:-180;maximum:180}
             LocalSlider {parameter:"opacity";label:qsTranslate("Luma", "Mask opacity");minimum:0;maximum:100}
             LocalCheckBox {objectName:"localOverlayToggle";text:qsTranslate("Luma", "Show mask overlay");checked:editor.localOverlay;onToggled:editor.localOverlay=checked}

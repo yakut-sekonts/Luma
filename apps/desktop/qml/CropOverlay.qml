@@ -2,6 +2,7 @@ import QtQuick
 
 Item {
     id: overlay
+    property rect paintBounds: Qt.rect(0,0,width,height)
     objectName: "cropOverlay"
     visible: editor.cropMode && editor.cropCanvasReady && editor.hasPhoto && !editor.busy && !editor.original && editor.correctionStates.crop
     property var frame: editor.cropState
@@ -76,11 +77,19 @@ Item {
     onVisibleChanged: {if(!visible)endDrag()}
     Canvas {
         id: drawing
-        anchors.fill: parent
+        objectName: "CropOverlay.canvas"
+        x: overlay.paintBounds.x; y: overlay.paintBounds.y
+        width: Math.max(1, overlay.paintBounds.width); height: Math.max(1, overlay.paintBounds.height)
+        onXChanged: requestPaint()
+        onYChanged: requestPaint()
+        onWidthChanged: requestPaint()
+        onHeightChanged: requestPaint()
         onPaint: {
-            const c=getContext("2d");c.clearRect(0,0,width,height)
+            const c=getContext("2d");c.clearRect(0,0,drawing.width,drawing.height)
+            const width=overlay.width, height=overlay.height
+            c.save();c.translate(-drawing.x,-drawing.y)
             const f=overlay.frame
-            if(f.x===undefined)return
+            if(f.x===undefined){c.restore();return}
             const l=f.x*width,t=f.y*height,w=f.width*width,h=f.height*height
             c.fillStyle="rgba(0,0,0,0.55)"
             c.fillRect(0,0,width,t);c.fillRect(0,t+h,width,height-t-h);c.fillRect(0,t,l,h);c.fillRect(l+w,t,width-l-w,h)
@@ -94,6 +103,7 @@ Item {
             c.fillStyle="#dfae77"
             const grips=[[0,0],[0.5,0],[1,0],[0,0.5],[1,0.5],[0,1],[0.5,1],[1,1]]
             for(let i=0;i<grips.length;i++){c.beginPath();c.arc(l+grips[i][0]*w,t+grips[i][1]*h,4,0,Math.PI*2);c.fill()}
+            c.restore()
         }
     }
     MouseArea {

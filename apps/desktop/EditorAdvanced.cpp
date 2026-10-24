@@ -116,6 +116,10 @@ QVariantList EditorController::curveSamples(const QString &channel, bool paramet
     return values;
 }
 void EditorController::setTargetedTool(const QString &tool) {
+    if (tool != QStringLiteral("none")) {
+        setRetouchMode(QStringLiteral("off"));
+        cancelAI();
+    }
     if (tool != QStringLiteral("none"))
         setLocalMode(false);
     closeTransformTool();
@@ -244,5 +248,8 @@ void EditorController::adjustTargeted(double delta) {
     }
 }
 void EditorController::endTargeted() {
-    endEdit();
+    // Loading another photo already ends the gesture before hiding the preview.
+    // Its MouseArea cancellation must not re-enter stateChanged (or end a later edit).
+    if (targeted_)
+        endEdit();
 }

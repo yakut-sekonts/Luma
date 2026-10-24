@@ -121,7 +121,7 @@ def main():
         assert restored["shadows"] == 25 and restored["enabledCorrections"] & 16 == 0
         assert run("catalog", "verify")["integrity"] == "ok"
         with sqlite3.connect(catalog) as connection:
-            assert connection.execute("PRAGMA user_version").fetchone()[0] == 11
+            assert connection.execute("PRAGMA user_version").fetchone()[0] == 21
         assert hashlib.sha256(source.read_bytes()).hexdigest() == original_hash
         assert not list(directory.glob(".luma-export-*")), "Export temporary files leaked"
         print("Develop CLI/GUI, Undo/Redo, restart-identical exports, embedded ICC, TIFF16 and original/destination integrity passed")

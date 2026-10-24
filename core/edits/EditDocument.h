@@ -1,7 +1,9 @@
 #pragma once
+#include "core/edits/CreativeSettings.h"
 #include "core/edits/CropSettings.h"
 #include "core/edits/LensSettings.h"
 #include "core/edits/LocalMasks.h"
+#include "core/edits/Retouch.h"
 #include "core/edits/TransformSettings.h"
 #include <array>
 #include <cmath>
@@ -28,7 +30,12 @@ enum class Correction : std::uint32_t {
     colorNoise = 8192,
     crop = 16384,
     lens = 32768,
-    transform = 65536
+    transform = 65536,
+    presence = 131072,
+    pointColor = 262144,
+    grading = 524288,
+    vignette = 1048576,
+    grain = 2097152
 };
 struct CurvePoint {
     double x = 0;
@@ -83,13 +90,17 @@ struct EditDocument {
     std::array<PointCurve, 4> curves{};
     std::array<HSLBand, 8> hsl{};
     std::vector<LocalMask> localMasks{};
+    std::vector<RetouchStroke> retouch{};
+    CreativeSettings creative{};
     bool operator==(const EditDocument &) const = default;
     bool enabled(Correction correction) const {
-        return (enabledCorrections & static_cast<std::uint32_t>(correction)) != 0;
+        const auto bit = static_cast<std::uint32_t>(correction);
+        return ((bit & creativeCorrectionMask ? creative.enabled : enabledCorrections) & bit) != 0;
     }
     void setEnabled(Correction correction, bool value) {
         const auto mask = static_cast<std::uint32_t>(correction);
-        enabledCorrections = value ? enabledCorrections | mask : enabledCorrections & ~mask;
+        auto &flags = mask & creativeCorrectionMask ? creative.enabled : enabledCorrections;
+        flags = value ? flags | mask : flags & ~mask;
     }
     void validate() const;
     double parameter(std::string_view name) const;

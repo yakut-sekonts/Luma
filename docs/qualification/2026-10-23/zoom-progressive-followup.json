@@ -1,0 +1,1646 @@
+{
+  "schema": 1,
+  "date": "2026-10-23",
+  "base_commit": "f783812d6342ce05e69b29aa815f13d83993a399",
+  "release_status": "NOT_QUALIFIED",
+  "issue": "LUMA-BUG-048",
+  "original_failure": {
+    "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-final-zoom-initial/UX_REPORT.json",
+    "sha256": "9b754b02d24318bbe0df5101bd475d25ed087f2917d886d52f93f8f57aa1c332",
+    "bytes": 9687,
+    "summary": {
+      "FAIL": 2
+    },
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "f783812d6342ce05e69b29aa815f13d83993a399",
+      "worktree_dirty": true,
+      "source_tree_sha256": "8f67b5ed47da1ad66cf7a9e13c17fab736291738f70c218503c2dcacfaeb4e26",
+      "test_executable_sha256": "91427b3b5ecd5aac361bce547a8271033632b7597e5c80f850fc23521b3a9023",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "91427b3b5ecd5aac361bce547a8271033632b7597e5c80f850fc23521b3a9023"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": true,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "f783812d6342ce05e69b29aa815f13d83993a399",
+      "reason": ""
+    },
+    "source_consistency": "PASS",
+    "original_hashes": "PASS",
+    "release_gate": "FAIL",
+    "results": [
+      {
+        "id": "UX-P06-ZOM-001",
+        "status": "FAIL",
+        "message": "Fit to 100% lost the image center",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 7788,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082319Z-21634/UX-P06-ZOM-001/repeat-1",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082319Z-21634/UX-P06-ZOM-001/repeat-1/actions.jsonl",
+          "sha256": "76680836da16e8e33f5dd0828b133106bc15b8692abf548c4dc707978ba343e4",
+          "bytes": 2492
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 0,
+            "content_y": 0,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": 239,
+            "origin_y_px": 146,
+            "source_center_x": 383,
+            "source_center_y": 233
+          }
+        ],
+        "pixel_evidence": []
+      },
+      {
+        "id": "UX-P06-ZOM-002",
+        "status": "FAIL",
+        "message": "Fit to 100% lost the image center",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 5228,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082319Z-21634/UX-P06-ZOM-002/repeat-1",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082319Z-21634/UX-P06-ZOM-002/repeat-1/actions.jsonl",
+          "sha256": "8dde58bf046aca975dbf42dfceaef241b392085f4fbc9ad8a5592f0c69b217e6",
+          "bytes": 2492
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 0,
+            "content_y": 0,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": 239,
+            "origin_y_px": 146,
+            "source_center_x": 383,
+            "source_center_y": 233
+          }
+        ],
+        "pixel_evidence": []
+      }
+    ]
+  },
+  "first_fixed_run": {
+    "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-final-zoom-fixed/UX_REPORT.json",
+    "sha256": "fd29ff4fcba9471fb1e1045a279d2786b6d9262af982ae3e0bdd751ee3651c62",
+    "bytes": 9526,
+    "summary": {
+      "PASS": 2
+    },
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "f783812d6342ce05e69b29aa815f13d83993a399",
+      "worktree_dirty": true,
+      "source_tree_sha256": "c731de865098d4a285073756483aa36c3511b843da4aa96814edd75bc0c62ce4",
+      "test_executable_sha256": "73ed67a1b4cdedee3cb30b7fc469bd9b1ffc4e02019c0cc2a332c3be63992411",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "73ed67a1b4cdedee3cb30b7fc469bd9b1ffc4e02019c0cc2a332c3be63992411"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": true,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "f783812d6342ce05e69b29aa815f13d83993a399",
+      "reason": ""
+    },
+    "source_consistency": "PASS",
+    "original_hashes": "PASS",
+    "release_gate": "NOT_QUALIFIED",
+    "results": [
+      {
+        "id": "UX-P06-ZOM-001",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 5922,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082439Z-21883/UX-P06-ZOM-001/repeat-1",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082439Z-21883/UX-P06-ZOM-001/repeat-1/actions.jsonl",
+          "sha256": "0b7a9df3d32aa672f9ee407b33ea1dc2589664ac0d55020d6cf148be89040b93",
+          "bytes": 3565
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536,
+            "source_center_y": 1024
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536.5,
+            "source_center_y": 1024.5
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_own_original_preserved",
+            "height": 2048,
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082439Z-21883/UX-P06-ZOM-001/repeat-1/zoom-originals/Zoom.png",
+            "width": 3072
+          }
+        ],
+        "pixel_evidence": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082439Z-21883/UX-P06-ZOM-001/repeat-1/zoom-reference-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          },
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082439Z-21883/UX-P06-ZOM-001/repeat-1/zoom-scene-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-ZOM-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 5695,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082439Z-21883/UX-P06-ZOM-002/repeat-1",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082439Z-21883/UX-P06-ZOM-002/repeat-1/actions.jsonl",
+          "sha256": "5eea5f68b5a16fd3001ccb09ea8649c56e43b86d4cc60d778cab19f00154d4fd",
+          "bytes": 3565
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536,
+            "source_center_y": 1024
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536.5,
+            "source_center_y": 1024.5
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_own_original_preserved",
+            "height": 2048,
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082439Z-21883/UX-P06-ZOM-002/repeat-1/zoom-originals/Zoom.png",
+            "width": 3072
+          }
+        ],
+        "pixel_evidence": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082439Z-21883/UX-P06-ZOM-002/repeat-1/zoom-reference-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          },
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082439Z-21883/UX-P06-ZOM-002/repeat-1/zoom-scene-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          }
+        ]
+      }
+    ]
+  },
+  "progressive_initial": {
+    "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-final-zoom-progressive/UX_REPORT.json",
+    "sha256": "9ec71266d9614562b90b41f11e922466828a56d97c48a85a703e530106d12b53",
+    "bytes": 11368,
+    "summary": {
+      "PASS": 3
+    },
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "f783812d6342ce05e69b29aa815f13d83993a399",
+      "worktree_dirty": true,
+      "source_tree_sha256": "824511ab32531cedc2e6d592b222445c74e38f2daedcbd35957e359191b1f5b0",
+      "test_executable_sha256": "7e62e7e7a26cacc2ca25955dfd1481e1b44302bea270687fc753bfe23431d9ad",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "7e62e7e7a26cacc2ca25955dfd1481e1b44302bea270687fc753bfe23431d9ad"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": true,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "f783812d6342ce05e69b29aa815f13d83993a399",
+      "reason": ""
+    },
+    "source_consistency": "PASS",
+    "original_hashes": "PASS",
+    "release_gate": "NOT_QUALIFIED",
+    "results": [
+      {
+        "id": "UX-P06-PRG-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 10539,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082705Z-22212/UX-P06-PRG-002/repeat-1",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082705Z-22212/UX-P06-PRG-002/repeat-1/actions.jsonl",
+          "sha256": "de2f454081c0a13619d2e87bdd602c0019352716f4ebb3cb431e1e91e42e6e11",
+          "bytes": 3444
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_own_original_created",
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082705Z-22212/UX-P06-PRG-002/repeat-1/zoom-originals/Zoom.png"
+          },
+          {
+            "action": "progressive_interaction_observed",
+            "height": 683,
+            "latency_qualification": false,
+            "pressed": true,
+            "preview_url": "image://preview/current?v=3",
+            "width": 1024
+          },
+          {
+            "action": "progressive_full_export",
+            "display_profile_used_for_export_reference": false,
+            "height": 2048,
+            "original_sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "output_sha256": "0ff7fb00a2fbbc14ceb5de315fe6720cc75f7635c08edf825cf594df967a45fe",
+            "pixel_budget": 0,
+            "width": 3072
+          }
+        ],
+        "pixel_evidence": []
+      },
+      {
+        "id": "UX-P06-ZOM-001",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 12264,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082705Z-22212/UX-P06-ZOM-001/repeat-1",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082705Z-22212/UX-P06-ZOM-001/repeat-1/actions.jsonl",
+          "sha256": "21035934bd908a40dbf6aa479b6f9baa15de1b5f285d159d0769265b32d9e364",
+          "bytes": 3837
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_own_original_created",
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082705Z-22212/UX-P06-ZOM-001/repeat-1/zoom-originals/Zoom.png"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536,
+            "source_center_y": 1024
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536.5,
+            "source_center_y": 1024.5
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_own_original_preserved",
+            "height": 2048,
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082705Z-22212/UX-P06-ZOM-001/repeat-1/zoom-originals/Zoom.png",
+            "width": 3072
+          }
+        ],
+        "pixel_evidence": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082705Z-22212/UX-P06-ZOM-001/repeat-1/zoom-reference-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          },
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082705Z-22212/UX-P06-ZOM-001/repeat-1/zoom-scene-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-ZOM-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 9373,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082705Z-22212/UX-P06-ZOM-002/repeat-1",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082705Z-22212/UX-P06-ZOM-002/repeat-1/actions.jsonl",
+          "sha256": "793f617b2c1dde467fa4ab520fc9b253970f20bb19f42b09f4dafb75e796481e",
+          "bytes": 3837
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_own_original_created",
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082705Z-22212/UX-P06-ZOM-002/repeat-1/zoom-originals/Zoom.png"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536,
+            "source_center_y": 1024
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536.5,
+            "source_center_y": 1024.5
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_own_original_preserved",
+            "height": 2048,
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082705Z-22212/UX-P06-ZOM-002/repeat-1/zoom-originals/Zoom.png",
+            "width": 3072
+          }
+        ],
+        "pixel_evidence": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082705Z-22212/UX-P06-ZOM-002/repeat-1/zoom-reference-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          },
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082705Z-22212/UX-P06-ZOM-002/repeat-1/zoom-scene-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          }
+        ]
+      }
+    ]
+  },
+  "final_offscreen": {
+    "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-final-zoom-repeat/UX_REPORT.json",
+    "sha256": "d02dbf8a99014d7e61950430e1eaae2ffc6949ea8d356a4915cea4988c037b1e",
+    "bytes": 22282,
+    "summary": {
+      "PASS": 9
+    },
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "f783812d6342ce05e69b29aa815f13d83993a399",
+      "worktree_dirty": true,
+      "source_tree_sha256": "d229d5e13665a43eb622c8d4aca96fd7d6786feff379a8c69f447c4307ac3870",
+      "test_executable_sha256": "27a11157fa268eb35c850b5f2484ba87815e441ccde25b6d585a0ddaa398faf4",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "27a11157fa268eb35c850b5f2484ba87815e441ccde25b6d585a0ddaa398faf4"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": true,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "f783812d6342ce05e69b29aa815f13d83993a399",
+      "reason": ""
+    },
+    "source_consistency": "PASS",
+    "original_hashes": "PASS",
+    "release_gate": "NOT_QUALIFIED",
+    "results": [
+      {
+        "id": "UX-P06-PRG-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 8338,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-PRG-002/repeat-1",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-PRG-002/repeat-1/actions.jsonl",
+          "sha256": "00e9c7b022cb4ebc9719bac0b419084db2600af9f677573df5910a5ea7e081a6",
+          "bytes": 3444
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_own_original_created",
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-PRG-002/repeat-1/zoom-originals/Zoom.png"
+          },
+          {
+            "action": "progressive_interaction_observed",
+            "height": 683,
+            "latency_qualification": false,
+            "pressed": true,
+            "preview_url": "image://preview/current?v=3",
+            "width": 1024
+          },
+          {
+            "action": "progressive_full_export",
+            "display_profile_used_for_export_reference": false,
+            "height": 2048,
+            "original_sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "output_sha256": "0ff7fb00a2fbbc14ceb5de315fe6720cc75f7635c08edf825cf594df967a45fe",
+            "pixel_budget": 0,
+            "width": 3072
+          }
+        ],
+        "pixel_evidence": []
+      },
+      {
+        "id": "UX-P06-PRG-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 7878,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-PRG-002/repeat-2",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-PRG-002/repeat-2/actions.jsonl",
+          "sha256": "6f03ba42723b928126069f19319b7370caa28f79d7be91909f910ca4f7c5db52",
+          "bytes": 3444
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_own_original_created",
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-PRG-002/repeat-2/zoom-originals/Zoom.png"
+          },
+          {
+            "action": "progressive_interaction_observed",
+            "height": 683,
+            "latency_qualification": false,
+            "pressed": true,
+            "preview_url": "image://preview/current?v=3",
+            "width": 1024
+          },
+          {
+            "action": "progressive_full_export",
+            "display_profile_used_for_export_reference": false,
+            "height": 2048,
+            "original_sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "output_sha256": "0ff7fb00a2fbbc14ceb5de315fe6720cc75f7635c08edf825cf594df967a45fe",
+            "pixel_budget": 0,
+            "width": 3072
+          }
+        ],
+        "pixel_evidence": []
+      },
+      {
+        "id": "UX-P06-PRG-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 7799,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-PRG-002/repeat-3",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-PRG-002/repeat-3/actions.jsonl",
+          "sha256": "d9a7855e9492193cb286c7410aa0efdb0da8a56508955aec70f8014de305cb76",
+          "bytes": 3444
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_own_original_created",
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-PRG-002/repeat-3/zoom-originals/Zoom.png"
+          },
+          {
+            "action": "progressive_interaction_observed",
+            "height": 683,
+            "latency_qualification": false,
+            "pressed": true,
+            "preview_url": "image://preview/current?v=3",
+            "width": 1024
+          },
+          {
+            "action": "progressive_full_export",
+            "display_profile_used_for_export_reference": false,
+            "height": 2048,
+            "original_sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "output_sha256": "0ff7fb00a2fbbc14ceb5de315fe6720cc75f7635c08edf825cf594df967a45fe",
+            "pixel_budget": 0,
+            "width": 3072
+          }
+        ],
+        "pixel_evidence": []
+      },
+      {
+        "id": "UX-P06-ZOM-001",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 5643,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-001/repeat-1",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-001/repeat-1/actions.jsonl",
+          "sha256": "44c1d3ba9280307e5c1e256d39b8edf847e42c240fbda853e3267865ecfd3158",
+          "bytes": 3837
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_own_original_created",
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-001/repeat-1/zoom-originals/Zoom.png"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536,
+            "source_center_y": 1024
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536.5,
+            "source_center_y": 1024.5
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_own_original_preserved",
+            "height": 2048,
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-001/repeat-1/zoom-originals/Zoom.png",
+            "width": 3072
+          }
+        ],
+        "pixel_evidence": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-001/repeat-1/zoom-reference-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          },
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-001/repeat-1/zoom-scene-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-ZOM-001",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 7677,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-001/repeat-2",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-001/repeat-2/actions.jsonl",
+          "sha256": "5f2abad676a581badaed324a157cf79ec8cd2aa58dbf25875fbbe9f5956ba638",
+          "bytes": 3837
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_own_original_created",
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-001/repeat-2/zoom-originals/Zoom.png"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536,
+            "source_center_y": 1024
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536.5,
+            "source_center_y": 1024.5
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_own_original_preserved",
+            "height": 2048,
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-001/repeat-2/zoom-originals/Zoom.png",
+            "width": 3072
+          }
+        ],
+        "pixel_evidence": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-001/repeat-2/zoom-reference-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          },
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-001/repeat-2/zoom-scene-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-ZOM-001",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 5626,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-001/repeat-3",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-001/repeat-3/actions.jsonl",
+          "sha256": "13662a98b08cb42a7dbdc7c1744cc728ad8132115f89c32488cde5f13b1a724b",
+          "bytes": 3837
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_own_original_created",
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-001/repeat-3/zoom-originals/Zoom.png"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536,
+            "source_center_y": 1024
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536.5,
+            "source_center_y": 1024.5
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_own_original_preserved",
+            "height": 2048,
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-001/repeat-3/zoom-originals/Zoom.png",
+            "width": 3072
+          }
+        ],
+        "pixel_evidence": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-001/repeat-3/zoom-reference-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          },
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-001/repeat-3/zoom-scene-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-ZOM-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 5501,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-002/repeat-1",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-002/repeat-1/actions.jsonl",
+          "sha256": "94c64ce326655ff4d4e8b48930535ff179027aa07baacc767f04fc21d619644c",
+          "bytes": 3837
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_own_original_created",
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-002/repeat-1/zoom-originals/Zoom.png"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536,
+            "source_center_y": 1024
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536.5,
+            "source_center_y": 1024.5
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_own_original_preserved",
+            "height": 2048,
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-002/repeat-1/zoom-originals/Zoom.png",
+            "width": 3072
+          }
+        ],
+        "pixel_evidence": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-002/repeat-1/zoom-reference-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          },
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-002/repeat-1/zoom-scene-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-ZOM-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 5493,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-002/repeat-2",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-002/repeat-2/actions.jsonl",
+          "sha256": "824e623bc653614750d11a7b785c5fa651ffa94cdc45925f116688e6b862001d",
+          "bytes": 3837
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_own_original_created",
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-002/repeat-2/zoom-originals/Zoom.png"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536,
+            "source_center_y": 1024
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536.5,
+            "source_center_y": 1024.5
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_own_original_preserved",
+            "height": 2048,
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-002/repeat-2/zoom-originals/Zoom.png",
+            "width": 3072
+          }
+        ],
+        "pixel_evidence": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-002/repeat-2/zoom-reference-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          },
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-002/repeat-2/zoom-scene-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-ZOM-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 5621,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-002/repeat-3",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-002/repeat-3/actions.jsonl",
+          "sha256": "2157dbd788c34a8e6af709db1d69e3d43498a1d690796e90ebf4b6a22f9eb54e",
+          "bytes": 3837
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_own_original_created",
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-002/repeat-3/zoom-originals/Zoom.png"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536,
+            "source_center_y": 1024
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 1153,
+            "content_y": 791,
+            "device_pixel_ratio": 1,
+            "image_height": 2048,
+            "image_width": 3072,
+            "origin_x_px": -914,
+            "origin_y_px": -645,
+            "source_center_x": 1536.5,
+            "source_center_y": 1024.5
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 0,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_own_original_preserved",
+            "height": 2048,
+            "sha256": "32ca6761f294af4d5c6bb4d820e73d4fbcb9639025f5144c3b0a2faccc1b1e1b",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-002/repeat-3/zoom-originals/Zoom.png",
+            "width": 3072
+          }
+        ],
+        "pixel_evidence": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-002/repeat-3/zoom-reference-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          },
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T082855Z-22503/UX-P06-ZOM-002/repeat-3/zoom-scene-sample.png",
+            "sha256": "20ce225fbc4f08471f71d3dc2746e1c80319e78eec72d47e6ee171a5b1a63f1f",
+            "bytes": 1508
+          }
+        ]
+      }
+    ]
+  },
+  "native_confirmation": {
+    "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-final-zoom-native/UX_REPORT.json",
+    "sha256": "15e1ec12bb3d6414aff72e8a235fe254d9fd8bb542debd723c6f82bd12fa8705",
+    "bytes": 11329,
+    "summary": {
+      "PASS": 3
+    },
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "6056dd2423d11ba5ee050c051256dd335b368c1d",
+      "worktree_dirty": false,
+      "source_tree_sha256": "5bc98834f7aad1874d69885608033fe7092fcd2b2360262d461ad41c8228a646",
+      "test_executable_sha256": "27a11157fa268eb35c850b5f2484ba87815e441ccde25b6d585a0ddaa398faf4",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "27a11157fa268eb35c850b5f2484ba87815e441ccde25b6d585a0ddaa398faf4"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": false,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "6056dd2423d11ba5ee050c051256dd335b368c1d",
+      "reason": ""
+    },
+    "source_consistency": "PASS",
+    "original_hashes": "PASS",
+    "release_gate": "NOT_QUALIFIED",
+    "results": [
+      {
+        "id": "UX-P06-PRG-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 9251,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T083850Z-23562/UX-P06-PRG-002/repeat-1",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T083850Z-23562/UX-P06-PRG-002/repeat-1/actions.jsonl",
+          "sha256": "db3706623ab596a3f030c21439d38e62396e868b8ce0c13740493fb1ad65ae92",
+          "bytes": 3441
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_own_original_created",
+            "sha256": "152c31c8f0045d97638fac4f9fda574f28c92e8f8c4e86ef883d665e8cbbc2a8",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T083850Z-23562/UX-P06-PRG-002/repeat-1/zoom-originals/Zoom.png"
+          },
+          {
+            "action": "progressive_interaction_observed",
+            "height": 683,
+            "latency_qualification": false,
+            "pressed": true,
+            "preview_url": "image://preview/current?v=3",
+            "width": 1024
+          },
+          {
+            "action": "progressive_full_export",
+            "display_profile_used_for_export_reference": false,
+            "height": 2048,
+            "original_sha256": "152c31c8f0045d97638fac4f9fda574f28c92e8f8c4e86ef883d665e8cbbc2a8",
+            "output_sha256": "0ff7fb00a2fbbc14ceb5de315fe6720cc75f7635c08edf825cf594df967a45fe",
+            "pixel_budget": 0,
+            "width": 3072
+          }
+        ],
+        "pixel_evidence": []
+      },
+      {
+        "id": "UX-P06-ZOM-001",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 7250,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T083850Z-23562/UX-P06-ZOM-001/repeat-1",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T083850Z-23562/UX-P06-ZOM-001/repeat-1/actions.jsonl",
+          "sha256": "9b81dfa32fbf3274d14cb1e2092ff4a77a0ff810f1a9e655e8d30e221442d271",
+          "bytes": 3832
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_own_original_created",
+            "sha256": "152c31c8f0045d97638fac4f9fda574f28c92e8f8c4e86ef883d665e8cbbc2a8",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T083850Z-23562/UX-P06-ZOM-001/repeat-1/zoom-originals/Zoom.png"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 385,
+            "content_y": 279,
+            "device_pixel_ratio": 2,
+            "image_height": 1024,
+            "image_width": 1536,
+            "origin_x_px": -292,
+            "origin_y_px": -266,
+            "source_center_x": 1536,
+            "source_center_y": 1024
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 1,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 384.5,
+            "content_y": 278.5,
+            "device_pixel_ratio": 2,
+            "image_height": 1024,
+            "image_width": 1536,
+            "origin_x_px": -291,
+            "origin_y_px": -265,
+            "source_center_x": 1536,
+            "source_center_y": 1024
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 1,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_own_original_preserved",
+            "height": 2048,
+            "sha256": "152c31c8f0045d97638fac4f9fda574f28c92e8f8c4e86ef883d665e8cbbc2a8",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T083850Z-23562/UX-P06-ZOM-001/repeat-1/zoom-originals/Zoom.png",
+            "width": 3072
+          }
+        ],
+        "pixel_evidence": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T083850Z-23562/UX-P06-ZOM-001/repeat-1/zoom-reference-sample.png",
+            "sha256": "40b058e078fffaf11698643525439d1ed1086eb0d291b3a6b7247c7a4d9e7ed4",
+            "bytes": 3663
+          },
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T083850Z-23562/UX-P06-ZOM-001/repeat-1/zoom-scene-sample.png",
+            "sha256": "40b058e078fffaf11698643525439d1ed1086eb0d291b3a6b7247c7a4d9e7ed4",
+            "bytes": 3663
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-ZOM-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "duration_ms": 7229,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T083850Z-23562/UX-P06-ZOM-002/repeat-1",
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T083850Z-23562/UX-P06-ZOM-002/repeat-1/actions.jsonl",
+          "sha256": "b7d11bfcbd671a5eb33738feeb4f7810cc38b11487d403833a138e5943f3254a",
+          "bytes": 3832
+        },
+        "zoom_progressive_events": [
+          {
+            "action": "zoom_own_original_created",
+            "sha256": "152c31c8f0045d97638fac4f9fda574f28c92e8f8c4e86ef883d665e8cbbc2a8",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T083850Z-23562/UX-P06-ZOM-002/repeat-1/zoom-originals/Zoom.png"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 385,
+            "content_y": 279,
+            "device_pixel_ratio": 2,
+            "image_height": 1024,
+            "image_width": 1536,
+            "origin_x_px": -292,
+            "origin_y_px": -266,
+            "source_center_x": 1536,
+            "source_center_y": 1024
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 1,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_pixel_geometry",
+            "content_x": 384.5,
+            "content_y": 278.5,
+            "device_pixel_ratio": 2,
+            "image_height": 1024,
+            "image_width": 1536,
+            "origin_x_px": -291,
+            "origin_y_px": -265,
+            "source_center_x": 1536,
+            "source_center_y": 1024
+          },
+          {
+            "action": "zoom_scene_pixels",
+            "alpha_budget": 0,
+            "rgb_budget": 1,
+            "sample_height": 128,
+            "sample_width": 256,
+            "scope": "actual Qt scene readback; hardware scanout not measured"
+          },
+          {
+            "action": "zoom_own_original_preserved",
+            "height": 2048,
+            "sha256": "152c31c8f0045d97638fac4f9fda574f28c92e8f8c4e86ef883d665e8cbbc2a8",
+            "source": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T083850Z-23562/UX-P06-ZOM-002/repeat-1/zoom-originals/Zoom.png",
+            "width": 3072
+          }
+        ],
+        "pixel_evidence": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T083850Z-23562/UX-P06-ZOM-002/repeat-1/zoom-reference-sample.png",
+            "sha256": "40b058e078fffaf11698643525439d1ed1086eb0d291b3a6b7247c7a4d9e7ed4",
+            "bytes": 3663
+          },
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T083850Z-23562/UX-P06-ZOM-002/repeat-1/zoom-scene-sample.png",
+            "sha256": "40b058e078fffaf11698643525439d1ed1086eb0d291b3a6b7247c7a4d9e7ed4",
+            "bytes": 3663
+          }
+        ]
+      }
+    ],
+    "authorized_interval": "Two minutes, approved by human; run started 2026-10-23T08:38:50Z and all three children completed in approximately 25 seconds."
+  },
+  "shipping_checks": {
+    "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/final-zoom-shipping.xml",
+    "sha256": "c5a988084f56a45025aaf6954b29c21f7f52e61f7d103a6780a1d9dab8ac2791",
+    "bytes": 1867,
+    "attributes": {
+      "name": "Darwin-c++",
+      "tests": "2",
+      "failures": "0",
+      "disabled": "0",
+      "skipped": "0",
+      "hostname": "MacBook-Pro.local",
+      "time": "1",
+      "timestamp": "2026-10-23T11:30:56"
+    },
+    "cases": [
+      {
+        "name": "ux-cpu-probe-shipping-isolation",
+        "classname": "ux-cpu-probe-shipping-isolation",
+        "time": "0.180037",
+        "status": "run"
+      },
+      {
+        "name": "qml-shell",
+        "classname": "qml-shell",
+        "time": "1.15341",
+        "status": "run"
+      }
+    ]
+  },
+  "source_files": [
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/Main.qml",
+      "sha256": "b9a6a396f00b24c140eb49b0ab91936602bdfb179907c3740f5093a06f78727b",
+      "bytes": 45138
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/tests/ux/ZoomScenarios.cpp",
+      "sha256": "396eb329ff3139df41c8ebf7f60dd53a3095da47bb04686b2001d984ddee1552",
+      "bytes": 17340
+    }
+  ],
+  "logs": [
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-zoom-build.log",
+      "sha256": "887dc55d1bc8bef8026661249b9edd1f074582d34728bb639d766ccba2c60455",
+      "bytes": 4611
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-zoom-build-2.log",
+      "sha256": "e4b383f79e3fa1e7f4cb533e21f5da0437224a2186be4552c262f991abcb8d1a",
+      "bytes": 455
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-zoom-fix-build.log",
+      "sha256": "bb661ccf43e6901d5f52972bfe3beda8836a7cfef657c898b937614988595907",
+      "bytes": 455
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-progressive-export-build.log",
+      "sha256": "fc01bd18f4d9b00ffee3936aeafaa7a99d5e43523a979636dc9a0498feca5b12",
+      "bytes": 540
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-zoom-qualified-build.log",
+      "sha256": "cb443f0dee9eb31086a616e12df9bdabe4430b6da3ccc3e9428d80c8b6c6406c",
+      "bytes": 455
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-zoom-repeat.log",
+      "sha256": "0812778bc187a1701cda21e9a4497e9cf0c557511584252e62c100eee85ac8a0",
+      "bytes": 473
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-zoom-all-targets.log",
+      "sha256": "9e1d6403c4aeb1bc97f0639e42a029d05a0b1a862fb1566930d6a0e75411332a",
+      "bytes": 3316
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-zoom-tidy-2.log",
+      "sha256": "71f88da7d13fb3e44a02d68e42594d2996235ab7597ae873d483ec27c5ebc9e2",
+      "bytes": 15610
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-zoom-runner-tests-2.log",
+      "sha256": "43c53564ef5aa0b532efe6c71097c177461bbc609fc7c06f6e450ce51f8d927d",
+      "bytes": 139
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-zoom-policy-tests-2.log",
+      "sha256": "a8ea4421f68e83d11a8ff1ef30ba1cca525d147d91640c5daa49262b40cf834c",
+      "bytes": 109
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-zoom-native-build.log",
+      "sha256": "daf3cc68656f97065b392ce065c75427c2b5d053e5f8bb5d2af2b13ba953bed2",
+      "bytes": 264
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-zoom-native.log",
+      "sha256": "0c6cab0961570fbea5d26d0cbd41e77883e230e7c8f122142e1e50aeae18f133",
+      "bytes": 287
+    }
+  ],
+  "contracts": [
+    "Actual UI import of a private generated 3072x2048 chart; source SHA recorded before import and verified after scenario.",
+    "100% loads full decoded output and maps one image pixel to one backing pixel; full provider pixels match the CPU reference.",
+    "Real 256x128 composited scene patch preserves one-pixel detail; shifted/changed reference negative controls fail.",
+    "Fit/100%/Fit preserves image center at even and odd window dimensions, full saved document, revision, selection, identity and history flags.",
+    "A real held Exposure gesture publishes the exact 1024 interaction preview, then the exact 2560 final Fit preview after release.",
+    "Actual UI PNG export is 3072x2048 sRGB and matches the independent full-source CPU document exactly; Undo/Redo retains one gesture."
+  ],
+  "limits": [
+    "These are local offscreen/software DPR1 results. GITHUB_ACTIONS=true selects the existing offscreen runner route; hosted_ci in the raw hardware block is not evidence of a remote run.",
+    "Native Cocoa/Metal/Retina DPR2 passes 3/3 on the available Mac. The Cocoa scene oracle permits at most one RGB8 step and exact alpha; provider and PNG export comparisons remain exact.",
+    "The generated chart is local to each child and separately SHA-checked; the global runner manifest covers its standard shared fixtures.",
+    "Independent oracle computation runs on the test GUI thread. Captured heartbeat stalls are not product latency/performance qualification.",
+    "No RAW, pan boundaries, physical input, display switching, memory pressure, GPU ordering/failure injection or full-release claim.",
+    "Blocking tidy checks pass; optional-access diagnostics remain because the analyzer does not establish the throwing require() precondition."
+  ]
+}

@@ -1,4 +1,5 @@
 #include "apps/shared/PhotoDecoder.h"
+#include "apps/shared/MetadataService.h"
 #include "core/image/Bayer.h"
 #include "core/raw/RawDecoder.h"
 #include "platform/macos/RasterDecoder.h"
@@ -39,13 +40,17 @@ bool PhotoDecoder::supportedExtension(const std::filesystem::path &path) {
 PhotoMetadata PhotoDecoder::inspect(const std::filesystem::path &path,
                                     CancellationToken stop) const {
     checkCancellation(stop);
-    return raw(path, stop) ? RawDecoder().inspect(path, stop)
-                           : macos::RasterDecoder().inspect(path, stop);
+    auto metadata = raw(path, stop) ? RawDecoder().inspect(path, stop)
+                                    : macos::RasterDecoder().inspect(path, stop);
+    MetadataService::readSourceMetadata(path, metadata, stop);
+    return metadata;
 }
 DecodedImage PhotoDecoder::decode(const std::filesystem::path &path, CancellationToken stop,
                                   const std::function<void(double)> &progress) const {
     checkCancellation(stop);
-    return raw(path, stop) ? RawDecoder().decode(path, stop, progress)
-                           : macos::RasterDecoder().decode(path, stop, progress);
+    auto decoded = raw(path, stop) ? RawDecoder().decode(path, stop, progress)
+                                   : macos::RasterDecoder().decode(path, stop, progress);
+    MetadataService::readSourceMetadata(path, decoded.metadata, stop);
+    return decoded;
 }
 } // namespace luma

@@ -1,0 +1,575 @@
+[
+  {
+    "sample": "portrait",
+    "sigma": 0.01,
+    "quality": {
+      "status": "PASS",
+      "color": {
+        "linear": {
+          "input_mse_rgb": [
+            0.00017971025789880143,
+            0.00010727568399725501,
+            9.627502800743319e-05
+          ],
+          "output_mse_rgb": [
+            6.631357560589261e-05,
+            4.017369992298497e-05,
+            8.055321464073754e-05
+          ],
+          "all_channels_improved": true
+        },
+        "srgb": {
+          "input_mse_rgb": [
+            9.333221162231182e-05,
+            9.278905979210089e-05,
+            9.152795514643409e-05
+          ],
+          "output_mse_rgb": [
+            3.995750700337955e-05,
+            4.1990771077272205e-05,
+            7.412715243260173e-05
+          ],
+          "all_channels_improved": true
+        }
+      },
+      "edge_errors": {
+        "vertical-all": {
+          "input_mse": 0.00018137036897995158,
+          "output_mse": 9.41338711110974e-05,
+          "improved": true
+        },
+        "vertical-tile-seams": {
+          "input_mse": 0.00016152884949586458,
+          "output_mse": 7.543321863164947e-05,
+          "improved": true
+        },
+        "horizontal-all": {
+          "input_mse": 0.0001815124428495406,
+          "output_mse": 9.382927058183354e-05,
+          "improved": true
+        },
+        "horizontal-tile-seams": {
+          "input_mse": 0.00015803151737467757,
+          "output_mse": 6.34490182431659e-05,
+          "improved": true
+        }
+      }
+    }
+  },
+  {
+    "sample": "portrait",
+    "sigma": 0.05,
+    "quality": {
+      "status": "PASS",
+      "color": {
+        "linear": {
+          "input_mse_rgb": [
+            0.0043906468557177135,
+            0.00266212074137762,
+            0.0023701805965792777
+          ],
+          "output_mse_rgb": [
+            0.00030112911834041345,
+            0.00017878075948426123,
+            0.00023750636288393152
+          ],
+          "all_channels_improved": true
+        },
+        "srgb": {
+          "input_mse_rgb": [
+            0.0022714152896098202,
+            0.0022300231498083023,
+            0.0021894455787957864
+          ],
+          "output_mse_rgb": [
+            0.00024888139532297374,
+            0.00024893341659146164,
+            0.0003201606406210142
+          ],
+          "all_channels_improved": true
+        }
+      },
+      "edge_errors": {
+        "vertical-all": {
+          "input_mse": 0.004341194129497224,
+          "output_mse": 0.00029347075752448915,
+          "improved": true
+        },
+        "vertical-tile-seams": {
+          "input_mse": 0.003790743520958773,
+          "output_mse": 0.00030037514147650534,
+          "improved": true
+        },
+        "horizontal-all": {
+          "input_mse": 0.004343996110446433,
+          "output_mse": 0.00030245560835373396,
+          "improved": true
+        },
+        "horizontal-tile-seams": {
+          "input_mse": 0.0036649658591909468,
+          "output_mse": 0.0001323088362864458,
+          "improved": true
+        }
+      }
+    }
+  },
+  {
+    "sample": "landscape",
+    "sigma": 0.01,
+    "quality": {
+      "status": "PASS",
+      "color": {
+        "linear": {
+          "input_mse_rgb": [
+            0.00012509846312511744,
+            0.00013408293567672075,
+            0.00014664439444568057
+          ],
+          "output_mse_rgb": [
+            9.22134412934939e-05,
+            7.687475287191646e-05,
+            9.80365452033634e-05
+          ],
+          "all_channels_improved": true
+        },
+        "srgb": {
+          "input_mse_rgb": [
+            9.963352589826966e-05,
+            9.980210661845464e-05,
+            9.960492884958753e-05
+          ],
+          "output_mse_rgb": [
+            8.305921554977975e-05,
+            6.898122765934105e-05,
+            9.010892151131311e-05
+          ],
+          "all_channels_improved": true
+        }
+      },
+      "edge_errors": {
+        "vertical-all": {
+          "input_mse": 0.00019951577961147685,
+          "output_mse": 0.0001420302238782302,
+          "improved": true
+        },
+        "horizontal-all": {
+          "input_mse": 0.00019924434039998024,
+          "output_mse": 0.00012993230841115843,
+          "improved": true
+        },
+        "horizontal-tile-seams": {
+          "input_mse": 0.00022251416600639078,
+          "output_mse": 0.00016879153490541394,
+          "improved": true
+        }
+      }
+    }
+  },
+  {
+    "sample": "landscape",
+    "sigma": 0.05,
+    "quality": {
+      "status": "PASS",
+      "color": {
+        "linear": {
+          "input_mse_rgb": [
+            0.0030864986711677234,
+            0.003314172288468369,
+            0.0036086814712127237
+          ],
+          "output_mse_rgb": [
+            0.0005137035161157706,
+            0.0004159322273187425,
+            0.0004012484797113892
+          ],
+          "all_channels_improved": true
+        },
+        "srgb": {
+          "input_mse_rgb": [
+            0.002448972926623565,
+            0.002455902982589712,
+            0.0024177449797117305
+          ],
+          "output_mse_rgb": [
+            0.00053516493462493,
+            0.00045111370149392133,
+            0.00044285582751292177
+          ],
+          "all_channels_improved": true
+        }
+      },
+      "edge_errors": {
+        "vertical-all": {
+          "input_mse": 0.004879639839234571,
+          "output_mse": 0.000782520345632135,
+          "improved": true
+        },
+        "horizontal-all": {
+          "input_mse": 0.004871159868893887,
+          "output_mse": 0.0006195348460852175,
+          "improved": true
+        },
+        "horizontal-tile-seams": {
+          "input_mse": 0.005393708255771856,
+          "output_mse": 0.0008961375075493153,
+          "improved": true
+        }
+      }
+    }
+  },
+  {
+    "sample": "night",
+    "sigma": 0.01,
+    "quality": {
+      "status": "PASS",
+      "color": {
+        "linear": {
+          "input_mse_rgb": [
+            3.3038872661240936e-05,
+            1.7681605038599726e-05,
+            4.931781429676321e-06
+          ],
+          "output_mse_rgb": [
+            1.6512368868083556e-05,
+            8.501988106025279e-06,
+            2.339503295388785e-06
+          ],
+          "all_channels_improved": true
+        },
+        "srgb": {
+          "input_mse_rgb": [
+            9.887692303747036e-05,
+            9.996836774900809e-05,
+            9.898879324314682e-05
+          ],
+          "output_mse_rgb": [
+            2.1971336293008696e-05,
+            1.9939630198393405e-05,
+            2.5699952163437884e-05
+          ],
+          "all_channels_improved": true
+        }
+      },
+      "edge_errors": {
+        "vertical-all": {
+          "input_mse": 0.00019800096280993404,
+          "output_mse": 3.413431047635544e-05,
+          "improved": true
+        },
+        "vertical-tile-seams": {
+          "input_mse": 0.00018160125271750123,
+          "output_mse": 4.330651287770314e-05,
+          "improved": true
+        },
+        "horizontal-all": {
+          "input_mse": 0.00019872056025774555,
+          "output_mse": 3.5629040483730186e-05,
+          "improved": true
+        }
+      }
+    }
+  },
+  {
+    "sample": "night",
+    "sigma": 0.05,
+    "quality": {
+      "status": "PASS",
+      "color": {
+        "linear": {
+          "input_mse_rgb": [
+            0.0007699093580101852,
+            0.00043779631783884477,
+            0.00012177253394022614
+          ],
+          "output_mse_rgb": [
+            0.0001898098433383697,
+            9.934479352701842e-05,
+            2.125584747784371e-05
+          ],
+          "all_channels_improved": true
+        },
+        "srgb": {
+          "input_mse_rgb": [
+            0.00216735625080548,
+            0.002180536003372011,
+            0.002079464734102627
+          ],
+          "output_mse_rgb": [
+            0.0001872752242237418,
+            0.00015770005661133724,
+            0.00015336822579927947
+          ],
+          "all_channels_improved": true
+        }
+      },
+      "edge_errors": {
+        "vertical-all": {
+          "input_mse": 0.00423243012077909,
+          "output_mse": 0.000188754481753374,
+          "improved": true
+        },
+        "vertical-tile-seams": {
+          "input_mse": 0.003640170487238682,
+          "output_mse": 0.0003012287943283486,
+          "improved": true
+        },
+        "horizontal-all": {
+          "input_mse": 0.0042466923021614355,
+          "output_mse": 0.00020687789907207276,
+          "improved": true
+        }
+      }
+    }
+  },
+  {
+    "sample": "gradient-noise",
+    "quality": {
+      "status": "PASS",
+      "regions": {
+        "full": {
+          "margin": 0,
+          "input_mse": 0.0006149746742580429,
+          "output_mse": 8.255663775430842e-05,
+          "input_peak_error": 0.1397833228111267,
+          "output_peak_error": 0.09574565012007952,
+          "criteria": {
+            "noise_error_reduced": true,
+            "peak_error_not_amplified": true
+          },
+          "status": "PASS"
+        },
+        "runtime-crop": {
+          "margin": 64,
+          "input_mse": 0.0006257888375699799,
+          "output_mse": 3.557831747856332e-05,
+          "input_peak_error": 0.1397833228111267,
+          "output_peak_error": 0.0859123170375824,
+          "criteria": {
+            "noise_error_reduced": true,
+            "peak_error_not_amplified": true
+          },
+          "status": "PASS"
+        }
+      },
+      "input_max": 1.0,
+      "output_max": 1.0,
+      "input_sha256": "7a0f11bce4b64aa41bd243fb1cab86326522952934db7420b332f241fd646804",
+      "clean_sha256": "c496a5d1c5b6c6b2f72fd636c61c357f0a97dc9b8f1a7b343c70a45022599f67",
+      "output_sha256": "c48728a263df48b880e6485973adf55a6f9e9fc93ae0140003e9e55c665b390d"
+    }
+  },
+  {
+    "sample": "near-black-noise",
+    "quality": {
+      "status": "PASS",
+      "regions": {
+        "full": {
+          "margin": 0,
+          "input_mse": 6.208468142964937e-10,
+          "output_mse": 1.990848162687598e-12,
+          "input_peak_error": 0.00013978328206576407,
+          "output_peak_error": 3.922429823433049e-05,
+          "criteria": {
+            "noise_error_reduced": true,
+            "peak_error_not_amplified": true
+          },
+          "status": "PASS"
+        },
+        "runtime-crop": {
+          "margin": 64,
+          "input_mse": 6.257888962130826e-10,
+          "output_mse": 1.155830820547545e-12,
+          "input_peak_error": 0.00013978328206576407,
+          "output_peak_error": 6.011105142533779e-06,
+          "criteria": {
+            "noise_error_reduced": true,
+            "peak_error_not_amplified": true
+          },
+          "status": "PASS"
+        }
+      },
+      "input_max": 0.00108927465043962,
+      "output_max": 0.0010084897512570024,
+      "input_sha256": "fd8e8d0191b74838bfd46644ebdb789309daa946376319c3a3394fe0bef0e245",
+      "clean_sha256": "5b42b644403cb3e3f3ca2055730fb785eccbebf96e157bab3b604ba752f36906",
+      "output_sha256": "cdf3d4136b10173251c5809c02ef176dd6a88dc1025524309cbf09509813d524"
+    }
+  },
+  {
+    "sample": "black-with-impulse",
+    "quality": {
+      "status": "PASS",
+      "regions": {
+        "full": {
+          "margin": 0,
+          "input_mse": 3.814697628001804e-12,
+          "output_mse": 3.6744201997847635e-12,
+          "input_peak_error": 0.0010000000474974513,
+          "output_peak_error": 0.0009902516612783074,
+          "criteria": {
+            "noise_error_reduced": true,
+            "peak_error_not_amplified": true
+          },
+          "status": "PASS"
+        },
+        "runtime-crop": {
+          "margin": 64,
+          "input_mse": 6.781684672003207e-12,
+          "output_mse": 6.532302577395132e-12,
+          "input_peak_error": 0.0010000000474974513,
+          "output_peak_error": 0.0009902516612783074,
+          "criteria": {
+            "noise_error_reduced": true,
+            "peak_error_not_amplified": true
+          },
+          "status": "PASS"
+        }
+      },
+      "input_max": 0.0010000000474974513,
+      "output_max": 0.0009902516612783074,
+      "input_sha256": "e4b66d170a0b724f2a1e9c9a56bb0a0b77264c0a468d0c86b7654a9b8e19b8ee",
+      "clean_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5",
+      "output_sha256": "93d74ab89062dc1e7f17c2bf634f357bdc22fbb1f0ac97c49c908424736b2603"
+    }
+  },
+  {
+    "sample": "uniform-black",
+    "quality": {
+      "status": "PASS",
+      "regions": {
+        "full": {
+          "margin": 0,
+          "input_mse": 0.0,
+          "output_mse": 0.0,
+          "input_peak_error": 0.0,
+          "output_peak_error": 0.0,
+          "criteria": {
+            "noiseless_input_unchanged": true
+          },
+          "status": "PASS"
+        },
+        "runtime-crop": {
+          "margin": 64,
+          "input_mse": 0.0,
+          "output_mse": 0.0,
+          "input_peak_error": 0.0,
+          "output_peak_error": 0.0,
+          "criteria": {
+            "noiseless_input_unchanged": true
+          },
+          "status": "PASS"
+        }
+      },
+      "input_max": 0.0,
+      "output_max": 0.0,
+      "input_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5",
+      "clean_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5",
+      "output_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    }
+  },
+  {
+    "sample": "uniform-near-black",
+    "quality": {
+      "status": "PASS",
+      "regions": {
+        "full": {
+          "margin": 0,
+          "input_mse": 0.0,
+          "output_mse": 0.0,
+          "input_peak_error": 0.0,
+          "output_peak_error": 0.0,
+          "criteria": {
+            "noiseless_input_unchanged": true
+          },
+          "status": "PASS"
+        },
+        "runtime-crop": {
+          "margin": 64,
+          "input_mse": 0.0,
+          "output_mse": 0.0,
+          "input_peak_error": 0.0,
+          "output_peak_error": 0.0,
+          "criteria": {
+            "noiseless_input_unchanged": true
+          },
+          "status": "PASS"
+        }
+      },
+      "input_max": 9.999999747378752e-05,
+      "output_max": 9.999999747378752e-05,
+      "input_sha256": "20a09b268922e57aae678f7f873cacd69419f0209964cb521729ca0c5320b3f3",
+      "clean_sha256": "20a09b268922e57aae678f7f873cacd69419f0209964cb521729ca0c5320b3f3",
+      "output_sha256": "20a09b268922e57aae678f7f873cacd69419f0209964cb521729ca0c5320b3f3"
+    }
+  },
+  {
+    "sample": "uniform-gray",
+    "quality": {
+      "status": "PASS",
+      "regions": {
+        "full": {
+          "margin": 0,
+          "input_mse": 0.0,
+          "output_mse": 0.0,
+          "input_peak_error": 0.0,
+          "output_peak_error": 0.0,
+          "criteria": {
+            "noiseless_input_unchanged": true
+          },
+          "status": "PASS"
+        },
+        "runtime-crop": {
+          "margin": 64,
+          "input_mse": 0.0,
+          "output_mse": 0.0,
+          "input_peak_error": 0.0,
+          "output_peak_error": 0.0,
+          "criteria": {
+            "noiseless_input_unchanged": true
+          },
+          "status": "PASS"
+        }
+      },
+      "input_max": 0.18000000715255737,
+      "output_max": 0.18000000715255737,
+      "input_sha256": "886d82fbee23fc8d54e0877c79c1eb05045c6c836c91b2f846e902b3bc15abc3",
+      "clean_sha256": "886d82fbee23fc8d54e0877c79c1eb05045c6c836c91b2f846e902b3bc15abc3",
+      "output_sha256": "886d82fbee23fc8d54e0877c79c1eb05045c6c836c91b2f846e902b3bc15abc3"
+    }
+  },
+  {
+    "sample": "uniform-color",
+    "quality": {
+      "status": "PASS",
+      "regions": {
+        "full": {
+          "margin": 0,
+          "input_mse": 0.0,
+          "output_mse": 0.0,
+          "input_peak_error": 0.0,
+          "output_peak_error": 0.0,
+          "criteria": {
+            "noiseless_input_unchanged": true
+          },
+          "status": "PASS"
+        },
+        "runtime-crop": {
+          "margin": 64,
+          "input_mse": 0.0,
+          "output_mse": 0.0,
+          "input_peak_error": 0.0,
+          "output_peak_error": 0.0,
+          "criteria": {
+            "noiseless_input_unchanged": true
+          },
+          "status": "PASS"
+        }
+      },
+      "input_max": 0.800000011920929,
+      "output_max": 0.800000011920929,
+      "input_sha256": "f161740d1bf610bbc61b3ae3c1c061682aa4ab639ae749b7bb792cd9a8043a10",
+      "clean_sha256": "f161740d1bf610bbc61b3ae3c1c061682aa4ab639ae749b7bb792cd9a8043a10",
+      "output_sha256": "f161740d1bf610bbc61b3ae3c1c061682aa4ab639ae749b7bb792cd9a8043a10"
+    }
+  }
+]

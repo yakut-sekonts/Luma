@@ -138,7 +138,9 @@ QString cachePath(Context &c, const Pin &pin) {
         luma::encodePreset({"Thumbnail", {}, asset.edits, luma::allSettingsGroups});
     const auto key = QByteArray::fromStdString(asset.checksum) + "|" +
                      QByteArray::number(saved.revision) + "|" + encoded + "|local-v2|" +
-                     QByteArray::fromStdString(luma::encodeLocalMasks(asset.edits.localMasks));
+                     QByteArray::fromStdString(luma::encodeLocalMasks(asset.edits.localMasks)) +
+                     "|retouch-v1|" +
+                     QByteArray::fromStdString(luma::encodeRetouch(asset.edits.retouch));
     return c.catalogFile + ".luma-cache/thumbnails/" +
            QString::fromLatin1(QCryptographicHash::hash(key, QCryptographicHash::Sha256).toHex()) +
            "-edited-v4.jpg";
@@ -429,7 +431,7 @@ Pins importHidden(Context &c, int count) {
         require(QFile::copy(c.fixture + '/' + name, destination), "Cannot copy private original");
         sources.push_back(QUrl::fromLocalFile(destination));
     }
-    require(d.object("library.pane")->setProperty("sources", QVariant::fromValue(sources)),
+    require(d.object("library.importDialog")->setProperty("sources", QVariant::fromValue(sources)),
             "Cannot supply declared file-chooser fixture result");
     d.click("library.importButton");
     d.wait([&] { return d.object("library.importDialog")->property("opened").toBool(); },

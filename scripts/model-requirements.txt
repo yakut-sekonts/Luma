@@ -1,0 +1,10 @@
+# Build-only tools. The application ships Core ML artifacts, not Python/PyTorch.
+coremltools==9.0
+# Keep the restricted checkpoint loader on the patched PyTorch line.
+torch==2.10.0
+torchvision==0.25.0
+onnx==1.17.0
+onnx2torch==1.5.15
+numpy==1.26.4
+protobuf==4.25.5
+certifi==2026.7.22

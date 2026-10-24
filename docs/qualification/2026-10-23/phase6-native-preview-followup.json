@@ -1,0 +1,341 @@
+{
+  "schema": 1,
+  "date": "2026-10-23",
+  "scope": "Native WB/targeted follow-up and initial phase 0.6 contracts; not full release qualification",
+  "native": {
+    "summary": {
+      "PASS": 4
+    },
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "621b929c01004aacdaeba5bc5be263999d64c963",
+      "worktree_dirty": true,
+      "source_tree_sha256": "1997925704bbe5c1653420772c9aa59733929f40a0d0a35500b137569d5b9cfc",
+      "test_executable_sha256": "4944e9dfc42e90c61ea5fae4c46ae23a51e76bd43de916c3b8850fcc1a7b9ed5",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "4944e9dfc42e90c61ea5fae4c46ae23a51e76bd43de916c3b8850fcc1a7b9ed5"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": false,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "source_consistency": "PASS",
+    "original_hashes": "PASS",
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "621b929c01004aacdaeba5bc5be263999d64c963",
+      "reason": ""
+    },
+    "run_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T075751Z-18535",
+    "release_gate": "NOT_QUALIFIED",
+    "file": {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-final-wb-targeted-native/UX_REPORT.json",
+      "sha256": "47d32ee604e72a39d6ad68a870178ee40c9e441b8290b23f4d30dee24ebd26ae",
+      "bytes": 17240
+    },
+    "results": [
+      {
+        "id": "UX-SLD-016",
+        "status": "PASS",
+        "message": "",
+        "warnings": [],
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "duration_ms": 2840,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T075751Z-18535/UX-SLD-016/repeat-1",
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-SLD-017",
+        "status": "PASS",
+        "message": "",
+        "warnings": [],
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "duration_ms": 64527,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T075751Z-18535/UX-SLD-017/repeat-1",
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-ADV-009",
+        "status": "PASS",
+        "message": "",
+        "warnings": [],
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "duration_ms": 7003,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T075751Z-18535/UX-ADV-009/repeat-1",
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-P06-GPU-001",
+        "status": "PASS",
+        "message": "",
+        "warnings": [],
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "duration_ms": 3478,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T075751Z-18535/UX-P06-GPU-001/repeat-1",
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      }
+    ]
+  },
+  "backend_offscreen": {
+    "summary": {
+      "PASS": 3
+    },
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "621b929c01004aacdaeba5bc5be263999d64c963",
+      "worktree_dirty": true,
+      "source_tree_sha256": "1997925704bbe5c1653420772c9aa59733929f40a0d0a35500b137569d5b9cfc",
+      "test_executable_sha256": "4944e9dfc42e90c61ea5fae4c46ae23a51e76bd43de916c3b8850fcc1a7b9ed5",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "4944e9dfc42e90c61ea5fae4c46ae23a51e76bd43de916c3b8850fcc1a7b9ed5"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": true,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "source_consistency": "PASS",
+    "original_hashes": "PASS",
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "621b929c01004aacdaeba5bc5be263999d64c963",
+      "reason": ""
+    },
+    "run_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T075646Z-17831",
+    "release_gate": "NOT_QUALIFIED",
+    "file": {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-final-phase6-backend/UX_REPORT.json",
+      "sha256": "83eb76820056e951691973d6933f1db4256b04ab27b1a5e5f97b4cd15acb5af0",
+      "bytes": 11267
+    },
+    "results": [
+      {
+        "id": "UX-P06-GPU-001",
+        "status": "PASS",
+        "message": "",
+        "warnings": [],
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "duration_ms": 1835,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T075646Z-17831/UX-P06-GPU-001/repeat-1",
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-P06-GPU-001",
+        "status": "PASS",
+        "message": "",
+        "warnings": [],
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "duration_ms": 1462,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T075646Z-17831/UX-P06-GPU-001/repeat-2",
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-P06-GPU-001",
+        "status": "PASS",
+        "message": "",
+        "warnings": [],
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "duration_ms": 1420,
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T075646Z-17831/UX-P06-GPU-001/repeat-3",
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      }
+    ]
+  },
+  "unit": [
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/final-phase6-cache.xml",
+      "sha256": "ee73b463fc3f249a20ddd22677fda45d69a13deb5f84ece6a72f417f70d0865c",
+      "bytes": 524,
+      "attributes": {
+        "name": "Darwin-c++",
+        "tests": "1",
+        "failures": "0",
+        "disabled": "0",
+        "skipped": "0",
+        "hostname": "MacBook-Pro.local",
+        "time": "0",
+        "timestamp": "2026-10-23T10:57:12"
+      },
+      "cases": [
+        {
+          "name": "preview-cache-contract",
+          "classname": "preview-cache-contract",
+          "time": "0.00180542",
+          "status": "run",
+          "failed": false
+        }
+      ]
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/final-phase6-shipping.xml",
+      "sha256": "04fe86273a840e5079cb8b3859549492cc3b1bd81fc92240960a5c09e3069b32",
+      "bytes": 2182,
+      "attributes": {
+        "name": "Darwin-c++",
+        "tests": "3",
+        "failures": "0",
+        "disabled": "0",
+        "skipped": "0",
+        "hostname": "MacBook-Pro.local",
+        "time": "1",
+        "timestamp": "2026-10-23T11:00:28"
+      },
+      "cases": [
+        {
+          "name": "ux-cpu-probe-shipping-isolation",
+          "classname": "ux-cpu-probe-shipping-isolation",
+          "time": "0.189591",
+          "status": "run",
+          "failed": false
+        },
+        {
+          "name": "preview-cache-contract",
+          "classname": "preview-cache-contract",
+          "time": "0.00202617",
+          "status": "run",
+          "failed": false
+        },
+        {
+          "name": "qml-shell",
+          "classname": "qml-shell",
+          "time": "1.11553",
+          "status": "run",
+          "failed": false
+        }
+      ]
+    }
+  ],
+  "logs": [
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-phase6-build.log",
+      "sha256": "7117f2746c7e0cb32458d08d0ec79934a9e50a5f4015b21dd5eed8e10eeb4b73",
+      "bytes": 893
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-phase6-backend.log",
+      "sha256": "1cda2717685a100e367ac1f413f75e07bb09406445dfb6df2920b94c2fc5b32b",
+      "bytes": 290
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-phase6-cache-build.log",
+      "sha256": "91fac368abb97fe511ce4ebeb6493f317d47ffe0e0a949c0f1b4f354029e8349",
+      "bytes": 382
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-phase6-cache.log",
+      "sha256": "99a07e87db27267dcaac364b424610965a60e53d2630f6b78678347a21364187",
+      "bytes": 365
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-phase6-tidy.log",
+      "sha256": "d264ef4dccafca06613ad05be71ab083d3d4bb3258f3b19793ea673ad3791af5",
+      "bytes": 13586
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-phase6-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-phase6-runner.log",
+      "sha256": "b19536d8711de66179ce73bd3f5d885d9c2b8eb42b307398c48ddcc3bba6b3df",
+      "bytes": 139
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-phase6-quality-policy.log",
+      "sha256": "e3c842207de5dd4b41f70e34894c2e6e9650d49c3e1198c5dd834e2e977e76df",
+      "bytes": 109
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-phase6-all-targets.log",
+      "sha256": "bdfe26fd1f521cb696d4093605a8fb3524a14c81ee533548f5bfb59d2ff270f8",
+      "bytes": 3218
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-phase6-shipping.log",
+      "sha256": "442ec0e1acfab74ba2e33c9e79b23172d52537e71823ba8c4546b9d1aea3ebab",
+      "bytes": 689
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-wb-targeted-native.log",
+      "sha256": "20841af66876ec9ac236916d3ca13a1f81e40e8c1d4a97d2c459d086899ead04",
+      "bytes": 313
+    }
+  ],
+  "capability_manifest": {
+    "meaning": "Source implementation availability, not verified qualification",
+    "phases": [
+      "0.6",
+      "0.7",
+      "0.8",
+      "0.9"
+    ],
+    "changed_classification": "Available workflows without adapters are SKIPPED/unadapted; they no longer disappear as future NOT_IMPLEMENTED capabilities. No result changed to PASS.",
+    "unchanged_conditionals": [
+      "depth_map",
+      "mask_duplicate",
+      "developer_id_notarization"
+    ]
+  },
+  "limits": [
+    "GPU001 exercises the actual Settings checkbox, independently retained documents/catalog revision/identity/membership/selection, preview regeneration, persisted preference and Undo/Redo. It does not observe GPU execution or prove fallback/device placement.",
+    "Cache tests exercise ByteLruCache directly with small immutable values and declared costs, including SIZE_MAX accounting without giant allocations. This does not emulate OS memory pressure or bound application RSS.",
+    "The native interval lasted under the owner-approved three minutes, on Cocoa/Metal DPR 2. Original hashes, build provenance and source consistency pass; no QML warnings.",
+    "Phase 0.6 has one executable official UX adapter of 58. Phases 0.7/0.8/0.9 have 56/50/84 inventory cases and still lack official executable adapters; existing unit/model evidence is separate.",
+    "The older WB/targeted source fix now has bounded native retests, but the full final campaign and distribution remain unqualified."
+  ]
+}

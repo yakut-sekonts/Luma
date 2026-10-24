@@ -1,4 +1,7 @@
 #include "tests/ux/UxContext.h"
+#include "apps/desktop/DiagnosticSession.h"
+#include "apps/desktop/DiagnosticsController.h"
+#include "tests/ux/NativeWindowLifecycle.h"
 #include "tests/ux/UpdaterProbe.h"
 #include <QDir>
 #include <QFileInfo>
@@ -10,6 +13,9 @@
 #include <QSGRendererInterface>
 #include <QScreen>
 #include <algorithm>
+#include <bit>
+#include <chrono>
+#include <future>
 #include <sqlite3.h>
 std::unique_ptr<NativeUpdater> makeNativeUpdater(UpdateCallbacks callbacks) {
     return std::make_unique<ux::NativeUpdaterProbe>(std::move(callbacks));
@@ -26,13 +32,18 @@ Context::Context(QString rootPath, QString fixturePath, const QString &qml, QStr
       exporter(catalogFile.toStdString(), editor, library),
       updates(
           [&] {
-              return !editor.transformAutoBusy() && !editor.busy() && !editor.saving() &&
-                     !editor.exporting() && !library.working() && !batch.working() &&
+              return editor.readyForUpdate() && !library.working() && !batch.working() &&
                      !exporter.working();
           },
           updaterProbe),
       metrics(root + "/heartbeat.json") {
     localization = std::make_unique<LocalizationController>(stateRoot + "/language.json", engine);
+    // Match unattended production startup: the real controller is present,
+    // while persistent diagnostics/crash capture stay disabled for UX fixtures.
+    diagnosticSession = std::make_unique<luma::desktop::DiagnosticSession>(false);
+    diagnostics = std::make_unique<DiagnosticsController>(catalogFile.toStdString(), editor,
+                                                          *diagnosticSession);
+    engine.rootContext()->setContextProperty("diagnostics", diagnostics.get());
     engine.rootContext()->setContextProperty("editor", &editor);
     engine.rootContext()->setContextProperty("library", &library);
     engine.rootContext()->setContextProperty("presets", &presets);
@@ -63,8 +74,33 @@ Context::Context(QString rootPath, QString fixturePath, const QString &qml, QStr
     metrics.attach(*window);
     editor.setWindow(window);
     driver = std::make_unique<Driver>(*window, metrics, root + "/actions.jsonl");
+    QObject::connect(&library, &QAbstractItemModel::modelReset, window,
+                     [model = &library, path = root + "/model-resets.jsonl"] {
+                         QFile log(path);
+                         require(log.open(QIODevice::WriteOnly | QIODevice::Append),
+                                 "Cannot preserve model reset evidence");
+                         const auto bytes = QJsonDocument(QJsonObject{{"status", model->status()},
+                                                                      {"loading", model->loading()},
+                                                                      {"count", model->count()}})
+                                                .toJson(QJsonDocument::Compact) +
+                                            '\n';
+                         require(log.write(bytes) == bytes.size(),
+                                 "Cannot write model reset evidence");
+                     });
     window->requestActivate();
-    driver->wait([&] { return window->isActive(); }, "native window active", 5000);
+    try {
+        driver->wait([&] { return window->isActive(); }, "native window active", 5000);
+    } catch (...) {
+        if (QGuiApplication::platformName() == "cocoa") {
+            try {
+                writeJson(root + "/activation-failure.json", nativeActivationSnapshot(*window));
+            } catch (const std::exception &error) {
+                writeJson(root + "/activation-failure.json",
+                          {{"diagnostic_error", QString::fromUtf8(error.what())}});
+            }
+        }
+        throw;
+    }
     driver->wait([&] { return !library.working() && !library.loading() && window->isVisible(); },
                  "empty app ready");
     driver->frame();
@@ -73,6 +109,37 @@ Context::Context(QString rootPath, QString fixturePath, const QString &qml, QStr
 Context::~Context() {
     if (window)
         window->hide();
+}
+void Context::selectPresetGroups(std::uint32_t groups) {
+    luma::validateSettingsGroups(groups);
+    auto *view = qobject_cast<QQuickItem *>(
+        qvariant_cast<QObject *>(driver->object("preset.editorScroll")->property("contentItem")));
+    require(view, "Preset editor has no scroll viewport");
+    for (int group = 0; group < std::bit_width(luma::allSettingsGroups); ++group) {
+        const auto id = "presetGroup" + QString::number(group);
+        auto *control = driver->item(id);
+        const bool selected = (groups & (std::uint32_t{1} << group)) != 0;
+        if (control->property("checked").toBool() == selected)
+            continue;
+        bool reached = false;
+        for (int step = 0; step < 24; ++step) {
+            driver->wait([&] { return !view->property("moving").toBool(); },
+                         "Preset group scroll settled");
+            driver->frame();
+            const auto rect = control->mapRectToItem(view, QRectF(QPointF{}, control->size()));
+            if (rect.top() >= 0 && rect.bottom() <= view->height()) {
+                reached = true;
+                break;
+            }
+            driver->wheel("preset.editorScroll", rect.top() < 0 ? 120 : -120);
+        }
+        require(reached, "Preset group cannot be reached by scrolling: " + id);
+        driver->click(id);
+        require(control->property("checked").toBool() == selected,
+                "Preset group did not respond to its actual click: " + id);
+    }
+    require(driver->object("presetEditor")->property("groups").toUInt() == groups,
+            "Preset editor did not retain the exact selected groups");
 }
 void Context::loaded() {
     driver->wait(
@@ -94,11 +161,13 @@ void Context::import(int count, bool copy) {
     require(names.size() >= count, "Insufficient public UX fixtures");
     for (int i = 0; i < count; ++i)
         sources.append(QUrl::fromLocalFile(fixture + '/' + names[i]));
-    auto *pane = driver->object("library.pane");
-    pane->setProperty("sources", QVariant::fromValue(sources));
+    auto *importDialog = driver->object("library.importDialog");
+    require(importDialog->setProperty("sources", QVariant::fromValue(sources)),
+            "Import dialog rejected fixture selection");
     if (copy) {
         QDir().mkpath(root + "/copies");
-        pane->setProperty("destination", QUrl::fromLocalFile(root + "/copies"));
+        require(importDialog->setProperty("destination", QUrl::fromLocalFile(root + "/copies")),
+                "Import dialog rejected fixture selection");
     }
     driver->click("library.importButton");
     driver->wait(
@@ -220,23 +289,34 @@ void Context::reveal(const QString &id) {
     throw std::runtime_error("Cannot scroll to control: " + id.toStdString());
 }
 void Context::checkData() {
-    luma::Catalog catalog(catalogFile.toStdString());
-    catalog.verify();
-    sqlite3 *database = nullptr;
-    require(sqlite3_open_v2(catalogFile.toUtf8().constData(), &database, SQLITE_OPEN_READONLY,
-                            nullptr) == SQLITE_OK,
-            "Cannot verify UX catalog");
-    sqlite3_stmt *statement = nullptr;
-    const bool prepared = sqlite3_prepare_v2(database, "PRAGMA integrity_check", -1, &statement,
-                                             nullptr) == SQLITE_OK;
-    const bool valid =
-        prepared && sqlite3_step(statement) == SQLITE_ROW &&
-        QString::fromUtf8(reinterpret_cast<const char *>(sqlite3_column_text(statement, 0))) ==
-            "ok";
-    sqlite3_finalize(statement);
-    sqlite3_close(database);
-    require(valid, "UX catalog integrity failed");
+    // The independent full-database oracle is test work. Keep it off the GUI
+    // thread so large integrity scans do not masquerade as application hangs.
+    // The real GUI heartbeat/watchdog remains active with its original budget.
+    const auto databasePath = catalogFile;
+    auto audit = std::async(std::launch::async, [databasePath] {
+        luma::Catalog catalog(databasePath.toStdString());
+        catalog.verify();
+        sqlite3 *database = nullptr;
+        require(sqlite3_open_v2(databasePath.toUtf8().constData(), &database, SQLITE_OPEN_READONLY,
+                                nullptr) == SQLITE_OK,
+                "Cannot verify UX catalog");
+        sqlite3_stmt *statement = nullptr;
+        const bool prepared = sqlite3_prepare_v2(database, "PRAGMA integrity_check", -1, &statement,
+                                                 nullptr) == SQLITE_OK;
+        const bool valid =
+            prepared && sqlite3_step(statement) == SQLITE_ROW &&
+            QString::fromUtf8(reinterpret_cast<const char *>(sqlite3_column_text(statement, 0))) ==
+                "ok";
+        sqlite3_finalize(statement);
+        sqlite3_close(database);
+        require(valid, "UX catalog integrity failed");
+    });
+    driver->wait(
+        [&] { return audit.wait_for(std::chrono::seconds(0)) == std::future_status::ready; },
+        "Independent catalog integrity audit completed", 60000);
+    audit.get();
 }
+
 void Context::finish(const QString &id, const QString &status, const QString &message) {
     auto values = metrics.json();
     values["id"] = id;

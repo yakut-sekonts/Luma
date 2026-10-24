@@ -228,6 +228,25 @@ void cropEditorTests(const QString &source, const QString &root, const QString &
     require(!editor.cropMode() && editor.beginTargeted(0.5, 0.5),
             "Targeted adjustment unavailable after Crop.");
     editor.endTargeted();
+    QObject completionObserver;
+    int completionNotifications = 0;
+    QObject::connect(&editor, &EditorController::stateChanged, &completionObserver,
+                     [&] { ++completionNotifications; });
+    editor.endTargeted();
+    require(completionNotifications == 0,
+            "Repeated targeted completion emitted stateChanged after its gesture ended.");
+    const auto beforeUnrelated = editor.currentSettings();
+    editor.beginEdit();
+    editor.setParameter("exposure", beforeUnrelated.exposure + .2);
+    const auto notificationsBeforeCancel = completionNotifications;
+    editor.endTargeted();
+    require(completionNotifications == notificationsBeforeCancel,
+            "Stale targeted cancellation notified an unrelated active gesture.");
+    editor.setParameter("exposure", beforeUnrelated.exposure + .4);
+    editor.endEdit();
+    editor.undo();
+    require(editor.currentSettings() == beforeUnrelated,
+            "Stale targeted cancellation split an unrelated gesture's Undo history.");
     click(child("cropReset"));
     require(editor.currentSettings().crop == luma::CropSettings{}, "Crop reset failed.");
     editor.undo();

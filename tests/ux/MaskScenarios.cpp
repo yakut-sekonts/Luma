@@ -1,6 +1,8 @@
 #include "core/render/CropGeometry.h"
 #include "core/render/MaskCoverage.h"
+#include "platform/macos/FileHasher.h"
 #include "tests/ux/UxContext.h"
+#include "tests/ux/UxPixels.h"
 #include <QEvent>
 #include <QGuiApplication>
 #include <QImage>
@@ -369,4 +371,103 @@ bool maskScenario(Context &c, const QString &id) {
     }
     throw std::runtime_error("Supported mask scenario has no assertions: " + id.toStdString());
 }
+bool aiMaskScenario(Context &c, const QString &id) {
+    if (id != "UX-P07-MSK-001" && id != "UX-P07-MSK-003")
+        return false;
+    auto &d = *c.driver;
+    c.import(1);
+    d.doubleClick(c.card(0));
+    c.loaded();
+    c.saved();
+    const auto path = c.editor.sourcePath().toStdString();
+    const auto digest = luma::macos::sha256File(path);
+    require(digest == "b7224c8c68fc7aaf76657b0d039e9fac69c00117d58523e5d2a11fe7cd2fbe61",
+            "AI mask requires the pinned public-domain portrait");
+    const auto before = c.editor.currentSettings();
+    c.reveal("localPanelToggle");
+    d.click("localPanelToggle");
+    c.reveal("localAI.subject");
+    d.click("localAI.subject");
+    d.wait([&] { return !c.editor.aiBusy(); }, "Real Vision foreground selection completed", 60000);
+    require(c.editor.error().isEmpty(), c.editor.error());
+    d.wait([&] { return c.editor.localCanvasReady() && !c.editor.histogramPending(); },
+           "AI mask overlay became ready");
+    c.saved();
+    const auto created = c.editor.currentSettings();
+    require(created.localMasks.size() == 1 &&
+                created.localMasks.front().shape == luma::MaskShape::bitmap &&
+                c.editor.localMode() && c.editor.localOverlay() &&
+                d.item("localPhotoOverlay")->isVisible() &&
+                d.object("localMaskChoice")->property("currentIndex").toInt() == 0,
+            "Actual AI subject mask did not enter the Local Adjustments lifecycle");
+    const auto &mask = created.localMasks.front();
+    require(mask.bitmap.width() == 512 && mask.bitmap.height() == 512,
+            "Subject bitmap lost source geometry");
+    const auto pixels = mask.bitmap.pixels();
+    const auto foreground =
+        std::count_if(pixels.begin(), pixels.end(), [](auto value) { return value >= 128; });
+    const double area = static_cast<double>(foreground) / pixels.size();
+    d.log({{"action", "actual_vision_subject_mask"},
+           {"foreground_fraction", area},
+           {"source_sha256", QString::fromStdString(digest)},
+           {"boundary_quality_qualification", false}});
+    require(area > .1 && area < .9,
+            "Subject mask is empty, constant or implausible on the pinned portrait");
+    d.screenshot(c.root + "/ai-subject-overlay.png");
+    d.click("main.undoButton");
+    c.saved();
+    require(c.editor.currentSettings() == before && c.editor.canRedo(),
+            "AI generation is not one complete Undo unit");
+    d.click("main.redoButton");
+    c.saved();
+    require(c.editor.currentSettings() == created, "AI Redo lost exact bitmap data");
+    if (id == "UX-P07-MSK-003") {
+        c.reveal("localMaskChoice");
+        d.choose("localMaskChoice", 0);
+        c.reveal("localOverlayToggle");
+        if (c.editor.localOverlay())
+            d.click("localOverlayToggle");
+        c.reveal("local_exposure");
+        d.drag("local_exposure", d.sliderThumb("local_exposure"), {.65, .5});
+        c.saved();
+        const auto adjusted = c.editor.currentSettings();
+        require(adjusted.localMasks.front().parameter("exposure") > 1 &&
+                    adjusted.localMasks.front().bitmap == mask.bitmap,
+                "Local exposure did not preserve the AI bitmap");
+        const auto expected = fixtureReference(c);
+        d.wait(
+            [&] {
+                return previewPixelsAgree(c.provider->requestImage({}, nullptr, {}), expected,
+                                          c.editor.metalPreview());
+            },
+            "Adjusted AI mask preview agrees with independent CPU rendering");
+        c.reveal("localMaskEnabled");
+        d.click("localMaskEnabled");
+        c.saved();
+        require(!c.editor.currentSettings().localMasks.front().enabled,
+                "AI mask cannot use the normal Enabled control");
+        d.click("main.undoButton");
+        c.saved();
+        require(c.editor.currentSettings() == adjusted, "Undo lost AI adjustment/bitmap state");
+        c.reveal("localMaskInvert");
+        d.click("localMaskInvert");
+        c.saved();
+        require(c.editor.currentSettings().localMasks.front().inverted &&
+                    c.editor.currentSettings().localMasks.front().bitmap == mask.bitmap,
+                "AI mask invert changed its immutable bitmap");
+        d.click("main.undoButton");
+        c.saved();
+        require(c.editor.currentSettings() == adjusted, "Invert Undo lost the AI mask");
+        c.reveal("localMaskDelete");
+        d.click("localMaskDelete");
+        c.saved();
+        require(c.editor.currentSettings().localMasks.empty(), "AI mask cannot be deleted");
+        d.click("main.undoButton");
+        c.saved();
+        require(c.editor.currentSettings() == adjusted, "Delete Undo lost exact AI mask data");
+    }
+    require(luma::macos::sha256File(path) == digest, "AI mask workflow changed the source photo");
+    return true;
+}
+
 } // namespace ux

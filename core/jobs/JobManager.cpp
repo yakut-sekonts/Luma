@@ -82,6 +82,10 @@ void JobManager::run() {
         std::erase(active_, job.data);
     }
 }
+bool JobManager::idle() const {
+    std::lock_guard lock(mutex_);
+    return queue_.empty() && active_.empty();
+}
 void JobManager::shutdown() {
     {
         std::lock_guard lock(mutex_);

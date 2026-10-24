@@ -4,7 +4,8 @@
 #include <cmath>
 
 QString EditorController::localShapeKey(luma::MaskShape shape) {
-    const std::array<const char *, 5> keys{"linear", "radial", "brush", "luminance", "color"};
+    const std::array<const char *, 6> keys{"linear",    "radial", "brush",
+                                           "luminance", "color",  "bitmap"};
     return QString::fromLatin1(keys.at(static_cast<std::size_t>(shape)));
 }
 luma::MaskGeometry EditorController::makeLocalGeometry(const QString &shape) {

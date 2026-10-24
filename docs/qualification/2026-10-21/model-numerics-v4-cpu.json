@@ -1,0 +1,442 @@
+{
+  "schema": 1,
+  "scope": "synthetic-adapted-source-vs-coreml-native",
+  "status": "PASS",
+  "photographic_quality": "NOT_RUN",
+  "python": "3.12.15",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "machine": "arm64",
+  "compute_units": "CPU_ONLY",
+  "manifest_sha256": "a56ce5ccee2cae55dbbee1ebb8cd8095ec70c74307e9452e4266753297ae6f19",
+  "recipe_sha256": "dc0aca29905295600d5fee025de624fa08e7ed52c2bcc519f4b4caf48da945e3",
+  "limits": {
+    "max_absolute_error": 0.0005,
+    "rmse": 5e-05
+  },
+  "cases": [
+    {
+      "model": "drunet-color-haar-mad-v1",
+      "sample": "gradient-noise",
+      "input_sha256": "7a0f11bce4b64aa41bd243fb1cab86326522952934db7420b332f241fd646804",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 1.3113021850585938e-06,
+      "rmse": 1.2939774008092996e-07,
+      "domain_contract": true,
+      "uniform_input_passthrough": null,
+      "analytical_quality": {
+        "status": "PASS",
+        "regions": {
+          "full": {
+            "margin": 0,
+            "input_mse": 0.0006149746742580429,
+            "output_mse": 8.255662329488429e-05,
+            "input_peak_error": 0.1397833228111267,
+            "output_peak_error": 0.09574565570801497,
+            "criteria": {
+              "noise_error_reduced": true,
+              "peak_error_not_amplified": true
+            },
+            "status": "PASS"
+          },
+          "runtime-crop": {
+            "margin": 64,
+            "input_mse": 0.0006257888375699799,
+            "output_mse": 3.557829934059541e-05,
+            "input_peak_error": 0.1397833228111267,
+            "output_peak_error": 0.08591228723526001,
+            "criteria": {
+              "noise_error_reduced": true,
+              "peak_error_not_amplified": true
+            },
+            "status": "PASS"
+          }
+        },
+        "input_max": 1.0,
+        "output_max": 1.0,
+        "input_sha256": "7a0f11bce4b64aa41bd243fb1cab86326522952934db7420b332f241fd646804",
+        "clean_sha256": "c496a5d1c5b6c6b2f72fd636c61c357f0a97dc9b8f1a7b343c70a45022599f67",
+        "output_sha256": "2452984e962956af96c63a1a412a70419f1d852feeecbc6b3ed99b2a79a91e79"
+      },
+      "status": "PASS"
+    },
+    {
+      "model": "drunet-color-haar-mad-v1",
+      "sample": "black",
+      "input_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "domain_contract": true,
+      "uniform_input_passthrough": true,
+      "analytical_quality": {
+        "status": "PASS",
+        "regions": {
+          "full": {
+            "margin": 0,
+            "input_mse": 0.0,
+            "output_mse": 0.0,
+            "input_peak_error": 0.0,
+            "output_peak_error": 0.0,
+            "criteria": {
+              "noiseless_input_unchanged": true
+            },
+            "status": "PASS"
+          },
+          "runtime-crop": {
+            "margin": 64,
+            "input_mse": 0.0,
+            "output_mse": 0.0,
+            "input_peak_error": 0.0,
+            "output_peak_error": 0.0,
+            "criteria": {
+              "noiseless_input_unchanged": true
+            },
+            "status": "PASS"
+          }
+        },
+        "input_max": 0.0,
+        "output_max": 0.0,
+        "input_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5",
+        "clean_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5",
+        "output_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+      },
+      "status": "PASS"
+    },
+    {
+      "model": "drunet-color-haar-mad-v1",
+      "sample": "negative-hdr",
+      "input_sha256": "8cd50f6e314fb3936e8065556b5fd5dbeaa2f96c44d5f7b6d0da469c420d23d8",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 1.6093254089355469e-06,
+      "rmse": 1.6162718673586512e-07,
+      "domain_contract": true,
+      "uniform_input_passthrough": null,
+      "analytical_quality": null,
+      "status": "PASS"
+    },
+    {
+      "model": "drunet-color-haar-mad-v1",
+      "sample": "uniform-near-black",
+      "input_sha256": "20a09b268922e57aae678f7f873cacd69419f0209964cb521729ca0c5320b3f3",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "domain_contract": true,
+      "uniform_input_passthrough": true,
+      "analytical_quality": {
+        "status": "PASS",
+        "regions": {
+          "full": {
+            "margin": 0,
+            "input_mse": 0.0,
+            "output_mse": 0.0,
+            "input_peak_error": 0.0,
+            "output_peak_error": 0.0,
+            "criteria": {
+              "noiseless_input_unchanged": true
+            },
+            "status": "PASS"
+          },
+          "runtime-crop": {
+            "margin": 64,
+            "input_mse": 0.0,
+            "output_mse": 0.0,
+            "input_peak_error": 0.0,
+            "output_peak_error": 0.0,
+            "criteria": {
+              "noiseless_input_unchanged": true
+            },
+            "status": "PASS"
+          }
+        },
+        "input_max": 9.999999747378752e-05,
+        "output_max": 9.999999747378752e-05,
+        "input_sha256": "20a09b268922e57aae678f7f873cacd69419f0209964cb521729ca0c5320b3f3",
+        "clean_sha256": "20a09b268922e57aae678f7f873cacd69419f0209964cb521729ca0c5320b3f3",
+        "output_sha256": "20a09b268922e57aae678f7f873cacd69419f0209964cb521729ca0c5320b3f3"
+      },
+      "status": "PASS"
+    },
+    {
+      "model": "drunet-color-haar-mad-v1",
+      "sample": "uniform-gray",
+      "input_sha256": "886d82fbee23fc8d54e0877c79c1eb05045c6c836c91b2f846e902b3bc15abc3",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "domain_contract": true,
+      "uniform_input_passthrough": true,
+      "analytical_quality": {
+        "status": "PASS",
+        "regions": {
+          "full": {
+            "margin": 0,
+            "input_mse": 0.0,
+            "output_mse": 0.0,
+            "input_peak_error": 0.0,
+            "output_peak_error": 0.0,
+            "criteria": {
+              "noiseless_input_unchanged": true
+            },
+            "status": "PASS"
+          },
+          "runtime-crop": {
+            "margin": 64,
+            "input_mse": 0.0,
+            "output_mse": 0.0,
+            "input_peak_error": 0.0,
+            "output_peak_error": 0.0,
+            "criteria": {
+              "noiseless_input_unchanged": true
+            },
+            "status": "PASS"
+          }
+        },
+        "input_max": 0.18000000715255737,
+        "output_max": 0.18000000715255737,
+        "input_sha256": "886d82fbee23fc8d54e0877c79c1eb05045c6c836c91b2f846e902b3bc15abc3",
+        "clean_sha256": "886d82fbee23fc8d54e0877c79c1eb05045c6c836c91b2f846e902b3bc15abc3",
+        "output_sha256": "886d82fbee23fc8d54e0877c79c1eb05045c6c836c91b2f846e902b3bc15abc3"
+      },
+      "status": "PASS"
+    },
+    {
+      "model": "drunet-color-haar-mad-v1",
+      "sample": "uniform-color",
+      "input_sha256": "f161740d1bf610bbc61b3ae3c1c061682aa4ab639ae749b7bb792cd9a8043a10",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "domain_contract": true,
+      "uniform_input_passthrough": true,
+      "analytical_quality": {
+        "status": "PASS",
+        "regions": {
+          "full": {
+            "margin": 0,
+            "input_mse": 0.0,
+            "output_mse": 0.0,
+            "input_peak_error": 0.0,
+            "output_peak_error": 0.0,
+            "criteria": {
+              "noiseless_input_unchanged": true
+            },
+            "status": "PASS"
+          },
+          "runtime-crop": {
+            "margin": 64,
+            "input_mse": 0.0,
+            "output_mse": 0.0,
+            "input_peak_error": 0.0,
+            "output_peak_error": 0.0,
+            "criteria": {
+              "noiseless_input_unchanged": true
+            },
+            "status": "PASS"
+          }
+        },
+        "input_max": 0.800000011920929,
+        "output_max": 0.800000011920929,
+        "input_sha256": "f161740d1bf610bbc61b3ae3c1c061682aa4ab639ae749b7bb792cd9a8043a10",
+        "clean_sha256": "f161740d1bf610bbc61b3ae3c1c061682aa4ab639ae749b7bb792cd9a8043a10",
+        "output_sha256": "f161740d1bf610bbc61b3ae3c1c061682aa4ab639ae749b7bb792cd9a8043a10"
+      },
+      "status": "PASS"
+    },
+    {
+      "model": "drunet-color-haar-mad-v1",
+      "sample": "near-black-noise",
+      "input_sha256": "fd8e8d0191b74838bfd46644ebdb789309daa946376319c3a3394fe0bef0e245",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 1.1641532182693481e-10,
+      "rmse": 7.154825842860184e-12,
+      "domain_contract": true,
+      "uniform_input_passthrough": null,
+      "analytical_quality": {
+        "status": "PASS",
+        "regions": {
+          "full": {
+            "margin": 0,
+            "input_mse": 6.208468142964937e-10,
+            "output_mse": 1.9908479031807653e-12,
+            "input_peak_error": 0.00013978328206576407,
+            "output_peak_error": 3.922429823433049e-05,
+            "criteria": {
+              "noise_error_reduced": true,
+              "peak_error_not_amplified": true
+            },
+            "status": "PASS"
+          },
+          "runtime-crop": {
+            "margin": 64,
+            "input_mse": 6.257888962130826e-10,
+            "output_mse": 1.1558307029533782e-12,
+            "input_peak_error": 0.00013978328206576407,
+            "output_peak_error": 6.011105142533779e-06,
+            "criteria": {
+              "noise_error_reduced": true,
+              "peak_error_not_amplified": true
+            },
+            "status": "PASS"
+          }
+        },
+        "input_max": 0.00108927465043962,
+        "output_max": 0.0010084897512570024,
+        "input_sha256": "fd8e8d0191b74838bfd46644ebdb789309daa946376319c3a3394fe0bef0e245",
+        "clean_sha256": "5b42b644403cb3e3f3ca2055730fb785eccbebf96e157bab3b604ba752f36906",
+        "output_sha256": "37900c3ba7bfbda4d4d0278df70349abafaed2b70aad35c2de9e76b817b57342"
+      },
+      "status": "PASS"
+    },
+    {
+      "model": "drunet-color-haar-mad-v1",
+      "sample": "black-with-impulse",
+      "input_sha256": "e4b66d170a0b724f2a1e9c9a56bb0a0b77264c0a468d0c86b7654a9b8e19b8ee",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 2.842170943040401e-14,
+      "rmse": 6.017384021206955e-17,
+      "domain_contract": true,
+      "uniform_input_passthrough": null,
+      "analytical_quality": {
+        "status": "PASS",
+        "regions": {
+          "full": {
+            "margin": 0,
+            "input_mse": 3.814697628001804e-12,
+            "output_mse": 3.674420199784852e-12,
+            "input_peak_error": 0.0010000000474974513,
+            "output_peak_error": 0.0009902516612783074,
+            "criteria": {
+              "noise_error_reduced": true,
+              "peak_error_not_amplified": true
+            },
+            "status": "PASS"
+          },
+          "runtime-crop": {
+            "margin": 64,
+            "input_mse": 6.781684672003207e-12,
+            "output_mse": 6.532302577395294e-12,
+            "input_peak_error": 0.0010000000474974513,
+            "output_peak_error": 0.0009902516612783074,
+            "criteria": {
+              "noise_error_reduced": true,
+              "peak_error_not_amplified": true
+            },
+            "status": "PASS"
+          }
+        },
+        "input_max": 0.0010000000474974513,
+        "output_max": 0.0009902516612783074,
+        "input_sha256": "e4b66d170a0b724f2a1e9c9a56bb0a0b77264c0a468d0c86b7654a9b8e19b8ee",
+        "clean_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5",
+        "output_sha256": "0da1e5708208095bd8afeeb15e523f5691ad360dccfa207214fc71f6e66350e7"
+      },
+      "status": "PASS"
+    },
+    {
+      "model": "u2net-sky-v1",
+      "sample": "gradient-noise",
+      "input_sha256": "c93ca62a2583086500b452628f69644cca00f4ea75e545af120d6e2ae62b490a",
+      "output_shape": [
+        1,
+        1,
+        320,
+        320
+      ],
+      "max_absolute_error": 2.384185791015625e-07,
+      "rmse": 1.151530557578335e-08,
+      "domain_contract": true,
+      "uniform_input_passthrough": null,
+      "analytical_quality": null,
+      "status": "PASS"
+    },
+    {
+      "model": "u2net-sky-v1",
+      "sample": "black",
+      "input_sha256": "3630e065eb7b4540fbab11dbfd2619e8500f211b9c404380a1867fdc44b77c0c",
+      "output_shape": [
+        1,
+        1,
+        320,
+        320
+      ],
+      "max_absolute_error": 1.1920928955078125e-07,
+      "rmse": 1.8250120749944285e-09,
+      "domain_contract": true,
+      "uniform_input_passthrough": null,
+      "analytical_quality": null,
+      "status": "PASS"
+    },
+    {
+      "model": "u2net-sky-v1",
+      "sample": "white",
+      "input_sha256": "af0fc1bd3503bcef802e67a7994c5de3e02973c3f49eab20999ffabe3f454fa3",
+      "output_shape": [
+        1,
+        1,
+        320,
+        320
+      ],
+      "max_absolute_error": 1.1920928955078125e-07,
+      "rmse": 1.343172518709298e-09,
+      "domain_contract": true,
+      "uniform_input_passthrough": null,
+      "analytical_quality": null,
+      "status": "PASS"
+    }
+  ],
+  "quality_validator_sha256": "1b2b6360d5f2d21156104fc96e0d2d0b75f9b230afa7b8ef82a3050b7e76b98d",
+  "xcode": "Xcode 27.1\nBuild version 27A9275",
+  "toolchain": {
+    "coremltools": "9.0",
+    "torch": "2.10.0",
+    "torchvision": "0.25.0",
+    "onnx": "1.17.0",
+    "onnx2torch": "1.5.15",
+    "numpy": "1.26.4",
+    "protobuf": "4.25.5",
+    "certifi": "2026.7.22"
+  },
+  "prediction_bridge_sha256": "200cbdb979b2c8bbedec99f1c2b52d70a5a78968664281ee8f112ddef30812b4",
+  "prediction_api": "native-MLModel-owned-MLMultiArray"
+}

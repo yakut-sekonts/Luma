@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "source_commit": "41c5d8c508f196edfb108d41b9509f32e6703397",
+  "release_status": "NOT_QUALIFIED",
+  "build": {
+    "status": "PASS",
+    "evidence": {
+      "local_file": ".tools/final-model-v2-app-build.log",
+      "sha256": "2a8ec9c1cac6bfacc7322d207f33e6367daf1558964b0e205603bfd34bcdc3d3"
+    },
+    "model_manifest_sha256": "85382b59bffe09db942ff642f54ab0e45393c69a201dde2cc0fe1b9d21422101",
+    "verified_bundles": [
+      "Luma.app",
+      "luma_ux_tests.app"
+    ]
+  },
+  "unit_adaptation": {
+    "status": "PASS",
+    "tests": 5,
+    "evidence": {
+      "local_file": ".tools/final-model-adaptation-unit.log",
+      "sha256": "0f40ff8f52499628ea6f0f59e75b43e13de6b7ef770873fd29d1e625a27308a5"
+    }
+  },
+  "native_probe_static_analysis": {
+    "status": "PASS",
+    "evidence": {
+      "local_file": ".tools/final-model-probe-v2-tidy.log",
+      "sha256": "61fe7746c78aba7e8ee39c74f882976303586e0f1a14654a05b1aa26228906ea"
+    }
+  },
+  "format": {
+    "status": "PASS",
+    "evidence": {
+      "local_file": ".tools/final-model-v2-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "affected_ctest_retests": [
+    {
+      "name": "model-xcode-preflight",
+      "status": "PASS",
+      "seconds": 0.183061
+    },
+    {
+      "name": "qml-shell",
+      "status": "PASS",
+      "seconds": 1.29619
+    },
+    {
+      "name": "signed-update-feed",
+      "status": "PASS",
+      "seconds": 2.63047
+    },
+    {
+      "name": "release-publisher",
+      "status": "PASS",
+      "seconds": 1.38349
+    },
+    {
+      "name": "release-dmg-recovery",
+      "status": "PASS",
+      "seconds": 0.646995
+    },
+    {
+      "name": "release-build-verification",
+      "status": "PASS",
+      "seconds": 1.50885
+    }
+  ],
+  "ctest_evidence": {
+    "local_file": ".tools/final-model-v2-package-regression.xml",
+    "sha256": "a7c17e9bad9b18bd176aa077b3ad5b53389a31e3a82c6bb32e6c9cb5d4280f47"
+  },
+  "numerical_reports": [
+    "model-numerics-v2-cpu.json",
+    "model-numerics-v2-all.json"
+  ],
+  "source_quality_report": "source-dark-sanity-v2.json",
+  "open_blockers": [
+    "LUMA-BUG-036",
+    "LUMA-BUG-037"
+  ],
+  "note": "Retests overlap the 57-case baseline; do not add them to its unique passing count. No native UI, photographic qualification, signed distribution or release was performed."
+}

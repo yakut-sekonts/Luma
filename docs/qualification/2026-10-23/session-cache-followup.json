@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "date": "2026-10-23",
+  "base_commit": "c7e4d81e0c4df7fb2b4128bc9b150348e49d75a2",
+  "scope": "Actual SessionService cache integration with isolated generated 1200x800 RGBA PNGs; no native window",
+  "result": "PASS",
+  "junit": {
+    "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/final-session-cache-2.xml",
+    "sha256": "408db06977b9970c818468cb17f09b676a5e2a4ca8fb75916ec76afaab136d48",
+    "bytes": 973,
+    "attributes": {
+      "name": "Darwin-c++",
+      "tests": "2",
+      "failures": "0",
+      "disabled": "0",
+      "skipped": "0",
+      "hostname": "MacBook-Pro.local",
+      "time": "0",
+      "timestamp": "2026-10-23T11:07:15"
+    },
+    "cases": [
+      {
+        "name": "preview-cache-contract",
+        "classname": "preview-cache-contract",
+        "time": "0.00243071",
+        "status": "run"
+      },
+      {
+        "name": "session-cache-contract",
+        "classname": "session-cache-contract",
+        "time": "0.427602",
+        "status": "run"
+      }
+    ]
+  },
+  "source": {
+    "path": "/Users/semenkontsevoy/Documents/New project/Luma/tests/unit/SessionCacheTests.cpp",
+    "sha256": "f1873441cbc4a4cb4f1caf191ac8bb463ae5baffd440becf2a87a47958848c65",
+    "bytes": 8319
+  },
+  "binary": {
+    "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_session_cache_tests",
+    "sha256": "d36ec1284377ee27039d866e9faaa330406e9728ca1126503b4e2e82c8916df9",
+    "bytes": 6879688
+  },
+  "logs": [
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-session-cache-build.log",
+      "sha256": "8ba966c546330b46413bbe48d1d2c0febfed8eafa24011f17755240c2a433935",
+      "bytes": 602
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-session-cache.log",
+      "sha256": "6884d2c7eba97de4cab06543d87318a7d2eb3ce2600b08253e6004f97fc246b1",
+      "bytes": 569
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-session-cache-build-2.log",
+      "sha256": "f647ce120b02839cfaa010e36cd801f23803a4d8993797fc3728ac933c345c6a",
+      "bytes": 260
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-session-cache-2.log",
+      "sha256": "4c46831cc3be87f79eda1ae80073ca30c7a6ba9c5e087dd22e4e66ba1c600266",
+      "bytes": 569
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-session-cache-tidy.log",
+      "sha256": "32a79e5e455a42558ffc445aaf1163d4354fd9d1619108c79ccc0f09e388197e",
+      "bytes": 7927
+    }
+  ],
+  "contracts": [
+    "Cold decode then identity-preserving warm standard/interactive hits",
+    "Current saved edits restored on a cache hit rather than cached document state",
+    "Byte-limited source eviction followed by exact pixel/alpha regeneration",
+    "Full-resolution cache hit and exact ownership across zero budget/purge/resume",
+    "Actual decode completion after a progress-triggered purge cannot repopulate the old generation",
+    "Cancelled open/full-resolution cache hit do not change catalog membership, selection or edits",
+    "Full-resolution warm cache refuses a deliberately changed owned source checksum",
+    "Source hashes unchanged before the explicit negative-control mutation"
+  ],
+  "limits": [
+    "Public PNG fixtures only; no real RAW quality, OS memory pressure, process RSS bound or performance claim",
+    "The source mutation is confined to the test-owned temporary directory",
+    "Tidy blocking checks pass; non-blocking existing-header and test warnings remain"
+  ],
+  "ci_budget": {
+    "before_minutes": 60,
+    "after_minutes": 90,
+    "reason": "Previous run 39774239377 reached PhotoCard checks at 59m33s and then failed; later UX/lint stages were skipped. Complete qualification needs more overall execution time. Per-test deadlines and acceptance criteria unchanged."
+  }
+}

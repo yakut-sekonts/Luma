@@ -263,7 +263,7 @@ void createSource(const QString &path) {
 }
 void importOwn(Context &c, const QString &source) {
     // Existing declared chooser-result fixture; the real Import button does work.
-    c.driver->object("library.pane")
+    c.driver->object("library.importDialog")
         ->setProperty("sources", QVariant::fromValue(QList<QUrl>{QUrl::fromLocalFile(source)}));
     c.driver->log({{"action", "fixture_file_chooser_result"}, {"source", source}});
     c.driver->click("library.importButton");

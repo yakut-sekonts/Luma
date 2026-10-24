@@ -1,13 +1,53 @@
 {
   "schema": 1,
-  "completed_phases": ["0.1", "0.2", "0.3", "0.4", "0.5"],
+  "completed_phases": [
+    "0.1",
+    "0.2",
+    "0.3",
+    "0.4",
+    "0.5",
+    "0.6",
+    "0.7",
+    "0.8",
+    "0.9"
+  ],
   "capabilities": {
-    "library": true, "develop": true, "presets": true, "batch": true,
-    "advanced_export": true, "localization": true, "local_masks": true,
-    "brush": true, "range_masks": true, "mask_composition": true,
-    "depth_map": false, "mask_duplicate": false,
-    "metal": false, "progressive": false, "true_one_to_one": false,
-    "ai": false, "merge": false, "catalog_backup": false, "relink": false,
+    "library": true,
+    "develop": true,
+    "presets": true,
+    "batch": true,
+    "advanced_export": true,
+    "localization": true,
+    "local_masks": true,
+    "brush": true,
+    "range_masks": true,
+    "mask_composition": true,
+    "depth_map": false,
+    "mask_duplicate": false,
+    "metal": true,
+    "progressive": true,
+    "true_one_to_one": true,
+    "ai": true,
+    "merge": true,
+    "catalog_backup": true,
+    "relink": true,
     "developer_id_notarization": false
-  }
+  },
+  "phase_semantics": "Source implementation available; this manifest does not certify QA or release readiness.",
+  "implemented_targets": {
+    "UX-PRV-012": "0.6"
+  },
+  "implemented_scenarios": [
+    "UX-P10-A11Y-002",
+    "UX-P10-DAT-004",
+    "UX-P10-DAT-005",
+    "UX-P10-DAY-003",
+    "UX-P10-DAY-007",
+    "UX-P10-DAY-009",
+    "UX-P10-DAY-010",
+    "UX-P10-DAY-011",
+    "UX-P10-DAY-012",
+    "UX-P10-DAY-013",
+    "UX-P10-UPG-012"
+  ]
 }

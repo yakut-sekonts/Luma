@@ -1,0 +1,183 @@
+{
+  "schema": 1,
+  "source_commit": "8dddb3f90524203d7d1cb43e79cd2ab9b504054f",
+  "implementation_commits": [
+    "59e8843",
+    "8dddb3f"
+  ],
+  "scope": "DRUNet replacement, synthetic source/native quality and current UX fixtures",
+  "execution_identity": "Executed on the uncommitted source snapshots recorded in each UX report; the same code was then committed. Documentation changes are not additional test executions.",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "ram_gib": 8,
+  "bundle_verification": {
+    "build-verify/models-v3": {
+      "status": "PASS",
+      "manifest_sha256": "c24d8ba1159efcbafe040c478c7d3900a53ccc0c7a1b5b596dff760b9eb1422d",
+      "recipe_sha256": "a5d7fdb13840980f0c017dc0499ed20d3f9530ccf66a106a206d11361469ca2c"
+    },
+    "build-verify/Luma.app/Contents/Resources/Models": {
+      "status": "PASS",
+      "manifest_sha256": "c24d8ba1159efcbafe040c478c7d3900a53ccc0c7a1b5b596dff760b9eb1422d",
+      "recipe_sha256": "a5d7fdb13840980f0c017dc0499ed20d3f9530ccf66a106a206d11361469ca2c"
+    },
+    "build-verify/luma_ux_tests.app/Contents/Resources/Models": {
+      "status": "PASS",
+      "manifest_sha256": "c24d8ba1159efcbafe040c478c7d3900a53ccc0c7a1b5b596dff760b9eb1422d",
+      "recipe_sha256": "a5d7fdb13840980f0c017dc0499ed20d3f9530ccf66a106a206d11361469ca2c"
+    }
+  },
+  "model_checks": {
+    "source_quality": {
+      "status": "PASS",
+      "cases": 7
+    },
+    "CPU_ONLY": {
+      "status": "PASS",
+      "cases": 11
+    },
+    "ALL": {
+      "status": "PASS",
+      "cases": 11
+    },
+    "adaptation_units": {
+      "status": "PASS",
+      "tests": 11
+    },
+    "quality_oracle_units": {
+      "status": "PASS",
+      "tests": 7
+    },
+    "thresholds_unchanged": true,
+    "ALL_proves_device_placement": false
+  },
+  "ctest": {
+    "status": "PASS",
+    "cases": [
+      "diagnostic-session-shutdown",
+      "model-xcode-preflight",
+      "qml-shell",
+      "signed-update-feed",
+      "release-publisher",
+      "release-build-verification",
+      "common-image-workflow",
+      "release-dmg-recovery",
+      "ux-native-bundle-provenance",
+      "ux-cpu-probe-shipping-isolation"
+    ]
+  },
+  "offscreen_ux": {
+    "status": "AFFECTED_RETESTS_PASS",
+    "distinct_passed": [
+      "UX-EXP-002",
+      "UX-EXP-003",
+      "UX-IMP-002",
+      "UX-IMP-003",
+      "UX-PRS-001",
+      "UX-PRS-002",
+      "UX-PRS-003",
+      "UX-PRS-008",
+      "UX-SEL-001",
+      "UX-SEL-002",
+      "UX-SLD-001",
+      "UX-UND-008"
+    ],
+    "runs_per_case": 1,
+    "full_suite": "NOT_RUN",
+    "current_context_initial": {
+      "PASS": 7,
+      "FAIL": 1
+    },
+    "recapture_retest": {
+      "PASS": 1
+    },
+    "undefined_diagnostics_warning_retest": "ABSENT",
+    "backend": "offscreen/software",
+    "route": "Local GITHUB_ACTIONS=1 forced existing software route; hosted_ci=true in report is not independent hosted-CI evidence."
+  },
+  "static_checks": {
+    "format": "PASS",
+    "affected_clang_tidy": "PASS",
+    "existing_nonblocking_warnings": true
+  },
+  "interrupted_ctest": {
+    "status": "ABORTED",
+    "log": ".tools/final-model-v3-ctest.log",
+    "reason": "Broad selection included native UI; stopped and replaced with explicit affected offscreen checks. Partial results are not counted as qualified native coverage."
+  },
+  "native_ui": "NOT_QUALIFIED",
+  "photographic_model_quality": "NOT_RUN",
+  "signed_distribution": "NOT_RUN",
+  "independent_ci_for_new_commits": "PENDING",
+  "release_gate": "NOT_QUALIFIED",
+  "logs": {
+    ".tools/final-model-build-v3.log": {
+      "sha256": "f1f4fb692ece8b8965e7bfb638f4907e0fdad5263279c0520e327f914b3949d3"
+    },
+    ".tools/final-drunet-adaptation-tests.log": {
+      "sha256": "a5dc4b15d94cd4ac3b506a644244c00597c2741be25a3836aa4ae427acc71f6a"
+    },
+    ".tools/final-drunet-quality-oracle-tests.log": {
+      "sha256": "21c7e48d0b1ec908feef784bbce1fa55f2c9a7acf76382fa7578754a78bd1ed8"
+    },
+    ".tools/final-denoise-quality-v3.log": {
+      "sha256": "c7eb9f7da0808d35430098a27c84e087a483ecf189182576e5f3afdb65a5ade5"
+    },
+    ".tools/final-model-numerics-v3-cpu.log": {
+      "sha256": "5c0fb461f60e9e5b55611e429d485de7ac37a15e476f65b120fc4922f0920204"
+    },
+    ".tools/final-model-numerics-v3-all.log": {
+      "sha256": "9d39045d75fd33c2d3d965b6b43d349a10dacc098aa27c24b64e8a6a42a741b6"
+    },
+    ".tools/final-model-v3-app-build.log": {
+      "sha256": "5473901d41c327996ab5a49acb3f2cda09a123e4fc594511751536df41e0618f"
+    },
+    ".tools/final-model-v3-affected-ctest.log": {
+      "sha256": "990a18b6ce9eaf8ca6b94743512de032ff68fa25a5ca8dcce7da16942ab54965"
+    },
+    ".tools/final-model-v3-affected-ctest.xml": {
+      "sha256": "c4a003cfe571c131f13bb4e7f566c6459ee5faa4ff020714517930f3448affda"
+    },
+    ".tools/final-model-v3-image-ctest.log": {
+      "sha256": "6b2e852c02ae80b7f1ae8219594c29255e2120c64f5f41338a3a6626286d7316"
+    },
+    ".tools/final-model-v3-image-ctest.xml": {
+      "sha256": "d7a3879419fae65d1faf2b6be420b522e50ffe7d2d0b1b24e45fcc9817df7daf"
+    },
+    ".tools/final-ux-context-isolation.log": {
+      "sha256": "1aa7b3e6f78aa5a2604888440efa2e344421c7f1064a48f0116b53f608173df1"
+    },
+    ".tools/final-ux-current-context-build.log": {
+      "sha256": "73b3921d8165d18995165bf9c44c2f222689d693ef4a13ff302e8c75911b5928"
+    },
+    ".tools/final-ux-recapture-build.log": {
+      "sha256": "971e685ae7606457a86f7a4a2c86e307c7abbc5f0e19ec62db15fdd63e75d2db"
+    },
+    ".tools/final-import-fixture-tidy.log": {
+      "sha256": "6bf4a1ba36016306164322ef888588ffb3c42f5ea39b490b8e7ea00154fbe394"
+    },
+    ".tools/final-ux-current-context-tidy.log": {
+      "sha256": "476cc1820bf6bfc03cdda0601c6f0ced7c3699555f23b28d3553aacc150d9ec8"
+    },
+    ".tools/final-ux-recapture-tidy.log": {
+      "sha256": "445b54d168bd81da089eb49c84b8e37f8290b205a1bf51e17b33f3367f690e28"
+    },
+    ".tools/final-v3-ux-format-2.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".tools/final-model-v3-ctest.log": {
+      "sha256": "e3e28388c7960a1d6cad4de7a474d53bf2ae6cafb5f6a8213b4081c61fcac9d5"
+    },
+    ".tools/final-baseline-candidate-quality.json": {
+      "sha256": "9771bba7f0bfc18fe7fb1b28ecea1171f46bf4a7c955b39e2c7022d007596199"
+    }
+  },
+  "retained_reports": {
+    "denoise-quality-v3.json": "dcdbecfbb32a879c1df7b29a7bed2b40031391cb587dc61b09b2ba97ef354db1",
+    "model-numerics-v3-cpu.json": "6f9100c3aa313beac58dfa207c0985983c79802b26079acdd83272dc279339d1",
+    "model-numerics-v3-all.json": "3e2b757b6275e4e740c63ad9cd4bcfa823a3bea48beab9cde3984dd92265a095",
+    "ux-import-offscreen.json": "20695abfb92bd0de7b00f274706ef7b3580c44c60d7f6dfefa66c941b015ecbe",
+    "ux-import-dependent-failure.json": "a22b6bac401c941301ebd0149e2b9d20e731ac199474f326610202208add0513",
+    "ux-current-context-offscreen.json": "da35d11f703cca3ee948cbe147df3c9e1b8ab292494b30521d0f8ed9244417a7",
+    "ux-recapture-offscreen.json": "e8fc40246078a7707c5ee50c81b48c57d6a58f15e8962fa18670bc8b11550017"
+  }
+}

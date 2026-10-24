@@ -1,0 +1,2151 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-23T20:00:42.807289+00:00",
+  "base_commit": "f052cac",
+  "release_gate": "NOT_QUALIFIED",
+  "new_adapters": [
+    "UX-P09-FLT-001",
+    "UX-P09-FLT-003",
+    "UX-P09-FLT-004",
+    "UX-P09-FLT-005",
+    "UX-P09-FLT-006"
+  ],
+  "product_fix": "Owned staging cleanup for XMP, SQLite backup and derived DNG. A separate flock-protected ownership record contains the exact stage pathname/device/inode. Recovery preserves active workers, legacy/unmarked files, symlinks and replaced inodes. XMP cleans on next write; backup/derived managed folders also clean during normal Library recovery. Original content and installed hard-linked results are preserved.",
+  "contracts": [
+    "Catalog: distinct prepare/verify process pairs before/after actual saveEdits COMMIT. Full old/new document, exact revisions, original SHA, fresh Undo.",
+    "Backup: SIGKILL after actual sqlite3_backup_step before publication; prior valid snapshot hashes survive, no partial destination, real UI retry publishes one verified complete snapshot.",
+    "Relink: SIGKILL during actual WAL write; old mapping remains Missing, retry updates it once with preserved original, complete document and metadata (including intentional metadata revision increment). Native chooser selection uses an explicit owned-path boundary, not picker navigation.",
+    "Batch: three selected metadata rows and fourth control, real WAL-write kill. All old rows persist, retry commits all three exactly once; complete original/Develop invariants hold.",
+    "HDR: real Bayer decode/alignment/merge/Float DNG install precedes kill before registration. Normal startup consumes journal exactly once, preserves source documents, dynamic range and checksums; recovered result renders independently and supports exact Undo."
+  ],
+  "reports": {
+    "ux-persistence-kills-first": {
+      "file": {
+        "path": "build-verify/ux-persistence-kills-first/UX_REPORT.json",
+        "sha256": "ddbfad83a4687f48742e6e3898c8d2a7a31f485e8f26452375f47cc2e8dfde26",
+        "bytes": 30749
+      },
+      "summary": {
+        "FAIL": 3,
+        "PASS": 2
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "f052cac28072b2eb60bc9a4257c14f27fe1af5e3",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "f052cac28072b2eb60bc9a4257c14f27fe1af5e3",
+        "worktree_dirty": true,
+        "source_tree_sha256": "441bc547cc2c16a389341a9a478cf207b849cbd22597cf5513ec3e08e5c60df2",
+        "test_executable_sha256": "8c294f17160243b4dc86ba9fd4c3332910d158f2ef9109a386918ceb7a23bfef",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "8c294f17160243b4dc86ba9fd4c3332910d158f2ef9109a386918ceb7a23bfef"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P09-FLT-001",
+          "status": "FAIL",
+          "message": "Insufficient public UX fixtures",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194520Z-22178/UX-P09-FLT-001/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "FAIL",
+              "message": "Insufficient public UX fixtures",
+              "child_pid": 22257,
+              "child_returncode": 1,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194520Z-22178/UX-P09-FLT-001/repeat-1/01-prepare"
+            }
+          ],
+          "observations": []
+        },
+        {
+          "id": "UX-P09-FLT-003",
+          "status": "FAIL",
+          "message": "Insufficient public UX fixtures",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194520Z-22178/UX-P09-FLT-003/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "FAIL",
+              "message": "Insufficient public UX fixtures",
+              "child_pid": 22268,
+              "child_returncode": 1,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194520Z-22178/UX-P09-FLT-003/repeat-1/01-prepare"
+            }
+          ],
+          "observations": []
+        },
+        {
+          "id": "UX-P09-FLT-004",
+          "status": "FAIL",
+          "message": "Relink crash/retry lost mapping atomicity, original, edits or metadata",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194520Z-22178/UX-P09-FLT-004/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 22272,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194520Z-22178/UX-P09-FLT-004/repeat-1/01-prepare"
+            },
+            {
+              "status": "FAIL",
+              "message": "Relink crash/retry lost mapping atomicity, original, edits or metadata",
+              "child_pid": 22318,
+              "child_returncode": 1,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194520Z-22178/UX-P09-FLT-004/repeat-1/02-verify"
+            }
+          ],
+          "observations": []
+        },
+        {
+          "id": "UX-P09-FLT-005",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194520Z-22178/UX-P09-FLT-005/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 22334,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194520Z-22178/UX-P09-FLT-005/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 22348,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194520Z-22178/UX-P09-FLT-005/repeat-1/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "real_batch_kill_recovered",
+              "control_assets": 1,
+              "selected_assets": 3
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-006",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194520Z-22178/UX-P09-FLT-006/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 22354,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194520Z-22178/UX-P09-FLT-006/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 22370,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194520Z-22178/UX-P09-FLT-006/repeat-1/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "merge_registration_kill_recovered",
+              "registered_results": 1
+            }
+          ]
+        }
+      ]
+    },
+    "ux-persistence-kills-oracles": {
+      "file": {
+        "path": "build-verify/ux-persistence-kills-oracles/UX_REPORT.json",
+        "sha256": "2387bba99ff0a686af337aacb3d6031e223fa27520b535df5874020601591aca",
+        "bytes": 37024
+      },
+      "summary": {
+        "PASS": 5
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "f052cac28072b2eb60bc9a4257c14f27fe1af5e3",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "f052cac28072b2eb60bc9a4257c14f27fe1af5e3",
+        "worktree_dirty": true,
+        "source_tree_sha256": "b20eb5aabefc3d4775bdabc4782bf395bf69cdfb54816516b688c25e47aaff47",
+        "test_executable_sha256": "01ab5ecc05a3c35472dabfa0a128de83065b883ce19d9badc71f9aba5d11820d",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "01ab5ecc05a3c35472dabfa0a128de83065b883ce19d9badc71f9aba5d11820d"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P09-FLT-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194648Z-22508/UX-P09-FLT-001/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 22576,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194648Z-22508/UX-P09-FLT-001/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 22594,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194648Z-22508/UX-P09-FLT-001/repeat-1/02-verify"
+            },
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 22601,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194648Z-22508/UX-P09-FLT-001/repeat-1/03-prepare-committed"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 22615,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194648Z-22508/UX-P09-FLT-001/repeat-1/04-verify-committed"
+            }
+          ],
+          "observations": [
+            {
+              "action": "catalog_commit_kill_recovered",
+              "committed": true
+            },
+            {
+              "action": "catalog_commit_kill_recovered",
+              "committed": false
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194648Z-22508/UX-P09-FLT-003/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 22620,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194648Z-22508/UX-P09-FLT-003/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 22625,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194648Z-22508/UX-P09-FLT-003/repeat-1/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "backup_kill_recovered",
+              "new_snapshots": 1,
+              "previous_snapshots": 1
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-004",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194648Z-22508/UX-P09-FLT-004/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 22629,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194648Z-22508/UX-P09-FLT-004/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 22644,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194648Z-22508/UX-P09-FLT-004/repeat-1/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "relink_commit_kill_recovered",
+              "photo": "0cc3fcdc-2547-4708-b902-0fd1954306cc"
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-005",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194648Z-22508/UX-P09-FLT-005/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 22657,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194648Z-22508/UX-P09-FLT-005/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 22669,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194648Z-22508/UX-P09-FLT-005/repeat-1/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "real_batch_kill_recovered",
+              "control_assets": 1,
+              "selected_assets": 3
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-006",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194648Z-22508/UX-P09-FLT-006/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 22689,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194648Z-22508/UX-P09-FLT-006/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 22697,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T194648Z-22508/UX-P09-FLT-006/repeat-1/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "merge_registration_kill_recovered",
+              "registered_results": 1
+            }
+          ]
+        }
+      ]
+    },
+    "ux-persistence-final": {
+      "file": {
+        "path": "build-verify/ux-persistence-final/UX_REPORT.json",
+        "sha256": "92b5eb16d415f553e47ba252b54e1aadb2d372e1e28f74d24d309bf56e1e3e10",
+        "bytes": 136188
+      },
+      "summary": {
+        "PASS": 24
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "f052cac28072b2eb60bc9a4257c14f27fe1af5e3",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "f052cac28072b2eb60bc9a4257c14f27fe1af5e3",
+        "worktree_dirty": true,
+        "source_tree_sha256": "c8fbb62891bc6acbb493239b59caa1599e9e1e873a6758720b88acbeda4da753",
+        "test_executable_sha256": "70cc24bc306fdf8d90a286540e82b5bdea85657dac3ab78c2384dcc0ec066f22",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "70cc24bc306fdf8d90a286540e82b5bdea85657dac3ab78c2384dcc0ec066f22"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P09-XMP-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-XMP-001/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [],
+          "observations": [
+            {
+              "action": "actual_xmp_checkpoint",
+              "destination_sha256": "4b90690ba094a353973500cded3b407c186c98c63578f524b56917daffe9af36",
+              "point": "xmp.before-install",
+              "staging_present": true
+            },
+            {
+              "action": "actual_xmp_checkpoint",
+              "destination_sha256": "88c910c07f4eacf2bf2d41ed660472fc2d5d7fa4df440ac19aa49c732db4431c",
+              "point": "xmp.after-install",
+              "staging_present": false
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-XMP-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-XMP-001/repeat-2",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [],
+          "observations": [
+            {
+              "action": "actual_xmp_checkpoint",
+              "destination_sha256": "4b90690ba094a353973500cded3b407c186c98c63578f524b56917daffe9af36",
+              "point": "xmp.before-install",
+              "staging_present": true
+            },
+            {
+              "action": "actual_xmp_checkpoint",
+              "destination_sha256": "88c910c07f4eacf2bf2d41ed660472fc2d5d7fa4df440ac19aa49c732db4431c",
+              "point": "xmp.after-install",
+              "staging_present": false
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-XMP-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-XMP-001/repeat-3",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [],
+          "observations": [
+            {
+              "action": "actual_xmp_checkpoint",
+              "destination_sha256": "4b90690ba094a353973500cded3b407c186c98c63578f524b56917daffe9af36",
+              "point": "xmp.before-install",
+              "staging_present": true
+            },
+            {
+              "action": "actual_xmp_checkpoint",
+              "destination_sha256": "88c910c07f4eacf2bf2d41ed660472fc2d5d7fa4df440ac19aa49c732db4431c",
+              "point": "xmp.after-install",
+              "staging_present": false
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-XMP-012",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-XMP-012/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24421,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-XMP-012/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24484,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-XMP-012/repeat-1/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "actual_xmp_checkpoint",
+              "destination_sha256": "88c910c07f4eacf2bf2d41ed660472fc2d5d7fa4df440ac19aa49c732db4431c",
+              "point": "xmp.after-install",
+              "staging_present": false
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-XMP-012",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-XMP-012/repeat-2",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24498,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-XMP-012/repeat-2/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24521,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-XMP-012/repeat-2/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "actual_xmp_checkpoint",
+              "destination_sha256": "88c910c07f4eacf2bf2d41ed660472fc2d5d7fa4df440ac19aa49c732db4431c",
+              "point": "xmp.after-install",
+              "staging_present": false
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-XMP-012",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-XMP-012/repeat-3",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24527,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-XMP-012/repeat-3/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24549,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-XMP-012/repeat-3/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "actual_xmp_checkpoint",
+              "destination_sha256": "88c910c07f4eacf2bf2d41ed660472fc2d5d7fa4df440ac19aa49c732db4431c",
+              "point": "xmp.after-install",
+              "staging_present": false
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-001/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24557,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-001/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24564,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-001/repeat-1/02-verify"
+            },
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24570,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-001/repeat-1/03-prepare-committed"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24581,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-001/repeat-1/04-verify-committed"
+            }
+          ],
+          "observations": [
+            {
+              "action": "catalog_commit_kill_recovered",
+              "committed": true
+            },
+            {
+              "action": "catalog_commit_kill_recovered",
+              "committed": false
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-001/repeat-2",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24593,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-001/repeat-2/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24597,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-001/repeat-2/02-verify"
+            },
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24612,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-001/repeat-2/03-prepare-committed"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24625,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-001/repeat-2/04-verify-committed"
+            }
+          ],
+          "observations": [
+            {
+              "action": "catalog_commit_kill_recovered",
+              "committed": true
+            },
+            {
+              "action": "catalog_commit_kill_recovered",
+              "committed": false
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-001/repeat-3",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24632,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-001/repeat-3/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24636,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-001/repeat-3/02-verify"
+            },
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24643,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-001/repeat-3/03-prepare-committed"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24659,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-001/repeat-3/04-verify-committed"
+            }
+          ],
+          "observations": [
+            {
+              "action": "catalog_commit_kill_recovered",
+              "committed": true
+            },
+            {
+              "action": "catalog_commit_kill_recovered",
+              "committed": false
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-002/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24664,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-002/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24689,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-002/repeat-1/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "actual_xmp_checkpoint",
+              "destination_sha256": "4b90690ba094a353973500cded3b407c186c98c63578f524b56917daffe9af36",
+              "point": "xmp.before-install",
+              "staging_present": true
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-002/repeat-2",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24698,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-002/repeat-2/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24738,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-002/repeat-2/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "actual_xmp_checkpoint",
+              "destination_sha256": "4b90690ba094a353973500cded3b407c186c98c63578f524b56917daffe9af36",
+              "point": "xmp.before-install",
+              "staging_present": true
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-002/repeat-3",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24774,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-002/repeat-3/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24798,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-002/repeat-3/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "actual_xmp_checkpoint",
+              "destination_sha256": "4b90690ba094a353973500cded3b407c186c98c63578f524b56917daffe9af36",
+              "point": "xmp.before-install",
+              "staging_present": true
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-003/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24828,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-003/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24834,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-003/repeat-1/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "backup_kill_recovered",
+              "new_snapshots": 1,
+              "previous_snapshots": 1
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-003/repeat-2",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24839,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-003/repeat-2/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24848,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-003/repeat-2/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "backup_kill_recovered",
+              "new_snapshots": 1,
+              "previous_snapshots": 1
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-003/repeat-3",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24852,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-003/repeat-3/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24859,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-003/repeat-3/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "backup_kill_recovered",
+              "new_snapshots": 1,
+              "previous_snapshots": 1
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-004",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-004/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24860,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-004/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24875,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-004/repeat-1/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "relink_commit_kill_recovered",
+              "photo": "d90f060e-f774-4005-a889-9dfee3a7553a"
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-004",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-004/repeat-2",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24887,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-004/repeat-2/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24896,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-004/repeat-2/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "relink_commit_kill_recovered",
+              "photo": "4833fc6a-36a6-4b71-922f-12b3ddfb64f4"
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-004",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-004/repeat-3",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24916,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-004/repeat-3/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24968,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-004/repeat-3/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "relink_commit_kill_recovered",
+              "photo": "9ece919c-3c8a-4f87-8104-e730f4d96a14"
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-005",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-005/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24979,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-005/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24983,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-005/repeat-1/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "real_batch_kill_recovered",
+              "control_assets": 1,
+              "selected_assets": 3
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-005",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-005/repeat-2",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24985,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-005/repeat-2/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 24993,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-005/repeat-2/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "real_batch_kill_recovered",
+              "control_assets": 1,
+              "selected_assets": 3
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-005",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-005/repeat-3",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 24997,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-005/repeat-3/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 25019,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-005/repeat-3/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "real_batch_kill_recovered",
+              "control_assets": 1,
+              "selected_assets": 3
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-006",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-006/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 25027,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-006/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 25043,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-006/repeat-1/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "merge_registration_kill_recovered",
+              "registered_results": 1
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-006",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-006/repeat-2",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 25048,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-006/repeat-2/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 25055,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-006/repeat-2/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "merge_registration_kill_recovered",
+              "registered_results": 1
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-006",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-006/repeat-3",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 25062,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-006/repeat-3/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 25066,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195549Z-24323/UX-P09-FLT-006/repeat-3/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "merge_registration_kill_recovered",
+              "registered_results": 1
+            }
+          ]
+        }
+      ]
+    },
+    "ux-persistence-final-native": {
+      "file": {
+        "path": "build-verify/ux-persistence-final-native/UX_REPORT.json",
+        "sha256": "ab174919c669d805ac6a0c068778294d2a7506039a51732088a9549732cf276b",
+        "bytes": 49789
+      },
+      "summary": {
+        "PASS": 8
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "f052cac28072b2eb60bc9a4257c14f27fe1af5e3",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "f052cac28072b2eb60bc9a4257c14f27fe1af5e3",
+        "worktree_dirty": true,
+        "source_tree_sha256": "c8fbb62891bc6acbb493239b59caa1599e9e1e873a6758720b88acbeda4da753",
+        "test_executable_sha256": "70cc24bc306fdf8d90a286540e82b5bdea85657dac3ab78c2384dcc0ec066f22",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "70cc24bc306fdf8d90a286540e82b5bdea85657dac3ab78c2384dcc0ec066f22"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P09-XMP-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-XMP-001/repeat-1",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [],
+          "observations": [
+            {
+              "action": "actual_xmp_checkpoint",
+              "destination_sha256": "4b90690ba094a353973500cded3b407c186c98c63578f524b56917daffe9af36",
+              "point": "xmp.before-install",
+              "staging_present": true
+            },
+            {
+              "action": "actual_xmp_checkpoint",
+              "destination_sha256": "88c910c07f4eacf2bf2d41ed660472fc2d5d7fa4df440ac19aa49c732db4431c",
+              "point": "xmp.after-install",
+              "staging_present": false
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-XMP-012",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-XMP-012/repeat-1",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 25167,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-XMP-012/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 25209,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-XMP-012/repeat-1/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "actual_xmp_checkpoint",
+              "destination_sha256": "88c910c07f4eacf2bf2d41ed660472fc2d5d7fa4df440ac19aa49c732db4431c",
+              "point": "xmp.after-install",
+              "staging_present": false
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-001/repeat-1",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 25243,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-001/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 25261,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-001/repeat-1/02-verify"
+            },
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 25274,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-001/repeat-1/03-prepare-committed"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 25292,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-001/repeat-1/04-verify-committed"
+            }
+          ],
+          "observations": [
+            {
+              "action": "catalog_commit_kill_recovered",
+              "committed": true
+            },
+            {
+              "action": "catalog_commit_kill_recovered",
+              "committed": false
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-002/repeat-1",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 25305,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-002/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 25355,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-002/repeat-1/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "actual_xmp_checkpoint",
+              "destination_sha256": "4b90690ba094a353973500cded3b407c186c98c63578f524b56917daffe9af36",
+              "point": "xmp.before-install",
+              "staging_present": true
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-003/repeat-1",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 25372,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-003/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 25385,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-003/repeat-1/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "backup_kill_recovered",
+              "new_snapshots": 1,
+              "previous_snapshots": 1
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-004",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-004/repeat-1",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 25397,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-004/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 25446,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-004/repeat-1/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "relink_commit_kill_recovered",
+              "photo": "cbc4973f-ccbe-4cbe-acf2-97a65f46aac8"
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-005",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-005/repeat-1",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 25512,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-005/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 25551,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-005/repeat-1/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "real_batch_kill_recovered",
+              "control_assets": 1,
+              "selected_assets": 3
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-FLT-006",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-006/repeat-1",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 25574,
+              "child_returncode": -9,
+              "intentional_kill": true,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-006/repeat-1/01-prepare"
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 25594,
+              "child_returncode": 0,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T195750Z-24261/UX-P09-FLT-006/repeat-1/02-verify"
+            }
+          ],
+          "observations": [
+            {
+              "action": "merge_registration_kill_recovered",
+              "registered_results": 1
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "retained_failures": [
+    "Initial compilation caught std::vector.contains in a test-only selection oracle; replaced by std::find.",
+    "First execution: 2 PASS / 3 FAIL. Two fixtures called openFirst (imports 10) with one supplied photo; now import one explicitly. Relink retry oracle omitted the existing intentional metadata revision +1; corrected after verifying complete stored rows and production transaction.",
+    "Initial supervisor unit fixture omitted mandatory metrics.json; corrected without changing parent SIGKILL validation. New tests require both commit checkpoint pairs and propagate any stage failure.",
+    "Initial inode-flock staging design conflicted with SQLite, causing two 15-second backup failures and a Library startup timeout. Separate ownership-record locks remove this interference; all nine affected CTest entries pass.",
+    "Initial tidy identified an unused merge result and two test RAII declarations; explicit discard and maybe_unused guards fixed all mandatory diagnostics."
+  ],
+  "validation": {
+    "full_build": "PASS",
+    "affected_ctest_pass": 9,
+    "strengthened_staging_safety_ctest": "PASS (live same/other process locks, real SIGKILL, replaced inode, symlink, mismatched pathname, prior output, companions, idempotence)",
+    "format": "PASS",
+    "mandatory_affected_tidy": "PASS",
+    "nonblocking_warnings_retained": true,
+    "symbol_isolation": {
+      "schema": 1,
+      "scope": "Global renderer signatures and all defined observer symbols; no signing, distribution or runtime qualification",
+      "shipping": {
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/Luma.app/Contents/MacOS/Luma",
+        "sha256": "68795e6032dea6fc14c0c6be986a4a615e18a6fd38fb1e12cecdc5d21eca98c0",
+        "original_renderer_symbols": [
+          "__ZN4luma9renderCPUERKNS_10FloatImageENS_12EditDocumentEiNSt3__14spanIKhLm18446744073709551615EEENS_17CancellationTokenENS_19RawColorCalibrationENS_16DetailDiagnosticEdNS_13PhotoMetadataENS_11MaskOverlayEPNS_18DevelopAcceleratorENS_22PreviewAnalysisOptionsE"
+        ],
+        "alternate_renderer_symbols": [],
+        "test_observer_symbols": [],
+        "observer_symbol_scope": "all_defined_including_local",
+        "nm_stderr": "",
+        "observer_nm_stderr": ""
+      },
+      "ux": {
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "sha256": "70cc24bc306fdf8d90a286540e82b5bdea85657dac3ab78c2384dcc0ec066f22",
+        "original_renderer_symbols": [
+          "__ZN4luma9renderCPUERKNS_10FloatImageENS_12EditDocumentEiNSt3__14spanIKhLm18446744073709551615EEENS_17CancellationTokenENS_19RawColorCalibrationENS_16DetailDiagnosticEdNS_13PhotoMetadataENS_11MaskOverlayEPNS_18DevelopAcceleratorENS_22PreviewAnalysisOptionsE"
+        ],
+        "alternate_renderer_symbols": [
+          "__ZN4luma19renderCPUWithUxRowsERNS_7ux_test14CpuRowObserverERKNS_10FloatImageENS_12EditDocumentEiNSt3__14spanIKhLm18446744073709551615EEENS_17CancellationTokenENS_19RawColorCalibrationENS_16DetailDiagnosticEdNS_13PhotoMetadataENS_11MaskOverlayE"
+        ],
+        "test_observer_symbols": [
+          "__GLOBAL__sub_I_LoadProbe.cpp",
+          "__GLOBAL__sub_I_PreviewResultProbe.cpp",
+          "__GLOBAL__sub_I_RetouchResultProbe.cpp",
+          "__ZN12_GLOBAL__N_19thumbnailERKNSt3__14__fs10filesystem4pathERK7QStringRKNS0_10shared_ptrI14ThumbnailStateEERKN4luma17CancellationTokenERKN2ux15thumbnail_trace5TokenE",
+          "__ZN12_GLOBAL__N_19thumbnailERKNSt3__14__fs10filesystem4pathERK7QStringRKNS0_10shared_ptrI14ThumbnailStateEERKN4luma17CancellationTokenERKN2ux15thumbnail_trace5TokenE.cold.1",
+          "__ZN2ux12_GLOBAL__N_111requestsForERKNS_15thumbnail_trace8SnapshotERK4QUrl",
+          "__ZN2ux12_GLOBAL__N_111rowControlsERKNS_15thumbnail_trace8SnapshotERKNSt3__16vectorINS0_12RowReferenceENS5_9allocatorIS7_EEEE",
+          "__ZN2ux12_GLOBAL__N_115rejectTransientERNS_7ContextERNS_17PreviewResultGateERK6QImageRK7QString",
+          "__ZN2ux12_GLOBAL__N_116checkNewResponseERKNS_15thumbnail_trace8SnapshotERKNS0_3PinEiRK5QSizey",
+          "__ZN2ux12_GLOBAL__N_13oneERKNS_15thumbnail_trace8SnapshotEyNS1_4KindE",
+          "__ZN2ux12_GLOBAL__N_14heldERNS_15thumbnail_trace7SessionERKNS0_3PinERK5QSizeb",
+          "__ZN2ux12_GLOBAL__N_14heldERNS_15thumbnail_trace7SessionERKNS0_3PinERK5QSizebRKNSt3__16vectorINS0_12RowReferenceENSA_9allocatorISC_EEEE",
+          "__ZN2ux12_GLOBAL__N_14heldERNS_15thumbnail_trace7SessionERKNS0_3PinERK5QSizebb",
+          "__ZN2ux12_GLOBAL__N_16cpuOneERKNS_15thumbnail_trace8SnapshotEyNS1_8CpuStageE",
+          "__ZN2ux12_GLOBAL__N_16cpuOneERKNS_15thumbnail_trace8SnapshotEyNS1_8CpuStageE.cold.1",
+          "__ZN2ux12_GLOBAL__N_19heldFinalERNS_7ContextERNS_17PreviewResultGateERK6QImageRK7QString",
+          "__ZN2ux12_GLOBAL__N_19traceJSONERKNS_15thumbnail_trace8SnapshotE",
+          "__ZN2ux13MergeJobProbe3jobERK16EditorController",
+          "__ZN2ux14LoadResultGate7releaseEv",
+          "__ZN2ux14LoadResultGateC1ER16EditorController",
+          "__ZN2ux14LoadResultGateC2ER16EditorController",
+          "__ZN2ux14LoadResultGateD1Ev",
+          "__ZN2ux14LoadResultGateD2Ev",
+          "__ZN2ux15PersistenceGate7releaseEv",
+          "__ZN2ux15PersistenceGateC1ENSt3__14__fs10filesystem4pathENS1_6vectorINS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEENS9_ISB_EEEE",
+          "__ZN2ux15PersistenceGateC2ENSt3__14__fs10filesystem4pathENS1_6vectorINS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEENS9_ISB_EEEE",
+          "__ZN2ux15PersistenceGateD1Ev",
+          "__ZN2ux15PersistenceGateD2Ev",
+          "__ZN2ux15holdLoadSuccessERKNS_13LoadOperationE",
+          "__ZN2ux15thumbnail_trace12_GLOBAL__N_112appendLockedERNS0_5StateEyNS0_4KindEyb",
+          "__ZN2ux15thumbnail_trace12_GLOBAL__N_116FirstRowObserver17firstRowCompletedERKN4luma12DisplayImageE",
+          "__ZN2ux15thumbnail_trace12_GLOBAL__N_116FirstRowObserverD0Ev",
+          "__ZN2ux15thumbnail_trace12_GLOBAL__N_116FirstRowObserverD1Ev",
+          "__ZN2ux15thumbnail_trace21observeActualResponseERKNSt3__110shared_ptrINS0_4SlotEEEP19QQuickImageResponseRK7QStringRK5QSize",
+          "__ZN2ux15thumbnail_trace27renderThumbnailWithCpuProbeERKNS0_5TokenEyRKN4luma10FloatImageENS4_12EditDocumentEiNSt3__14spanIKhLm18446744073709551615EEENS4_17CancellationTokenENS4_19RawColorCalibrationENS4_16DetailDiagnosticEdNS4_13PhotoMetadataENS4_11MaskOverlayE",
+          "__ZN2ux15thumbnail_trace5StateD2Ev",
+          "__ZN2ux15thumbnail_trace5TokenC1ENSt3__110shared_ptrINS0_5StateEEEy",
+          "__ZN2ux15thumbnail_trace5TokenC2ENSt3__110shared_ptrINS0_5StateEEEy",
+          "__ZN2ux15thumbnail_trace5TokenD1Ev",
+          "__ZN2ux15thumbnail_trace7RequestD1Ev",
+          "__ZN2ux15thumbnail_trace7Session7releaseEv",
+          "__ZN2ux15thumbnail_trace7SessionC1ENSt3__110shared_ptrINS0_4SlotEEENS2_8optionalINS0_8GateSpecEEE",
+          "__ZN2ux15thumbnail_trace7SessionC2ENSt3__110shared_ptrINS0_4SlotEEENS2_8optionalINS0_8GateSpecEEE",
+          "__ZN2ux15thumbnail_trace7SessionD1Ev",
+          "__ZN2ux15thumbnail_trace7SessionD2Ev",
+          "__ZN2ux15thumbnail_trace8SnapshotC2ERKS1_",
+          "__ZN2ux15thumbnail_trace8SnapshotD2Ev",
+          "__ZN2ux15thumbnail_trace8makeSlotEv",
+          "__ZN2ux16PersistenceStateD2Ev",
+          "__ZN2ux16PreviewOperationD1Ev",
+          "__ZN2ux17LoadProbeSnapshotD2Ev",
+          "__ZN2ux17MetalPreviewProbe7developERKN4luma10FloatImageERKNS1_15DevelopPipelineENS1_17CancellationTokenE",
+          "__ZN2ux17MetalPreviewProbe7developERKN4luma10FloatImageERKNS1_15DevelopPipelineENS1_17CancellationTokenE.cold.1",
+          "__ZN2ux17MetalPreviewProbe7installER16EditorController",
+          "__ZN2ux17MetalPreviewProbe7installER16EditorController.cold.1",
+          "__ZN2ux17MetalPreviewProbeD0Ev",
+          "__ZN2ux17MetalPreviewProbeD1Ev",
+          "__ZN2ux17PreviewResultGate7releaseEv",
+          "__ZN2ux17PreviewResultGateC1ER16EditorControlleri",
+          "__ZN2ux17PreviewResultGateC2ER16EditorControlleri",
+          "__ZN2ux17PreviewResultGateD1Ev",
+          "__ZN2ux17PreviewResultGateD2Ev",
+          "__ZN2ux17RetouchResultGate7releaseEv",
+          "__ZN2ux17RetouchResultGateC1ER16EditorController",
+          "__ZN2ux17RetouchResultGateC2ER16EditorController",
+          "__ZN2ux17RetouchResultGateD1Ev",
+          "__ZN2ux17RetouchResultGateD2Ev",
+          "__ZN2ux18PreviewResultStateD2Ev",
+          "__ZN2ux19deferPreviewSuccessERKNS_16PreviewOperationERK6QImageNSt3__18functionIFvvEEE",
+          "__ZN2ux19deferRetouchSuccessEPK16EditorControlleryRKN4luma13RetouchStrokeENSt3__18functionIFvvEEE",
+          "__ZN2ux21PreviewResultSnapshotC2ERKS0_",
+          "__ZN2ux21PreviewResultSnapshotD1Ev",
+          "__ZN2ux21RetouchResultSnapshotD1Ev",
+          "__ZN2ux22observePreviewDeliveryERKNS_16PreviewOperationE",
+          "__ZN2ux22observeRetouchDeliveryEPK16EditorControlleryb",
+          "__ZN2ux23observePreviewRejectionERKNS_16PreviewOperationEy",
+          "__ZN2ux26observeLoadSuccessDeliveryERKNS_13LoadOperationE",
+          "__ZN2ux28observePersistenceCheckpointERKNSt3__14__fs10filesystem4pathENS0_17basic_string_viewIcNS0_11char_traitsIcEEEES5_S5_",
+          "__ZN4luma19renderCPUWithUxRowsERNS_7ux_test14CpuRowObserverERKNS_10FloatImageENS_12EditDocumentEiNSt3__14spanIKhLm18446744073709551615EEENS_17CancellationTokenENS_19RawColorCalibrationENS_16DetailDiagnosticEdNS_13PhotoMetadataENS_11MaskOverlayE",
+          "__ZN9QtPrivate15QCallableObjectIZN2ux12_GLOBAL__N_110BatchAuditC1ERNS1_7ContextERNS1_15thumbnail_trace7SessionEEUlvE_NS_4ListIJEEEvE4implEiPNS_15QSlotObjectBaseEP7QObjectPPvPb",
+          "__ZN9QtPrivate15QCallableObjectIZN2ux12_GLOBAL__N_117InvalidationAuditC1ERNS1_7ContextERNS1_15thumbnail_trace7SessionEEUlRK11QModelIndexSB_RK5QListIiEE_NS_4ListIJSB_SB_SF_EEEvE4implEiPNS_15QSlotObjectBaseEP7QObjectPPvPb",
+          "__ZN9QtPrivate15QCallableObjectIZN2ux15thumbnail_trace21observeActualResponseERKNSt3__110shared_ptrINS2_4SlotEEEP19QQuickImageResponseRK7QStringRK5QSizeE3$_0NS_4ListIJEEEvE4implEiPNS_15QSlotObjectBaseEP7QObjectPPvPb",
+          "__ZN9QtPrivate15QCallableObjectIZN2ux15thumbnail_trace21observeActualResponseERKNSt3__110shared_ptrINS2_4SlotEEEP19QQuickImageResponseRK7QStringRK5QSizeE3$_1NS_4ListIJP7QObjectEEEvE4implEiPNS_15QSlotObjectBaseESK_PPvPb",
+          "__ZNK2ux14LoadResultGate8snapshotEv",
+          "__ZNK2ux15PersistenceGate8snapshotEv",
+          "__ZNK2ux15thumbnail_trace5Token12noteCpuStageENS0_8CpuStageEyii",
+          "__ZNK2ux15thumbnail_trace5Token12noteCpuStageENS0_8CpuStageEyii.cold.1",
+          "__ZNK2ux15thumbnail_trace5Token17afterActualCpuRowEyiiNSt3__14spanIKhLm18446744073709551615EEE",
+          "__ZNK2ux15thumbnail_trace5Token19beforeFinishedQueueEb",
+          "__ZNK2ux15thumbnail_trace5Token23requiresPartialCpuProbeEv",
+          "__ZNK2ux15thumbnail_trace5Token4noteENS0_4KindEy",
+          "__ZNK2ux15thumbnail_trace7Session8snapshotEv",
+          "__ZNK2ux16PreviewOperation6sameAsERKS0_",
+          "__ZNK2ux17PreviewResultGate8snapshotEv",
+          "__ZNK2ux17RetouchResultGate8snapshotEv",
+          "__ZNKSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE11target_typeEv",
+          "__ZNKSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE6targetERKSt9type_info",
+          "__ZNKSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE7__cloneEPNS0_6__baseISF_EE",
+          "__ZNKSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE7__cloneEv",
+          "__ZNKSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE11target_typeEv",
+          "__ZNKSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE6targetERKSt9type_info",
+          "__ZNKSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE7__cloneEPNS0_6__baseISF_EE",
+          "__ZNKSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE7__cloneEv",
+          "__ZNKSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEE11target_typeEv",
+          "__ZNKSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEE6targetERKSt9type_info",
+          "__ZNKSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEE7__cloneEPNS0_6__baseISL_EE",
+          "__ZNKSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEE7__cloneEv",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE18destroy_deallocateEv",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE7destroyEv",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEED0Ev",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEED1Ev",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEEclEv",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE18destroy_deallocateEv",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE7destroyEv",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEED0Ev",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEED1Ev",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEEclEv",
+          "__ZNSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEE18destroy_deallocateEv",
+          "__ZNSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEE7destroyEv",
+          "__ZNSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEED0Ev",
+          "__ZNSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEED1Ev",
+          "__ZNSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEEclEOiSN_",
+          "__ZNSt3__110shared_ptrIN2ux14LoadProbeStateEED1B9nqe220106Ev",
+          "__ZNSt3__110shared_ptrIN2ux15thumbnail_trace4SlotEED1B9nqe220106Ev",
+          "__ZNSt3__110shared_ptrIN2ux15thumbnail_trace5StateEED1B9nqe220106Ev",
+          "__ZNSt3__110shared_ptrIN2ux16PersistenceStateEED1B9nqe220106Ev",
+          "__ZNSt3__110shared_ptrIN2ux17MetalPreviewProbeEED1B9nqe220106Ev",
+          "__ZNSt3__110shared_ptrIN2ux18PreviewResultStateEED1B9nqe220106Ev",
+          "__ZNSt3__110shared_ptrIN2ux18RetouchResultStateEED1B9nqe220106Ev",
+          "__ZNSt3__110unique_ptrIN2ux15thumbnail_trace7SessionENS_14default_deleteIS3_EEED1B9nqe220106Ev",
+          "__ZNSt3__111make_uniqueB9nqe220106IN2ux15thumbnail_trace7SessionEJNS_10shared_ptrINS2_4SlotEEENS2_8GateSpecEELi0EEENS_10unique_ptrIT_NS_14default_deleteIS9_EEEEDpOT0_",
+          "__ZNSt3__114__split_bufferIN2ux15thumbnail_trace7RequestERNS_9allocatorIS3_EEED1Ev",
+          "__ZNSt3__118condition_variable10wait_untilB9nqe220106INS_6chrono12steady_clockENS2_8durationIxNS_5ratioILl1ELl1000000000EEEEEZNK2ux15thumbnail_trace5Token17afterActualCpuRowEyiiNS_4spanIKhLm18446744073709551615EEEE3$_0EEbRNS_11unique_lockINS_5mutexEEERKNS2_10time_pointIT_T0_EET1_",
+          "__ZNSt3__118condition_variable10wait_untilB9nqe220106INS_6chrono12steady_clockENS2_8durationIxNS_5ratioILl1ELl1000000000EEEEEZNK2ux15thumbnail_trace5Token19beforeFinishedQueueEbE3$_0EEbRNS_11unique_lockINS_5mutexEEERKNS2_10time_pointIT_T0_EET1_",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux14LoadProbeStateENS_9allocatorIS2_EEE16__on_zero_sharedEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux14LoadProbeStateENS_9allocatorIS2_EEE21__on_zero_shared_weakEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux14LoadProbeStateENS_9allocatorIS2_EEED0Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux14LoadProbeStateENS_9allocatorIS2_EEED1Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace4SlotENS_9allocatorIS3_EEE16__on_zero_sharedEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace4SlotENS_9allocatorIS3_EEE21__on_zero_shared_weakEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace4SlotENS_9allocatorIS3_EEED0Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace4SlotENS_9allocatorIS3_EEED1Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace5StateENS_9allocatorIS3_EEE16__on_zero_sharedEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace5StateENS_9allocatorIS3_EEE21__on_zero_shared_weakEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace5StateENS_9allocatorIS3_EEED0Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace5StateENS_9allocatorIS3_EEED1Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux16PersistenceStateENS_9allocatorIS2_EEE16__on_zero_sharedEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux16PersistenceStateENS_9allocatorIS2_EEE21__on_zero_shared_weakEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux16PersistenceStateENS_9allocatorIS2_EEED0Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux16PersistenceStateENS_9allocatorIS2_EEED1Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux17MetalPreviewProbeENS_9allocatorIS2_EEE16__on_zero_sharedEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux17MetalPreviewProbeENS_9allocatorIS2_EEE21__on_zero_shared_weakEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux17MetalPreviewProbeENS_9allocatorIS2_EEED0Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux17MetalPreviewProbeENS_9allocatorIS2_EEED1Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux18PreviewResultStateENS_9allocatorIS2_EEE16__on_zero_sharedEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux18PreviewResultStateENS_9allocatorIS2_EEE21__on_zero_shared_weakEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux18PreviewResultStateENS_9allocatorIS2_EEED0Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux18PreviewResultStateENS_9allocatorIS2_EEED1Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux18RetouchResultStateENS_9allocatorIS2_EEE16__on_zero_sharedEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux18RetouchResultStateENS_9allocatorIS2_EEE21__on_zero_shared_weakEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux18RetouchResultStateENS_9allocatorIS2_EEED0Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux18RetouchResultStateENS_9allocatorIS2_EEED1Ev",
+          "__ZNSt3__123__optional_storage_baseIN2ux16PreviewOperationELb0EED2Ev",
+          "__ZNSt3__128__exception_guard_exceptionsINS_6vectorIN2ux15thumbnail_trace14CpuRenderEventENS_9allocatorIS4_EEE16__destroy_vectorEED1B9nqe220106Ev",
+          "__ZNSt3__128__exception_guard_exceptionsINS_6vectorIN2ux15thumbnail_trace7RequestENS_9allocatorIS4_EEE16__destroy_vectorEED1B9nqe220106Ev",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace14CpuRenderEventENS_9allocatorIS3_EEE18__assign_with_sizeB9nqe220106INS_17_ClassicAlgPolicyEPS3_S9_EEvT0_T1_l",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace14CpuRenderEventENS_9allocatorIS3_EEE20__throw_length_errorB9nqe220106Ev",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace14CpuRenderEventENS_9allocatorIS3_EEE24__emplace_back_slow_pathIJS3_EEEPS3_DpOT_",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace14CpuRenderEventENS_9allocatorIS3_EEE9push_backB9nqe220106EOS3_",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace5EventENS_9allocatorIS3_EEE18__assign_with_sizeB9nqe220106INS_17_ClassicAlgPolicyEPS3_S9_EEvT0_T1_l",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace5EventENS_9allocatorIS3_EEE20__throw_length_errorB9nqe220106Ev",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace7RequestENS_9allocatorIS3_EEE16__init_with_sizeB9nqe220106IPS3_S8_EEvT_T0_m",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace7RequestENS_9allocatorIS3_EEE18__assign_with_sizeB9nqe220106INS_17_ClassicAlgPolicyEPS3_S9_EEvT0_T1_l",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace7RequestENS_9allocatorIS3_EEE20__throw_length_errorB9nqe220106Ev",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace7RequestENS_9allocatorIS3_EEE24__emplace_back_slow_pathIJRKS3_EEEPS3_DpOT_",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace7RequestENS_9allocatorIS3_EEE24__emplace_back_slow_pathIJS3_EEEPS3_DpOT_",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace7RequestENS_9allocatorIS3_EEE26__swap_out_circular_bufferERNS_14__split_bufferIS3_RS5_EE",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace7RequestENS_9allocatorIS3_EEED1B9nqe220106Ev",
+          "__ZNSt3__18optionalIN2ux15thumbnail_trace8SnapshotEEaSB9nqe220106IRKS3_Li0EEERS4_OT_",
+          "__ZNSt3__18optionalIN2ux16PreviewOperationEED1Ev",
+          "__ZNSt3__18optionalIN2ux16PreviewOperationEEaSB9nqe220106IRKS2_Li0EEERS3_OT_",
+          "__ZNSt3__18weak_ptrIN2ux14LoadProbeStateEED1Ev",
+          "__ZNSt3__18weak_ptrIN2ux16PersistenceStateEED1Ev",
+          "__ZNSt3__18weak_ptrIN2ux18PreviewResultStateEED1Ev",
+          "__ZNSt3__18weak_ptrIN2ux18RetouchResultStateEED1Ev",
+          "__ZTIN2ux15thumbnail_trace12_GLOBAL__N_116FirstRowObserverE",
+          "__ZTIN2ux17MetalPreviewProbeE",
+          "__ZTIN4luma7ux_test14CpuRowObserverE",
+          "__ZTINSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEEE",
+          "__ZTINSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEEE",
+          "__ZTINSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEEE",
+          "__ZTINSt3__120__shared_ptr_emplaceIN2ux14LoadProbeStateENS_9allocatorIS2_EEEE",
+          "__ZTINSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace4SlotENS_9allocatorIS3_EEEE",
+          "__ZTINSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace5StateENS_9allocatorIS3_EEEE",
+          "__ZTINSt3__120__shared_ptr_emplaceIN2ux16PersistenceStateENS_9allocatorIS2_EEEE",
+          "__ZTINSt3__120__shared_ptr_emplaceIN2ux17MetalPreviewProbeENS_9allocatorIS2_EEEE",
+          "__ZTINSt3__120__shared_ptr_emplaceIN2ux18PreviewResultStateENS_9allocatorIS2_EEEE",
+          "__ZTINSt3__120__shared_ptr_emplaceIN2ux18RetouchResultStateENS_9allocatorIS2_EEEE",
+          "__ZTIZN2ux12_GLOBAL__N_115rejectTransientERNS_7ContextERNS_17PreviewResultGateERK6QImageRK7QStringE3$_0",
+          "__ZTIZN2ux12_GLOBAL__N_19heldFinalERNS_7ContextERNS_17PreviewResultGateERK6QImageRK7QStringE3$_0",
+          "__ZTIZN4luma19renderCPUWithUxRowsERNS_7ux_test14CpuRowObserverERKNS_10FloatImageENS_12EditDocumentEiNSt3__14spanIKhLm18446744073709551615EEENS_17CancellationTokenENS_19RawColorCalibrationENS_16DetailDiagnosticEdNS_13PhotoMetadataENS_11MaskOverlayEE3$_2",
+          "__ZTSN2ux15thumbnail_trace12_GLOBAL__N_116FirstRowObserverE",
+          "__ZTSN2ux17MetalPreviewProbeE",
+          "__ZTSN4luma7ux_test14CpuRowObserverE",
+          "__ZTSNSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEEE",
+          "__ZTSNSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEEE",
+          "__ZTSNSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEEE",
+          "__ZTSNSt3__120__shared_ptr_emplaceIN2ux14LoadProbeStateENS_9allocatorIS2_EEEE",
+          "__ZTSNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace4SlotENS_9allocatorIS3_EEEE",
+          "__ZTSNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace5StateENS_9allocatorIS3_EEEE",
+          "__ZTSNSt3__120__shared_ptr_emplaceIN2ux16PersistenceStateENS_9allocatorIS2_EEEE",
+          "__ZTSNSt3__120__shared_ptr_emplaceIN2ux17MetalPreviewProbeENS_9allocatorIS2_EEEE",
+          "__ZTSNSt3__120__shared_ptr_emplaceIN2ux18PreviewResultStateENS_9allocatorIS2_EEEE",
+          "__ZTSNSt3__120__shared_ptr_emplaceIN2ux18RetouchResultStateENS_9allocatorIS2_EEEE",
+          "__ZTSZN2ux12_GLOBAL__N_115rejectTransientERNS_7ContextERNS_17PreviewResultGateERK6QImageRK7QStringE3$_0",
+          "__ZTSZN2ux12_GLOBAL__N_19heldFinalERNS_7ContextERNS_17PreviewResultGateERK6QImageRK7QStringE3$_0",
+          "__ZTSZN4luma19renderCPUWithUxRowsERNS_7ux_test14CpuRowObserverERKNS_10FloatImageENS_12EditDocumentEiNSt3__14spanIKhLm18446744073709551615EEENS_17CancellationTokenENS_19RawColorCalibrationENS_16DetailDiagnosticEdNS_13PhotoMetadataENS_11MaskOverlayEE3$_2",
+          "__ZTVN2ux15thumbnail_trace12_GLOBAL__N_116FirstRowObserverE",
+          "__ZTVN2ux17MetalPreviewProbeE",
+          "__ZTVNSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEEE",
+          "__ZTVNSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEEE",
+          "__ZTVNSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEEE",
+          "__ZTVNSt3__120__shared_ptr_emplaceIN2ux14LoadProbeStateENS_9allocatorIS2_EEEE",
+          "__ZTVNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace4SlotENS_9allocatorIS3_EEEE",
+          "__ZTVNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace5StateENS_9allocatorIS3_EEEE",
+          "__ZTVNSt3__120__shared_ptr_emplaceIN2ux16PersistenceStateENS_9allocatorIS2_EEEE",
+          "__ZTVNSt3__120__shared_ptr_emplaceIN2ux17MetalPreviewProbeENS_9allocatorIS2_EEEE",
+          "__ZTVNSt3__120__shared_ptr_emplaceIN2ux18PreviewResultStateENS_9allocatorIS2_EEEE",
+          "__ZTVNSt3__120__shared_ptr_emplaceIN2ux18RetouchResultStateENS_9allocatorIS2_EEEE",
+          "__ZZN2ux15thumbnail_trace21observeActualResponseERKNSt3__110shared_ptrINS0_4SlotEEEP19QQuickImageResponseRK7QStringRK5QSizeEN3$_0D1Ev",
+          "__ZZN2ux15thumbnail_trace21observeActualResponseERKNSt3__110shared_ptrINS0_4SlotEEEP19QQuickImageResponseRK7QStringRK5QSizeEN3$_1D1Ev",
+          "__ZZN4luma19renderCPUWithUxRowsERNS_7ux_test14CpuRowObserverERKNS_10FloatImageENS_12EditDocumentEiNSt3__14spanIKhLm18446744073709551615EEENS_17CancellationTokenENS_19RawColorCalibrationENS_16DetailDiagnosticEdNS_13PhotoMetadataENS_11MaskOverlayEENK3$_3clEii",
+          "__ZZNSt3__16vectorIN2ux15thumbnail_trace5EventENS_9allocatorIS3_EEE12emplace_backIJS3_EEERS3_DpOT_ENKUlvE0_clEv"
+        ],
+        "observer_symbol_scope": "all_defined_including_local",
+        "nm_stderr": "",
+        "observer_nm_stderr": ""
+      },
+      "status": "PASS"
+    },
+    "native_screenshots_inspected": [
+      "UX-P09-FLT-003/02-verify/after.png",
+      "UX-P09-FLT-006/02-verify/after.png"
+    ]
+  },
+  "logs": [
+    {
+      "path": ".tools/final-persistence-kills-build.log",
+      "sha256": "274b9a8065f48d2a673afa71f610d6d0cc1e41bc36c0c22d333222a31669a958",
+      "bytes": 7875
+    },
+    {
+      "path": ".tools/final-persistence-runner-tests.log",
+      "sha256": "81c42e7bd963a6ce5a263c716ea336c3e09cecaf3d2fc56870f772f1eb43b974",
+      "bytes": 1902
+    },
+    {
+      "path": ".tools/final-owned-staging-ctest.log",
+      "sha256": "d70452f6a485eeb59c7ad5870a236d3367dc6e24be6d429a16426de453ac5814",
+      "bytes": 2358
+    },
+    {
+      "path": ".tools/final-owned-staging-tidy.log",
+      "sha256": "eae4aa40bd5346bf69d03bf6c4a486fb687003c7fe991e8b774d980224e17d6f",
+      "bytes": 57322
+    },
+    {
+      "path": ".tools/final-staging-lock-record-app-build.log",
+      "sha256": "52b59ff884f42121cda849d58d52eb5e3838f86307f012eb85bd6f73332fce56",
+      "bytes": 2345
+    },
+    {
+      "path": ".tools/final-staging-lock-record-ctest.log",
+      "sha256": "d47a84578913a593e41fbfd01463775fe8c49cd328e005de8d5fdd13ecddf37e",
+      "bytes": 1644
+    },
+    {
+      "path": ".tools/final-staging-safety-ctest.log",
+      "sha256": "2deb83f6589bea0fc80b35b7121322a1986ba4450f27d07fd86c915cfb25444e",
+      "bytes": 467
+    },
+    {
+      "path": ".tools/final-persistence-final-build.log",
+      "sha256": "bb2522d54371aad1458ce271dcf7b60aa39609c6ce0fb3f729e9d53491fdb03c",
+      "bytes": 264
+    },
+    {
+      "path": ".tools/final-persistence-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".tools/final-persistence-tidy.log",
+      "sha256": "3fcf23e4b89de3b6c9e1d4acec2ee97fc410d3dcd0dc4377b5b2735168c59e15",
+      "bytes": 56540
+    },
+    {
+      "path": ".tools/final-persistence-graph.log",
+      "sha256": "1e02f5395161664fe744868de614b73753f2e848a08b7aa8299ccd206422274a",
+      "bytes": 1360
+    },
+    {
+      "path": ".tools/final-persistence-graph-health.log",
+      "sha256": "9362d1286513d596f660792ced3e67973618d1a18a8c891fa6138986f7ece739",
+      "bytes": 1154
+    }
+  ],
+  "graph": {
+    "nodes": 7903,
+    "edges": 20506,
+    "self_loops": 4,
+    "missing_or_dangling": 0,
+    "exact_duplicates": 0,
+    "qml_structurally_parsed": false
+  },
+  "limits": [
+    "Cleanup intentionally preserves legacy stages and incomplete/invalid ownership records; a kill during ownership initialization can leave such unclassified scratch files. It does not certify power-loss or external-volume behavior.",
+    "The filesystem selection fixtures do not qualify native picker navigation.",
+    "Only the existing 8 GiB M3 and built-in Retina were used.",
+    "Two applicable blocking IDs from phases 0.6–0.9 remain without adapters; phase 1.0, complete quality/load/performance, artifact/update gates and BUG045/069 remain open."
+  ]
+}

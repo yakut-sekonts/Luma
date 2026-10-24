@@ -1,13 +1,16 @@
 #include "apps/desktop/LibraryModel.h"
+#include "apps/shared/MetadataService.h"
 #include "core/catalog/Identity.h"
 #include "core/raw/RawDecoder.h"
 #include "platform/macos/FileHasher.h"
+#include "tests/unit/LegacyCatalogFixture.h"
 #include <QCoreApplication>
 #include <QElapsedTimer>
 #include <QThread>
 #include <fstream>
 #include <future>
 #include <iostream>
+#include <set>
 #include <sqlite3.h>
 #include <unistd.h>
 
@@ -101,6 +104,7 @@ void catalogTests(const std::filesystem::path &root, const std::filesystem::path
     db.deleteCollection(collection);
     require(db.libraryCount() == 1, "Deleting collection deleted original.");
     require(db.activeAsset()->edits.exposure == 1.25, "Library mutation changed Develop edits.");
+    sql(path, fixture::removePostV11Tables);
     sql(path,
         R"sql(PRAGMA foreign_keys=OFF;
             CREATE TABLE historical_edits(
@@ -408,6 +412,90 @@ void firstPageOnResetTests(const std::filesystem::path &root) {
     db.verify();
 }
 
+void sourceAvailabilityTests(const std::filesystem::path &root,
+                             const std::filesystem::path &fixture) {
+    const auto folder = root / "watched-originals";
+    std::filesystem::create_directory(folder);
+    const auto source = folder / "source.dng";
+    const auto held = root / "temporarily-removed.dng";
+    std::filesystem::copy_file(fixture, source);
+    const auto path = root / "source-watch.sqlite";
+    luma::Catalog catalog(path);
+    const auto original = catalog.addAndSelect(source, luma::macos::sha256File(source),
+                                               luma::RawDecoder().inspect(source));
+    LibraryModel model(path);
+    wait([&] {
+        return !model.working() && !model.loading() && model.count() == 1 &&
+               model.data(model.index(0), LibraryModel::AssetID).toString() ==
+                   QString::fromStdString(original.id);
+    });
+    model.select(0);
+    model.photoOpened(QString::fromStdString(original.id));
+    require(!model.data(model.index(0), LibraryModel::Missing).toBool(),
+            "Existing watched source is incorrectly marked missing.");
+    int resets = 0, notifications = 0;
+    bool unexpectedRoles = false;
+    QObject::connect(&model, &QAbstractItemModel::modelReset, &model, [&] { ++resets; });
+    QObject::connect(
+        &model, &QAbstractItemModel::dataChanged, &model,
+        [&](const QModelIndex &first, const QModelIndex &last, const QList<int> &roles) {
+            ++notifications;
+            unexpectedRoles = unexpectedRoles || first.row() != 0 || last.row() != 0 ||
+                              roles != QList<int>{LibraryModel::Missing};
+        });
+    std::filesystem::rename(source, held);
+    wait([&] { return model.data(model.index(0), LibraryModel::Missing).toBool(); });
+    require(resets == 0 && notifications == 1 && !unexpectedRoles && model.count() == 1 &&
+                model.selectedCount() == 1 &&
+                model.data(model.index(0), LibraryModel::Active).toBool(),
+            "Actual source removal reset the model or changed selection/metadata.");
+    std::filesystem::rename(held, source);
+    wait([&] { return !model.data(model.index(0), LibraryModel::Missing).toBool(); });
+    require(resets == 0 && notifications == 2 && !unexpectedRoles && model.count() == 1 &&
+                model.selectedCount() == 1 &&
+                model.data(model.index(0), LibraryModel::AssetID).toString() ==
+                    QString::fromStdString(original.id) &&
+                catalog.assetByID(original.id)->edits == original.edits &&
+                luma::macos::sha256File(source) == original.checksum,
+            "Actual source restoration changed identity, original bytes or edits.");
+    const auto movedFolder = root / "moved-watched-originals";
+    std::filesystem::rename(folder, movedFolder);
+    wait([&] { return model.data(model.index(0), LibraryModel::Missing).toBool(); });
+    std::filesystem::rename(movedFolder, folder);
+    wait([&] { return !model.data(model.index(0), LibraryModel::Missing).toBool(); });
+    require(resets == 0 && notifications == 4 && !unexpectedRoles,
+            "Parent rename/restoration did not refresh only the missing role.");
+    std::cout << "Source watcher: file and parent rename/restoration passed\n";
+    // Unrelated incoming files must not defer the availability refresh forever.
+    // Keep real directory events flowing faster than the production coalescer.
+    const auto activity = folder / "unrelated-incoming-file";
+    QTimer events;
+    events.setInterval(25);
+    QObject::connect(&events, &QTimer::timeout, &model, [&] {
+        if (std::filesystem::exists(activity))
+            std::filesystem::remove(activity);
+        else
+            std::ofstream(activity) << "owned test activity";
+    });
+    events.start();
+    std::filesystem::rename(source, held);
+    try {
+        wait([&] { return model.data(model.index(0), LibraryModel::Missing).toBool(); });
+    } catch (const std::exception &) {
+        throw std::runtime_error("Continuous directory events starved missing-source refresh.");
+    }
+    std::filesystem::rename(held, source);
+    wait([&] { return !model.data(model.index(0), LibraryModel::Missing).toBool(); });
+    events.stop();
+    std::filesystem::remove(activity);
+    require(resets == 0 && notifications == 6 && !unexpectedRoles && model.count() == 1 &&
+                model.selectedCount() == 1 &&
+                model.data(model.index(0), LibraryModel::Active).toBool() &&
+                catalog.assetByID(original.id)->edits == original.edits &&
+                luma::macos::sha256File(source) == original.checksum,
+            "Continuous folder events starved availability or changed source/model state.");
+}
+
 void modelTests(const std::filesystem::path &root, bool scaleContract) {
     const int rowCount = scaleContract ? 100000 : 256;
     const auto path = root / (scaleContract ? "large.sqlite" : "bounded-model.sqlite");
@@ -480,6 +568,201 @@ void modelTests(const std::filesystem::path &root, bool scaleContract) {
                                 : "256 metadata rows: two page boundaries, selection/filter/cache "
                                   "notifications passed; scale deferred\n");
 }
+void maintenanceAfterCancelledImportTests(const std::filesystem::path &root,
+                                          const std::filesystem::path &fixture) {
+    const auto folder = root / "maintenance-originals";
+    std::filesystem::create_directory(folder);
+    const auto source = folder / "source.dng";
+    std::filesystem::copy_file(fixture, source);
+    const auto hash = luma::macos::sha256File(source);
+    const auto catalogFolder = root / "maintenance-catalog";
+    std::filesystem::create_directory(catalogFolder);
+    const auto path = catalogFolder / "catalog.sqlite";
+    luma::Catalog catalog(path);
+    const auto asset = catalog.addAndSelect(source, hash, luma::RawDecoder().inspect(source));
+    catalog.saveExposure(asset.id, 1.25);
+    catalog.setRating({asset.id}, 4);
+    const auto collection = catalog.createCollection("Keep after cancellation");
+    catalog.collectionMembership(collection, {asset.id}, true);
+    const auto document = catalog.assetSnapshot(asset.id)->asset.edits;
+    const auto revision = catalog.assetSnapshot(asset.id)->revision;
+    const auto id = QString::fromStdString(asset.id);
+    LibraryModel model(path);
+    auto settled = [&] { wait([&] { return !model.working() && !model.loading(); }); };
+    auto metadata = [&] {
+        model.loadMetadata(id);
+        wait([&] { return model.descriptiveMetadata().value("id").toString() == id; });
+        require(model.error().isEmpty(), "Maintenance metadata read failed.");
+    };
+    settled();
+    require(model.error().isEmpty(), "Maintenance startup failed.");
+    model.setBackupSchedule(0);
+    const auto backups = std::filesystem::path(model.backupFolder().toLocalFile().toStdString());
+    auto backupFiles = [&] {
+        std::set<std::filesystem::path> files;
+        for (const auto &entry : std::filesystem::directory_iterator(backups))
+            if (entry.path().extension() == ".sqlite3")
+                files.insert(entry.path());
+        return files;
+    };
+    auto backup = [&] {
+        const auto before = backupFiles();
+        model.backupNow();
+        settled();
+        require(model.error().isEmpty(), "Cancelled import poisoned manual backup.");
+        auto after = backupFiles();
+        for (const auto &file : before)
+            after.erase(file);
+        require(after.size() == 1, "Manual backup did not create exactly one snapshot.");
+        luma::Catalog::verifyBackup(*after.begin());
+        return *after.begin();
+    };
+    const auto first = backup();
+    require(luma::Catalog(first).assetSnapshot(asset.id)->asset.edits == document,
+            "Baseline backup lost saved edits.");
+    model.importFiles({QUrl::fromLocalFile(QString::fromStdString(source.string()))}, false, {},
+                      true, true);
+    require(model.importing(), "Cancellation fixture did not start a real import.");
+    model.cancelImport();
+    settled();
+    require(!model.importing() && model.error().isEmpty(), "Import cancellation did not settle.");
+    const auto second = backup();
+    const auto restored = root / "restored-after-cancel.sqlite";
+    model.restoreCatalog(QUrl::fromLocalFile(QString::fromStdString(second.string())),
+                         QUrl::fromLocalFile(QString::fromStdString(restored.string())));
+    settled();
+    require(model.error().isEmpty(), "Cancelled import poisoned backup restore.");
+    luma::Catalog::verifyBackup(restored);
+    const auto restoredAsset = luma::Catalog(restored).assetSnapshot(asset.id);
+    require(restoredAsset && restoredAsset->asset.edits == document &&
+                restoredAsset->revision == revision &&
+                luma::Catalog(restored).libraryPage({}, 0, 1).front().rating == 4,
+            "Restore after import cancellation lost edits/revision/metadata.");
+    metadata();
+    model.writeMetadataSidecar();
+    settled();
+    require(model.error().isEmpty() &&
+                std::filesystem::is_regular_file(luma::MetadataService::sidecarPath(source)),
+            "Cancelled import poisoned explicit XMP write.");
+    model.setAutoWriteXMP(true);
+    settled();
+    require(model.error().isEmpty(), "Cancelled import poisoned pending sidecar sync.");
+    wait([&] { return model.data(model.index(0), LibraryModel::AssetID).toString() == id; });
+    model.select(0);
+    require(model.selectionIDs() == std::vector<std::string>{asset.id},
+            "Metadata fixture did not select the original identity.");
+    model.rate(5);
+    settled();
+    const auto written = luma::MetadataService(path).read(asset.id);
+    require(model.error().isEmpty() && written.values.rating == 5 &&
+                written.writtenRevision == written.revision,
+            "Cancelled import poisoned automatic XMP after metadata commit.");
+    metadata();
+    model.importDescriptiveMetadata();
+    settled();
+    require(model.error().isEmpty() &&
+                luma::MetadataService(path).read(asset.id).values.rating == 5,
+            "Cancelled import poisoned XMP readback.");
+    const auto movedFolder = root / "located-originals";
+    std::filesystem::create_directory(movedFolder);
+    const auto moved = movedFolder / source.filename();
+    std::filesystem::rename(source, moved);
+    metadata();
+    model.locateOriginal(QUrl::fromLocalFile(QString::fromStdString(moved.string())));
+    settled();
+    require(model.error().isEmpty() &&
+                catalog.fileRecord(asset.id)->path == std::filesystem::canonical(moved),
+            "Cancelled import poisoned Locate Original.");
+    const auto movedAgainFolder = root / "located-again-originals";
+    std::filesystem::create_directory(movedAgainFolder);
+    const auto movedAgain = movedAgainFolder / source.filename();
+    std::filesystem::rename(moved, movedAgain);
+    metadata();
+    model.locateFolder(QUrl::fromLocalFile(QString::fromStdString(movedAgainFolder.string())),
+                       false);
+    settled();
+    require(model.error().isEmpty() &&
+                catalog.fileRecord(asset.id)->path == std::filesystem::canonical(movedAgain),
+            "Cancelled import poisoned Locate Folder.");
+    const auto final = catalog.assetSnapshot(asset.id);
+    require(final && final->asset.edits == document && final->revision == revision &&
+                catalog.libraryCount() == 1 && catalog.collections().front().count == 1 &&
+                luma::MetadataService(path).read(asset.id).values.rating == 5 &&
+                luma::macos::sha256File(movedAgain) == hash,
+            "Maintenance after cancellation changed original, edits, identity or organization.");
+    catalog.verify();
+    const auto beforeClose = backupFiles();
+    bool closeRequested = false, closeWasImmediate = true, closed = false;
+    QObject::connect(&model, &LibraryModel::closeReady, &model, [&] { closed = true; });
+    QObject::connect(&model, &LibraryModel::stateChanged, &model, [&] {
+        if (!closeRequested && model.working()) {
+            closeRequested = true;
+            closeWasImmediate = model.requestClose();
+        }
+    });
+    // Request Close at the operation's busy notification, before the worker can
+    // start. This exercises cancellation deterministically without timed sleeps.
+    model.backupNow();
+    require(closeRequested && !closeWasImmediate, "Close bypassed pending maintenance work.");
+    wait([&] { return closed; });
+    require(model.error() == QStringLiteral("Operation cancelled.") && backupFiles() == beforeClose,
+            "Close did not cancel queued maintenance without creating a snapshot.");
+    model.backupNow();
+    QCoreApplication::processEvents();
+    require(backupFiles() == beforeClose, "Closing model accepted new maintenance work.");
+    std::cout << "After cancelled import: backup/restore, explicit/automatic XMP, readback, "
+                 "file/folder relink and close passed\n";
+}
+
+void invalidXmpTextTests(const std::filesystem::path &root, const std::filesystem::path &fixture) {
+    const auto folder = root / "invalid-xmp-originals";
+    std::filesystem::create_directory(folder);
+    const auto source = folder / "source.dng";
+    std::filesystem::copy_file(fixture, source);
+    const auto hash = luma::macos::sha256File(source);
+    const auto path = root / "invalid-xmp.sqlite";
+    luma::Catalog catalog(path);
+    const auto asset = catalog.addAndSelect(source, hash, luma::RawDecoder().inspect(source));
+    catalog.saveExposure(asset.id, 1.25);
+    const auto edits = catalog.assetSnapshot(asset.id).value();
+    const luma::MetadataService service(path);
+    const auto sidecar = luma::MetadataService::sidecarPath(source);
+    for (const bool existing : {false, true}) {
+        if (existing) {
+            const auto before = catalog.metadataSnapshot(asset.id);
+            auto valid = before.values;
+            valid.title = "Valid Unicode 夜景";
+            service.save(asset.id, before.revision, valid);
+            const auto published = service.writeSidecar(asset.id, {});
+            require(std::filesystem::is_regular_file(published) &&
+                        std::filesystem::equivalent(published, sidecar),
+                    "Valid metadata did not create the sidecar positive control.");
+        }
+        const auto oldHash = existing ? luma::macos::sha256File(sidecar) : std::string{};
+        const auto before = catalog.metadataSnapshot(asset.id);
+        auto invalid = before.values;
+        invalid.title = "\xef\xbf\xbe";
+        service.save(asset.id, before.revision, invalid);
+        const auto pending = catalog.metadataSnapshot(asset.id);
+        throws([&] { service.writeSidecar(asset.id, {}); });
+        const auto after = catalog.metadataSnapshot(asset.id);
+        const auto currentEdits = catalog.assetSnapshot(asset.id).value();
+        require(after.values == pending.values && after.revision == pending.revision &&
+                    after.writtenRevision == pending.writtenRevision &&
+                    after.sidecarHash == pending.sidecarHash &&
+                    currentEdits.asset.edits == edits.asset.edits &&
+                    currentEdits.revision == edits.revision &&
+                    luma::macos::sha256File(source) == hash &&
+                    (existing ? luma::macos::sha256File(sidecar) == oldHash
+                              : !std::filesystem::exists(sidecar)),
+                "Rejected XML text changed sidecar, acknowledgement, original or edits.");
+        for (const auto &entry : std::filesystem::directory_iterator(folder))
+            require(entry.path() == source || (existing && entry.path() == sidecar),
+                    "Rejected XMP text left an unexpected temporary file.");
+    }
+    catalog.verify();
+}
+
 } // namespace
 int main(int argc, char **argv) {
     QCoreApplication app(argc, argv);
@@ -492,11 +775,14 @@ int main(int argc, char **argv) {
         if (scaleContract) {
             modelTests(root, true);
         } else {
+            invalidXmpTextTests(root, argv[1]);
+            maintenanceAfterCancelledImportTests(root, argv[1]);
             catalogTests(root, argv[1]);
             importTests(root, argv[1]);
             viewportTests(root);
             firstPageOnResetTests(root);
             modelTests(root, false);
+            sourceAvailabilityTests(root, argv[1]);
         }
         std::filesystem::remove_all(root);
         std::cout << (scaleContract ? "Library 100k scale contract passed\n"

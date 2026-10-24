@@ -1,0 +1,83 @@
+{
+    "checks": [
+        {
+            "action": "single-click-motion",
+            "content_item_y": [
+                -7797.777777777778,
+                -7798
+            ],
+            "overflow": false
+        },
+        {
+            "action": "single-click",
+            "after": {
+                "anchor": "10919d2c-fd90-426b-a1bf-b55987d1c47e",
+                "anchor_offset": -28,
+                "anchor_row": 148,
+                "content_y": 7798,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            },
+            "before": {
+                "anchor": "10919d2c-fd90-426b-a1bf-b55987d1c47e",
+                "anchor_offset": -27.777777777778283,
+                "anchor_row": 148,
+                "content_y": 7797.777777777778,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            }
+        },
+        {
+            "action": "single-click-motion",
+            "content_item_y": [
+                -7798
+            ],
+            "overflow": false
+        },
+        {
+            "action": "single-click",
+            "after": {
+                "anchor": "10919d2c-fd90-426b-a1bf-b55987d1c47e",
+                "anchor_offset": -28,
+                "anchor_row": 148,
+                "content_y": 7798,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            },
+            "before": {
+                "anchor": "10919d2c-fd90-426b-a1bf-b55987d1c47e",
+                "anchor_offset": -27.777777777778283,
+                "anchor_row": 148,
+                "content_y": 7797.777777777778,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            }
+        },
+        {
+            "action": "open-and-return",
+            "after": {
+                "anchor": "10919d2c-fd90-426b-a1bf-b55987d1c47e",
+                "anchor_offset": -38,
+                "anchor_row": 148,
+                "content_y": 7808,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            },
+            "before": {
+                "anchor": "10919d2c-fd90-426b-a1bf-b55987d1c47e",
+                "anchor_offset": -27.777777777778283,
+                "anchor_row": 148,
+                "content_y": 7797.777777777778,
+                "count": 176,
+                "height": 382,
+                "origin_y": 0
+            }
+        }
+    ],
+    "status": "FAIL"
+}

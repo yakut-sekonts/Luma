@@ -1,6 +1,7 @@
-#include "tests/ux/QueuedCallGate.h"
+#include "tests/ux/AutoTransformProbe.h"
 #include "tests/ux/UxContext.h"
 #include <QSet>
+#include <QSignalSpy>
 #include <cmath>
 
 namespace ux {
@@ -131,32 +132,69 @@ bool transformScenario(Context &c, const QString &id) {
                 "Reset did not clear Guided refusal");
         return true;
     }
+    // Calibrated, bounded source fixture; Auto and Cancel still use real UI input.
+    c.editor.openFile(QUrl::fromLocalFile(c.fixture + "/stress/Building.DNG"));
+    c.loaded();
     c.saved();
     c.reveal("transformAuto");
     const auto before = c.editor.currentSettings();
-    const bool undo = c.editor.canUndo();
-    QueuedCallGate gate(
-        c.editor,
-        [&] { return c.editor.transformAutoBusy() && !c.editor.busy() && !c.editor.saving(); },
-        [&] {
-            d.log({{"action", "auto_completion_callback_held"}});
-            d.frame();
-            require(d.item("transformAutoCancel")->isVisible() &&
-                        d.item("transformAutoCancel")->isEnabled(),
-                    "Auto has no usable Cancel");
-            d.click("transformAutoCancel");
-            require(!c.editor.transformAutoBusy() && c.editor.currentSettings() == before &&
-                        c.editor.canUndo() == undo,
-                    "Cancel committed Auto or left it busy");
-        });
+    const bool undo = c.editor.canUndo(), redo = c.editor.canRedo();
+    // An arbitrary QObject MetaCall can be a preview/save callback. Hold the
+    // actual successful Auto result before its original GUI delivery instead.
+    AutoTransformResultGate gate(c.editor);
+    QSignalSpy cancels(d.object("transformAutoCancel"), SIGNAL(clicked()));
+    require(cancels.isValid(), "Auto has no observable Cancel button");
     d.click("transformAuto");
-    d.wait([&] { return gate.caught; }, "Auto queued completion reached");
-    if (gate.failure)
-        std::rethrow_exception(gate.failure);
+    d.wait([&] { return gate.snapshot().held.has_value() || !c.editor.transformAutoBusy(); },
+           "Calibrated Auto result reached the worker boundary", 15000);
+    const auto held = gate.snapshot();
+    require(held.held && held.successfulArrivals == 1 && held.deliveries == 0 && !held.released &&
+                !held.timedOut && !held.hookFailed &&
+                held.held->operation.controller == &c.editor && held.held->operation.job &&
+                held.held->operation.assetID == c.editor.photoID().toStdString() &&
+                held.held->operation.sourcePath == c.editor.sourcePath().toStdString() &&
+                c.editor.transformAutoBusy(),
+            "Auto did not hold exactly its real successful result");
+    const auto operation = held.held->operation;
+    auto wouldApply = before;
+    wouldApply.transform = held.held->solved;
+    wouldApply.setEnabled(luma::Correction::transform, true);
+    require(wouldApply != before && wouldApply.transform.guided,
+            "Auto cancellation fixture would not produce a meaningful edit");
+    c.reveal("transformAutoCancel");
+    d.click("transformAutoCancel");
+    require(cancels.count() == 1 && gate.snapshot().deliveries == 0 &&
+                !c.editor.transformAutoBusy() && c.editor.currentSettings() == before &&
+                c.editor.canUndo() == undo && c.editor.canRedo() == redo,
+            "Cancel committed Auto or left it busy");
+    gate.release();
+    d.wait([&] { return gate.snapshot().deliveries > 0; }, "Original Auto callback delivered");
+    d.wait([&] { return operation.job->state.load() == luma::JobState::cancelled; },
+           "Cancelled Auto worker finished");
     d.frame();
-    require(c.editor.currentSettings() == before && c.editor.error().isEmpty() &&
-                !c.editor.transformAutoBusy() && c.editor.canUndo() == undo,
-            "Late Auto completion changed state after Cancel");
+    const auto delivered = gate.snapshot();
+    writeJson(c.root + "/auto-cancel-delivery.json",
+              {{"fixture", "calibrated 320x240 Building.DNG"},
+               {"successful_arrivals", static_cast<int>(delivered.successfulArrivals)},
+               {"deliveries", static_cast<int>(delivered.deliveries)},
+               {"rejections", static_cast<int>(delivered.rejections)},
+               {"cancel_clicks", cancels.count()},
+               {"released", delivered.released},
+               {"left_hold", delivered.leftHold},
+               {"timed_out", delivered.timedOut},
+               {"hook_failed", delivered.hookFailed}});
+    require(delivered.successfulArrivals == 1 && delivered.deliveries == 1 &&
+                delivered.rejections == 1 && delivered.lastDelivered && delivered.rejection &&
+                delivered.lastDelivered->sameAs(operation) &&
+                delivered.rejection->operation.sameAs(operation) &&
+                delivered.rejection->controllerPresent &&
+                delivered.rejection->currentRevision != operation.revision && delivered.released &&
+                delivered.leftHold && !delivered.timedOut && !delivered.hookFailed &&
+                !delivered.deliveryBeforeRelease && delivered.mismatchedDeliveries == 0 &&
+                c.editor.currentSettings() == before && c.editor.error().isEmpty() &&
+                !c.editor.transformAutoBusy() && c.editor.canUndo() == undo &&
+                c.editor.canRedo() == redo,
+            "Original late Auto success was not rejected exactly once after Cancel");
     return true;
 }
 } // namespace ux

@@ -1,0 +1,680 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "base_commit": "406f161c54fc01723880bcaad9fd64c4cf361e17",
+  "campaign_status": "NOT_QUALIFIED",
+  "environment": "Local Apple M3, Qt 6.10.3, offscreen/software; GITHUB_ACTIONS=1 selects that local backend. This is not a hosted or native UI run.",
+  "scope": [
+    "176 small generated PNGs; actual import processing, pointer selection/open/return, filename filter and clearing filter; metadata page boundary 128",
+    "Visible asset identity and offset tolerance <= 1 logical pixel; passive single-click motion; no model reset for known assets; Down-key reveal remains functional",
+    "Supplemental Tab/Return/keypad activation; official DSC006 A/B adjustments viewport, render, values and durable settings",
+    "Official TRN003/TRN004 use a calibrated 320x240 Building DNG and actual successful worker result before real Cancel input"
+  ],
+  "findings": [
+    "Initial zero-motion event oracle incorrectly rejected harmless 0.22 pixel rounding; corrected to <=1 logical pixel displacement and retained failure.",
+    "Actual pre-fix open/return shifts contentY from 7797.777777777778 to 7808. Explicit mouse positioning stops deferred Qt current-cell reveal.",
+    "Initial arrow test checked before asynchronous reveal completed. Bounded completion wait retains the required row and viewport movement assertions.",
+    "DSC006 demanded a pending model reload removed by the existing known-asset source fix; updated oracle observes prior/busy/photoLoaded transitions and checks geometry throughout.",
+    "Hosted CI failed once on unavailable Auto Cancel; old generic MetaCall gate can intercept unrelated editor deliveries. Local old adapter passed 10/10 and did not reproduce the CI failure. Replacement holds the actual successful transform result, checks source/job identity, real Cancel, then exact once-only stale-revision rejection."
+  ],
+  "records": {
+    "library_initial_zero_motion_oracle": {
+      "summary": {
+        "FAIL": 1
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "release_gate": "NOT_QUALIFIED",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "406f161c54fc01723880bcaad9fd64c4cf361e17",
+        "reason": ""
+      },
+      "report": {
+        "path": "build-verify/ux-library-scroll-offscreen-initial/UX_REPORT.json",
+        "sha256": "597b48fb96505164e32acab9f925480185141669d8731157e555e254d4aa5c68"
+      },
+      "run_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261021T154837Z-72253",
+      "source_tree_sha256": "5f761f7e6507845ac3fdf681653fd75268c4f73126216a1434beba7311b89924",
+      "binary_sha256": "35fc7cda8af1c59ff646411c1604977471260f3d7a6b6f364e7d5396a9c45943",
+      "results": [
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "repeat": null,
+          "status": "FAIL",
+          "message": "Single click transiently moved the Library viewport",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        }
+      ],
+      "detailed_evidence": [
+        {
+          "path": "build-verify/ux-artifacts/20261021T154837Z-72253/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-1/library-selection-scroll.json",
+          "sha256": "76e52e1713ae6e83000c304678e0ce1bedf0f6f61a1b2376e06037a92115de45"
+        }
+      ]
+    },
+    "library_pre_fix_offset_failure": {
+      "summary": {
+        "FAIL": 1
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "release_gate": "NOT_QUALIFIED",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "406f161c54fc01723880bcaad9fd64c4cf361e17",
+        "reason": ""
+      },
+      "report": {
+        "path": "build-verify/ux-library-scroll-offscreen-observed/UX_REPORT.json",
+        "sha256": "5bfbe995cb280e7d46be5f0090638dadf9401ac428db753a0384d6802ef4a778"
+      },
+      "run_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261021T192549Z-72942",
+      "source_tree_sha256": "f7f9bf2a5ff618b7b61bb5d35eb35dc50354f17f30e48b82f3ae7f60ecd62f59",
+      "binary_sha256": "a2910e9e0c7f219de5cfb4befe78e5185953e3bc36c19200a235ed63f2dc9ef9",
+      "results": [
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "repeat": null,
+          "status": "FAIL",
+          "message": "Photo selection/open/return changed Library's visible asset anchor or offset",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        }
+      ],
+      "detailed_evidence": [
+        {
+          "path": "build-verify/ux-artifacts/20261021T192549Z-72942/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-1/library-selection-scroll.json",
+          "sha256": "1fcaac2cbbddb9c2946ea4fe2b8140c46124161f13ba570adae90593ca968a2c"
+        }
+      ]
+    },
+    "library_arrow_assertion_before_async_completion": {
+      "summary": {
+        "FAIL": 3
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "release_gate": "NOT_QUALIFIED",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "406f161c54fc01723880bcaad9fd64c4cf361e17",
+        "reason": ""
+      },
+      "report": {
+        "path": "build-verify/ux-library-scroll-offscreen-fixed/UX_REPORT.json",
+        "sha256": "cc30d1eca1f5b669883880a880e6793d69962ebeb672c0edab7ffca2266ec62b"
+      },
+      "run_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T101245Z-75309",
+      "source_tree_sha256": "5d2018a3c6b7ed7e903bccf8af6ff38e20e9ef716144a26b351705849ff63c00",
+      "binary_sha256": "f7e8b9461b175d6b0eb778f94b6045bd1defd667539acb83379915c10b6f919a",
+      "results": [
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "repeat": null,
+          "status": "FAIL",
+          "message": "Mouse viewport retention broke arrow-key current-item reveal",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "repeat": null,
+          "status": "FAIL",
+          "message": "Mouse viewport retention broke arrow-key current-item reveal",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "repeat": null,
+          "status": "FAIL",
+          "message": "Mouse viewport retention broke arrow-key current-item reveal",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        }
+      ],
+      "detailed_evidence": [
+        {
+          "path": "build-verify/ux-artifacts/20261022T101245Z-75309/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-1/library-selection-scroll.json",
+          "sha256": "aeb27f00b517b3454d34b156ecc0a72e6b1ccd3cc42c6e16ce22edb8183a83e2"
+        },
+        {
+          "path": "build-verify/ux-artifacts/20261022T101245Z-75309/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-2/library-selection-scroll.json",
+          "sha256": "67c6b15ca85cb8affb8bb332494dc3f3e739e06e0bda4c4fccd4b3870235fe81"
+        },
+        {
+          "path": "build-verify/ux-artifacts/20261022T101245Z-75309/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-3/library-selection-scroll.json",
+          "sha256": "63ee20a11c1ffc814bbb60e134b68502f6825fdb9a20829c213d5ec3b53b81da"
+        }
+      ]
+    },
+    "library_final": {
+      "summary": {
+        "PASS": 3
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "release_gate": "NOT_QUALIFIED",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "406f161c54fc01723880bcaad9fd64c4cf361e17",
+        "reason": ""
+      },
+      "report": {
+        "path": "build-verify/ux-library-scroll-offscreen-final/UX_REPORT.json",
+        "sha256": "8e1b08b66dd196b7058285f9fa5399eaf9e7147213f0432def298a0b79cba683"
+      },
+      "run_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T101602Z-75811",
+      "source_tree_sha256": "82b07168ebecc1bafecd37c261f363ff23e8e393820016f9a9609e3e2cd13ce7",
+      "binary_sha256": "b601609c2f7d684ae8864e7c3e1520754500859009f1d528e7cc36dfdfab5f05",
+      "results": [
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        }
+      ],
+      "detailed_evidence": [
+        {
+          "path": "build-verify/ux-artifacts/20261022T101602Z-75811/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-1/library-selection-scroll.json",
+          "sha256": "dda276ffcb84e365e81ca25f421dfe68f60327ada628a67ae40bb492c592e6b3"
+        },
+        {
+          "path": "build-verify/ux-artifacts/20261022T101602Z-75811/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-2/library-selection-scroll.json",
+          "sha256": "ee18cc98319a32952a5b97d7dd97359323ea2c5bb037f6907d5e1d4862c974c8"
+        },
+        {
+          "path": "build-verify/ux-artifacts/20261022T101602Z-75811/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-3/library-selection-scroll.json",
+          "sha256": "87f050c9e4229ee0a2f6109bd255451c524d6bc8a1bf06b27caf82cdb402e308"
+        }
+      ]
+    },
+    "keyboard_neighbors": {
+      "summary": {
+        "PASS": 6
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "release_gate": "NOT_QUALIFIED",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "406f161c54fc01723880bcaad9fd64c4cf361e17",
+        "reason": ""
+      },
+      "report": {
+        "path": "build-verify/ux-keyboard-library-scroll/UX_REPORT.json",
+        "sha256": "6808cf8e93eac8dc069f5a279af6eff885044164cf59b454358c86aa764fca8d"
+      },
+      "run_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T101614Z-76119",
+      "source_tree_sha256": "82b07168ebecc1bafecd37c261f363ff23e8e393820016f9a9609e3e2cd13ce7",
+      "binary_sha256": "b601609c2f7d684ae8864e7c3e1520754500859009f1d528e7cc36dfdfab5f05",
+      "results": [
+        {
+          "id": "CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        }
+      ],
+      "detailed_evidence": []
+    },
+    "adjustments_obsolete_reload_oracle": {
+      "summary": {
+        "FAIL": 1
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "release_gate": "FAIL",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "406f161c54fc01723880bcaad9fd64c4cf361e17",
+        "reason": ""
+      },
+      "report": {
+        "path": "build-verify/ux-dsc006-before-oracle-update/UX_REPORT.json",
+        "sha256": "7acc44dead285c46ba46ce6e171929ee4624d8c5da49565ee0b6d2087ed32919"
+      },
+      "run_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T100852Z-74818",
+      "source_tree_sha256": "f7f9bf2a5ff618b7b61bb5d35eb35dc50354f17f30e48b82f3ae7f60ecd62f59",
+      "binary_sha256": "a2910e9e0c7f219de5cfb4befe78e5185953e3bc36c19200a235ed63f2dc9ef9",
+      "results": [
+        {
+          "id": "UX-DSC-006",
+          "repeat": null,
+          "status": "FAIL",
+          "message": "Photo-switch regression missed complete pending-reload geometry: A-to-B",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        }
+      ],
+      "detailed_evidence": [
+        {
+          "path": "build-verify/ux-artifacts/20261022T100852Z-74818/UX-DSC-006/repeat-1/dsc006-scroll-trace.json",
+          "sha256": "69db226d92c5c24dc02025e86f009f47280e956e1edc44fb8dde39d462fef88d"
+        }
+      ]
+    },
+    "adjustments_final": {
+      "summary": {
+        "PASS": 3
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "release_gate": "NOT_QUALIFIED",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "406f161c54fc01723880bcaad9fd64c4cf361e17",
+        "reason": ""
+      },
+      "report": {
+        "path": "build-verify/ux-dsc006-final/UX_REPORT.json",
+        "sha256": "82b3e356dbbacad7d230b84ec4048474529036f522525073c095c161b43ea64c"
+      },
+      "run_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T101627Z-76240",
+      "source_tree_sha256": "82b07168ebecc1bafecd37c261f363ff23e8e393820016f9a9609e3e2cd13ce7",
+      "binary_sha256": "b601609c2f7d684ae8864e7c3e1520754500859009f1d528e7cc36dfdfab5f05",
+      "results": [
+        {
+          "id": "UX-DSC-006",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "UX-DSC-006",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "UX-DSC-006",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        }
+      ],
+      "detailed_evidence": [
+        {
+          "path": "build-verify/ux-artifacts/20261022T101627Z-76240/UX-DSC-006/repeat-1/dsc006-scroll-trace.json",
+          "sha256": "fcb6a5c47b9088357ba22512b839f89d45e9092b4e8567e7c47af863f5def581"
+        },
+        {
+          "path": "build-verify/ux-artifacts/20261022T101627Z-76240/UX-DSC-006/repeat-2/dsc006-scroll-trace.json",
+          "sha256": "624f9e05b2232c5c1bdd7c12fbdcd46ab600a74d847c0d68975412c77261644c"
+        },
+        {
+          "path": "build-verify/ux-artifacts/20261022T101627Z-76240/UX-DSC-006/repeat-3/dsc006-scroll-trace.json",
+          "sha256": "7980087b39c31706126055e5324a5aaf1d457e6736b00e03a133c818c7502b37"
+        }
+      ]
+    },
+    "auto_cancel_previous_adapter_local": {
+      "summary": {
+        "PASS": 10
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "release_gate": "NOT_QUALIFIED",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "406f161c54fc01723880bcaad9fd64c4cf361e17",
+        "reason": ""
+      },
+      "report": {
+        "path": "build-verify/ux-trn003-before-gate-fix/UX_REPORT.json",
+        "sha256": "31729a3de1feffd2e78e818de32f36f8f904ddabab121def7b7e14bc06063341"
+      },
+      "run_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T101640Z-75798",
+      "source_tree_sha256": "82b07168ebecc1bafecd37c261f363ff23e8e393820016f9a9609e3e2cd13ce7",
+      "binary_sha256": "b601609c2f7d684ae8864e7c3e1520754500859009f1d528e7cc36dfdfab5f05",
+      "results": [
+        {
+          "id": "UX-TRN-003",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "UX-TRN-003",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "UX-TRN-003",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "UX-TRN-003",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "UX-TRN-003",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "UX-TRN-003",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "UX-TRN-003",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "UX-TRN-003",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "UX-TRN-003",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "UX-TRN-003",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        }
+      ],
+      "detailed_evidence": []
+    },
+    "auto_cancel_actual_result_gate": {
+      "summary": {
+        "PASS": 6
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "release_gate": "NOT_QUALIFIED",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "406f161c54fc01723880bcaad9fd64c4cf361e17",
+        "reason": ""
+      },
+      "report": {
+        "path": "build-verify/ux-auto-cancel-result-gate/UX_REPORT.json",
+        "sha256": "fb41ee4630307aa6f2c8844e9ba3e184a52529bdfd0cb0d3f341dd9d381cfed9"
+      },
+      "run_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T101859Z-76542",
+      "source_tree_sha256": "a04edf53c19ba34a8c2ed72be70fef3a9fcf878d5ed2bd8d1de48ecf32c2132c",
+      "binary_sha256": "a827fa2c47d57b7bc790c4e196e5d880ce6e9ef7d56a842b148b183004b2f491",
+      "results": [
+        {
+          "id": "UX-TRN-003",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "UX-TRN-003",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "UX-TRN-003",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "UX-TRN-004",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "UX-TRN-004",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        },
+        {
+          "id": "UX-TRN-004",
+          "repeat": null,
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "quick_backend": "software"
+        }
+      ],
+      "detailed_evidence": [
+        {
+          "path": "build-verify/ux-artifacts/20261022T101859Z-76542/UX-TRN-003/repeat-1/auto-cancel-delivery.json",
+          "sha256": "859fad90c2c73e5117d8b6927345af9a85a23b76fb9f76a7c168bc649ef4fbb9"
+        },
+        {
+          "path": "build-verify/ux-artifacts/20261022T101859Z-76542/UX-TRN-003/repeat-2/auto-cancel-delivery.json",
+          "sha256": "859fad90c2c73e5117d8b6927345af9a85a23b76fb9f76a7c168bc649ef4fbb9"
+        },
+        {
+          "path": "build-verify/ux-artifacts/20261022T101859Z-76542/UX-TRN-003/repeat-3/auto-cancel-delivery.json",
+          "sha256": "859fad90c2c73e5117d8b6927345af9a85a23b76fb9f76a7c168bc649ef4fbb9"
+        },
+        {
+          "path": "build-verify/ux-artifacts/20261022T101859Z-76542/UX-TRN-004/repeat-1/auto-cancel-delivery.json",
+          "sha256": "859fad90c2c73e5117d8b6927345af9a85a23b76fb9f76a7c168bc649ef4fbb9"
+        },
+        {
+          "path": "build-verify/ux-artifacts/20261022T101859Z-76542/UX-TRN-004/repeat-2/auto-cancel-delivery.json",
+          "sha256": "859fad90c2c73e5117d8b6927345af9a85a23b76fb9f76a7c168bc649ef4fbb9"
+        },
+        {
+          "path": "build-verify/ux-artifacts/20261022T101859Z-76542/UX-TRN-004/repeat-3/auto-cancel-delivery.json",
+          "sha256": "859fad90c2c73e5117d8b6927345af9a85a23b76fb9f76a7c168bc649ef4fbb9"
+        }
+      ]
+    }
+  },
+  "negative_controls": {
+    "artifact": {
+      "path": ".tools/final-library-scroll-negative/controls.json",
+      "sha256": "9f11fd57942bc860c0bf2a2381b4741a0f4c72163aed5dd8b75cca1b6e4073f6"
+    },
+    "binary_sha256": "a827fa2c47d57b7bc790c4e196e5d880ce6e9ef7d56a842b148b183004b2f491",
+    "results": [
+      {
+        "mutation": "omit-mouse-position",
+        "exit_code": 1,
+        "status": "FAIL",
+        "message": "Photo selection/open/return changed Library's visible asset anchor or offset",
+        "modified_qml_sha256": "f8bf8f2bddbecf9cb540f770d55d5e454d34e6c51eba5e34990f5dc232b8026a"
+      },
+      {
+        "mutation": "legacy-focus-order",
+        "exit_code": 1,
+        "status": "FAIL",
+        "message": "Timeout: Arrow-key current-item reveal completed",
+        "modified_qml_sha256": "7f2199e87553975ff145eaf7a030430897f90005a768e47c2942d7c071fa106b"
+      },
+      {
+        "mutation": "forced-photo-reload",
+        "exit_code": 1,
+        "status": "FAIL",
+        "message": "Opening an already loaded asset reset the Library model",
+        "modified_qml_sha256": "174cc2b6a72efb035654698d8f7409cddb0df2baa954000981fe3b21cfb88c96"
+      }
+    ],
+    "interpretation": "Omitting mouse positioning and forcing reload fail their specific scroll/reset assertions. The legacy-index mutation fails the keyboard reveal check; it is not evidence of historical release scroll reproduction."
+  },
+  "static_and_runner_checks": {
+    "format": "PASS",
+    "clang_tidy": "PASS with non-blocking warnings; affected three scenario translation units",
+    "runner_unit_tests": 40,
+    "quality_policy_unit_tests": 10,
+    "artifacts": [
+      {
+        "path": ".tools/final-scroll-cancel-tidy.log",
+        "sha256": "ddaf9387ad3ca6efb3d1bc598b02963fb9985cc19419cb057d9187efb77acfda"
+      },
+      {
+        "path": ".tools/final-scroll-runner-tests.log",
+        "sha256": "60e279a071289549ceb757e7f738f4c5f1c8319d77b7a4477d48e35aff538ada"
+      },
+      {
+        "path": ".tools/final-scroll-policy-tests.log",
+        "sha256": "79df89c1275396d97b472c355017fe5c3369eacc7d16c42ed8963bcd5a4391c3"
+      }
+    ]
+  },
+  "source_sha256": {
+    "apps/desktop/qml/PhotoCard.qml": "0d629fbcdee71832c924e45b858bc81b97efb2b3131d52503abaaee77d61d26e",
+    "apps/desktop/qml/LibraryPane.qml": "25f9a515feeb16434d8948222325b9c682677f0c950861121bf1d97297025ee2",
+    "apps/desktop/LibraryModel.cpp": "6a9ae45a45a18ec429d23b2eb4aa0875bb227fbb585f405aa39c65c6961c9585",
+    "tests/ux/LibraryScrollCandidate.cpp": "0ebc66db4e1efa5bbe662ee838ae5a9013a82479c4a0014ed82efdef8fa76ea6",
+    "tests/ux/run_library_scroll_regression.py": "d10f062770c38e27a2a6ddf8db46590a3a92a97e6bf2c15680527272e597f9b2",
+    "tests/ux/GestureRemainingScenarios.cpp": "922d13bf8c74d44787a62febb4baf0ce2b47920bf38ac42591886f3115d6ebbf",
+    "tests/ux/TransformScenarios.cpp": "d392160383e1d3b9e26958428fcaaa5a24bf48e2bdaa551aeabd9cf67fedc30d"
+  },
+  "ci_before_fix": {
+    "run_id": 39627660731,
+    "job_id": 119317287699,
+    "head_sha": "406f161c54fc01723880bcaad9fd64c4cf361e17",
+    "url": "https://github.com/yakut-sekonts/Luma/actions/runs/39627660731",
+    "conclusion": "failure",
+    "passing_stages": [
+      "Build pinned offline Denoise and Sky models",
+      "Check native Core ML numerical agreement",
+      "Check source Denoise against analytical clean images",
+      "Build",
+      "Check photographic Denoise and actual runtime tiling",
+      "Unit and integration tests"
+    ],
+    "blocking_ux": {
+      "PASS": 194,
+      "FAIL": 1,
+      "SKIPPED": 29,
+      "NOT_IMPLEMENTED": 92
+    },
+    "failure": "2026-10-21T16:14:57.0793010Z UX-TRN-003 repeat 2: FAIL Cannot click unavailable control: transformAutoCancel",
+    "notes": [
+      "Counts are runner results/repeats, not unique specification scenarios.",
+      "Supplemental stages and formatting/tidy were skipped after the blocking UX failure."
+    ]
+  },
+  "remaining": [
+    "Native macOS/trackpad/Retina and original user recording reproduction",
+    "Other filter/sort combinations, large catalogs and all remaining final-qualification cases",
+    "Post-fix hosted CI pending; complete signed distribution/update qualification still required"
+  ]
+}

@@ -1,18 +1,26 @@
 name: macOS Apple Silicon
 on:
   push:
-    branches: [main, 'codex/**']
+    branches: [main, 'codex/**', '!codex/1.0-development']
   pull_request:
     branches: [main, 'codex/**']
 permissions:
   contents: read
 concurrency:
   group: macos-${{ github.ref }}
-  cancel-in-progress: true
+  # Preserve the long qualification scan; only the latest pending run waits.
+  # Regular development branches still cancel superseded runs immediately.
+  cancel-in-progress: ${{ (github.head_ref || github.ref_name) != 'codex/1.0-qualification' }}
 jobs:
   build-test:
+    # The dedicated implementation branch accumulates unqualified 1.0 work.
+    # Release branches/tags retain their independent mandatory checks.
+    if: github.head_ref != 'codex/1.0-development'
     runs-on: macos-15
-    timeout-minutes: 60
+    # Model/build/blocking checks already take ~52 minutes. Independent UX and
+    # complete static analysis now also run after failures; allow that evidence
+    # to finish. Individual scenario deadlines and all gates stay intact.
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4.2.2
       - uses: actions/setup-python@v5.6.0
@@ -21,41 +29,154 @@ jobs:
       - name: Verify supported architecture
         run: test "$(uname -m)" = arm64
       - name: Install fixed toolchain and Qt
+        id: toolchain
         run: ./scripts/bootstrap.sh
+      - name: Build pinned offline Denoise and Sky models
+        run: bash scripts/build-bundled-models.sh build/models
+      - name: Check native Core ML numerical agreement
+        id: model_numerics
+        # Keep independent application checks running; the final mandatory gate
+        # below still fails the job unless this step succeeds.
+        continue-on-error: true
+        run: .tools/model-venv/bin/python scripts/check-model-conversion.py build/models --report build/model-numerics.json
+      - name: Check source Denoise against analytical clean images
+        id: model_quality
+        continue-on-error: true
+        run: .tools/model-venv/bin/python scripts/check-denoise-quality.py build/models --report build/denoise-quality.json
+      - name: Upload model conversion evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: model-numerics
+          path: |
+            build/model-numerics.json
+            build/denoise-quality.json
+          if-no-files-found: warn
       - name: Configure
         run: .tools/venv/bin/cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_MAKE_PROGRAM="$PWD/.tools/venv/bin/ninja"
       - name: Build
+        id: application_build
         run: .tools/venv/bin/cmake --build build --parallel 3
+      - name: Check photographic Denoise and actual runtime tiling
+        id: model_photographs
+        continue-on-error: true
+        run: .tools/model-venv/bin/python scripts/check-denoise-photographs.py build/models --probe build/luma_denoise_runtime_probe --output build/denoise-photographs
+      - name: Check Sky photographic interiors and native provider contracts
+        id: model_sky_photographs
+        continue-on-error: true
+        run: |
+          .tools/model-venv/bin/python -m unittest discover -s tests/models -p test_sky_photographs.py
+          .tools/model-venv/bin/python scripts/check-sky-photographs.py build/models --probe build/luma_sky_runtime_probe --output build/sky-photographs
+      - name: Upload photographic model evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: denoise-photographs
+          path: |
+            build/denoise-photographs/report.json
+            build/denoise-photographs/*/comparison.png
+            build/denoise-photographs/*/native.log
+          if-no-files-found: warn
+      - name: Upload Sky photographic evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: sky-photographs
+          path: |
+            build/sky-photographs/report.json
+            build/sky-photographs/*/comparison.png
+            build/sky-photographs/*/native.log
+          if-no-files-found: warn
       - name: Unit and integration tests
+        if: ${{ !cancelled() && steps.application_build.outcome == 'success' }}
         run: .tools/venv/bin/ctest --test-dir build --output-on-failure --label-exclude load
+      - name: Preserve CTest diagnostics before UX checks
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ctest-evidence
+          path: |
+            build/Testing/Temporary/LastTest.log
+            build/Testing/Temporary/LastTestsFailed.log
+            build/Testing/Temporary/CTestCostData.txt
+          if-no-files-found: warn
+          retention-days: 7
       - name: Build and attest UX executable
+        id: ux_build
+        if: ${{ !cancelled() && steps.application_build.outcome == 'success' }}
         run: .tools/venv/bin/python tests/ux/build_ux.py --build build
+      # Independent regressions still run after an earlier failed/incomplete check.
+      # No continue-on-error: every failure keeps this job red.
       - name: Bounded functional blocking UX checks
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
         run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --suite blocking --quality-only --runs 3 --require-build-provenance
+      - name: Preserve blocking UX summary before supplemental checks
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ux-blocking-summary
+          path: |
+            build/ux-report/
+            build/ux-build-provenance.json
+          if-no-files-found: warn
+          retention-days: 7
       - name: Supplemental selected-asset keyboard regression
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
         run: .tools/venv/bin/python tests/ux/run_keyboard_regression.py --build build --runs 3 --require-build-provenance
+      - name: Library and filmstrip selection preserve deep scroll
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
+        run: .tools/venv/bin/python tests/ux/run_library_scroll_regression.py --build build --runs 3 --require-build-provenance
       - name: Keyboard import edit export at minimum window
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
         run: .tools/venv/bin/python tests/ux/run_keyboard_workflow_regression.py --build build --runs 3 --require-build-provenance
       - name: Localized preset dialogs at minimum window
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
         run: .tools/venv/bin/python tests/ux/run_localized_dialog_regression.py --build build --runs 3 --timeout 240 --require-build-provenance
       - name: Supplemental gradient handle accessibility regressions
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
         run: .tools/venv/bin/python tests/ux/run_mask_handle_regression.py --build build --runs 3 --require-build-provenance
       - name: Supplemental PhotoCard flag localization regression
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
         run: .tools/venv/bin/python tests/ux/run_card_flag_regression.py --build build --runs 3 --require-build-provenance
       - name: Actual thumbnail response regression
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
         run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-LIB-004 --runs 3 --require-build-provenance --report build/ux-thumbnail-response-report
       - name: Thumbnail away and back before pending completion
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
         run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-LIB-005 --runs 3 --require-build-provenance --report build/ux-thumbnail-away-back-report
       - name: Batch commit during actual partial thumbnail render
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
         run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-RACE-007 --runs 3 --require-build-provenance --report build/ux-thumbnail-partial-render-report
       - name: Thumbnail invalidation during an actual response
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
         run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-RACE-002 --runs 3 --require-build-provenance --report build/ux-thumbnail-invalidation-report
       - name: Missing private watermark snapshot regression
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
         run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-EXP-028 --runs 3 --require-build-provenance --report build/ux-watermark-snapshot-report
       - name: Legal UTF-8 current export filename regression
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
         run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-VIS-003 --runs 3 --require-build-provenance --report build/ux-export-current-filename-report
+      - name: Preview revision ordering and photo-switch zoom
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
+        run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-P06-PRG-004 --case UX-P06-PRG-007 --case UX-P06-PRG-008 --case UX-P06-PRG-009 --case UX-P06-ZOM-002 --case UX-P06-ZOM-005 --runs 3 --require-build-provenance --report build/ux-preview-ordering-report
+      - name: Viewer scale and pointer input regression
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
+        run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-PRV-012 --case UX-P06-ZOM-003 --case UX-P06-ZOM-004 --case UX-P06-ZOM-012 --runs 3 --require-build-provenance --report build/ux-viewer-input-report
       - name: Auto Transform completion regression
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
         run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-RACE-005 --runs 3 --require-build-provenance --report build/ux-auto-transform-report
+      - name: Metadata forms and XMP preservation regression
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
+        run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-P09-META-002 --case UX-P09-META-007 --case UX-P09-XMP-002 --case UX-P09-XMP-003 --case UX-P09-XMP-004 --case UX-P09-XMP-005 --runs 3 --require-build-provenance --report build/ux-metadata-xmp-report
+      - name: Missing originals and relink preservation regression
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
+        run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-P09-RLK-001 --case UX-P09-RLK-002 --case UX-P09-RLK-003 --case UX-P09-RLK-004 --case UX-P09-RLK-006 --case UX-P09-RLK-007 --runs 3 --require-build-provenance --report build/ux-relink-report
+      - name: Catalog backup and restore regression
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
+        run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-P09-BKP-001 --case UX-P09-BKP-002 --case UX-P09-BKP-006 --case UX-P09-BKP-007 --runs 3 --require-build-provenance --report build/ux-catalog-backup-report
+      - name: Implemented phase 1.0 daily and data workflows
+        if: ${{ !cancelled() && steps.ux_build.outcome == 'success' }}
+        run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --through 1.0 --suite blocking --quality-only --case UX-P10-DAT-004 --case UX-P10-DAT-005 --case UX-P10-DAY-003 --case UX-P10-DAY-007 --case UX-P10-DAY-009 --case UX-P10-DAY-010 --case UX-P10-DAY-011 --case UX-P10-DAY-012 --case UX-P10-DAY-013 --case UX-P10-UPG-012 --runs 3 --require-build-provenance --report build/ux-phase-1-report
       - name: Upload UX evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -64,10 +185,17 @@ jobs:
           path: |
             build/ux-report/
             build/ux-keyboard-report/
+            build/ux-library-scroll-report/
             build/ux-keyboard-workflow-report/
             build/ux-localized-dialog-report/
             build/ux-mask-handles-report/
             build/ux-auto-transform-report/
+            build/ux-preview-ordering-report/
+            build/ux-viewer-input-report/
+            build/ux-metadata-xmp-report/
+            build/ux-relink-report/
+            build/ux-catalog-backup-report/
+            build/ux-phase-1-report/
             build/ux-card-flags-report/
             build/ux-thumbnail-response-report/
             build/ux-thumbnail-away-back-report/
@@ -79,9 +207,14 @@ jobs:
             build/ux-artifacts/20*/fixture-manifest.json
             build/ux-artifacts/20*/**/result.json
             build/ux-artifacts/20*/**/child-result.json
+            build/ux-artifacts/20*/**/data-invariants.json
+            build/ux-artifacts/20*/**/serialized-audit.json
+            build/ux-artifacts/20*/**/activation-failure.json
             build/ux-artifacts/20*/**/metrics.json
             build/ux-artifacts/20*/**/actions.jsonl
             build/ux-artifacts/20*/**/keyboard-activation.json
+            build/ux-artifacts/20*/**/library-selection-scroll.json
+            build/ux-artifacts/20*/**/auto-cancel-delivery.json
             build/ux-artifacts/20*/**/keyboard-workflow.json
             build/ux-artifacts/20*/**/localized-dialogs.json
             build/ux-artifacts/20*/**/dialog-*.png
@@ -103,15 +236,30 @@ jobs:
             build/ux-artifacts/20*/**/lib005-*.json
             build/ux-artifacts/20*/**/msk023-*.png
             build/ux-artifacts/20*/**/app.log
+            build/ux-artifacts/20*/**/model-resets.jsonl
+            build/ux-artifacts/20*/**/preview-pixel-difference.json
+            build/ux-artifacts/20*/**/zoom-*-sample.png
+            build/ux-artifacts/20*/**/zoom-1600-scene.png
+            build/ux-artifacts/20*/**/expected-preview.png
+            build/ux-artifacts/20*/**/actual-preview.png
             build/ux-artifacts/20*/**/command.json
             build/ux-artifacts/20*/**/before.png
             build/ux-artifacts/20*/**/after.png
             build/ux-artifacts/20*/**/failure.png
             build/ux-artifacts/20*/**/thread-sample.txt
+            build/ux-artifacts/20*/**/thread-sample.log
+            build/ux-artifacts/20*/**/thread-sample-status.json
             build/ux-artifacts/20*/**/catalog-copy.sqlite
           if-no-files-found: warn
           retention-days: 7
       - name: clang-format
+        if: ${{ !cancelled() && steps.toolchain.outcome == 'success' }}
         run: ./scripts/check-format.sh
       - name: clang-tidy
+        if: ${{ !cancelled() && steps.application_build.outcome == 'success' }}
         run: ./scripts/check-tidy.sh build
+      - name: Require model numerical agreement and source and photographic quality
+        if: ${{ !cancelled() && (steps.model_numerics.outcome != 'success' || steps.model_quality.outcome != 'success' || steps.model_photographs.outcome != 'success' || steps.model_sky_photographs.outcome != 'success') }}
+        run: |
+          echo '::error::Model numerical agreement, source quality or photographic runtime quality did not pass; see model evidence artifacts.'
+          exit 1

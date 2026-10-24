@@ -272,7 +272,7 @@ bool removableDestinationScenario(Context &c, const QString &id, const QString &
                 "Cannot create the private mounted export-only subdirectory");
         files(destination, {});
         phase = "actual_add_import";
-        require(d.object("library.pane")
+        require(d.object("library.importDialog")
                     ->setProperty("sources",
                                   QVariant::fromValue(QList<QUrl>{QUrl::fromLocalFile(paths[0]),
                                                                   QUrl::fromLocalFile(paths[1])})),

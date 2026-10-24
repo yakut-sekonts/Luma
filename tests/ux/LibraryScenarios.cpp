@@ -1,11 +1,17 @@
+#include "core/catalog/Catalog.h"
+#include "core/catalog/SqliteStatement.h"
 #include "tests/ux/UxContext.h"
 #include "tests/ux/UxTestIds.h"
 #include <QColor>
 #include <QDir>
 #include <QFile>
+#include <QJsonArray>
 #include <QQmlProperty>
 #include <QSet>
 #include <QTest>
+#include <array>
+#include <cmath>
+#include <memory>
 namespace ux {
 namespace {
 void idle(Context &c) {
@@ -285,4 +291,83 @@ bool libraryScenario(Context &c, const QString &id) {
     }
     return false;
 }
+
+bool semanticScenario(Context &c, const QString &id) {
+    if (id != "UX-P07-SEM-001")
+        return false;
+    auto &d = *c.driver;
+    c.import(3);
+    const auto selection = c.library.selectedAssetIDs();
+    require(!c.library.semanticEnabled(),
+            "Owned semantic fixture unexpectedly has an index enabled");
+    d.click("semantic.open");
+    d.wait([&] { return d.object("semantic.dialog")->property("opened").toBool(); },
+           "Actual description search dialog opened");
+    d.click("semantic.build");
+    d.wait([&] { return !c.library.semanticBusy(); }, "Actual local semantic indexing completed",
+           60000);
+    require(c.library.semanticEnabled() && c.library.semanticError().isEmpty(),
+            c.library.semanticError());
+    require(c.library.semanticStatus().endsWith("errors: 0"),
+            "Pinned photograph failed actual semantic indexing: " + c.library.semanticStatus());
+    const auto storedCount = [&] {
+        sqlite3 *raw = nullptr;
+        const int opened = sqlite3_open_v2(c.catalogFile.toUtf8().constData(), &raw,
+                                           SQLITE_OPEN_READONLY, nullptr);
+        const std::unique_ptr<sqlite3, decltype(&sqlite3_close)> connection(raw, sqlite3_close);
+        require(opened == SQLITE_OK, "Cannot inspect actual persisted semantic index");
+        luma::detail::Statement statement(raw, "SELECT count(*) FROM semantic_embeddings");
+        require(statement.row(), "Cannot count actual semantic embeddings");
+        return statement.integer(0);
+    };
+    require(storedCount() == 3, "Actual index did not persist all three photo embeddings");
+    const std::array<std::pair<QString, QString>, 3> queries{
+        {{"a portrait of a person", "Portrait.png"},
+         {"river and trees in a landscape", "Landscape.png"},
+         {"a city at night", "Night.png"}}};
+    for (const auto &[query, expected] : queries) {
+        d.type("semantic.query", query);
+        d.click("semantic.search");
+        d.wait([&] { return !c.library.semanticBusy(); }, "Actual semantic query completed", 60000);
+        require(c.library.semanticError().isEmpty(), c.library.semanticError());
+        const auto matches = c.library.semanticResults();
+        QJsonArray recorded;
+        double prior = 2;
+        for (const auto &row : matches) {
+            const auto match = row.toMap();
+            const double score = match.value("similarity").toDouble();
+            require(std::isfinite(score) && score >= .15 && score <= 1.000001 && score <= prior,
+                    "Semantic scores are not finite bounded descending matches");
+            prior = score;
+            recorded.append(QJsonObject::fromVariantMap(match));
+        }
+        d.log({{"action", "actual_semantic_query"},
+               {"query", query},
+               {"expected_first", expected},
+               {"matches", recorded}});
+        require(!matches.empty() &&
+                    matches.front().toMap().value("filename").toString() == expected,
+                "Actual semantic neighborhood did not rank " + expected + " first for " + query);
+        const auto asset = matches.front().toMap().value("id").toString();
+        d.wait(
+            [&] {
+                auto *item = d.find("semantic.result." + asset);
+                return item && qobject_cast<QQuickItem *>(item)->isVisible();
+            },
+            "Expected semantic result is actually visible");
+        d.screenshot(c.root + "/semantic-" + expected + ".png");
+    }
+    require(c.library.count() == 3 && c.library.selectedAssetIDs() == selection,
+            "Semantic queries changed library selection or membership");
+    // Normal opt-out must remove the persisted local index, not only hide results.
+    d.click("semantic.disable");
+    d.wait([&] { return !c.library.semanticBusy(); }, "Local semantic index deletion completed");
+    require(!c.library.semanticEnabled() && c.library.semanticResults().empty() &&
+                c.library.semanticError().isEmpty(),
+            "Semantic opt-out retained results or error");
+    require(storedCount() == 0, "Semantic opt-out did not delete persisted embeddings");
+    require(!d.item("semantic.search")->isEnabled(), "Disabled semantic index still allows search");
+    return true;
+}
+
 } // namespace ux

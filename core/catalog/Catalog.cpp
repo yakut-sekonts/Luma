@@ -1,6 +1,12 @@
+#ifdef LUMA_UX_PERSISTENCE_PROBE
+#include "tests/ux/PersistenceProbe.h"
+#endif
 #include "core/catalog/Catalog.h"
+#include "core/catalog/CreativeStorage.h"
 #include "core/catalog/Identity.h"
 #include "core/catalog/LocalMaskStorage.h"
+#include "core/catalog/MetadataStorage.h"
+#include "core/catalog/RetouchStorage.h"
 #include "core/catalog/SqliteStatement.h"
 #include "core/image/Bayer.h"
 #include "core/render/TransformMapping.h"
@@ -117,11 +123,14 @@ AssetRecord readAsset(sqlite3 *db, const Statement &query) {
     if (stored && count != edits.hsl.size())
         throw std::runtime_error("Missing stored HSL bands.");
     edits.localMasks = detail::readLocalMasks(db, query.string(0));
+    edits.retouch = detail::readRetouch(db, query.string(0));
+    edits.creative = detail::readCreative(db, query.string(0));
     edits.validate();
     if (edits.enabled(Correction::transform) && !edits.transform.neutral())
         (void)TransformMapping(metadata.width, metadata.height, metadata.orientation,
                                edits.transform, true);
-    return {query.string(0), query.string(1), query.string(2), metadata, edits};
+    return {query.string(0), query.string(1), query.string(2),
+            metadata,        edits,           detail::readMetadataOverlay(db, query.string(0))};
 }
 constexpr auto selectFields =
     "SELECT a.id,a.original_path,a.checksum,a.camera,a.lens,a.iso,"
@@ -141,12 +150,13 @@ constexpr auto selectFields =
     "FROM assets a JOIN edit_documents e ON e.asset_id=a.id ";
 } // namespace
 
-Catalog::Catalog(const std::filesystem::path &path) {
-    if (!path.parent_path().empty()) {
+Catalog::Catalog(const std::filesystem::path &path, CatalogOpenMode mode) {
+    if (mode == CatalogOpenMode::createIfMissing && !path.parent_path().empty()) {
         std::filesystem::create_directories(path.parent_path());
     }
     if (sqlite3_open_v2(path.c_str(), &db_,
-                        SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_NOMUTEX,
+                        SQLITE_OPEN_READWRITE | SQLITE_OPEN_NOMUTEX |
+                            (mode == CatalogOpenMode::createIfMissing ? SQLITE_OPEN_CREATE : 0),
                         nullptr) != SQLITE_OK) {
         const std::string error =
             db_ ? sqlite3_errmsg(db_) : "Unable to allocate SQLite connection";
@@ -185,12 +195,20 @@ Catalog::Catalog(const std::filesystem::path &path) {
         };
         int current = schemaVersion();
         // Current-schema readers must remain usable during WAL writes/imports.
-        if (current == 11)
+        if (current == 21)
             return;
+        if (current > 21)
+            throw std::runtime_error("Catalog was created by a newer version of Luma.");
+        if (current > 0) {
+            // Preserve a restorable pre-migration SQLite snapshot, including WAL.
+            // Failure leaves the old schema intact; never migrate without a backup.
+            const auto folder = path.parent_path() / (path.filename().string() + ".luma-backups");
+            backupTo(folder / ("schema-" + std::to_string(current) + "-" + newID() + ".sqlite3"));
+        }
         execute("BEGIN IMMEDIATE;");
         // Another connection may have migrated while this one awaited the lock.
         current = schemaVersion();
-        if (current > 11) {
+        if (current > 21) {
             throw std::runtime_error("Catalog was created by a newer version of Luma.");
         }
         if (current == 0) {
@@ -341,8 +359,49 @@ Catalog::Catalog(const std::filesystem::path &path) {
             migrateLocalMasks();
             current = 10;
         }
-        if (current == 10)
+        if (current == 10) {
             migrateMaskComponents();
+            current = 11;
+        }
+        if (current == 11) {
+            migrateBitmapMasks();
+            current = 12;
+        }
+        if (current == 12) {
+            migrateRetouch();
+            current = 13;
+        }
+        if (current == 13) {
+            migrateSemanticIndex();
+            current = 14;
+        }
+        if (current == 14) {
+            migrateDerivedImages();
+            current = 15;
+        }
+        if (current == 15) {
+            migrateMetadata();
+            current = 16;
+        }
+        if (current == 16) {
+            migrateMetadataInterop();
+            current = 17;
+        }
+        if (current == 17) {
+            migrateEditVersions();
+            current = 18;
+        }
+        if (current == 18) {
+            migrateCreative();
+            current = 19;
+        }
+        if (current == 19) {
+            migrateSmartCollections();
+            current = 20;
+        }
+        if (current == 20) {
+            migrateImportPlans();
+        }
         execute("COMMIT;");
     } catch (...) {
         sqlite3_exec(db_, "ROLLBACK", nullptr, nullptr, nullptr);
@@ -416,6 +475,7 @@ AssetRecord Catalog::addAssetRecord(const std::filesystem::path &source,
         Statement edit(db_, "INSERT INTO edit_documents(asset_id) VALUES(?1)");
         edit.text(1, result.id);
         edit.row();
+        detail::initializeMetadata(db_, result.id, path, metadata);
     }
     if (selectActive) {
         Statement select(db_, "INSERT INTO session(slot,asset_id) VALUES(1,?1) ON CONFLICT(slot) "
@@ -423,6 +483,7 @@ AssetRecord Catalog::addAssetRecord(const std::filesystem::path &source,
         select.text(1, result.id);
         select.row();
     }
+    result.descriptive = detail::readMetadataOverlay(db_, result.id);
     return result;
 }
 
@@ -500,7 +561,15 @@ void Catalog::saveEdits(const std::string &assetID, EditDocument edits) {
     execute("BEGIN IMMEDIATE;");
     try {
         writeEdits(assetID, edits);
+#ifdef LUMA_UX_PERSISTENCE_PROBE
+        ux::observePersistenceCheckpoint(sqlite3_db_filename(db_, "main"), "catalog.before-commit",
+                                         {}, {});
+#endif
         execute("COMMIT;");
+#ifdef LUMA_UX_PERSISTENCE_PROBE
+        ux::observePersistenceCheckpoint(sqlite3_db_filename(db_, "main"), "catalog.after-commit",
+                                         {}, {});
+#endif
     } catch (...) {
         sqlite3_exec(db_, "ROLLBACK", nullptr, nullptr, nullptr);
         throw;
@@ -579,6 +648,8 @@ void Catalog::writeEdits(const std::string &assetID, const EditDocument &edits) 
     if (sqlite3_changes(db_) != 1)
         throw std::runtime_error("Cannot save edits: asset is missing from catalog.");
     writeLocalMasks(assetID, edits.localMasks);
+    writeRetouch(assetID, edits.retouch);
+    writeCreative(assetID, edits.creative);
     for (const auto *sql : {"DELETE FROM edit_curve_points WHERE asset_id=?1",
                             "DELETE FROM edit_hsl_bands WHERE asset_id=?1"}) {
         Statement clear(db_, sql);

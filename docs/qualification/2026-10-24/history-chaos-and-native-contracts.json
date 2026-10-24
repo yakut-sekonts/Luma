@@ -1,0 +1,539 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-24T02:04:38.989093+00:00",
+  "base_commit": "28fcdbca14dbc1cffa4c7e7f047ef1ccb6bc1df4",
+  "release_gate": "NOT_QUALIFIED",
+  "initial_chaos": {
+    "file": {
+      "path": "build-verify/ux-history-chaos-10000/UX_REPORT.json",
+      "sha256": "55482b7d6c2af09b0253fb262c0fc77bb78be4c6bc308ab4ef34381baa6f735c",
+      "bytes": 8650
+    },
+    "summary": {
+      "FAIL": 1
+    },
+    "execution_status": "FAIL",
+    "release_gate": "FAIL",
+    "source_consistency": "PASS",
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "28fcdbca14dbc1cffa4c7e7f047ef1ccb6bc1df4",
+      "reason": ""
+    },
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "28fcdbca14dbc1cffa4c7e7f047ef1ccb6bc1df4",
+      "worktree_dirty": false,
+      "source_tree_sha256": "1fa79f4985c89092fa651586ade469655b3b1a87b71424d1ae3175fa43a3999e",
+      "test_executable_sha256": "4247471a6c83e41da7ff7199047733174ac8303dd09b8b6c68face5122080930",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "4247471a6c83e41da7ff7199047733174ac8303dd09b8b6c68face5122080930"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": true,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "results": [
+      {
+        "id": "UX-UND-017",
+        "status": "FAIL",
+        "message": "CHAOS seed=123456 action=200 stage=durable_checkpoint: Timeout: chaos exact Ready preview reached the independent full document",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T014358Z-42232/UX-UND-017/repeat-1",
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      }
+    ]
+  },
+  "diagnostic_chaos": {
+    "file": {
+      "path": "build-verify/ux-chaos-diagnostic/UX_REPORT.json",
+      "sha256": "5117bf400030479cfe465c3b40fde6dd57c98847475b69d3f794257e8b5cbbdb",
+      "bytes": 7957
+    },
+    "summary": {
+      "FAIL": 1
+    },
+    "execution_status": "FAIL",
+    "release_gate": "FAIL",
+    "source_consistency": "PASS",
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "28fcdbca14dbc1cffa4c7e7f047ef1ccb6bc1df4",
+      "reason": ""
+    },
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "28fcdbca14dbc1cffa4c7e7f047ef1ccb6bc1df4",
+      "worktree_dirty": true,
+      "source_tree_sha256": "e560491e5589965cb8a140eab307a20571c6dc2a66d3aeb87e8bfc6e8f80f172",
+      "test_executable_sha256": "1775d37252ef72fafc9dd55f293699afeb2173b19f446f216389402705bb2889",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "1775d37252ef72fafc9dd55f293699afeb2173b19f446f216389402705bb2889"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": true,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "results": [
+      {
+        "id": "UX-UND-017",
+        "status": "FAIL",
+        "message": "CHAOS seed=123456 action=200 stage=durable_checkpoint: Timeout: chaos exact Ready preview reached the independent full document",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T014518Z-42504/UX-UND-017/repeat-1",
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      }
+    ]
+  },
+  "pixel_difference": {
+    "file": {
+      "path": "build-verify/chaos-pixel-diagnostic.json",
+      "sha256": "166bab269ca06f7f98c2f93f2d5c66597c865d8f571ba84d0072b3674d618a83",
+      "bytes": 151
+    },
+    "result": {
+      "maximum_rgb_difference": 1,
+      "alpha_differences": 0,
+      "different_channels": 1,
+      "coordinates": [
+        [
+          90,
+          85,
+          0
+        ]
+      ]
+    }
+  },
+  "full_original_replay": {
+    "file": {
+      "path": "build-verify/ux-history-chaos-replay/UX_REPORT.json",
+      "sha256": "6721cd17f8c062bd492039884392338c87d7665f560a52dc88d47fa9fd2c3f09",
+      "bytes": 31098
+    },
+    "summary": {
+      "PASS": 1
+    },
+    "execution_status": "PASS",
+    "release_gate": "NOT_QUALIFIED",
+    "source_consistency": "PASS",
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "28fcdbca14dbc1cffa4c7e7f047ef1ccb6bc1df4",
+      "reason": ""
+    },
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "28fcdbca14dbc1cffa4c7e7f047ef1ccb6bc1df4",
+      "worktree_dirty": true,
+      "source_tree_sha256": "2d4d9008f8219a5e307e229c3cc744e03a373537ce2ea1dc324753161fc802dd",
+      "test_executable_sha256": "b73dc1557987b55275da6ee05f537a6108243ef29e60647fba108cb1f95a49c3",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "b73dc1557987b55275da6ee05f537a6108243ef29e60647fba108cb1f95a49c3"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": true,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "results": [
+      {
+        "id": "UX-UND-017",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T014645Z-42771/UX-UND-017/repeat-1",
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      }
+    ]
+  },
+  "chaos_measurements": {
+    "action_count_definition": "semantic schedule rows; excludes fixture/Tab/scroll/frame/checkpoint inputs",
+    "checkpoint_interval_actions": 100,
+    "completed_actions": 10000,
+    "default_10000_action_baseline_satisfied": true,
+    "final_document_sha256": "84318b30df0e6093fd49e5f3a767bd81a1036d5b6cbe3e219b9d341c16d9bb3d",
+    "final_history_sweep_complete": true,
+    "general_chaos_monkey_or_phase06_claimed": false,
+    "history_cap_preamble_complete": true,
+    "intentional_noop_actions": 1301,
+    "pointer_gesture_coalescing_exercised": false,
+    "requested_actions": 10000,
+    "scenario": "UX-UND-017",
+    "schedule_sha256": "a0bc804104de4b7ff4f7f71af717617707c1885e2e67fea9b5f997e4e4fb4e4f",
+    "scope": "three integer Basic sliders, discrete keys, Undo/Redo only",
+    "seed": "123456"
+  },
+  "durable_checkpoints": 100,
+  "schedule_byte_identical_to_original_failure": true,
+  "chaos_artifacts": [
+    {
+      "path": "build-verify/ux-artifacts/20261024T014645Z-42771/UX-UND-017/repeat-1/measurements.json",
+      "sha256": "9dd4279a19bcfaad297165468fbdbe431f2f4ef9a599e2850e4404a6e0654d90",
+      "bytes": 21538
+    },
+    {
+      "path": "build-verify/ux-artifacts/20261024T014645Z-42771/UX-UND-017/repeat-1/replay.jsonl",
+      "sha256": "a0bc804104de4b7ff4f7f71af717617707c1885e2e67fea9b5f997e4e4fb4e4f",
+      "bytes": 2570694
+    },
+    {
+      "path": "build-verify/ux-artifacts/20261024T014645Z-42771/UX-UND-017/repeat-1/chaos-execution.jsonl",
+      "sha256": "58a3bd97832297221db7df6ade30760bffaa63691e4c2185614a904529642770",
+      "bytes": 5657772
+    }
+  ],
+  "performance_attempt": {
+    "file": {
+      "path": "build-verify/ux-performance-functional/UX_REPORT.json",
+      "sha256": "fe5d5b652f251451fdca0d3f52e7e47ac73eb9e6833fa429992a16b91bdda42e",
+      "bytes": 38129
+    },
+    "summary": {
+      "FAIL": 4,
+      "PASS": 2
+    },
+    "execution_status": "FAIL",
+    "release_gate": "NOT_QUALIFIED",
+    "source_consistency": "PASS",
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "28fcdbca14dbc1cffa4c7e7f047ef1ccb6bc1df4",
+      "reason": ""
+    },
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "28fcdbca14dbc1cffa4c7e7f047ef1ccb6bc1df4",
+      "worktree_dirty": true,
+      "source_tree_sha256": "2d4d9008f8219a5e307e229c3cc744e03a373537ce2ea1dc324753161fc802dd",
+      "test_executable_sha256": "b73dc1557987b55275da6ee05f537a6108243ef29e60647fba108cb1f95a49c3",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "b73dc1557987b55275da6ee05f537a6108243ef29e60647fba108cb1f95a49c3"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": true,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "results": [
+      {
+        "id": "UX-NAV-002",
+        "status": "FAIL",
+        "message": "PERF_LOCAL measurements require native Cocoa on an idle physical Mac",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T015426Z-44371/UX-NAV-002/repeat-1",
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-FLT-002",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T015426Z-44371/UX-FLT-002/repeat-1",
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-PRV-002",
+        "status": "FAIL",
+        "message": "PERF_LOCAL measurements require native Cocoa on an idle physical Mac",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T015426Z-44371/UX-PRV-002/repeat-1",
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-ADV-012",
+        "status": "FAIL",
+        "message": "PERF_LOCAL measurements require native Cocoa on an idle physical Mac",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T015426Z-44371/UX-ADV-012/repeat-1",
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-TRN-013",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T015426Z-44371/UX-TRN-013/repeat-1",
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      },
+      {
+        "id": "UX-PERF-006",
+        "status": "FAIL",
+        "message": "PERF_LOCAL search measurements require native Cocoa on an idle physical Mac",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T015426Z-44371/UX-PERF-006/repeat-1",
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      }
+    ]
+  },
+  "native_contract_routing": {
+    "file": {
+      "path": "build-verify/ux-performance-contracts/UX_REPORT.json",
+      "sha256": "85c177c9f19b968363dcafb6fe0dbe9498ee985c7b930f8648eece4a0e8d7a1c",
+      "bytes": 9214
+    },
+    "summary": {
+      "SKIPPED": 4
+    },
+    "execution_status": "INCOMPLETE",
+    "release_gate": "NOT_QUALIFIED",
+    "source_consistency": "PASS",
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "28fcdbca14dbc1cffa4c7e7f047ef1ccb6bc1df4",
+      "reason": ""
+    },
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "28fcdbca14dbc1cffa4c7e7f047ef1ccb6bc1df4",
+      "worktree_dirty": true,
+      "source_tree_sha256": "363d001b2e079621868a524971558686da9e3e578c398fe3365fb5ffe06e2f49",
+      "test_executable_sha256": "b73dc1557987b55275da6ee05f537a6108243ef29e60647fba108cb1f95a49c3",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "b73dc1557987b55275da6ee05f537a6108243ef29e60647fba108cb1f95a49c3"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": true,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "results": [
+      {
+        "id": "UX-NAV-002",
+        "status": "SKIPPED",
+        "message": null,
+        "artifacts": null,
+        "original_integrity": null,
+        "catalog_integrity": null
+      },
+      {
+        "id": "UX-PRV-002",
+        "status": "SKIPPED",
+        "message": null,
+        "artifacts": null,
+        "original_integrity": null,
+        "catalog_integrity": null
+      },
+      {
+        "id": "UX-ADV-012",
+        "status": "SKIPPED",
+        "message": null,
+        "artifacts": null,
+        "original_integrity": null,
+        "catalog_integrity": null
+      },
+      {
+        "id": "UX-PERF-006",
+        "status": "SKIPPED",
+        "message": null,
+        "artifacts": null,
+        "original_integrity": null,
+        "catalog_integrity": null
+      }
+    ]
+  },
+  "native_readiness_recheck": {
+    "file": {
+      "path": "build-verify/ux-native-readiness-recheck/UX_REPORT.json",
+      "sha256": "78ff5fc88da5882600d7b16423cb65c2aba9d307cdac3e19f870e9092fc95a14",
+      "bytes": 6752
+    },
+    "summary": {
+      "FAIL": 1
+    },
+    "execution_status": "FAIL",
+    "release_gate": "FAIL",
+    "source_consistency": "PASS",
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "28fcdbca14dbc1cffa4c7e7f047ef1ccb6bc1df4",
+      "reason": ""
+    },
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "28fcdbca14dbc1cffa4c7e7f047ef1ccb6bc1df4",
+      "worktree_dirty": true,
+      "source_tree_sha256": "2d4d9008f8219a5e307e229c3cc744e03a373537ce2ea1dc324753161fc802dd",
+      "test_executable_sha256": "b73dc1557987b55275da6ee05f537a6108243ef29e60647fba108cb1f95a49c3",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "b73dc1557987b55275da6ee05f537a6108243ef29e60647fba108cb1f95a49c3"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": false,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "results": [
+      {
+        "id": "UX-APP-013",
+        "status": "FAIL",
+        "message": "Timeout: native window active",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T015609Z-44517/UX-APP-013/repeat-1",
+        "original_integrity": "PASS",
+        "catalog_integrity": "PASS"
+      }
+    ]
+  },
+  "activation": {
+    "file": {
+      "path": "build-verify/ux-artifacts/20261024T015609Z-44517/UX-APP-013/repeat-1/activation-failure.json",
+      "sha256": "8a690ab7b2c842eb221684a93f5eade8b9980bb96f9a6c358d78863cd6ca3c74",
+      "bytes": 613
+    },
+    "result": {
+      "activation_policy": 0,
+      "application_active": false,
+      "application_hidden": false,
+      "finished_launching": true,
+      "frontmost_bundle": "com.apple.UserNotificationCenter",
+      "frontmost_pid": 47890,
+      "own_pid": 44542,
+      "owned_windows": [
+        {
+          "key": false,
+          "miniaturized": false,
+          "title": "Luma 0.9.0",
+          "visible": true
+        }
+      ],
+      "qt_active": false,
+      "qt_visible": true,
+      "window_can_become_key": true,
+      "window_key": false,
+      "window_miniaturized": false,
+      "window_occlusion": 8194,
+      "window_visible": true
+    }
+  },
+  "validation_logs": [
+    {
+      "path": ".tools/history-chaos-tidy.log",
+      "sha256": "e6373951041f6547d1dd175c6d198d322bc89f1c622d557a38add43ef79767b5",
+      "bytes": 11503
+    },
+    {
+      "path": ".tools/history-chaos-ctest.log",
+      "sha256": "17e30699b79283b37376eb1ea1e6ffc5a5708e11de774bb11f4f7a811e3eb079",
+      "bytes": 586
+    },
+    {
+      "path": ".tools/chaos-runner-accounting.log",
+      "sha256": "9ed65eba6c3cbc355e9b168b127058a18434dfbc912be7006a85477ef5dc5f1a",
+      "bytes": 587
+    },
+    {
+      "path": ".tools/native-performance-contract-tests.log",
+      "sha256": "3bfac191896ed61a9893b8fb95841a1d311bf98979872e1805fa272503db71b5",
+      "bytes": 111
+    },
+    {
+      "path": ".tools/chaos-final-graph.log",
+      "sha256": "a5aa174009dce7891db0f92ab0a5968f0fc2a83e3453abac3eecb7b413e4c34c",
+      "bytes": 2512
+    }
+  ],
+  "scope": [
+    "Test oracle uses existing GPU-compatible Metal RGB budget; alpha, geometry, color space and DPR exact; CPU exact. Existing negative controls run before chaos. Production renderer and timeouts unchanged.",
+    "Two offscreen PERF_LOCAL functional cases pass; four explicit Cocoa-only preconditions are now classified SKIPPED/unsupported_backend without spawning fixtures or children. Exit 1, INCOMPLETE and NOT_QUALIFIED remain. No native performance acceptance.",
+    "Release workflow now mandates all 15 implemented stress cases and the 10000-action history baseline, with evidence uploads. No new hosted PASS claimed.",
+    "Ordinary native startup recheck still fails before scenario: UserNotificationCenter has foreground. No alternate interaction with the tool-prohibited system app attempted. User manual dismissal remains pending.",
+    "This is bounded Basic-slider history chaos, not general Chaos Monkey, pointer coalescing, soak, complete hardware qualification or final release approval."
+  ]
+}

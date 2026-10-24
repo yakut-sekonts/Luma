@@ -1,0 +1,286 @@
+{
+  "schema": 1,
+  "run_id": 40034163108,
+  "url": "https://github.com/yakut-sekonts/Luma/actions/runs/40034163108",
+  "head_sha": "7d66d83",
+  "job": "build-test",
+  "conclusion": "success",
+  "started_at": "2026-10-23T22:36:42Z",
+  "completed_at": "2026-10-24T00:40:26Z",
+  "elapsed_seconds": 7424,
+  "steps": [
+    {
+      "name": "Set up job",
+      "conclusion": "success",
+      "started_at": "2026-10-23T22:36:43Z",
+      "completed_at": "2026-10-23T22:36:44Z"
+    },
+    {
+      "name": "Run actions/checkout@v4.2.2",
+      "conclusion": "success",
+      "started_at": "2026-10-23T22:36:44Z",
+      "completed_at": "2026-10-23T22:36:46Z"
+    },
+    {
+      "name": "Run actions/setup-python@v5.6.0",
+      "conclusion": "success",
+      "started_at": "2026-10-23T22:36:46Z",
+      "completed_at": "2026-10-23T22:36:47Z"
+    },
+    {
+      "name": "Verify supported architecture",
+      "conclusion": "success",
+      "started_at": "2026-10-23T22:36:47Z",
+      "completed_at": "2026-10-23T22:36:47Z"
+    },
+    {
+      "name": "Install fixed toolchain and Qt",
+      "conclusion": "success",
+      "started_at": "2026-10-23T22:36:47Z",
+      "completed_at": "2026-10-23T22:37:28Z"
+    },
+    {
+      "name": "Build pinned offline Denoise and Sky models",
+      "conclusion": "success",
+      "started_at": "2026-10-23T22:37:28Z",
+      "completed_at": "2026-10-23T22:38:43Z"
+    },
+    {
+      "name": "Check native Core ML numerical agreement",
+      "conclusion": "success",
+      "started_at": "2026-10-23T22:38:43Z",
+      "completed_at": "2026-10-23T22:41:43Z"
+    },
+    {
+      "name": "Check source Denoise against analytical clean images",
+      "conclusion": "success",
+      "started_at": "2026-10-23T22:41:43Z",
+      "completed_at": "2026-10-23T22:42:54Z"
+    },
+    {
+      "name": "Upload model conversion evidence",
+      "conclusion": "success",
+      "started_at": "2026-10-23T22:42:54Z",
+      "completed_at": "2026-10-23T22:42:56Z"
+    },
+    {
+      "name": "Configure",
+      "conclusion": "success",
+      "started_at": "2026-10-23T22:42:56Z",
+      "completed_at": "2026-10-23T22:43:23Z"
+    },
+    {
+      "name": "Build",
+      "conclusion": "success",
+      "started_at": "2026-10-23T22:43:23Z",
+      "completed_at": "2026-10-23T22:52:16Z"
+    },
+    {
+      "name": "Check photographic Denoise and actual runtime tiling",
+      "conclusion": "success",
+      "started_at": "2026-10-23T22:52:16Z",
+      "completed_at": "2026-10-23T23:05:05Z"
+    },
+    {
+      "name": "Check Sky photographic interiors and native provider contracts",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:05:05Z",
+      "completed_at": "2026-10-23T23:05:23Z"
+    },
+    {
+      "name": "Upload photographic model evidence",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:05:23Z",
+      "completed_at": "2026-10-23T23:05:25Z"
+    },
+    {
+      "name": "Upload Sky photographic evidence",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:05:25Z",
+      "completed_at": "2026-10-23T23:05:26Z"
+    },
+    {
+      "name": "Unit and integration tests",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:05:26Z",
+      "completed_at": "2026-10-23T23:08:24Z"
+    },
+    {
+      "name": "Preserve CTest diagnostics before UX checks",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:08:24Z",
+      "completed_at": "2026-10-23T23:08:25Z"
+    },
+    {
+      "name": "Build and attest UX executable",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:08:25Z",
+      "completed_at": "2026-10-23T23:08:27Z"
+    },
+    {
+      "name": "Bounded functional blocking UX checks",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:08:27Z",
+      "completed_at": "2026-10-23T23:36:02Z"
+    },
+    {
+      "name": "Preserve blocking UX summary before supplemental checks",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:36:02Z",
+      "completed_at": "2026-10-23T23:36:03Z"
+    },
+    {
+      "name": "Supplemental selected-asset keyboard regression",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:36:03Z",
+      "completed_at": "2026-10-23T23:36:20Z"
+    },
+    {
+      "name": "Library and filmstrip selection preserve deep scroll",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:36:20Z",
+      "completed_at": "2026-10-23T23:36:47Z"
+    },
+    {
+      "name": "Keyboard import edit export at minimum window",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:36:47Z",
+      "completed_at": "2026-10-23T23:37:21Z"
+    },
+    {
+      "name": "Localized preset dialogs at minimum window",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:37:21Z",
+      "completed_at": "2026-10-23T23:40:30Z"
+    },
+    {
+      "name": "Supplemental gradient handle accessibility regressions",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:40:30Z",
+      "completed_at": "2026-10-23T23:46:04Z"
+    },
+    {
+      "name": "Supplemental PhotoCard flag localization regression",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:46:04Z",
+      "completed_at": "2026-10-23T23:46:37Z"
+    },
+    {
+      "name": "Actual thumbnail response regression",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:46:37Z",
+      "completed_at": "2026-10-23T23:46:54Z"
+    },
+    {
+      "name": "Thumbnail away and back before pending completion",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:46:54Z",
+      "completed_at": "2026-10-23T23:47:24Z"
+    },
+    {
+      "name": "Batch commit during actual partial thumbnail render",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:47:24Z",
+      "completed_at": "2026-10-23T23:47:45Z"
+    },
+    {
+      "name": "Thumbnail invalidation during an actual response",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:47:45Z",
+      "completed_at": "2026-10-23T23:48:01Z"
+    },
+    {
+      "name": "Missing private watermark snapshot regression",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:48:01Z",
+      "completed_at": "2026-10-23T23:48:17Z"
+    },
+    {
+      "name": "Legal UTF-8 current export filename regression",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:48:17Z",
+      "completed_at": "2026-10-23T23:49:18Z"
+    },
+    {
+      "name": "Preview revision ordering and photo-switch zoom",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:49:18Z",
+      "completed_at": "2026-10-23T23:51:35Z"
+    },
+    {
+      "name": "Viewer scale and pointer input regression",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:51:35Z",
+      "completed_at": "2026-10-23T23:52:48Z"
+    },
+    {
+      "name": "Auto Transform completion regression",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:52:48Z",
+      "completed_at": "2026-10-23T23:53:02Z"
+    },
+    {
+      "name": "Metadata forms and XMP preservation regression",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:53:02Z",
+      "completed_at": "2026-10-23T23:54:54Z"
+    },
+    {
+      "name": "Missing originals and relink preservation regression",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:54:54Z",
+      "completed_at": "2026-10-23T23:57:35Z"
+    },
+    {
+      "name": "Catalog backup and restore regression",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:57:35Z",
+      "completed_at": "2026-10-23T23:58:34Z"
+    },
+    {
+      "name": "Upload UX evidence",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:58:34Z",
+      "completed_at": "2026-10-23T23:58:49Z"
+    },
+    {
+      "name": "clang-format",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:58:49Z",
+      "completed_at": "2026-10-23T23:58:52Z"
+    },
+    {
+      "name": "clang-tidy",
+      "conclusion": "success",
+      "started_at": "2026-10-23T23:58:52Z",
+      "completed_at": "2026-10-24T00:40:21Z"
+    },
+    {
+      "name": "Require model numerical agreement and source and photographic quality",
+      "conclusion": "skipped",
+      "started_at": "2026-10-24T00:40:21Z",
+      "completed_at": "2026-10-24T00:40:21Z"
+    },
+    {
+      "name": "Post Run actions/setup-python@v5.6.0",
+      "conclusion": "success",
+      "started_at": "2026-10-24T00:40:21Z",
+      "completed_at": "2026-10-24T00:40:22Z"
+    },
+    {
+      "name": "Post Run actions/checkout@v4.2.2",
+      "conclusion": "success",
+      "started_at": "2026-10-24T00:40:22Z",
+      "completed_at": "2026-10-24T00:40:22Z"
+    },
+    {
+      "name": "Complete job",
+      "conclusion": "success",
+      "started_at": "2026-10-24T00:40:22Z",
+      "completed_at": "2026-10-24T00:40:25Z"
+    }
+  ],
+  "release_timeout_before_minutes": 120,
+  "release_timeout_after_minutes": 180,
+  "scope": "Job budget only; no test, threshold, watchdog or publication gate removed; release packaging itself is not yet qualified."
+}

@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "status": "BOUNDED_CHECKS_PASS",
+  "release_gate": "NOT_QUALIFIED",
+  "source_base": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+  "source_state": "New qualification probe/script/annotations and CI/docs in working tree; production Sky provider and model recipe unchanged.",
+  "hardware": "Apple M3, Mac15,3, 8 GiB, macOS 27.0.1; requested MLComputeUnitsAll, actual placement/fallback unobserved",
+  "report": {
+    "path": "docs/qualification/2026-10-22/sky-photographs.json",
+    "sha256": "a7381dd0654a96120ffb073b23f60bd5a04cdb40da2ddb8d39baf3ae75855c62"
+  },
+  "quality": {
+    "source_cases_passed": 3,
+    "native_cases_passed": 3,
+    "runtime_numerics_passed": 3,
+    "oracle_tests_passed": 7,
+    "max_absolute_error": 0.0019684135913848877
+  },
+  "annotation_provenance": "Conservative rectangles selected from the original licensed PNGs before the first Sky prediction; unannotated pixels are unknown. Draft copy retained in .tools/sky-qualification-draft/.",
+  "source_hashes": {
+    "scripts/check-sky-photographs.py": "4ec92943c0b3562ead34cdad144177dd1bd0084e84d0d93a61092a6a664c088c",
+    "tests/models/SkyRuntime.cpp": "0442c2c94be1c8ee8c59a231b99c4490d14521fec0a900ef64cb7f4848a7b18d",
+    "tests/models/test_sky_photographs.py": "c465d5f4615af83fc33426fd795c273f09a2a72eb6fcaeea5cdb273d725c216f",
+    "tests/assets/filters/sky-regions.json": "fd8bcf9c55840065b64c6989ae338ef9a56957ce4247fce835543b8f8a3f7a8a",
+    "platform/macos/CoreMLSky.mm": "7a35a45ffd47bd7d7b8c07f8c966c310b0b2744fb422983462d51dd4d07bb190",
+    "scripts/convert-models.py": "aecd7cd612bc3b73f0f7810d6a66006bd66081a7588e762003acd30d14740cdf"
+  },
+  "logs": [
+    {
+      "path": ".tools/final-sky-runtime-build.log",
+      "sha256": "777167eae128cdc49b4b965df30c4c2c2f584bcab26ee9ba5ddbd362f52fd1bb"
+    },
+    {
+      "path": ".tools/final-sky-runtime-tidy.log",
+      "sha256": "e43c3ad567f51b1b8fc6008b83394fb97cf3656ab8ac7be53c2bd9278c6d45ca"
+    },
+    {
+      "path": ".tools/final-sky-oracle-tests.log",
+      "sha256": "83166b089fbcb82fac63f22522fa6ae99bb5e46368cd35d756277fd463dd6346"
+    },
+    {
+      "path": ".tools/final-sky-photographs-initial.log",
+      "sha256": "15b3a391f7ffac14c9dfd743af1db976b78ffb3e6138b5b13765d80864569f76"
+    }
+  ],
+  "visual_review": {
+    "status": "BOUNDED_OBSERVATIONS_ONLY",
+    "method": "Assistant visual inspection of source/annotation, native mask and overlay sheets; no dense boundary acceptance claimed. Immutable raw report retains its original PENDING field.",
+    "sheets": [
+      {
+        "sample": "portrait",
+        "path": ".tools/final-sky-photographs-initial/portrait/comparison.png",
+        "sha256": "aa9d6cc4c1ae75c51d49fa0d511bacd517b00cc90fa26400d0308c8a37a4ea78",
+        "observation": "Mostly black mask; faint low-confidence responses on helmet/body but no pixels reach 0.5. No large person/studio/flag/rocket selection."
+      },
+      {
+        "sample": "landscape",
+        "path": ".tools/final-sky-photographs-initial/landscape/comparison.png",
+        "sha256": "acdcf7016913b01c5ed94c8a7d3f9cd9bf7258ebe075a90d43cac50b53f5ab9e",
+        "observation": "Broad sky/cloud region selected and river/rocks excluded. Some small gaps between branches or dense foliage are missed; these are outside annotated interiors."
+      },
+      {
+        "sample": "night",
+        "path": ".tools/final-sky-photographs-initial/night/comparison.png",
+        "sha256": "50a728823a8a27067b05ed0b354ec42a4ac2834bfddb850947a17b1d2d990e65",
+        "observation": "Broad dark sky selected; tower/buildings and foreground pole mostly excluded. Fine architecture/pole outlines are soft/coarse; no dense boundary ground truth."
+      }
+    ]
+  },
+  "remaining": [
+    "Dense boundary/foliage/fine-architecture accuracy and broader photographic scenes",
+    "RAW and full image pipeline orientation/crop/alpha integration",
+    "CPU fallback and actual accelerator placement",
+    "Full-resolution resource, memory, cancellation timing, load and recovery",
+    "Independent hosted execution and full final release quality gate"
+  ]
+}

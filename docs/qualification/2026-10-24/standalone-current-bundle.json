@@ -1,0 +1,96 @@
+{
+  "status": "NOT_QUALIFIED",
+  "scope": "Standalone current application without developer Qt/Sparkle SDKs",
+  "bundle": {
+    "path": "dist/Luma.app",
+    "info": {
+      "version": "0.9.0",
+      "source_commit": "2fd6f65f56d839f1b1c903788ada2b3d4662970b",
+      "platform": "macOS 14+",
+      "architecture": "arm64",
+      "distribution": "github-open-source",
+      "signing": "ad-hoc",
+      "bundled_models": [
+        {
+          "role": "denoise",
+          "id": "drunet-color-haar-mad-v1",
+          "display_name": "DRUNet Color \u00b7 Luma 2",
+          "bundle": "LumaDenoise.mlmodelc",
+          "license": "MIT",
+          "source_sha256": "479abe3c5327dfd10ff54a80ec7d4098ca80752a5c9492cdff31cee430bec4b4"
+        },
+        {
+          "role": "sky",
+          "id": "u2net-sky-v1",
+          "display_name": "U\u00b2-Net Sky \u00b7 Luma 1",
+          "bundle": "LumaSky.mlmodelc",
+          "license": "MIT",
+          "source_sha256": "ab9c34c64c3d821220a2886a4a06da4642ffa14d5b30e8d5339056a089aa1d39"
+        }
+      ],
+      "models_manifest_sha256": "a56ce5ccee2cae55dbbee1ebb8cd8095ec70c74307e9452e4266753297ae6f19",
+      "dependencies": {
+        "Qt": "6.10.3",
+        "LibRaw": "0.21.5",
+        "SQLite": "3.50.4",
+        "LittleCMS": "2.17",
+        "Sparkle": "2.10.0",
+        "LensfunDatabase": "0.3.4",
+        "PLCrashReporter": "1.12.2"
+      },
+      "notarized": false
+    },
+    "executable_sha256": "3dbe926057b7d985d546a4d24240a2a39470ebf9077d01db7b90b0b510dbacac",
+    "plist_sha256": "9e25bb55851990aaf0d7b3c80b5fe767a20ca4492cb67d47d938d29b57c4e399"
+  },
+  "checks": {
+    "production_build": "PASS",
+    "models_recipe": "PASS models-v4, dc0aca29905295600d5fee025de624fa08e7ed52c2bcc519f4b4caf48da945e3",
+    "package": "PASS",
+    "strict_recursive_codesign": "PASS ad-hoc",
+    "standalone_workflows": "PASS",
+    "sdk_restored": true
+  },
+  "verification_fix": [
+    "Reproduced stale catalog schema 11 assertion after actual standalone RAW/mask/export/restart workflows. Current schema is 21.",
+    "Next run reproduced stale mask serialization version 2 assertion. Current version is 3 with the same two expected saved masks.",
+    "Sparse preset library and entry now require version 9, preserving exact exposure-only parameter selection and persisted exposure/contrast checks.",
+    "Final complete workflow succeeded; no product code or format was changed."
+  ],
+  "packaging_history": [
+    "Default build-verify/models is stale and correctly rejected by provenance verification. Reused existing qualified models-v4 with explicit LUMA_BUNDLED_MODELS_DIR; no conversion/check bypass.",
+    "Failed generated 0.9.0 package was removed only after executable hash and version matched the build. Previous 0.5.1 stable bundle is preserved at dist/Luma.previous.1792796353.app.",
+    "macdeployqt emitted Sparkle search-path and optional SQL-driver dependency warnings. Final bundled Sparkle is present; optional SQL drivers are removed by the packager. Strict signature and all actual standalone workflows pass with source Qt/Sparkle locations hidden."
+  ],
+  "logs": {
+    ".tools/standalone-current-build.log": {
+      "sha256": "d1a400701d09d597cbea7929c515e563aac87184a83ab4bdbdaaadadb1cd42e5",
+      "text": "[0/2] Re-checking globbed directories...\n[1/90] Automatic MOC and UIC for target luma_raster_tests\n[2/88] Automatic MOC and UIC for target Luma\n[3/87] Running AUTOMOC file extraction for target Luma\n[4/87] Running moc --collect-json for target Luma\n"
+    },
+    ".tools/standalone-current-package.log": {
+      "sha256": "8fbde92bbf314cc3ee2f8d9217acf888083ca332315b7f9319c0bef9504c1073",
+      "text": "Traceback (most recent call last):\n  File \"/Users/semenkontsevoy/Documents/New project/Luma/scripts/install-bundled-models.py\", line 35, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/semenkontsevoy/Documents/New project/Luma/scripts/install-bundled-models.py\", line 17, in main\n    verify_artifacts(args.source)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\n  File \"/Users/semenkontsevoy/Documents/New project/Luma/scripts/model_assets.py\", line 80, in verify_artifacts\n    raise ValueError(\"Bundled models do not match this source/conversion recipe.\")\nValueError: Bundled models do not match this source/conversion recipe.\n"
+    },
+    ".tools/standalone-current-package-v4.log": {
+      "sha256": "487dfff2b5aeb269388cdf1b0ad059b798af6a9d92d83e64e49c38a8bbd3c65a",
+      "text": "ERROR: Cannot resolve rpath \"@rpath/Sparkle.framework/Versions/B/Sparkle\"\nERROR:  using QList(\"/Users/semenkontsevoy/Documents/New project/Luma/.tools/sparkle\", \"/Users/semenkontsevoy/Documents/New project/Luma/.tools/qt/6.10.3/macos/lib\", \"/Users/semenkontsevoy/Documents/New project/Luma/build-verify\")\nWARNING: Plugin \"libqsqlodbc.dylib\" uses private API and is not Mac App store compliant.\nWARNING: Skip plugin \"libqsqlodbc.dylib\"\nWARNING: Plugin \"libqsqlpsql.dylib\" uses private API and is not Mac App store compliant.\nWARNING: Skip plugin \"libqsqlpsql.dylib\"\nERROR: \"error: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic: can't open file: /usr/local/lib/libmimerapi.dylib (No such file or directory)\\n\"\nERROR: no file at \"/usr/local/lib/libmimerapi.dylib\"\nERROR: \"error: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic: can't open file: /usr/local/lib/libmimerapi.dylib (No such file or directory)\\n\"\nERROR: no file at \"/usr/local/lib/libmimerapi.dylib\"\n/Users/semenkontsevoy/Documents/New project/Luma/dist/Luma.app: replacing existing signature\nPackaged: /Users/semenkontsevoy/Documents/New project/Luma/dist/Luma.app\n"
+    },
+    ".tools/standalone-current-verify-initial.log": {
+      "sha256": "ff0e1c91c34a56320dd7312478774555a588e9e66768efaa5f9d077df596ef77",
+      "text": "Traceback (most recent call last):\n  File \"/Users/semenkontsevoy/Documents/New project/Luma/scripts/verify-bundle.py\", line 76, in <module>\n    assert db.execute(\"PRAGMA user_version\").fetchone()==(11,)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    ".tools/standalone-current-verify-schema.log": {
+      "sha256": "0a69ba36dc149c8b6d4ed39492ed59c6d3e93693b2854691eae372645a6926bf",
+      "text": "Traceback (most recent call last):\n  File \"/Users/semenkontsevoy/Documents/New project/Luma/scripts/verify-bundle.py\", line 78, in <module>\n    assert db.execute(\"SELECT document FROM edit_local_masks\").fetchone()[0].startswith(\"LUMA_LOCAL_MASKS 2 2\\n\")\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    ".tools/standalone-current-verify-final.log": {
+      "sha256": "11a3a7e8d408fd3cd3e970107a0a0a20ffdd3008fccc7990c6ca665e20f299ac",
+      "text": "Standalone Luma 0.9.0: complete Brush/Erase/range/boolean masks, Library, Develop, Lens Corrections, Transform/Filter/Undo, sparse XMP import/apply/Undo/restart/export, edited thumbnails, advanced queue/processed DNG, eight runtime languages, ordinary-image Library/alpha/HEIC/WebP/16-bit edit/export/restart/queue, export/restart and source integrity passed without Qt/Sparkle SDKs\n"
+    }
+  },
+  "limits": [
+    "Source/bundle version remains 0.9.0, source commit 2fd6f65; verifier-only changes are dirty during the final check. This is not the final tagged 1.0 artifact.",
+    "Developer SDKs are temporarily hidden and restored; software Qt Quick renderer with Cocoa windows is used by this verifier.",
+    "Actual DMG drag-to-Applications, quarantined launch, native picker navigation, Sparkle update and uploaded-asset checks remain separate."
+  ]
+}

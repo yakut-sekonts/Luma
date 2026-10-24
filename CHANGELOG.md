@@ -1,5 +1,69 @@
 # Changelog
 
+## Unreleased / 0.6–0.9 source development
+
+No builds, tests or QA have been run for this implementation. Stable remains 0.5.1.
+
+- Completed eight additional source workflows: Presence (Texture/Clarity/Dehaze),
+  sampled Point Color with range preview, four-way Color Grading, Post Crop
+  Vignette/Grain, nested Smart Collections, Select/Candidate Compare with linked
+  zoom/pan, local Auto Adjust, and advanced Add/Copy/Move import with date folders,
+  naming, metadata/develop presets, keywords and second backup.
+  Creative edits join presets/batch/history/versions/export; catalog schema 21,
+  preset codecs 8/9 and snapshot codec 2. New controls have eight-language labels.
+  [Source completion and pending qualification](docs/FUNCTIONAL_COMPLETION.md).
+- Bounded preview/source caches, progressive resolution, full-resolution view,
+  memory-pressure handling and Metal Light/Color/Curves/HSL.
+- RGB/luminance Histogram with bounded, alpha-weighted preview sampling before
+  monitor ICC conversion, approximate clipping percentages and red/blue overlays.
+  Histogram tone gestures use Undo/autosave; Option on Whites/Blacks provides a
+  temporary clipping overlay. Eight-language UI; analysis/overlays are view-only.
+- Auto white balance and neutral eyedropper: source-space, alpha-aware sampling
+  through crop/transform/optics/retouch, bounded Temperature/Tint fitting using
+  the existing render model, one-step Undo/autosave and cancellable worker with
+  stale-result guards. Eight-language guidance; Custom results persist normally.
+- Native local AI Subject/Background/Object selections stored as editable masks.
+- Local Core ML Sky mask adapter, sharing bitmap persistence and Undo.
+- Parametric Clone/Heal/Remove, source repositioning, persistence and Undo.
+- Local Core ML denoise adapter and managed Float32 Linear DNG derivatives.
+- Offline model delivery source integration: pinned NAFNet SIDD and U²-Net Sky
+  weights/licenses, Core ML conversion recipe, automatic bundled defaults with
+  custom override/reset and model manifests checked before release publication.
+- Opt-in English semantic search based on local image classification and embeddings.
+- HDR exposure merge/deghosting and panorama registration, three projections,
+  feather blending, auto crop/boundary warp and managed Float32 DNG outputs.
+- Durable generated-image registration and dead-owner recovery.
+- Descriptive metadata, keywords/search, revision-aware XMP sidecars, source
+  packet backups and metadata snapshots/policies in export.
+- XMP interoperability: ordered creators, exact custom label text, Library color
+  mapping, Reject/-1 import/export and flag-aware pending writes. Metadata UI
+  edits these fields; creator/label text is searchable. Fractional ratings are
+  refused explicitly instead of rounded.
+- Catalog backup scheduling/retention/restore, create/open catalog windows,
+  missing-original relinking and bounded folder watching.
+- Startup catalog recovery, interrupted-session choice and remembered catalog;
+  no automatic replacement of missing or unreadable catalogs.
+- Local Diagnostics with system/cache information and a privacy-limited JSON
+  export that refuses to replace existing files.
+- Local rotating event logs and pinned PLCrashReporter crash capture, isolated
+  per process. Inactive reports are formatted on the next launch; local folder
+  access and capability status are available in all eight languages. No upload.
+- Named processing versions: full edits/masks/retouch stored in the catalog,
+  restore as one Undo step, rename/delete with stale-revision guards and bounded
+  storage; eight-language desktop UI. Originals and photo metadata stay separate.
+- Session History browser: labeled steps, arbitrary Undo/Redo navigation, guarded
+  clear and direct named-version creation from a retained state. Stable handles,
+  eight-language UI and explicit 200-step/session lifetime; original photos and
+  current edits are retained when clearing history. Still unbuilt/unqualified.
+- SQLite pre-migration backups; catalog 11→18 migrations.
+- Source-only Developer ID/hardened-runtime/notarization packaging with isolated
+  Actions setup and refusal of unsigned/non-notarized 1.x publication.
+- Candidate fix for LUMA-BUG-035: avoid resetting loaded Library pages on photo
+  opening and bind card focus to the clicked item before activating the view.
+
+Model conversion/qualification and final acceptance remain open. Source version
+0.9.0 is not a released or tested application. See docs/FINAL_1_0_READINESS.md.
+
 ## 0.5.1 / Complete local masks and UX fixes
 
 - Brush with size, feather, per-stroke opacity, continuous painting and erase.

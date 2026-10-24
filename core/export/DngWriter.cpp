@@ -75,7 +75,8 @@ void write(std::ofstream &file, const Bytes &bytes) {
 void writeLinearDNG(const LinearOutput &image, const ColorMatrix3 &rgbToXYZ,
                     const ExportRowConversion &convert, const std::filesystem::path &temporary,
                     std::string_view profileName, std::span<const std::uint8_t> xmp,
-                    CancellationToken stop, const std::function<void(double)> &progress) {
+                    CancellationToken stop, const std::function<void(double)> &progress,
+                    DngSamples samples) {
     image.validate();
     checkCancellation(stop);
     ExportOptions limits;
@@ -91,39 +92,45 @@ void writeLinearDNG(const LinearOutput &image, const ColorMatrix3 &rgbToXYZ,
         throw std::runtime_error("DNG forward matrix does not map neutral RGB to D50.");
     const auto width = static_cast<std::uint32_t>(image.width),
                height = static_cast<std::uint32_t>(image.height);
-    std::vector<Field> fields{longs(254, {0}),
-                              longs(256, {width}),
-                              longs(257, {height}),
-                              shorts(258, {16, 16, 16}),
-                              shorts(259, {1}),
-                              shorts(262, {34892}),
-                              ascii(271, "Luma"),
-                              ascii(272, "Rendered Linear RGB"),
-                              longs(273, {0}),
-                              shorts(274, {1}),
-                              shorts(277, {3}),
-                              longs(278, {height}),
-                              longs(279, {width * height * 6}),
-                              shorts(284, {1}),
-                              ascii(305, "Luma"),
-                              shorts(339, {1}),
-                              {50706, 1, 4, {1, 4, 0, 0}},
-                              {50707, 1, 4, {1, 4, 0, 0}},
-                              ascii(50708, "Luma Rendered Linear RGB v1"),
-                              {50710, 1, 3, {0, 1, 2}},
-                              rational(50714, {0}),
-                              longs(50717, {65535}),
-                              rational(50718, {1, 1}),
-                              longs(50719, {0, 0}),
-                              longs(50720, {width, height}),
-                              matrix(50721, inverse),
-                              rational(50728, {1, 1, 1}),
-                              {50730, 10, 1, {0, 0, 0, 0, 1, 0, 0, 0}},
-                              shorts(50778, {23}),
-                              longs(50829, {0, 0, height, width}),
-                              ascii(50936, profileName),
-                              matrix(50964, rgbToXYZ),
-                              longs(51110, {1})};
+    if (samples != DngSamples::integer16 && samples != DngSamples::floating32)
+        throw std::runtime_error("Unsupported DNG sample format.");
+    const bool floating = samples == DngSamples::floating32;
+    const std::uint16_t bits = floating ? 32 : 16;
+    std::vector<Field> fields{
+        longs(254, {0}),
+        longs(256, {width}),
+        longs(257, {height}),
+        shorts(258, {bits, bits, bits}),
+        shorts(259, {1}),
+        shorts(262, {34892}),
+        ascii(271, "Luma"),
+        ascii(272, floating ? "Rendered Linear RGB Float" : "Rendered Linear RGB"),
+        longs(273, {0}),
+        shorts(274, {1}),
+        shorts(277, {3}),
+        longs(278, {height}),
+        longs(279, {width * height * (floating ? 12U : 6U)}),
+        shorts(284, {1}),
+        ascii(305, "Luma"),
+        shorts(339, {static_cast<std::uint16_t>(floating ? 3 : 1)}),
+        {50706, 1, 4, {1, 4, 0, 0}},
+        {50707, 1, 4, {1, 4, 0, 0}},
+        ascii(50708,
+              floating ? "Luma Rendered Linear RGB Float v1" : "Luma Rendered Linear RGB v1"),
+        {50710, 1, 3, {0, 1, 2}},
+        rational(50714, {0}),
+        longs(50717, {floating ? 1U : 65535U}),
+        rational(50718, {1, 1}),
+        longs(50719, {0, 0}),
+        longs(50720, {width, height}),
+        matrix(50721, inverse),
+        rational(50728, {1, 1, 1}),
+        {50730, 10, 1, {0, 0, 0, 0, 1, 0, 0, 0}},
+        shorts(50778, {23}),
+        longs(50829, {0, 0, height, width}),
+        ascii(50936, profileName),
+        matrix(50964, rgbToXYZ),
+        longs(51110, {1})};
     Field curve{50940, 11, 4, {}};
     for (float value : {0.F, 0.F, 1.F, 1.F})
         u32(curve.bytes, std::bit_cast<std::uint32_t>(value));
@@ -249,12 +256,15 @@ void writeLinearDNG(const LinearOutput &image, const ColorMatrix3 &rgbToXYZ,
         }
         convert(row, converted);
         Bytes samples;
-        samples.reserve(row.size() * 2);
+        samples.reserve(row.size() * (floating ? 4 : 2));
         for (float value : converted) {
             if (!std::isfinite(value))
                 throw std::runtime_error("Non-finite DNG output sample.");
-            u16(samples, static_cast<std::uint16_t>(std::lround(
-                             std::clamp(static_cast<double>(value), 0.0, 1.0) * 65535)));
+            if (floating)
+                u32(samples, std::bit_cast<std::uint32_t>(value));
+            else
+                u16(samples, static_cast<std::uint16_t>(std::lround(
+                                 std::clamp(static_cast<double>(value), 0.0, 1.0) * 65535)));
         }
         write(file, samples);
         if (progress)

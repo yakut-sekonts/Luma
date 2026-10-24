@@ -1,0 +1,30 @@
+[
+  {
+    "seed": 0,
+    "units": "cpu",
+    "max_absolute_error": 1.862645149230957e-09,
+    "elapsed_seconds": 0.35023633297532797,
+    "status": "PASS"
+  },
+  {
+    "seed": 0,
+    "units": "all",
+    "max_absolute_error": 1.862645149230957e-09,
+    "elapsed_seconds": 0.3393902910174802,
+    "status": "PASS"
+  },
+  {
+    "seed": 17,
+    "units": "cpu",
+    "max_absolute_error": 0.0,
+    "elapsed_seconds": 0.23874050000449643,
+    "status": "PASS"
+  },
+  {
+    "seed": 17,
+    "units": "all",
+    "max_absolute_error": 0.0,
+    "elapsed_seconds": 0.23810737498570234,
+    "status": "PASS"
+  }
+]

@@ -1,0 +1,270 @@
+{
+  "schema": 1,
+  "scope": "synthetic-denoise-source-vs-analytical-clean",
+  "status": "PASS",
+  "photographic_quality": "NOT_RUN",
+  "compute_units": "TORCH_CPU",
+  "python": "3.12.15",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "validator_sha256": "1b2b6360d5f2d21156104fc96e0d2d0b75f9b230afa7b8ef82a3050b7e76b98d",
+  "cases": [
+    {
+      "sample": "gradient-noise",
+      "mode": "denoise",
+      "status": "PASS",
+      "regions": {
+        "full": {
+          "margin": 0,
+          "input_mse": 0.0006149746742580429,
+          "output_mse": 8.255663775430842e-05,
+          "input_peak_error": 0.1397833228111267,
+          "output_peak_error": 0.09574565012007952,
+          "criteria": {
+            "noise_error_reduced": true,
+            "peak_error_not_amplified": true
+          },
+          "status": "PASS"
+        },
+        "runtime-crop": {
+          "margin": 64,
+          "input_mse": 0.0006257888375699799,
+          "output_mse": 3.557831747856332e-05,
+          "input_peak_error": 0.1397833228111267,
+          "output_peak_error": 0.0859123170375824,
+          "criteria": {
+            "noise_error_reduced": true,
+            "peak_error_not_amplified": true
+          },
+          "status": "PASS"
+        }
+      },
+      "input_max": 1.0,
+      "output_max": 1.0,
+      "input_sha256": "7a0f11bce4b64aa41bd243fb1cab86326522952934db7420b332f241fd646804",
+      "clean_sha256": "c496a5d1c5b6c6b2f72fd636c61c357f0a97dc9b8f1a7b343c70a45022599f67",
+      "output_sha256": "c48728a263df48b880e6485973adf55a6f9e9fc93ae0140003e9e55c665b390d"
+    },
+    {
+      "sample": "near-black-noise",
+      "mode": "denoise",
+      "status": "PASS",
+      "regions": {
+        "full": {
+          "margin": 0,
+          "input_mse": 6.208468142964937e-10,
+          "output_mse": 1.990848162687598e-12,
+          "input_peak_error": 0.00013978328206576407,
+          "output_peak_error": 3.922429823433049e-05,
+          "criteria": {
+            "noise_error_reduced": true,
+            "peak_error_not_amplified": true
+          },
+          "status": "PASS"
+        },
+        "runtime-crop": {
+          "margin": 64,
+          "input_mse": 6.257888962130826e-10,
+          "output_mse": 1.155830820547545e-12,
+          "input_peak_error": 0.00013978328206576407,
+          "output_peak_error": 6.011105142533779e-06,
+          "criteria": {
+            "noise_error_reduced": true,
+            "peak_error_not_amplified": true
+          },
+          "status": "PASS"
+        }
+      },
+      "input_max": 0.00108927465043962,
+      "output_max": 0.0010084897512570024,
+      "input_sha256": "fd8e8d0191b74838bfd46644ebdb789309daa946376319c3a3394fe0bef0e245",
+      "clean_sha256": "5b42b644403cb3e3f3ca2055730fb785eccbebf96e157bab3b604ba752f36906",
+      "output_sha256": "cdf3d4136b10173251c5809c02ef176dd6a88dc1025524309cbf09509813d524"
+    },
+    {
+      "sample": "black-with-impulse",
+      "mode": "denoise",
+      "status": "PASS",
+      "regions": {
+        "full": {
+          "margin": 0,
+          "input_mse": 3.814697628001804e-12,
+          "output_mse": 3.6744201997847635e-12,
+          "input_peak_error": 0.0010000000474974513,
+          "output_peak_error": 0.0009902516612783074,
+          "criteria": {
+            "noise_error_reduced": true,
+            "peak_error_not_amplified": true
+          },
+          "status": "PASS"
+        },
+        "runtime-crop": {
+          "margin": 64,
+          "input_mse": 6.781684672003207e-12,
+          "output_mse": 6.532302577395132e-12,
+          "input_peak_error": 0.0010000000474974513,
+          "output_peak_error": 0.0009902516612783074,
+          "criteria": {
+            "noise_error_reduced": true,
+            "peak_error_not_amplified": true
+          },
+          "status": "PASS"
+        }
+      },
+      "input_max": 0.0010000000474974513,
+      "output_max": 0.0009902516612783074,
+      "input_sha256": "e4b66d170a0b724f2a1e9c9a56bb0a0b77264c0a468d0c86b7654a9b8e19b8ee",
+      "clean_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5",
+      "output_sha256": "93d74ab89062dc1e7f17c2bf634f357bdc22fbb1f0ac97c49c908424736b2603"
+    },
+    {
+      "sample": "uniform-black",
+      "mode": "preserve",
+      "status": "PASS",
+      "regions": {
+        "full": {
+          "margin": 0,
+          "input_mse": 0.0,
+          "output_mse": 0.0,
+          "input_peak_error": 0.0,
+          "output_peak_error": 0.0,
+          "criteria": {
+            "noiseless_input_unchanged": true
+          },
+          "status": "PASS"
+        },
+        "runtime-crop": {
+          "margin": 64,
+          "input_mse": 0.0,
+          "output_mse": 0.0,
+          "input_peak_error": 0.0,
+          "output_peak_error": 0.0,
+          "criteria": {
+            "noiseless_input_unchanged": true
+          },
+          "status": "PASS"
+        }
+      },
+      "input_max": 0.0,
+      "output_max": 0.0,
+      "input_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5",
+      "clean_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5",
+      "output_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5"
+    },
+    {
+      "sample": "uniform-near-black",
+      "mode": "preserve",
+      "status": "PASS",
+      "regions": {
+        "full": {
+          "margin": 0,
+          "input_mse": 0.0,
+          "output_mse": 0.0,
+          "input_peak_error": 0.0,
+          "output_peak_error": 0.0,
+          "criteria": {
+            "noiseless_input_unchanged": true
+          },
+          "status": "PASS"
+        },
+        "runtime-crop": {
+          "margin": 64,
+          "input_mse": 0.0,
+          "output_mse": 0.0,
+          "input_peak_error": 0.0,
+          "output_peak_error": 0.0,
+          "criteria": {
+            "noiseless_input_unchanged": true
+          },
+          "status": "PASS"
+        }
+      },
+      "input_max": 9.999999747378752e-05,
+      "output_max": 9.999999747378752e-05,
+      "input_sha256": "20a09b268922e57aae678f7f873cacd69419f0209964cb521729ca0c5320b3f3",
+      "clean_sha256": "20a09b268922e57aae678f7f873cacd69419f0209964cb521729ca0c5320b3f3",
+      "output_sha256": "20a09b268922e57aae678f7f873cacd69419f0209964cb521729ca0c5320b3f3"
+    },
+    {
+      "sample": "uniform-gray",
+      "mode": "preserve",
+      "status": "PASS",
+      "regions": {
+        "full": {
+          "margin": 0,
+          "input_mse": 0.0,
+          "output_mse": 0.0,
+          "input_peak_error": 0.0,
+          "output_peak_error": 0.0,
+          "criteria": {
+            "noiseless_input_unchanged": true
+          },
+          "status": "PASS"
+        },
+        "runtime-crop": {
+          "margin": 64,
+          "input_mse": 0.0,
+          "output_mse": 0.0,
+          "input_peak_error": 0.0,
+          "output_peak_error": 0.0,
+          "criteria": {
+            "noiseless_input_unchanged": true
+          },
+          "status": "PASS"
+        }
+      },
+      "input_max": 0.18000000715255737,
+      "output_max": 0.18000000715255737,
+      "input_sha256": "886d82fbee23fc8d54e0877c79c1eb05045c6c836c91b2f846e902b3bc15abc3",
+      "clean_sha256": "886d82fbee23fc8d54e0877c79c1eb05045c6c836c91b2f846e902b3bc15abc3",
+      "output_sha256": "886d82fbee23fc8d54e0877c79c1eb05045c6c836c91b2f846e902b3bc15abc3"
+    },
+    {
+      "sample": "uniform-color",
+      "mode": "preserve",
+      "status": "PASS",
+      "regions": {
+        "full": {
+          "margin": 0,
+          "input_mse": 0.0,
+          "output_mse": 0.0,
+          "input_peak_error": 0.0,
+          "output_peak_error": 0.0,
+          "criteria": {
+            "noiseless_input_unchanged": true
+          },
+          "status": "PASS"
+        },
+        "runtime-crop": {
+          "margin": 64,
+          "input_mse": 0.0,
+          "output_mse": 0.0,
+          "input_peak_error": 0.0,
+          "output_peak_error": 0.0,
+          "criteria": {
+            "noiseless_input_unchanged": true
+          },
+          "status": "PASS"
+        }
+      },
+      "input_max": 0.800000011920929,
+      "output_max": 0.800000011920929,
+      "input_sha256": "f161740d1bf610bbc61b3ae3c1c061682aa4ab639ae749b7bb792cd9a8043a10",
+      "clean_sha256": "f161740d1bf610bbc61b3ae3c1c061682aa4ab639ae749b7bb792cd9a8043a10",
+      "output_sha256": "f161740d1bf610bbc61b3ae3c1c061682aa4ab639ae749b7bb792cd9a8043a10"
+    }
+  ],
+  "manifest_sha256": "a56ce5ccee2cae55dbbee1ebb8cd8095ec70c74307e9452e4266753297ae6f19",
+  "recipe_sha256": "dc0aca29905295600d5fee025de624fa08e7ed52c2bcc519f4b4caf48da945e3",
+  "toolchain": {
+    "coremltools": "9.0",
+    "torch": "2.10.0",
+    "torchvision": "0.25.0",
+    "onnx": "1.17.0",
+    "onnx2torch": "1.5.15",
+    "numpy": "1.26.4",
+    "protobuf": "4.25.5",
+    "certifi": "2026.7.22"
+  },
+  "model": "drunet-color-haar-mad-v1",
+  "weights_sha256": "479abe3c5327dfd10ff54a80ec7d4098ca80752a5c9492cdff31cee430bec4b4"
+}

@@ -3,6 +3,7 @@
 #include "core/render/AdvancedColor.h"
 #include "core/render/LocalAdjustments.h"
 #include "core/render/MaskReference.h"
+#include "tests/unit/LegacyCatalogFixture.h"
 #include <cmath>
 #include <filesystem>
 #include <fstream>
@@ -256,9 +257,13 @@ void serialization() {
         mask.components.push_back(c);
     }
     const auto encoded = luma::encodeLocalMasks({mask, old[0]});
-    require(encoded.starts_with("LUMA_LOCAL_MASKS 2 2\n") &&
+    require(encoded.starts_with("LUMA_LOCAL_MASKS 3 2\n") &&
                 luma::decodeLocalMasks(encoded) == std::vector{mask, old[0]},
-            "Version-2 masks did not roundtrip losslessly.");
+            "Version-3 masks did not roundtrip losslessly.");
+    auto version2 = encoded;
+    version2.replace(0, std::string("LUMA_LOCAL_MASKS 3").size(), "LUMA_LOCAL_MASKS 2");
+    require(luma::decodeLocalMasks(version2) == std::vector{mask, old[0]},
+            "Version-2 vector masks lost data when read by the version-3 codec.");
     rejects([&] { luma::decodeLocalMasks(encoded + "junk"); });
     auto bad = mask;
     bad.strokes[0].points.resize(16385);
@@ -306,11 +311,12 @@ void migration() {
         const std::string legacy =
             "LUMA_LOCAL_MASKS 1 1\n\"01234567-89ab-cdef-0123-456789abcdef\" \"Legacy\" 0 1 0 0.5 "
             "0.25 0.5 0.75 0 100 100 1.25 0 0 0 0 0 0 0\n";
+        sql(path, fixture::removePostV11Tables);
         sql(path, "UPDATE edit_local_masks SET document='" + legacy +
                       "';DROP TRIGGER initialize_local_masks;CREATE TRIGGER initialize_local_masks "
                       "AFTER INSERT ON edit_documents BEGIN INSERT INTO edit_local_masks "
                       "VALUES(NEW.asset_id,'LUMA_LOCAL_MASKS 1 0'||char(10));END;DELETE FROM "
-                      "schema_migrations WHERE version=11;PRAGMA user_version=10;");
+                      "schema_migrations WHERE version>=11;PRAGMA user_version=10;");
         const auto first = std::min(one, two), last = std::max(one, two);
         sql(path, "UPDATE edit_local_masks SET document='broken' WHERE asset_id='" + last + "';");
         rejects([&] { luma::Catalog db(path); });
@@ -326,10 +332,10 @@ void migration() {
                         record->asset.edits.localMasks == luma::decodeLocalMasks(legacy),
                     "Catalog-10 migration changed revision, global edits or gradient data.");
         }
-        require(scalar(path, "PRAGMA user_version") == "11" &&
+        require(scalar(path, "PRAGMA user_version") == "21" &&
                     scalar(path, "SELECT document FROM edit_local_masks LIMIT 1")
-                        .starts_with("LUMA_LOCAL_MASKS 2 1\n"),
-                "Migration did not persist version 2.");
+                        .starts_with("LUMA_LOCAL_MASKS 3 1\n"),
+                "Migration did not persist version 3.");
         std::filesystem::remove_all(root);
     } catch (...) {
         std::filesystem::remove_all(root);

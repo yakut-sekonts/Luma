@@ -1,0 +1,310 @@
+{
+  "schema": 1,
+  "status": "PASS",
+  "scope": "three-photographs-conservative-interior-regions",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "cases": [
+    {
+      "sample": "portrait",
+      "fixture_sha256": "b7224c8c68fc7aaf76657b0d039e9fac69c00117d58523e5d2a11fe7cd2fbe61",
+      "native": {
+        "contracts": {
+          "after_resize_cancel": true,
+          "cancelled_progress": [
+            0.15
+          ],
+          "invalid_buffer_rejected": true,
+          "pre_cancel": true,
+          "repeat_after_cancel_identical": true,
+          "unsupported_categories_rejected": true
+        },
+        "height": 320,
+        "identifier": "coreml.sky.v1",
+        "input_unchanged": true,
+        "progress": [
+          0.15,
+          1
+        ],
+        "requested_compute_units": "ALL",
+        "width": 320
+      },
+      "source_quality": {
+        "status": "PASS",
+        "regions": [
+          {
+            "name": "entire indoor studio portrait",
+            "sky": false,
+            "rect": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pixels": 102400,
+            "mean_probability": 0.00018263651269173872,
+            "fraction_over_half": 0.0,
+            "status": "PASS"
+          }
+        ]
+      },
+      "native_quality": {
+        "status": "PASS",
+        "regions": [
+          {
+            "name": "entire indoor studio portrait",
+            "sky": false,
+            "rect": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pixels": 102400,
+            "mean_probability": 0.0001641390984514146,
+            "fraction_over_half": 0.0,
+            "status": "PASS"
+          }
+        ]
+      },
+      "numerics": {
+        "status": "PASS",
+        "max_absolute_error": 0.0019601453095674515
+      },
+      "input_sha256": "0df3c62c654dd5432e753a8d273e73ad3fb7d5826848b395afaead620b89bdd0",
+      "mask_sha256": "c3fdd14573634fc7d492492a3515393691fb6efbb39a8d6a80bc7715a1364a35",
+      "status": "PASS"
+    },
+    {
+      "sample": "landscape",
+      "fixture_sha256": "65f8cab61ebac24d87257397d9964af17e2972a5eb47d507ee44f3c0209c5b3d",
+      "native": {
+        "height": 320,
+        "identifier": "coreml.sky.v1",
+        "input_unchanged": true,
+        "progress": [
+          0.15,
+          1
+        ],
+        "requested_compute_units": "ALL",
+        "width": 320
+      },
+      "source_quality": {
+        "status": "PASS",
+        "regions": [
+          {
+            "name": "daylight sky and clouds above treetops",
+            "sky": true,
+            "rect": [
+              0,
+              0,
+              512,
+              74
+            ],
+            "pixels": 19840,
+            "mean_probability": 0.9999995253349264,
+            "fraction_over_half": 1.0,
+            "status": "PASS"
+          },
+          {
+            "name": "river reflections, rocks and ground",
+            "sky": false,
+            "rect": [
+              0,
+              200,
+              512,
+              384
+            ],
+            "pixels": 48960,
+            "mean_probability": 4.075525892033052e-07,
+            "fraction_over_half": 0.0,
+            "status": "PASS"
+          }
+        ]
+      },
+      "native_quality": {
+        "status": "PASS",
+        "regions": [
+          {
+            "name": "daylight sky and clouds above treetops",
+            "sky": true,
+            "rect": [
+              0,
+              0,
+              512,
+              74
+            ],
+            "pixels": 19840,
+            "mean_probability": 1.0,
+            "fraction_over_half": 1.0,
+            "status": "PASS"
+          },
+          {
+            "name": "river reflections, rocks and ground",
+            "sky": false,
+            "rect": [
+              0,
+              200,
+              512,
+              384
+            ],
+            "pixels": 48960,
+            "mean_probability": 8.00974031733775e-08,
+            "fraction_over_half": 0.0,
+            "status": "PASS"
+          }
+        ]
+      },
+      "numerics": {
+        "status": "PASS",
+        "max_absolute_error": 0.0019684135913848877
+      },
+      "input_sha256": "b3f7ac0ebe7a4ced3041e09176ad2331c336f73728c3ef2cb96326363cee7c06",
+      "mask_sha256": "cf1ef84f9c0ee45f6829500b3af9bef01ab28b0515e59f4ba57dce0f7f976170",
+      "status": "PASS"
+    },
+    {
+      "sample": "night",
+      "fixture_sha256": "a10274f9ca55d6dbd6f09de8473831bbd3349d604149b7d497390b5e37845985",
+      "native": {
+        "height": 320,
+        "identifier": "coreml.sky.v1",
+        "input_unchanged": true,
+        "progress": [
+          0.15,
+          1
+        ],
+        "requested_compute_units": "ALL",
+        "width": 320
+      },
+      "source_quality": {
+        "status": "PASS",
+        "regions": [
+          {
+            "name": "night sky right of tower",
+            "sky": true,
+            "rect": [
+              285,
+              10,
+              374,
+              315
+            ],
+            "pixels": 14325,
+            "mean_probability": 1.0,
+            "fraction_over_half": 1.0,
+            "status": "PASS"
+          },
+          {
+            "name": "night sky left of tower",
+            "sky": true,
+            "rect": [
+              72,
+              80,
+              112,
+              240
+            ],
+            "pixels": 3300,
+            "mean_probability": 0.9999974672722094,
+            "fraction_over_half": 1.0,
+            "status": "PASS"
+          },
+          {
+            "name": "illuminated tower masonry",
+            "sky": false,
+            "rect": [
+              155,
+              80,
+              230,
+              430
+            ],
+            "pixels": 13797,
+            "mean_probability": 4.579211545673271e-06,
+            "fraction_over_half": 0.0,
+            "status": "PASS"
+          }
+        ]
+      },
+      "native_quality": {
+        "status": "PASS",
+        "regions": [
+          {
+            "name": "night sky right of tower",
+            "sky": true,
+            "rect": [
+              285,
+              10,
+              374,
+              315
+            ],
+            "pixels": 14325,
+            "mean_probability": 1.0,
+            "fraction_over_half": 1.0,
+            "status": "PASS"
+          },
+          {
+            "name": "night sky left of tower",
+            "sky": true,
+            "rect": [
+              72,
+              80,
+              112,
+              240
+            ],
+            "pixels": 3300,
+            "mean_probability": 1.0,
+            "fraction_over_half": 1.0,
+            "status": "PASS"
+          },
+          {
+            "name": "illuminated tower masonry",
+            "sky": false,
+            "rect": [
+              155,
+              80,
+              230,
+              430
+            ],
+            "pixels": 13797,
+            "mean_probability": 3.410801356267504e-06,
+            "fraction_over_half": 0.0,
+            "status": "PASS"
+          }
+        ]
+      },
+      "numerics": {
+        "status": "PASS",
+        "max_absolute_error": 0.0019639134407043457
+      },
+      "input_sha256": "a5d09108b0326f0fa4024539985033d9285dc2a6d950324b310498482e8471c6",
+      "mask_sha256": "3ee5b826a6eee9fbdfd48617826bdf80e5a506726162e7821223129374cb4aeb",
+      "status": "PASS"
+    }
+  ],
+  "dense_boundary_quality": "NOT_RUN",
+  "visual_review": "PENDING",
+  "compute_policy": "ALL; actual device and CPU fallback unobserved",
+  "validator_sha256": "4ec92943c0b3562ead34cdad144177dd1bd0084e84d0d93a61092a6a664c088c",
+  "probe_sha256": "1b1c8ca16efd81afa23235ed2157bed16a73dd34753b0a541e69fed8f9d2bfb3",
+  "provider_source_sha256": "7a35a45ffd47bd7d7b8c07f8c966c310b0b2744fb422983462d51dd4d07bb190",
+  "annotations_sha256": "fd8bcf9c55840065b64c6989ae338ef9a56957ce4247fce835543b8f8a3f7a8a",
+  "runtime_max_absolute_error_limit": 0.00246078431372549,
+  "manifest_sha256": "a56ce5ccee2cae55dbbee1ebb8cd8095ec70c74307e9452e4266753297ae6f19",
+  "recipe_sha256": "dc0aca29905295600d5fee025de624fa08e7ed52c2bcc519f4b4caf48da945e3",
+  "toolchain": {
+    "coremltools": "9.0",
+    "torch": "2.10.0",
+    "torchvision": "0.25.0",
+    "onnx": "1.17.0",
+    "onnx2torch": "1.5.15",
+    "numpy": "1.26.4",
+    "protobuf": "4.25.5",
+    "certifi": "2026.7.22"
+  },
+  "model": "u2net-sky-v1",
+  "quality_limits": {
+    "sky_min_mean": 0.9,
+    "sky_min_fraction_over_half": 0.98,
+    "non_sky_max_mean": 0.1,
+    "non_sky_max_fraction_over_half": 0.02
+  },
+  "fixture_manifest_sha256": "af22d646a5404f99be9121ae28165ad5fac43cfbc69db8c6ae29903eb1b27579"
+}

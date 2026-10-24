@@ -1,4 +1,5 @@
 #include "apps/shared/PresetStore.h"
+#include "core/render/DevelopPipeline.h"
 #include "tests/ux/UxContext.h"
 #include "tests/ux/UxPixels.h"
 #include <QColorSpace>
@@ -34,16 +35,30 @@ void exact(Context &c, const luma::EditDocument &expected, const QString &reason
 }
 QImage rendered(Context &c, const luma::EditDocument &expected) {
     const auto pixels = fixtureReference(c, expected, c.editor.sourcePath());
-    c.driver->wait(
-        [&] {
-            auto *image = c.driver->item("develop.preview");
-            return !c.editor.busy() && image->isVisible() &&
-                   image->property("status").toInt() == 1 &&
-                   image->property("source").toUrl().toString() == c.editor.previewUrl() &&
-                   c.provider->requestImage({}, nullptr, {}) == pixels;
-        },
-        "WB/numeric preview matches the complete expected document");
+    const bool metalEligible =
+        c.editor.metalPreview() && luma::DevelopPipeline(expected).gpuCompatible();
+    try {
+        c.driver->wait(
+            [&] {
+                auto *image = c.driver->item("develop.preview");
+                return !c.editor.busy() && image->isVisible() &&
+                       image->property("status").toInt() == 1 &&
+                       image->property("source").toUrl().toString() == c.editor.previewUrl() &&
+                       previewPixelsAgree(c.provider->requestImage({}, nullptr, {}), pixels,
+                                          metalEligible);
+            },
+            "WB/numeric preview matches the complete expected document");
+    } catch (...) {
+        recordPreviewDifference(c, pixels,
+                                metalEligible ? "WB/numeric CPU reference: RGB <= 1, alpha exact"
+                                              : "WB/numeric exact CPU reference");
+        throw;
+    }
     exact(c, expected, "Preview readiness changed the expected WB/numeric document");
+    c.driver->log({{"action", "wb_numeric_cpu_pixel_oracle"},
+                   {"metal_eligible", metalEligible},
+                   {"rgb_max_error", metalEligible ? 1 : 0},
+                   {"alpha_max_error", 0}});
     c.driver->frame();
     return pixels;
 }
@@ -135,7 +150,7 @@ PublicPair importPublicPair(Context &c) {
             "WB scenarios require only the runner-generated public DNG/PNG pair");
     // Selection boundary only. Native chooser/HID selection is not claimed.
     const QList<QUrl> sources{QUrl::fromLocalFile(pair.aPath), QUrl::fromLocalFile(pair.bPath)};
-    require(d.object("library.pane")->setProperty("sources", QVariant::fromValue(sources)),
+    require(d.object("library.importDialog")->setProperty("sources", QVariant::fromValue(sources)),
             "Cannot prepare the public WB import source selection");
     d.click("library.importButton");
     d.wait([&] { return d.object("library.importDialog")->property("opened").toBool(); },
@@ -187,6 +202,7 @@ void protectUnrelatedLight(Context &c) {
     rendered(c, expected);
 }
 void whiteBalanceSemantics(Context &c) {
+    checkPreviewPixelOracle();
     importPublicPair(c);
     protectUnrelatedLight(c);
     const auto base = c.editor.currentSettings();

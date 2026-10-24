@@ -15,6 +15,7 @@ ColumnLayout {
     property string correction: parameter
     property bool allowDisable: true
     property bool detailDiagnostic: false
+    property bool clippingDiagnostic: parameter === "whites" || parameter === "blacks"
     property bool available: editor.hasPhoto && !editor.busy
     spacing: 2
     RowLayout {
@@ -53,7 +54,7 @@ ColumnLayout {
         onPressedChanged: {
             if (pressed) {
                 editor.beginEdit()
-                if (control.detailDiagnostic)
+                if (control.detailDiagnostic || control.clippingDiagnostic)
                     editor.setDetailControl(control.parameter)
             } else {
                 if (resetRequested) {

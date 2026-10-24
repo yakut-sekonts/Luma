@@ -40,6 +40,8 @@ void EditorController::setCropMode(bool value) {
                                          !history_.current().enabled(luma::Correction::crop))))
         return;
     if (value) {
+        setRetouchMode(QStringLiteral("off"));
+        cancelAI();
         setLocalMode(false);
         closeTransformTool();
     }

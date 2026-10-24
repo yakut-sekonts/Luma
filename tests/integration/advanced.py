@@ -46,7 +46,7 @@ with tempfile.TemporaryDirectory(prefix="luma-advanced-") as temporary:
     assert run("restore") == saved, "A failed advanced write changed the durable edit document"
     with sqlite3.connect(catalog) as db:
         db.execute("DROP TRIGGER fail_hsl")
-        assert db.execute("PRAGMA user_version").fetchone()[0] == 11
+        assert db.execute("PRAGMA user_version").fetchone()[0] == 21
         assert db.execute("SELECT COUNT(*) FROM edit_hsl_bands").fetchone()[0] == 8
     edited = root / "edited.png"
     run("export", edited)

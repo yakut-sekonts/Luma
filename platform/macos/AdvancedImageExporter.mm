@@ -100,7 +100,8 @@ void writeAdvancedImage(const DecodedRaw &decoded, const EditDocument &edits,
                         const std::filesystem::path &destination, const ExportOptions &options,
                         CancellationToken stop, const std::function<void(double)> &progress,
                         const std::filesystem::path &metadataSource,
-                        const ExportInstallGuard &installGuard) {
+                        const ExportInstallGuard &installGuard,
+                        const std::optional<MetadataOverlay> &metadataOverlay) {
     @autoreleasepool {
         options.validate();
         edits.validate();
@@ -131,7 +132,8 @@ void writeAdvancedImage(const DecodedRaw &decoded, const EditDocument &edits,
         if (progress)
             progress(.86);
         const ExportColor color(options.colorSpace);
-        auto metadata = exportMetadata(metadataSource, options, surface.width, surface.height);
+        auto metadata =
+            exportMetadata(metadataSource, options, surface.width, surface.height, metadataOverlay);
         if (options.format == ExportFormat::dng) {
             const auto xmp = metadataXMP(metadata.get(), options.metadata);
             const std::array names{"Luma rendered sRGB", "Luma rendered Display P3",

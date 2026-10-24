@@ -1,0 +1,357 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-24T02:16:52.167247+00:00",
+  "base_commit": "535eb541409dc3935114235b157f24d4d3e03fa4",
+  "release_gate": "NOT_QUALIFIED",
+  "publisher_reproduction": {
+    "status": "EXPECTED_FAIL_BEFORE_FIX",
+    "cases": 9,
+    "description": "Synthetic network-free publisher accepts archives with stale source/version, different signing/model provenance, wrong plist version/build/app/executable, or absent embedded BUILD_INFO. No real GitHub release was changed.",
+    "log": {
+      "path": ".tools/release-identity-before-fix.log",
+      "sha256": "52d7ca73aa93e950260b219990c702b236b96a02da01fd939099b5791bdc295c",
+      "bytes": 7112
+    }
+  },
+  "fix": "Validate exact embedded/release provenance and plist app identity before any GitHub call. Require every regular file, executable bit and symlink target in mounted DMG app to match ZIP. Only post-signing Developer ID notarization receipt fields may be absent inside the signed app. Existing signature, model and source checks remain.",
+  "validation": {
+    "publisher_tests": {
+      "tests": 9,
+      "status": "PASS",
+      "log": {
+        "path": ".tools/release-identity-publisher-fixed.log",
+        "sha256": "d2cbd52893812faa18aba8c2706512c9e3cef64a71cf3af8763c257f1cb19ddd",
+        "bytes": 107
+      }
+    },
+    "identity_tests": {
+      "tests": 10,
+      "status": "PASS",
+      "log": {
+        "path": ".tools/release-identity-negative-controls.log",
+        "sha256": "1173b97f3b4a9b80377ede8e18f44a77ef68eeaa7f7ab530e66e86335111ef8a",
+        "bytes": 109
+      }
+    },
+    "affected_ctest": {
+      "tests": 5,
+      "status": "PASS",
+      "log": {
+        "path": ".tools/release-identity-ctest.log",
+        "sha256": "61f6b76bb713920f8214c77f375399413a235a2718ec88f642114538c8c3b810",
+        "bytes": 788
+      }
+    },
+    "ux_build": {
+      "path": ".tools/release-identity-configure.log",
+      "sha256": "0ac536f0fa0864d3c730ea4d60ea13ff32140cafab26897ea8813f4330df00dd",
+      "bytes": 637
+    },
+    "graphify": {
+      "path": ".tools/release-identity-graph.log",
+      "sha256": "eac54c012a80de9a3772f58a9322c288301346fd6c85cc5a930208f2aa906351",
+      "bytes": 2433
+    }
+  },
+  "existing_local_candidate": {
+    "result": {
+      "files_and_symlinks": 2350,
+      "regular_file_bytes": 564917208,
+      "version": "0.9.0",
+      "source_commit": "91caa174925c91a3a1b51074eeaf0af3bfcfefaa",
+      "status": "PASS",
+      "distribution": "github-open-source",
+      "signing": "ad-hoc",
+      "notarized": false,
+      "scope": "Existing local 0.9.0 candidate only; not the current head or final release",
+      "zip": {
+        "path": "dist/release/Luma-0.9.0-macos-arm64.zip",
+        "sha256": "bc73cf319f10c4aa04bc2c2a8448f06ecddf0088887470b45fe4b889853a9fba",
+        "bytes": 434015893
+      },
+      "dmg": {
+        "path": "dist/release/Luma-0.9.0-macos-arm64.dmg",
+        "sha256": "3532e8e09fba4f82154b12bfb766dea4f9deb8ca515156d633919edf9732f408",
+        "bytes": 440039942
+      }
+    },
+    "file": {
+      "path": "build-verify/packaged-identity-evidence.json",
+      "sha256": "7917a03485b7c54d36662b5d410bc48ea9f43752276c42acb5dbad2a9d67cd33",
+      "bytes": 699
+    },
+    "log": {
+      "path": ".tools/packaged-identity.log",
+      "sha256": "70e0eb90e2fcbc61667728b054e30e9709d79dfbdf2cc9910177bf0d89e4e954",
+      "bytes": 643
+    }
+  },
+  "photocard_repetition": {
+    "report": {
+      "path": "build-verify/ux-photocard-attribution/UX_REPORT.json",
+      "sha256": "d514eca8bed4f8e2ac277e366031db9657283f8263f7b790c518e0906a4f413b",
+      "bytes": 114413
+    },
+    "summary": {
+      "PASS": 50
+    },
+    "source_consistency": "PASS",
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "535eb541409dc3935114235b157f24d4d3e03fa4",
+      "worktree_dirty": false,
+      "source_tree_sha256": "e7a6e7c49c180b76829f30bb4286a73cd04593328c1ee0d9de00b5fba7cd0bc7",
+      "test_executable_sha256": "b73dc1557987b55275da6ee05f537a6108243ef29e60647fba108cb1f95a49c3",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "b73dc1557987b55275da6ee05f537a6108243ef29e60647fba108cb1f95a49c3"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": true,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "535eb541409dc3935114235b157f24d4d3e03fa4",
+      "reason": ""
+    },
+    "observed_pressure_values": [
+      0
+    ],
+    "historical_bug_045": "OPEN; no original failure cause established by passing repeats",
+    "results": [
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-1"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-2"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-3"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-4"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-5"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-6"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-7"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-8"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-9"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-10"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-11"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-12"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-13"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-14"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-15"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-16"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-17"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-18"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-19"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-20"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-21"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-22"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-23"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-24"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-25"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-26"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-27"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-28"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-29"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-30"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-31"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-32"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-33"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-34"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-35"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-36"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-37"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-38"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-39"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-40"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-41"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-42"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-43"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-44"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-45"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-46"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-47"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-48"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-49"
+      },
+      {
+        "status": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T020651Z-45493/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-50"
+      }
+    ]
+  },
+  "hosted_candidate": {
+    "run": "https://github.com/yakut-sekonts/Luma/actions/runs/40052678745",
+    "source_commit": "535eb54",
+    "state_at_snapshot": "build-package in progress; signing-configuration success",
+    "snapshot": {
+      "path": ".tools/release-candidate-535eb54-jobs.json",
+      "sha256": "fdc25fde2c5bf04ecace6f01cc59df67ba8dfe4ee52e2a7ccfe25d288fc07a99",
+      "bytes": 15690
+    },
+    "publication": "tags-only publisher; no tag or public appcast created"
+  },
+  "limits": [
+    "No latest-head hosted PASS, final source campaign or publication qualification claimed.",
+    "Mounted candidate source91caa17 predates Import Cancel fix; same-artifact comparison does not make it current.",
+    "Native activation still awaits manual system-dialog dismissal. Broader golden/load/soak/install/update/hardware gates and BUG045 remain open."
+  ]
+}

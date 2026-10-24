@@ -1,0 +1,87 @@
+name: Core ML Denoise crash diagnostics
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: macos-15
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: actions/setup-python@v5.6.0
+        with:
+          python-version: '3.12'
+      - name: Install pinned toolchain
+        run: ./scripts/bootstrap.sh
+      - name: Build pinned offline models
+        run: bash scripts/build-bundled-models.sh build/models
+      - name: Configure and build the actual UX application with bundled models
+        run: |
+          .tools/venv/bin/cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_MAKE_PROGRAM="$PWD/.tools/venv/bin/ninja"
+          .tools/venv/bin/cmake --build build --target luma_ux_bundled_models --parallel 3
+          .tools/venv/bin/python tests/ux/build_ux.py --build build
+      - name: Verify inference stack and synchronous ownership
+        run: |
+          xcrun clang++ -std=c++20 -O2 -Wall -Wextra -Wpedantic -Werror -I . tests/unit/InferenceStackTests.cpp -o build/inference-stack-tests
+          build/inference-stack-tests
+      # Retest joined inference stack and coalesced row-progress delivery with
+      # the original five-second watchdog and real staging/cancellation checks.
+      - name: Reproduce Denoise through the production UI
+        id: reproduce
+        continue-on-error: true
+        run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-P07-DNS-001 --case UX-P07-DNS-002 --case UX-P07-DNS-008 --runs 3 --require-build-provenance --report build/ux-denoise-diagnostics
+      - name: Capture the actual crashing process under LLDB
+        if: ${{ !cancelled() && steps.reproduce.outcome == 'failure' }}
+        timeout-minutes: 12
+        env:
+          QT_QPA_PLATFORM: offscreen
+          QT_QUICK_BACKEND: software
+        run: |
+          .tools/venv/bin/python - <<'PY'
+          from pathlib import Path
+          import json
+          import subprocess
+          root = Path.cwd()
+          evidence = root / 'build/denoise-debugger'
+          evidence.mkdir(parents=True, exist_ok=True)
+          report = json.loads((root / 'build/ux-denoise-diagnostics/UX_REPORT.json').read_text())
+          fixtures = next(Path(profile['directory'])
+                          for profile in report['fixture_profile']['case_profiles']
+                          if profile['case_id'] == 'UX-P07-DNS-001')
+          if not fixtures.is_relative_to(root / 'build/ux-artifacts') or not (fixtures / 'Frame02.dng').is_file():
+              raise RuntimeError('Missing owned RAW fixture for the actual Denoise reproduction')
+          command = ['xcrun', 'lldb', '--batch',
+                     '-o', 'settings set target.disable-aslr false',
+                     '-o', 'run', '-o', 'thread backtrace all', '-o', 'image list',
+                     '-k', 'thread backtrace all', '-k', 'image list',
+                     '--', str(root / 'build/luma_ux_tests.app/Contents/MacOS/luma_ux_tests'),
+                     '--case', 'UX-P07-DNS-001', '--root', str(evidence / 'case'),
+                     '--fixtures', str(fixtures),
+                     '--qml', str(root / 'apps/desktop/qml')]
+          with (evidence / 'lldb.log').open('w') as output:
+              try:
+                  result = subprocess.run(command, stdout=output, stderr=subprocess.STDOUT,
+                                          timeout=600, check=False)
+                  output.write(f'\nDebugger exit status: {result.returncode}\n')
+              except subprocess.TimeoutExpired:
+                  output.write('\nDebugger timed out after 600 seconds.\n')
+                  raise
+          PY
+      - name: Preserve reproduction and debugger evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: denoise-crash-diagnostics
+          path: |
+            build/ux-denoise-diagnostics/
+            build/ux-artifacts/**/UX-P07-DNS-*/
+            build/ux-build-provenance.json
+            build/denoise-debugger/
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Keep reproduction failures visible
+        if: ${{ !cancelled() }}
+        env:
+          REPRODUCE_OUTCOME: ${{ steps.reproduce.outcome }}
+        run: test "$REPRODUCE_OUTCOME" = success

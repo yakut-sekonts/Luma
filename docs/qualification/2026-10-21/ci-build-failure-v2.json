@@ -1,0 +1,20 @@
+{
+  "run_url": "https://github.com/yakut-sekonts/Luma/actions/runs/39612524379",
+  "job_id": 119265150407,
+  "head_sha": "1ed426154ddff14b41d1cb576c4e7745e43ee6ab",
+  "status": "FAIL",
+  "diagnostics": [
+    "2026-10-21T14:04:25.2307530Z FAILED: CMakeFiles/Luma.dir/apps/desktop/DiagnosticSession.cpp.o ",
+    "2026-10-21T14:04:25.2515540Z /Users/runner/work/Luma/Luma/apps/desktop/DiagnosticSession.h:68:10: error: no type named 'jthread' in namespace 'std'; did you mean 'thread'?",
+    "2026-10-21T14:04:25.2677350Z /Users/runner/work/Luma/Luma/apps/desktop/DiagnosticSession.h:74:25: error: no type named 'stop_token' in namespace 'std'",
+    "2026-10-21T14:04:25.2680310Z /Users/runner/work/Luma/Luma/apps/desktop/DiagnosticSession.cpp:129:44: error: no type named 'stop_token' in namespace 'std'",
+    "2026-10-21T14:04:25.2682420Z /Users/runner/work/Luma/Luma/apps/desktop/DiagnosticSession.cpp:129:55: error: unused parameter 'stop' [-Werror,-Wunused-parameter]",
+    "2026-10-21T14:04:25.2701290Z /Users/runner/work/Luma/Luma/apps/desktop/DiagnosticSession.cpp:129:24: error: no member named 'jthread' in namespace 'std'",
+    "2026-10-21T14:04:25.2708940Z /Users/runner/work/Luma/Luma/apps/desktop/DiagnosticSession.cpp:129:55: error: unused parameter 'stop' [-Werror,-Wunused-parameter]",
+    "2026-10-21T14:04:25.2718950Z /Users/runner/work/Luma/Luma/apps/desktop/DiagnosticSession.cpp:129:33: error: lambda capture 'this' is not used [-Werror,-Wunused-lambda-capture]",
+    "2026-10-21T14:04:25.2722400Z /Users/runner/work/Luma/Luma/apps/desktop/DiagnosticSession.cpp:146:21: error: no member named 'request_stop' in 'std::thread'",
+    "2026-10-21T14:04:25.2728340Z /Users/runner/work/Luma/Luma/apps/desktop/DiagnosticSession.cpp:213:40: error: no type named 'stop_token' in namespace 'std'",
+    "2026-10-21T14:04:29.0414840Z ##[group]Run echo '::error::Core ML numerical agreement did not pass; see model-numerics artifact.'",
+    "2026-10-21T14:04:29.0415480Z \u001b[36;1mecho '::error::Core ML numerical agreement did not pass; see model-numerics artifact.'\u001b[0m"
+  ]
+}

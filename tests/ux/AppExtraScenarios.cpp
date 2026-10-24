@@ -351,20 +351,53 @@ ScrollState scrollState(Context &c) {
     return {scroll(*c.driver->item("library.grid"), false), scroll(*adjustmentFlickable(c), false),
             scroll(*c.driver->item("develop.filmstrip"), true)};
 }
-void preservedScroll(Context &c, const ScrollState &expected) {
+QJsonObject libraryViewport(Context &c) {
+    auto *grid = c.driver->item("library.grid");
+    auto *content =
+        qobject_cast<QQuickItem *>(qvariant_cast<QObject *>(grid->property("contentItem")));
+    require(content, "Library viewport has no actual content item");
+    QQuickItem *first = nullptr;
+    for (auto *card : content->childItems()) {
+        if (!card->objectName().startsWith("library.card.") ||
+            !card->mapRectToItem(grid, card->boundingRect()).intersects(grid->boundingRect()))
+            continue;
+        if (!first || card->property("index").toInt() < first->property("index").toInt())
+            first = card;
+    }
+    require(first && !first->property("assetID").toString().isEmpty(),
+            "Library viewport has no populated visible asset anchor");
+    return {{"asset", first->property("assetID").toString()},
+            {"row", first->property("index").toInt()},
+            {"offset", first->mapToItem(grid, {0, 0}).y()},
+            {"width", grid->width()},
+            {"scroll", scroll(*grid, false).json()}};
+}
+void preservedScroll(Context &c, const ScrollState &expected, const QJsonObject &expectedViewport) {
     const auto actual = scrollState(c);
+    const auto actualViewport = libraryViewport(c);
     auto same = [](const Scroll &first, const Scroll &second) {
-        return std::abs(first.offset - second.offset) <= 1 &&
+        // Qt may rebase a virtualized view's origin when column counts change.
+        // Compare the scroll distance and separately pin the visible asset below.
+        return std::abs((first.offset - first.origin) - (second.offset - second.origin)) <= 1 &&
                std::abs(first.content - second.content) <= 1 &&
                std::abs(first.viewport - second.viewport) <= 1;
     };
     c.driver->log({{"action", "windowed_scroll_preservation"},
                    {"library", actual.library.json()},
+                   {"expected_library", expected.library.json()},
+                   {"expected_adjustments", expected.adjustments.json()},
+                   {"expected_filmstrip", expected.filmstrip.json()},
+                   {"expected_viewport", expectedViewport},
+                   {"actual_viewport", actualViewport},
                    {"adjustments", actual.adjustments.json()},
                    {"filmstrip", actual.filmstrip.json()}});
     require(same(expected.library, actual.library) &&
                 same(expected.adjustments, actual.adjustments) &&
-                same(expected.filmstrip, actual.filmstrip),
+                same(expected.filmstrip, actual.filmstrip) &&
+                expectedViewport["asset"] == actualViewport["asset"] &&
+                expectedViewport["row"] == actualViewport["row"] &&
+                std::abs(expectedViewport["offset"].toDouble() -
+                         actualViewport["offset"].toDouble()) <= 1,
             "Returning to the same window geometry reset a nonzero scroll position");
 }
 } // namespace
@@ -388,6 +421,8 @@ bool appExtraScenario(Context &c, const QString &id) {
     stable(c, 100);
     const auto expected = state(c);
     const auto offsets = scrollState(c);
+    const auto expectedViewport = libraryViewport(c);
+    d.log({{"action", "initial_library_viewport"}, {"viewport", expectedViewport}});
     require(offsets.library.offset > offsets.library.origin + 20 &&
                 offsets.adjustments.offset > offsets.adjustments.origin + 20 &&
                 offsets.filmstrip.offset > offsets.filmstrip.origin + 20,
@@ -398,6 +433,11 @@ bool appExtraScenario(Context &c, const QString &id) {
             d.click(library ? "main.libraryButton" : "main.developButton");
             stable(c, 60);
             unchanged(c, expected);
+            d.log({{"action", "lifecycle_library_viewport"},
+                   {"cycle", cycle},
+                   {"fullscreen", c.window->windowStates().testFlag(Qt::WindowFullScreen)},
+                   {"library_mode", library},
+                   {"viewport", libraryViewport(c)}});
         }
         toggleFullscreen(c, false);
         d.wait([&] { return c.window->size() == windowed; },
@@ -406,8 +446,13 @@ bool appExtraScenario(Context &c, const QString &id) {
             d.click(library ? "main.libraryButton" : "main.developButton");
             stable(c, 60);
             unchanged(c, expected);
+            d.log({{"action", "lifecycle_library_viewport"},
+                   {"cycle", cycle},
+                   {"fullscreen", c.window->windowStates().testFlag(Qt::WindowFullScreen)},
+                   {"library_mode", library},
+                   {"viewport", libraryViewport(c)}});
         }
-        preservedScroll(c, offsets);
+        preservedScroll(c, offsets, expectedViewport);
         c.checkData();
         d.log({{"action", "fullscreen_round_trip"},
                {"completed_cycle", cycle + 1},

@@ -201,3 +201,12 @@ void PresetController::pasteSettings() {
     if (copied_)
         editor_.applySettings(copied_->settings, copied_->groups);
 }
+
+QString PresetController::importSnapshot(const QString &id) {
+    try {
+        return QString::fromUtf8(luma::encodePreset(find(id)));
+    } catch (const std::exception &error) {
+        failure(error);
+        return {};
+    }
+}

@@ -307,11 +307,12 @@ void start(Context &c, const QList<QUrl> &sources, const QString &destination, b
     auto &d = *c.driver;
     if (!c.window->property("libraryMode").toBool())
         d.click("main.libraryButton");
-    require(
-        QFileInfo(destination).canonicalFilePath() == destination &&
-            d.object("library.pane")->setProperty("sources", QVariant::fromValue(sources)) &&
-            d.object("library.pane")->setProperty("destination", QUrl::fromLocalFile(destination)),
-        "Actual Copy pane rejected known existing file/folder-panel results");
+    require(QFileInfo(destination).canonicalFilePath() == destination &&
+                d.object("library.importDialog")
+                    ->setProperty("sources", QVariant::fromValue(sources)) &&
+                d.object("library.importDialog")
+                    ->setProperty("destination", QUrl::fromLocalFile(destination)),
+            "Actual Copy pane rejected known existing file/folder-panel results");
     d.click("library.importButton");
     d.wait([&] { return d.object("library.importDialog")->property("opened").toBool(); },
            "actual two-source Copy dialog opened");
@@ -435,10 +436,9 @@ bool copyDestinationScenario(Context &c, const QString &id, const QString &varia
         sessionIdentity(heldProof, destination, false, "running");
         const auto first = item(heldProof, 0, sources[0], "staged");
         const auto pending = item(heldProof, 1, sources[1], "queued");
-        const auto firstDirectory = "Luma-" + firstID;
-        const auto firstRelative = firstDirectory + "/0/Control-A.png";
+        const QString firstRelative = "Control-A.png";
         firstTarget = destination + '/' + firstRelative;
-        firstTemporary = destination + '/' + firstDirectory + "/0/.luma-copy-" + firstID + "-0.tmp";
+        firstTemporary = destination + "/.luma-copy-" + firstID + "-0.tmp";
         staged(first, firstTarget, firstTemporary, hashes[0], QFileInfo(sources[0]).size());
         unStaged(pending);
         require(first["asset_id"].isNull() && first["error"].toString().isEmpty() &&
@@ -448,9 +448,9 @@ bool copyDestinationScenario(Context &c, const QString &id, const QString &varia
             published(firstTarget, firstTemporary, mount, hashes[0], QFileInfo(sources[0]).size());
         QMap<QString, QString> publishedFiles{{firstRelative, hashes[0]}};
         if (publishedProof["temporary_present"].toBool())
-            publishedFiles[firstDirectory + "/0/.luma-copy-" + firstID + "-0.tmp"] = hashes[0];
+            publishedFiles[".luma-copy-" + firstID + "-0.tmp"] = hashes[0];
         const auto heldTree = inventory(destination);
-        exactTree(heldTree, {firstDirectory, firstDirectory + "/0"}, publishedFiles);
+        exactTree(heldTree, {}, publishedFiles);
         // published()/audit()/source hashing close all readers before detach.
         volume.pinOriginals({{"Copies/" + firstRelative, hashes[0]}});
         const auto beforeDetachHashes = originalHashes();
@@ -541,8 +541,7 @@ bool copyDestinationScenario(Context &c, const QString &id, const QString &varia
         // Strict original oracle: never remove or ignore an old .luma-copy-* link.
         // If it survived the unlink attempted while unmounted, this MUST FAIL here.
         phase = "strict_original_no_old_copy_temporary_hardlink";
-        exactTree(remountedTree, {firstDirectory, firstDirectory + "/0"},
-                  {{firstRelative, hashes[0]}});
+        exactTree(remountedTree, {}, {{firstRelative, hashes[0]}});
         require(absent(firstTemporary) && proof(remountedAudit, firstID) == initial &&
                     sha(firstTarget) == hashes[0],
                 "Copy remount changed its terminal journal/source or retained its temporary link");
@@ -576,11 +575,9 @@ bool copyDestinationScenario(Context &c, const QString &id, const QString &varia
         require(duplicateA["asset_id"].toString() == aID &&
                     duplicateA["error"].toString().isEmpty(),
                 "Copy retry duplicated A or changed its existing UUID");
-        const auto retryDirectory = "Luma-" + retryID;
-        const auto bRelative = retryDirectory + "/1/Source-B.png";
+        const QString bRelative = "Source-B.png";
         const auto bTarget = destination + '/' + bRelative;
-        const auto bTemporary =
-            destination + '/' + retryDirectory + "/1/.luma-copy-" + retryID + "-1.tmp";
+        const auto bTemporary = destination + "/.luma-copy-" + retryID + "-1.tmp";
         staged(committedB, bTarget, bTemporary, hashes[1], QFileInfo(sources[1]).size());
         const auto bID = committedB["asset_id"].toString();
         require(!QUuid(bID).isNull() && bID != aID && committedB["error"].toString().isEmpty() &&
@@ -591,9 +588,7 @@ bool copyDestinationScenario(Context &c, const QString &id, const QString &varia
         asset(saved(c, aID), aID, firstTarget, hashes[0], metadata[0]);
         asset(saved(c, bID), bID, bTarget, hashes[1], metadata[1]);
         const auto finalTree = inventory(destination);
-        exactTree(finalTree,
-                  {firstDirectory, firstDirectory + "/0", retryDirectory, retryDirectory + "/1"},
-                  {{firstRelative, hashes[0]}, {bRelative, hashes[1]}});
+        exactTree(finalTree, {}, {{firstRelative, hashes[0]}, {bRelative, hashes[1]}});
         opened(c, bID, bTarget, references[1]);
         const auto durableActive = luma::Catalog(c.catalogFile.toStdString()).activeAsset();
         require(opens.count() == 2 && loads.count() == 2 &&

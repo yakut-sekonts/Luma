@@ -354,6 +354,59 @@ class GateTests(unittest.TestCase):
                 with self.assertRaises(sqlite3.ProgrammingError):
                     connection.cursor()
 
+    def test_daily_restore_audits_the_opened_copy_after_child_exit(self):
+        for restored_kind, status in [('valid', 'PASS'), ('corrupt', 'FAIL'), ('missing', 'FAIL')]:
+            with self.subTest(restored_kind=restored_kind), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                state = root / 'state'
+                (state / 'restored').mkdir(parents=True)
+                connection = sqlite3.connect(state / 'catalog.sqlite')
+                connection.execute('CREATE TABLE original (id INTEGER PRIMARY KEY)')
+                connection.close()
+                restored = state / 'restored/catalog.sqlite'
+                if restored_kind == 'valid':
+                    connection = sqlite3.connect(restored)
+                    connection.execute('CREATE TABLE restored (id INTEGER PRIMARY KEY)')
+                    connection.close()
+                elif restored_kind == 'corrupt':
+                    restored.write_bytes(b'Corrupted restored copy, valid original remains')
+                child = root / 'luma_ux_tests'
+                child.write_text('#!/usr/bin/env python3\nimport json,sys\nfrom pathlib import Path\nr=Path(sys.argv[sys.argv.index("--root")+1])\n(r/"result.json").write_text(json.dumps({"id":"UX-P10-DAY-010","status":"PASS"}))\n')
+                child.chmod(0o755)
+                result = runner.execute(
+                    {'id': 'UX-P10-DAY-010', 'scope': '1.0', 'mode': 'BLOCKING',
+                     'severity': 'P0', 'scenario': 'Mocked restored process audit'},
+                    root / 'result', argparse.Namespace(build=root, timeout=10,
+                                                        stage='verify', state_root=state), root)
+                self.assertEqual(result['status'], status)
+                self.assertEqual(result['catalog_audit_path'], str(restored))
+                if status == 'FAIL':
+                    self.assertIn('P0 ', result['message'])
+
+    def test_restored_data_audit_overrides_a_child_pass(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary).resolve()
+            state = root / 'state'
+            (state / 'restored').mkdir(parents=True)
+            restored = state / 'restored/catalog.sqlite'
+            database = sqlite3.connect(restored)
+            database.execute('CREATE TABLE fixture (id INTEGER PRIMARY KEY)')
+            database.close()
+            child = root / 'luma_ux_tests'
+            child.write_text('#!/usr/bin/env python3\nimport json,sys\nfrom pathlib import Path\nr=Path(sys.argv[sys.argv.index("--root")+1])\n(r/"result.json").write_text(json.dumps({"id":"UX-P10-DAT-005","status":"PASS"}))\n')
+            child.chmod(0o755)
+            with patch.object(runner, 'audit_restored_workflow', side_effect=ValueError('orphan mask')) as audit:
+                result = runner.execute(
+                    {'id': 'UX-P10-DAT-005', 'scope': '1.0', 'mode': 'BLOCKING',
+                     'severity': 'P0', 'scenario': 'Mocked restored data audit'},
+                    root / 'result', argparse.Namespace(build=root, timeout=10,
+                                                        stage='verify', state_root=state), root)
+            self.assertEqual(result['status'], 'FAIL')
+            self.assertIn('P0 restored data invariant: orphan mask', result['message'])
+            self.assertEqual(audit.call_args.args[:4], (restored, state, root, root / 'result'))
+            self.assertEqual(audit.call_args.args[4], result['child_pid'])
+            self.assertTrue((root / 'result/catalog-copy.sqlite').is_file())
+
     def test_watchdog_overrides_a_forged_pass(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -511,6 +564,47 @@ else:
             self.assertEqual(len(result['stages']), 2)
             self.assertNotEqual(result['stages'][0]['child_pid'], result['stages'][1]['child_pid'])
 
+    def test_commit_checkpoints_use_separate_state_pairs_and_propagate_failure(self):
+        row = {'id': 'UX-P09-FLT-001', 'scope': '0.9', 'mode': 'BLOCKING',
+               'severity': 'P0', 'scenario': 'Commit checkpoint supervisor accounting'}
+        for failed in (None, 'prepare', 'verify', 'prepare-committed', 'verify-committed'):
+            with self.subTest(failed=failed), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                calls = []
+                def execute(row, destination, options, fixture):
+                    calls.append((options.stage, options.state_root))
+                    return {'id': row['id'], 'status': 'FAIL' if options.stage == failed else 'PASS',
+                            'message': options.stage, 'wall_duration_ms': 1}
+                with patch.object(runner, 'execute', side_effect=execute):
+                    result = runner.execute_scenario(row, root / 'result', argparse.Namespace(), root)
+                stages = ['prepare', 'verify', 'prepare-committed', 'verify-committed']
+                required = stages if failed is None else stages[:stages.index(failed) + 1]
+                self.assertEqual([stage for stage, _ in calls], required)
+                self.assertEqual([state for _, state in calls], [root / 'result' /
+                    ('state-committed' if stage.endswith('-committed') else 'state') for stage in required])
+                self.assertEqual(result['status'], 'FAIL' if failed else 'PASS')
+                self.assertEqual(result['wall_duration_ms'], len(required))
+
+    def test_committed_checkpoint_requires_actual_sigkill(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            child = root / 'luma_ux_tests'
+            child.write_text('''#!/usr/bin/env python3
+import json,os,sys,time
+from pathlib import Path
+r=Path(sys.argv[sys.argv.index("--root")+1])
+(r/"metrics.json").write_text(json.dumps({"checkpoint_metric":42}))
+(r/"kill-ready.json").write_text(json.dumps({"id":"UX-P09-FLT-001","stage":"prepare-committed","pid":os.getpid(),"utc_ms":time.time_ns()//1000000}))
+time.sleep(30)
+''')
+            child.chmod(0o755)
+            result = runner.execute({'id':'UX-P09-FLT-001','scope':'0.9','mode':'BLOCKING',
+                                     'severity':'P0','scenario':'Fake committed checkpoint'}, root / 'result',
+                                    argparse.Namespace(build=root, timeout=10, stage='prepare-committed'), root)
+            self.assertEqual(result['status'], 'PASS')
+            self.assertEqual(result['child_returncode'], -signal.SIGKILL)
+            self.assertTrue(result['intentional_kill'])
+
     def _fake_isolated_variant_children(self, identifier, variants, failed_variant=None):
         # Infrastructure fixture only: no native application, volume or UI claim.
         with tempfile.TemporaryDirectory() as directory:
@@ -572,6 +666,24 @@ failed_variant=''' + repr(failed_variant) + '''
 
     def test_mac008_requires_both_variants_in_distinct_processes_without_shared_state(self):
         self._fake_isolated_variant_children('UX-MAC-008', ('copy', 'export'))
+
+    def test_daily_merge_requires_hdr_and_panorama_in_distinct_processes(self):
+        self._fake_isolated_variant_children('UX-P10-DAY-011', ('hdr', 'panorama'))
+        self._fake_isolated_variant_children('UX-P10-DAY-011', ('hdr', 'panorama'), 'panorama')
+
+    def test_update_guard_requires_all_operations_including_cancelled_worker(self):
+        variants = ('save', 'import', 'export', 'batch', 'merge', 'merge-cancel')
+        self._fake_isolated_variant_children('UX-P10-UPG-012', variants)
+        self._fake_isolated_variant_children('UX-P10-UPG-012', variants, 'merge-cancel')
+
+    def test_offline_sandbox_is_scoped_to_the_actual_child_and_preserves_arguments(self):
+        command = ['/owned path/Luma UX', '--root', '/owned path/evidence', '--case', 'UX-P10-DAY-012']
+        wrapped = runner.offline_child_command('UX-P10-DAY-012', command)
+        self.assertEqual(wrapped[:3], ['/usr/bin/sandbox-exec', '-p',
+                                      '(version 1) (allow default) (deny network*)'])
+        self.assertEqual(wrapped[3:], command)
+        self.assertEqual(runner.offline_child_command('UX-P10-UPG-012', command), command)
+        self.assertEqual(command[0], '/owned path/Luma UX')
 
     def _mac008_failure_aggregation(self, failed_variant, expected_variants):
         with tempfile.TemporaryDirectory() as directory:

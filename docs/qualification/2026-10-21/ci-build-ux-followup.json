@@ -1,0 +1,35 @@
+{
+  "run_url": "https://github.com/yakut-sekonts/Luma/actions/runs/39616268298",
+  "job_id": 119278039372,
+  "source_commit": "5ef81d3cac4d2ba219a1204bc35adf124d5486ab",
+  "build": "PASS",
+  "ctest": {
+    "passed": 58,
+    "skipped": 1,
+    "total": 59,
+    "diagnostic_session_shutdown": "PASS",
+    "skip": "private Nikon fixture unavailable"
+  },
+  "ux": {
+    "status": "FAIL",
+    "summary": {
+      "SKIPPED": 29,
+      "PASS": 15,
+      "FAIL": 180,
+      "NOT_IMPLEMENTED": 92
+    },
+    "reproduced_cause": "chooser fixture writes retired LibraryPane sources/destination properties; this does not explain every failure"
+  },
+  "log_evidence": [
+    "2026-10-21T14:39:00.1510920Z       Start  1: diagnostic-session-shutdown",
+    "2026-10-21T14:39:00.2479930Z  1/59 Test  #1: diagnostic-session-shutdown ......................   Passed    0.10 sec",
+    "2026-10-21T14:41:57.0409690Z       Start 59: nikon-d7500-restart",
+    "2026-10-21T14:41:57.0957310Z 59/59 Test #59: nikon-d7500-restart ..............................***Skipped   0.05 sec",
+    "2026-10-21T14:41:57.0983340Z 100% tests passed, 0 tests failed out of 59",
+    "2026-10-21T14:41:57.0988260Z \t 59 - nikon-d7500-restart (Skipped)",
+    "2026-10-21T14:45:15.5004610Z UX-MSK-040 repeat 1: FAIL Cannot click unavailable control: library.importStart",
+    "2026-10-21T14:45:16.6014940Z UX-MSK-040 repeat 2: FAIL Cannot click unavailable control: library.importStart",
+    "2026-10-21T14:45:17.8908150Z UX-MSK-040 repeat 3: FAIL Cannot click unavailable control: library.importStart",
+    "2026-10-21T14:45:18.4627110Z {\"summary\": {\"SKIPPED\": 29, \"PASS\": 15, \"FAIL\": 180, \"NOT_IMPLEMENTED\": 92}, \"release_gate\": \"FAIL\", \"report\": \"/Users/runner/work/Luma/Luma/build/ux-report\"}"
+  ]
+}

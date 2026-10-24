@@ -1,0 +1,122 @@
+{
+  "status": "IN_PROGRESS",
+  "run_url": "https://github.com/yakut-sekonts/Luma/actions/runs/40034163108",
+  "head_commit": "7d66d83bddfca43e39fc17a67568e50ac216d20e",
+  "tested_merge_commit": "7d795c84388b23dc716cf789ee62768f19fc8a2b",
+  "artifact_id": 12539001551,
+  "artifact_sha256": "d5589369f7247bc1878669240c21d6cd6cf78a8e46ab085b57c29b813c67b560",
+  "summary": {
+    "SKIPPED": 33,
+    "PASS": 366,
+    "NOT_IMPLEMENTED": 31
+  },
+  "build_provenance": {
+    "status": "PASS",
+    "path": "/Users/runner/work/Luma/Luma/build/ux-build-provenance.json",
+    "source_commit": "7d795c84388b23dc716cf789ee62768f19fc8a2b",
+    "reason": ""
+  },
+  "source_consistency": "PASS",
+  "original_hashes": "PASS",
+  "execution_status": "PASS",
+  "release_gate": "NOT_QUALIFIED",
+  "fixed_regressions": [
+    {
+      "id": "UX-P06-GPU-002",
+      "status": "PASS",
+      "message": "",
+      "platform": "offscreen",
+      "graphics_api": "software"
+    },
+    {
+      "id": "UX-P06-GPU-002",
+      "status": "PASS",
+      "message": "",
+      "platform": "offscreen",
+      "graphics_api": "software"
+    },
+    {
+      "id": "UX-P06-GPU-002",
+      "status": "PASS",
+      "message": "",
+      "platform": "offscreen",
+      "graphics_api": "software"
+    },
+    {
+      "id": "UX-P07-DNS-001",
+      "status": "PASS",
+      "message": "",
+      "platform": "offscreen",
+      "graphics_api": "software"
+    },
+    {
+      "id": "UX-P07-DNS-001",
+      "status": "PASS",
+      "message": "",
+      "platform": "offscreen",
+      "graphics_api": "software"
+    },
+    {
+      "id": "UX-P07-DNS-001",
+      "status": "PASS",
+      "message": "",
+      "platform": "offscreen",
+      "graphics_api": "software"
+    },
+    {
+      "id": "UX-P07-DNS-002",
+      "status": "PASS",
+      "message": "",
+      "platform": "offscreen",
+      "graphics_api": "software"
+    },
+    {
+      "id": "UX-P07-DNS-002",
+      "status": "PASS",
+      "message": "",
+      "platform": "offscreen",
+      "graphics_api": "software"
+    },
+    {
+      "id": "UX-P07-DNS-002",
+      "status": "PASS",
+      "message": "",
+      "platform": "offscreen",
+      "graphics_api": "software"
+    },
+    {
+      "id": "UX-P07-DNS-008",
+      "status": "PASS",
+      "message": "",
+      "platform": "offscreen",
+      "graphics_api": "software"
+    },
+    {
+      "id": "UX-P07-DNS-008",
+      "status": "PASS",
+      "message": "",
+      "platform": "offscreen",
+      "graphics_api": "software"
+    },
+    {
+      "id": "UX-P07-DNS-008",
+      "status": "PASS",
+      "message": "",
+      "platform": "offscreen",
+      "graphics_api": "software"
+    }
+  ],
+  "job_status_as_observed": [
+    {
+      "status": "in_progress",
+      "conclusion": null,
+      "active_steps": [
+        "clang-tidy"
+      ]
+    }
+  ],
+  "limits": [
+    "This older merge does not contain the latest export metadata/Library resize fixes",
+    "No blanket release qualification; remaining skipped/unimplemented cases are retained"
+  ]
+}

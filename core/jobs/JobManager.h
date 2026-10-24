@@ -50,6 +50,7 @@ class JobManager {
     explicit JobManager(std::size_t workers = 1);
     ~JobManager();
     JobHandle submit(JobPriority priority, std::function<void(const JobContext &)> work);
+    bool idle() const;
     void shutdown();
 
   private:
@@ -57,7 +58,7 @@ class JobManager {
         std::shared_ptr<JobData> data;
         std::function<void(const JobContext &)> work;
     };
-    std::mutex mutex_;
+    mutable std::mutex mutex_;
     std::condition_variable condition_;
     std::deque<Job> queue_;
     std::vector<std::shared_ptr<JobData>> active_;

@@ -1,3 +1,4 @@
+#include "platform/macos/FileHasher.h"
 #include "tests/ux/UxContext.h"
 #include <QCoreApplication>
 #include <QDir>
@@ -41,16 +42,43 @@ void onScreen(Context &c, const QString &selector) {
 }
 } // namespace
 bool localeRestartScenario(Context &c, const QString &id, const QString &stage) {
-    if (id != "UX-LOC-006" && id != "UX-LOC-007")
+    const bool project = id == "UX-P10-DAY-013";
+    if (id != "UX-LOC-006" && id != "UX-LOC-007" && !project)
         return false;
     auto &d = *c.driver;
     if (stage == "prepare") {
-        if (id == "UX-LOC-006") {
+        if (project) {
+            c.openFirst();
+            c.reveal("develop.exposureSlider");
+            d.drag("develop.exposureSlider", d.sliderThumb("develop.exposureSlider"), {.65, .5});
+            c.saved();
+            luma::Catalog catalog(c.catalogFile.toStdString());
+            const auto snapshot = catalog.assetSnapshot(c.editor.photoID().toStdString());
+            require(snapshot && snapshot->asset.edits == c.editor.currentSettings() &&
+                        snapshot->asset.edits.exposure > 1 && catalog.libraryCount() == 10,
+                    "Language-switch project requires committed edits and an imported library");
+            catalog.backupTo((c.stateRoot + "/expected-project.sqlite").toStdString());
+            writeJson(c.stateRoot + "/expected-project.json",
+                      {{"prepare_pid", QCoreApplication::applicationPid()}});
+        }
+        if (id == "UX-LOC-006" || project) {
             preferences(c);
             d.choose("languageChoice", 7);
             require(c.localization->language() == "fr" && c.localization->error().isEmpty(),
                     "Foreign language preparation failed");
             closePreferences(c);
+            if (project) {
+                luma::Catalog expected((c.stateRoot + "/expected-project.sqlite").toStdString(),
+                                       luma::CatalogOpenMode::existingOnly);
+                const auto snapshot = expected.assetSnapshot(c.editor.photoID().toStdString());
+                const auto actual = luma::Catalog(c.catalogFile.toStdString())
+                                        .assetSnapshot(c.editor.photoID().toStdString());
+                require(snapshot && actual && actual->revision == snapshot->revision &&
+                            actual->asset.edits == snapshot->asset.edits &&
+                            c.editor.currentSettings() == snapshot->asset.edits &&
+                            c.editor.canUndo() && !c.editor.saving(),
+                        "Runtime language switch changed the project document/history/revision");
+            }
         } else {
             QFile file(c.stateRoot + "/language.json");
             require(file.open(QIODevice::WriteOnly) && file.write("{broken-preferences") > 0,
@@ -61,16 +89,60 @@ bool localeRestartScenario(Context &c, const QString &id, const QString &stage) 
         return true;
     }
     require(stage == "verify", "Unknown localization restart stage");
-    const QString expected = id == "UX-LOC-006" ? "fr" : "en";
+    const QString expected = id == "UX-LOC-006" || project ? "fr" : "en";
     require(c.localization->language() == expected, "Process restart restored the wrong language");
-    require(id == "UX-LOC-006" ? c.localization->error().isEmpty()
-                               : !c.localization->error().isEmpty(),
+    require(id == "UX-LOC-006" || project ? c.localization->error().isEmpty()
+                                          : !c.localization->error().isEmpty(),
             "Language preference error/fallback status is incorrect");
     preferences(c);
     require(d.object("preferencesPanel")->property("title").toString() ==
                 translated(expected, "Settings"),
             "Restarted UI was not translated to the restored/fallback language");
     closePreferences(c);
+    if (project) {
+        QFile file(c.stateRoot + "/expected-project.json");
+        require(file.open(QIODevice::ReadOnly), "Missing language-project process identity");
+        const auto preparePID =
+            QJsonDocument::fromJson(file.readAll()).object()["prepare_pid"].toInteger();
+        require(preparePID > 0 && preparePID != QCoreApplication::applicationPid(),
+                "Language-project restart must use a distinct application process");
+        c.editor.restore();
+        c.loaded();
+        c.saved();
+        luma::Catalog oracle((c.stateRoot + "/expected-project.sqlite").toStdString(),
+                             luma::CatalogOpenMode::existingOnly);
+        luma::Catalog catalog(c.catalogFile.toStdString());
+        const auto saved = oracle.activeAsset();
+        require(saved.has_value(), "Language-project expected active asset is missing");
+        const auto before = oracle.assetSnapshot(saved->id);
+        const auto after = catalog.assetSnapshot(saved->id);
+        require(before && after && before->revision == after->revision &&
+                    after->asset.edits == before->asset.edits &&
+                    after->asset.path == before->asset.path &&
+                    after->asset.checksum == before->asset.checksum &&
+                    c.editor.photoID().toStdString() == saved->id &&
+                    c.editor.sourcePath().toStdString() == saved->path.string() &&
+                    c.editor.currentSettings() == saved->edits && !c.editor.canUndo() &&
+                    !c.editor.canRedo() && catalog.libraryIDs({}) == oracle.libraryIDs({}) &&
+                    luma::macos::sha256File(saved->path) == saved->checksum,
+                "Language-project restart changed library, active identity, edits or original");
+        c.reveal("develop.contrastSlider");
+        d.drag("develop.contrastSlider", d.sliderThumb("develop.contrastSlider"), {.7, .5});
+        c.saved();
+        require(c.editor.currentSettings().contrast > 1 && c.editor.canUndo(),
+                "Localized restored project cannot continue editing");
+        d.click("main.undoButton");
+        c.saved();
+        require(c.editor.currentSettings() == saved->edits &&
+                    c.localization->language() == expected,
+                "New-session Undo or editing changed the restored project/language");
+        d.log({{"action", "project_language_restart"},
+               {"prepare_pid", preparePID},
+               {"verify_pid", QCoreApplication::applicationPid()},
+               {"language", expected},
+               {"library_count", qint64(catalog.libraryCount())},
+               {"complete_document_preserved", true}});
+    }
     return true;
 }
 bool localizationScenario(Context &c, const QString &id) {

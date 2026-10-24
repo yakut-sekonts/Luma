@@ -1,5 +1,6 @@
 #include "apps/shared/PhotoDecoder.h"
 #include "core/render/CpuRenderer.h"
+#include "tests/ux/LoadProbe.h"
 #include "tests/ux/QueuedCallGate.h"
 #include "tests/ux/UxContext.h"
 #include "tests/ux/UxPixels.h"
@@ -19,6 +20,12 @@
 
 namespace ux {
 namespace {
+struct ReleaseWrites {
+    SqliteFault &fault;
+    ~ReleaseWrites() {
+        fault.holdWrites(false);
+    }
+};
 struct KeyboardNavigation {
     Qt::TabFocusBehavior previous = QGuiApplication::styleHints()->tabFocusBehavior();
     KeyboardNavigation() {
@@ -156,6 +163,10 @@ void targetedExport(Context &c, bool hsl) {
             "PNG snapshot oracle configuration has unexpected processing or collision policy");
     chooseTarget(c, hsl);
     c.saved();
+    const ReleaseWrites release{c.storageFault};
+    // Hold the actual save transaction so UI/frame scheduling cannot consume
+    // the debounce interval before Export reaches its pending-save boundary.
+    c.storageFault.holdWrites(true);
     QSignalSpy saves(&c.editor, &EditorController::editsSaved);
     QElapsedTimer debounceWindow;
     debounceWindow.start();
@@ -181,15 +192,15 @@ void targetedExport(Context &c, bool hsl) {
     QObject::connect(&c.exporter, &ExportController::changed, &observer, [&] {
         if (c.exporter.waitingForSave() && startDelay < 0) {
             startDelay = debounceWindow.elapsed();
-            // Conservative proof: even the FIRST gesture edit is younger than
-            // EditorController's 180 ms timer, and every later edit restarts it.
-            // This is a fixture-boundary assertion, not a UI latency budget.
-            pendingAtStart =
-                pendingAtStart || (c.editor.saving() && saves.isEmpty() && startDelay < 180);
+            pendingAtStart = pendingAtStart || (c.editor.saving() && saves.isEmpty());
         }
     });
     d.click("export.current");
     require(pendingAtStart, "Export did not enter its wait-for-pending-edits boundary");
+    d.wait([&] { return c.storageFault.writeBlocked(); }, "actual pending edit WAL write held");
+    require(c.exporter.waitingForSave() && c.editor.saving() && saves.isEmpty(),
+            "Export bypassed the held real edit transaction");
+    c.storageFault.holdWrites(false);
     exportCompleted(c);
     const auto finalPixels = exportReference(c, after);
     require(finalPixels != baseline,
@@ -334,6 +345,9 @@ void targetedPhotoSwitch(Context &c) {
                 "Targeted switch failed to save the old photo's final accepted state");
         rendered(c);
     }
+    for (const auto &warning : c.warnings)
+        require(!warning.contains("Binding loop detected"),
+                "Targeted photo switch re-entered a QML binding: " + warning);
 }
 void cancelCompletionBoundary(Context &c) {
     auto &d = *c.driver;
@@ -346,32 +360,36 @@ void cancelCompletionBoundary(Context &c) {
     QSignalSpy loads(&c.editor, &EditorController::photoLoaded);
     QSignalSpy clicked(d.object("editor.cancelLoad"), SIGNAL(clicked()));
     require(clicked.isValid(), "Decode Cancel button has no observable clicked signal");
-    // For opaque PNG decoding RasterDecoder queues exactly one final progress(1)
-    // before returning to SessionService. With saves and renders already idle,
-    // the following Editor MetaCall is its real successful load completion.
-    QueuedCallGate gate(
-        c.editor, [&] { return c.editor.busy() && c.editor.progress() == 1; },
-        [&] {
-            require(c.editor.sourcePath() != path && loads.isEmpty(),
-                    "Completion gate ran after the new photo had already been installed");
-            d.frame();
-            require(d.item("editor.cancelLoad")->isVisible() &&
-                        d.item("editor.cancelLoad")->isEnabled(),
-                    "Late decode Cancel is not an available actual UI action");
-            d.log({{"action", "cancel_with_successful_load_completion_held"}, {"next", path}});
-            QTest::mouseClick(c.window, Qt::LeftButton, Qt::NoModifier,
-                              d.point("editor.cancelLoad"));
-            require(clicked.count() == 1, "Actual Cancel input was not acknowledged exactly once");
-        });
+    LoadResultGate gate(c.editor);
     d.click(next);
-    d.wait([&] { return gate.caught; }, "decode progress-to-completion scheduler boundary");
-    if (gate.failure)
-        std::rethrow_exception(gate.failure);
+    d.wait([&] { return gate.snapshot().held.has_value(); },
+           "actual successful load worker held before GUI delivery");
+    const auto held = gate.snapshot();
+    require(held.held->assetID == nextID.toStdString() &&
+                held.held->sourcePath == path.toStdString() && held.successfulArrivals == 1 &&
+                held.deliveries == 0 && !held.released && !held.timedOut && !held.hookFailed &&
+                c.editor.busy() && c.editor.sourcePath() != path && loads.isEmpty(),
+            "Successful-load gate missed the exact pending new asset");
+    d.frame();
+    require(d.item("editor.cancelLoad")->isVisible() && d.item("editor.cancelLoad")->isEnabled(),
+            "Late decode Cancel is not an available actual UI action");
+    d.log({{"action", "cancel_with_successful_load_completion_held"}, {"next", path}});
+    d.click("editor.cancelLoad");
+    require(clicked.count() == 1 && loads.isEmpty() && gate.snapshot().deliveries == 0,
+            "Actual Cancel was not acknowledged once before success delivery");
+    gate.release();
     c.loaded();
     require(c.editor.sourcePath() == path && c.editor.photoID() == nextID && loads.count() == 1 &&
                 c.editor.error().isEmpty() && !c.editor.saving() && !c.editor.canUndo(),
             "Late Cancel and completed load left inconsistent metadata/history or duplicate "
             "activation");
+    const auto delivered = gate.snapshot();
+    require(delivered.successfulArrivals == 1 && delivered.deliveries == 1 &&
+                delivered.lastDelivered && delivered.lastDelivered->sameAs(*held.held) &&
+                delivered.released && delivered.leftHold && !delivered.timedOut &&
+                !delivered.hookFailed && !delivered.deliveryBeforeRelease &&
+                delivered.mismatchedDeliveries == 0,
+            "Late Cancel result was not delivered exactly once by its actual load worker");
     const auto active = luma::Catalog(c.catalogFile.toStdString()).activeAsset();
     require(active && active->id == nextID.toStdString() &&
                 active->edits == c.editor.currentSettings(),

@@ -33,8 +33,9 @@ bool lumaLinearDNG(const libraw_data_t &data) {
 }
 RawColorCalibration linearCalibration(const libraw_data_t &data) {
     const auto &profile = data.color.dng_color[0];
+    const bool floating = text(data.idata.model).find("Linear RGB Float") != std::string::npos;
     if (!lumaLinearDNG(data) || profile.illuminant != 23 || data.color.black != 0 ||
-        data.color.maximum != 65535)
+        data.color.maximum != (floating ? 1U : 65535U))
         throw std::runtime_error("Unsupported rendered Linear RGB DNG calibration.");
     // LibRaw 0.21 copies TIFF matrix values without copying their parsedfields.
     // Require the actual matrices to be finite, invertible and consistent instead.
@@ -132,7 +133,7 @@ PhotoMetadata metadataFrom(const libraw_data_t &data) {
 
 bool RawDecoder::recognizes(const std::filesystem::path &path, CancellationToken stop) const {
     checkCancellation(stop);
-    if (!std::filesystem::is_regular_file(path) || std::filesystem::file_size(path) > 512'000'000)
+    if (!std::filesystem::is_regular_file(path) || std::filesystem::file_size(path) > 1'300'000'000)
         throw std::runtime_error("Image is missing or exceeds the input budget.");
     const auto decoder = std::make_unique<LibRaw>();
     decoder->set_progress_handler(cancelRaw, &stop);
@@ -153,6 +154,8 @@ PhotoMetadata RawDecoder::inspect(const std::filesystem::path &path, Cancellatio
     decoder->set_progress_handler(cancelRaw, &stop);
     requireSuccess(decoder->open_file(path.c_str()), "Read RAW metadata");
     const auto &data = decoder->imgdata;
+    if (!lumaLinearDNG(data) && std::filesystem::file_size(path) > 512'000'000)
+        throw std::runtime_error("RAW exceeds the 512 MB input budget.");
     if ((!lumaLinearDNG(data) && data.idata.filters == 0) || data.idata.filters == 9 ||
         data.idata.colors != 3 || data.sizes.width < 2 || data.sizes.height < 2)
         throw std::runtime_error("Library currently supports Bayer RAW only.");
@@ -181,8 +184,9 @@ std::vector<std::uint8_t> RawDecoder::embeddedJPEG(const std::filesystem::path &
 DecodedRaw RawDecoder::decode(const std::filesystem::path &path, luma::CancellationToken stop,
                               const std::function<void(double)> &progress) const {
     checkCancellation(stop);
-    if (!std::filesystem::is_regular_file(path) || std::filesystem::file_size(path) > 512'000'000) {
-        throw std::runtime_error("RAW is missing or exceeds the 512 MB input budget.");
+    if (!std::filesystem::is_regular_file(path) ||
+        std::filesystem::file_size(path) > 1'300'000'000) {
+        throw std::runtime_error("RAW is missing or exceeds the input budget.");
     }
     // LibRaw contains large metadata tables. macOS worker stacks are only 512 KB.
     const auto allocation = std::make_unique<LibRaw>();
@@ -190,6 +194,12 @@ DecodedRaw RawDecoder::decode(const std::filesystem::path &path, luma::Cancellat
     decoder.set_progress_handler(cancelRaw, &stop);
     decoder.imgdata.rawparams.max_raw_memory_mb = 512;
     requireSuccess(decoder.open_file(path.c_str()), "Open RAW");
+    if (lumaLinearDNG(decoder.imgdata)) {
+        decoder.imgdata.rawparams.options &= ~LIBRAW_RAWOPTIONS_CONVERTFLOAT_TO_INT;
+        decoder.imgdata.rawparams.max_raw_memory_mb = 1536;
+    } else if (std::filesystem::file_size(path) > 512'000'000) {
+        throw std::runtime_error("RAW exceeds the 512 MB input budget.");
+    }
     if (progress) {
         progress(0.1);
     }
@@ -199,16 +209,21 @@ DecodedRaw RawDecoder::decode(const std::filesystem::path &path, luma::Cancellat
     const auto &sizes = data.sizes;
     if (lumaLinearDNG(data)) {
         const auto calibration = linearCalibration(data);
-        const int channels = data.rawdata.color3_image ? 3 : data.rawdata.color4_image ? 4 : 0;
+        const bool floating = data.rawdata.float3_image || data.rawdata.float4_image;
+        const int channels = floating                    ? (data.rawdata.float3_image ? 3 : 4)
+                             : data.rawdata.color3_image ? 3
+                             : data.rawdata.color4_image ? 4
+                                                         : 0;
+        const unsigned bytes = floating ? sizeof(float) : sizeof(unsigned short);
+        if (floating != (text(data.idata.model).find("Linear RGB Float") != std::string::npos))
+            throw std::runtime_error("Rendered DNG sample type does not match its profile.");
         if (channels == 0 || sizes.width < 22 || sizes.height < 22 ||
             sizes.top_margin + sizes.height > sizes.raw_height ||
             sizes.left_margin + sizes.width > sizes.raw_width ||
-            sizes.raw_pitch <
-                static_cast<unsigned>(sizes.raw_width) * channels * sizeof(unsigned short) ||
-            sizes.raw_pitch % (static_cast<unsigned>(channels) * sizeof(unsigned short)) != 0)
+            sizes.raw_pitch < static_cast<unsigned>(sizes.raw_width) * channels * bytes ||
+            sizes.raw_pitch % (static_cast<unsigned>(channels) * bytes) != 0)
             throw std::runtime_error("Invalid rendered Linear RGB DNG sample bounds.");
-        const auto stride =
-            sizes.raw_pitch / (static_cast<unsigned>(channels) * sizeof(unsigned short));
+        const auto stride = sizes.raw_pitch / (static_cast<unsigned>(channels) * bytes);
         FloatImage image(sizes.width, sizes.height);
         for (int y = 0; y < image.height; ++y) {
             checkCancellation(stop);
@@ -216,10 +231,17 @@ DecodedRaw RawDecoder::decode(const std::filesystem::path &path, luma::Cancellat
                 const auto index =
                     static_cast<std::size_t>(y + sizes.top_margin) * stride + x + sizes.left_margin;
                 const auto target = (static_cast<std::size_t>(y) * image.width + x) * 3;
-                for (std::size_t c = 0; c < 3; ++c)
-                    image.rgb[target + c] = (channels == 3 ? data.rawdata.color3_image[index][c]
-                                                           : data.rawdata.color4_image[index][c]) /
-                                            65535.F;
+                for (std::size_t c = 0; c < 3; ++c) {
+                    const float value =
+                        floating ? (channels == 3 ? data.rawdata.float3_image[index][c]
+                                                  : data.rawdata.float4_image[index][c])
+                                 : (channels == 3 ? data.rawdata.color3_image[index][c]
+                                                  : data.rawdata.color4_image[index][c]) /
+                                       65535.F;
+                    if (!std::isfinite(value))
+                        throw std::runtime_error("Non-finite rendered DNG sample.");
+                    image.rgb[target + c] = value;
+                }
             }
             if (progress)
                 progress(0.45 + .55 * (y + 1.0) / image.height);

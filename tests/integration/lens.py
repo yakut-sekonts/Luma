@@ -9,6 +9,7 @@ import tempfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "assets"))
 from generate_dng import create_dng
+from catalog_fixtures import remove_post_v11_features
 from develop import png_info, tiff_info
 
 cli = Path(sys.argv[1])
@@ -38,6 +39,7 @@ with tempfile.TemporaryDirectory(prefix="luma-lens-") as temporary:
         run("export", root / f"before.{extension}")
     with sqlite3.connect(catalog) as db:
         db.execute("PRAGMA foreign_keys=OFF")
+        remove_post_v11_features(db)
         columns = [item[1] for item in db.execute("PRAGMA table_info(edit_documents)")
                    if not item[1].startswith(("lens_", "transform_"))]
         selection = ",".join("6 AS schema_version" if name == "schema_version" else "enabled & 32767 AS enabled" if name == "enabled" else name
@@ -54,7 +56,7 @@ with tempfile.TemporaryDirectory(prefix="luma-lens-") as temporary:
                     for table in ("edit_curve_points", "edit_hsl_bands")]
     assert run("restore") == before, "Neutral migration changed old settings or selection"
     with sqlite3.connect(catalog) as db:
-        assert db.execute("PRAGMA user_version").fetchone()[0] == 11
+        assert db.execute("PRAGMA user_version").fetchone()[0] == 21
         assert db.execute("SELECT schema_version,lens_profile,lens_distortion,lens_vignetting,lens_ca FROM edit_documents").fetchone() == (8,"",100,100,1)
         assert db.execute("SELECT revision,updated_at FROM edit_documents").fetchone() == durable
         assert db.execute("SELECT rating FROM assets").fetchone()[0] == 4
@@ -101,6 +103,7 @@ with tempfile.TemporaryDirectory(prefix="luma-lens-") as temporary:
     # The migration's INSERT must enforce old and new invariants before COMMIT.
     with sqlite3.connect(catalog) as db:
         db.execute("PRAGMA foreign_keys=OFF")
+        remove_post_v11_features(db)
         selection = ",".join("6 AS schema_version" if name == "schema_version" else
                              "9.0 AS exposure" if name == "exposure" else
                              "enabled & 32767 AS enabled" if name == "enabled" else name for name in columns)

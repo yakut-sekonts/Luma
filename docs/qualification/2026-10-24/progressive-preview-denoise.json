@@ -1,0 +1,920 @@
+{
+  "status": "NOT_QUALIFIED",
+  "scope": "Progressive preview performance, byte-cache accounting and Core ML worker stack diagnostics",
+  "reports": {
+    "performance_native": {
+      "path": "build-verify/ux-progressive-parameter-cache/UX_REPORT.json",
+      "sha256": "a4ae3cb54469380d6224fc0d30a2d3363af82e10991530e3f54ca614eb1403cc",
+      "source_tree_sha256": "6aea458d7afed681ad6e8f74aa3ae00dd223b9fef112b25a008c5f1c2a0129d0",
+      "test_executable_sha256": "41d5784d1b15c259d684060c6187ec29323b7b756cd542b432f4aa06545c2234",
+      "summary": {
+        "PASS": 3
+      },
+      "build_provenance": "PASS",
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "release_gate": "NOT_QUALIFIED",
+      "results": [
+        {
+          "id": "UX-P06-PRG-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211514Z-38786/UX-P06-PRG-001/repeat-1",
+          "main_loop_stall_max_ms": 308
+        },
+        {
+          "id": "UX-P06-PRG-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211514Z-38786/UX-P06-PRG-001/repeat-2",
+          "main_loop_stall_max_ms": 301
+        },
+        {
+          "id": "UX-P06-PRG-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211514Z-38786/UX-P06-PRG-001/repeat-3",
+          "main_loop_stall_max_ms": 289
+        }
+      ]
+    },
+    "regression_offscreen": {
+      "path": "build-verify/ux-preview-stack-regression/UX_REPORT.json",
+      "sha256": "c5e222590537a4fe6a6132d8c015bcfefcdb901b2f28932b58f5154de99db293",
+      "source_tree_sha256": "6aea458d7afed681ad6e8f74aa3ae00dd223b9fef112b25a008c5f1c2a0129d0",
+      "test_executable_sha256": "41d5784d1b15c259d684060c6187ec29323b7b756cd542b432f4aa06545c2234",
+      "summary": {
+        "PASS": 68,
+        "SKIPPED": 4,
+        "FAIL": 22
+      },
+      "build_provenance": "PASS",
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "release_gate": "FAIL",
+      "results": [
+        {
+          "id": "UX-SLD-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-SLD-003/repeat-1",
+          "main_loop_stall_max_ms": 39
+        },
+        {
+          "id": "UX-SLD-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-SLD-003/repeat-2",
+          "main_loop_stall_max_ms": 38
+        },
+        {
+          "id": "UX-SLD-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-SLD-003/repeat-3",
+          "main_loop_stall_max_ms": 51
+        },
+        {
+          "id": "UX-SLD-015",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-SLD-015/repeat-1",
+          "main_loop_stall_max_ms": 259
+        },
+        {
+          "id": "UX-SLD-015",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-SLD-015/repeat-2",
+          "main_loop_stall_max_ms": 120
+        },
+        {
+          "id": "UX-SLD-015",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-SLD-015/repeat-3",
+          "main_loop_stall_max_ms": 64
+        },
+        {
+          "id": "UX-SLD-016",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-SLD-016/repeat-1",
+          "main_loop_stall_max_ms": 67
+        },
+        {
+          "id": "UX-SLD-016",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-SLD-016/repeat-2",
+          "main_loop_stall_max_ms": 49
+        },
+        {
+          "id": "UX-SLD-016",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-SLD-016/repeat-3",
+          "main_loop_stall_max_ms": 74
+        },
+        {
+          "id": "UX-SLD-017",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-SLD-017/repeat-1",
+          "main_loop_stall_max_ms": 74
+        },
+        {
+          "id": "UX-SLD-017",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-SLD-017/repeat-2",
+          "main_loop_stall_max_ms": 73
+        },
+        {
+          "id": "UX-SLD-017",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-SLD-017/repeat-3",
+          "main_loop_stall_max_ms": 97
+        },
+        {
+          "id": "UX-CRP-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-CRP-001/repeat-1",
+          "main_loop_stall_max_ms": 41
+        },
+        {
+          "id": "UX-CRP-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-CRP-001/repeat-2",
+          "main_loop_stall_max_ms": 42
+        },
+        {
+          "id": "UX-CRP-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-CRP-001/repeat-3",
+          "main_loop_stall_max_ms": 95
+        },
+        {
+          "id": "UX-TRN-006",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-TRN-006/repeat-1",
+          "main_loop_stall_max_ms": 34
+        },
+        {
+          "id": "UX-TRN-006",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-TRN-006/repeat-2",
+          "main_loop_stall_max_ms": 37
+        },
+        {
+          "id": "UX-TRN-006",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-TRN-006/repeat-3",
+          "main_loop_stall_max_ms": 33
+        },
+        {
+          "id": "UX-PRS-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-PRS-001/repeat-1",
+          "main_loop_stall_max_ms": 35
+        },
+        {
+          "id": "UX-PRS-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-PRS-001/repeat-2",
+          "main_loop_stall_max_ms": 39
+        },
+        {
+          "id": "UX-PRS-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-PRS-001/repeat-3",
+          "main_loop_stall_max_ms": 40
+        },
+        {
+          "id": "UX-PRS-004",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-PRS-004/repeat-1",
+          "main_loop_stall_max_ms": 35
+        },
+        {
+          "id": "UX-PRS-004",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-PRS-004/repeat-2",
+          "main_loop_stall_max_ms": 44
+        },
+        {
+          "id": "UX-PRS-004",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-PRS-004/repeat-3",
+          "main_loop_stall_max_ms": 40
+        },
+        {
+          "id": "UX-PRS-005",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-PRS-005/repeat-1",
+          "main_loop_stall_max_ms": 37
+        },
+        {
+          "id": "UX-PRS-005",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-PRS-005/repeat-2",
+          "main_loop_stall_max_ms": 47
+        },
+        {
+          "id": "UX-PRS-005",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-PRS-005/repeat-3",
+          "main_loop_stall_max_ms": 40
+        },
+        {
+          "id": "UX-BAT-001",
+          "status": "SKIPPED",
+          "message": "",
+          "artifacts": null,
+          "main_loop_stall_max_ms": null
+        },
+        {
+          "id": "UX-BAT-002",
+          "status": "SKIPPED",
+          "message": "",
+          "artifacts": null,
+          "main_loop_stall_max_ms": null
+        },
+        {
+          "id": "UX-UND-001",
+          "status": "SKIPPED",
+          "message": "",
+          "artifacts": null,
+          "main_loop_stall_max_ms": null
+        },
+        {
+          "id": "UX-UND-002",
+          "status": "SKIPPED",
+          "message": "",
+          "artifacts": null,
+          "main_loop_stall_max_ms": null
+        },
+        {
+          "id": "UX-UND-009",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-UND-009/repeat-1",
+          "main_loop_stall_max_ms": 41
+        },
+        {
+          "id": "UX-UND-009",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-UND-009/repeat-2",
+          "main_loop_stall_max_ms": 37
+        },
+        {
+          "id": "UX-UND-009",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-UND-009/repeat-3",
+          "main_loop_stall_max_ms": 39
+        },
+        {
+          "id": "UX-MSK-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-MSK-001/repeat-1",
+          "main_loop_stall_max_ms": 37
+        },
+        {
+          "id": "UX-MSK-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-MSK-001/repeat-2",
+          "main_loop_stall_max_ms": 34
+        },
+        {
+          "id": "UX-MSK-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-MSK-001/repeat-3",
+          "main_loop_stall_max_ms": 36
+        },
+        {
+          "id": "UX-MSK-020",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-MSK-020/repeat-1",
+          "main_loop_stall_max_ms": 38
+        },
+        {
+          "id": "UX-MSK-020",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-MSK-020/repeat-2",
+          "main_loop_stall_max_ms": 39
+        },
+        {
+          "id": "UX-MSK-020",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-MSK-020/repeat-3",
+          "main_loop_stall_max_ms": 40
+        },
+        {
+          "id": "UX-P06-GPU-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-GPU-002/repeat-1",
+          "main_loop_stall_max_ms": 41
+        },
+        {
+          "id": "UX-P06-GPU-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-GPU-002/repeat-2",
+          "main_loop_stall_max_ms": 38
+        },
+        {
+          "id": "UX-P06-GPU-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-GPU-002/repeat-3",
+          "main_loop_stall_max_ms": 40
+        },
+        {
+          "id": "UX-P06-PRG-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-PRG-002/repeat-1",
+          "main_loop_stall_max_ms": 174
+        },
+        {
+          "id": "UX-P06-PRG-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-PRG-002/repeat-2",
+          "main_loop_stall_max_ms": 163
+        },
+        {
+          "id": "UX-P06-PRG-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-PRG-002/repeat-3",
+          "main_loop_stall_max_ms": 197
+        },
+        {
+          "id": "UX-P06-PRG-004",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-PRG-004/repeat-1",
+          "main_loop_stall_max_ms": 171
+        },
+        {
+          "id": "UX-P06-PRG-004",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-PRG-004/repeat-2",
+          "main_loop_stall_max_ms": 166
+        },
+        {
+          "id": "UX-P06-PRG-004",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-PRG-004/repeat-3",
+          "main_loop_stall_max_ms": 197
+        },
+        {
+          "id": "UX-P06-PRG-007",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-PRG-007/repeat-1",
+          "main_loop_stall_max_ms": 171
+        },
+        {
+          "id": "UX-P06-PRG-007",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-PRG-007/repeat-2",
+          "main_loop_stall_max_ms": 167
+        },
+        {
+          "id": "UX-P06-PRG-007",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-PRG-007/repeat-3",
+          "main_loop_stall_max_ms": 163
+        },
+        {
+          "id": "UX-P06-PRG-008",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-PRG-008/repeat-1",
+          "main_loop_stall_max_ms": 168
+        },
+        {
+          "id": "UX-P06-PRG-008",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-PRG-008/repeat-2",
+          "main_loop_stall_max_ms": 182
+        },
+        {
+          "id": "UX-P06-PRG-008",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-PRG-008/repeat-3",
+          "main_loop_stall_max_ms": 169
+        },
+        {
+          "id": "UX-P06-PRG-009",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-PRG-009/repeat-1",
+          "main_loop_stall_max_ms": 343
+        },
+        {
+          "id": "UX-P06-PRG-009",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-PRG-009/repeat-2",
+          "main_loop_stall_max_ms": 328
+        },
+        {
+          "id": "UX-P06-PRG-009",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-PRG-009/repeat-3",
+          "main_loop_stall_max_ms": 325
+        },
+        {
+          "id": "UX-P06-ZOM-006",
+          "status": "FAIL",
+          "message": "Active editing tool disables required zoom/pan",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-ZOM-006/repeat-1",
+          "main_loop_stall_max_ms": 188
+        },
+        {
+          "id": "UX-P06-ZOM-006",
+          "status": "FAIL",
+          "message": "Active editing tool disables required zoom/pan",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-ZOM-006/repeat-2",
+          "main_loop_stall_max_ms": 192
+        },
+        {
+          "id": "UX-P06-ZOM-006",
+          "status": "FAIL",
+          "message": "Active editing tool disables required zoom/pan",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-ZOM-006/repeat-3",
+          "main_loop_stall_max_ms": 188
+        },
+        {
+          "id": "UX-P06-ZOM-007",
+          "status": "FAIL",
+          "message": "Active editing tool disables required zoom/pan",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-ZOM-007/repeat-1",
+          "main_loop_stall_max_ms": 190
+        },
+        {
+          "id": "UX-P06-ZOM-007",
+          "status": "FAIL",
+          "message": "Active editing tool disables required zoom/pan",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-ZOM-007/repeat-2",
+          "main_loop_stall_max_ms": 187
+        },
+        {
+          "id": "UX-P06-ZOM-007",
+          "status": "FAIL",
+          "message": "Active editing tool disables required zoom/pan",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-ZOM-007/repeat-3",
+          "main_loop_stall_max_ms": 189
+        },
+        {
+          "id": "UX-P06-ZOM-008",
+          "status": "FAIL",
+          "message": "Active editing tool disables required zoom/pan",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-ZOM-008/repeat-1",
+          "main_loop_stall_max_ms": 193
+        },
+        {
+          "id": "UX-P06-ZOM-008",
+          "status": "FAIL",
+          "message": "Active editing tool disables required zoom/pan",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-ZOM-008/repeat-2",
+          "main_loop_stall_max_ms": 183
+        },
+        {
+          "id": "UX-P06-ZOM-008",
+          "status": "FAIL",
+          "message": "Active editing tool disables required zoom/pan",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-ZOM-008/repeat-3",
+          "main_loop_stall_max_ms": 191
+        },
+        {
+          "id": "UX-P06-ZOM-009",
+          "status": "FAIL",
+          "message": "Active editing tool disables required zoom/pan",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-ZOM-009/repeat-1",
+          "main_loop_stall_max_ms": 84
+        },
+        {
+          "id": "UX-P06-ZOM-009",
+          "status": "FAIL",
+          "message": "Active editing tool disables required zoom/pan",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-ZOM-009/repeat-2",
+          "main_loop_stall_max_ms": 93
+        },
+        {
+          "id": "UX-P06-ZOM-009",
+          "status": "FAIL",
+          "message": "Active editing tool disables required zoom/pan",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-ZOM-009/repeat-3",
+          "main_loop_stall_max_ms": 86
+        },
+        {
+          "id": "UX-P06-LRU-001",
+          "status": "FAIL",
+          "message": "Cache fixture did not populate distinct uniformly-sized rendered entries beyond 16 MiB",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-LRU-001/repeat-1",
+          "main_loop_stall_max_ms": 31
+        },
+        {
+          "id": "UX-P06-LRU-001",
+          "status": "FAIL",
+          "message": "Cache fixture did not populate distinct uniformly-sized rendered entries beyond 16 MiB",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-LRU-001/repeat-2",
+          "main_loop_stall_max_ms": 49
+        },
+        {
+          "id": "UX-P06-LRU-001",
+          "status": "FAIL",
+          "message": "Cache fixture did not populate distinct uniformly-sized rendered entries beyond 16 MiB",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-LRU-001/repeat-3",
+          "main_loop_stall_max_ms": 37
+        },
+        {
+          "id": "UX-P06-LRU-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-LRU-002/repeat-1",
+          "main_loop_stall_max_ms": 22
+        },
+        {
+          "id": "UX-P06-LRU-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-LRU-002/repeat-2",
+          "main_loop_stall_max_ms": 25
+        },
+        {
+          "id": "UX-P06-LRU-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-LRU-002/repeat-3",
+          "main_loop_stall_max_ms": 22
+        },
+        {
+          "id": "UX-P06-MEM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-MEM-001/repeat-1",
+          "main_loop_stall_max_ms": 179
+        },
+        {
+          "id": "UX-P06-MEM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-MEM-001/repeat-2",
+          "main_loop_stall_max_ms": 165
+        },
+        {
+          "id": "UX-P06-MEM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-MEM-001/repeat-3",
+          "main_loop_stall_max_ms": 169
+        },
+        {
+          "id": "UX-P06-MEM-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-MEM-002/repeat-1",
+          "main_loop_stall_max_ms": 165
+        },
+        {
+          "id": "UX-P06-MEM-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-MEM-002/repeat-2",
+          "main_loop_stall_max_ms": 167
+        },
+        {
+          "id": "UX-P06-MEM-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P06-MEM-002/repeat-3",
+          "main_loop_stall_max_ms": 221
+        },
+        {
+          "id": "UX-P07-DNS-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P07-DNS-001/repeat-1",
+          "main_loop_stall_max_ms": 501
+        },
+        {
+          "id": "UX-P07-DNS-001",
+          "status": "FAIL",
+          "message": "Denoise failed before staging: ",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P07-DNS-001/repeat-2",
+          "main_loop_stall_max_ms": 72
+        },
+        {
+          "id": "UX-P07-DNS-001",
+          "status": "FAIL",
+          "message": "Denoise failed before staging: ",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P07-DNS-001/repeat-3",
+          "main_loop_stall_max_ms": 30
+        },
+        {
+          "id": "UX-P07-DNS-002",
+          "status": "FAIL",
+          "message": "AI Denoise processing/progress/Cancel or source state is incorrect",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P07-DNS-002/repeat-1",
+          "main_loop_stall_max_ms": 476
+        },
+        {
+          "id": "UX-P07-DNS-002",
+          "status": "FAIL",
+          "message": "Denoise failed before staging: ",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P07-DNS-002/repeat-2",
+          "main_loop_stall_max_ms": 35
+        },
+        {
+          "id": "UX-P07-DNS-002",
+          "status": "FAIL",
+          "message": "Denoise failed before staging: ",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P07-DNS-002/repeat-3",
+          "main_loop_stall_max_ms": 29
+        },
+        {
+          "id": "UX-P07-DNS-008",
+          "status": "FAIL",
+          "message": "Denoise failed before staging: ",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P07-DNS-008/repeat-1",
+          "main_loop_stall_max_ms": 28
+        },
+        {
+          "id": "UX-P07-DNS-008",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P07-DNS-008/repeat-2",
+          "main_loop_stall_max_ms": 539
+        },
+        {
+          "id": "UX-P07-DNS-008",
+          "status": "FAIL",
+          "message": "Denoise failed before staging: ",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P07-DNS-008/repeat-3",
+          "main_loop_stall_max_ms": 73
+        },
+        {
+          "id": "UX-P09-PERF-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P09-PERF-001/repeat-1",
+          "main_loop_stall_max_ms": null
+        },
+        {
+          "id": "UX-P09-PERF-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P09-PERF-001/repeat-2",
+          "main_loop_stall_max_ms": null
+        },
+        {
+          "id": "UX-P09-PERF-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T211651Z-39143/UX-P09-PERF-001/repeat-3",
+          "main_loop_stall_max_ms": null
+        }
+      ]
+    },
+    "cache_denoise_followup_offscreen": {
+      "path": "build-verify/ux-denoise-pressure-observed/UX_REPORT.json",
+      "sha256": "acd53dc95c8ae1d0057aa7f0dc3ff64bbb3d3ba9a608fd72d8da5f2a77470c6e",
+      "source_tree_sha256": "d2a0d9c8fac1eac78ca1fdb085c7618a91c547bd847a84e2a4650b202cf819f7",
+      "test_executable_sha256": "8443f9c1447582665f87e24f116331a8e0e0c402217be39b254cc2f8f5b3df95",
+      "summary": {
+        "PASS": 4
+      },
+      "build_provenance": "PASS",
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "release_gate": "NOT_QUALIFIED",
+      "results": [
+        {
+          "id": "UX-P06-LRU-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T212906Z-41774/UX-P06-LRU-001/repeat-1",
+          "main_loop_stall_max_ms": 31
+        },
+        {
+          "id": "UX-P07-DNS-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T212906Z-41774/UX-P07-DNS-001/repeat-1",
+          "main_loop_stall_max_ms": 479
+        },
+        {
+          "id": "UX-P07-DNS-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T212906Z-41774/UX-P07-DNS-002/repeat-1",
+          "main_loop_stall_max_ms": 518
+        },
+        {
+          "id": "UX-P07-DNS-008",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T212906Z-41774/UX-P07-DNS-008/repeat-1",
+          "main_loop_stall_max_ms": 492
+        }
+      ]
+    },
+    "native_followup": {
+      "path": "build-verify/ux-preview-stack-native/UX_REPORT.json",
+      "sha256": "74d1bff5893ed4f9a4b2cd86da43d80bb14fecd37e8013810c3a5f730e250e0b",
+      "source_tree_sha256": "d2a0d9c8fac1eac78ca1fdb085c7618a91c547bd847a84e2a4650b202cf819f7",
+      "test_executable_sha256": "8443f9c1447582665f87e24f116331a8e0e0c402217be39b254cc2f8f5b3df95",
+      "summary": {
+        "PASS": 3,
+        "FAIL": 6
+      },
+      "build_provenance": "PASS",
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "release_gate": "FAIL",
+      "results": [
+        {
+          "id": "UX-P06-GPU-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T212936Z-41950/UX-P06-GPU-002/repeat-1",
+          "main_loop_stall_max_ms": 249
+        },
+        {
+          "id": "UX-P06-ZOM-006",
+          "status": "FAIL",
+          "message": "Active editing tool disables required zoom/pan",
+          "artifacts": "build-verify/ux-artifacts/20261023T212936Z-41950/UX-P06-ZOM-006/repeat-1",
+          "main_loop_stall_max_ms": 194
+        },
+        {
+          "id": "UX-P06-ZOM-007",
+          "status": "FAIL",
+          "message": "Active editing tool disables required zoom/pan",
+          "artifacts": "build-verify/ux-artifacts/20261023T212936Z-41950/UX-P06-ZOM-007/repeat-1",
+          "main_loop_stall_max_ms": 192
+        },
+        {
+          "id": "UX-P06-ZOM-008",
+          "status": "FAIL",
+          "message": "Active editing tool disables required zoom/pan",
+          "artifacts": "build-verify/ux-artifacts/20261023T212936Z-41950/UX-P06-ZOM-008/repeat-1",
+          "main_loop_stall_max_ms": 238
+        },
+        {
+          "id": "UX-P06-ZOM-009",
+          "status": "FAIL",
+          "message": "Active editing tool disables required zoom/pan",
+          "artifacts": "build-verify/ux-artifacts/20261023T212936Z-41950/UX-P06-ZOM-009/repeat-1",
+          "main_loop_stall_max_ms": 165
+        },
+        {
+          "id": "UX-P06-LRU-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T212936Z-41950/UX-P06-LRU-001/repeat-1",
+          "main_loop_stall_max_ms": 116
+        },
+        {
+          "id": "UX-P07-DNS-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "build-verify/ux-artifacts/20261023T212936Z-41950/UX-P07-DNS-001/repeat-1",
+          "main_loop_stall_max_ms": 570
+        },
+        {
+          "id": "UX-P07-DNS-002",
+          "status": "FAIL",
+          "message": "AI Denoise processing/progress/Cancel or source state is incorrect",
+          "artifacts": "build-verify/ux-artifacts/20261023T212936Z-41950/UX-P07-DNS-002/repeat-1",
+          "main_loop_stall_max_ms": 2073
+        },
+        {
+          "id": "UX-P07-DNS-008",
+          "status": "FAIL",
+          "message": "Denoise failed before staging: ",
+          "artifacts": "build-verify/ux-artifacts/20261023T212936Z-41950/UX-P07-DNS-008/repeat-1",
+          "main_loop_stall_max_ms": 162
+        }
+      ]
+    }
+  },
+  "performance": {
+    "native_repetitions": 3,
+    "samples_per_repetition": 10,
+    "p95_ms": [
+      37.612584,
+      30.448625,
+      42.000666
+    ],
+    "budget_p95_ms": 50,
+    "first_feedback_pixels": 512,
+    "held_refinement_pixels": 1024,
+    "released_pixels": 2560,
+    "measurement": "input to synchronized frameSwapped, not hardware display scanout",
+    "pixel_budget": "existing Metal RGB8 <= 1 and exact alpha; independent CPU reference"
+  },
+  "validation": {
+    "full_build": ".tools/parameter-cache-full-build.log",
+    "affected_ctest": {
+      "log": ".tools/parameter-cache-ctest.log",
+      "passed": 17
+    },
+    "runner_tests": 42,
+    "quality_policy_tests": 11,
+    "tidy_latest": {
+      "status": "PASS",
+      "log": ".tools/preview-denoise-final-tidy.log",
+      "scope": [
+        "EditorController.cpp (all four compile commands)",
+        "ZoomScenarios.cpp",
+        "MergeScenarios.cpp"
+      ],
+      "nonblocking_warnings_retained": true
+    },
+    "format": {
+      "status": "PASS",
+      "log": ".tools/preview-denoise-format.log"
+    }
+  },
+  "retained_failures": [
+    {
+      "path": "build-verify/ux-progressive-quick/UX_REPORT.json",
+      "reason": "double resampling disagreed with direct-source reference; fixed direct-source 512 stage",
+      "sha256": "782ecdfde9951e14d16d615be2dc0a8906e0f408be0d3ca4b1e30b6be3f412b4"
+    },
+    {
+      "path": "build-verify/ux-progressive-source-repeat/UX_REPORT.json",
+      "reason": "one RGB8 Metal rounding step rejected by exact test; adopted existing Metal one-step/exact-alpha oracle",
+      "sha256": "5c93f7265648f3844baa85ff2fd173df238929269a5d267dfbd125b19adb47b0"
+    },
+    {
+      "path": "build-verify/ux-progressive-source-final/UX_REPORT.json",
+      "reason": "first input took 59.221667ms; fixed repeated QML parameter-map construction with revision cache",
+      "sha256": "5312a66d3f56acc97e7aaff836502672bef7523ab1a78e2d0cdb3d9495917bc8"
+    }
+  ],
+  "hosted_denoise": [
+    {
+      "run": 40022592469,
+      "head": "8c4ab32",
+      "artifact_sha256": "57555c1d69e9de3c724f75b2787fdbaa4e2e7da755b24ec6eeb331bab760262c",
+      "result": "SIGBUS / __chkstk_darwin / BNNSGraphContextExecute_v2 on JobManager worker; fixed with joined explicit 8MiB inference stack in cc007db"
+    },
+    {
+      "run": 40024642105,
+      "head": "cc007db",
+      "artifact_sha256": "ef69df2f3b461e7e610ce02ec73b4532fbf73afba88dd4a74b0bb25ada1b1095",
+      "result": "all three supervised scenarios fail unchanged >5s heartbeat watchdog; separate LLDB DNS001 child passes in 25318ms; no release qualification inferred"
+    },
+    {
+      "run": 40027066662,
+      "head": "d5f7531",
+      "result": "pending diagnostic checkpoints"
+    }
+  ],
+  "remaining": [
+    "Hosted watchdog cause and confirmation of GPU002 settled-state fix",
+    "Real OS memory pressure prevents ZOM006-009 and cancels DNS002/008 on native 8GiB host; passive logs confirm transition normal -> warning",
+    "Full phase 1.0 golden workflow, installation, migration and update qualification",
+    "Full load, stress, soak, model/image quality and hardware/display qualification"
+  ],
+  "no_waivers": true
+}

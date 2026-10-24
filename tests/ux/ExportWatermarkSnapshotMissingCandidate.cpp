@@ -144,7 +144,7 @@ void importOwned(Context &c) {
     QList<QUrl> sources;
     for (const auto &name : photoNames)
         sources.append(QUrl::fromLocalFile(c.fixture + '/' + name));
-    require(d.object("library.pane")->setProperty("sources", QVariant::fromValue(sources)),
+    require(d.object("library.importDialog")->setProperty("sources", QVariant::fromValue(sources)),
             "EXP028 chooser-result fixture rejected sources");
     d.log({{"action", "fixture_file_chooser_result"},
            {"photo_count", 3},

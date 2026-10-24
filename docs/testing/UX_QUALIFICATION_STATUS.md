@@ -1,5 +1,11 @@
 # Current-scope UX qualification
 
+Current execution policy, 2026-10-20: the user subsequently deferred **all**
+intermediate QA, test runs and static checks until the final 1.0.0 campaign.
+The records below are historical; they do not qualify new development.
+New user-reported defects are recorded in
+[the development backlog](../DEVELOPMENT_BACKLOG.md).
+
 Status: **full qualification incomplete; 0.5.1 publication authorized after CI
 with explicitly accepted coverage gaps**.
 Work is tracked in [PR #47](https://github.com/yakut-sekonts/Luma/pull/47),

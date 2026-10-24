@@ -1,0 +1,545 @@
+{
+  "status": "NOT_QUALIFIED",
+  "scope": "DAY003 complete 100-photo culling workflow",
+  "production_behavior_changed": false,
+  "assertions": [
+    "Import 100 distinct owned generated 256x192 PNGs. Rate and flag ten picks and ten rejects using actual shortcuts; assert all persisted ratings and flags.",
+    "Search, rating and flag filters, select-all and named collection checked against independent exact ID sets.",
+    "Develop one collected photo, persist edit, apply a built-in preset to exactly ten collection members, verify complete documents of all 100 assets.",
+    "Export exactly ten full-resolution sRGB PNGs and compare every RGBA byte against independent decode/renderCPU of the saved documents.",
+    "All original hashes, exact collection membership, untouched 90 documents and catalog integrity preserved."
+  ],
+  "reports": {
+    "offscreen": {
+      "path": "build-verify/ux-daily-culling-offscreen/UX_REPORT.json",
+      "sha256": "a5ac36832aa2b240e3b90fd5f086f4afc85d55d760213e777db915c0c81d7ba2",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "baa08ca26020bd3de33aea58ebe9bfc4423796e6",
+        "worktree_dirty": true,
+        "source_tree_sha256": "ea265a9a175111b20866ac3757a13b2bc250f7bb309d8c149d93df8b929fe77c",
+        "test_executable_sha256": "ae799d7a34639b362e92ede66b39ca866bff7eb3e8749870d479a04e0f3860ae",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "ae799d7a34639b362e92ede66b39ca866bff7eb3e8749870d479a04e0f3860ae"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "FAIL": 3
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "baa08ca26020bd3de33aea58ebe9bfc4423796e6",
+        "reason": ""
+      },
+      "fixture_profile": {
+        "directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T225534Z-63960/public-fixtures-quality",
+        "public_photo_count": 100,
+        "base_original_checksum_count": 102,
+        "large_24mp_generated": false,
+        "case_profiles": [],
+        "extra_public_photo_count": 0,
+        "extra_original_checksum_count": 0,
+        "original_checksum_count": 102
+      },
+      "results": [
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "FAIL",
+          "message": "Daily Library contains empty or repeated identities",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 1106,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "FAIL",
+          "message": "Daily Library contains empty or repeated identities",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 715,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "FAIL",
+          "message": "Daily Library contains empty or repeated identities",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 722,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    },
+    "page-offscreen": {
+      "path": "build-verify/ux-daily-culling-page-offscreen/UX_REPORT.json",
+      "sha256": "bac165d0a1be43c6df9c5522dd772f215cbaf66e6a04b9be98ea2d2fca1c4b57",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "baa08ca26020bd3de33aea58ebe9bfc4423796e6",
+        "worktree_dirty": true,
+        "source_tree_sha256": "ec018d9c8df13a17d444f0b36cb068424c3140848aaae239647c7b126fd71d09",
+        "test_executable_sha256": "c48134fd50118bf812ed15019fd05216e91e363c6f79feaa5ee6cc3369f515ed",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "c48134fd50118bf812ed15019fd05216e91e363c6f79feaa5ee6cc3369f515ed"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "FAIL": 3
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "baa08ca26020bd3de33aea58ebe9bfc4423796e6",
+        "reason": ""
+      },
+      "fixture_profile": {
+        "directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T225604Z-64113/public-fixtures-quality",
+        "public_photo_count": 100,
+        "base_original_checksum_count": 102,
+        "large_24mp_generated": false,
+        "case_profiles": [],
+        "extra_public_photo_count": 0,
+        "extra_original_checksum_count": 0,
+        "original_checksum_count": 102
+      },
+      "results": [
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "FAIL",
+          "message": "Daily search returned the wrong photos",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 1051,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "FAIL",
+          "message": "Daily search returned the wrong photos",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 766,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "FAIL",
+          "message": "Daily search returned the wrong photos",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 807,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    },
+    "search-offscreen": {
+      "path": "build-verify/ux-daily-culling-search-offscreen/UX_REPORT.json",
+      "sha256": "bbcac1e3996ec9fe2cf9305b909609b473d492a04ec79475b729d076f1a29bde",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "baa08ca26020bd3de33aea58ebe9bfc4423796e6",
+        "worktree_dirty": true,
+        "source_tree_sha256": "bc6068ffd5c8e7d3e787ec831b9911e949a04b54855446e6ed8d780876d79486",
+        "test_executable_sha256": "a6fdfb5d0630a450453c1f7540f647d9729d337341b29468e87e16e47a1224c0",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "a6fdfb5d0630a450453c1f7540f647d9729d337341b29468e87e16e47a1224c0"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "FAIL": 1
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "baa08ca26020bd3de33aea58ebe9bfc4423796e6",
+        "reason": ""
+      },
+      "fixture_profile": {
+        "directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T225638Z-64298/public-fixtures-quality",
+        "public_photo_count": 100,
+        "base_original_checksum_count": 102,
+        "large_24mp_generated": false,
+        "case_profiles": [],
+        "extra_public_photo_count": 0,
+        "extra_original_checksum_count": 0,
+        "original_checksum_count": 102
+      },
+      "results": [
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "FAIL",
+          "message": "Daily rating filter returned incorrect identities",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 1623,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    },
+    "filter-offscreen": {
+      "path": "build-verify/ux-daily-culling-filter-offscreen/UX_REPORT.json",
+      "sha256": "8640b28e9d0aed37ec9d80d04d2194e6bf81afdd86a6ee3c64d912b82f9547c1",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "baa08ca26020bd3de33aea58ebe9bfc4423796e6",
+        "worktree_dirty": true,
+        "source_tree_sha256": "44dfb58a6985e44158ee894837eaeecba9f804983eac0800fbad14fba2aaf4a1",
+        "test_executable_sha256": "a0cc8a0b38e514ad58192f49d3f9083419c773a7a83b8a341ca72e12467086bd",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "a0cc8a0b38e514ad58192f49d3f9083419c773a7a83b8a341ca72e12467086bd"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "PASS": 1
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "baa08ca26020bd3de33aea58ebe9bfc4423796e6",
+        "reason": ""
+      },
+      "fixture_profile": {
+        "directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T225705Z-64446/public-fixtures-quality",
+        "public_photo_count": 100,
+        "base_original_checksum_count": 102,
+        "large_24mp_generated": false,
+        "case_profiles": [],
+        "extra_public_photo_count": 0,
+        "extra_original_checksum_count": 0,
+        "original_checksum_count": 102
+      },
+      "results": [
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 3870,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    },
+    "final-offscreen": {
+      "path": "build-verify/ux-daily-culling-final-offscreen/UX_REPORT.json",
+      "sha256": "90f3e6c6cafead40f9f501d515acdcdf40b748e91403d2fc56ce5cec0fc324c6",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "baa08ca26020bd3de33aea58ebe9bfc4423796e6",
+        "worktree_dirty": true,
+        "source_tree_sha256": "44dfb58a6985e44158ee894837eaeecba9f804983eac0800fbad14fba2aaf4a1",
+        "test_executable_sha256": "a0cc8a0b38e514ad58192f49d3f9083419c773a7a83b8a341ca72e12467086bd",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "a0cc8a0b38e514ad58192f49d3f9083419c773a7a83b8a341ca72e12467086bd"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "PASS": 3
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "baa08ca26020bd3de33aea58ebe9bfc4423796e6",
+        "reason": ""
+      },
+      "fixture_profile": {
+        "directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T225721Z-64638/public-fixtures-quality",
+        "public_photo_count": 100,
+        "base_original_checksum_count": 102,
+        "large_24mp_generated": false,
+        "case_profiles": [],
+        "extra_public_photo_count": 0,
+        "extra_original_checksum_count": 0,
+        "original_checksum_count": 102
+      },
+      "results": [
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 3702,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 3531,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 3451,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    },
+    "final-native": {
+      "path": "build-verify/ux-daily-culling-final-native/UX_REPORT.json",
+      "sha256": "6182441bc78949896fa52be31d7dba68c80ee879a21d85e6f0dc66d41832c875",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "baa08ca26020bd3de33aea58ebe9bfc4423796e6",
+        "worktree_dirty": true,
+        "source_tree_sha256": "44dfb58a6985e44158ee894837eaeecba9f804983eac0800fbad14fba2aaf4a1",
+        "test_executable_sha256": "a0cc8a0b38e514ad58192f49d3f9083419c773a7a83b8a341ca72e12467086bd",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "a0cc8a0b38e514ad58192f49d3f9083419c773a7a83b8a341ca72e12467086bd"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "PASS": 3
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "baa08ca26020bd3de33aea58ebe9bfc4423796e6",
+        "reason": ""
+      },
+      "fixture_profile": {
+        "directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T225735Z-64625/public-fixtures-quality",
+        "public_photo_count": 100,
+        "base_original_checksum_count": 102,
+        "large_24mp_generated": false,
+        "case_profiles": [],
+        "extra_public_photo_count": 0,
+        "extra_original_checksum_count": 0,
+        "original_checksum_count": 102
+      },
+      "results": [
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 5111,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 4948,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 4840,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    }
+  },
+  "history": [
+    "Initial 3/3 failed because count arrived before the asynchronous identity page. The adapter now waits for the real ID page.",
+    "Next 3/3 failed because consecutive searches both return ten rows; equal count cannot prove the new query completed. Wait for exact expected IDs.",
+    "Next 1/1 failed because filter activation schedules its model reload. Filter/collection checkpoints now wait for exact expected IDs, with unchanged driver and timeouts.",
+    "Corrected single run and final 3/3 offscreen + 3/3 Cocoa/Metal passed. No product changes or acceptance relaxation."
+  ],
+  "checks": {
+    "ux_build": "PASS",
+    "affected_ctest": "19 PASS",
+    "runner_units": 46,
+    "quality_policy_units": 12,
+    "format": "PASS",
+    "mandatory_affected_tidy": "PASS; nonblocking diagnostics retained",
+    "graph": {
+      "nodes": 7976,
+      "edges": 20826,
+      "self_loops": 5,
+      "dangling_endpoints": 0,
+      "exact_duplicates": 0
+    },
+    "logs": {
+      ".tools/daily-culling-build.log": "3f6ac6a6fcc4348d0f060550d492399cfca2baa8aca8b0adfa790197db9d3f2f",
+      ".tools/daily-culling-page-build.log": "d6b6e374ab075cd0f8498b58a6f588cca3c481b486f586b7cd88edcbb07c1d6d",
+      ".tools/daily-culling-search-build.log": "27acb18dce18c91cde9981045f6e724b6adc4e560ab8f4fabfe9466185d4c108",
+      ".tools/daily-culling-filter-build.log": "82af99514b1c69e9f8407a4df808a847b3e9ee4a231bca90dfa7319044c667e8",
+      ".tools/daily-culling-ctest.log": "cbae0bc398ebfe1e81bf8ebfe9441a66538b63a96e2e8704dc8e9e5636292053",
+      ".tools/daily-culling-policy.log": "6e0330017bfaee78956b7d20766fa9f65ca3d928869dc1abb516cd5b6f9425f8",
+      ".tools/daily-culling-runner.log": "90e04fd734a80d0451a4c82955c2076cf252041a8abdc762267abd76f77eb58e",
+      ".tools/daily-culling-final-tidy.log": "5db5d5d17a04c43c2a639afca4c3400db6d7a03465286cb7fc5023aa3d3d45f6",
+      ".tools/daily-culling-graph-diagnostics.log": "46e700db8a062b3fe3b90337d5711e7f405d556d1977a8b237d49d7bf25d89c6"
+    }
+  },
+  "limits": [
+    "Generated images exercise workflow/data/pixel correctness; no photographic quality or large-catalog performance claim.",
+    "Import starts at declared source-selection boundary, not native picker navigation.",
+    "Installed bundle and complete golden-suite invariants remain separate."
+  ],
+  "unadapted_applicable": {
+    "total": 307,
+    "blocking": 22
+  }
+}

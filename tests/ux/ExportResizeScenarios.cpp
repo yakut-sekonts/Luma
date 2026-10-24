@@ -179,8 +179,9 @@ void importOwned(Context &c, const QStringList &sources) {
     QList<QUrl> urls;
     for (const auto &source : sources)
         urls.append(QUrl::fromLocalFile(source));
-    require(c.driver->object("library.pane")->setProperty("sources", QVariant::fromValue(urls)),
-            "Owned chooser-result boundary rejected source URLs");
+    require(
+        c.driver->object("library.importDialog")->setProperty("sources", QVariant::fromValue(urls)),
+        "Owned chooser-result boundary rejected source URLs");
     c.driver->log({{"action", "fixture_file_chooser_result"},
                    {"source_count", 2},
                    {"native_chooser_exercised", false}});

@@ -6,14 +6,19 @@ namespace ux {
 namespace {
 void pixelsReady(Context &c) {
     const auto expected = fixtureReference(c);
-    c.driver->wait(
-        [&] {
-            const auto *preview = c.driver->item("develop.preview");
-            return preview->isVisible() && preview->property("status").toInt() == 1 &&
-                   preview->property("source").toUrl().toString() == c.editor.previewUrl() &&
-                   c.provider->requestImage({}, nullptr, {}) == expected;
-        },
-        "preset document pixels ready");
+    try {
+        c.driver->wait(
+            [&] {
+                const auto *preview = c.driver->item("develop.preview");
+                return preview->isVisible() && preview->property("status").toInt() == 1 &&
+                       preview->property("source").toUrl().toString() == c.editor.previewUrl() &&
+                       c.provider->requestImage({}, nullptr, {}) == expected;
+            },
+            "preset document pixels ready");
+    } catch (...) {
+        recordPreviewDifference(c, expected, "preset document pixels ready");
+        throw;
+    }
 }
 void undoRedo(Context &c, const luma::EditDocument &before, const luma::EditDocument &after) {
     c.driver->click("main.undoButton");

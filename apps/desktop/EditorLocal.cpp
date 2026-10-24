@@ -80,6 +80,8 @@ void EditorController::setLocalMode(bool value) {
         return;
     endEdit();
     if (value) {
+        setRetouchMode(QStringLiteral("off"));
+        cancelAI();
         setCropMode(false);
         closeTransformTool();
         targetedTool_ = QStringLiteral("none");
@@ -253,7 +255,8 @@ bool EditorController::beginLocalGesture(int handle, double x, double y, bool pr
         const auto &selected =
             localGeometry(history_.current().localMasks[static_cast<std::size_t>(localIndex())]);
         if (selected.shape == luma::MaskShape::color ||
-            selected.shape == luma::MaskShape::luminance)
+            selected.shape == luma::MaskShape::luminance ||
+            selected.shape == luma::MaskShape::bitmap)
             return false;
         // Only an existing gradient handle may use the expanded overlay.
         // Brush, range sampling and a new gradient retain photo/coverage bounds.

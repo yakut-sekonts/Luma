@@ -1,5 +1,55 @@
 # Native UX regression
 
+Official `UX-P06-GPU-002` imports one neutral 256×192 PNG and uses actual Settings
+clicks to compare CPU and GPU preview buffers and completed Image-node readbacks.
+A UX-only `MetalPreviewProbe` forwards to the exact controller-created native
+accelerator, counts genuine completions and compares every returned linear sample
+with the CPU pipeline at the existing `2e-5 + 2e-5 * abs(reference)` tolerance.
+CPU fallback, missing buffers, nonfinite samples or extra GPU calls while disabled
+fail. Final CPU samples are exact; GPU/scene RGB8 allows one existing quantization
+step and alpha remains exact. Saved document/revision/identity, selection/history
+and original hashes remain unchanged. The observer never changes pixels or GPU
+eligibility. Shipping isolation includes local as well as global observer symbols.
+This bounded neutral check does not qualify arbitrary RAW/edits, GPU failures,
+display transitions or performance; observation adds CPU work in the worker.
+
+Official `UX-P06-LRU-002` checks the actual thumbnail provider's 512 MiB disk cap
+with two owned photos and two 256 MiB sparse cache entries (less than 1 MiB physical
+allocation each). Cold insertion and the first warm hit on a recreated real
+provider must evict the oldest entry, retain the newer/current JPEGs and preserve
+a non-JPEG marker. The second photo has never appeared in QML: a real successful
+worker/texture response while its original is hidden rules out Qt pixmap reuse
+and regeneration. Actual filters and scene pixels, saved revisions/documents,
+original hashes and JPEG bytes are checked. Sparse entries are cleaned on failure
+as well as success. This is bounded disk accounting; it does not qualify RSS/VRAM,
+whole-app restart, multi-process cache concurrency or a physical 512 MiB workload.
+
+Official `UX-P09-RLK-001/002/003/004/006/007` use three owned PNGs with Unicode
+paths and a two-member collection. Actual UI saves Exposure and descriptive
+metadata, moves one original or its parent tree, checks Missing badges, then
+drives Locate Original/Folder and reopens the new path. File/folder chooser URLs
+are explicit fixture boundaries; native picker navigation is not qualified.
+The folder fixture sets `currentFolder` before opening the actual dialog because
+Cocoa does not select a different directory through an already open panel's
+`selectedFolder` setter. Returned local URLs are logged and must resolve to the
+exact owned canonical target before the production accepted handler runs.
+A same-name/same-size/different-hash candidate must fail without any mutation,
+then a valid candidate must succeed. Exact document/revision/identity, saved
+metadata, collection, selection, history and source hashes are preserved. Preview
+pixels after reopening are checked against an independent CPU reference. The
+missing-only case restores the folder and moves a nested file again to verify
+watch rearming. Three repeats run in shared CI; RLK001/002/003/006 are blocking.
+These bounded checks do not cover network volumes, eject/remount, watcher-limit
+saturation, process kill during relink or large-catalog latency.
+
+P06-MEM-001/002 exercise warning/critical and normal recovery through the real
+EditorController GUI handler. The UX-only friend probe stops and drains OS
+notifications on an empty owned controller so host events cannot interleave with
+the prescribed sequence. Actual UI zoom, full/Fit CPU pixels, three reclaimable
+cache budgets, document/history/catalog and original hashes are checked. This
+is controlled application recovery, not OS event delivery, RSS or stress
+qualification. The same scenarios run on offscreen/software and Cocoa/Metal.
+
 This separate Qt Test executable loads production Main.qml and the real controllers.
 It sends real clicks, drags, keys and ordinary wheel events. A native file-panel
 selection may be prepared as a fixture boundary; this does not qualify the native
@@ -457,3 +507,50 @@ python3 tests/ux/run_localized_dialog_regression.py --build build-verify --runs 
 Both workflows retain the binding ledger, input trace and 32 screenshots per
 repeat. This supplemental domain does not register VIS007/VIS008 or qualify
 every product surface, native chooser, translation meaning or physical scanout.
+
+
+Official `UX-P09-META-001` displays all six capture-data fields from one dedicated
+128×96 DNG with an EXIF IFD, then saves/reopens all nine supported descriptive
+fields. A real queued metadata completion is held while Escape, workspace
+navigation and Library selection run; the original result must deliver without
+reopening the dismissed dialog. This is a completion-boundary test, not a slow
+filesystem or large-catalog benchmark. The generic Lens/Building fixtures keep
+their previous bytes; only this case enables the DNG generator's EXIF IFD option.
+
+Official `UX-P09-META-006` selects three of four photos and uses the actual Rating,
+Flag and Label controls. For each operation the test VFS holds the first successful
+catalog write, independently reads the old snapshot, and checks that PhotoCards
+do not expose uncommitted values. `SQLITE_FULL` on a subsequent write must preserve
+all metadata/revisions and show an error. A retry commits all selected rows exactly
+once and preserves the unselected control, original hashes, Develop state/history
+and sidecar absence. This covers implemented catalog batch fields; crash recovery
+and multi-file XMP publication have separate cases and remain unqualified.
+
+Both adapters are in the blocking CI subset and support Cocoa/Metal and offscreen
+software runs. Bounded fixture routing and independent TIFF/EXIF decoding are
+registered as `ux-metadata-display-fixture-accounting` in CTest.
+# Merge workflow qualification — 2026-10-23
+
+`MergeScenarios.cpp` and isolated `merge_fixtures.py` cover MRG001/003/004/005/
+006/009/010, HDR001/009, PAN001/002/004, ALG002 and FLT002. Actual UI clicks create
+HDR/Panorama jobs. A UX-only friend copies their genuine JobHandle; terminal state
+is required before cancellation cleanup is asserted. Real catalog writes are
+held through the existing owned SQLite VFS, after decode/alignment/encoding.
+Shipping symbol isolation rejects the probe in the distributed executable.
+
+EXIF bracket and exact overlapping crops are deterministic, owned and hash
+protected. Independent TIFF/IEEE Float32 and sRGB scene oracles check storage,
+dynamic range, source preservation and panorama content. Source URLs are declared
+picker fixtures; these tests do not qualify native chooser navigation.
+
+Final results: 42 offscreen and 14 Cocoa/Metal DPR2 PASS. Original failures,
+fixture corrections, intermediate HDR rejection and retained limitations are in
+[`merge-workflows.json`](../../docs/qualification/2026-10-23/merge-workflows.json).
+
+PAN012/FLT001 additionally run as distinct prepare/verify processes. A successful
+merge is edited, saved and closed through the UI. The next process verifies the
+complete document, exact original/Float DNG hashes, decoded HDR range, independent
+preview and continued edit/Undo behavior. Six offscreen and two Cocoa/Metal DPR2
+paired runs pass, with all individual stage results retained in
+[`merge-restart.json`](../../docs/qualification/2026-10-23/merge-restart.json).
+These adapters do not imply crash/kill recovery coverage.

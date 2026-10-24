@@ -1,0 +1,90 @@
+{
+  "status": "HISTORICAL_FAILURE",
+  "run": 40022592049,
+  "source_commit": "8c4ab32c4bb85c879e3db079c26ceb78c58c858e",
+  "summary": {
+    "SKIPPED": 34,
+    "PASS": 351,
+    "FAIL": 12,
+    "NOT_IMPLEMENTED": 31
+  },
+  "report_sha256": "2834c131e26eb34f835c8ae482e138c9165ec63541b2c0a41dcb81d615007e6e",
+  "artifact": 12535081036,
+  "artifact_sha256": "d553a4beca38d25632c5f2b8f58d02e702182e3e612bbd83e8c11487d26e5c2b",
+  "full_clang_tidy": "PASS",
+  "failures": [
+    {
+      "id": "UX-P06-GPU-002",
+      "status": "FAIL",
+      "message": "Neutral preview did not complete actual Metal within the linear-light budget",
+      "child_returncode": 1
+    },
+    {
+      "id": "UX-P06-GPU-002",
+      "status": "FAIL",
+      "message": "Neutral preview did not complete actual Metal within the linear-light budget",
+      "child_returncode": 1
+    },
+    {
+      "id": "UX-P06-GPU-002",
+      "status": "FAIL",
+      "message": "Disabled Metal still executed the accelerator",
+      "child_returncode": 1
+    },
+    {
+      "id": "UX-P07-DNS-001",
+      "status": "FAIL",
+      "message": "Child exited -10 (SIGBUS)",
+      "child_returncode": -10
+    },
+    {
+      "id": "UX-P07-DNS-001",
+      "status": "FAIL",
+      "message": "Child exited -10 (SIGBUS)",
+      "child_returncode": -10
+    },
+    {
+      "id": "UX-P07-DNS-001",
+      "status": "FAIL",
+      "message": "Child exited -10 (SIGBUS)",
+      "child_returncode": -10
+    },
+    {
+      "id": "UX-P07-DNS-002",
+      "status": "FAIL",
+      "message": "Child exited -10 (SIGBUS)",
+      "child_returncode": -10
+    },
+    {
+      "id": "UX-P07-DNS-002",
+      "status": "FAIL",
+      "message": "Child exited -10 (SIGBUS)",
+      "child_returncode": -10
+    },
+    {
+      "id": "UX-P07-DNS-002",
+      "status": "FAIL",
+      "message": "Child exited -10 (SIGBUS)",
+      "child_returncode": -10
+    },
+    {
+      "id": "UX-P07-DNS-008",
+      "status": "FAIL",
+      "message": "Child exited -10 (SIGBUS)",
+      "child_returncode": -10
+    },
+    {
+      "id": "UX-P07-DNS-008",
+      "status": "FAIL",
+      "message": "Child exited -10 (SIGBUS)",
+      "child_returncode": -10
+    },
+    {
+      "id": "UX-P07-DNS-008",
+      "status": "FAIL",
+      "message": "Child exited -10 (SIGBUS)",
+      "child_returncode": -10
+    }
+  ],
+  "interpretation": "Old 8c4ab32 predates the joined inference stack and settled render fixes. Current full run 40034163108 on 7d66d83 has passed photographic Denoise/runtime checks and is running bounded blocking UX; no current full PASS claimed."
+}

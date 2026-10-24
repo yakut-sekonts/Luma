@@ -40,6 +40,7 @@ class PresetController final : public QObject {
     std::optional<luma::DevelopPreset> copiedSettings() const {
         return copied_;
     }
+    Q_INVOKABLE QString importSnapshot(const QString &id);
     Q_INVOKABLE bool refresh();
     Q_INVOKABLE bool save(const QString &id, const QString &name, const QString &folder, int groups,
                           bool captureCurrent);

@@ -8,7 +8,7 @@ std::vector<LocalMask> readLocalMasks(sqlite3 *db, const std::string &assetID) {
                         "edit_local_masks WHERE asset_id=?1");
     query.text(1, assetID);
     if (!query.row() || query.string(0) != "text" || query.integer(1) < 1 ||
-        query.integer(1) > 1048576)
+        query.integer(1) > 16 * 1048576)
         throw std::runtime_error("Missing or invalid local mask document.");
     const auto text = query.string(2);
     if (static_cast<std::int64_t>(text.size()) != query.integer(1))

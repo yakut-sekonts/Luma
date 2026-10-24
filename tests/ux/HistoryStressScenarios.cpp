@@ -1,3 +1,4 @@
+#include "core/render/DevelopPipeline.h"
 #include "tests/ux/UxContext.h"
 #include "tests/ux/UxPixels.h"
 #include <QElapsedTimer>
@@ -80,11 +81,20 @@ bool pixelsMatch(Context &c, const QImage &expected) {
     auto *preview = c.driver->item("develop.preview");
     return preview->isVisible() && preview->property("status").toInt() == 1 &&
            preview->property("source").toUrl() == c.editor.previewUrl() &&
-           c.provider->requestImage({}, nullptr, {}) == expected;
+           previewPixelsAgree(
+               c.provider->requestImage({}, nullptr, {}), expected,
+               c.editor.metalPreview() &&
+                   luma::DevelopPipeline(c.editor.currentSettings()).gpuCompatible());
 }
 void waitPixels(Context &c, const QString &reason) {
     const auto expected = expectedPixels(c);
-    c.driver->wait([&] { return pixelsMatch(c, expected); }, reason);
+    try {
+        c.driver->wait([&] { return pixelsMatch(c, expected); }, reason);
+    } catch (...) {
+        recordPreviewDifference(c, expected,
+                                "History/slider CPU reference: Metal RGB <= 1; CPU/alpha exact");
+        throw;
+    }
 }
 struct ReleaseWrites {
     SqliteFault &fault;

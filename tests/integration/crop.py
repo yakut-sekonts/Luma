@@ -10,6 +10,7 @@ import tempfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "assets"))
 from generate_dng import create_dng
+from catalog_fixtures import remove_post_v11_features
 
 from develop import png_info, tiff_info
 cli = Path(sys.argv[1])
@@ -48,6 +49,7 @@ with tempfile.TemporaryDirectory(prefix="luma-crop-") as temporary:
     run("export", base)
     with sqlite3.connect(catalog) as db:
         db.execute("PRAGMA foreign_keys=OFF")
+        remove_post_v11_features(db)
         db.execute("DROP TABLE edit_local_masks")
         db.execute("DROP TRIGGER initialize_local_masks")
         db.execute("CREATE TABLE old_edits AS SELECT asset_id, 5 AS schema_version, exposure, temperature, tint, custom_wb, contrast, highlights, shadows, whites, blacks, vibrance, saturation, enabled & 16383 AS enabled, curve_shadows, curve_darks, curve_lights, curve_highlights, advanced_saved, sharpen_amount, sharpen_radius, sharpen_detail, sharpen_masking, noise_luminance, noise_luminance_detail, noise_luminance_contrast, noise_color, noise_color_detail, noise_color_smoothness, revision, updated_at FROM edit_documents")
@@ -60,7 +62,7 @@ with tempfile.TemporaryDirectory(prefix="luma-crop-") as temporary:
                     for table in ("edit_curve_points", "edit_hsl_bands")]
     assert run("restore") == before, "Migration changed existing settings/selection"
     with sqlite3.connect(catalog) as db:
-        assert db.execute("PRAGMA user_version").fetchone()[0] == 11
+        assert db.execute("PRAGMA user_version").fetchone()[0] == 21
         assert db.execute("SELECT schema_version,crop_x,crop_y,crop_width,crop_height,crop_angle,crop_aspect,crop_quarter_turns,crop_flip_h,crop_flip_v FROM edit_documents").fetchone() == (8,0,0,1,1,0,0,0,0,0)
         assert db.execute("SELECT revision,updated_at FROM edit_documents").fetchone() == revision
         assert db.execute("SELECT rating FROM assets").fetchone()[0] == 4
@@ -122,6 +124,7 @@ with tempfile.TemporaryDirectory(prefix="luma-crop-") as temporary:
     # A failed migration must retain the entire old catalog, including its version.
     with sqlite3.connect(catalog) as db:
         db.execute("PRAGMA foreign_keys=OFF")
+        remove_post_v11_features(db)
         db.execute("CREATE TABLE bad_edits AS SELECT asset_id, 5 AS schema_version, 9.0 AS exposure, temperature, tint, custom_wb, contrast, highlights, shadows, whites, blacks, vibrance, saturation, enabled & 16383 AS enabled, curve_shadows, curve_darks, curve_lights, curve_highlights, advanced_saved, sharpen_amount, sharpen_radius, sharpen_detail, sharpen_masking, noise_luminance, noise_luminance_detail, noise_luminance_contrast, noise_color, noise_color_detail, noise_color_smoothness, revision, updated_at FROM edit_documents")
         db.execute("DROP TABLE edit_documents")
         db.execute("ALTER TABLE bad_edits RENAME TO edit_documents")

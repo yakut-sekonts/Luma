@@ -2,6 +2,7 @@
 #include "apps/shared/PresetStore.h"
 #include "core/catalog/Catalog.h"
 #include "core/render/CpuRenderer.h"
+#include "tests/ux/ThumbnailResponseTrace.h"
 #include "tests/ux/UxContext.h"
 #include "tests/ux/UxPixels.h"
 #include <QBuffer>
@@ -53,9 +54,11 @@ QString cachePath(Context &c, const luma::AssetSnapshot &snapshot) {
     const auto &asset = snapshot.asset;
     const auto encoded =
         luma::encodePreset({"Thumbnail", {}, asset.edits, luma::allSettingsGroups});
-    const auto identity = QByteArray::fromStdString(asset.checksum) + "|" +
-                          QByteArray::number(snapshot.revision) + "|" + encoded + "|local-v2|" +
-                          QByteArray::fromStdString(luma::encodeLocalMasks(asset.edits.localMasks));
+    const auto identity =
+        QByteArray::fromStdString(asset.checksum) + "|" + QByteArray::number(snapshot.revision) +
+        "|" + encoded + "|local-v2|" +
+        QByteArray::fromStdString(luma::encodeLocalMasks(asset.edits.localMasks)) + "|retouch-v1|" +
+        QByteArray::fromStdString(luma::encodeRetouch(asset.edits.retouch));
     const auto fingerprint = QCryptographicHash::hash(identity, QCryptographicHash::Sha256).toHex();
     return c.catalogFile + ".luma-cache/thumbnails/" + QString::fromLatin1(fingerprint) +
            "-edited-v4.jpg";
@@ -349,7 +352,7 @@ Rows importHidden(Context &c, int count) {
                 "Cannot copy private thumbnail original");
         sources.push_back(QUrl::fromLocalFile(destination));
     }
-    require(d.object("library.pane")->setProperty("sources", QVariant::fromValue(sources)),
+    require(d.object("library.importDialog")->setProperty("sources", QVariant::fromValue(sources)),
             "Cannot supply the file-selection result to the actual Import dialog");
     d.click("library.importButton");
     d.wait([&] { return d.object("library.importDialog")->property("opened").toBool(); },
@@ -730,6 +733,149 @@ void boundedRetry(Context &c) {
                {"scene_mean_rgb_tolerance", 4},
                {"cache_pixels_tolerance", 0}});
 }
+struct CacheCapacityFixture {
+    std::filesystem::path older, newer;
+    explicit CacheCapacityFixture(const std::filesystem::path &directory)
+        : older(directory / "owned-older.jpg"), newer(directory / "owned-newer.jpg") {}
+    ~CacheCapacityFixture() {
+        std::error_code ignored;
+        std::filesystem::remove(older, ignored);
+        std::filesystem::remove(newer, ignored);
+    }
+    void seed() {
+        const auto now = std::filesystem::file_time_type::clock::now();
+        int hours = 48;
+        for (const auto &path : {older, newer}) {
+            require(!std::filesystem::exists(path), "Owned cache capacity fixture already exists");
+            QFile file(QString::fromStdString(path.string()));
+            require(file.open(QIODevice::WriteOnly | QIODevice::NewOnly) &&
+                        file.seek(256LL * 1024 * 1024 - 1) && file.write("\0", 1) == 1,
+                    "Cannot create sparse cache capacity fixture");
+            file.close();
+            struct stat info{};
+            require(::stat(path.c_str(), &info) == 0 && info.st_size == 256LL * 1024 * 1024 &&
+                        info.st_blocks * 512 < 1024 * 1024,
+                    "Cache capacity fixture must be sparse, not a physical 256 MiB write");
+            std::filesystem::last_write_time(path, now - std::chrono::hours(hours));
+            hours -= 24;
+        }
+    }
+};
+void boundedThumbnailCache(Context &c) {
+    auto &d = *c.driver;
+    const auto rows = importHidden(c, 2);
+    const auto baseline = freeze(c, rows);
+    const auto &saved = baseline.front();
+    const auto cached = cachePath(c, saved);
+    const auto directory = std::filesystem::path(QFileInfo(cached).absolutePath().toStdString());
+    std::filesystem::create_directories(directory);
+    require(std::filesystem::canonical(directory).string().starts_with(
+                std::filesystem::canonical(c.root.toStdString()).string() + '/'),
+            "Cache capacity fixture escaped its owned root");
+    const auto marker = QString::fromStdString((directory / "preserved.txt").string());
+    {
+        QFile file(marker);
+        require(file.open(QIODevice::WriteOnly | QIODevice::NewOnly) && file.write("preserve") == 8,
+                "Cannot create unrelated cache marker");
+    }
+    constexpr std::uintmax_t budget = 512ULL * 1024 * 1024;
+    auto logicalBytes = [&] {
+        std::uintmax_t total = 0;
+        for (const auto &entry : std::filesystem::directory_iterator(directory))
+            if (entry.is_regular_file() && entry.path().extension() == ".jpg")
+                total += entry.file_size();
+        return total;
+    };
+    auto showOne = [&](const luma::LibraryItem &row) {
+        d.type("library.search", QString::fromStdString(row.filename));
+        d.wait([&] { return !c.library.loading() && c.library.count() == 1; },
+               "Actual filename filter exposes one cache fixture asset");
+        auto *result = d.item(c.card(0));
+        require(result->property("assetID").toString().toStdString() == row.id,
+                "Cache fixture filter exposed another asset");
+        return result;
+    };
+    auto bounded = [&](const CacheCapacityFixture &fixture, const char *phase,
+                       const QString &currentCache) {
+        const auto size = logicalBytes();
+        d.log({{"action", "thumbnail_disk_capacity"},
+               {"phase", phase},
+               {"budget_bytes", static_cast<qint64>(budget)},
+               {"logical_bytes", static_cast<qint64>(size)},
+               {"oldest_removed", !std::filesystem::exists(fixture.older)},
+               {"newer_preserved", std::filesystem::exists(fixture.newer)}});
+        require(size <= budget && !std::filesystem::exists(fixture.older) &&
+                    std::filesystem::exists(fixture.newer) && QFileInfo(currentCache).isFile() &&
+                    bytes(marker) == "preserve",
+                QStringLiteral("Thumbnail disk cache exceeds its bound or evicts wrong data: ") +
+                    phase);
+    };
+    QPointer<QQuickItem> card;
+    {
+        CacheCapacityFixture capacity(directory);
+        capacity.seed();
+        require(logicalBytes() == budget, "Cold capacity fixture must start exactly at its cap");
+        card = showOne(rows.front());
+        d.wait([&] { return card && ready(card); }, "Cold thumbnail renders after cache eviction");
+        bounded(capacity, "cold-render", cached);
+        cardPixels(c, card, saved);
+        invariant(c, baseline, saved);
+    }
+    const auto &warm = baseline.back();
+    const auto warmCache = cachePath(c, warm);
+    // Asset B has never appeared in QML, so its first Image cannot reuse Qt's
+    // in-memory pixmap. Seed a real persisted JPEG with the independent oracle.
+    {
+        const auto jpeg = thumbnailJPEG(warm);
+        QSaveFile file(warmCache);
+        require(file.open(QIODevice::WriteOnly) && file.write(jpeg) == jpeg.size() && file.commit(),
+                "Cannot prepare known-valid persisted thumbnail cache input");
+    }
+    const auto cachedHash = hash(warmCache);
+    d.type("library.search", "no-such-cache-capacity-fixture");
+    d.wait([&] { return !c.library.loading() && c.library.count() == 0 && !card; },
+           "Actual search destroys the original thumbnail delegate");
+    // Recreate the genuine engine provider at an idle boundary to exercise a
+    // persisted cache on reopening. This is not a full process-restart test.
+    c.engine.removeImageProvider("thumbnail");
+    auto *reopened = new ThumbnailProvider(c.catalogFile.toStdString());
+    c.engine.addImageProvider("thumbnail", reopened);
+    thumbnail_trace::Session responses(reopened->uxTraceSlot());
+    d.log({{"action", "actual_thumbnail_provider_recreated"},
+           {"scope", "persisted disk cache; not whole application restart"}});
+    {
+        CacheCapacityFixture capacity(directory);
+        capacity.seed();
+        require(logicalBytes() > budget, "Warm cache fixture must start above its cap");
+        // Without the original, a successful real provider response proves disk
+        // cache reuse. No fake provider or direct cache-trim invocation is used.
+        MissingOriginal missing(QString::fromStdString(warm.asset.path.string()));
+        card = showOne(rows.back());
+        d.wait([&] { return card && ready(card); }, "Warm cached thumbnail loads without original");
+        const auto observed = responses.snapshot();
+        require(!observed.diagnosticFailure && observed.requests.size() == 1 &&
+                    std::any_of(observed.events.begin(), observed.events.end(),
+                                [](const auto &e) {
+                                    return e.kind == thumbnail_trace::Kind::WorkerResultReady &&
+                                           e.successfulPixels;
+                                }) &&
+                    std::any_of(observed.events.begin(), observed.events.end(),
+                                [](const auto &e) {
+                                    return e.kind == thumbnail_trace::Kind::TextureFactoryCalled;
+                                }),
+                "Warm cache check did not observe an actual successful provider response");
+        bounded(capacity, "warm-cache-hit", warmCache);
+        require(hash(warmCache) == cachedHash, "Cache reuse changed the saved JPEG bytes");
+        missing.restore();
+        cardPixels(c, card, warm);
+        invariant(c, baseline, warm);
+    }
+    require(logicalBytes() == static_cast<std::uintmax_t>(QFileInfo(cached).size() +
+                                                          QFileInfo(warmCache).size()) &&
+                c.library.error().isEmpty() && !c.editor.hasPhoto() && c.warnings.isEmpty(),
+            "Cache capacity check left sparse ballast, changed Develop state or raised warnings");
+    luma::Catalog(c.catalogFile.toStdString()).verify();
+}
 } // namespace
 
 void thumbnailCardPixels(Context &c, QQuickItem *card, const luma::AssetSnapshot &saved) {
@@ -741,6 +887,8 @@ bool thumbnailRemainingScenario(Context &c, const QString &id) {
         invalidation(c);
     else if (id == "UX-LIB-006")
         boundedRetry(c);
+    else if (id == "UX-P06-LRU-002")
+        boundedThumbnailCache(c);
     else
         return false; // 004/005/RACE002 candidates and 007 gap must not become inferred PASS.
     return true;

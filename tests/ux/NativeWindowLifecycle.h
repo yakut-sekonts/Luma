@@ -3,6 +3,8 @@
 #include <memory>
 class QQuickWindow;
 namespace ux {
+// Passive failure evidence; never activates a window or changes OS settings.
+QJsonObject nativeActivationSnapshot(QQuickWindow &window);
 // Test-only AppKit window actions and independently observed native notifications.
 class NativeWindowLifecycle final {
   public:

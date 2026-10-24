@@ -1,0 +1,988 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "source_base": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+  "status": "BOUNDED_OFFSCREEN_AND_NATIVE_PASS",
+  "release_gate": "NOT_QUALIFIED",
+  "execution": "Local offscreen/software and separately authorized local Cocoa/Metal, Retina DPR 2. GITHUB_ACTIONS=true only selected the offscreen backend in those reports; no listed run is hosted execution.",
+  "source_hashes": {
+    "apps/desktop/qml/PhotoCard.qml": "7bad0bafd72fe07a92e39e9e9ea5667d091e9bd6e611e09ebddccb5d5e41710e",
+    "apps/desktop/qml/Main.qml": "796568032649e1207f091746b9defee7037c5dc6b76d34a19e3ed610b35b2fc5",
+    "tests/ux/LibraryScrollCandidate.cpp": "1cac36909558922738bdcc0f001d447255edf93dc3998c948fbbe81e625b8a15",
+    "tests/ux/KeyboardActivationCandidate.cpp": "0673d93fe77713fbfbb6a70d84142d1f76981b0288267a6428e9b710075d78a9"
+  },
+  "retained_runs": [
+    {
+      "classification": "original final-anchor failure",
+      "report": "build-verify/ux-filmstrip-before/UX_REPORT.json",
+      "report_sha256": "16c068c13caa638e5c2fae7025afc8db525b8d5a1cbdde7d45d1cd4cec303b42",
+      "summary": {
+        "FAIL": 1
+      },
+      "source_consistency": "PASS",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "worktree_dirty": true,
+        "source_tree_sha256": "5ea0d94b3d40ace3ad0c3957aa3ccb1e8e82316ce9cadacf6a97c4a63e160c9c",
+        "test_executable_sha256": "31f39ecefb4eb174e4ed89f34a321795db54d5a0d86ab2b571c1caa29b605bf9",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "31f39ecefb4eb174e4ed89f34a321795db54d5a0d86ab2b571c1caa29b605bf9"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "FAIL",
+          "message": "Filmstrip click/open moved its visible anchor or reset the model",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T113028Z-82235/CANDIDATE-FILMSTRIP-SELECTION-SCROLL/repeat-1",
+          "scroll_evidence_sha256": "74356b97f303e756da580d839f7bb43422d4b673bb77b6f346deaa95f5a30fe3"
+        }
+      ]
+    },
+    {
+      "classification": "retained intermediate property-observer failure",
+      "report": "build-verify/ux-filmstrip-library-after/UX_REPORT.json",
+      "report_sha256": "d7d7b0a5742cb37d3f63133c1d4f1e48054320789efd2544303a24172b77dac2",
+      "summary": {
+        "PASS": 3,
+        "FAIL": 3
+      },
+      "source_consistency": "PASS",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "worktree_dirty": true,
+        "source_tree_sha256": "11f37a028c2ceb0bd533eec3b22053b002c8f8f2053c7208796663954c9d0ae1",
+        "test_executable_sha256": "837b976836f556fceca558bb8d2e4fccce09bbd5671a35d80ff626eead68971d",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "837b976836f556fceca558bb8d2e4fccce09bbd5671a35d80ff626eead68971d"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T113226Z-82456/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-1",
+          "scroll_evidence_sha256": "ec834459dde6ed2fa3c7141db7b17c50ff0d51889c7db5e242623b334fcc7070"
+        },
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T113226Z-82456/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-2",
+          "scroll_evidence_sha256": "3158464e028b6241b496d91f21b21bc732e7ecafef8152542d5d5df174404ba3"
+        },
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T113226Z-82456/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-3",
+          "scroll_evidence_sha256": "b937466ec7faacbc560dad7bc8602ce48c2cd8217873e8224ee832b6627d61ca"
+        },
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "FAIL",
+          "message": "Filmstrip click transiently moved its viewport by more than one logical pixel",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T113226Z-82456/CANDIDATE-FILMSTRIP-SELECTION-SCROLL/repeat-1",
+          "scroll_evidence_sha256": "ec18172fd3d7b6a25848323ac5b07baceae5b82d41e1050eeef6b15cc2f4f99b"
+        },
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "FAIL",
+          "message": "Filmstrip click transiently moved its viewport by more than one logical pixel",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T113226Z-82456/CANDIDATE-FILMSTRIP-SELECTION-SCROLL/repeat-2",
+          "scroll_evidence_sha256": "425b3c585b8a6d943a277b78c255596de03e2b81ba4d8764efa016746d5a79f0"
+        },
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "FAIL",
+          "message": "Filmstrip click transiently moved its viewport by more than one logical pixel",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T113226Z-82456/CANDIDATE-FILMSTRIP-SELECTION-SCROLL/repeat-3",
+          "scroll_evidence_sha256": "5aff72daa75fde76d075982ad1030b4734c04ce3144ce5607619f4f21c617dfe"
+        }
+      ]
+    },
+    {
+      "classification": "retained Right-key navigation failure",
+      "report": "build-verify/ux-filmstrip-library-frame-after/UX_REPORT.json",
+      "report_sha256": "1868416fcabee182bd1da04c6df7f957567285e47374f7475f8619d0faed9391",
+      "summary": {
+        "PASS": 3,
+        "FAIL": 3
+      },
+      "source_consistency": "PASS",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "worktree_dirty": true,
+        "source_tree_sha256": "78e06307f9b04a9317bae4b3584a76732e7740de851e76be0e7c09988d77b1f0",
+        "test_executable_sha256": "4e7d253fceb84afb04252817d5f98e057258ea341356ba78a534092740d0e28c",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "4e7d253fceb84afb04252817d5f98e057258ea341356ba78a534092740d0e28c"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T113606Z-82891/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-1",
+          "scroll_evidence_sha256": "c62a004946d8f5ff58c810f9dfb05505833cb74ef654a7ef06c1728e418613af"
+        },
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T113606Z-82891/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-2",
+          "scroll_evidence_sha256": "f9249355d333cbe35e77e9e357647bbd9f2dec09eb35f4450e76454bca29c537"
+        },
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T113606Z-82891/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-3",
+          "scroll_evidence_sha256": "53b0e5dd49350885b6ffd718cb2b23c32d1bf0e0f1965d791e382decb7609a9a"
+        },
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "FAIL",
+          "message": "Timeout: Filmstrip Right-key current-item reveal completed",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T113606Z-82891/CANDIDATE-FILMSTRIP-SELECTION-SCROLL/repeat-1",
+          "scroll_evidence_sha256": "5e3dfb31ad01c14786c18615b90b4bfaec971330885cdea5d62458dcf0d881ec"
+        },
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "FAIL",
+          "message": "Timeout: Filmstrip Right-key current-item reveal completed",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T113606Z-82891/CANDIDATE-FILMSTRIP-SELECTION-SCROLL/repeat-2",
+          "scroll_evidence_sha256": "af6643e9535d73fe850fd4ed565ac83b420593a0a388f06eafa536c01b8d0511"
+        },
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "FAIL",
+          "message": "Timeout: Filmstrip Right-key current-item reveal completed",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T113606Z-82891/CANDIDATE-FILMSTRIP-SELECTION-SCROLL/repeat-3",
+          "scroll_evidence_sha256": "419c59a757369cc68ba3134bdcc3b26aa08159785d28ede6da91372c56888cc1"
+        }
+      ]
+    },
+    {
+      "classification": "retained keyboard geometry diagnostic failure",
+      "report": "build-verify/ux-filmstrip-key-diagnostic/UX_REPORT.json",
+      "report_sha256": "8140d23df58634a3d9917072a31dd1f7ff95460089335a111d0ab7aac8efd741",
+      "summary": {
+        "FAIL": 1
+      },
+      "source_consistency": "PASS",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "worktree_dirty": true,
+        "source_tree_sha256": "ee90c1848f8439e63926047e749b432ecf15bb0755e6c26e5e8f2406e0562c4f",
+        "test_executable_sha256": "93b2ddc6cb55cc8eaa2a2b6052c42ed62c97a6a994d82c9009afa739dc4a6a38",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "93b2ddc6cb55cc8eaa2a2b6052c42ed62c97a6a994d82c9009afa739dc4a6a38"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "FAIL",
+          "message": "Timeout: Filmstrip Right-key current-item reveal completed",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T113804Z-83288/CANDIDATE-FILMSTRIP-SELECTION-SCROLL/repeat-1",
+          "scroll_evidence_sha256": "fcc7a5c01aef7f136b6c81636398ca36d0c1dccc8667ecb4c4ab7423d08c6524"
+        }
+      ]
+    },
+    {
+      "classification": "accepted final grid/filmstrip retest",
+      "report": "build-verify/ux-filmstrip-navigation-after/UX_REPORT.json",
+      "report_sha256": "9308b33c82f0d28e27723dd19bced57f85644846d2b0c93b58ef22a04d085ebe",
+      "summary": {
+        "PASS": 6
+      },
+      "source_consistency": "PASS",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "worktree_dirty": true,
+        "source_tree_sha256": "25566fb3c997414be4ea0534da85ed7af9690a510b65fa74fe1adc34bd7a2242",
+        "test_executable_sha256": "07da9c0c5aeefd6af59aa5c46989a156a8f3d71518c2ebc5ee5db2863d8a56ba",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "07da9c0c5aeefd6af59aa5c46989a156a8f3d71518c2ebc5ee5db2863d8a56ba"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114328Z-83600/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-1",
+          "scroll_evidence_sha256": "e64551ad2ef42dc2876f6779f2344f72eb502d301bf33dd1efa29517e36c5cbe"
+        },
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114328Z-83600/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-2",
+          "scroll_evidence_sha256": "986e05fa8d75c832ad2272dfa6bd0c35a5acba715ede943cd5966616cec9d5b0"
+        },
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114328Z-83600/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-3",
+          "scroll_evidence_sha256": "968be86997fb7cd6c2663719859a0c581ecab223628013f535dd78b474a4b527"
+        },
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114328Z-83600/CANDIDATE-FILMSTRIP-SELECTION-SCROLL/repeat-1",
+          "scroll_evidence_sha256": "f2b8761a500d4609395726eea3cd16398e8bc7526c73735d59394482e45857d9"
+        },
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114328Z-83600/CANDIDATE-FILMSTRIP-SELECTION-SCROLL/repeat-2",
+          "scroll_evidence_sha256": "e236a4c114bfc6e2870287b476fbe3b98b049668cdda44050fdf2fb164ddd04a"
+        },
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114328Z-83600/CANDIDATE-FILMSTRIP-SELECTION-SCROLL/repeat-3",
+          "scroll_evidence_sha256": "3c369972f92021c80587d28b1dbdb0e531253acfb30d83a6d6d03cacaed0638e"
+        }
+      ]
+    },
+    {
+      "classification": "accepted final keyboard retest",
+      "report": "build-verify/ux-keyboard-navigation-final/UX_REPORT.json",
+      "report_sha256": "159dbfdebb92d45b1b47e23da7bf86f04cfb3ad120143d6b3add1c642ee5785b",
+      "summary": {
+        "PASS": 6
+      },
+      "source_consistency": "PASS",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "worktree_dirty": true,
+        "source_tree_sha256": "25566fb3c997414be4ea0534da85ed7af9690a510b65fa74fe1adc34bd7a2242",
+        "test_executable_sha256": "07da9c0c5aeefd6af59aa5c46989a156a8f3d71518c2ebc5ee5db2863d8a56ba",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "07da9c0c5aeefd6af59aa5c46989a156a8f3d71518c2ebc5ee5db2863d8a56ba"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114530Z-83910/CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION/repeat-1"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114530Z-83910/CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION/repeat-2"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114530Z-83910/CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION/repeat-3"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114530Z-83910/CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION/repeat-1"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114530Z-83910/CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION/repeat-2"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114530Z-83910/CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION/repeat-3"
+        }
+      ]
+    },
+    {
+      "classification": "accepted neighboring selection/scroll retest",
+      "report": "build-verify/ux-filmstrip-neighbors/UX_REPORT.json",
+      "report_sha256": "1fabc2b5af41188d4f80fc940e57cadcfb3ce84901b988426d667deac1658484",
+      "summary": {
+        "PASS": 9
+      },
+      "source_consistency": "PASS",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "worktree_dirty": true,
+        "source_tree_sha256": "25566fb3c997414be4ea0534da85ed7af9690a510b65fa74fe1adc34bd7a2242",
+        "test_executable_sha256": "07da9c0c5aeefd6af59aa5c46989a156a8f3d71518c2ebc5ee5db2863d8a56ba",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "07da9c0c5aeefd6af59aa5c46989a156a8f3d71518c2ebc5ee5db2863d8a56ba"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "UX-SEL-017",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114539Z-83897/UX-SEL-017/repeat-1"
+        },
+        {
+          "id": "UX-SEL-017",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114539Z-83897/UX-SEL-017/repeat-2"
+        },
+        {
+          "id": "UX-SEL-017",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114539Z-83897/UX-SEL-017/repeat-3"
+        },
+        {
+          "id": "UX-SEL-018",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114539Z-83897/UX-SEL-018/repeat-1"
+        },
+        {
+          "id": "UX-SEL-018",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114539Z-83897/UX-SEL-018/repeat-2"
+        },
+        {
+          "id": "UX-SEL-018",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114539Z-83897/UX-SEL-018/repeat-3"
+        },
+        {
+          "id": "UX-DSC-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114539Z-83897/UX-DSC-006/repeat-1"
+        },
+        {
+          "id": "UX-DSC-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114539Z-83897/UX-DSC-006/repeat-2"
+        },
+        {
+          "id": "UX-DSC-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114539Z-83897/UX-DSC-006/repeat-3"
+        }
+      ]
+    },
+    {
+      "classification": "accepted final native grid/filmstrip retest",
+      "report": "build-verify/ux-filmstrip-navigation-native/UX_REPORT.json",
+      "report_sha256": "ee5f40f5ac191eecd9b43fc0c3543cbe2979fbc381883efd917f024b80105c30",
+      "summary": {
+        "PASS": 6
+      },
+      "source_consistency": "PASS",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "worktree_dirty": true,
+        "source_tree_sha256": "061c25125c4ee8be179fefb76a3028168a51018baeeabba6a2845ff90ece1b72",
+        "test_executable_sha256": "07da9c0c5aeefd6af59aa5c46989a156a8f3d71518c2ebc5ee5db2863d8a56ba",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "07da9c0c5aeefd6af59aa5c46989a156a8f3d71518c2ebc5ee5db2863d8a56ba"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114916Z-84334/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-1",
+          "library-selection-scroll.json_sha256": "1d4cdfe8c60430379acc15a11f0b74ce19010f45297ccf42b4f27043efb32f7a"
+        },
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114916Z-84334/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-2",
+          "library-selection-scroll.json_sha256": "c8ccff6ce31262ee4b4f2d26ebbb8aa6f4f1a2bb5e32fb3886c0317e4ec7416f"
+        },
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114916Z-84334/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-3",
+          "library-selection-scroll.json_sha256": "6494723a5f90df6201522c3fe5ed7fb8cd5dbae903ed643a71947507d1ca1987"
+        },
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114916Z-84334/CANDIDATE-FILMSTRIP-SELECTION-SCROLL/repeat-1",
+          "library-selection-scroll.json_sha256": "fea2cd6f1feabde2c8c8205c33bd3eb5b5e093ba1a9e7a408d0fd8d65ff1436c"
+        },
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114916Z-84334/CANDIDATE-FILMSTRIP-SELECTION-SCROLL/repeat-2",
+          "library-selection-scroll.json_sha256": "c99a9c994a513e7ef342ffe122ccb71474086b396fb9a4e39870066d7e1a3f65"
+        },
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T114916Z-84334/CANDIDATE-FILMSTRIP-SELECTION-SCROLL/repeat-3",
+          "library-selection-scroll.json_sha256": "1ff61b81622619b5d7566e1f6aea20cd22cf0dfa4f9b01ad371490173768b870"
+        }
+      ]
+    },
+    {
+      "classification": "accepted final native keyboard retest",
+      "report": "build-verify/ux-keyboard-rebind-native-final/UX_REPORT.json",
+      "report_sha256": "6c084af4b56e51e9b0b50b46b9ca214b9433e005b369257b638f6da70c356344",
+      "summary": {
+        "PASS": 6
+      },
+      "source_consistency": "PASS",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "worktree_dirty": true,
+        "source_tree_sha256": "061c25125c4ee8be179fefb76a3028168a51018baeeabba6a2845ff90ece1b72",
+        "test_executable_sha256": "07da9c0c5aeefd6af59aa5c46989a156a8f3d71518c2ebc5ee5db2863d8a56ba",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "07da9c0c5aeefd6af59aa5c46989a156a8f3d71518c2ebc5ee5db2863d8a56ba"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115011Z-84305/CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION/repeat-1",
+          "keyboard-activation.json_sha256": "207294f47ba357a6bb15a76ef6585d79128b14a2caf8cabf531fc9cd4bf65c54"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115011Z-84305/CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION/repeat-2",
+          "keyboard-activation.json_sha256": "76c2efb44d0565a73d6e8c4684cbf19d5acd8069ebc3b64516e4a452d8425898"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115011Z-84305/CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION/repeat-3",
+          "keyboard-activation.json_sha256": "4afc677c6fa472b29e6838593777edffdd89bc0e68a2ab3403833e2950c60c4c"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115011Z-84305/CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION/repeat-1",
+          "keyboard-activation.json_sha256": "dab9e7adc11ed346ce690cd7997bb3d1998f3d7e04f5c676ac13096efcb636f6"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115011Z-84305/CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION/repeat-2",
+          "keyboard-activation.json_sha256": "632aa2d0cd35a3d7a06d5d506f7622e28262ff7c3029365b2657daaad9101432"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115011Z-84305/CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION/repeat-3",
+          "keyboard-activation.json_sha256": "b38125eee4d76e805bd081133469da44c16ff97b0793060413ac7d9535691868"
+        }
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "report": ".tools/scroll-control-prior-positioning/control.json",
+      "sha256": "0c3313db748daef95f68f6b45bb632a71a1bd8d5d5794d39b8dc95f979ee3722",
+      "result": {
+        "mode": "prior-positioning",
+        "returncode": 1,
+        "command": [
+          "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "--case",
+          "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "--root",
+          "/Users/semenkontsevoy/Documents/New project/Luma/.tools/scroll-control-prior-positioning/case",
+          "--fixtures",
+          "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T113028Z-82235/public-fixtures-supplemental",
+          "--qml",
+          "/Users/semenkontsevoy/Documents/New project/Luma/.tools/scroll-control-prior-positioning/qml"
+        ],
+        "binary_sha256": "07da9c0c5aeefd6af59aa5c46989a156a8f3d71518c2ebc5ee5db2863d8a56ba",
+        "modified_qml": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/scroll-control-prior-positioning/qml/PhotoCard.qml",
+        "qml_sha256": "cafdd4ebdd733f992985841d9c7720b63336796a9bfeb0a47211292180c7b9b5",
+        "scope": "Declared QML control only; not a production or native QA pass",
+        "message": "Filmstrip click/open moved its visible anchor or reset the model",
+        "control_status": "PASS"
+      }
+    },
+    {
+      "report": ".tools/scroll-control-delegate-recreation/control.json",
+      "sha256": "54223f334a760b59b5a12a5ffb88a5fcb6dccb16c5f5ac96553f612c79fec32f",
+      "result": {
+        "mode": "delegate-recreation",
+        "returncode": 0,
+        "command": [
+          "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "--case",
+          "CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION",
+          "--root",
+          "/Users/semenkontsevoy/Documents/New project/Luma/.tools/scroll-control-delegate-recreation/case",
+          "--fixtures",
+          "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T113701Z-83181/public-fixtures-supplemental",
+          "--qml",
+          "/Users/semenkontsevoy/Documents/New project/Luma/.tools/scroll-control-delegate-recreation/qml"
+        ],
+        "binary_sha256": "07da9c0c5aeefd6af59aa5c46989a156a8f3d71518c2ebc5ee5db2863d8a56ba",
+        "modified_qml": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/scroll-control-delegate-recreation/qml/LibraryPane.qml",
+        "qml_sha256": "8078edb95fe4d10967783eae96871ce8f9302b50b916558e4930ea013978bd93",
+        "scope": "Declared QML control only; not a production or native QA pass",
+        "card_instance_changes": 1,
+        "outcome": "CANDIDATE_ACTIVATION_REACHED_NOT_KEY015_QUALIFIED",
+        "control_status": "PASS"
+      }
+    }
+  ],
+  "explanations": [
+    "The supplied video shows Develop filmstrip resets; its visible version is 0.5.1. The earlier grid-only test did not cover that surface. No original executable identity or root-cause proof comes from the video.",
+    "The new horizontal test independently reproduced a 24.82 logical-pixel partial-card shift in current source. Mouse selection now restores contentX within the click handler.",
+    "The first corrected run still failed a property-notification oracle: currentIndex briefly changed and restored content inside one synchronous handler. The final oracle keeps that trace and separately requires nonempty pre-synchronization frame samples within one logical pixel, plus unchanged final anchor/offset and no model resets. The old positioning still fails this final oracle.",
+    "The next run exposed a real Right-key failure: currentIndex advanced 155 to 156 while contentX stayed 19578 and row156 remained outside the viewport. Explicit ListView Left/Right navigation now reveals its current item with Contain. Right and 12 bounded Left inputs are checked without opening another photo.",
+    "Hosted keyboard repeat3 held a deleted delegate, although actual forward/backward Tab reached the expected UUID. The observer now resolves the current UUID-matched card without focus/model mutation. A declared QML control recreates the delegate on selection and passes with one observed instance change.",
+    "The final authorized native run passes grid 3/3, filmstrip 3/3 and keyboard 6/6 on Cocoa/Metal, Retina DPR 2, with no QML warnings and intact original files. Both reports attest the same dirty worktree based on ff2bcb0; subsequent documentation-only changes do not make it a clean-commit run. Frame positions sample Qt scene synchronization, not physical display scanout or trackpad input."
+  ],
+  "remaining": [
+    "Physical wheel/trackpad, other sizes/sorts/filters and original RAW dataset",
+    "Full final QA, model boundary/RAW/resource qualification and signed distribution"
+  ]
+}

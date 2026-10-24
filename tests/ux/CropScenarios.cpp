@@ -127,10 +127,25 @@ bool cropScenario(Context &c, const QString &id) {
                     "Extreme custom Crop ratio was not applied");
             const auto frame = c.editor.cropState();
             const auto before = c.editor.currentSettings();
-            const QPointF start(frame["x"].toDouble(), frame["y"].toDouble());
+            const auto *area = d.item("cropDragArea");
+            // Window input is rounded to integer scene coordinates. Stay one
+            // logical pixel inside the item while still hitting its corner grip.
+            const QPointF start(std::max(frame["x"].toDouble(), 1. / area->width()),
+                                std::max(frame["y"].toDouble(), 1. / area->height()));
             const bool wide = before.crop.aspect > 1;
             const QPointF finish = start + (wide ? QPointF(.2, 0) : QPointF(0, .2));
-            d.drag("cropDragArea", start, finish);
+            d.press("cropDragArea", start);
+            require(d.object("cropDragArea")->property("pressed").toBool() &&
+                        d.object("cropOverlay")->property("dragMode").toString() == "lt",
+                    "Extreme Crop input did not acquire its actual top-left grip");
+            d.log({{"action", "extreme_crop_corner_press"},
+                   {"aspect", before.crop.aspect},
+                   {"frame", QJsonObject::fromVariantMap(frame)},
+                   {"pressed", d.object("cropDragArea")->property("pressed").toBool()},
+                   {"drag_mode", d.object("cropOverlay")->property("dragMode").toString()}});
+            for (int step = 1; step <= 12; ++step)
+                d.move("cropDragArea", start + (finish - start) * (step / 12.));
+            d.release("cropDragArea", finish);
             valid(c);
             const auto moved = c.editor.cropState();
             const auto dimension = wide ? "outputWidth" : "outputHeight";

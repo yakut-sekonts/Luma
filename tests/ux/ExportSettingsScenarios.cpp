@@ -80,7 +80,7 @@ void importPrivate(Context &c, const QStringList &paths) {
     for (const auto &path : paths)
         urls.append(QUrl::fromLocalFile(path));
     // Declared chooser-result fixture boundary; acceptance is the real Import button.
-    c.driver->object("library.pane")->setProperty("sources", QVariant::fromValue(urls));
+    c.driver->object("library.importDialog")->setProperty("sources", QVariant::fromValue(urls));
     c.driver->log(
         {{"action", "fixture_file_chooser_result"}, {"count", static_cast<qint64>(paths.size())}});
     c.driver->click("library.importButton");

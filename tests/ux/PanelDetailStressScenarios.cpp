@@ -153,7 +153,7 @@ void ownImport(Context &c) {
     }
     // Explicit chooser RESULT fixture setup; the production Import button accepts it.
     // This does not exercise or qualify the OS file chooser itself.
-    require(d.object("library.pane")->setProperty("sources", QVariant::fromValue(sources)),
+    require(d.object("library.importDialog")->setProperty("sources", QVariant::fromValue(sources)),
             "Private chooser-result fixture rejected its source URLs");
     d.log({{"action", "fixture_private_chooser_result"}, {"source_count", 3}});
     d.click("library.importButton");
@@ -396,8 +396,8 @@ void panelStress(Context &c, bool importing, const QString &id) {
     require(opened.isValid() && closed.isValid() && rejected.isValid() && accepted.isValid() &&
                 closingClick.isValid(),
             "Panel stress lacks observable production popup/button signals");
-    const auto sources = qmlValue(d.object("library.pane"), "sources");
-    const auto destination = qmlValue(d.object("library.pane"), "destination");
+    const auto sources = qmlValue(d.object("library.importDialog"), "sources");
+    const auto destination = qmlValue(d.object("library.importDialog"), "destination");
     const bool recursive = d.object("library.importRecursive")->property("checked").toBool();
     const bool duplicates = d.object("library.importDuplicates")->property("checked").toBool();
     QJsonArray measurements{sample(c, 0)};
@@ -413,14 +413,43 @@ void panelStress(Context &c, bool importing, const QString &id) {
         d.click(importing ? "library.importCancel" : "export.close");
         d.wait([&] { return !panel->property("visible").toBool() && closed.count() == cycle; },
                "stress panel fully closed");
+        const QJsonObject checks{
+            {"clicked_once", closingClick.count() == cycle},
+            {"opened_once", opened.count() == cycle},
+            {"accepted_empty", accepted.isEmpty()},
+            {"rejected_once", !importing || rejected.count() == cycle},
+            {"document", c.editor.currentSettings() == before.document},
+            {"undo", c.editor.canUndo() == before.undo},
+            {"redo", c.editor.canRedo() == before.redo},
+            {"import_idle", !c.library.importing()},
+            {"export_idle", !c.exporter.working()},
+            {"sources", qmlValue(d.object("library.importDialog"), "sources") == sources},
+            {"destination",
+             qmlValue(d.object("library.importDialog"), "destination") == destination},
+            {"recursive",
+             d.object("library.importRecursive")->property("checked").toBool() == recursive},
+            {"duplicates",
+             d.object("library.importDuplicates")->property("checked").toBool() == duplicates}};
+        for (auto check = checks.begin(); check != checks.end(); ++check)
+            if (!check.value().toBool()) {
+                writeJson(c.root + "/panel-stress-failure.json", {{"scenario", id},
+                                                                  {"cycle", cycle},
+                                                                  {"checks", checks},
+                                                                  {"opened", opened.count()},
+                                                                  {"closed", closed.count()},
+                                                                  {"clicked", closingClick.count()},
+                                                                  {"accepted", accepted.count()},
+                                                                  {"rejected", rejected.count()}});
+                break;
+            }
         require(
             closingClick.count() == cycle && opened.count() == cycle && accepted.isEmpty() &&
                 (!importing || rejected.count() == cycle) &&
                 c.editor.currentSettings() == before.document &&
                 c.editor.canUndo() == before.undo && c.editor.canRedo() == before.redo &&
                 !c.library.importing() && !c.exporter.working() &&
-                qmlValue(d.object("library.pane"), "sources") == sources &&
-                qmlValue(d.object("library.pane"), "destination") == destination &&
+                qmlValue(d.object("library.importDialog"), "sources") == sources &&
+                qmlValue(d.object("library.importDialog"), "destination") == destination &&
                 d.object("library.importRecursive")->property("checked").toBool() == recursive &&
                 d.object("library.importDuplicates")->property("checked").toBool() == duplicates,
             "Panel stress lost an actual Cancel/Close or changed form/document/history");

@@ -161,7 +161,7 @@ Fixture fixture(Context &c) {
     d.log({{"action", "declared_keyboard_activation_import_fixture_begin"},
            {"pointer_setup_inputs", true},
            {"native_chooser_exercised", false}});
-    require(d.object("library.pane")
+    require(d.object("library.importDialog")
                 ->setProperty("sources",
                               QVariant::fromValue(QList<QUrl>{QUrl::fromLocalFile(value.source)})),
             "Declared file-chooser result fixture rejected its single owned source");
@@ -214,10 +214,24 @@ void reproduce(Context &c, bool keypadOnly) {
     require(opens.isValid() && loads.isValid() && selected.isValid() && developed.isValid(),
             "Keyboard activation signals are not observable");
     QJsonArray trace, attempts;
+    int cardInstanceChanges = 0;
+    const auto resolveCard = [&] {
+        // A virtualized delegate may be replaced after import metadata settles.
+        // Observe the current UUID-matched card; never set focus or mutate the model.
+        auto *current = qobject_cast<QQuickItem *>(d.find("library.card." + known.id));
+        require(!current || (current->property("assetID").toString() == known.id &&
+                             inside(current, grid.data())),
+                "Keyboard observer found an unrelated card for the imported UUID");
+        if (card.data() != current) {
+            ++cardInstanceChanges;
+            card = current;
+        }
+    };
     bool reachedCard = false, reachedGrid = false;
     bool forwardClosed = false, backwardClosed = false;
     QString phase = "acceptance_begin";
     const auto observe = [&](const QString &label, bool afterActualTab = false) {
+        resolveCard();
         auto *focus = c.window->activeFocusItem();
         trace.append(QJsonObject{{"label", label},
                                  {"after_actual_tab", afterActualTab},
@@ -233,6 +247,7 @@ void reproduce(Context &c, bool keypadOnly) {
     };
     PointerAudit audit(c.window); // Installed only AFTER all declared setup pointer events.
     const auto evidence = [&](const QString &outcome) {
+        resolveCard();
         auto *preview = d.item("develop.preview");
         writeJson(
             c.root + "/keyboard-activation.json",
@@ -263,6 +278,7 @@ void reproduce(Context &c, bool keypadOnly) {
              {"forward_cycle_closed", forwardClosed},
              {"backward_cycle_closed", backwardClosed},
              {"card", itemState(card.data())},
+             {"card_instance_changes", cardInstanceChanges},
              {"grid", itemState(grid.data())},
              {"select_all_clicks", selected.count()},
              {"develop_clicks", developed.count()},
@@ -309,6 +325,7 @@ void reproduce(Context &c, bool keypadOnly) {
     };
     QSet<QString> tried;
     const auto tryCurrentAssetRoute = [&] {
+        resolveCard();
         auto *focus = c.window->activeFocusItem();
         QString route;
         if (focus && focus == grid.data())
@@ -497,7 +514,7 @@ void keyboardWorkflow(Context &c) {
     // The only input seam: the native file chooser's selected URL. Import itself,
     // selection, opening Develop, edits and export are all real keyboard UI input.
     require(
-        d.object("library.pane")
+        d.object("library.importDialog")
             ->setProperty("sources", QVariant::fromValue(QList<QUrl>{QUrl::fromLocalFile(source)})),
         "Keyboard workflow chooser-result fixture rejected");
     PointerAudit audit(c.window);

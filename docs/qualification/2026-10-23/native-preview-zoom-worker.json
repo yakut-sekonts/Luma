@@ -1,0 +1,3320 @@
+{
+  "schema": 1,
+  "date": "2026-10-23",
+  "base_commit": "bdea5bd51f4f9157428a77a5b04c16def15c89f5",
+  "release_status": "NOT_QUALIFIED",
+  "scope": "Native transient/preset/WB confirmation and background CPU oracle for zoom UX; no product implementation change",
+  "native_before_worker_change": {
+    "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-final-transient-preset-native/UX_REPORT.json",
+    "bytes": 18898,
+    "sha256": "d6fe6ea25ca9432411112f5b82b588a27115557a84d15aac0266c7e27ad188df",
+    "summary": {
+      "PASS": 5
+    },
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "bdea5bd51f4f9157428a77a5b04c16def15c89f5",
+      "worktree_dirty": false,
+      "source_tree_sha256": "0418d344d6904e5f31f95ee5fa240511692eb20045329d5b3eb0c86f549e2ee8",
+      "test_executable_sha256": "10a77e66fefc0d5503c63135d589f6225cbd557a79941691fcd8d1839e11b0ba",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "10a77e66fefc0d5503c63135d589f6225cbd557a79941691fcd8d1839e11b0ba"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": false,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "source_consistency": "PASS",
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "bdea5bd51f4f9157428a77a5b04c16def15c89f5",
+      "reason": ""
+    },
+    "release_gate": "NOT_QUALIFIED",
+    "original_hashes": "PASS",
+    "cases": [
+      {
+        "id": "UX-SLD-016",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101433Z-37447/UX-SLD-016/repeat-1",
+        "duration_ms": 2244,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101433Z-37447/UX-SLD-016/repeat-1/01-prepare/actions.jsonl",
+            "bytes": 8027,
+            "sha256": "73272f10f2da72d6c79ebe763df1a5a3f1c879c1cfb8d7c71e9ed9686d7a9bd8"
+          },
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101433Z-37447/UX-SLD-016/repeat-1/02-verify/actions.jsonl",
+            "bytes": 792,
+            "sha256": "39beb4151eaa8fd7d647d9d1a4031fa198e5c27031b9d66c10012164f1d3e875"
+          }
+        ],
+        "observations": [
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101433Z-37447/UX-SLD-016/repeat-1/01-prepare/metrics.json",
+              "bytes": 726,
+              "sha256": "79cb7e57a09868afaccccf36a11c84b9a10d1cd9d63850aee01596fb9a8451c1"
+            },
+            "main_loop_stall_max_ms": 471
+          },
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101433Z-37447/UX-SLD-016/repeat-1/02-verify/metrics.json",
+              "bytes": 726,
+              "sha256": "9e49bd3bc5d3794b0ae2c48dca18f86900a13819cbc25d101194759272b0c86d"
+            },
+            "main_loop_stall_max_ms": 329
+          }
+        ]
+      },
+      {
+        "id": "UX-SLD-017",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101433Z-37447/UX-SLD-017/repeat-1",
+        "duration_ms": 59362,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101433Z-37447/UX-SLD-017/repeat-1/actions.jsonl",
+            "bytes": 73264,
+            "sha256": "0da8a6a04583e479dc2d2b49cbf6a28e01028ababb39abaeb854847935e9ae70"
+          }
+        ],
+        "observations": [
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "wb_numeric_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101433Z-37447/UX-SLD-017/repeat-1/metrics.json",
+              "bytes": 738,
+              "sha256": "dca89716bf6484768c1ee7d20d4ece8f6c425496bdd5a5ac2061503c474d49d8"
+            },
+            "main_loop_stall_max_ms": 320
+          }
+        ]
+      },
+      {
+        "id": "UX-PRS-017",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101433Z-37447/UX-PRS-017/repeat-1",
+        "duration_ms": 5103,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101433Z-37447/UX-PRS-017/repeat-1/actions.jsonl",
+            "bytes": 8462,
+            "sha256": "6e0c4fb5de86255a0906d13bc3e04cdde11401a1e8c9cfc303553fae8c08a7af"
+          }
+        ],
+        "observations": [
+          {
+            "action": "preset_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          },
+          {
+            "action": "preset_cpu_pixel_oracle",
+            "alpha_max_error": 0,
+            "metal_eligible": true,
+            "rgb_max_error": 1
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101433Z-37447/UX-PRS-017/repeat-1/metrics.json",
+              "bytes": 734,
+              "sha256": "ef673ace35ff2d507caf891d1a4d21aa33011c7d7cbf8fedf1f3fdabef8393a9"
+            },
+            "main_loop_stall_max_ms": 267
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-PRG-007",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101433Z-37447/UX-P06-PRG-007/repeat-1",
+        "duration_ms": 6888,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101433Z-37447/UX-P06-PRG-007/repeat-1/actions.jsonl",
+            "bytes": 4127,
+            "sha256": "e085b104d32919593955c0214976ae23fda6ae7b380ec2e82ad77fcc6259fb33"
+          }
+        ],
+        "observations": [
+          {
+            "action": "progressive_transient_final_held",
+            "exact_cpu_pixels": true,
+            "original": true,
+            "phase": "Original-to-Processed",
+            "preset_preview": false
+          },
+          {
+            "action": "progressive_transient_interaction",
+            "phase": "Original-to-Processed",
+            "width": 1024
+          },
+          {
+            "action": "progressive_transient_rejected",
+            "current_pixels_exact": true,
+            "current_revision": "20",
+            "deliveries": 1,
+            "exact_job_identity": true,
+            "guard_rejections": 1,
+            "held_revision": "18",
+            "phase": "Original-to-Processed"
+          },
+          {
+            "action": "progressive_transient_final_held",
+            "exact_cpu_pixels": true,
+            "original": false,
+            "phase": "Processed-to-Original",
+            "preset_preview": false
+          },
+          {
+            "action": "progressive_transient_interaction",
+            "phase": "Processed-to-Original",
+            "width": 1024
+          },
+          {
+            "action": "progressive_transient_rejected",
+            "current_pixels_exact": true,
+            "current_revision": "26",
+            "deliveries": 1,
+            "exact_job_identity": true,
+            "guard_rejections": 1,
+            "held_revision": "24",
+            "phase": "Processed-to-Original"
+          },
+          {
+            "action": "progressive_transient_preserved",
+            "original_sha256": "152c31c8f0045d97638fac4f9fda574f28c92e8f8c4e86ef883d665e8cbbc2a8",
+            "saved_revision_before": "1",
+            "scenario": "UX-P06-PRG-007",
+            "view_modes_created_history_entries": false
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101433Z-37447/UX-P06-PRG-007/repeat-1/metrics.json",
+              "bytes": 734,
+              "sha256": "eb58242bee2d485f8165102b7665fa886869999045d5bc37f3a66843c838cf48"
+            },
+            "main_loop_stall_max_ms": 1303
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-PRG-008",
+        "status": "PASS",
+        "message": "",
+        "platform": "cocoa",
+        "graphics_api": "metal",
+        "device_pixel_ratio": 2,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101433Z-37447/UX-P06-PRG-008/repeat-1",
+        "duration_ms": 15798,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101433Z-37447/UX-P06-PRG-008/repeat-1/actions.jsonl",
+            "bytes": 3727,
+            "sha256": "2647310ad1dc12c3210b45d5026ec3c06e8b657e08e28a8ce258b9467aa71422"
+          }
+        ],
+        "observations": [
+          {
+            "action": "progressive_transient_final_held",
+            "exact_cpu_pixels": true,
+            "original": false,
+            "phase": "hover-final-before-leave",
+            "preset_preview": true
+          },
+          {
+            "action": "progressive_transient_current_accepted",
+            "deliveries": 1,
+            "phase": "hover-final-before-leave",
+            "rejections": 0,
+            "width": 2560
+          },
+          {
+            "action": "progressive_transient_final_held",
+            "exact_cpu_pixels": true,
+            "original": false,
+            "phase": "hover-leave-before-final",
+            "preset_preview": true
+          },
+          {
+            "action": "progressive_transient_rejected",
+            "current_pixels_exact": true,
+            "current_revision": "26",
+            "deliveries": 1,
+            "exact_job_identity": true,
+            "guard_rejections": 1,
+            "held_revision": "24",
+            "phase": "hover-leave-before-final"
+          },
+          {
+            "action": "progressive_transient_preserved",
+            "original_sha256": "152c31c8f0045d97638fac4f9fda574f28c92e8f8c4e86ef883d665e8cbbc2a8",
+            "saved_revision_before": "1",
+            "scenario": "UX-P06-PRG-008",
+            "view_modes_created_history_entries": false
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101433Z-37447/UX-P06-PRG-008/repeat-1/metrics.json",
+              "bytes": 732,
+              "sha256": "23856238398ac29752f7f705dd89642ac6599585e6ea2d494bff3248adff6222"
+            },
+            "main_loop_stall_max_ms": 2008
+          }
+        ]
+      }
+    ]
+  },
+  "hosted_ci_before_worker_change": {
+    "run_id": 39932371084,
+    "url": "https://github.com/yakut-sekonts/Luma/actions/runs/39932371084",
+    "head_commit": "bdea5bd51f4f9157428a77a5b04c16def15c89f5",
+    "job": {
+      "jobs": [
+        {
+          "id": 120343925304,
+          "name": "build-test",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_id": 39932371084,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@v4.2.2",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run actions/setup-python@v5.6.0",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Verify supported architecture",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Install fixed toolchain and Qt",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Build pinned offline Denoise and Sky models",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Check native Core ML numerical agreement",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Check source Denoise against analytical clean images",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Upload model conversion evidence",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Configure",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            },
+            {
+              "name": "Check photographic Denoise and actual runtime tiling",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12
+            },
+            {
+              "name": "Check Sky photographic interiors and native provider contracts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            },
+            {
+              "name": "Upload photographic model evidence",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Upload Sky photographic evidence",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            },
+            {
+              "name": "Unit and integration tests",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Build and attest UX executable",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Bounded functional blocking UX checks",
+              "status": "completed",
+              "conclusion": "failure",
+              "number": 18
+            },
+            {
+              "name": "Supplemental selected-asset keyboard regression",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 19
+            },
+            {
+              "name": "Library and filmstrip selection preserve deep scroll",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 20
+            },
+            {
+              "name": "Keyboard import edit export at minimum window",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 21
+            },
+            {
+              "name": "Localized preset dialogs at minimum window",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 22
+            },
+            {
+              "name": "Supplemental gradient handle accessibility regressions",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 23
+            },
+            {
+              "name": "Supplemental PhotoCard flag localization regression",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 24
+            },
+            {
+              "name": "Actual thumbnail response regression",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 25
+            },
+            {
+              "name": "Thumbnail away and back before pending completion",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 26
+            },
+            {
+              "name": "Batch commit during actual partial thumbnail render",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 27
+            },
+            {
+              "name": "Thumbnail invalidation during an actual response",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 28
+            },
+            {
+              "name": "Missing private watermark snapshot regression",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 29
+            },
+            {
+              "name": "Legal UTF-8 current export filename regression",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 30
+            },
+            {
+              "name": "Preview revision ordering and photo-switch zoom",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 31
+            },
+            {
+              "name": "Auto Transform completion regression",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 32
+            },
+            {
+              "name": "Upload UX evidence",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 33
+            },
+            {
+              "name": "clang-format",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 34
+            },
+            {
+              "name": "clang-tidy",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 35
+            },
+            {
+              "name": "Require model numerical agreement and source and photographic quality",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 36
+            },
+            {
+              "name": "Post Run actions/setup-python@v5.6.0",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 71
+            },
+            {
+              "name": "Post Run actions/checkout@v4.2.2",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 72
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 73
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/ci-bdea5bd-ux/ux-report/UX_REPORT.json",
+      "bytes": 521337,
+      "sha256": "512dfd229ed2d44c96589ebd25881f434569831fff594e4bcca02338a8ae6217"
+    },
+    "summary": {
+      "SKIPPED": 87,
+      "PASS": 203,
+      "FAIL": 1,
+      "NOT_IMPLEMENTED": 31
+    },
+    "hardware": {
+      "chip": "Apple M1 (Virtual)",
+      "model": "VirtualMac2,1",
+      "ram_bytes": "7516192768",
+      "macos": "15.7.9",
+      "qt": "6.10.3",
+      "commit": "1be63ebfdd23b91c1dc4d68428fd34afdbe38024",
+      "worktree_dirty": false,
+      "source_tree_sha256": "0418d344d6904e5f31f95ee5fa240511692eb20045329d5b3eb0c86f549e2ee8",
+      "test_executable_sha256": "5ad76cb26a0ec48f629d5d83e56ae43137089a96855987c7ffa905704fccd887",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/runner/work/Luma/Luma/build/luma_ux_tests.app",
+        "info_plist_path": "/Users/runner/work/Luma/Luma/build/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/runner/work/Luma/Luma/build/luma_ux_tests",
+        "canonical_executable": "/Users/runner/work/Luma/Luma/build/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "5ad76cb26a0ec48f629d5d83e56ae43137089a96855987c7ffa905704fccd887"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/runner/work/Luma/Luma/build",
+      "hosted_ci": true,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "source_consistency": "PASS",
+    "artifact_id": 12494671633,
+    "archive": {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/ci-bdea5bd-ux.zip",
+      "bytes": 44918821,
+      "sha256": "76fbf04782d610e57df3915d890f72645cbdc5fe4a4a8d5aa285d2ce9880b100"
+    },
+    "original_zoom_repetitions": [
+      {
+        "result": {
+          "id": "UX-P06-ZOM-001",
+          "status": "FAIL",
+          "child_returncode": -9,
+          "child_reported_status": null,
+          "intentional_kill_requested": false,
+          "message": "P0 hard hang: no main-loop heartbeat for >5s",
+          "catalog_integrity": "PASS",
+          "catalog_snapshot": "catalog-copy.sqlite",
+          "scope": "0.6",
+          "mode": "BLOCKING",
+          "severity_if_failed": "P1",
+          "scenario": "true 1:1 показывает заявленное pixel mapping.",
+          "artifacts": "/Users/runner/work/Luma/Luma/build/ux-artifacts/20261023T100117Z-53345/UX-P06-ZOM-001/repeat-1",
+          "child_pid": 78775,
+          "wall_duration_ms": 9778,
+          "original_integrity": "PASS"
+        },
+        "result_file": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/ci-bdea5bd-ux/ux-artifacts/20261023T100117Z-53345/UX-P06-ZOM-001/repeat-1/result.json",
+          "bytes": 632,
+          "sha256": "a540864d642881e8387dace6485458544ed47c089110cc6eb8783932afbd74ab"
+        },
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/ci-bdea5bd-ux/ux-artifacts/20261023T100117Z-53345/UX-P06-ZOM-001/repeat-1/actions.jsonl",
+          "bytes": 2492,
+          "sha256": "0526e89e6a14831fabb212bdbbb3ace4e77cdab78b7817588ffde71be1692ac3"
+        },
+        "sample_file": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/ci-bdea5bd-ux/ux-artifacts/20261023T100117Z-53345/UX-P06-ZOM-001/repeat-1/thread-sample.txt",
+          "bytes": 100156,
+          "sha256": "39c0897df53295aa21e98623a8d1092a72adc87e47976b178b920d0ca6d04720"
+        },
+        "main_thread_excerpt": "\n    1 Thread_201080   DispatchQueue_1: com.apple.main-thread  (serial)\n      1 _LUTevalFloat  (in luma_ux_tests) + 164  [0x10309e878]  cmslut.c:0\n\nTotal number in stack (recursive counted multiple, when >=5):\n\nSort by top of stack, same collapsed (when >= 5):\n\n",
+        "metrics": null
+      },
+      {
+        "result": {
+          "application_version": "0.9.0",
+          "device_pixel_ratio": 1,
+          "display_geometry": {
+            "height": 800,
+            "width": 800
+          },
+          "duration_ms": 9371,
+          "frame_intervals": 75,
+          "frame_max_ms": 2674,
+          "frame_p50_ms": 32,
+          "frame_p95_ms": 283,
+          "frame_p99_ms": 2674,
+          "graphics_api": "software",
+          "hard_hang": false,
+          "id": "UX-P06-ZOM-001",
+          "input_dispatch_p95_ms": 120.545833,
+          "main_loop_stall_max_ms": 2678,
+          "message": "",
+          "platform": "offscreen",
+          "qt_runtime": "6.10.3",
+          "quantile_resolution_ms": 1,
+          "quick_backend": "software",
+          "rss_first_mb": 103.796875,
+          "rss_last_mb": 1398.265625,
+          "rss_minutes": [
+            {
+              "maximum_mb": 1398.265625,
+              "mean_mb": 988.0223214285714,
+              "minimum_mb": 103.796875,
+              "minute": 0,
+              "samples": 28
+            }
+          ],
+          "rss_minutes_limit": 1440,
+          "rss_peak_mb": 1398.265625,
+          "rss_samples": 28,
+          "stall_over_1000_ms": 1,
+          "stall_over_100_ms": 13,
+          "stall_over_250_ms": 2,
+          "status": "PASS",
+          "warnings": [],
+          "window_size": {
+            "height": 841,
+            "width": 1321
+          },
+          "window_state": "visible",
+          "child_returncode": 0,
+          "child_reported_status": "PASS",
+          "intentional_kill_requested": false,
+          "catalog_integrity": "PASS",
+          "scope": "0.6",
+          "mode": "BLOCKING",
+          "severity_if_failed": "P1",
+          "scenario": "true 1:1 показывает заявленное pixel mapping.",
+          "artifacts": "/Users/runner/work/Luma/Luma/build/ux-artifacts/20261023T100117Z-53345/UX-P06-ZOM-001/repeat-2",
+          "child_pid": 79053,
+          "wall_duration_ms": 9591,
+          "original_integrity": "PASS"
+        },
+        "result_file": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/ci-bdea5bd-ux/ux-artifacts/20261023T100117Z-53345/UX-P06-ZOM-001/repeat-2/result.json",
+          "bytes": 1555,
+          "sha256": "a0470ab7bedffd78f82d049dc99d029f03226e0db97a6cb243aa9683c800256e"
+        },
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/ci-bdea5bd-ux/ux-artifacts/20261023T100117Z-53345/UX-P06-ZOM-001/repeat-2/actions.jsonl",
+          "bytes": 3802,
+          "sha256": "d5d238a8a1ed68818cf5fb23baeed757e586fd7e12bfa830bec312e6586884f5"
+        },
+        "sample_file": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/ci-bdea5bd-ux/ux-artifacts/20261023T100117Z-53345/UX-P06-ZOM-001/repeat-2/thread-sample.txt",
+          "bytes": 166705,
+          "sha256": "d84e386996a976df9cd4b256067f5cebfa8794b1c85cd87663d1fc0c117afd4a"
+        },
+        "main_thread_excerpt": "    +       !                             1 QMetaObject::cast(QObject const*) const  (in QtCore) + 40  [0x102d42dfc]\n    +       13 ux::zoomScenario(ux::Context&, QString const&)  (in luma_ux_tests) + 1108  [0x1005ca010]  ZoomScenarios.cpp:325\n    +       ! 12 ux::(anonymous namespace)::reference(ux::Context&, luma::DecodedImage const&, luma::EditDocument const&, int, bool)  (in luma_ux_tests) + 628  [0x1005ccf4c]  ZoomScenarios.cpp:65\n    +       ! : 8 luma::renderCPU(luma::FloatImage const&, luma::EditDocument, int, std::span<unsigned char const, 18446744073709551615ul>, luma::CancellationToken, luma::RawColorCalibration, luma::DetailDiagnostic, double, luma::PhotoMetadata, luma::MaskOverlay, luma::DevelopAccelerator*, luma::PreviewAnalysisOptions)  (in luma_ux_tests) + 6316  [0x1009e1098]  CpuRenderer.cpp:215\n    +       ! : | 8 luma::DisplayTransform::convert(std::span<float const, 18446744073709551615ul>, std::span<unsigned char, 18446744073709551615ul>) const  (in luma_ux_tests) + 80  [0x1009efafc]  DisplayTransform.cpp:46\n    +       ! : |   8 cmsDoTransform  (in luma_ux_tests) + 68  [0x100b35204]  cmsxform.c:206\n    +       ! : |     5 FloatXFORM  (in luma_ux_tests) + 204  [0x100b36880]  cmsxform.c:0\n    +       ! : |     + 5 _LUTevalFloat  (in luma_ux_tests) + 112  [0x100b1a844]  cmslut.c:1368\n    +       ! : |     +   5 EvaluateCurves  (in luma_ux_tests) + 68  [0x100b17f9c]  cmslut.c:182",
+        "metrics": {
+          "duration_ms": 9371,
+          "frame_intervals": 75,
+          "frame_max_ms": 2674,
+          "frame_p50_ms": 32,
+          "frame_p95_ms": 283,
+          "frame_p99_ms": 2674,
+          "hard_hang": false,
+          "input_dispatch_p95_ms": 120.545833,
+          "main_loop_stall_max_ms": 2678,
+          "quantile_resolution_ms": 1,
+          "rss_first_mb": 103.796875,
+          "rss_last_mb": 1398.265625,
+          "rss_minutes": [
+            {
+              "maximum_mb": 1398.265625,
+              "mean_mb": 988.0223214285714,
+              "minimum_mb": 103.796875,
+              "minute": 0,
+              "samples": 28
+            }
+          ],
+          "rss_minutes_limit": 1440,
+          "rss_peak_mb": 1398.265625,
+          "rss_samples": 28,
+          "stall_over_1000_ms": 1,
+          "stall_over_100_ms": 13,
+          "stall_over_250_ms": 2
+        }
+      },
+      {
+        "result": {
+          "application_version": "0.9.0",
+          "device_pixel_ratio": 1,
+          "display_geometry": {
+            "height": 800,
+            "width": 800
+          },
+          "duration_ms": 10138,
+          "frame_intervals": 77,
+          "frame_max_ms": 3557,
+          "frame_p50_ms": 27,
+          "frame_p95_ms": 267,
+          "frame_p99_ms": 3557,
+          "graphics_api": "software",
+          "hard_hang": false,
+          "id": "UX-P06-ZOM-001",
+          "input_dispatch_p95_ms": 104.0375,
+          "main_loop_stall_max_ms": 3573,
+          "message": "",
+          "platform": "offscreen",
+          "qt_runtime": "6.10.3",
+          "quantile_resolution_ms": 1,
+          "quick_backend": "software",
+          "rss_first_mb": 104.453125,
+          "rss_last_mb": 1424.59375,
+          "rss_minutes": [
+            {
+              "maximum_mb": 1424.59375,
+              "mean_mb": 1061.3917824074074,
+              "minimum_mb": 104.453125,
+              "minute": 0,
+              "samples": 27
+            }
+          ],
+          "rss_minutes_limit": 1440,
+          "rss_peak_mb": 1424.59375,
+          "rss_samples": 27,
+          "stall_over_1000_ms": 1,
+          "stall_over_100_ms": 5,
+          "stall_over_250_ms": 1,
+          "status": "PASS",
+          "warnings": [],
+          "window_size": {
+            "height": 841,
+            "width": 1321
+          },
+          "window_state": "visible",
+          "child_returncode": 0,
+          "child_reported_status": "PASS",
+          "intentional_kill_requested": false,
+          "catalog_integrity": "PASS",
+          "scope": "0.6",
+          "mode": "BLOCKING",
+          "severity_if_failed": "P1",
+          "scenario": "true 1:1 показывает заявленное pixel mapping.",
+          "artifacts": "/Users/runner/work/Luma/Luma/build/ux-artifacts/20261023T100117Z-53345/UX-P06-ZOM-001/repeat-3",
+          "child_pid": 79323,
+          "wall_duration_ms": 10417,
+          "original_integrity": "PASS"
+        },
+        "result_file": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/ci-bdea5bd-ux/ux-artifacts/20261023T100117Z-53345/UX-P06-ZOM-001/repeat-3/result.json",
+          "bytes": 1552,
+          "sha256": "f9055785d78063efa2e38ffe3e16c135a283cee3bd01dfc2dbec19c0b9437ed0"
+        },
+        "actions": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/ci-bdea5bd-ux/ux-artifacts/20261023T100117Z-53345/UX-P06-ZOM-001/repeat-3/actions.jsonl",
+          "bytes": 3802,
+          "sha256": "bac8e459ccb69749fef5908dc3b44f21dd50e36b0293e88a9cdd7639e3536fc2"
+        },
+        "sample_file": {
+          "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/ci-bdea5bd-ux/ux-artifacts/20261023T100117Z-53345/UX-P06-ZOM-001/repeat-3/thread-sample.txt",
+          "bytes": 127337,
+          "sha256": "25e0546b4390d5498f3eaf6d5f757f6f4b081b7091ca9706eb362ed5393f1e41"
+        },
+        "main_thread_excerpt": "    +     80 ux::basicScenario(ux::Context&, QString const&)  (in luma_ux_tests) + 204  [0x102552ea0]  BasicScenarios.cpp:60\n    +       80 ux::zoomScenario(ux::Context&, QString const&)  (in luma_ux_tests) + 1108  [0x10260e010]  ZoomScenarios.cpp:325\n    +         80 ux::(anonymous namespace)::reference(ux::Context&, luma::DecodedImage const&, luma::EditDocument const&, int, bool)  (in luma_ux_tests) + 628  [0x102610f4c]  ZoomScenarios.cpp:65\n    +           48 luma::renderCPU(luma::FloatImage const&, luma::EditDocument, int, std::span<unsigned char const, 18446744073709551615ul>, luma::CancellationToken, luma::RawColorCalibration, luma::DetailDiagnostic, double, luma::PhotoMetadata, luma::MaskOverlay, luma::DevelopAccelerator*, luma::PreviewAnalysisOptions)  (in luma_ux_tests) + 6316  [0x102a25098]  CpuRenderer.cpp:215\n    +           ! 48 luma::DisplayTransform::convert(std::span<float const, 18446744073709551615ul>, std::span<unsigned char, 18446744073709551615ul>) const  (in luma_ux_tests) + 80  [0x102a33afc]  DisplayTransform.cpp:46\n    +           !   48 cmsDoTransform  (in luma_ux_tests) + 68  [0x102b79204]  cmsxform.c:206\n    +           !     42 FloatXFORM  (in luma_ux_tests) + 204  [0x102b7a880]  cmsxform.c:0\n    +           !     : 40 _LUTevalFloat  (in luma_ux_tests) + 112  [0x102b5e844]  cmslut.c:1368\n    +           !     : | 37 EvaluateCurves  (in luma_ux_tests) + 68  [0x102b5bf9c]  cmslut.c:182",
+        "metrics": {
+          "duration_ms": 10138,
+          "frame_intervals": 77,
+          "frame_max_ms": 3557,
+          "frame_p50_ms": 27,
+          "frame_p95_ms": 267,
+          "frame_p99_ms": 3557,
+          "hard_hang": false,
+          "input_dispatch_p95_ms": 104.0375,
+          "main_loop_stall_max_ms": 3573,
+          "quantile_resolution_ms": 1,
+          "rss_first_mb": 104.453125,
+          "rss_last_mb": 1424.59375,
+          "rss_minutes": [
+            {
+              "maximum_mb": 1424.59375,
+              "mean_mb": 1061.3917824074074,
+              "minimum_mb": 104.453125,
+              "minute": 0,
+              "samples": 27
+            }
+          ],
+          "rss_minutes_limit": 1440,
+          "rss_peak_mb": 1424.59375,
+          "rss_samples": 27,
+          "stall_over_1000_ms": 1,
+          "stall_over_100_ms": 5,
+          "stall_over_250_ms": 1
+        }
+      }
+    ]
+  },
+  "worker_offscreen_retest": {
+    "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-final-zoom-worker-regression/UX_REPORT.json",
+    "bytes": 49696,
+    "sha256": "cde5fa016824783f0587fb7925f3dc8c232273b11d2e01ed1df27fbbf5c418a3",
+    "summary": {
+      "PASS": 24
+    },
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "bdea5bd51f4f9157428a77a5b04c16def15c89f5",
+      "worktree_dirty": true,
+      "source_tree_sha256": "f119a39d9f711ec65b7a57a7e16b321418ecde0ca208908adb16d034c7e53086",
+      "test_executable_sha256": "6e31155f0556518f38e33aa38e54ac2158b857ee1aa6bd62edd53fb37bf15cef",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "6e31155f0556518f38e33aa38e54ac2158b857ee1aa6bd62edd53fb37bf15cef"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": true,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "source_consistency": "PASS",
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "bdea5bd51f4f9157428a77a5b04c16def15c89f5",
+      "reason": ""
+    },
+    "release_gate": "NOT_QUALIFIED",
+    "original_hashes": "PASS",
+    "cases": [
+      {
+        "id": "UX-P06-PRG-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-002/repeat-1",
+        "duration_ms": 8145,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-002/repeat-1/actions.jsonl",
+            "bytes": 4639,
+            "sha256": "9c90f550cc0377d1e500c17b9cb340f4eba13906a2cd8c01bf6afa21f904692e"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 810,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 1024
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 147,
+            "height": 683,
+            "maximum_dimension": 1024,
+            "width": 1024,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 863,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 0
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 1107,
+            "height": 2048,
+            "maximum_dimension": 0,
+            "width": 3072,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 792,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 800,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-002/repeat-1/metrics.json",
+              "bytes": 726,
+              "sha256": "08f3376e9a56762ff652ee69e68d1b81ad089fa200b80c585ecbe093f15a17cc"
+            },
+            "main_loop_stall_max_ms": 175
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-PRG-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-002/repeat-2",
+        "duration_ms": 7595,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-002/repeat-2/actions.jsonl",
+            "bytes": 4639,
+            "sha256": "0d071ad6b5bb5114bf87917ac7b81ba8578f925e807299dc3b95ba77c210e3f0"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 798,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 1024
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 141,
+            "height": 683,
+            "maximum_dimension": 1024,
+            "width": 1024,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 860,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 0
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 1129,
+            "height": 2048,
+            "maximum_dimension": 0,
+            "width": 3072,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 799,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 783,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-002/repeat-2/metrics.json",
+              "bytes": 734,
+              "sha256": "cc218ec9708f0962264fb42d8aa6ed9754c68515047686930de30ec521287cd8"
+            },
+            "main_loop_stall_max_ms": 171
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-PRG-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-002/repeat-3",
+        "duration_ms": 7270,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-002/repeat-3/actions.jsonl",
+            "bytes": 4639,
+            "sha256": "4ec46d279b94cc0fb606b3aaffb318617b7a96cc378ba545f0b75615c75b028e"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 767,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 1024
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 123,
+            "height": 683,
+            "maximum_dimension": 1024,
+            "width": 1024,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 804,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 0
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 1051,
+            "height": 2048,
+            "maximum_dimension": 0,
+            "width": 3072,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 756,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 780,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-002/repeat-3/metrics.json",
+              "bytes": 740,
+              "sha256": "7396a28a673c76e89d37b845a9191fd1106dfe5448e5eb29e53a2203633f60d9"
+            },
+            "main_loop_stall_max_ms": 177
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-PRG-004",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-004/repeat-1",
+        "duration_ms": 5060,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-004/repeat-1/actions.jsonl",
+            "bytes": 4956,
+            "sha256": "ac9c5702376f8b4b176044d4b5a514447468117e33c33273e5aacb546da40d5c"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 760,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 809,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 878,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-004/repeat-1/metrics.json",
+              "bytes": 727,
+              "sha256": "d3b8e96b1c048a498226ecac7b8845b1bfd3fea1cd82fadc78fcb073b6b63096"
+            },
+            "main_loop_stall_max_ms": 169
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-PRG-004",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-004/repeat-2",
+        "duration_ms": 5891,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-004/repeat-2/actions.jsonl",
+            "bytes": 4956,
+            "sha256": "fef1c6b19db6bab17b516c5fa76a7ba3477ffe387ccff17625bf9a528b0d99f2"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 824,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 841,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 821,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-004/repeat-2/metrics.json",
+              "bytes": 728,
+              "sha256": "fd6d6f48d01ed119eafa1197766145c0ddfbe4d621998f94bb806f000e672fda"
+            },
+            "main_loop_stall_max_ms": 171
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-PRG-004",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-004/repeat-3",
+        "duration_ms": 6373,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-004/repeat-3/actions.jsonl",
+            "bytes": 4956,
+            "sha256": "c4ff3fc63edadfacc201fc5bd0e0c36596386d9231f0403e251039dd92dfd916"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 750,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 790,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 786,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-004/repeat-3/metrics.json",
+              "bytes": 727,
+              "sha256": "d3cd3291ea3e5095d6a66b1857fb11e9ac6f980d7b84db0c4a53a3b5ec07f4c3"
+            },
+            "main_loop_stall_max_ms": 167
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-PRG-007",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-007/repeat-1",
+        "duration_ms": 12588,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-007/repeat-1/actions.jsonl",
+            "bytes": 4916,
+            "sha256": "6c877e72586b181a3cacb411b603bbee486f2771b62987fcd00d5048431b494c"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 806,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 757,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 1024
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 134,
+            "height": 683,
+            "maximum_dimension": 1024,
+            "width": 1024,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 1024
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 123,
+            "height": 683,
+            "maximum_dimension": 1024,
+            "width": 1024,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-007/repeat-1/metrics.json",
+              "bytes": 728,
+              "sha256": "120e00f8bf3c5cbedc095534ba5a1ff8e97ac132835b7d5e2d4727c9cffdfe52"
+            },
+            "main_loop_stall_max_ms": 164
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-PRG-007",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-007/repeat-2",
+        "duration_ms": 12227,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-007/repeat-2/actions.jsonl",
+            "bytes": 4916,
+            "sha256": "47692dd0fbc3104bacfe9d9eebe961e205738d963deaec4c6e22a6858ec0a00f"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 785,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 741,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 1024
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 120,
+            "height": 683,
+            "maximum_dimension": 1024,
+            "width": 1024,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 1024
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 125,
+            "height": 683,
+            "maximum_dimension": 1024,
+            "width": 1024,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-007/repeat-2/metrics.json",
+              "bytes": 738,
+              "sha256": "7e0f532ca09a8900c6f9b688974fdb31db0999535eb8fbcd97d559cdcdc09f34"
+            },
+            "main_loop_stall_max_ms": 166
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-PRG-007",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-007/repeat-3",
+        "duration_ms": 6132,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-007/repeat-3/actions.jsonl",
+            "bytes": 4916,
+            "sha256": "e77a967547649b36b8ee2e7c2e6cc303ff9042f3bf9c1af6cd90e064d35e29d3"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 778,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 759,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 1024
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 123,
+            "height": 683,
+            "maximum_dimension": 1024,
+            "width": 1024,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 1024
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 133,
+            "height": 683,
+            "maximum_dimension": 1024,
+            "width": 1024,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-007/repeat-3/metrics.json",
+              "bytes": 732,
+              "sha256": "8671e60a09338f8d0d628d753b97c8b1e2419c1983c4c16970fdad8b3bb6b0be"
+            },
+            "main_loop_stall_max_ms": 204
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-PRG-008",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-008/repeat-1",
+        "duration_ms": 9446,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-008/repeat-1/actions.jsonl",
+            "bytes": 4518,
+            "sha256": "18c354f9fb5a849243e7b1e40b26e673a1c8916f334d0ce8b60608219b16d090"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 782,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 736,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 1024
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 312,
+            "height": 683,
+            "maximum_dimension": 1024,
+            "width": 1024,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 1794,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-008/repeat-1/metrics.json",
+              "bytes": 728,
+              "sha256": "e261ca5911216a9c3b6502fac792c8f39e9a5eabe529c6099f9538f55950a70c"
+            },
+            "main_loop_stall_max_ms": 163
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-PRG-008",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-008/repeat-2",
+        "duration_ms": 9731,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-008/repeat-2/actions.jsonl",
+            "bytes": 4518,
+            "sha256": "f01268ceb164caf91206c62172e8ce525db1ed923262ed7b4cb3a5c2de654aac"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 802,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 741,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 1024
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 315,
+            "height": 683,
+            "maximum_dimension": 1024,
+            "width": 1024,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 1829,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-008/repeat-2/metrics.json",
+              "bytes": 720,
+              "sha256": "57892309fe9c474b1413ccbf95cfe0a88707d0a7c15ee140d4a150d94d859cb1"
+            },
+            "main_loop_stall_max_ms": 164
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-PRG-008",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-008/repeat-3",
+        "duration_ms": 9507,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-008/repeat-3/actions.jsonl",
+            "bytes": 4518,
+            "sha256": "a1b134256eaf1e812d16ffd8429aa0f47f649ecb63380de4805a962827f6de1d"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 793,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 750,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 1024
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 292,
+            "height": 683,
+            "maximum_dimension": 1024,
+            "width": 1024,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 1793,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-008/repeat-3/metrics.json",
+              "bytes": 734,
+              "sha256": "2d0a9bdc678bdde3b5921eb45075632ca469a866a937cf745b357b96a14d55c0"
+            },
+            "main_loop_stall_max_ms": 168
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-PRG-009",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-009/repeat-1",
+        "duration_ms": 5910,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-009/repeat-1/actions.jsonl",
+            "bytes": 4181,
+            "sha256": "a967381cb41432aa668ef41ba275c4ea7dc149cca72ef68b20eedc87a3a4701f"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 760,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 777,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 738,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-009/repeat-1/metrics.json",
+              "bytes": 719,
+              "sha256": "7f29c94d35732adaf1d4be6b8164772f6e0b89c42b52acd2374c58f5310ee481"
+            },
+            "main_loop_stall_max_ms": 322
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-PRG-009",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-009/repeat-2",
+        "duration_ms": 5871,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-009/repeat-2/actions.jsonl",
+            "bytes": 4181,
+            "sha256": "894224602d00bfd7d3d1eeb6c3f120207e9e110207279f09474bcc38f0522612"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 760,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 810,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 735,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-009/repeat-2/metrics.json",
+              "bytes": 732,
+              "sha256": "785860d13dab30daf4e992818bae7aa47ecaa022fc621e900f8598130cc44dcc"
+            },
+            "main_loop_stall_max_ms": 317
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-PRG-009",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-009/repeat-3",
+        "duration_ms": 5849,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-009/repeat-3/actions.jsonl",
+            "bytes": 4181,
+            "sha256": "b2f6bdb07c01ec6c025cc43c8a412f4cf3433cbc549a5388560cb584938dd752"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 744,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 770,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 735,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-PRG-009/repeat-3/metrics.json",
+              "bytes": 731,
+              "sha256": "b293872d7f1e68d75a56896c22f160ead55f411f2e74e9c55355494549907c58"
+            },
+            "main_loop_stall_max_ms": 315
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-ZOM-001",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-001/repeat-1",
+        "duration_ms": 5588,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-001/repeat-1/actions.jsonl",
+            "bytes": 4245,
+            "sha256": "5f07e3b57f968fd7c8c1e217cee458e2f8c8230024cd86b19c9d2fc2b5967bd7"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 778,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 0
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 1113,
+            "height": 2048,
+            "maximum_dimension": 0,
+            "width": 3072,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-001/repeat-1/metrics.json",
+              "bytes": 725,
+              "sha256": "b0912d299bc780503c9208c563035a5f559d99abf57cc046c694801789f3a4ba"
+            },
+            "main_loop_stall_max_ms": 165
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-ZOM-001",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-001/repeat-2",
+        "duration_ms": 5534,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-001/repeat-2/actions.jsonl",
+            "bytes": 4245,
+            "sha256": "4386e4b52428045266b44caffd98c78e58ad284eaab494f27dfed936c89791c9"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 788,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 0
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 1045,
+            "height": 2048,
+            "maximum_dimension": 0,
+            "width": 3072,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-001/repeat-2/metrics.json",
+              "bytes": 725,
+              "sha256": "38f207a4720c516eeec5502445405024591fc24b1a8ad3066dc14e76ca944bd2"
+            },
+            "main_loop_stall_max_ms": 167
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-ZOM-001",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-001/repeat-3",
+        "duration_ms": 5565,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-001/repeat-3/actions.jsonl",
+            "bytes": 4245,
+            "sha256": "051e00ab40f1777999fe05e829a1f4c07fa5089f9e9b25712e8826d88a653015"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 781,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 0
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 1056,
+            "height": 2048,
+            "maximum_dimension": 0,
+            "width": 3072,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-001/repeat-3/metrics.json",
+              "bytes": 727,
+              "sha256": "799f75c2a30a24affe8d891c6f25cebf7177eeecc2121eb4a97cabebc5bcebe6"
+            },
+            "main_loop_stall_max_ms": 162
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-ZOM-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-002/repeat-1",
+        "duration_ms": 5577,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-002/repeat-1/actions.jsonl",
+            "bytes": 4245,
+            "sha256": "766f4f7a1f1f995766fb894d977b378b6a462ded13f0335e702c6b7c4d5d0b5e"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 801,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 0
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 1060,
+            "height": 2048,
+            "maximum_dimension": 0,
+            "width": 3072,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-002/repeat-1/metrics.json",
+              "bytes": 731,
+              "sha256": "ba1c02955687d2978851eec7ce669a946b973822142194ac2a2b983444e6b635"
+            },
+            "main_loop_stall_max_ms": 164
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-ZOM-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-002/repeat-2",
+        "duration_ms": 5844,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-002/repeat-2/actions.jsonl",
+            "bytes": 4245,
+            "sha256": "722e12d694107ccbce49172d3f0ab81176c5e3067f064b69bcff6a68de619500"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 787,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 0
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 1102,
+            "height": 2048,
+            "maximum_dimension": 0,
+            "width": 3072,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-002/repeat-2/metrics.json",
+              "bytes": 732,
+              "sha256": "250c9f34608f54c587274b5de31efe041fdf9185f764995ee252e03361d5ad81"
+            },
+            "main_loop_stall_max_ms": 168
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-ZOM-002",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-002/repeat-3",
+        "duration_ms": 5891,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-002/repeat-3/actions.jsonl",
+            "bytes": 4245,
+            "sha256": "dcbfe5e2153019eaf2070ec194023d6b1c60de4b84a95ef18a1f7588bd7a08ac"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 828,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 0
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 1103,
+            "height": 2048,
+            "maximum_dimension": 0,
+            "width": 3072,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-002/repeat-3/metrics.json",
+              "bytes": 735,
+              "sha256": "e7304a6546616e2444d73dd4701150c0987fdb8aee8d6b819dfeb9f5bd6ffaea"
+            },
+            "main_loop_stall_max_ms": 170
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-ZOM-005",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-005/repeat-1",
+        "duration_ms": 7734,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-005/repeat-1/actions.jsonl",
+            "bytes": 5457,
+            "sha256": "98dbf13582bd5a89a0b1c094ddbb8155f7c01502313727e50e2489f5b8f2f89f"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 838,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 0
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 1128,
+            "height": 2048,
+            "maximum_dimension": 0,
+            "width": 3072,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 0
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 1069,
+            "height": 2048,
+            "maximum_dimension": 0,
+            "width": 3072,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 771,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-005/repeat-1/metrics.json",
+              "bytes": 734,
+              "sha256": "88512c5aefcbc1e6c2c1606b740759fed208b2ca0cf4e15b2f820a0948f13988"
+            },
+            "main_loop_stall_max_ms": 323
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-ZOM-005",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-005/repeat-2",
+        "duration_ms": 7492,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-005/repeat-2/actions.jsonl",
+            "bytes": 5457,
+            "sha256": "4185f0f274f35fbb3344fa2f7899f6883aaddcefaecddc97345c2c4324c6774c"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 790,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 0
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 1109,
+            "height": 2048,
+            "maximum_dimension": 0,
+            "width": 3072,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 0
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 1061,
+            "height": 2048,
+            "maximum_dimension": 0,
+            "width": 3072,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 778,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-005/repeat-2/metrics.json",
+              "bytes": 738,
+              "sha256": "70e7ab9288247727505e21d1a9500f31f98790fcff140c84387ba8b0cd003506"
+            },
+            "main_loop_stall_max_ms": 321
+          }
+        ]
+      },
+      {
+        "id": "UX-P06-ZOM-005",
+        "status": "PASS",
+        "message": "",
+        "platform": "offscreen",
+        "graphics_api": "software",
+        "device_pixel_ratio": 1,
+        "warnings": [],
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-005/repeat-3",
+        "duration_ms": 7565,
+        "actions": [
+          {
+            "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-005/repeat-3/actions.jsonl",
+            "bytes": 5457,
+            "sha256": "fa3b1f7038e84365a57ed65c5d86378586a333c59be5d4607f2b92864c38c1d4"
+          }
+        ],
+        "observations": [
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 775,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 0
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 1072,
+            "height": 2048,
+            "maximum_dimension": 0,
+            "width": 3072,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 0
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 1047,
+            "height": 2048,
+            "maximum_dimension": 0,
+            "width": 3072,
+            "worker_thread": true
+          },
+          {
+            "action": "zoom_cpu_reference_started",
+            "maximum_dimension": 2560
+          },
+          {
+            "action": "zoom_cpu_reference_completed",
+            "elapsed_ms": 742,
+            "height": 1707,
+            "maximum_dimension": 2560,
+            "width": 2560,
+            "worker_thread": true
+          }
+        ],
+        "metrics": [
+          {
+            "file": {
+              "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T101833Z-38289/UX-P06-ZOM-005/repeat-3/metrics.json",
+              "bytes": 737,
+              "sha256": "f583efcf48d7f543daddc905fff80ec8550087553c17cc2009db2b341749505e"
+            },
+            "main_loop_stall_max_ms": 352
+          }
+        ]
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/tests/ux/ZoomScenarios.cpp",
+      "bytes": 45089,
+      "sha256": "910a73ddd5dd1bd4c0a7fb4d9dfec0a516e1ce1305aa2e860e5c6649930a67fb"
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/tests/ux/run_ux_suite.py",
+      "bytes": 49790,
+      "sha256": "41c3e10c7671519c42b78bf9d734c6c3b4cc08f5bb5ff2f8183fcd2c96152e66"
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/tests/ux/test_runner.py",
+      "bytes": 50027,
+      "sha256": "88c1747b0f660c60d5b1c1f057f206ab2e88b5e5c7fb1ac118a4fa139dd5db13"
+    }
+  ],
+  "logs": [
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-transient-preset-native-attest.log",
+      "bytes": 264,
+      "sha256": "a856871ce825fe5dce5a0de7e67a17f79acd9ee45f59cec371401d6daa16c00c"
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-transient-preset-native.log",
+      "bytes": 349,
+      "sha256": "9815a99f1de9c58bc590c49db590230d72474ba4f312d95d1d51b456241e4e69"
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/ci-bdea5bd-job-excerpt.log",
+      "bytes": 3460,
+      "sha256": "dd8c5e815d6992f2070473b0b6a3fc8ead2f75b898d486851bb72263cdfe4c0c"
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-zoom-worker-build.log",
+      "bytes": 455,
+      "sha256": "b00e96c4bf8c883743158311067c67da7de3dd29cc6f3a2d9d9f3c85711ae203"
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-zoom-worker-regression.log",
+      "bytes": 950,
+      "sha256": "59584d8f281a77dde0db4e6c64640a04d73a8acbb827c2d3c018476a7448da2e"
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-zoom-worker-tidy.log",
+      "bytes": 20829,
+      "sha256": "37d4b99e461b8e75f4cc088f6c9e04e983a306cb3831ea5821ce1990ae2f59fc"
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-zoom-worker-watchdog-control.log",
+      "bytes": 98,
+      "sha256": "6115f8acc2c24473eb51e47df381009bb9e4b2d44daaccb71c6026f6ff393598"
+    }
+  ],
+  "findings": [
+    "The approved three-minute quiet interval completed five cases on clean bdea5bd: SLD016/017, PRS017 and PRG007/008, Cocoa/Metal Retina DPR2, no warnings or source/catalog-integrity failures. Mac was released immediately after completion.",
+    "Hosted bdea5bd/PR-merge CI passed model conversion/numerics/source quality, full build, photographic Denoise/Sky and unit/integration. Blocking UX returned 203 PASS / 1 FAIL, 87 SKIPPED and 31 NOT_IMPLEMENTED. Supplemental and static steps were skipped, not passed.",
+    "The first ZOM001 repetition was killed by the unchanged >5s main-loop watchdog. Its truncated main-thread sample contains only _LUTevalFloat. Both passing sibling samples identify the synchronous test reference -> renderCPU -> DisplayTransform -> cmsDoTransform path; their maximum main-loop gaps were 2678 and 3573 ms.",
+    "Source/action ordering and sibling stacks support CPU test-oracle work as the cause, but the failing sample alone does not contain a complete caller chain. The original hosted failure remains retained and the replacement hosted run is required.",
+    "Only the independent zoom CPU oracle moves to std::launch::async. ICC data is read on the GUI thread first; workers see immutable fixture/settings/profile data and assert a different thread ID. GUI wait pumps real events. Timeout cancels and joins before borrowed data leaves scope; exceptions propagate.",
+    "Pixel math, reference size/ICC, exact acceptance criteria, rendering pipeline, fixtures and watchdog threshold are unchanged. Real GUI heartbeats are never fabricated. Worker start/completion dimensions and elapsed times are logged.",
+    "The existing adversarial watchdog test still kills a hung fake process after five seconds and overrides its forged PASS. This is a runner unit control, not a real application hang scenario."
+  ],
+  "limits": [
+    "Native evidence predates the worker-only harness change; no second native interval was assumed or used.",
+    "Offscreen timing on this M3 is not a product latency or hosted-runner performance qualification. CPU references remain independent of the application backend and do not prove GPU completion order.",
+    "No claim closes GAP049, BUG045, full phase coverage, load/hardware/model/RAW/installation or updater gaps. Stable distribution remains 0.5.1 and no 1.0 tag/appcast/installer is published."
+  ]
+}

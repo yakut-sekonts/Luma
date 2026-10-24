@@ -5,6 +5,8 @@
 #include "core/jobs/JobManager.h"
 #include "core/render/CpuRenderer.h"
 #include "core/render/DevelopPipeline.h"
+#include "core/render/RetouchPass.h"
+#include "tests/unit/LegacyCatalogFixture.h"
 #include <array>
 #include <cmath>
 #include <fstream>
@@ -75,6 +77,39 @@ void imageTests() {
     stop.cancel();
     throws([&] { luma::renderCPU(gray, {}, 0, {}, stop.token()); });
     throws([] { luma::FloatImage invalid(0, 10); });
+}
+void retouchSourceTests() {
+    for (const auto size : {std::array{64, 64}, std::array{97, 83}}) {
+        luma::FloatImage image(size[0], size[1]);
+        std::fill(image.rgb.begin(), image.rgb.end(), .25F);
+        const auto center = (static_cast<std::size_t>(size[1] / 2) * size[0] + size[0] / 2) * 3;
+        image.rgb[center] = 1;
+        const auto original = image.rgb;
+        luma::RetouchStroke stroke;
+        stroke.id = "1234-abcd";
+        stroke.mode = luma::RetouchMode::clone;
+        stroke.radius = .06;
+        stroke.points = {{.5, .5}};
+        const auto offset = luma::findRetouchSource(image, stroke);
+        require(offset == luma::findRetouchSource(image, stroke),
+                "Retouch source search was not deterministic.");
+        require(std::isfinite(offset[0]) && std::isfinite(offset[1]) &&
+                    std::hypot(offset[0] * size[0], offset[1] * size[1]) >
+                        2 * stroke.radius * std::min(size[0], size[1]),
+                "Retouch source overlaps the target.");
+        stroke.sourceOffsetX = offset[0];
+        stroke.sourceOffsetY = offset[1];
+        luma::RetouchPass repaired(image, {stroke});
+        require(std::abs(repaired.image().rgb[center] - .25F) < 1e-6 && image.rgb == original,
+                "Retouch did not repair the isolated defect or mutated its source.");
+        require(luma::decodeRetouch(luma::encodeRetouch({stroke})) == std::vector{stroke},
+                "Retouch persistence lost the resolved donor.");
+        luma::CancellationSource cancelled;
+        cancelled.cancel();
+        throws([&] { luma::findRetouchSource(image, stroke, cancelled.token()); });
+        image.alpha.assign(static_cast<std::size_t>(size[0]) * size[1], 0);
+        throws([&] { luma::findRetouchSource(image, stroke); });
+    }
 }
 void jpegProfileTests() {
     const std::vector<std::uint8_t> jpeg{255, 216, 255, 224, 0, 4, 1,   2,
@@ -235,6 +270,9 @@ void catalogTests() {
         }
         sqlite3 *db = nullptr;
         require(sqlite3_open(path.c_str(), &db) == SQLITE_OK, "Cannot open schema test database.");
+        require(sqlite3_exec(db, fixture::removePostV11Tables, nullptr, nullptr, nullptr) ==
+                    SQLITE_OK,
+                "Cannot remove newer features from the historical M0 fixture.");
         const char *legacy = R"sql(
             BEGIN;
             CREATE TABLE legacy_edits(asset_id TEXT PRIMARY KEY REFERENCES assets(id) ON DELETE CASCADE,
@@ -272,7 +310,7 @@ void catalogTests() {
         }
         require(sqlite3_open(path.c_str(), &db) == SQLITE_OK,
                 "Cannot reopen future schema fixture.");
-        require(sqlite3_exec(db, "PRAGMA user_version=12", nullptr, nullptr, nullptr) == SQLITE_OK,
+        require(sqlite3_exec(db, "PRAGMA user_version=22", nullptr, nullptr, nullptr) == SQLITE_OK,
                 "Cannot create future catalog.");
         sqlite3_close(db);
         throws([&] { luma::Catalog future(path); });
@@ -284,6 +322,7 @@ void catalogTests() {
 }
 void jobTests() {
     luma::JobManager jobs;
+    require(jobs.idle(), "An empty job pool is not idle.");
     std::promise<void> firstStarted;
     std::promise<void> release;
     auto waiting = release.get_future().share();
@@ -292,6 +331,7 @@ void jobTests() {
         waiting.wait();
     });
     firstStarted.get_future().wait();
+    require(!jobs.idle(), "Running worker was reported idle.");
     std::atomic<bool> executed = false;
     auto cancelled = jobs.submit(luma::JobPriority::background,
                                  [&](const luma::JobContext &) { executed = true; });
@@ -311,15 +351,40 @@ void jobTests() {
             "Cancelled job state was not retained.");
     require(first.state() == luma::JobState::completed, "Completed job state is wrong.");
     require(interactive.progress() == 1, "Job progress did not complete.");
+    require(jobs.idle(), "A stopped, drained pool is not idle.");
+}
+void cancelledWorkerIdleTests() {
+    luma::JobManager jobs;
+    std::promise<void> started, release;
+    auto waiting = release.get_future().share();
+    auto previous = jobs.submit(luma::JobPriority::background, [&](const luma::JobContext &) {
+        started.set_value();
+        waiting.wait();
+    });
+    started.get_future().wait();
+    previous.cancel();
+    auto newest = jobs.submit(luma::JobPriority::background, [](const luma::JobContext &) {});
+    newest.cancel();
+    jobs.submit(luma::JobPriority::interactive, [](const luma::JobContext &) {});
+    const bool newestTerminal = newest.state() == luma::JobState::cancelled;
+    const bool oldWorkerRetained = previous.state() == luma::JobState::running && !jobs.idle();
+    release.set_value();
+    jobs.shutdown();
+    require(newestTerminal, "Cancelled queued handle did not reach its terminal state.");
+    require(oldWorkerRetained, "Terminal replacement handle hid an older cancelled worker.");
+    require(jobs.idle() && previous.state() == luma::JobState::cancelled,
+            "Cancelled worker was not drained before idle.");
 }
 } // namespace
 int main() {
     try {
         imageTests();
+        retouchSourceTests();
         developTests();
         jpegProfileTests();
         catalogTests();
         jobTests();
+        cancelledWorkerIdleTests();
         std::cout << "Core unit tests passed\n";
         return 0;
     } catch (const std::exception &error) {

@@ -1,3 +1,4 @@
+#include "core/render/DevelopPipeline.h"
 #include "tests/ux/HistoryChaos.h"
 #include "tests/ux/UxContext.h"
 #include "tests/ux/UxPixels.h"
@@ -170,19 +171,28 @@ void checkpoint(Context &c, const Baseline &before, const HistoryChaosModel &mod
         },
         "chaos natural autosave reached the exact full expected document");
     const auto image = fixtureReference(c, expected, before.source);
-    c.driver->wait(
-        [&] {
-            auto *preview = c.driver->item("develop.preview");
-            return preview->isVisible() && preview->property("status").toInt() == 1 &&
-                   preview->property("source").toUrl().toString() == c.editor.previewUrl() &&
-                   c.provider->requestImage({}, nullptr, {}) == image;
-        },
-        "chaos exact Ready preview reached the independent full document");
+    const bool metalEligible =
+        c.editor.metalPreview() && luma::DevelopPipeline(expected).gpuCompatible();
+    try {
+        c.driver->wait(
+            [&] {
+                auto *preview = c.driver->item("develop.preview");
+                return preview->isVisible() && preview->property("status").toInt() == 1 &&
+                       preview->property("source").toUrl().toString() == c.editor.previewUrl() &&
+                       previewPixelsAgree(c.provider->requestImage({}, nullptr, {}), image,
+                                          metalEligible);
+            },
+            "chaos Ready preview reached the independent full document within its renderer budget");
+    } catch (...) {
+        recordPreviewDifference(c, image, "History chaos durable checkpoint");
+        throw;
+    }
     invariant(c, before, model);
     c.checkData();
 }
 } // namespace
 void runHistoryChaos(Context &c, const HistoryChaosPlan &plan) {
+    checkPreviewPixelOracle();
     std::cerr << "CHAOS seed=" << plan.seed << " actions=" << plan.actions << '\n';
     require(static_cast<int>(plan.rows.size()) == plan.actions && plan.actions >= 1,
             "Chaos plan/action count mismatch before fixture input");

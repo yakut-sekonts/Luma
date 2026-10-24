@@ -8,6 +8,8 @@ from collections import Counter
 from contextlib import closing
 import hashlib
 from history_chaos_cli import configure_history_chaos
+from catalog_invariants import audit_restored_workflow
+from migration_fixtures import prepare_migration, audit_migration
 from native_bundle_provenance import native_bundle_info, launch_executable
 from quality_policy import quality_skip_reason, quality_fixture_count
 from thumbnail_response_fixtures import CASE_PROFILE_IDS as THUMBNAIL_PROFILE_IDS, official_fixture as thumbnail_fixture
@@ -18,6 +20,11 @@ from export_watermark_fixtures import (OFFICIAL_CASE as WATERMARK_CASE,
                                        child_environment as watermark_child_environment)
 from export_current_filename_fixtures import (OFFICIAL_CASE as CURRENT_FILENAME_CASE,
                                               official_fixture as current_filename_fixture)
+from metadata_display_fixtures import (OFFICIAL_CASE as METADATA_DISPLAY_CASE,
+                                       official_fixture as metadata_display_fixture)
+from ai_workflow_fixtures import CASE_PROFILE_IDS as AI_PROFILE_IDS, official_fixture as ai_fixture
+from catalog_scale_fixtures import CASE_PROFILE_IDS as CATALOG_SCALE_IDS, official_fixture as catalog_scale_fixture
+from merge_fixtures import CASE_PROFILE_IDS as MERGE_PROFILE_IDS, official_fixture as merge_fixture
 import importlib.util
 import json
 import os
@@ -32,13 +39,18 @@ import sys
 import time
 import zlib
 
-CASE_PROFILE_IDS = THUMBNAIL_PROFILE_IDS | {WATERMARK_CASE, CROP_DONE_CASE, CURRENT_FILENAME_CASE, PARTIAL_RENDER_CASE}
+CASE_PROFILE_IDS = AI_PROFILE_IDS | CATALOG_SCALE_IDS | MERGE_PROFILE_IDS | THUMBNAIL_PROFILE_IDS | {WATERMARK_CASE, CROP_DONE_CASE, CURRENT_FILENAME_CASE, PARTIAL_RENDER_CASE, METADATA_DISPLAY_CASE}
 
-# These adapters have explicit actual-native render contracts. NATIVE below means
+# These adapters have explicit actual-native render/measurement contracts. NATIVE below means
 # implemented adapter, not compatibility with every requested Qt backend.
 NATIVE_ONLY_CONTRACTS = {
     'UX-MAC-001': {'platform': 'cocoa', 'graphics_api': 'metal', 'device_pixel_ratio': 2},
     CROP_DONE_CASE: {'platform': 'cocoa', 'graphics_api': 'metal'},
+    'UX-P10-A11Y-002': {'platform': 'cocoa'},
+    'UX-NAV-002': {'platform': 'cocoa'},
+    'UX-PRV-002': {'platform': 'cocoa'},
+    'UX-ADV-012': {'platform': 'cocoa'},
+    'UX-PERF-006': {'platform': 'cocoa'},
 }
 
 
@@ -75,8 +87,24 @@ NATIVE.update(f'UX-MSK-{i:03}' for i in (1,2,3,4,6,7,9,10,11,13,14,15,16,17,19,2
 
 NATIVE.update(('UX-APP-006', 'UX-APP-007', 'UX-NAV-008', 'UX-NAV-009', 'UX-NAV-013', 'UX-KEY-002',
                'UX-SLD-007', 'UX-SLD-008', 'UX-SLD-019', 'UX-UND-001', 'UX-UND-002', 'UX-UND-003', 'UX-UND-004', 'UX-UND-005', 'UX-UND-010'))
+NATIVE.update(('UX-PRV-012', 'UX-P06-ZOM-003', 'UX-P06-ZOM-004', 'UX-P06-ZOM-012'))
+NATIVE.update(f'UX-P06-ZOM-{i:03}' for i in (6,7,8,9))
 NATIVE.add('UX-PRV-013')
 NATIVE.add('UX-PRV-006')
+NATIVE.update(('UX-P06-GPU-001', 'UX-P06-GPU-002'))
+NATIVE.update(('UX-P06-MEM-001', 'UX-P06-MEM-002'))
+NATIVE.update(('UX-P06-LRU-001', 'UX-P06-LRU-002'))
+NATIVE.add('UX-P09-BKP-001')
+NATIVE.add('UX-P06-PRG-001')
+NATIVE.update(MERGE_PROFILE_IDS)
+NATIVE.update(AI_PROFILE_IDS)
+NATIVE.update(f'UX-P07-REM-{i:03}' for i in (1, 2, 3))
+NATIVE.update(f'UX-P09-RLK-{i:03}' for i in (1, 2, 3, 4, 6, 7))
+NATIVE.update(('UX-P09-BKP-002', 'UX-P09-BKP-006', 'UX-P09-BKP-007'))
+NATIVE.update(('UX-P09-META-001', 'UX-P09-META-006', 'UX-P09-META-002', 'UX-P09-META-007', 'UX-P09-XMP-002',
+               'UX-P09-XMP-003', 'UX-P09-XMP-004', 'UX-P09-XMP-005'))
+NATIVE.update(('UX-P06-ZOM-001', 'UX-P06-ZOM-002', 'UX-P06-ZOM-005',
+               'UX-P06-PRG-002', 'UX-P06-PRG-004', 'UX-P06-PRG-007', 'UX-P06-PRG-008', 'UX-P06-PRG-009'))
 NATIVE.update(f'UX-IMP-{i:03}' for i in (1, 2, 3, 4, 6, 7, 8, 9, 13, 14, 15, 16))
 NATIVE.add('UX-APP-008')
 NATIVE.update(f'UX-REC-{i:03}' for i in (1, 2, 3, 4, 5, 6, 12))
@@ -85,9 +113,20 @@ NATIVE.add('UX-APP-009')
 RESTART = {'UX-APP-001', 'UX-APP-003', 'UX-APP-005', 'UX-APP-007',
            'UX-MSK-008', 'UX-MSK-040', 'UX-UND-013', 'UX-UND-014', 'UX-UND-015', 'UX-REC-007',
            'UX-DTL-012', 'UX-SLD-020', 'UX-CRP-018', 'UX-LNS-010', 'UX-TRN-015', 'UX-IMP-020', 'UX-LOC-006', 'UX-LOC-007'}
-KILL = {'UX-UND-014', 'UX-UND-015', 'UX-REC-007', 'UX-IMP-020'}
+KILL = {'UX-P09-XMP-012', 'UX-P09-FLT-002', 'UX-UND-014', 'UX-UND-015', 'UX-REC-007', 'UX-IMP-020'}
 RESTART.update(('UX-PRS-011', 'UX-PRS-018', 'UX-REC-009', 'UX-APP-004', 'UX-SLD-016'))
 RESTART.add('UX-EXP-025')
+RESTART.update(('UX-P08-PAN-012', 'UX-P08-FLT-001'))
+RESTART.add('UX-P07-DNS-008')
+RESTART.update(CATALOG_SCALE_IDS)
+RESTART.update(('UX-P09-XMP-012', 'UX-P09-FLT-002'))
+CRASH_IDS = {f'UX-P09-FLT-{i:03}' for i in (1, 3, 4, 5, 6)}
+RESTART.update(CRASH_IDS)
+KILL.update(CRASH_IDS)
+RESTART.add('UX-P10-DAT-004')
+RESTART.update(('UX-P10-DAY-007', 'UX-P10-DAY-010', 'UX-P10-DAY-013', 'UX-P10-DAT-005'))
+KILL.add('UX-P10-DAY-007')
+NATIVE.add('UX-P09-XMP-001')
 NATIVE.update(RESTART)
 NATIVE.update(f'UX-BAT-{i:03}' for i in (1, 2, 3, 5, 6, 8, 9, 10, 12, 15))
 NATIVE.add('UX-APP-010')
@@ -144,6 +183,10 @@ NATIVE.add(WATERMARK_CASE)
 NATIVE.add(CROP_DONE_CASE)
 NATIVE.add(CURRENT_FILENAME_CASE)
 NATIVE.add(PARTIAL_RENDER_CASE)
+NATIVE.add('UX-P09-PERF-001')  # Executable Python schema adapter; no native UI claim.
+NATIVE.add('UX-P10-A11Y-002')
+NATIVE.add('UX-P10-DAY-009')
+NATIVE.add('UX-P10-DAY-003')
 GLOBAL = {'UX-UND-018'}
 
 CASE_TIMEOUTS = {'UX-MAC-008': 300, 'UX-MAC-007': 300, 'UX-EXP-026': 300, 'UX-UND-017': 3600, 'UX-LIB-006': 300, 'UX-LIB-018': 300, 'UX-MAC-001': 300,
@@ -160,6 +203,8 @@ CASE_TIMEOUTS = {'UX-MAC-008': 300, 'UX-MAC-007': 300, 'UX-EXP-026': 300, 'UX-UN
 
 
 ISOLATED_VARIANTS = {
+    'UX-P10-UPG-012': ('save', 'import', 'export', 'batch', 'merge', 'merge-cancel'),
+    'UX-P10-DAY-011': ('hdr', 'panorama'),
     'UX-UPD-003': ('import', 'export', 'batch'),
     'UX-MAC-008': ('copy', 'export'),
 }
@@ -214,7 +259,21 @@ def merge_fixture_hashes(profiles):
     return merged
 
 
-def in_scope(scope, through):
+def implemented_scope(scope, identifier=None):
+    # A named, source-implemented TARGET can enter qualification without
+    # changing the original specification or admitting other future targets.
+    if scope == 'TARGET':
+        return MANIFEST.get('implemented_targets', {}).get(identifier, scope)
+    return scope
+
+
+def capability_implemented(scope, identifier):
+    return (implemented_scope(scope, identifier) in ('ALL', 'CURRENT', *MANIFEST['completed_phases'])
+            or identifier in MANIFEST.get('implemented_scenarios', ()))
+
+
+def in_scope(scope, through, identifier=None):
+    scope = implemented_scope(scope, identifier)
     if scope in ('ALL', 'CURRENT'):
         return True
     if scope == 'TARGET':
@@ -320,6 +379,12 @@ def build_provenance(build, snapshot):
         return {'status': 'UNVERIFIED', 'path': str(path), 'reason': str(error)}
 
 
+def offline_child_command(identifier, command):
+    if identifier != 'UX-P10-DAY-012':
+        return list(command)
+    return ['/usr/bin/sandbox-exec', '-p', '(version 1) (allow default) (deny network*)', *command]
+
+
 def execute(row, directory, arguments, fixture_folder):
     directory.mkdir(parents=True)
     environment = os.environ.copy()
@@ -334,6 +399,8 @@ def execute(row, directory, arguments, fixture_folder):
     command = [str(launch_executable(arguments.build)), '--case', row['id'], '--root', str(directory),
                '--fixtures', str(fixture_folder), '--qml', str(ROOT / 'apps/desktop/qml')]
     state_root = getattr(arguments, 'state_root', directory)
+    if row['id'] == 'UX-P10-DAT-004' and getattr(arguments, 'stage', None) == 'prepare':
+        prepare_migration(state_root)
     if getattr(arguments, 'stage', None):
         command.extend(['--stage', arguments.stage, '--state-root', str(state_root)])
     if getattr(arguments, 'variant', None):
@@ -342,6 +409,7 @@ def execute(row, directory, arguments, fixture_folder):
         command.extend(['--seed', str(arguments.seed), '--actions', str(arguments.actions)])
         if arguments.replay:
             command.extend(['--replay', str(arguments.replay)])
+    command = offline_child_command(row['id'], command)
     atomic_json(directory / 'command.json', command)
     deadline_seconds = scenario_timeout(row['id'], arguments)
     started = time.monotonic()
@@ -354,9 +422,9 @@ def execute(row, directory, arguments, fixture_folder):
         try:
             while process.poll() is None:
                 ready = directory / 'kill-ready.json'
-                if row['id'] in KILL and getattr(arguments, 'stage', None) == 'prepare' and ready.exists():
+                if row['id'] in KILL and getattr(arguments, 'stage', None) in ('prepare', 'prepare-committed') and ready.exists():
                     marker = json.loads(ready.read_text())
-                    if marker.get('id') != row['id'] or marker.get('stage') != 'prepare' or marker.get('pid') != process.pid:
+                    if marker.get('id') != row['id'] or marker.get('stage') != arguments.stage or marker.get('pid') != process.pid:
                         reason = 'Invalid intentional-kill stage marker'
                     elif row['id'] == 'UX-UND-015' and time.time() * 1000 - marker['utc_ms'] > 100:
                         reason = 'Pending-debounce kill missed its 100 ms fixture window'
@@ -369,9 +437,10 @@ def execute(row, directory, arguments, fixture_folder):
                     if current != observed:
                         observed, last_beat = current, time.monotonic()
                 if time.monotonic() - last_beat > 2 and diagnostic is None and Path('/usr/bin/sample').exists():
-                    diagnostic = subprocess.Popen(['/usr/bin/sample', str(process.pid), '1', '10',
-                                                   '-file', str(directory / 'thread-sample.txt')],
-                                                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                    with (directory / 'thread-sample.log').open('w') as sample_log:
+                        diagnostic = subprocess.Popen(['/usr/bin/sample', str(process.pid), '1', '10',
+                                                       '-file', str(directory / 'thread-sample.txt')],
+                                                      stdout=sample_log, stderr=subprocess.STDOUT)
                 if time.monotonic() - last_beat > 5:
                     reason = 'P0 hard hang: no main-loop heartbeat for >5s'
                 if time.monotonic() - started > deadline_seconds:
@@ -389,6 +458,9 @@ def execute(row, directory, arguments, fixture_folder):
                 except subprocess.TimeoutExpired:
                     diagnostic.terminate()
                     diagnostic.wait(timeout=2)
+                atomic_json(directory / 'thread-sample-status.json',
+                            {'returncode': diagnostic.returncode,
+                             'sample_available': (directory / 'thread-sample.txt').exists()})
     result_path = directory / 'result.json'
     child_result = json.loads(result_path.read_text()) if result_path.exists() else None
     if child_result is not None:
@@ -416,6 +488,12 @@ def execute(row, directory, arguments, fixture_folder):
                 pass  # Retain the numeric code if the platform has no signal name.
         result.update(status='FAIL', message=reason or result.get('message') or exit_message)
     catalog = state_root / 'catalog.sqlite'
+    restored_daily = row['id'] in ('UX-P10-DAY-010', 'UX-P10-DAT-005') and getattr(arguments, 'stage', None) == 'verify'
+    if restored_daily:
+        catalog = state_root / 'restored' / 'catalog.sqlite'
+        if not catalog.is_file() or catalog.is_symlink():
+            result.update(status='FAIL', message='P0 restored catalog missing or aliased after process exit')
+    result['catalog_audit_path'] = str(catalog)
     if catalog.exists():
         try:
             with closing(sqlite3.connect(f'file:{catalog}?mode=ro', uri=True)) as database:
@@ -424,6 +502,22 @@ def execute(row, directory, arguments, fixture_folder):
             result['catalog_integrity'] = 'PASS'
         except (sqlite3.Error, AssertionError) as error:
             result.update(status='FAIL', message=f'P0 catalog integrity: {error}')
+    if row['id'] == 'UX-P10-DAT-005' and restored_daily and result['status'] == 'PASS':
+        try:
+            audit = audit_restored_workflow(catalog, state_root, fixture_folder, directory, process.pid)
+            atomic_json(directory / 'data-invariants.json', audit)
+            result['data_invariants'] = audit
+        except (OSError, ValueError, sqlite3.Error, KeyError, TypeError) as error:
+            result.update(status='FAIL', message=f'P0 restored data invariant: {error}')
+    if row['id'] == 'UX-P10-DAT-004' and result['status'] == 'PASS':
+        try:
+            audit, after = audit_migration(state_root, directory, process.pid, arguments.stage)
+            atomic_json(directory / 'data-invariants.json', audit)
+            if arguments.stage == 'prepare':
+                atomic_json(state_root / 'first-migration.json', after)
+            result['data_invariants'] = audit
+        except (OSError, ValueError, sqlite3.Error, KeyError, TypeError) as error:
+            result.update(status='FAIL', message=f'P0 migration data invariant: {error}')
     if result['status'] == 'FAIL' and catalog.exists():
         try:
             with closing(sqlite3.connect(f'file:{catalog}?mode=ro', uri=True)) as source:
@@ -442,6 +536,9 @@ def execute(row, directory, arguments, fixture_folder):
 
 
 def execute_scenario(row, directory, arguments, fixture_folder):
+    if row['id'] == 'UX-P09-PERF-001':
+        from performance_baseline import execute_schema_case
+        return execute_schema_case(row, directory)
     variants = ISOLATED_VARIANTS.get(row['id'])
     if row['id'] not in RESTART and not variants:
         return execute(row, directory, arguments, fixture_folder)
@@ -451,6 +548,8 @@ def execute_scenario(row, directory, arguments, fixture_folder):
         stages = variants
     elif cycles:
         stages = ['cycle'] * cycles
+    elif row['id'] == 'UX-P09-FLT-001':
+        stages = ['prepare', 'verify', 'prepare-committed', 'verify-committed']
     else:
         stages = ['prepare', 'verify']
     outcomes = []
@@ -462,7 +561,8 @@ def execute_scenario(row, directory, arguments, fixture_folder):
             options.pop('state_root', None)
             options['variant'] = stage
         else:
-            options.update(stage=stage, state_root=directory / 'state')
+            state = 'state-committed' if stage.endswith('-committed') else 'state'
+            options.update(stage=stage, state_root=directory / state)
         options = argparse.Namespace(**options)
         outcome = execute(row, directory / f'{index + 1:02}-{stage}', options, fixture_folder)
         outcomes.append(outcome)
@@ -486,9 +586,9 @@ def repetitions_for(row, arguments):
 
 
 def phase_selected(row, phase):
-    if phase is None or row['scope'] in ('ALL', phase):
+    if phase is None or implemented_scope(row['scope'], row.get('id')) in ('ALL', phase):
         return True
-    return row['mode'] == 'BLOCKING' and in_scope(row['scope'], phase)
+    return row['mode'] == 'BLOCKING' and in_scope(row['scope'], phase, row.get('id'))
 
 
 def row_selected(row, arguments):
@@ -517,7 +617,7 @@ def qualification_requested(arguments):
 
 def qualify(results, inventory, through, requested):
     required = {r['id'] for r in inventory if r['mode'] == 'BLOCKING'
-                and in_scope(r['scope'], through)}
+                and in_scope(r['scope'], through, r['id'])}
     missing = []
     for identifier in required:
         attempts = [r for r in results if r['id'] == identifier]
@@ -527,15 +627,15 @@ def qualify(results, inventory, through, requested):
            r.get('severity_if_failed', r.get('severity', 'P0')) in ('P0', 'P1') for r in results):
         return 'FAIL', sorted(missing)
     if any(r['status'] == 'SKIPPED' and r.get('skip_reason') == 'unsupported_backend'
-           and in_scope(r.get('scope', 'CURRENT'), through) for r in results):
+           and in_scope(r.get('scope', 'CURRENT'), through, r['id']) for r in results):
         return 'NOT_QUALIFIED', sorted(missing)
     if not requested:
         return 'NOT_QUALIFIED', sorted(missing)
     observed = {row['id'] for row in results}
-    if any(row['id'] not in observed for row in inventory if in_scope(row['scope'], through)):
+    if any(row['id'] not in observed for row in inventory if in_scope(row['scope'], through, row['id'])):
         return 'FAIL', sorted(missing)
     if any(r['status'] == 'SKIPPED' and r.get('skip_reason', 'unadapted') == 'unadapted'
-           and in_scope(r.get('scope', 'CURRENT'), through) for r in results):
+           and in_scope(r.get('scope', 'CURRENT'), through, r['id']) for r in results):
         return 'FAIL', sorted(missing)
     return ('FAIL' if missing else 'PASS'), sorted(missing)
 
@@ -671,8 +771,8 @@ def main(*, inventory=None, executable_ids=None, fixture_factory=None,
         parser.error('--runs and --timeout must be positive')
     selected_rows = [row for row in selected_inventory if row_selected(row, args)]
     fixture_rows = [row for row in selected_rows
-                    if row['id'] in selected_executable and in_scope(row['scope'], args.through)
-                    and (row['scope'] in ('ALL', 'CURRENT') or row['scope'] in MANIFEST['completed_phases'])
+                    if row['id'] in selected_executable and in_scope(row['scope'], args.through, row['id'])
+                    and capability_implemented(row['scope'], row['id'])
                     and not (args.quality_only and quality_skip_reason(row))
                     and not (domain == 'specification' and unsupported_backend_requirement(row['id']))]
     case_profile_rows = [row for row in fixture_rows
@@ -711,12 +811,20 @@ def main(*, inventory=None, executable_ids=None, fixture_factory=None,
         hash_profiles = [(fixture_folder, base_checksums)]
         for row in case_profile_rows:
             folder = run_root / 'case-fixtures' / row['id']
-            if row['id'] == WATERMARK_CASE:
+            if row['id'] in CATALOG_SCALE_IDS:
+                extra_checksums, profile = catalog_scale_fixture(folder, owned_root=run_root, case_id=row['id'])
+            elif row['id'] in AI_PROFILE_IDS:
+                extra_checksums, profile = ai_fixture(folder, owned_root=run_root, case_id=row['id'])
+            elif row['id'] in MERGE_PROFILE_IDS:
+                extra_checksums, profile = merge_fixture(folder, owned_root=run_root, case_id=row['id'])
+            elif row['id'] == WATERMARK_CASE:
                 extra_checksums, profile = watermark_fixture(folder, owned_root=run_root)
             elif row['id'] == CROP_DONE_CASE:
                 extra_checksums, profile = crop_done_fixture(folder, owned_root=run_root)
             elif row['id'] == CURRENT_FILENAME_CASE:
                 extra_checksums, profile = current_filename_fixture(folder, owned_root=run_root)
+            elif row['id'] == METADATA_DISPLAY_CASE:
+                extra_checksums, profile = metadata_display_fixture(folder, owned_root=run_root)
             elif row['id'] == PARTIAL_RENDER_CASE:
                 extra_checksums, profile = partial_render_fixture(folder, owned_root=run_root)
             else:
@@ -749,8 +857,8 @@ def main(*, inventory=None, executable_ids=None, fixture_factory=None,
         for row in selected_rows:
             identifier, scope, mode = row['id'], row['scope'], row['mode']
             repetitions = repetitions_for(row, args)
-            applicable = in_scope(scope, args.through)
-            capable = scope in ('ALL', 'CURRENT') or scope in MANIFEST['completed_phases']
+            applicable = in_scope(scope, args.through, identifier)
+            capable = capability_implemented(scope, identifier)
             if not applicable or not capable or identifier == 'UX-MSK-005':
                 results.append({**row, 'status': 'NOT_IMPLEMENTED', 'notes': ['Capability absent; future phase/conditional tool']})
                 continue
@@ -832,7 +940,7 @@ def main(*, inventory=None, executable_ids=None, fixture_factory=None,
                          for r in results) or not any(r.get('child_pid') for r in results)
         summary['unadapted_applicable'] = sorted({r['id'] for r in results if r['status'] == 'SKIPPED'
                                                 and r.get('skip_reason', 'unadapted') == 'unadapted'
-                                                and in_scope(r.get('scope', 'CURRENT'), args.through)})
+                                                and in_scope(r.get('scope', 'CURRENT'), args.through, r['id'])})
         if not source_stable or args.require_build_provenance and provenance['status'] != 'PASS':
             incomplete = True
             summary['release_gate'] = 'FAIL' if args.release_qualification else 'NOT_QUALIFIED'

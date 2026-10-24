@@ -1,0 +1,479 @@
+{
+  "status": "NOT_QUALIFIED",
+  "scope": "DAY009 actual owned mounted-volume detach, relink and continued daily work",
+  "production_behavior_changed": false,
+  "assertions": [
+    "Real 64 MiB HFS+ image, pinned source hashes, normal detach and remount, mandatory cleanup.",
+    "Import and global/local edits; Missing badge; relink through actual Locate handler at explicit picker-result boundary.",
+    "Identity, committed full document and revision preserved; continued edits, exact Undo/Redo, full-resolution sRGB PNG equals independent CPU pixels.",
+    "Control document and all source hashes unchanged; catalog integrity valid."
+  ],
+  "reports": {
+    "first": {
+      "path": "build-verify/ux-daily-external-relink-first/UX_REPORT.json",
+      "sha256": "2357dbd3f7deefddfb5fb98e17c0828780a4834cb8b0fc74b32e306d67db443e",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "1ea833235b502c264ac39d1d077d7b7fbb6085d4",
+        "worktree_dirty": true,
+        "source_tree_sha256": "4558df811817e7deee62cd936c73541ae1171e4dfe55e12b732d9437015e0a9b",
+        "test_executable_sha256": "6c4cbcb3327adbf9ff3aef11bd33393e125df5c6bf7301dad3b5ce42814e2e37",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "6c4cbcb3327adbf9ff3aef11bd33393e125df5c6bf7301dad3b5ce42814e2e37"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "PASS": 1
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "1ea833235b502c264ac39d1d077d7b7fbb6085d4",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "UX-P10-DAY-009",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 13250,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    },
+    "offscreen": {
+      "path": "build-verify/ux-daily-external-relink-offscreen/UX_REPORT.json",
+      "sha256": "ea60f8794425a3fdadd13963c48d562a37903937eb9fe768be391596a6b9edf8",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "1ea833235b502c264ac39d1d077d7b7fbb6085d4",
+        "worktree_dirty": true,
+        "source_tree_sha256": "4558df811817e7deee62cd936c73541ae1171e4dfe55e12b732d9437015e0a9b",
+        "test_executable_sha256": "6c4cbcb3327adbf9ff3aef11bd33393e125df5c6bf7301dad3b5ce42814e2e37",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "6c4cbcb3327adbf9ff3aef11bd33393e125df5c6bf7301dad3b5ce42814e2e37"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "FAIL": 3
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "1ea833235b502c264ac39d1d077d7b7fbb6085d4",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "UX-P10-DAY-009",
+          "status": "FAIL",
+          "message": "Text input has no active focus item: export.destination",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 6469,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-009",
+          "status": "FAIL",
+          "message": "Text input has no active focus item: export.destination",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 6214,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-009",
+          "status": "FAIL",
+          "message": "Text input has no active focus item: export.destination",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 6785,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    },
+    "native": {
+      "path": "build-verify/ux-daily-external-relink-native/UX_REPORT.json",
+      "sha256": "3a799cfc2479306f818a050e339daf7310fc1474874066407bd54bf1ca2cdbf1",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "1ea833235b502c264ac39d1d077d7b7fbb6085d4",
+        "worktree_dirty": true,
+        "source_tree_sha256": "4558df811817e7deee62cd936c73541ae1171e4dfe55e12b732d9437015e0a9b",
+        "test_executable_sha256": "6c4cbcb3327adbf9ff3aef11bd33393e125df5c6bf7301dad3b5ce42814e2e37",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "6c4cbcb3327adbf9ff3aef11bd33393e125df5c6bf7301dad3b5ce42814e2e37"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "PASS": 3
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "1ea833235b502c264ac39d1d077d7b7fbb6085d4",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "UX-P10-DAY-009",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 12488,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-009",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 11856,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-009",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 13035,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    },
+    "focus": {
+      "path": "build-verify/ux-daily-external-relink-focus/UX_REPORT.json",
+      "sha256": "acfad62b77e8b922b93fb1588838ceb117b026ac603e5030a4aafb2b9e048a15",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "1ea833235b502c264ac39d1d077d7b7fbb6085d4",
+        "worktree_dirty": true,
+        "source_tree_sha256": "7e6519f2e1708995ef91acbb12e7f414b212338558126e040d74ed6a1de0f29d",
+        "test_executable_sha256": "531c2ef91f121e3aa782a9498f7fc0424bc8740afd8a3a1e5958962f55979096",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "531c2ef91f121e3aa782a9498f7fc0424bc8740afd8a3a1e5958962f55979096"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "PASS": 1
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "1ea833235b502c264ac39d1d077d7b7fbb6085d4",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "UX-P10-DAY-009",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 7416,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    },
+    "final-offscreen": {
+      "path": "build-verify/ux-daily-external-relink-final-offscreen/UX_REPORT.json",
+      "sha256": "458a1205465ec0f880d7218e0c80b4cf16a05291d7a8c66e8656d08fc943e5b1",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "1ea833235b502c264ac39d1d077d7b7fbb6085d4",
+        "worktree_dirty": true,
+        "source_tree_sha256": "7e6519f2e1708995ef91acbb12e7f414b212338558126e040d74ed6a1de0f29d",
+        "test_executable_sha256": "531c2ef91f121e3aa782a9498f7fc0424bc8740afd8a3a1e5958962f55979096",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "531c2ef91f121e3aa782a9498f7fc0424bc8740afd8a3a1e5958962f55979096"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "PASS": 3
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "1ea833235b502c264ac39d1d077d7b7fbb6085d4",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "UX-P10-DAY-009",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 7168,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-009",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 7608,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-009",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 6957,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    },
+    "final-native": {
+      "path": "build-verify/ux-daily-external-relink-final-native/UX_REPORT.json",
+      "sha256": "e8d49d5e7260f81dcf2347196fdd7135449fc388b81acd2f4b020948d5b653c6",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "1ea833235b502c264ac39d1d077d7b7fbb6085d4",
+        "worktree_dirty": true,
+        "source_tree_sha256": "7e6519f2e1708995ef91acbb12e7f414b212338558126e040d74ed6a1de0f29d",
+        "test_executable_sha256": "531c2ef91f121e3aa782a9498f7fc0424bc8740afd8a3a1e5958962f55979096",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "531c2ef91f121e3aa782a9498f7fc0424bc8740afd8a3a1e5958962f55979096"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "PASS": 3
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "1ea833235b502c264ac39d1d077d7b7fbb6085d4",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "UX-P10-DAY-009",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 11543,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-009",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 11845,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-009",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 11426,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    }
+  },
+  "history": [
+    "Initial compile assumed LibraryItem contains edits; corrected to full assetByID snapshot.",
+    "Initial offscreen series failed 3/3: synthetic chooser result left an invisible QQuickPopupWindow as keyboard focus window. Initial native 1/1 and subsequent native 3/3 passed.",
+    "Fixture-only offscreen owner reactivation is conditional on a different invisible focus window. No visible modal, Cocoa focus, shared driver or product code changed. Diagnostic 1/1 and final 3/3 offscreen + 3/3 native passed."
+  ],
+  "checks": {
+    "ux_build": "PASS",
+    "affected_ctest": "19 PASS",
+    "runner_units": 46,
+    "quality_policy_units": 12,
+    "format": "PASS",
+    "mandatory_affected_tidy": "PASS; nonblocking diagnostics retained",
+    "graph": {
+      "nodes": 7968,
+      "edges": 20782,
+      "self_loops": 5,
+      "dangling_endpoints": 0,
+      "exact_duplicates": 0
+    },
+    "logs": {
+      ".tools/daily-external-relink-build.log": "901505bec50d4debf331f67bc7b0cf9d4526f25e8344d9171e35f8e8f369c7f4",
+      ".tools/daily-external-relink-build-corrected.log": "1cb26dfec09baab0ef5220f1623381fd40edb4c8398b32463f1e376ca2d3ab88",
+      ".tools/daily-external-relink-focus-build.log": "0d63549e34aa8f33e15803b27030d571747bb80b1086de3b1e691951b0957176",
+      ".tools/daily-external-relink-ctest.log": "b95891c03efefc064d73fe42fec9f4a294fdcea3ee07692de789220c8adae820",
+      ".tools/daily-external-relink-tidy.log": "fb619f2cbf2b75d947070bf8837594539d96565b6cd123545560df926782e051",
+      ".tools/daily-external-relink-graph-diagnostics.log": "ec7f1d6994251f2675335ac76e5442dc3c059545bb678c65732c6f0c454103cc"
+    }
+  },
+  "limits": [
+    "Native picker navigation and physical USB removal are not exercised.",
+    "No installed artifact/update qualification is inferred."
+  ],
+  "unadapted_applicable": {
+    "total": 308,
+    "blocking": 23
+  }
+}

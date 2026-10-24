@@ -185,8 +185,7 @@ int main(int argc, char **argv) {
             held.mode == "copy" && held.sessionState == "running" && held.item.state == "staged" &&
                 held.assetsVisible == 0 && held.item.index == 0 && held.item.source == source &&
                 held.item.target.filename() == source.filename() &&
-                held.item.target.parent_path() ==
-                    destination / ("Luma-" + held.item.sessionID) / "0" &&
+                held.item.target.parent_path() == destination &&
                 held.item.temporary.parent_path() == held.item.target.parent_path() &&
                 held.item.temporary.filename() == ".luma-copy-" + held.item.sessionID + "-0.tmp" &&
                 held.item.checksum == checksum &&

@@ -1,3 +1,6 @@
+#include "platform/macos/FileHasher.h"
+#include "tests/ux/CrashScenarios.h"
+#include "tests/ux/PersistenceProbe.h"
 #include "tests/ux/UxContext.h"
 #include "tests/ux/UxTestIds.h"
 #include <QCoreApplication>
@@ -6,6 +9,13 @@
 #include <QJsonDocument>
 
 namespace ux {
+bool xmpAtomicScenario(Context &, const QString &, const QString &);
+bool catalogCommitCrashScenario(Context &, const QString &, const QString &);
+bool metadataBatchCrashScenario(Context &, const QString &, const QString &);
+bool backupCrashScenario(Context &, const QString &, const QString &);
+bool backupDailyRestartScenario(Context &, const QString &, const QString &);
+bool relinkCrashScenario(Context &, const QString &, const QString &);
+bool mergeCrashScenario(Context &, const QString &, const QString &);
 bool localeRestartScenario(Context &, const QString &, const QString &);
 bool exportSettingsRestartScenario(Context &, const QString &, const QString &);
 bool copyRestartScenario(Context &, const QString &, const QString &);
@@ -13,6 +23,8 @@ bool presetRemainingRestartScenario(Context &, const QString &, const QString &)
 bool thumbnailRestartScenario(Context &, const QString &, const QString &);
 bool whiteBalanceRestartScenario(Context &, const QString &, const QString &);
 bool appMissingSourceRestartScenario(Context &, const QString &, const QString &);
+bool catalogScaleRestartScenario(Context &, const QString &, const QString &);
+bool mergeRestartScenario(Context &, const QString &, const QString &);
 namespace {
 void quit(Context &c) {
     c.driver->quitShortcut();
@@ -22,6 +34,12 @@ void quit(Context &c) {
 }
 } // namespace
 void restartScenario(Context &c, const QString &id, const QString &stage) {
+    if (catalogCommitCrashScenario(c, id, stage) || metadataBatchCrashScenario(c, id, stage) ||
+        backupCrashScenario(c, id, stage) || backupDailyRestartScenario(c, id, stage) ||
+        relinkCrashScenario(c, id, stage) || mergeCrashScenario(c, id, stage) ||
+        xmpAtomicScenario(c, id, stage) || catalogScaleRestartScenario(c, id, stage) ||
+        mergeRestartScenario(c, id, stage))
+        return;
     if (exportSettingsRestartScenario(c, id, stage) || whiteBalanceRestartScenario(c, id, stage) ||
         appMissingSourceRestartScenario(c, id, stage) ||
         presetRemainingRestartScenario(c, id, stage) || thumbnailRestartScenario(c, id, stage) ||
@@ -29,7 +47,9 @@ void restartScenario(Context &c, const QString &id, const QString &stage) {
         return;
     auto &d = *c.driver;
     const bool mask = id == "UX-MSK-008" || id == "UX-MSK-040";
-    const bool killed = id == "UX-UND-014" || id == "UX-UND-015" || id == "UX-REC-007";
+    const bool dailyKill = id == "UX-P10-DAY-007";
+    const bool committedKill = id == "UX-UND-014" || dailyKill;
+    const bool killed = committedKill || id == "UX-UND-015" || id == "UX-REC-007";
     const bool detail = id == "UX-DTL-012" || id == "UX-SLD-020";
     const bool crop = id == "UX-CRP-018";
     const bool transform = id == "UX-TRN-015";
@@ -54,8 +74,16 @@ void restartScenario(Context &c, const QString &id, const QString &stage) {
         if (killed) {
             c.saved();
             c.reveal(ids::exposure);
-            if (id == "UX-UND-014") {
+            if (committedKill) {
                 d.drag(ids::exposure, {.5, .5}, {.65, .5});
+                if (dailyKill) {
+                    c.addMask(2);
+                    d.drag("localMaskGestureArea", {.2, .3}, {.8, .7});
+                    d.wait([&] { return c.editor.localCanvasReady(); },
+                           "Daily-use brush gesture rendered");
+                    c.reveal("local_exposure");
+                    d.drag("local_exposure", d.sliderThumb("local_exposure"), {.65, .5});
+                }
                 c.saved();
             }
             const auto document = c.editor.currentSettings();
@@ -73,7 +101,22 @@ void restartScenario(Context &c, const QString &id, const QString &stage) {
                 require(stored->edits == document,
                         "Expected document serializer lost in-memory fields");
             }
-            writeJson(c.stateRoot + "/expected.json", {{"source", c.editor.sourcePath()}});
+            const auto snapshot = luma::Catalog(c.catalogFile.toStdString())
+                                      .assetSnapshot(c.editor.photoID().toStdString());
+            require(snapshot.has_value(), "Kill fixture lost its committed asset snapshot");
+            writeJson(c.stateRoot + "/expected.json",
+                      {{"source", c.editor.sourcePath()},
+                       {"id", c.editor.photoID()},
+                       {"revision", qint64(snapshot->revision)},
+                       {"prepare_pid", QCoreApplication::applicationPid()}});
+            if (dailyKill) {
+                require(snapshot->asset.edits == document && document.exposure > 1 &&
+                            document.localMasks.size() == 1 &&
+                            !document.localMasks.front().strokes.empty() &&
+                            document.localMasks.front().adjustments[0] > 0,
+                        "Daily-use kill needs a complete committed global/local document");
+                killCheckpoint(c, id, stage, "daily.committed-global-and-local-edits");
+            }
             struct Unblock {
                 SqliteFault &fault;
                 ~Unblock() {
@@ -83,7 +126,7 @@ void restartScenario(Context &c, const QString &id, const QString &stage) {
             [[maybe_unused]] const Unblock unblock{c.storageFault};
             if (id == "UX-REC-007")
                 c.storageFault.holdWrites(true);
-            if (id != "UX-UND-014") {
+            if (!committedKill) {
                 d.drag(ids::exposure, {.5, .5}, {.7, .5});
                 require(c.editor.saving(), "Kill fixture missed pending save");
                 if (id == "UX-REC-007")
@@ -176,6 +219,26 @@ void restartScenario(Context &c, const QString &id, const QString &stage) {
             "Process restart lost/crossed the saved document or mask geometry");
     require(!c.editor.canUndo() && !c.editor.canRedo(),
             "Session-local history crossed a process restart");
+    if (dailyKill) {
+        require(expected["prepare_pid"].toInteger() != QCoreApplication::applicationPid(),
+                "Daily-use recovery did not start a new process");
+        const auto snapshot = luma::Catalog(c.catalogFile.toStdString())
+                                  .assetSnapshot(c.editor.photoID().toStdString());
+        require(snapshot && c.editor.photoID() == expected["id"].toString() &&
+                    snapshot->revision == expected["revision"].toInteger() &&
+                    snapshot->asset.edits == document->edits &&
+                    luma::macos::sha256File(snapshot->asset.path) == snapshot->asset.checksum,
+                "Daily-use restart changed identity, revision, committed edits or original");
+        c.reveal(ids::exposure);
+        d.drag(ids::exposure, d.sliderThumb(ids::exposure), {.3, .5});
+        c.saved();
+        require(c.editor.currentSettings().exposure < -1 && c.editor.canUndo(),
+                "Recovered daily-use session cannot accept another edit");
+        d.click(ids::undo);
+        c.saved();
+        require(c.editor.currentSettings() == document->edits,
+                "New-session Undo did not return to the complete recovered document");
+    }
     if (mask) {
         require(!c.editor.currentSettings().localMasks.empty() && !c.editor.localMode() &&
                     !c.editor.localGestureActive(),
@@ -188,4 +251,81 @@ void restartScenario(Context &c, const QString &id, const QString &stage) {
     }
     quit(c);
 }
+bool catalogCommitCrashScenario(Context &c, const QString &id, const QString &stage) {
+    if (id != "UX-P09-FLT-001")
+        return false;
+    auto &d = *c.driver;
+    const bool committed = stage.endsWith("-committed");
+    const auto expectedPath = (c.stateRoot + "/expected-commit.sqlite").toStdString();
+    luma::Catalog catalog(c.catalogFile.toStdString());
+    if (stage.startsWith("prepare")) {
+        c.import(1);
+        d.doubleClick(c.card(0));
+        c.loaded();
+        c.saved();
+        c.reveal("develop.exposureSlider");
+        d.drag("develop.exposureSlider", d.sliderThumb("develop.exposureSlider"), {.6, .5});
+        c.saved();
+        catalog.backupTo(expectedPath);
+        const auto photo = c.editor.photoID().toStdString();
+        const auto old = catalog.assetSnapshot(photo).value();
+        const std::string point = committed ? "catalog.after-commit" : "catalog.before-commit";
+        PersistenceGate gate(c.catalogFile.toStdString(), {point});
+        d.drag("develop.exposureSlider", d.sliderThumb("develop.exposureSlider"), {.75, .5});
+        const auto desired = c.editor.currentSettings();
+        require(desired != old.asset.edits,
+                "Commit crash fixture needs distinct complete documents");
+        {
+            luma::Catalog expected(expectedPath);
+            expected.saveEdits(photo, desired);
+        }
+        d.wait([&] { return gate.snapshot().held; }, "Actual catalog commit checkpoint reached");
+        const auto visible = catalog.assetSnapshot(photo).value();
+        require(!gate.snapshot().hookFailed &&
+                    visible.asset.edits == (committed ? desired : old.asset.edits) &&
+                    visible.revision == old.revision + (committed ? 1 : 0),
+                "Independent connection saw incorrect catalog transaction state");
+        // Keep both complete documents, without interpreting individual edit fields.
+        luma::Catalog oldState((c.stateRoot + "/old-commit.sqlite").toStdString());
+        auto oldAsset =
+            oldState.addAndSelect(old.asset.path, old.asset.checksum, old.asset.metadata);
+        oldState.saveEdits(oldAsset.id, old.asset.edits);
+        writeJson(c.stateRoot + "/commit-expected.json",
+                  {{"prepare_pid", QCoreApplication::applicationPid()},
+                   {"photo", QString::fromStdString(photo)},
+                   {"old_revision", static_cast<qint64>(old.revision)}});
+        killCheckpoint(c, id, stage, QString::fromStdString(point));
+    }
+    require(stage == "verify" || stage == "verify-committed", "Invalid commit recovery stage");
+    const auto saved = crashExpectation(c, "commit-expected.json");
+    luma::Catalog expected(expectedPath);
+    const auto photo = saved["photo"].toString().toStdString();
+    const auto newState = expected.assetSnapshot(photo).value();
+    const auto oldState =
+        luma::Catalog((c.stateRoot + "/old-commit.sqlite").toStdString()).activeAsset().value();
+    const auto wanted = committed ? newState.asset.edits : oldState.edits;
+    c.editor.restore();
+    c.loaded();
+    c.saved();
+    const auto current = catalog.assetSnapshot(photo).value();
+    require(
+        catalog.libraryIDs({}) == expected.libraryIDs({}) && current.asset.edits == wanted &&
+            current.revision == saved["old_revision"].toInteger() + (committed ? 1 : 0) &&
+            current.asset.path == newState.asset.path &&
+            current.asset.checksum == newState.asset.checksum &&
+            luma::macos::sha256File(current.asset.path) == current.asset.checksum &&
+            c.editor.photoID().toStdString() == photo && c.editor.currentSettings() == wanted &&
+            !c.editor.canUndo() && !c.editor.canRedo(),
+        "Killed catalog transaction lost atomicity, identity, original or complete edit document");
+    c.reveal("develop.contrastSlider");
+    d.drag("develop.contrastSlider", d.sliderThumb("develop.contrastSlider"), {.7, .5});
+    c.saved();
+    d.click("main.undoButton");
+    c.saved();
+    require(c.editor.currentSettings() == wanted && c.editor.canRedo(),
+            "Recovered catalog could not save a new edit and exact Undo");
+    d.log({{"action", "catalog_commit_kill_recovered"}, {"committed", committed}});
+    return true;
+}
+
 } // namespace ux

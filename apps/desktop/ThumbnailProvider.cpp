@@ -24,6 +24,7 @@ struct ThumbnailState {
     std::mutex mutex, cacheMutex;
     std::vector<luma::CancellationSource> active;
     bool shuttingDown = false;
+    bool cacheBudgetChecked = false; // Protected by cacheMutex, including the first cache hit.
 };
 namespace {
 void trimCache(const std::filesystem::path &cache) {
@@ -66,9 +67,11 @@ QImage thumbnail(const std::filesystem::path &catalog, const QString &id,
     const auto &asset = snapshot->asset;
     const auto encoded =
         luma::encodePreset({"Thumbnail", {}, asset.edits, luma::allSettingsGroups});
-    const auto identity = QByteArray::fromStdString(asset.checksum) + "|" +
-                          QByteArray::number(snapshot->revision) + "|" + encoded + "|local-v2|" +
-                          QByteArray::fromStdString(luma::encodeLocalMasks(asset.edits.localMasks));
+    const auto identity =
+        QByteArray::fromStdString(asset.checksum) + "|" + QByteArray::number(snapshot->revision) +
+        "|" + encoded + "|local-v2|" +
+        QByteArray::fromStdString(luma::encodeLocalMasks(asset.edits.localMasks)) + "|retouch-v1|" +
+        QByteArray::fromStdString(luma::encodeRetouch(asset.edits.retouch));
     const auto fingerprint = QCryptographicHash::hash(identity, QCryptographicHash::Sha256).toHex();
     const auto directory =
         catalog.parent_path() / (catalog.filename().string() + ".luma-cache") / "thumbnails";
@@ -86,6 +89,13 @@ QImage thumbnail(const std::filesystem::path &catalog, const QString &id,
             std::filesystem::last_write_time(cached, std::filesystem::file_time_type::clock::now(),
                                              error);
             luma::checkCancellation(stop);
+            // Recover a persisted oversized cache even when this session only
+            // reads existing thumbnails. Later hits need no directory scan;
+            // every new cache publication continues to enforce the same cap.
+            if (!state->cacheBudgetChecked) {
+                trimCache(directory);
+                state->cacheBudgetChecked = true;
+            }
             return image;
         }
     }
@@ -134,6 +144,7 @@ QImage thumbnail(const std::filesystem::path &catalog, const QString &id,
         if (!file.open(QIODevice::WriteOnly) || file.write(jpeg) != jpeg.size() || !file.commit())
             throw std::runtime_error("Cannot write thumbnail cache.");
         trimCache(directory);
+        state->cacheBudgetChecked = true;
     }
     return compressed;
 }

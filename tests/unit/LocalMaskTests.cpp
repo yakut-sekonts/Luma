@@ -4,6 +4,7 @@
 #include "core/export/LinearOutput.h"
 #include "core/render/CpuRenderer.h"
 #include "core/render/CropGeometry.h"
+#include "tests/unit/LegacyCatalogFixture.h"
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -73,9 +74,11 @@ void documents() {
     const auto encoded = luma::encodeLocalMasks({m});
     require(luma::decodeLocalMasks(encoded) == std::vector{m},
             "Canonical Unicode roundtrip failed.");
-    require(luma::encodeLocalMasks({}) == "LUMA_LOCAL_MASKS 2 0\n", "Neutral document changed.");
+    require(luma::encodeLocalMasks({}) == "LUMA_LOCAL_MASKS 3 0\n", "Neutral document changed.");
+    require(luma::decodeLocalMasks("LUMA_LOCAL_MASKS 2 0\n").empty(),
+            "Legacy neutral document did not decode.");
     for (auto text :
-         {encoded + " ", std::string("LUMA_LOCAL_MASKS 3 0\n"),
+         {encoded + " ", std::string("LUMA_LOCAL_MASKS 4 0\n"),
           std::string("LUMA_LOCAL_MASKS 1 129\n"), encoded.substr(0, encoded.size() - 2)})
         rejects([&] { luma::decodeLocalMasks(text); });
     rejects([&] { luma::encodeLocalMasks({m, m}); });
@@ -263,6 +266,7 @@ void persistence(const std::filesystem::path &root) {
         edits.exposure = .7;
         db.saveEdits(id, edits);
     }
+    sql(path, fixture::removePostV11Tables);
     sql(path, "DROP TRIGGER initialize_local_masks;DROP TABLE edit_local_masks;DELETE FROM "
               "schema_migrations WHERE version>=10;PRAGMA user_version=9;");
     {
@@ -316,6 +320,7 @@ void persistence(const std::filesystem::path &root) {
         metadata.height = 2;
         db.addAndSelect(root / "other.dng", "other", metadata);
     }
+    sql(bad, fixture::removePostV11Tables);
     sql(bad, "DROP TRIGGER initialize_local_masks;DROP TABLE edit_local_masks;DELETE FROM "
              "schema_migrations WHERE version>=10;PRAGMA user_version=9;PRAGMA "
              "ignore_check_constraints=ON;UPDATE edit_documents SET schema_version=99;");

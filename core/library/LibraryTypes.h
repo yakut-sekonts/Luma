@@ -1,4 +1,6 @@
 #pragma once
+#include "core/edits/EditDocument.h"
+#include "core/metadata/DescriptiveMetadata.h"
 #include <cstdint>
 #include <filesystem>
 #include <optional>
@@ -21,17 +23,27 @@ struct LibraryItem {
     std::string checksum;
     int width = 0, height = 0, orientation = 0, rating = 0, flag = 0;
     std::string label, camera;
+    bool missing = false;
 };
 struct CollectionRecord {
     std::string id, name;
     std::int64_t count = 0;
+    bool smart = false;
 };
-enum class ImportMode : std::uint8_t { add, copy };
+enum class ImportMode : std::uint8_t { add, copy, move };
 struct ImportOptions {
     ImportMode mode = ImportMode::add;
     std::filesystem::path destination;
     bool recursive = true;
     bool skipDuplicates = true;
+    // Capture date in UTC; missing dates use the timestamp frozen at session start.
+    bool dateFolders = false;
+    std::string naming = "{name}";
+    std::filesystem::path backupDestination{};
+    DescriptiveMetadata metadata{};
+    std::optional<EditDocument> develop = std::nullopt;
+    std::int64_t startedAt = 0;
+    void validate() const;
 };
 struct ImportSummary {
     std::string sessionID;
@@ -43,6 +55,9 @@ struct ImportJournalItem {
     std::filesystem::path source, target, temporary;
     std::string checksum, state, error;
     std::int64_t size = 0;
+    std::filesystem::path backup{}, sourceHold{};
+    std::string moveState{};
+    std::string metadataDocument{};
 };
 struct ImportJournal {
     std::string id, state;
@@ -51,6 +66,13 @@ struct ImportJournal {
     std::filesystem::path destination;
     std::vector<ImportJournalItem> items;
     bool skipDuplicates = true;
+    std::optional<ImportOptions> options = std::nullopt;
 };
+std::string encodeImportOptions(const ImportOptions &options);
+ImportOptions decodeImportOptions(const std::string &document);
+std::filesystem::path importRelativePath(const std::filesystem::path &source,
+                                         std::optional<std::int64_t> capturedAt, int index,
+                                         const ImportOptions &options);
+DescriptiveMetadata importMetadata(DescriptiveMetadata original, const DescriptiveMetadata &preset);
 void validateLabel(const std::string &label);
 } // namespace luma

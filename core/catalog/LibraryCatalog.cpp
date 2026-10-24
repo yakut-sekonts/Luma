@@ -11,12 +11,34 @@ using detail::Statement;
 constexpr auto where =
     " WHERE a.rating>=?1 AND (?2=-2 OR a.flag=?2)"
     " AND (?3='' OR a.filename LIKE ?3 ESCAPE '\\' OR a.original_path LIKE ?3 ESCAPE '\\'"
-    " OR a.camera LIKE ?3 ESCAPE '\\' OR a.lens LIKE ?3 ESCAPE '\\')"
+    " OR a.camera LIKE ?3 ESCAPE '\\' OR a.lens LIKE ?3 ESCAPE '\\'"
+    " OR EXISTS(SELECT 1 FROM asset_keywords k WHERE k.asset_id=a.id AND k.keyword LIKE ?3 ESCAPE "
+    "'\\')"
+    " OR EXISTS(SELECT 1 FROM asset_creators c WHERE c.asset_id=a.id AND c.name LIKE ?3 ESCAPE "
+    "'\\')"
+    " OR EXISTS(SELECT 1 FROM asset_metadata m WHERE m.asset_id=a.id AND (m.title LIKE ?3 ESCAPE "
+    "'\\'"
+    " OR m.caption LIKE ?3 ESCAPE '\\' OR m.xmp_label LIKE ?3 ESCAPE '\\')))"
     " AND (?4='' OR EXISTS(SELECT 1 FROM collection_assets ca WHERE ca.asset_id=a.id AND "
     "ca.collection_id=?4))"
     " AND (?5=0 OR COALESCE(a.color_label,'')=?6)";
 constexpr auto order = " ORDER BY a.filename COLLATE NOCASE,a.id";
-void bindFilter(Statement &query, const LibraryFilter &filter) {
+struct QueryFilter {
+    std::string where;
+    SmartSQL smart;
+    bool dynamic = false;
+};
+QueryFilter resolveFilter(const Catalog &db, const LibraryFilter &filter) {
+    QueryFilter result{where, {}, false};
+    if (!filter.collectionID.empty())
+        if (const auto collection = db.smartCollection(filter.collectionID)) {
+            result.smart = compileSmartRule(collection->rule);
+            result.dynamic = true;
+            result.where += " AND (" + result.smart.expression + ")";
+        }
+    return result;
+}
+void bindFilter(Statement &query, const LibraryFilter &filter, const QueryFilter &resolved) {
     filter.validate();
     query.integer(1, filter.minimumRating);
     query.integer(2, filter.flag);
@@ -27,9 +49,17 @@ void bindFilter(Statement &query, const LibraryFilter &filter) {
         search += c;
     }
     query.text(3, search.empty() ? "" : "%" + search + "%");
-    query.text(4, filter.collectionID);
+    query.text(4, resolved.dynamic ? "" : filter.collectionID);
     query.integer(5, filter.label.has_value() ? 1 : 0);
     query.text(6, filter.label.value_or(""));
+    for (std::size_t i = 0; i < resolved.smart.values.size(); ++i) {
+        const auto &v = resolved.smart.values[i];
+        const int index = 9 + static_cast<int>(i);
+        if (const auto number = std::get_if<double>(&v))
+            query.number(index, *number);
+        else
+            query.text(index, std::get<std::string>(v));
+    }
 }
 void validateName(const std::string &name) {
     if (name.empty() || name.size() > 512 || name.find_first_not_of(" \t\r\n") == std::string::npos)
@@ -41,35 +71,38 @@ void requireChanged(sqlite3 *db) {
 }
 } // namespace
 std::int64_t Catalog::libraryCount(const LibraryFilter &filter) const {
-    Statement query(db_, ("SELECT COUNT(*) FROM assets a" + std::string(where)).c_str());
-    bindFilter(query, filter);
+    const auto resolved = resolveFilter(*this, filter);
+    Statement query(db_, ("SELECT COUNT(*) FROM assets a" + resolved.where).c_str());
+    bindFilter(query, filter, resolved);
     if (!query.row())
         throw std::runtime_error("Cannot count library.");
     return query.integer(0);
 }
 std::optional<std::int64_t> Catalog::libraryIndex(const LibraryFilter &filter,
                                                   const std::string &assetID) const {
+    const auto resolved = resolveFilter(*this, filter);
     filter.validate();
     if (assetID.empty())
         return std::nullopt;
     Statement query(db_,
                     ("SELECT position FROM (SELECT a.id,ROW_NUMBER() OVER (" + std::string(order) +
-                     ")-1 AS position FROM assets a" + where + ") WHERE id=?7")
+                     ")-1 AS position FROM assets a" + resolved.where + ") WHERE id=?7")
                         .c_str());
-    bindFilter(query, filter);
+    bindFilter(query, filter, resolved);
     query.text(7, assetID);
     return query.row() ? std::optional<std::int64_t>(query.integer(0)) : std::nullopt;
 }
 std::vector<LibraryItem> Catalog::libraryPage(const LibraryFilter &filter, int offset,
                                               int limit) const {
+    const auto resolved = resolveFilter(*this, filter);
     if (offset < 0 || limit < 1 || limit > 1024)
         throw std::runtime_error("Invalid metadata page bounds.");
     Statement query(
         db_, ("SELECT a.id,a.original_path,a.filename,a.checksum,a.width,a.height,a.orientation,"
               "a.rating,a.flag,COALESCE(a.color_label,''),a.camera FROM assets a" +
-              std::string(where) + order + " LIMIT ?7 OFFSET ?8")
+              resolved.where + order + " LIMIT ?7 OFFSET ?8")
                  .c_str());
-    bindFilter(query, filter);
+    bindFilter(query, filter, resolved);
     query.integer(7, limit);
     query.integer(8, offset);
     std::vector<LibraryItem> rows;
@@ -82,12 +115,13 @@ std::vector<LibraryItem> Catalog::libraryPage(const LibraryFilter &filter, int o
 }
 std::vector<std::string> Catalog::libraryIDs(const LibraryFilter &filter, int offset,
                                              int limit) const {
+    const auto resolved = resolveFilter(*this, filter);
     if (offset < 0 || limit < 0)
         throw std::runtime_error("Invalid selection bounds.");
-    Statement query(db_, ("SELECT a.id FROM assets a" + std::string(where) + std::string(order) +
+    Statement query(db_, ("SELECT a.id FROM assets a" + resolved.where + std::string(order) +
                           " LIMIT ?7 OFFSET ?8")
                              .c_str());
-    bindFilter(query, filter);
+    bindFilter(query, filter, resolved);
     query.integer(7, limit);
     query.integer(8, offset);
     std::vector<std::string> ids;
@@ -135,8 +169,16 @@ std::vector<CollectionRecord> Catalog::collections() const {
         "SELECT c.id,c.name,COUNT(ca.asset_id) FROM collections c LEFT JOIN collection_assets ca"
         " ON ca.collection_id=c.id GROUP BY c.id ORDER BY c.name COLLATE NOCASE,c.id");
     std::vector<CollectionRecord> rows;
-    while (query.row())
-        rows.push_back({query.string(0), query.string(1), query.integer(2)});
+    while (query.row()) {
+        CollectionRecord record{query.string(0), query.string(1), query.integer(2)};
+        record.smart = smartCollection(record.id).has_value();
+        if (record.smart) {
+            LibraryFilter filter;
+            filter.collectionID = record.id;
+            record.count = libraryCount(filter);
+        }
+        rows.push_back(std::move(record));
+    }
     return rows;
 }
 std::string Catalog::createCollection(const std::string &name) {
@@ -164,6 +206,8 @@ void Catalog::deleteCollection(const std::string &id) {
 }
 void Catalog::collectionMembership(const std::string &collectionID,
                                    const std::vector<std::string> &ids, bool add) {
+    if (smartCollection(collectionID))
+        throw std::runtime_error("Smart collection membership is defined by its rules.");
     execute("BEGIN IMMEDIATE;");
     try {
         Statement exists(db_, "SELECT 1 FROM collections WHERE id=?1");
@@ -192,9 +236,11 @@ void Catalog::collectionMembership(const std::string &collectionID,
 std::string Catalog::beginImport(ImportMode mode, const std::filesystem::path &destination,
                                  const std::vector<std::filesystem::path> &sources,
                                  std::int64_t ownerPID, bool skipDuplicates,
-                                 const std::map<std::filesystem::path, std::string> &sourceErrors) {
+                                 const std::map<std::filesystem::path, std::string> &sourceErrors,
+                                 const std::optional<ImportOptions> &options) {
     if (sources.size() > static_cast<std::size_t>(std::numeric_limits<int>::max()) ||
-        ownerPID <= 0 || (mode != ImportMode::add && mode != ImportMode::copy))
+        ownerPID <= 0 ||
+        (mode != ImportMode::add && mode != ImportMode::copy && mode != ImportMode::move))
         throw std::runtime_error("Invalid import session.");
     if (!sourceErrors.empty()) {
         const std::set<std::filesystem::path> knownSources(sources.begin(), sources.end());
@@ -203,6 +249,9 @@ std::string Catalog::beginImport(ImportMode mode, const std::filesystem::path &d
                 throw std::runtime_error("Invalid initial import error.");
         }
     }
+    const auto optionsDocument = options ? encodeImportOptions(*options) : std::string{};
+    if (mode == ImportMode::move && !options)
+        throw std::runtime_error("Move requires a durable import plan.");
     const auto id = newID();
     execute("BEGIN IMMEDIATE;");
     try {
@@ -215,6 +264,12 @@ std::string Catalog::beginImport(ImportMode mode, const std::filesystem::path &d
         session.integer(4, ownerPID);
         session.integer(5, skipDuplicates ? 1 : 0);
         session.row();
+        if (options) {
+            Statement plan(db_, "INSERT INTO import_options(session_id,document) VALUES(?1,?2)");
+            plan.text(1, id);
+            plan.text(2, optionsDocument);
+            plan.row();
+        }
         for (std::size_t i = 0; i < sources.size(); ++i) {
             const auto failure = sourceErrors.find(sources[i]);
             Statement item(db_,
@@ -248,7 +303,9 @@ void Catalog::stageImport(const ImportJournalItem &item) {
     requireChanged(db_);
 }
 bool Catalog::commitImport(const ImportJournalItem &item, const PhotoMetadata &metadata,
-                           bool skipDuplicates) {
+                           bool skipDuplicates, const std::optional<EditDocument> &develop) {
+    if (develop)
+        develop->validate();
     execute("BEGIN IMMEDIATE;");
     try {
         auto existing =
@@ -259,6 +316,13 @@ bool Catalog::commitImport(const ImportJournalItem &item, const PhotoMetadata &m
             path.text(1, std::filesystem::canonical(item.target).string());
             inserted = !path.row();
             existing = addAssetRecord(item.target, item.checksum, metadata, false);
+        }
+        if (inserted && develop)
+            writeEdits(existing->id, *develop);
+        if (inserted && metadata.descriptive && metadata.descriptiveSource.empty()) {
+            Statement dirty(db_, "UPDATE asset_metadata SET revision=revision+1 WHERE asset_id=?1");
+            dirty.text(1, existing->id);
+            dirty.row();
         }
         Statement complete(db_, "UPDATE import_items SET state=?1,asset_id=?2,error='' WHERE "
                                 "session_id=?3 AND position=?4"
@@ -324,18 +388,48 @@ std::vector<ImportJournal> Catalog::unfinishedImports() const {
                               sessions.integer(3),
                               sessions.string(4),
                               {},
-                              sessions.integer(5) != 0};
+                              sessions.integer(5) != 0,
+                              std::nullopt};
+        Statement options(db_, "SELECT document FROM import_options WHERE session_id=?1");
+        options.text(1, journal.id);
+        if (options.row()) {
+            journal.options = decodeImportOptions(options.string(0));
+            journal.mode = journal.options->mode;
+        }
         Statement items(
             db_,
             "SELECT position,source_path,target_path,temporary_path,checksum,state,error,filesize "
             "FROM import_items"
-            " WHERE session_id=?1 AND state IN ('queued','staged') ORDER BY position");
+            " WHERE session_id=?1 AND (state IN ('queued','staged') OR (state='committed' AND "
+            "EXISTS(SELECT 1 FROM import_item_plans p WHERE p.session_id=import_items.session_id "
+            "AND p.position=import_items.position AND p.move_state='pending'))) ORDER BY position");
         items.text(1, journal.id);
-        while (items.row())
-            journal.items.push_back({journal.id, static_cast<int>(items.integer(0)),
-                                     items.string(1), items.string(2), items.string(3),
-                                     items.string(4), items.string(5), items.string(6),
-                                     items.integer(7)});
+        while (items.row()) {
+            journal.items.push_back({journal.id,
+                                     static_cast<int>(items.integer(0)),
+                                     items.string(1),
+                                     items.string(2),
+                                     items.string(3),
+                                     items.string(4),
+                                     items.string(5),
+                                     items.string(6),
+                                     items.integer(7),
+                                     {},
+                                     {},
+                                     {},
+                                     {}});
+            auto &item = journal.items.back();
+            Statement plan(db_, "SELECT backup_path,source_hold_path,move_state,metadata_document "
+                                "FROM import_item_plans WHERE session_id=?1 AND position=?2");
+            plan.text(1, journal.id);
+            plan.integer(2, item.index);
+            if (plan.row()) {
+                item.backup = plan.string(0);
+                item.sourceHold = plan.string(1);
+                item.moveState = plan.string(2);
+                item.metadataDocument = plan.string(3);
+            }
+        }
         result.push_back(std::move(journal));
     }
     return result;
@@ -358,11 +452,18 @@ ImportSummary Catalog::importSummary(const std::string &sessionID) const {
         else if (state == "cancelled")
             result.cancelled = count;
     }
+    Statement warnings(db_, "SELECT COUNT(*) FROM import_items WHERE session_id=?1 AND "
+                            "state='committed' AND error!=''");
+    warnings.text(1, sessionID);
+    if (warnings.row())
+        result.failed += warnings.integer(0);
     return result;
 }
 std::vector<std::string> Catalog::importProblems(const std::string &sessionID) const {
-    Statement query(db_, "SELECT source_path,error FROM import_items WHERE session_id=?1"
-                         " AND state='failed' ORDER BY position LIMIT 100");
+    Statement query(
+        db_,
+        "SELECT source_path,error FROM import_items WHERE session_id=?1"
+        " AND (state='failed' OR (state='committed' AND error!='')) ORDER BY position LIMIT 100");
     query.text(1, sessionID);
     std::vector<std::string> results;
     while (query.row())

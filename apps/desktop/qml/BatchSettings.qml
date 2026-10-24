@@ -34,13 +34,13 @@ GridLayout {
         parent: Overlay.overlay; anchors.centerIn: parent
         width: 430; implicitWidth: 430; modal: true
         title: qsTranslate("Luma", "Sync Settings")
-        property int groups: 255
+        property int groups: 4095
         ColumnLayout {
             width: parent.width
             Label { text: qsTranslate("Luma", "Source: ") + editor.filename; textFormat: Text.PlainText; wrapMode: Text.Wrap; Layout.fillWidth: true }
             Label { text: qsTranslate("Luma", "Selected photos: ") + library.selectedCount + qsTranslate("Luma", ". Only the selected groups will change."); wrapMode: Text.Wrap; Layout.fillWidth: true }
             Repeater {
-                model: [qsTranslate("Luma", "Light"), qsTranslate("Luma", "Color"), qsTranslate("Luma", "Curve"), "HSL", qsTranslate("Luma", "Detail"), qsTranslate("Luma", "Crop"), qsTranslate("Luma", "Optics"), qsTranslate("Luma", "Geometry")]
+                model: [qsTranslate("Luma", "Light"), qsTranslate("Luma", "Color"), qsTranslate("Luma", "Curve"), "HSL", qsTranslate("Luma", "Detail"), qsTranslate("Luma", "Crop"), qsTranslate("Luma", "Optics"), qsTranslate("Luma", "Geometry"),qsTranslate("Luma","Presence"),qsTranslate("Luma","Point Color"),qsTranslate("Luma","Color Grading"),qsTranslate("Luma","Effects")]
                 CheckBox {
                     required property string modelData
                     required property int index

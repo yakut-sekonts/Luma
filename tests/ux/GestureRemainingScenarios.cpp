@@ -242,7 +242,7 @@ void scrollHeight(Context &c) {
     durable(c, c.editor.photoID(), expected);
     rendered(c, expected);
 }
-// Bounded passive reload/layout evidence for UX-DSC-006. No event pumping or input.
+// Bounded passive photo-switch/layout evidence for UX-DSC-006. No event pumping or input.
 class ScrollPhotoTrace {
   public:
     ScrollPhotoTrace(Context &context, double baseline)
@@ -263,6 +263,10 @@ class ScrollPhotoTrace {
                          [this] { record("library.modelAboutToBeReset"); });
         QObject::connect(&c.library, &QAbstractItemModel::modelReset, &observer,
                          [this] { record("library.modelReset"); });
+        QObject::connect(&c.editor, &EditorController::stateChanged, &observer,
+                         [this] { record("editor.stateChanged"); });
+        QObject::connect(&c.editor, &EditorController::photoLoaded, &observer,
+                         [this] { record("editor.photoLoaded"); });
         QObject::connect(c.window, &QQuickWindow::afterAnimating, &observer,
                          [this] { record("window.afterAnimating"); });
         QObject::connect(c.window, &QQuickWindow::activeFocusItemChanged, &observer,
@@ -292,23 +296,27 @@ class ScrollPhotoTrace {
                    {"events", events},
                    {"current", snapshot("write")}});
     }
-    void verifyReloadGeometry(const QString &expectedPhase) const {
-        bool observedPendingReload = false;
+    void verifyPhotoSwitchGeometry(const QString &expectedPhase, const QString &from,
+                                   const QString &to) const {
+        bool observedPrevious = false, observedBusy = false, observedLoaded = false;
         for (const auto &value : events) {
             const auto event = value.toObject();
-            if (event["phase"].toString() != expectedPhase || !event["library_loading"].toBool() ||
-                event["library_count"].toInt() != 0 || !event["editor_has_photo"].toBool())
+            if (event["phase"].toString() != expectedPhase)
                 continue;
-            observedPendingReload = true;
+            observedPrevious |= event["photo_id"].toString() == from;
+            observedBusy |= event["editor_busy"].toBool();
+            observedLoaded |= event["event"].toString() == "editor.photoLoaded" &&
+                              event["photo_id"].toString() == to;
             const auto scroll = event["scroll"].toObject();
-            require(event["filmstrip"].toObject()["visible"].toBool() &&
+            require(!event["library_mode"].toBool() &&
+                        event["filmstrip"].toObject()["visible"].toBool() &&
                         std::abs(scroll["height"].toDouble() - baselineViewport) <= 1 &&
                         std::abs(scroll["contentY"].toDouble() - baselineY) <= 1,
-                    "Photo-switch reload hid the filmstrip or moved the adjustments viewport: " +
+                    "Photo switch hid the filmstrip or moved the adjustments viewport: " +
                         expectedPhase);
         }
-        require(observedPendingReload && dropped == 0,
-                "Photo-switch regression missed complete pending-reload geometry: " +
+        require(from != to && observedPrevious && observedBusy && observedLoaded && dropped == 0,
+                "Photo-switch regression missed the previous/busy/loaded geometry: " +
                     expectedPhase);
     }
 
@@ -399,7 +407,7 @@ void scrollPhoto(Context &c) {
         settled(c);
         trace.mark("before.original.strict.offset.assert");
         trace.save("before-original-strict-offset-assert");
-        trace.verifyReloadGeometry("A-to-B");
+        trace.verifyPhotoSwitchGeometry("A-to-B", a, b);
         require(scrollState(c).y > scrollState(c).viewport && std::abs(scrollState(c).y - y) <= 1,
                 "Photo switch unexpectedly abandoned its deep adjustments viewport");
         validRange(c);
@@ -417,7 +425,7 @@ void scrollPhoto(Context &c) {
         detailControls(c, aDoc);
         rendered(c, aDoc);
         durable(c, a, aDoc);
-        trace.verifyReloadGeometry("B-to-A");
+        trace.verifyPhotoSwitchGeometry("B-to-A", b, a);
         trace.mark("completed");
         trace.save("completed");
     } catch (...) {
@@ -609,13 +617,7 @@ void heldLibrary(Context &c) {
     durable(c, photo, fresh);
 }
 void selectGroups(Context &c, std::uint32_t groups) {
-    for (int i = 0; i < 8; ++i) {
-        const auto name = "presetGroup" + QString::number(i);
-        if (c.driver->object(name)->property("checked").toBool() != bool(groups & (1u << i)))
-            c.driver->click(name);
-    }
-    require(c.driver->object("presetEditor")->property("groups").toUInt() == groups,
-            "Preset group dialog did not acknowledge optics-only selection");
+    c.selectPresetGroups(groups);
 }
 void presetOpened(Context &c) {
     c.driver->wait([&] { return c.driver->object("presetEditor")->property("opened").toBool(); },

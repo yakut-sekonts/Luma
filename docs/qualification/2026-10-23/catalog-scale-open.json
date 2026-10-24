@@ -1,0 +1,3279 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-23T19:02:59.103392+00:00",
+  "base_commit": "87ad951",
+  "release_gate": "NOT_QUALIFIED",
+  "new_adapters": [
+    "UX-P09-CAT-001",
+    "UX-P09-CAT-006",
+    "UX-P09-CAT-011"
+  ],
+  "contracts": [
+    "Prepare 10000/100000/500000 metadata rows and close. A distinct fresh process uses actual Library startup and recovery with no refresh/repopulation.",
+    "Require exact SQLite/model count, bounded cards/pages, actual scrollbar movement to nine regions, and actual visible non-placeholder IDs/filenames/Missing properties.",
+    "Independent SQLite integrity and foreign-key audits remain complete. Their test-only scan runs off GUI while the genuine heartbeat and unchanged five-second watchdog stay active.",
+    "No image files are generated: an isolated empty source folder prevents test artifacts from triggering source-watch reloads. Missing-original warnings are expected and retained."
+  ],
+  "reports": {
+    "ux-catalog-scale-first": {
+      "file": {
+        "path": "build-verify/ux-catalog-scale-first/UX_REPORT.json",
+        "sha256": "51d2cd5ac0bd535dadf02be96a46b5659b6031309b571a3ba037660d1897fc0b",
+        "bytes": 51558
+      },
+      "summary": {
+        "FAIL": 3
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "87ad95179e404110fb62c8eba5a59a704397e66c",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "87ad95179e404110fb62c8eba5a59a704397e66c",
+        "worktree_dirty": true,
+        "source_tree_sha256": "a42a44e1de8aace1719e1fef40ea9dfaf55394f29d6c54aad94b9cd5feb4b7c9",
+        "test_executable_sha256": "51d0050bcd1dd0e7cce518916ffee5ca647b17960a1a8ac24daa03fe87f4f6ca",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "51d0050bcd1dd0e7cce518916ffee5ca647b17960a1a8ac24daa03fe87f4f6ca"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P09-CAT-001",
+          "status": "FAIL",
+          "message": "Timeout: Prepared large catalog closed before fresh-process open",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T184734Z-9149/UX-P09-CAT-001/repeat-1",
+          "wall_duration_ms": 31118,
+          "rss_peak_mb": 127.53125,
+          "main_loop_stall_max_ms": 56,
+          "stages": [
+            {
+              "status": "FAIL",
+              "message": "Timeout: Prepared large catalog closed before fresh-process open",
+              "child_pid": 9174,
+              "catalog_integrity": "PASS",
+              "platform": "offscreen",
+              "graphics_api": "software",
+              "device_pixel_ratio": 1,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T184734Z-9149/UX-P09-CAT-001/repeat-1/01-prepare",
+              "rss_peak_mb": 127.53125,
+              "main_loop_stall_max_ms": 56,
+              "warning_count": 36,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 10000
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-006",
+          "status": "FAIL",
+          "message": "Timeout: Prepared large catalog closed before fresh-process open",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T184734Z-9149/UX-P09-CAT-006/repeat-1",
+          "wall_duration_ms": 33337,
+          "rss_peak_mb": 125.09375,
+          "main_loop_stall_max_ms": 99,
+          "stages": [
+            {
+              "status": "FAIL",
+              "message": "Timeout: Prepared large catalog closed before fresh-process open",
+              "child_pid": 9324,
+              "catalog_integrity": "PASS",
+              "platform": "offscreen",
+              "graphics_api": "software",
+              "device_pixel_ratio": 1,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T184734Z-9149/UX-P09-CAT-006/repeat-1/01-prepare",
+              "rss_peak_mb": 125.09375,
+              "main_loop_stall_max_ms": 99,
+              "warning_count": 36,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 100000
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-011",
+          "status": "FAIL",
+          "message": "Timeout: Prepared large catalog closed before fresh-process open",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T184734Z-9149/UX-P09-CAT-011/repeat-1",
+          "wall_duration_ms": 46911,
+          "rss_peak_mb": 122.03125,
+          "main_loop_stall_max_ms": 72,
+          "stages": [
+            {
+              "status": "FAIL",
+              "message": "Timeout: Prepared large catalog closed before fresh-process open",
+              "child_pid": 9524,
+              "catalog_integrity": "PASS",
+              "platform": "offscreen",
+              "graphics_api": "software",
+              "device_pixel_ratio": 1,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T184734Z-9149/UX-P09-CAT-011/repeat-1/01-prepare",
+              "rss_peak_mb": 122.03125,
+              "main_loop_stall_max_ms": 72,
+              "warning_count": 36,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 500000
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        }
+      ]
+    },
+    "ux-catalog-scale-corrected": {
+      "file": {
+        "path": "build-verify/ux-catalog-scale-corrected/UX_REPORT.json",
+        "sha256": "b24736f2aaff0a7516bb627d34c3df43c3b8b85ecb38061008801b6f095dac94",
+        "bytes": 94338
+      },
+      "summary": {
+        "PASS": 2,
+        "FAIL": 1
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "87ad95179e404110fb62c8eba5a59a704397e66c",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "87ad95179e404110fb62c8eba5a59a704397e66c",
+        "worktree_dirty": true,
+        "source_tree_sha256": "3f63ab2d19480a17344070668ee1673caeb763f7285df91bd62c8bb1475aca51",
+        "test_executable_sha256": "56c99427d3ff31a0dd639b41b8445acac0d4385fe177856d230ea151fcc50fc6",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "56c99427d3ff31a0dd639b41b8445acac0d4385fe177856d230ea151fcc50fc6"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P09-CAT-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T184937Z-9787/UX-P09-CAT-001/repeat-1",
+          "wall_duration_ms": 2685,
+          "rss_peak_mb": 129.984375,
+          "main_loop_stall_max_ms": 25,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 9850,
+              "catalog_integrity": "PASS",
+              "platform": "offscreen",
+              "graphics_api": "software",
+              "device_pixel_ratio": 1,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T184937Z-9787/UX-P09-CAT-001/repeat-1/01-prepare",
+              "rss_peak_mb": 104.21875,
+              "main_loop_stall_max_ms": 20,
+              "warning_count": 10,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 10000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 9854,
+              "catalog_integrity": "PASS",
+              "platform": "offscreen",
+              "graphics_api": "software",
+              "device_pixel_ratio": 1,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T184937Z-9787/UX-P09-CAT-001/repeat-1/02-verify",
+              "rss_peak_mb": 129.984375,
+              "main_loop_stall_max_ms": 25,
+              "warning_count": 173,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 12,
+                  "performance_qualification": false,
+                  "prepare_pid": 9850,
+                  "real_image_files": 0,
+                  "rows": 10000,
+                  "verify_pid": 9854
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 8,
+                  "delegates": 24,
+                  "fraction": 0.1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.3
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 18,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.7
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 0.9
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 12,
+                  "fraction": 0
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-006",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T184937Z-9787/UX-P09-CAT-006/repeat-1",
+          "wall_duration_ms": 10949,
+          "rss_peak_mb": 128.71875,
+          "main_loop_stall_max_ms": 26,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 9864,
+              "catalog_integrity": "PASS",
+              "platform": "offscreen",
+              "graphics_api": "software",
+              "device_pixel_ratio": 1,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T184937Z-9787/UX-P09-CAT-006/repeat-1/01-prepare",
+              "rss_peak_mb": 125.25,
+              "main_loop_stall_max_ms": 21,
+              "warning_count": 9,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 100000
+                }
+              ],
+              "thread_samples": [
+                {
+                  "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T184937Z-9787/UX-P09-CAT-006/repeat-1/01-prepare/thread-sample.txt",
+                  "sha256": "90f7f6398aa7aa9463694fa76a28e6cbb49ff7de7f9903e4f8b4c216262dd414",
+                  "bytes": 111010
+                }
+              ]
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 9907,
+              "catalog_integrity": "PASS",
+              "platform": "offscreen",
+              "graphics_api": "software",
+              "device_pixel_ratio": 1,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T184937Z-9787/UX-P09-CAT-006/repeat-1/02-verify",
+              "rss_peak_mb": 128.71875,
+              "main_loop_stall_max_ms": 26,
+              "warning_count": 63,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 12,
+                  "performance_qualification": false,
+                  "prepare_pid": 9864,
+                  "real_image_files": 0,
+                  "rows": 100000,
+                  "verify_pid": 9907
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 14,
+                  "delegates": 15,
+                  "fraction": 0.1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 0.3
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 17,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.7
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.9
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 24,
+                  "fraction": 1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 17,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 12,
+                  "fraction": 0
+                }
+              ],
+              "thread_samples": [
+                {
+                  "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T184937Z-9787/UX-P09-CAT-006/repeat-1/02-verify/thread-sample.txt",
+                  "sha256": "35e923810a727b5b02fe8a409fcf33013cdedc6f59e453f9e5fa250cb03d7f07",
+                  "bytes": 131812
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-011",
+          "status": "FAIL",
+          "message": "P0 hard hang: no main-loop heartbeat for >5s",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T184937Z-9787/UX-P09-CAT-011/repeat-1",
+          "wall_duration_ms": 21114,
+          "rss_peak_mb": 0,
+          "main_loop_stall_max_ms": 0,
+          "stages": [
+            {
+              "status": "FAIL",
+              "message": "P0 hard hang: no main-loop heartbeat for >5s",
+              "child_pid": 9926,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T184937Z-9787/UX-P09-CAT-011/repeat-1/01-prepare",
+              "warning_count": 0,
+              "unique_warnings": [],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 500000
+                }
+              ],
+              "thread_samples": [
+                {
+                  "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T184937Z-9787/UX-P09-CAT-011/repeat-1/01-prepare/thread-sample.txt",
+                  "sha256": "b6fbba5a656ff17bf6e6753761caa818a19849524a5dfebb887f8e4b52876e06",
+                  "bytes": 136104
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "ux-catalog-500k-audit": {
+      "file": {
+        "path": "build-verify/ux-catalog-500k-audit/UX_REPORT.json",
+        "sha256": "5c655b839ffdb35cc69abeb83060948939c5baaf2959fba6b532d3fd684609d3",
+        "bytes": 44283
+      },
+      "summary": {
+        "PASS": 1
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "87ad95179e404110fb62c8eba5a59a704397e66c",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "87ad95179e404110fb62c8eba5a59a704397e66c",
+        "worktree_dirty": true,
+        "source_tree_sha256": "9f3e8086a37ba6d7659c05f67c1af4fbdea111d6dc5ca4fa9acc4efeb047bbe9",
+        "test_executable_sha256": "4813cf55f074913464e2df4a8eaa5ef1501c788394ea4f302c0eae77459c694e",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "4813cf55f074913464e2df4a8eaa5ef1501c788394ea4f302c0eae77459c694e"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P09-CAT-011",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185109Z-10096/UX-P09-CAT-011/repeat-1",
+          "wall_duration_ms": 53385,
+          "rss_peak_mb": 125.15625,
+          "main_loop_stall_max_ms": 61,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 10163,
+              "catalog_integrity": "PASS",
+              "platform": "offscreen",
+              "graphics_api": "software",
+              "device_pixel_ratio": 1,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185109Z-10096/UX-P09-CAT-011/repeat-1/01-prepare",
+              "rss_peak_mb": 119.046875,
+              "main_loop_stall_max_ms": 61,
+              "warning_count": 36,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 500000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 10333,
+              "catalog_integrity": "PASS",
+              "platform": "offscreen",
+              "graphics_api": "software",
+              "device_pixel_ratio": 1,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185109Z-10096/UX-P09-CAT-011/repeat-1/02-verify",
+              "rss_peak_mb": 125.15625,
+              "main_loop_stall_max_ms": 42,
+              "warning_count": 88,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 12,
+                  "performance_qualification": false,
+                  "prepare_pid": 10163,
+                  "real_image_files": 0,
+                  "rows": 500000,
+                  "verify_pid": 10333
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 6,
+                  "delegates": 16,
+                  "fraction": 0.1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 12,
+                  "delegates": 23,
+                  "fraction": 0.3
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.7
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 25,
+                  "fraction": 0.9
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 12,
+                  "fraction": 0
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        }
+      ]
+    },
+    "ux-catalog-scale-native": {
+      "file": {
+        "path": "build-verify/ux-catalog-scale-native/UX_REPORT.json",
+        "sha256": "5aa0fe5065fac7041523f1bf61c2869d43c0a018a43eb607fa8adc48dce3e560",
+        "bytes": 364936
+      },
+      "summary": {
+        "PASS": 9
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "87ad95179e404110fb62c8eba5a59a704397e66c",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "87ad95179e404110fb62c8eba5a59a704397e66c",
+        "worktree_dirty": true,
+        "source_tree_sha256": "c2a9ec21bec786f6748744f9af80d2f5899b934a07fb1b7f2927c594b318527d",
+        "test_executable_sha256": "f8493128ac9e18596589beb4d5519ddcca3d5c148684a9d1b164554f0aaad57b",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "f8493128ac9e18596589beb4d5519ddcca3d5c148684a9d1b164554f0aaad57b"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P09-CAT-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-001/repeat-1",
+          "wall_duration_ms": 5692,
+          "rss_peak_mb": 206.796875,
+          "main_loop_stall_max_ms": 233,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 10902,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-001/repeat-1/01-prepare",
+              "rss_peak_mb": 206.796875,
+              "main_loop_stall_max_ms": 233,
+              "warning_count": 12,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 10000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 10916,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-001/repeat-1/02-verify",
+              "rss_peak_mb": 199.078125,
+              "main_loop_stall_max_ms": 218,
+              "warning_count": 163,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 12,
+                  "performance_qualification": false,
+                  "prepare_pid": 10902,
+                  "real_image_files": 0,
+                  "rows": 10000,
+                  "verify_pid": 10916
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 8,
+                  "delegates": 16,
+                  "fraction": 0.1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.3
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 18,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.7
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 24,
+                  "fraction": 0.9
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 12,
+                  "fraction": 0
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-001/repeat-2",
+          "wall_duration_ms": 4223,
+          "rss_peak_mb": 226.453125,
+          "main_loop_stall_max_ms": 147,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 10941,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-001/repeat-2/01-prepare",
+              "rss_peak_mb": 222.890625,
+              "main_loop_stall_max_ms": 147,
+              "warning_count": 12,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 10000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 10960,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-001/repeat-2/02-verify",
+              "rss_peak_mb": 226.453125,
+              "main_loop_stall_max_ms": 108,
+              "warning_count": 143,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 12,
+                  "performance_qualification": false,
+                  "prepare_pid": 10941,
+                  "real_image_files": 0,
+                  "rows": 10000,
+                  "verify_pid": 10960
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 8,
+                  "delegates": 16,
+                  "fraction": 0.1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.3
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 18,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.7
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 0.9
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 12,
+                  "fraction": 0
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-001/repeat-3",
+          "wall_duration_ms": 4129,
+          "rss_peak_mb": 213.15625,
+          "main_loop_stall_max_ms": 119,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 10975,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-001/repeat-3/01-prepare",
+              "rss_peak_mb": 211.78125,
+              "main_loop_stall_max_ms": 115,
+              "warning_count": 12,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 10000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 10985,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-001/repeat-3/02-verify",
+              "rss_peak_mb": 213.15625,
+              "main_loop_stall_max_ms": 119,
+              "warning_count": 163,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 12,
+                  "performance_qualification": false,
+                  "prepare_pid": 10975,
+                  "real_image_files": 0,
+                  "rows": 10000,
+                  "verify_pid": 10985
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 8,
+                  "delegates": 16,
+                  "fraction": 0.1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.3
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 18,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.7
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 0.9
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 12,
+                  "fraction": 0
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-006",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-006/repeat-1",
+          "wall_duration_ms": 7259,
+          "rss_peak_mb": 226.40625,
+          "main_loop_stall_max_ms": 161,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11000,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-006/repeat-1/01-prepare",
+              "rss_peak_mb": 226.40625,
+              "main_loop_stall_max_ms": 102,
+              "warning_count": 12,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 100000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11021,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-006/repeat-1/02-verify",
+              "rss_peak_mb": 204.734375,
+              "main_loop_stall_max_ms": 161,
+              "warning_count": 65,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 12,
+                  "performance_qualification": false,
+                  "prepare_pid": 11000,
+                  "real_image_files": 0,
+                  "rows": 100000,
+                  "verify_pid": 11021
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 12,
+                  "delegates": 15,
+                  "fraction": 0.1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 0.3
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 17,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.7
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.9
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 17,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 12,
+                  "fraction": 0
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-006",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-006/repeat-2",
+          "wall_duration_ms": 7679,
+          "rss_peak_mb": 221.796875,
+          "main_loop_stall_max_ms": 154,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11054,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-006/repeat-2/01-prepare",
+              "rss_peak_mb": 219.28125,
+              "main_loop_stall_max_ms": 154,
+              "warning_count": 12,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 100000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11073,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-006/repeat-2/02-verify",
+              "rss_peak_mb": 221.796875,
+              "main_loop_stall_max_ms": 120,
+              "warning_count": 72,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 12,
+                  "performance_qualification": false,
+                  "prepare_pid": 11054,
+                  "real_image_files": 0,
+                  "rows": 100000,
+                  "verify_pid": 11073
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 14,
+                  "delegates": 15,
+                  "fraction": 0.1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 0.3
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 17,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.7
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.9
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 17,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 12,
+                  "fraction": 0
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-006",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-006/repeat-3",
+          "wall_duration_ms": 7361,
+          "rss_peak_mb": 215.75,
+          "main_loop_stall_max_ms": 127,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11102,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-006/repeat-3/01-prepare",
+              "rss_peak_mb": 215.75,
+              "main_loop_stall_max_ms": 112,
+              "warning_count": 12,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 100000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11118,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-006/repeat-3/02-verify",
+              "rss_peak_mb": 213.578125,
+              "main_loop_stall_max_ms": 127,
+              "warning_count": 69,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 12,
+                  "performance_qualification": false,
+                  "prepare_pid": 11102,
+                  "real_image_files": 0,
+                  "rows": 100000,
+                  "verify_pid": 11118
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 14,
+                  "delegates": 15,
+                  "fraction": 0.1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 0.3
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 17,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.7
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.9
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 17,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 12,
+                  "fraction": 0
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-011",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-011/repeat-1",
+          "wall_duration_ms": 42239,
+          "rss_peak_mb": 221.671875,
+          "main_loop_stall_max_ms": 216,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11152,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-011/repeat-1/01-prepare",
+              "rss_peak_mb": 221.671875,
+              "main_loop_stall_max_ms": 181,
+              "warning_count": 36,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 500000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11264,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-011/repeat-1/02-verify",
+              "rss_peak_mb": 203.015625,
+              "main_loop_stall_max_ms": 216,
+              "warning_count": 82,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 20,
+                  "performance_qualification": false,
+                  "prepare_pid": 11152,
+                  "real_image_files": 0,
+                  "rows": 500000,
+                  "verify_pid": 11264
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 4,
+                  "delegates": 16,
+                  "fraction": 0.1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 9,
+                  "delegates": 15,
+                  "fraction": 0.3
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 13,
+                  "delegates": 15,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.7
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 17,
+                  "fraction": 0.9
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 12,
+                  "fraction": 0
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-011",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-011/repeat-2",
+          "wall_duration_ms": 37050,
+          "rss_peak_mb": 211.875,
+          "main_loop_stall_max_ms": 194,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11330,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-011/repeat-2/01-prepare",
+              "rss_peak_mb": 199.6875,
+              "main_loop_stall_max_ms": 194,
+              "warning_count": 36,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 500000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11432,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-011/repeat-2/02-verify",
+              "rss_peak_mb": 211.875,
+              "main_loop_stall_max_ms": 184,
+              "warning_count": 83,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 20,
+                  "performance_qualification": false,
+                  "prepare_pid": 11330,
+                  "real_image_files": 0,
+                  "rows": 500000,
+                  "verify_pid": 11432
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 4,
+                  "delegates": 16,
+                  "fraction": 0.1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 10,
+                  "delegates": 15,
+                  "fraction": 0.3
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 15,
+                  "delegates": 15,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.7
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 17,
+                  "fraction": 0.9
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 12,
+                  "fraction": 0
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-011",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-011/repeat-3",
+          "wall_duration_ms": 44987,
+          "rss_peak_mb": 200.625,
+          "main_loop_stall_max_ms": 284,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11511,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-011/repeat-3/01-prepare",
+              "rss_peak_mb": 200.625,
+              "main_loop_stall_max_ms": 189,
+              "warning_count": 36,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 500000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11613,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185409Z-10441/UX-P09-CAT-011/repeat-3/02-verify",
+              "rss_peak_mb": 196.4375,
+              "main_loop_stall_max_ms": 284,
+              "warning_count": 80,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 20,
+                  "performance_qualification": false,
+                  "prepare_pid": 11511,
+                  "real_image_files": 0,
+                  "rows": 500000,
+                  "verify_pid": 11613
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 4,
+                  "delegates": 16,
+                  "fraction": 0.1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 9,
+                  "delegates": 15,
+                  "fraction": 0.3
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 13,
+                  "delegates": 15,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.7
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 17,
+                  "fraction": 0.9
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 1
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.5
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 12,
+                  "fraction": 0
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        }
+      ]
+    },
+    "ux-catalog-scale-populated-native": {
+      "file": {
+        "path": "build-verify/ux-catalog-scale-populated-native/UX_REPORT.json",
+        "sha256": "ae46c0594cc92f4de7579e168e4c94e61d2d2b6c3a37efb8f140970cddf892e9",
+        "bytes": 473461
+      },
+      "summary": {
+        "PASS": 9
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "87ad95179e404110fb62c8eba5a59a704397e66c",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "87ad95179e404110fb62c8eba5a59a704397e66c",
+        "worktree_dirty": true,
+        "source_tree_sha256": "528c501b0b5c06cce619e3e15582f4b4561734684cac9363ec2235c1cdaa6b9d",
+        "test_executable_sha256": "b56aaffa79a1c17c0eb154ab39e99e2ac0fbab20bb1d3493f235d4ca042774cd",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "b56aaffa79a1c17c0eb154ab39e99e2ac0fbab20bb1d3493f235d4ca042774cd"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P09-CAT-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-001/repeat-1",
+          "wall_duration_ms": 4270,
+          "rss_peak_mb": 223.984375,
+          "main_loop_stall_max_ms": 183,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 12298,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-001/repeat-1/01-prepare",
+              "rss_peak_mb": 205.859375,
+              "main_loop_stall_max_ms": 183,
+              "warning_count": 12,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 10000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 12309,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-001/repeat-1/02-verify",
+              "rss_peak_mb": 223.984375,
+              "main_loop_stall_max_ms": 110,
+              "warning_count": 154,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 12,
+                  "performance_qualification": false,
+                  "prepare_pid": 12298,
+                  "real_image_files": 0,
+                  "rows": 10000,
+                  "verify_pid": 12309
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 8,
+                  "delegates": 16,
+                  "fraction": 0.1,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.3,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 18,
+                  "fraction": 0.5,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.7,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 24,
+                  "fraction": 0.9,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 1,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.5,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 12,
+                  "fraction": 0,
+                  "populated_visible_cards": 8
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-001/repeat-2",
+          "wall_duration_ms": 3033,
+          "rss_peak_mb": 227.359375,
+          "main_loop_stall_max_ms": 121,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 12331,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-001/repeat-2/01-prepare",
+              "rss_peak_mb": 214.5,
+              "main_loop_stall_max_ms": 104,
+              "warning_count": 12,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 10000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 12344,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-001/repeat-2/02-verify",
+              "rss_peak_mb": 227.359375,
+              "main_loop_stall_max_ms": 121,
+              "warning_count": 155,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 12,
+                  "performance_qualification": false,
+                  "prepare_pid": 12331,
+                  "real_image_files": 0,
+                  "rows": 10000,
+                  "verify_pid": 12344
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 8,
+                  "delegates": 16,
+                  "fraction": 0.1,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.3,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 18,
+                  "fraction": 0.5,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.7,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 0.9,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 1,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.5,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 12,
+                  "fraction": 0,
+                  "populated_visible_cards": 8
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-001/repeat-3",
+          "wall_duration_ms": 2923,
+          "rss_peak_mb": 239.765625,
+          "main_loop_stall_max_ms": 113,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 12367,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-001/repeat-3/01-prepare",
+              "rss_peak_mb": 208.75,
+              "main_loop_stall_max_ms": 105,
+              "warning_count": 12,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 10000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 12382,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-001/repeat-3/02-verify",
+              "rss_peak_mb": 239.765625,
+              "main_loop_stall_max_ms": 113,
+              "warning_count": 159,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 12,
+                  "performance_qualification": false,
+                  "prepare_pid": 12367,
+                  "real_image_files": 0,
+                  "rows": 10000,
+                  "verify_pid": 12382
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 8,
+                  "delegates": 16,
+                  "fraction": 0.1,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.3,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 18,
+                  "fraction": 0.5,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.7,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 0.9,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 16,
+                  "fraction": 1,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 15,
+                  "fraction": 0.5,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 12,
+                  "fraction": 0,
+                  "populated_visible_cards": 8
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-006",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-006/repeat-1",
+          "wall_duration_ms": 8369,
+          "rss_peak_mb": 211.59375,
+          "main_loop_stall_max_ms": 136,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 12395,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-006/repeat-1/01-prepare",
+              "rss_peak_mb": 208.796875,
+              "main_loop_stall_max_ms": 131,
+              "warning_count": 12,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 100000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 12433,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-006/repeat-1/02-verify",
+              "rss_peak_mb": 211.59375,
+              "main_loop_stall_max_ms": 136,
+              "warning_count": 129,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 12,
+                  "performance_qualification": false,
+                  "prepare_pid": 12395,
+                  "real_image_files": 0,
+                  "rows": 100000,
+                  "verify_pid": 12433
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 14,
+                  "delegates": 15,
+                  "fraction": 0.1,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 24,
+                  "fraction": 0.3,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 25,
+                  "fraction": 0.5,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.7,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.9,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 24,
+                  "fraction": 1,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 25,
+                  "fraction": 0.5,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 20,
+                  "fraction": 0,
+                  "populated_visible_cards": 8
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-006",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-006/repeat-2",
+          "wall_duration_ms": 9584,
+          "rss_peak_mb": 209.953125,
+          "main_loop_stall_max_ms": 197,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 12455,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-006/repeat-2/01-prepare",
+              "rss_peak_mb": 202.15625,
+              "main_loop_stall_max_ms": 154,
+              "warning_count": 12,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 100000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 12482,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-006/repeat-2/02-verify",
+              "rss_peak_mb": 209.953125,
+              "main_loop_stall_max_ms": 197,
+              "warning_count": 121,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 12,
+                  "performance_qualification": false,
+                  "prepare_pid": 12455,
+                  "real_image_files": 0,
+                  "rows": 100000,
+                  "verify_pid": 12482
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 14,
+                  "delegates": 15,
+                  "fraction": 0.1,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 24,
+                  "fraction": 0.3,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 25,
+                  "fraction": 0.5,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.7,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.9,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 24,
+                  "fraction": 1,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 25,
+                  "fraction": 0.5,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 20,
+                  "fraction": 0,
+                  "populated_visible_cards": 8
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-006",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-006/repeat-3",
+          "wall_duration_ms": 9243,
+          "rss_peak_mb": 228.9375,
+          "main_loop_stall_max_ms": 176,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 12520,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-006/repeat-3/01-prepare",
+              "rss_peak_mb": 199.171875,
+              "main_loop_stall_max_ms": 176,
+              "warning_count": 12,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 100000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 12540,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-006/repeat-3/02-verify",
+              "rss_peak_mb": 228.9375,
+              "main_loop_stall_max_ms": 163,
+              "warning_count": 70,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 12,
+                  "performance_qualification": false,
+                  "prepare_pid": 12520,
+                  "real_image_files": 0,
+                  "rows": 100000,
+                  "verify_pid": 12540
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 14,
+                  "delegates": 23,
+                  "fraction": 0.1,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 24,
+                  "fraction": 0.3,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 25,
+                  "fraction": 0.5,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.7,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.9,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 24,
+                  "fraction": 1,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 25,
+                  "fraction": 0.5,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 20,
+                  "fraction": 0,
+                  "populated_visible_cards": 8
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-011",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-011/repeat-1",
+          "wall_duration_ms": 37693,
+          "rss_peak_mb": 203.890625,
+          "main_loop_stall_max_ms": 337,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 12567,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-011/repeat-1/01-prepare",
+              "rss_peak_mb": 195.734375,
+              "main_loop_stall_max_ms": 225,
+              "warning_count": 36,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 500000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 12638,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-011/repeat-1/02-verify",
+              "rss_peak_mb": 203.890625,
+              "main_loop_stall_max_ms": 337,
+              "warning_count": 189,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 12,
+                  "performance_qualification": false,
+                  "prepare_pid": 12567,
+                  "real_image_files": 0,
+                  "rows": 500000,
+                  "verify_pid": 12638
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 15,
+                  "delegates": 24,
+                  "fraction": 0.1,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.3,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.5,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.7,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 25,
+                  "fraction": 0.9,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 1,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.5,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 20,
+                  "fraction": 0,
+                  "populated_visible_cards": 8
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-011",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-011/repeat-2",
+          "wall_duration_ms": 36764,
+          "rss_peak_mb": 209.34375,
+          "main_loop_stall_max_ms": 226,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 12711,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-011/repeat-2/01-prepare",
+              "rss_peak_mb": 203.40625,
+              "main_loop_stall_max_ms": 195,
+              "warning_count": 36,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 500000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 12786,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-011/repeat-2/02-verify",
+              "rss_peak_mb": 209.34375,
+              "main_loop_stall_max_ms": 226,
+              "warning_count": 148,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 12,
+                  "performance_qualification": false,
+                  "prepare_pid": 12711,
+                  "real_image_files": 0,
+                  "rows": 500000,
+                  "verify_pid": 12786
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 15,
+                  "delegates": 24,
+                  "fraction": 0.1,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.3,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.5,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.7,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 25,
+                  "fraction": 0.9,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 1,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.5,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 20,
+                  "fraction": 0,
+                  "populated_visible_cards": 8
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-CAT-011",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-011/repeat-3",
+          "wall_duration_ms": 48454,
+          "rss_peak_mb": 220.359375,
+          "main_loop_stall_max_ms": 252,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 12836,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-011/repeat-3/01-prepare",
+              "rss_peak_mb": 209,
+              "main_loop_stall_max_ms": 252,
+              "warning_count": 36,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "metadata_only_fixture_ready",
+                  "real_image_files": 0,
+                  "rows": 500000
+                }
+              ],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 12970,
+              "catalog_integrity": "PASS",
+              "platform": "cocoa",
+              "graphics_api": "metal",
+              "device_pixel_ratio": 2,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185839Z-12231/UX-P09-CAT-011/repeat-3/02-verify",
+              "rss_peak_mb": 220.359375,
+              "main_loop_stall_max_ms": 185,
+              "warning_count": 157,
+              "unique_warnings": [
+                "file:///Users/semenkontsevoy/Documents/New project/Luma/apps/desktop/qml/PhotoCard.qml:51:5: QML QQuickImage: Cannot read original file."
+              ],
+              "measurements": [
+                {
+                  "action": "fresh_catalog_open",
+                  "cached_pages": 1,
+                  "initial_delegates": 12,
+                  "performance_qualification": false,
+                  "prepare_pid": 12836,
+                  "real_image_files": 0,
+                  "rows": 500000,
+                  "verify_pid": 12970
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 1,
+                  "delegates": 20,
+                  "fraction": 0,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 15,
+                  "delegates": 24,
+                  "fraction": 0.1,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.3,
+                  "populated_visible_cards": 8
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.5,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.7,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 25,
+                  "fraction": 0.9,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 1,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 23,
+                  "fraction": 0.5,
+                  "populated_visible_cards": 12
+                },
+                {
+                  "action": "metadata_grid_virtualization",
+                  "cached_pages": 16,
+                  "delegates": 20,
+                  "fraction": 0,
+                  "populated_visible_cards": 8
+                }
+              ],
+              "thread_samples": []
+            }
+          ]
+        }
+      ]
+    },
+    "ux-catalog-audit-regression": {
+      "file": {
+        "path": "build-verify/ux-catalog-audit-regression/UX_REPORT.json",
+        "sha256": "4cbf09e6f7fb294745cf1dbbc309aca9abe2f4f512cd32eb876c9844b83ca1d5",
+        "bytes": 25557
+      },
+      "summary": {
+        "PASS": 6
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "87ad95179e404110fb62c8eba5a59a704397e66c",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "87ad95179e404110fb62c8eba5a59a704397e66c",
+        "worktree_dirty": true,
+        "source_tree_sha256": "c2a9ec21bec786f6748744f9af80d2f5899b934a07fb1b7f2927c594b318527d",
+        "test_executable_sha256": "f8493128ac9e18596589beb4d5519ddcca3d5c148684a9d1b164554f0aaad57b",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "f8493128ac9e18596589beb4d5519ddcca3d5c148684a9d1b164554f0aaad57b"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-REC-007",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185651Z-11402/UX-REC-007/repeat-1",
+          "wall_duration_ms": 2277,
+          "rss_peak_mb": 173.421875,
+          "main_loop_stall_max_ms": 96,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "Intentional SIGKILL at the verified persistence checkpoint",
+              "child_pid": 11749,
+              "catalog_integrity": "PASS",
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185651Z-11402/UX-REC-007/repeat-1/01-prepare",
+              "rss_peak_mb": 173.421875,
+              "main_loop_stall_max_ms": 39,
+              "warning_count": 0,
+              "unique_warnings": [],
+              "measurements": [],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11766,
+              "catalog_integrity": "PASS",
+              "platform": "offscreen",
+              "graphics_api": "software",
+              "device_pixel_ratio": 1,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185651Z-11402/UX-REC-007/repeat-1/02-verify",
+              "rss_peak_mb": 148.21875,
+              "main_loop_stall_max_ms": 96,
+              "warning_count": 0,
+              "unique_warnings": [],
+              "measurements": [],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-DNS-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185651Z-11402/UX-P07-DNS-002/repeat-1",
+          "wall_duration_ms": 4231,
+          "rss_peak_mb": 339.78125,
+          "main_loop_stall_max_ms": 1466,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11782,
+              "catalog_integrity": "PASS",
+              "platform": "offscreen",
+              "graphics_api": "software",
+              "device_pixel_ratio": 1,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185651Z-11402/UX-P07-DNS-002/repeat-1",
+              "rss_peak_mb": 339.78125,
+              "main_loop_stall_max_ms": 1466,
+              "warning_count": 0,
+              "unique_warnings": [],
+              "measurements": [],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P08-FLT-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185651Z-11402/UX-P08-FLT-001/repeat-1",
+          "wall_duration_ms": 4222,
+          "rss_peak_mb": 206.453125,
+          "main_loop_stall_max_ms": 61,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11817,
+              "catalog_integrity": "PASS",
+              "platform": "offscreen",
+              "graphics_api": "software",
+              "device_pixel_ratio": 1,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185651Z-11402/UX-P08-FLT-001/repeat-1/01-prepare",
+              "rss_peak_mb": 206.453125,
+              "main_loop_stall_max_ms": 40,
+              "warning_count": 0,
+              "unique_warnings": [],
+              "measurements": [],
+              "thread_samples": []
+            },
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11842,
+              "catalog_integrity": "PASS",
+              "platform": "offscreen",
+              "graphics_api": "software",
+              "device_pixel_ratio": 1,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185651Z-11402/UX-P08-FLT-001/repeat-1/02-verify",
+              "rss_peak_mb": 171.828125,
+              "main_loop_stall_max_ms": 61,
+              "warning_count": 0,
+              "unique_warnings": [],
+              "measurements": [],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-META-006",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185651Z-11402/UX-P09-META-006/repeat-1",
+          "wall_duration_ms": 1555,
+          "rss_peak_mb": 185.890625,
+          "main_loop_stall_max_ms": 47,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11857,
+              "catalog_integrity": "PASS",
+              "platform": "offscreen",
+              "graphics_api": "software",
+              "device_pixel_ratio": 1,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185651Z-11402/UX-P09-META-006/repeat-1",
+              "rss_peak_mb": 185.890625,
+              "main_loop_stall_max_ms": 47,
+              "warning_count": 0,
+              "unique_warnings": [],
+              "measurements": [],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-XMP-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185651Z-11402/UX-P09-XMP-002/repeat-1",
+          "wall_duration_ms": 3064,
+          "rss_peak_mb": 180.828125,
+          "main_loop_stall_max_ms": 40,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11872,
+              "catalog_integrity": "PASS",
+              "platform": "offscreen",
+              "graphics_api": "software",
+              "device_pixel_ratio": 1,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185651Z-11402/UX-P09-XMP-002/repeat-1",
+              "rss_peak_mb": 180.828125,
+              "main_loop_stall_max_ms": 40,
+              "warning_count": 0,
+              "unique_warnings": [],
+              "measurements": [],
+              "thread_samples": []
+            }
+          ]
+        },
+        {
+          "id": "UX-P09-BKP-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185651Z-11402/UX-P09-BKP-001/repeat-1",
+          "wall_duration_ms": 1157,
+          "rss_peak_mb": 182.53125,
+          "main_loop_stall_max_ms": 37,
+          "stages": [
+            {
+              "status": "PASS",
+              "message": "",
+              "child_pid": 11884,
+              "catalog_integrity": "PASS",
+              "platform": "offscreen",
+              "graphics_api": "software",
+              "device_pixel_ratio": 1,
+              "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T185651Z-11402/UX-P09-BKP-001/repeat-1",
+              "rss_peak_mb": 182.53125,
+              "main_loop_stall_max_ms": 37,
+              "warning_count": 0,
+              "unique_warnings": [],
+              "measurements": [],
+              "thread_samples": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "retained_failures": [
+    "The first three cases fail because the test incorrectly expects working() false after closing_ becomes true; the window closed. The harness waits for actual closed window and editor quiescence instead.",
+    "Corrected 10k/100k pass; 500k times out the real watchdog while the test performs full PRAGMA integrity_check on the GUI thread. Retained thread sample identifies Context::checkData, not application startup. Moving the same audit to a worker resolves it without weakening checks or changing production.",
+    "The first nine native PASS runs verify size/bounds but screenshots show transient placeholder cards. The test is strengthened to require populated visible cards, and its missing-source folder is isolated from log-write events. Only the stronger final nine runs qualify this contract."
+  ],
+  "validation": {
+    "full_build": "PASS",
+    "ctest_pass": 7,
+    "format": "PASS",
+    "mandatory_affected_tidy": "PASS",
+    "nonblocking_warnings_retained": true
+  },
+  "logs": [
+    {
+      "path": ".tools/final-catalog-scale-app-build.log",
+      "sha256": "af8376d515eacc12c9af583b2455bde0f5c6960e79a897d3a9dbe75e69d51c45",
+      "bytes": 724
+    },
+    {
+      "path": ".tools/final-catalog-scale-ctest.log",
+      "sha256": "1f753ac073032cca6ee95d4efd5217491b2f0bbbb8d839de222ba02cd4b52e20",
+      "bytes": 1204
+    },
+    {
+      "path": ".tools/final-catalog-scale-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".tools/final-catalog-scale-tidy.log",
+      "sha256": "5ad5b7b12f0cd22629a4c31a18bf31300e34617a50f274b68138c7320f1fe0e6",
+      "bytes": 17281
+    },
+    {
+      "path": ".tools/final-catalog-scale-tidy-populated.log",
+      "sha256": "1e97b313342632201ac69a3071a9275e2f8731e7ec6d22679eccd1435e62b0fb",
+      "bytes": 15789
+    },
+    {
+      "path": ".tools/final-catalog-scale-graph-health-final.log",
+      "sha256": "45e627a5b6683f1b2da89ee70b2d8a77a103cecc910ffa887b044cda61a856e9",
+      "bytes": 1154
+    },
+    {
+      "path": ".tools/final-catalog-scale-routing.log",
+      "sha256": "41cee9cc70f8e2902ff4277cf9577cbdf05c130cf7652490990fd48efa2e4859",
+      "bytes": 101
+    }
+  ],
+  "limits": [
+    "Metadata-only catalogs do not qualify hundreds of thousands of actual photo decodes, sustained workflows, physical I/O, RSS slope or startup/scroll latency budgets.",
+    "Whole-run wall time includes setup, audit and shutdown and is not startup latency.",
+    "Hardware remains one 8 GiB M3 Mac, built-in Retina display. No 16 GiB or external-display qualification is inferred.",
+    "16 applicable blocking IDs remain without adapters after this checkpoint; complete QA, BUG045 and final artifact/update gates remain open."
+  ],
+  "graph": {
+    "nodes": 7777,
+    "raw_edges": 20108,
+    "self_loops": 8,
+    "missing_endpoints": 0,
+    "dangling_endpoints": 0,
+    "exact_duplicates": 0,
+    "qml_structurally_parsed": false
+  }
+}

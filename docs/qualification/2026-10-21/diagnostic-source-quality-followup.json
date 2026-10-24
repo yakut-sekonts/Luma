@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "source_commit": "95eb85b3bc6dc953b0b991229daa959c3432b8ad",
+  "scope": "diagnostic-writer-libcxx-compatibility-and-independent-source-quality-gate",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "machine": "arm64",
+  "build": {
+    "Luma": "PASS",
+    "luma_diagnostic_session_tests": "PASS",
+    "configuration": "build-verify/RelWithDebInfo",
+    "xcode16_ci_retest": "PENDING"
+  },
+  "checks": {
+    "diagnostic-session-shutdown": "PASS",
+    "denoise-quality-oracle-tests": {
+      "status": "PASS",
+      "count": 7
+    },
+    "affected-ctest-regressions": {
+      "status": "PASS",
+      "cases": [
+        "qml-shell",
+        "release-publisher",
+        "release-dmg-recovery",
+        "release-build-verification"
+      ]
+    },
+    "clang-format": "PASS",
+    "affected-clang-tidy": {
+      "status": "PASS",
+      "nonblocking_warnings_remain": true
+    },
+    "workflow-yaml-and-mandatory-gates": "PASS"
+  },
+  "model_source_quality": {
+    "status": "FAIL",
+    "passed": 5,
+    "total": 7,
+    "failed": [
+      "near-black-noise",
+      "black-with-impulse"
+    ],
+    "report": "denoise-quality-v2.json",
+    "runtime_crop_also_fails": true,
+    "model_recipe_changed": false
+  },
+  "ci_previous": {
+    "run_url": "https://github.com/yakut-sekonts/Luma/actions/runs/39612524379",
+    "source_commit": "1ed426154ddff14b41d1cb576c4e7745e43ee6ab",
+    "build": "FAIL",
+    "reason": "Xcode 16.4 libc++ does not provide std::jthread/stop_token",
+    "numerics": {
+      "status": "FAIL",
+      "passed": 9,
+      "total": 11,
+      "report": "model-numerics-ci-v2.json"
+    }
+  },
+  "photographic_quality": "NOT_RUN",
+  "native_ui": "NOT_RUN",
+  "signed_distribution": "NOT_RUN",
+  "logs": {
+    ".tools/final-diagnostic-compatibility-build.log": {
+      "sha256": "95577e6fab762ddf69d2eeaebfecb0837b4bb12039641044603a5ece3bc63a6e"
+    },
+    ".tools/final-diagnostic-session-tests.log": {
+      "sha256": "67784353858900f4760ec04f17e01646d4fc2aa73ab89698cdf4c4a6894795ae"
+    },
+    ".tools/final-diagnostic-session-tests.xml": {
+      "sha256": "f9ff5be3f669b7777dc2a57a7516ef642dc5795831c204a5182103e6bbbe9b6f"
+    },
+    ".tools/final-diagnostic-session-tidy.log": {
+      "sha256": "ab080918ea01297df56bdcd18c147c23e3cdbfb64c44e0cd1a97a2be1c9b3838"
+    },
+    ".tools/final-diagnostic-quality-format.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".tools/final-diagnostic-quality-regression.log": {
+      "sha256": "52209e11837df5e2e6ebf4848983df99ce67489bad8f77e98efa983ed94f3209"
+    },
+    ".tools/final-diagnostic-quality-regression.xml": {
+      "sha256": "55d7d5c444d82a3f9e3c4af0ba8e594bdaf889b41125c13b7fb50bd8855f20a3"
+    },
+    ".tools/final-denoise-quality-oracle-tests.log": {
+      "sha256": "e586fc0f3bb2a05f4c80f07d1b4c6171e830592f6c7aaf70d4af3b0aa3ebd072"
+    },
+    ".tools/final-denoise-quality-v2.log": {
+      "sha256": "293224a5f757ad4797b22be28fff22ce41dc1b85b8022bf14146699c6e3b7866"
+    },
+    ".tools/final-denoise-quality-v2.json": {
+      "sha256": "cd16bf6a68d03ac9fdd464a8a1b89d50ee35ff6cc42c67d100f905e3a12c2da9"
+    },
+    ".tools/final-denoise-quality-workflows.log": {
+      "sha256": "6f223fdbd302b1096678c5cafff417aeeccf1e930c2f38fba2d0c37d37a9612b"
+    },
+    ".tools/final-denoise-boundaries.json": {
+      "sha256": "af7de18c478f57dd973ff1d344c0b7ebccdfe4145fea4a5f64bae0be7e0f1f8b"
+    }
+  }
+}

@@ -1,0 +1,340 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "scope": "human-authorized native Cocoa/Metal interval; six scenarios repeated three times",
+  "source_commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+  "status": "PASS",
+  "passes": 18,
+  "native_file_chooser": "fixture-boundary, not exercised",
+  "full_release_gate": "NOT_QUALIFIED",
+  "records": [
+    {
+      "report": "build-verify/ux-library-scroll-native-final/UX_REPORT.json",
+      "report_sha256": "534adebbc7af80d2e5c38f4a4de0f27e0ba26bbb149581b9e978bc04e49d7000",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "worktree_dirty": false,
+        "source_tree_sha256": "34c68f0b3aec41fd424db5e29aa9e510476e2e14bacf278cce06007e80d48b13",
+        "test_executable_sha256": "a827fa2c47d57b7bc790c4e196e5d880ce6e9ef7d56a842b148b183004b2f491",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "a827fa2c47d57b7bc790c4e196e5d880ce6e9ef7d56a842b148b183004b2f491"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "reason": ""
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "summary": {
+        "PASS": 3
+      },
+      "release_gate": "NOT_QUALIFIED",
+      "run_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T105106Z-77928",
+      "results": [
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "artifacts": "build-verify/ux-artifacts/20261022T105106Z-77928/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-1"
+        },
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "artifacts": "build-verify/ux-artifacts/20261022T105106Z-77928/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-2"
+        },
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "artifacts": "build-verify/ux-artifacts/20261022T105106Z-77928/CANDIDATE-LIBRARY-SELECTION-SCROLL/repeat-3"
+        }
+      ]
+    },
+    {
+      "report": "build-verify/ux-keyboard-library-scroll-native/UX_REPORT.json",
+      "report_sha256": "fcb41fb5e369d63e1e808a01fb54b2ee79dc2afa4c3bb46bc9e39df6315983c6",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "worktree_dirty": false,
+        "source_tree_sha256": "34c68f0b3aec41fd424db5e29aa9e510476e2e14bacf278cce06007e80d48b13",
+        "test_executable_sha256": "a827fa2c47d57b7bc790c4e196e5d880ce6e9ef7d56a842b148b183004b2f491",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "a827fa2c47d57b7bc790c4e196e5d880ce6e9ef7d56a842b148b183004b2f491"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "reason": ""
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "summary": {
+        "PASS": 6
+      },
+      "release_gate": "NOT_QUALIFIED",
+      "run_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T105135Z-78126",
+      "results": [
+        {
+          "id": "CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "artifacts": "build-verify/ux-artifacts/20261022T105135Z-78126/CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION/repeat-1"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "artifacts": "build-verify/ux-artifacts/20261022T105135Z-78126/CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION/repeat-2"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "artifacts": "build-verify/ux-artifacts/20261022T105135Z-78126/CANDIDATE-KEYBOARD-SELECTED-ASSET-ACTIVATION/repeat-3"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "artifacts": "build-verify/ux-artifacts/20261022T105135Z-78126/CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION/repeat-1"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "artifacts": "build-verify/ux-artifacts/20261022T105135Z-78126/CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION/repeat-2"
+        },
+        {
+          "id": "CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "artifacts": "build-verify/ux-artifacts/20261022T105135Z-78126/CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION/repeat-3"
+        }
+      ]
+    },
+    {
+      "report": "build-verify/ux-scroll-cancel-native-final/UX_REPORT.json",
+      "report_sha256": "9c6a45d6d44970439e53e1cd3c9f1af5518e987505615ffe6223eb6de8d5b460",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "worktree_dirty": false,
+        "source_tree_sha256": "34c68f0b3aec41fd424db5e29aa9e510476e2e14bacf278cce06007e80d48b13",
+        "test_executable_sha256": "a827fa2c47d57b7bc790c4e196e5d880ce6e9ef7d56a842b148b183004b2f491",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "a827fa2c47d57b7bc790c4e196e5d880ce6e9ef7d56a842b148b183004b2f491"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+        "reason": ""
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "summary": {
+        "PASS": 9
+      },
+      "release_gate": "NOT_QUALIFIED",
+      "run_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T105200Z-77915",
+      "results": [
+        {
+          "id": "UX-DSC-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "artifacts": "build-verify/ux-artifacts/20261022T105200Z-77915/UX-DSC-006/repeat-1"
+        },
+        {
+          "id": "UX-DSC-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "artifacts": "build-verify/ux-artifacts/20261022T105200Z-77915/UX-DSC-006/repeat-2"
+        },
+        {
+          "id": "UX-DSC-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "artifacts": "build-verify/ux-artifacts/20261022T105200Z-77915/UX-DSC-006/repeat-3"
+        },
+        {
+          "id": "UX-TRN-003",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "artifacts": "build-verify/ux-artifacts/20261022T105200Z-77915/UX-TRN-003/repeat-1"
+        },
+        {
+          "id": "UX-TRN-003",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "artifacts": "build-verify/ux-artifacts/20261022T105200Z-77915/UX-TRN-003/repeat-2"
+        },
+        {
+          "id": "UX-TRN-003",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "artifacts": "build-verify/ux-artifacts/20261022T105200Z-77915/UX-TRN-003/repeat-3"
+        },
+        {
+          "id": "UX-TRN-004",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "artifacts": "build-verify/ux-artifacts/20261022T105200Z-77915/UX-TRN-004/repeat-1"
+        },
+        {
+          "id": "UX-TRN-004",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "artifacts": "build-verify/ux-artifacts/20261022T105200Z-77915/UX-TRN-004/repeat-2"
+        },
+        {
+          "id": "UX-TRN-004",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "warnings": [],
+          "artifacts": "build-verify/ux-artifacts/20261022T105200Z-77915/UX-TRN-004/repeat-3"
+        }
+      ]
+    }
+  ],
+  "remaining": [
+    "Physical trackpad/wheel input and other window sizes/filter/sort combinations",
+    "Full final UX/new workflows, RAW/Sky quality, resource/load/recovery, signing and update gates"
+  ]
+}

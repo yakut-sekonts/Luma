@@ -1,0 +1,207 @@
+{
+  "schema": 1,
+  "scope": "synthetic-adapted-source-vs-coreml-native",
+  "status": "FAIL",
+  "photographic_quality": "NOT_RUN",
+  "python": "3.12.15",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "machine": "arm64",
+  "compute_units": "ALL",
+  "manifest_sha256": "85382b59bffe09db942ff642f54ab0e45393c69a201dde2cc0fe1b9d21422101",
+  "recipe_sha256": "b51acc6904130329ccc9a93039fe0eda333b8c744b30501d6f32fbaad1a8b9f7",
+  "limits": {
+    "max_absolute_error": 0.0005,
+    "rmse": 5e-05
+  },
+  "cases": [
+    {
+      "model": "nafnet-sidd-width32-v2",
+      "sample": "gradient-noise",
+      "input_sha256": "7a0f11bce4b64aa41bd243fb1cab86326522952934db7420b332f241fd646804",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 2.6226043701171875e-06,
+      "rmse": 1.3209488570022985e-07,
+      "domain_contract": true,
+      "uniform_input_passthrough": null,
+      "status": "PASS"
+    },
+    {
+      "model": "nafnet-sidd-width32-v2",
+      "sample": "black",
+      "input_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "domain_contract": true,
+      "uniform_input_passthrough": true,
+      "status": "PASS"
+    },
+    {
+      "model": "nafnet-sidd-width32-v2",
+      "sample": "negative-hdr",
+      "input_sha256": "8cd50f6e314fb3936e8065556b5fd5dbeaa2f96c44d5f7b6d0da469c420d23d8",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 2.0265579223632812e-06,
+      "rmse": 1.2017301688544955e-07,
+      "domain_contract": true,
+      "uniform_input_passthrough": null,
+      "status": "PASS"
+    },
+    {
+      "model": "nafnet-sidd-width32-v2",
+      "sample": "uniform-near-black",
+      "input_sha256": "20a09b268922e57aae678f7f873cacd69419f0209964cb521729ca0c5320b3f3",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "domain_contract": true,
+      "uniform_input_passthrough": true,
+      "status": "PASS"
+    },
+    {
+      "model": "nafnet-sidd-width32-v2",
+      "sample": "uniform-gray",
+      "input_sha256": "886d82fbee23fc8d54e0877c79c1eb05045c6c836c91b2f846e902b3bc15abc3",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "domain_contract": true,
+      "uniform_input_passthrough": true,
+      "status": "PASS"
+    },
+    {
+      "model": "nafnet-sidd-width32-v2",
+      "sample": "uniform-color",
+      "input_sha256": "f161740d1bf610bbc61b3ae3c1c061682aa4ab639ae749b7bb792cd9a8043a10",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 0.0,
+      "rmse": 0.0,
+      "domain_contract": true,
+      "uniform_input_passthrough": true,
+      "status": "PASS"
+    },
+    {
+      "model": "nafnet-sidd-width32-v2",
+      "sample": "near-black-noise",
+      "input_sha256": "fd8e8d0191b74838bfd46644ebdb789309daa946376319c3a3394fe0bef0e245",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 0.0006736516952514648,
+      "rmse": 3.7553244945211545e-05,
+      "domain_contract": true,
+      "uniform_input_passthrough": null,
+      "status": "FAIL"
+    },
+    {
+      "model": "nafnet-sidd-width32-v2",
+      "sample": "black-with-impulse",
+      "input_sha256": "e4b66d170a0b724f2a1e9c9a56bb0a0b77264c0a468d0c86b7654a9b8e19b8ee",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 0.0003936886787414551,
+      "rmse": 4.5520331298726366e-05,
+      "domain_contract": true,
+      "uniform_input_passthrough": null,
+      "status": "PASS"
+    },
+    {
+      "model": "u2net-sky-v1",
+      "sample": "gradient-noise",
+      "input_sha256": "c93ca62a2583086500b452628f69644cca00f4ea75e545af120d6e2ae62b490a",
+      "output_shape": [
+        1,
+        1,
+        320,
+        320
+      ],
+      "max_absolute_error": 5.364418029785156e-07,
+      "rmse": 1.8161506592852646e-08,
+      "domain_contract": true,
+      "uniform_input_passthrough": null,
+      "status": "PASS"
+    },
+    {
+      "model": "u2net-sky-v1",
+      "sample": "black",
+      "input_sha256": "3630e065eb7b4540fbab11dbfd2619e8500f211b9c404380a1867fdc44b77c0c",
+      "output_shape": [
+        1,
+        1,
+        320,
+        320
+      ],
+      "max_absolute_error": 1.1920928955078125e-07,
+      "rmse": 2.55393035724798e-09,
+      "domain_contract": true,
+      "uniform_input_passthrough": null,
+      "status": "PASS"
+    },
+    {
+      "model": "u2net-sky-v1",
+      "sample": "white",
+      "input_sha256": "af0fc1bd3503bcef802e67a7994c5de3e02973c3f49eab20999ffabe3f454fa3",
+      "output_shape": [
+        1,
+        1,
+        320,
+        320
+      ],
+      "max_absolute_error": 1.1920928955078125e-07,
+      "rmse": 2.414264045062609e-09,
+      "domain_contract": true,
+      "uniform_input_passthrough": null,
+      "status": "PASS"
+    }
+  ],
+  "xcode": "Xcode 27.1\nBuild version 27A9275",
+  "toolchain": {
+    "coremltools": "9.0",
+    "torch": "2.10.0",
+    "torchvision": "0.25.0",
+    "onnx": "1.17.0",
+    "onnx2torch": "1.5.15",
+    "numpy": "1.26.4",
+    "protobuf": "4.25.5",
+    "certifi": "2026.7.22"
+  },
+  "prediction_bridge_sha256": "200cbdb979b2c8bbedec99f1c2b52d70a5a78968664281ee8f112ddef30812b4",
+  "prediction_api": "native-MLModel-owned-MLMultiArray"
+}

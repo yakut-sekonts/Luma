@@ -101,11 +101,11 @@ std::uint16_t encode16(float value) {
 void writeImage(const DecodedRaw &decoded, EditDocument edits,
                 const std::filesystem::path &destination, ExportOptions options,
                 CancellationToken stop, const std::function<void(double)> &progress,
-                const std::filesystem::path &metadataSource,
-                const ExportInstallGuard &installGuard) {
+                const std::filesystem::path &metadataSource, const ExportInstallGuard &installGuard,
+                const std::optional<MetadataOverlay> &metadataOverlay) {
     if (options.advanced() || !decoded.image.alpha.empty()) {
         writeAdvancedImage(decoded, edits, destination, options, stop, progress, metadataSource,
-                           installGuard);
+                           installGuard, metadataOverlay);
         return;
     }
     @autoreleasepool {

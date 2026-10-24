@@ -189,7 +189,7 @@ Fixture prepare(Context &c, int count, Replay &replay) {
         if ((index + 1) % 16 == 0)
             d.frame();
     }
-    require(d.object("library.pane")->setProperty("sources", QVariant::fromValue(sources)),
+    require(d.object("library.importDialog")->setProperty("sources", QVariant::fromValue(sources)),
             "Actual Import pane refused the known file-panel selection result");
     d.click("library.importButton");
     d.wait([&] { return d.object("library.importDialog")->property("opened").toBool(); },

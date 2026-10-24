@@ -13,6 +13,10 @@
 #include <QSharedPointer>
 #include <memory>
 class QQuickItemGrabResult;
+class DiagnosticsController;
+namespace luma::desktop {
+class DiagnosticSession;
+}
 namespace ux {
 class Context {
   public:
@@ -29,6 +33,8 @@ class Context {
     BatchController batch;
     ExportController exporter;
     UpdateController updates;
+    std::unique_ptr<luma::desktop::DiagnosticSession> diagnosticSession;
+    std::unique_ptr<DiagnosticsController> diagnostics;
     QStringList warnings;
     std::unique_ptr<LocalizationController> localization;
     // A failed readback stays alive past engine/window/render-thread teardown.
@@ -41,6 +47,7 @@ class Context {
     void loaded();
     void saved();
     void import(int count, bool copy = false);
+    void selectPresetGroups(std::uint32_t groups);
     void openFirst();
     void addMask(int kind);
     void addComponent(int kind, int operation);

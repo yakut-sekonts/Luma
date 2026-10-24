@@ -35,3 +35,6 @@ dist/
 *.provisionprofile
 __pycache__/
 *.log
+# Tiny synthetic originals recorded by the stable migration fixture, never user RAWs.
+!tests/assets/migration-051/01-complete.DNG
+!tests/assets/migration-051/02-global-local.DNG

@@ -1,0 +1,2119 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-23T19:22:05.315286+00:00",
+  "base_commit": "ddb2986",
+  "release_gate": "NOT_QUALIFIED",
+  "new_adapters": [
+    "UX-P07-REM-001",
+    "UX-P07-REM-002",
+    "UX-P07-REM-003",
+    "UX-P07-SEM-001"
+  ],
+  "contracts": [
+    "Remove: actual draw, donor search and result retained at the original queued dispatch. Real visible busy/progress/Cancel; cancelled late result must be rejected with exact document/pixels preserved. Successful result applies once, reduces the known center defect from >200 to <100 RGB8, agrees with independent CPU preview and is one exact Undo/Redo unit. Original SHA preserved.",
+    "Semantic: actual Apple Vision classification plus local English sentence embedding. Three pinned public-domain/CC0 photographs, real index build, three declared queries each require expected top-ranked photo and visible result. Scores finite/bounded/descending, selection unchanged, actual opt-out deletes all persisted embeddings."
+  ],
+  "reports": {
+    "ux-remove-semantic-first": {
+      "file": {
+        "path": "build-verify/ux-remove-semantic-first/UX_REPORT.json",
+        "sha256": "23f6fbdc31b0b872b65c2ff9ebd41d858dd5691d68f5d3e10b492f8679502e6c",
+        "bytes": 15123
+      },
+      "summary": {
+        "PASS": 4
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "ddb298647969eb65ef01a820ca6b0531b29ef8b1",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "ddb298647969eb65ef01a820ca6b0531b29ef8b1",
+        "worktree_dirty": true,
+        "source_tree_sha256": "54137f9be74dd6a12869d6f93a8ef2ed6aff16efd16ed59a82d490f718e1338a",
+        "test_executable_sha256": "22c56d4e066f301970f36b43fa336a5e2c6ca30dc58c686270b5d70f44a99c44",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "22c56d4e066f301970f36b43fa336a5e2c6ca30dc58c686270b5d70f44a99c44"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P07-REM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191450Z-16065/UX-P07-REM-001/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191450Z-16065/UX-P07-REM-002/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191450Z-16065/UX-P07-REM-003/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-SEM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191450Z-16065/UX-P07-SEM-001/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Portrait.png",
+              "matches": [
+                {
+                  "filename": "Portrait.png",
+                  "id": "7cd66f8c-1454-4ae5-8ff7-f3d73fc6cc98",
+                  "similarity": 0.538168959543739,
+                  "thumbnail": "image://thumbnail/7cd66f8c-1454-4ae5-8ff7-f3d73fc6cc98",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191450Z-16065/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                },
+                {
+                  "filename": "Night.png",
+                  "id": "9183d25b-069b-4c0a-88d5-56c9365d2d0b",
+                  "similarity": 0.390082846905363,
+                  "thumbnail": "image://thumbnail/9183d25b-069b-4c0a-88d5-56c9365d2d0b",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191450Z-16065/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Landscape.png",
+                  "id": "f3d758c6-e954-453f-b2fa-841dc6239310",
+                  "similarity": 0.3022143817958446,
+                  "thumbnail": "image://thumbnail/f3d758c6-e954-453f-b2fa-841dc6239310",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191450Z-16065/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                }
+              ],
+              "query": "a portrait of a person"
+            },
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Landscape.png",
+              "matches": [
+                {
+                  "filename": "Landscape.png",
+                  "id": "f3d758c6-e954-453f-b2fa-841dc6239310",
+                  "similarity": 0.6135270942378664,
+                  "thumbnail": "image://thumbnail/f3d758c6-e954-453f-b2fa-841dc6239310",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191450Z-16065/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                },
+                {
+                  "filename": "Night.png",
+                  "id": "9183d25b-069b-4c0a-88d5-56c9365d2d0b",
+                  "similarity": 0.4275766270687204,
+                  "thumbnail": "image://thumbnail/9183d25b-069b-4c0a-88d5-56c9365d2d0b",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191450Z-16065/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Portrait.png",
+                  "id": "7cd66f8c-1454-4ae5-8ff7-f3d73fc6cc98",
+                  "similarity": 0.2720582375322165,
+                  "thumbnail": "image://thumbnail/7cd66f8c-1454-4ae5-8ff7-f3d73fc6cc98",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191450Z-16065/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                }
+              ],
+              "query": "river and trees in a landscape"
+            },
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Night.png",
+              "matches": [
+                {
+                  "filename": "Night.png",
+                  "id": "9183d25b-069b-4c0a-88d5-56c9365d2d0b",
+                  "similarity": 0.3689006281353242,
+                  "thumbnail": "image://thumbnail/9183d25b-069b-4c0a-88d5-56c9365d2d0b",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191450Z-16065/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Landscape.png",
+                  "id": "f3d758c6-e954-453f-b2fa-841dc6239310",
+                  "similarity": 0.33224341685305164,
+                  "thumbnail": "image://thumbnail/f3d758c6-e954-453f-b2fa-841dc6239310",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191450Z-16065/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                },
+                {
+                  "filename": "Portrait.png",
+                  "id": "7cd66f8c-1454-4ae5-8ff7-f3d73fc6cc98",
+                  "similarity": 0.23602667017874399,
+                  "thumbnail": "image://thumbnail/7cd66f8c-1454-4ae5-8ff7-f3d73fc6cc98",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191450Z-16065/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                }
+              ],
+              "query": "a city at night"
+            }
+          ]
+        }
+      ]
+    },
+    "ux-remove-semantic": {
+      "file": {
+        "path": "build-verify/ux-remove-semantic/UX_REPORT.json",
+        "sha256": "b310132fef2cfc71f6046ae794c4aa4f36c8c5346cc14a7d7e73e8683861583a",
+        "bytes": 29275
+      },
+      "summary": {
+        "PASS": 12
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "ddb298647969eb65ef01a820ca6b0531b29ef8b1",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "ddb298647969eb65ef01a820ca6b0531b29ef8b1",
+        "worktree_dirty": true,
+        "source_tree_sha256": "54137f9be74dd6a12869d6f93a8ef2ed6aff16efd16ed59a82d490f718e1338a",
+        "test_executable_sha256": "22c56d4e066f301970f36b43fa336a5e2c6ca30dc58c686270b5d70f44a99c44",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "22c56d4e066f301970f36b43fa336a5e2c6ca30dc58c686270b5d70f44a99c44"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P07-REM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/UX-P07-REM-001/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/UX-P07-REM-001/repeat-2",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/UX-P07-REM-001/repeat-3",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/UX-P07-REM-002/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/UX-P07-REM-002/repeat-2",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/UX-P07-REM-002/repeat-3",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/UX-P07-REM-003/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/UX-P07-REM-003/repeat-2",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/UX-P07-REM-003/repeat-3",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-SEM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/UX-P07-SEM-001/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Portrait.png",
+              "matches": [
+                {
+                  "filename": "Portrait.png",
+                  "id": "53b756c5-4b17-425c-8120-b2cb091a66b3",
+                  "similarity": 0.538168959543739,
+                  "thumbnail": "image://thumbnail/53b756c5-4b17-425c-8120-b2cb091a66b3",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                },
+                {
+                  "filename": "Night.png",
+                  "id": "1be7d33f-a66c-4ba5-a4de-2b21cc03e118",
+                  "similarity": 0.390082846905363,
+                  "thumbnail": "image://thumbnail/1be7d33f-a66c-4ba5-a4de-2b21cc03e118",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Landscape.png",
+                  "id": "6d82e74d-080f-403e-a66f-6c695aebcda1",
+                  "similarity": 0.3022143817958446,
+                  "thumbnail": "image://thumbnail/6d82e74d-080f-403e-a66f-6c695aebcda1",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                }
+              ],
+              "query": "a portrait of a person"
+            },
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Landscape.png",
+              "matches": [
+                {
+                  "filename": "Landscape.png",
+                  "id": "6d82e74d-080f-403e-a66f-6c695aebcda1",
+                  "similarity": 0.6135270942378664,
+                  "thumbnail": "image://thumbnail/6d82e74d-080f-403e-a66f-6c695aebcda1",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                },
+                {
+                  "filename": "Night.png",
+                  "id": "1be7d33f-a66c-4ba5-a4de-2b21cc03e118",
+                  "similarity": 0.4275766270687204,
+                  "thumbnail": "image://thumbnail/1be7d33f-a66c-4ba5-a4de-2b21cc03e118",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Portrait.png",
+                  "id": "53b756c5-4b17-425c-8120-b2cb091a66b3",
+                  "similarity": 0.2720582375322165,
+                  "thumbnail": "image://thumbnail/53b756c5-4b17-425c-8120-b2cb091a66b3",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                }
+              ],
+              "query": "river and trees in a landscape"
+            },
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Night.png",
+              "matches": [
+                {
+                  "filename": "Night.png",
+                  "id": "1be7d33f-a66c-4ba5-a4de-2b21cc03e118",
+                  "similarity": 0.3689006281353242,
+                  "thumbnail": "image://thumbnail/1be7d33f-a66c-4ba5-a4de-2b21cc03e118",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Landscape.png",
+                  "id": "6d82e74d-080f-403e-a66f-6c695aebcda1",
+                  "similarity": 0.33224341685305164,
+                  "thumbnail": "image://thumbnail/6d82e74d-080f-403e-a66f-6c695aebcda1",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                },
+                {
+                  "filename": "Portrait.png",
+                  "id": "53b756c5-4b17-425c-8120-b2cb091a66b3",
+                  "similarity": 0.23602667017874399,
+                  "thumbnail": "image://thumbnail/53b756c5-4b17-425c-8120-b2cb091a66b3",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                }
+              ],
+              "query": "a city at night"
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-SEM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/UX-P07-SEM-001/repeat-2",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Portrait.png",
+              "matches": [
+                {
+                  "filename": "Portrait.png",
+                  "id": "19e59c78-24d3-45dd-a33d-8e6249dd8a33",
+                  "similarity": 0.538168959543739,
+                  "thumbnail": "image://thumbnail/19e59c78-24d3-45dd-a33d-8e6249dd8a33",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                },
+                {
+                  "filename": "Night.png",
+                  "id": "7d5933a4-436a-4672-9570-0d5a249499e3",
+                  "similarity": 0.390082846905363,
+                  "thumbnail": "image://thumbnail/7d5933a4-436a-4672-9570-0d5a249499e3",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Landscape.png",
+                  "id": "f7ae0f67-e024-4271-b92c-1c5783eec347",
+                  "similarity": 0.3022143817958446,
+                  "thumbnail": "image://thumbnail/f7ae0f67-e024-4271-b92c-1c5783eec347",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                }
+              ],
+              "query": "a portrait of a person"
+            },
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Landscape.png",
+              "matches": [
+                {
+                  "filename": "Landscape.png",
+                  "id": "f7ae0f67-e024-4271-b92c-1c5783eec347",
+                  "similarity": 0.6135270942378664,
+                  "thumbnail": "image://thumbnail/f7ae0f67-e024-4271-b92c-1c5783eec347",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                },
+                {
+                  "filename": "Night.png",
+                  "id": "7d5933a4-436a-4672-9570-0d5a249499e3",
+                  "similarity": 0.4275766270687204,
+                  "thumbnail": "image://thumbnail/7d5933a4-436a-4672-9570-0d5a249499e3",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Portrait.png",
+                  "id": "19e59c78-24d3-45dd-a33d-8e6249dd8a33",
+                  "similarity": 0.2720582375322165,
+                  "thumbnail": "image://thumbnail/19e59c78-24d3-45dd-a33d-8e6249dd8a33",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                }
+              ],
+              "query": "river and trees in a landscape"
+            },
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Night.png",
+              "matches": [
+                {
+                  "filename": "Night.png",
+                  "id": "7d5933a4-436a-4672-9570-0d5a249499e3",
+                  "similarity": 0.3689006281353242,
+                  "thumbnail": "image://thumbnail/7d5933a4-436a-4672-9570-0d5a249499e3",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Landscape.png",
+                  "id": "f7ae0f67-e024-4271-b92c-1c5783eec347",
+                  "similarity": 0.33224341685305164,
+                  "thumbnail": "image://thumbnail/f7ae0f67-e024-4271-b92c-1c5783eec347",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                },
+                {
+                  "filename": "Portrait.png",
+                  "id": "19e59c78-24d3-45dd-a33d-8e6249dd8a33",
+                  "similarity": 0.23602667017874399,
+                  "thumbnail": "image://thumbnail/19e59c78-24d3-45dd-a33d-8e6249dd8a33",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                }
+              ],
+              "query": "a city at night"
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-SEM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/UX-P07-SEM-001/repeat-3",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Portrait.png",
+              "matches": [
+                {
+                  "filename": "Portrait.png",
+                  "id": "83400e2e-f55a-4476-ba41-1788baacb71a",
+                  "similarity": 0.538168959543739,
+                  "thumbnail": "image://thumbnail/83400e2e-f55a-4476-ba41-1788baacb71a",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                },
+                {
+                  "filename": "Night.png",
+                  "id": "24c73b52-98c9-4a9c-b335-a7eea5887faf",
+                  "similarity": 0.390082846905363,
+                  "thumbnail": "image://thumbnail/24c73b52-98c9-4a9c-b335-a7eea5887faf",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Landscape.png",
+                  "id": "13eb2b06-aab7-40bb-90b5-31acef4c70eb",
+                  "similarity": 0.3022143817958446,
+                  "thumbnail": "image://thumbnail/13eb2b06-aab7-40bb-90b5-31acef4c70eb",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                }
+              ],
+              "query": "a portrait of a person"
+            },
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Landscape.png",
+              "matches": [
+                {
+                  "filename": "Landscape.png",
+                  "id": "13eb2b06-aab7-40bb-90b5-31acef4c70eb",
+                  "similarity": 0.6135270942378664,
+                  "thumbnail": "image://thumbnail/13eb2b06-aab7-40bb-90b5-31acef4c70eb",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                },
+                {
+                  "filename": "Night.png",
+                  "id": "24c73b52-98c9-4a9c-b335-a7eea5887faf",
+                  "similarity": 0.4275766270687204,
+                  "thumbnail": "image://thumbnail/24c73b52-98c9-4a9c-b335-a7eea5887faf",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Portrait.png",
+                  "id": "83400e2e-f55a-4476-ba41-1788baacb71a",
+                  "similarity": 0.2720582375322165,
+                  "thumbnail": "image://thumbnail/83400e2e-f55a-4476-ba41-1788baacb71a",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                }
+              ],
+              "query": "river and trees in a landscape"
+            },
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Night.png",
+              "matches": [
+                {
+                  "filename": "Night.png",
+                  "id": "24c73b52-98c9-4a9c-b335-a7eea5887faf",
+                  "similarity": 0.3689006281353242,
+                  "thumbnail": "image://thumbnail/24c73b52-98c9-4a9c-b335-a7eea5887faf",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Landscape.png",
+                  "id": "13eb2b06-aab7-40bb-90b5-31acef4c70eb",
+                  "similarity": 0.33224341685305164,
+                  "thumbnail": "image://thumbnail/13eb2b06-aab7-40bb-90b5-31acef4c70eb",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                },
+                {
+                  "filename": "Portrait.png",
+                  "id": "83400e2e-f55a-4476-ba41-1788baacb71a",
+                  "similarity": 0.23602667017874399,
+                  "thumbnail": "image://thumbnail/83400e2e-f55a-4476-ba41-1788baacb71a",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191516Z-16239/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                }
+              ],
+              "query": "a city at night"
+            }
+          ]
+        }
+      ]
+    },
+    "ux-remove-semantic-native": {
+      "file": {
+        "path": "build-verify/ux-remove-semantic-native/UX_REPORT.json",
+        "sha256": "131e32fae2641a7ff44824924f2c2882ccbecccb170abec72fd262b0a419e6e7",
+        "bytes": 15122
+      },
+      "summary": {
+        "PASS": 4
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "ddb298647969eb65ef01a820ca6b0531b29ef8b1",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "ddb298647969eb65ef01a820ca6b0531b29ef8b1",
+        "worktree_dirty": true,
+        "source_tree_sha256": "54137f9be74dd6a12869d6f93a8ef2ed6aff16efd16ed59a82d490f718e1338a",
+        "test_executable_sha256": "22c56d4e066f301970f36b43fa336a5e2c6ca30dc58c686270b5d70f44a99c44",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "22c56d4e066f301970f36b43fa336a5e2c6ca30dc58c686270b5d70f44a99c44"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P07-REM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191533Z-16226/UX-P07-REM-001/repeat-1",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191533Z-16226/UX-P07-REM-002/repeat-1",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191533Z-16226/UX-P07-REM-003/repeat-1",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-SEM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191533Z-16226/UX-P07-SEM-001/repeat-1",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Portrait.png",
+              "matches": [
+                {
+                  "filename": "Portrait.png",
+                  "id": "28a34528-c9a7-4345-8bfb-5197a0605490",
+                  "similarity": 0.538168959543739,
+                  "thumbnail": "image://thumbnail/28a34528-c9a7-4345-8bfb-5197a0605490",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191533Z-16226/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                },
+                {
+                  "filename": "Night.png",
+                  "id": "3d399206-11d4-4c74-ae66-2718b97e93f9",
+                  "similarity": 0.390082846905363,
+                  "thumbnail": "image://thumbnail/3d399206-11d4-4c74-ae66-2718b97e93f9",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191533Z-16226/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Landscape.png",
+                  "id": "efe09e96-b9e7-455d-a35e-83347f18cd42",
+                  "similarity": 0.3022143817958446,
+                  "thumbnail": "image://thumbnail/efe09e96-b9e7-455d-a35e-83347f18cd42",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191533Z-16226/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                }
+              ],
+              "query": "a portrait of a person"
+            },
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Landscape.png",
+              "matches": [
+                {
+                  "filename": "Landscape.png",
+                  "id": "efe09e96-b9e7-455d-a35e-83347f18cd42",
+                  "similarity": 0.6135270942378664,
+                  "thumbnail": "image://thumbnail/efe09e96-b9e7-455d-a35e-83347f18cd42",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191533Z-16226/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                },
+                {
+                  "filename": "Night.png",
+                  "id": "3d399206-11d4-4c74-ae66-2718b97e93f9",
+                  "similarity": 0.4275766270687204,
+                  "thumbnail": "image://thumbnail/3d399206-11d4-4c74-ae66-2718b97e93f9",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191533Z-16226/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Portrait.png",
+                  "id": "28a34528-c9a7-4345-8bfb-5197a0605490",
+                  "similarity": 0.2720582375322165,
+                  "thumbnail": "image://thumbnail/28a34528-c9a7-4345-8bfb-5197a0605490",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191533Z-16226/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                }
+              ],
+              "query": "river and trees in a landscape"
+            },
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Night.png",
+              "matches": [
+                {
+                  "filename": "Night.png",
+                  "id": "3d399206-11d4-4c74-ae66-2718b97e93f9",
+                  "similarity": 0.3689006281353242,
+                  "thumbnail": "image://thumbnail/3d399206-11d4-4c74-ae66-2718b97e93f9",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191533Z-16226/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Landscape.png",
+                  "id": "efe09e96-b9e7-455d-a35e-83347f18cd42",
+                  "similarity": 0.33224341685305164,
+                  "thumbnail": "image://thumbnail/efe09e96-b9e7-455d-a35e-83347f18cd42",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191533Z-16226/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                },
+                {
+                  "filename": "Portrait.png",
+                  "id": "28a34528-c9a7-4345-8bfb-5197a0605490",
+                  "similarity": 0.23602667017874399,
+                  "thumbnail": "image://thumbnail/28a34528-c9a7-4345-8bfb-5197a0605490",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191533Z-16226/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                }
+              ],
+              "query": "a city at night"
+            }
+          ]
+        }
+      ]
+    },
+    "ux-local-ai-final": {
+      "file": {
+        "path": "build-verify/ux-local-ai-final/UX_REPORT.json",
+        "sha256": "4ddf6df3f0176f972deddd324d9c3ade77ddea66d86b534b1ad03463dfc3ccdd",
+        "bytes": 40897
+      },
+      "summary": {
+        "PASS": 18
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "ddb298647969eb65ef01a820ca6b0531b29ef8b1",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "ddb298647969eb65ef01a820ca6b0531b29ef8b1",
+        "worktree_dirty": true,
+        "source_tree_sha256": "1fed7ec951c51b1d03a8d3dd756ff0c6b87fec96151d8642392be0ad1c26db6a",
+        "test_executable_sha256": "73b672a8b59c5560269a69c648a9066e1e3be3e535a27b7831568a4d9c14200a",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "73b672a8b59c5560269a69c648a9066e1e3be3e535a27b7831568a4d9c14200a"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P07-MSK-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/UX-P07-MSK-001/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "actual_vision_subject_mask",
+              "boundary_quality_qualification": false,
+              "foreground_fraction": 0.5368766784667969,
+              "source_sha256": "b7224c8c68fc7aaf76657b0d039e9fac69c00117d58523e5d2a11fe7cd2fbe61"
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-MSK-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/UX-P07-MSK-001/repeat-2",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "actual_vision_subject_mask",
+              "boundary_quality_qualification": false,
+              "foreground_fraction": 0.5368766784667969,
+              "source_sha256": "b7224c8c68fc7aaf76657b0d039e9fac69c00117d58523e5d2a11fe7cd2fbe61"
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-MSK-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/UX-P07-MSK-001/repeat-3",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "actual_vision_subject_mask",
+              "boundary_quality_qualification": false,
+              "foreground_fraction": 0.5368766784667969,
+              "source_sha256": "b7224c8c68fc7aaf76657b0d039e9fac69c00117d58523e5d2a11fe7cd2fbe61"
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-MSK-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/UX-P07-MSK-003/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "actual_vision_subject_mask",
+              "boundary_quality_qualification": false,
+              "foreground_fraction": 0.5368766784667969,
+              "source_sha256": "b7224c8c68fc7aaf76657b0d039e9fac69c00117d58523e5d2a11fe7cd2fbe61"
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-MSK-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/UX-P07-MSK-003/repeat-2",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "actual_vision_subject_mask",
+              "boundary_quality_qualification": false,
+              "foreground_fraction": 0.5368766784667969,
+              "source_sha256": "b7224c8c68fc7aaf76657b0d039e9fac69c00117d58523e5d2a11fe7cd2fbe61"
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-MSK-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/UX-P07-MSK-003/repeat-3",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "actual_vision_subject_mask",
+              "boundary_quality_qualification": false,
+              "foreground_fraction": 0.5368766784667969,
+              "source_sha256": "b7224c8c68fc7aaf76657b0d039e9fac69c00117d58523e5d2a11fe7cd2fbe61"
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/UX-P07-REM-001/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/UX-P07-REM-001/repeat-2",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/UX-P07-REM-001/repeat-3",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/UX-P07-REM-002/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/UX-P07-REM-002/repeat-2",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/UX-P07-REM-002/repeat-3",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/UX-P07-REM-003/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/UX-P07-REM-003/repeat-2",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/UX-P07-REM-003/repeat-3",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-SEM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/UX-P07-SEM-001/repeat-1",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Portrait.png",
+              "matches": [
+                {
+                  "filename": "Portrait.png",
+                  "id": "3f5d0726-17c8-4a69-ab10-33d71caf7bf0",
+                  "similarity": 0.538168959543739,
+                  "thumbnail": "image://thumbnail/3f5d0726-17c8-4a69-ab10-33d71caf7bf0",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                },
+                {
+                  "filename": "Night.png",
+                  "id": "96fa98c3-6f49-4a95-bbaf-264b38fb3d64",
+                  "similarity": 0.390082846905363,
+                  "thumbnail": "image://thumbnail/96fa98c3-6f49-4a95-bbaf-264b38fb3d64",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Landscape.png",
+                  "id": "a86fef36-b5dd-47f4-81f2-a941f1c34d65",
+                  "similarity": 0.3022143817958446,
+                  "thumbnail": "image://thumbnail/a86fef36-b5dd-47f4-81f2-a941f1c34d65",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                }
+              ],
+              "query": "a portrait of a person"
+            },
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Landscape.png",
+              "matches": [
+                {
+                  "filename": "Landscape.png",
+                  "id": "a86fef36-b5dd-47f4-81f2-a941f1c34d65",
+                  "similarity": 0.6135270942378664,
+                  "thumbnail": "image://thumbnail/a86fef36-b5dd-47f4-81f2-a941f1c34d65",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                },
+                {
+                  "filename": "Night.png",
+                  "id": "96fa98c3-6f49-4a95-bbaf-264b38fb3d64",
+                  "similarity": 0.4275766270687204,
+                  "thumbnail": "image://thumbnail/96fa98c3-6f49-4a95-bbaf-264b38fb3d64",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Portrait.png",
+                  "id": "3f5d0726-17c8-4a69-ab10-33d71caf7bf0",
+                  "similarity": 0.2720582375322165,
+                  "thumbnail": "image://thumbnail/3f5d0726-17c8-4a69-ab10-33d71caf7bf0",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                }
+              ],
+              "query": "river and trees in a landscape"
+            },
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Night.png",
+              "matches": [
+                {
+                  "filename": "Night.png",
+                  "id": "96fa98c3-6f49-4a95-bbaf-264b38fb3d64",
+                  "similarity": 0.3689006281353242,
+                  "thumbnail": "image://thumbnail/96fa98c3-6f49-4a95-bbaf-264b38fb3d64",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Landscape.png",
+                  "id": "a86fef36-b5dd-47f4-81f2-a941f1c34d65",
+                  "similarity": 0.33224341685305164,
+                  "thumbnail": "image://thumbnail/a86fef36-b5dd-47f4-81f2-a941f1c34d65",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                },
+                {
+                  "filename": "Portrait.png",
+                  "id": "3f5d0726-17c8-4a69-ab10-33d71caf7bf0",
+                  "similarity": 0.23602667017874399,
+                  "thumbnail": "image://thumbnail/3f5d0726-17c8-4a69-ab10-33d71caf7bf0",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                }
+              ],
+              "query": "a city at night"
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-SEM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/UX-P07-SEM-001/repeat-2",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Portrait.png",
+              "matches": [
+                {
+                  "filename": "Portrait.png",
+                  "id": "ab2763fd-0f63-439f-a172-94cdd7ef5efb",
+                  "similarity": 0.538168959543739,
+                  "thumbnail": "image://thumbnail/ab2763fd-0f63-439f-a172-94cdd7ef5efb",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                },
+                {
+                  "filename": "Night.png",
+                  "id": "6fd2e124-d3f8-4488-af6e-58818b1c1362",
+                  "similarity": 0.390082846905363,
+                  "thumbnail": "image://thumbnail/6fd2e124-d3f8-4488-af6e-58818b1c1362",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Landscape.png",
+                  "id": "0dc72145-eced-44ae-a226-e5ef61550b57",
+                  "similarity": 0.3022143817958446,
+                  "thumbnail": "image://thumbnail/0dc72145-eced-44ae-a226-e5ef61550b57",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                }
+              ],
+              "query": "a portrait of a person"
+            },
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Landscape.png",
+              "matches": [
+                {
+                  "filename": "Landscape.png",
+                  "id": "0dc72145-eced-44ae-a226-e5ef61550b57",
+                  "similarity": 0.6135270942378664,
+                  "thumbnail": "image://thumbnail/0dc72145-eced-44ae-a226-e5ef61550b57",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                },
+                {
+                  "filename": "Night.png",
+                  "id": "6fd2e124-d3f8-4488-af6e-58818b1c1362",
+                  "similarity": 0.4275766270687204,
+                  "thumbnail": "image://thumbnail/6fd2e124-d3f8-4488-af6e-58818b1c1362",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Portrait.png",
+                  "id": "ab2763fd-0f63-439f-a172-94cdd7ef5efb",
+                  "similarity": 0.2720582375322165,
+                  "thumbnail": "image://thumbnail/ab2763fd-0f63-439f-a172-94cdd7ef5efb",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                }
+              ],
+              "query": "river and trees in a landscape"
+            },
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Night.png",
+              "matches": [
+                {
+                  "filename": "Night.png",
+                  "id": "6fd2e124-d3f8-4488-af6e-58818b1c1362",
+                  "similarity": 0.3689006281353242,
+                  "thumbnail": "image://thumbnail/6fd2e124-d3f8-4488-af6e-58818b1c1362",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Landscape.png",
+                  "id": "0dc72145-eced-44ae-a226-e5ef61550b57",
+                  "similarity": 0.33224341685305164,
+                  "thumbnail": "image://thumbnail/0dc72145-eced-44ae-a226-e5ef61550b57",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                },
+                {
+                  "filename": "Portrait.png",
+                  "id": "ab2763fd-0f63-439f-a172-94cdd7ef5efb",
+                  "similarity": 0.23602667017874399,
+                  "thumbnail": "image://thumbnail/ab2763fd-0f63-439f-a172-94cdd7ef5efb",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                }
+              ],
+              "query": "a city at night"
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-SEM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/UX-P07-SEM-001/repeat-3",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "device_pixel_ratio": 1,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Portrait.png",
+              "matches": [
+                {
+                  "filename": "Portrait.png",
+                  "id": "fafb4568-1022-49ed-aadf-666d4333a19e",
+                  "similarity": 0.538168959543739,
+                  "thumbnail": "image://thumbnail/fafb4568-1022-49ed-aadf-666d4333a19e",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                },
+                {
+                  "filename": "Night.png",
+                  "id": "59a2f666-f8aa-43fe-8848-8c5d53e32f5f",
+                  "similarity": 0.390082846905363,
+                  "thumbnail": "image://thumbnail/59a2f666-f8aa-43fe-8848-8c5d53e32f5f",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Landscape.png",
+                  "id": "f28ee59e-13e0-4042-9bef-3d7d1e2d7888",
+                  "similarity": 0.3022143817958446,
+                  "thumbnail": "image://thumbnail/f28ee59e-13e0-4042-9bef-3d7d1e2d7888",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                }
+              ],
+              "query": "a portrait of a person"
+            },
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Landscape.png",
+              "matches": [
+                {
+                  "filename": "Landscape.png",
+                  "id": "f28ee59e-13e0-4042-9bef-3d7d1e2d7888",
+                  "similarity": 0.6135270942378664,
+                  "thumbnail": "image://thumbnail/f28ee59e-13e0-4042-9bef-3d7d1e2d7888",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                },
+                {
+                  "filename": "Night.png",
+                  "id": "59a2f666-f8aa-43fe-8848-8c5d53e32f5f",
+                  "similarity": 0.4275766270687204,
+                  "thumbnail": "image://thumbnail/59a2f666-f8aa-43fe-8848-8c5d53e32f5f",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Portrait.png",
+                  "id": "fafb4568-1022-49ed-aadf-666d4333a19e",
+                  "similarity": 0.2720582375322165,
+                  "thumbnail": "image://thumbnail/fafb4568-1022-49ed-aadf-666d4333a19e",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                }
+              ],
+              "query": "river and trees in a landscape"
+            },
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Night.png",
+              "matches": [
+                {
+                  "filename": "Night.png",
+                  "id": "59a2f666-f8aa-43fe-8848-8c5d53e32f5f",
+                  "similarity": 0.3689006281353242,
+                  "thumbnail": "image://thumbnail/59a2f666-f8aa-43fe-8848-8c5d53e32f5f",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Landscape.png",
+                  "id": "f28ee59e-13e0-4042-9bef-3d7d1e2d7888",
+                  "similarity": 0.33224341685305164,
+                  "thumbnail": "image://thumbnail/f28ee59e-13e0-4042-9bef-3d7d1e2d7888",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                },
+                {
+                  "filename": "Portrait.png",
+                  "id": "fafb4568-1022-49ed-aadf-666d4333a19e",
+                  "similarity": 0.23602667017874399,
+                  "thumbnail": "image://thumbnail/fafb4568-1022-49ed-aadf-666d4333a19e",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191900Z-17231/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                }
+              ],
+              "query": "a city at night"
+            }
+          ]
+        }
+      ]
+    },
+    "ux-local-ai-final-native": {
+      "file": {
+        "path": "build-verify/ux-local-ai-final-native/UX_REPORT.json",
+        "sha256": "5e8d1c040da8abc228bacc903ebc50cd31111b850eb7e574785fd781157fb74d",
+        "bytes": 15125
+      },
+      "summary": {
+        "PASS": 4
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "ddb298647969eb65ef01a820ca6b0531b29ef8b1",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "ddb298647969eb65ef01a820ca6b0531b29ef8b1",
+        "worktree_dirty": true,
+        "source_tree_sha256": "1fed7ec951c51b1d03a8d3dd756ff0c6b87fec96151d8642392be0ad1c26db6a",
+        "test_executable_sha256": "73b672a8b59c5560269a69c648a9066e1e3be3e535a27b7831568a4d9c14200a",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "73b672a8b59c5560269a69c648a9066e1e3be3e535a27b7831568a4d9c14200a"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P07-REM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191937Z-17217/UX-P07-REM-001/repeat-1",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-002",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191937Z-17217/UX-P07-REM-002/repeat-1",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-REM-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191937Z-17217/UX-P07-REM-003/repeat-1",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "computed_removal_held",
+              "offset_x": -0.375,
+              "offset_y": -0.3333333333333333,
+              "points": 13,
+              "revision": 5
+            }
+          ]
+        },
+        {
+          "id": "UX-P07-SEM-001",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T191937Z-17217/UX-P07-SEM-001/repeat-1",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "device_pixel_ratio": 2,
+          "catalog_integrity": "PASS",
+          "warnings": [],
+          "measurements": [
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Portrait.png",
+              "matches": [
+                {
+                  "filename": "Portrait.png",
+                  "id": "914ee032-8619-4db0-a38f-2f134b530a42",
+                  "similarity": 0.538168959543739,
+                  "thumbnail": "image://thumbnail/914ee032-8619-4db0-a38f-2f134b530a42",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191937Z-17217/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                },
+                {
+                  "filename": "Night.png",
+                  "id": "81082584-4e55-46c5-9f4c-4dc37ab6d0c3",
+                  "similarity": 0.390082846905363,
+                  "thumbnail": "image://thumbnail/81082584-4e55-46c5-9f4c-4dc37ab6d0c3",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191937Z-17217/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Landscape.png",
+                  "id": "1df0492f-8205-46ce-810b-9940523d2c1b",
+                  "similarity": 0.3022143817958446,
+                  "thumbnail": "image://thumbnail/1df0492f-8205-46ce-810b-9940523d2c1b",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191937Z-17217/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                }
+              ],
+              "query": "a portrait of a person"
+            },
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Landscape.png",
+              "matches": [
+                {
+                  "filename": "Landscape.png",
+                  "id": "1df0492f-8205-46ce-810b-9940523d2c1b",
+                  "similarity": 0.6135270942378664,
+                  "thumbnail": "image://thumbnail/1df0492f-8205-46ce-810b-9940523d2c1b",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191937Z-17217/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                },
+                {
+                  "filename": "Night.png",
+                  "id": "81082584-4e55-46c5-9f4c-4dc37ab6d0c3",
+                  "similarity": 0.4275766270687204,
+                  "thumbnail": "image://thumbnail/81082584-4e55-46c5-9f4c-4dc37ab6d0c3",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191937Z-17217/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Portrait.png",
+                  "id": "914ee032-8619-4db0-a38f-2f134b530a42",
+                  "similarity": 0.2720582375322165,
+                  "thumbnail": "image://thumbnail/914ee032-8619-4db0-a38f-2f134b530a42",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191937Z-17217/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                }
+              ],
+              "query": "river and trees in a landscape"
+            },
+            {
+              "action": "actual_semantic_query",
+              "expected_first": "Night.png",
+              "matches": [
+                {
+                  "filename": "Night.png",
+                  "id": "81082584-4e55-46c5-9f4c-4dc37ab6d0c3",
+                  "similarity": 0.3689006281353242,
+                  "thumbnail": "image://thumbnail/81082584-4e55-46c5-9f4c-4dc37ab6d0c3",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191937Z-17217/case-fixtures/UX-P07-SEM-001/Night.png"
+                },
+                {
+                  "filename": "Landscape.png",
+                  "id": "1df0492f-8205-46ce-810b-9940523d2c1b",
+                  "similarity": 0.33224341685305164,
+                  "thumbnail": "image://thumbnail/1df0492f-8205-46ce-810b-9940523d2c1b",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191937Z-17217/case-fixtures/UX-P07-SEM-001/Landscape.png"
+                },
+                {
+                  "filename": "Portrait.png",
+                  "id": "914ee032-8619-4db0-a38f-2f134b530a42",
+                  "similarity": 0.23602667017874399,
+                  "thumbnail": "image://thumbnail/914ee032-8619-4db0-a38f-2f134b530a42",
+                  "url": "file:///Users/semenkontsevoy/Documents/New%20project/Luma/build-verify/ux-artifacts/20261023T191937Z-17217/case-fixtures/UX-P07-SEM-001/Portrait.png"
+                }
+              ],
+              "query": "a city at night"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "retained_observations": [
+    "Initial 4/4, repeated 12/12 and native 4/4 passed. Static review then found the test-only retouch gate destructor could propagate exceptions. Its observation/release paths now catch errors and expose hookFailed, which fails the test explicitly.",
+    "Final source repeats all six local AI cases: 18/18 offscreen PASS (including mask profile regression) and 4/4 Cocoa/Metal DPR2 PASS for Remove/semantic. Original numeric/state assertions were not relaxed."
+  ],
+  "validation": {
+    "full_build": "PASS",
+    "ctest_pass": 4,
+    "format": "PASS",
+    "mandatory_affected_tidy": "PASS",
+    "nonblocking_warnings_retained": true,
+    "symbol_isolation": {
+      "schema": 1,
+      "scope": "Global renderer signatures and all defined observer symbols; no signing, distribution or runtime qualification",
+      "shipping": {
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/Luma.app/Contents/MacOS/Luma",
+        "sha256": "89acdd87790aa5925ceaf35624636a06b193ed1a6bb853b055b8255cce95084d",
+        "original_renderer_symbols": [
+          "__ZN4luma9renderCPUERKNS_10FloatImageENS_12EditDocumentEiNSt3__14spanIKhLm18446744073709551615EEENS_17CancellationTokenENS_19RawColorCalibrationENS_16DetailDiagnosticEdNS_13PhotoMetadataENS_11MaskOverlayEPNS_18DevelopAcceleratorENS_22PreviewAnalysisOptionsE"
+        ],
+        "alternate_renderer_symbols": [],
+        "test_observer_symbols": [],
+        "observer_symbol_scope": "all_defined_including_local",
+        "nm_stderr": "",
+        "observer_nm_stderr": ""
+      },
+      "ux": {
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "sha256": "73b672a8b59c5560269a69c648a9066e1e3be3e535a27b7831568a4d9c14200a",
+        "original_renderer_symbols": [
+          "__ZN4luma9renderCPUERKNS_10FloatImageENS_12EditDocumentEiNSt3__14spanIKhLm18446744073709551615EEENS_17CancellationTokenENS_19RawColorCalibrationENS_16DetailDiagnosticEdNS_13PhotoMetadataENS_11MaskOverlayEPNS_18DevelopAcceleratorENS_22PreviewAnalysisOptionsE"
+        ],
+        "alternate_renderer_symbols": [
+          "__ZN4luma19renderCPUWithUxRowsERNS_7ux_test14CpuRowObserverERKNS_10FloatImageENS_12EditDocumentEiNSt3__14spanIKhLm18446744073709551615EEENS_17CancellationTokenENS_19RawColorCalibrationENS_16DetailDiagnosticEdNS_13PhotoMetadataENS_11MaskOverlayE"
+        ],
+        "test_observer_symbols": [
+          "__GLOBAL__sub_I_LoadProbe.cpp",
+          "__GLOBAL__sub_I_PreviewResultProbe.cpp",
+          "__GLOBAL__sub_I_RetouchResultProbe.cpp",
+          "__ZN12_GLOBAL__N_19thumbnailERKNSt3__14__fs10filesystem4pathERK7QStringRKNS0_10shared_ptrI14ThumbnailStateEERKN4luma17CancellationTokenERKN2ux15thumbnail_trace5TokenE",
+          "__ZN12_GLOBAL__N_19thumbnailERKNSt3__14__fs10filesystem4pathERK7QStringRKNS0_10shared_ptrI14ThumbnailStateEERKN4luma17CancellationTokenERKN2ux15thumbnail_trace5TokenE.cold.1",
+          "__ZN2ux12_GLOBAL__N_111requestsForERKNS_15thumbnail_trace8SnapshotERK4QUrl",
+          "__ZN2ux12_GLOBAL__N_111rowControlsERKNS_15thumbnail_trace8SnapshotERKNSt3__16vectorINS0_12RowReferenceENS5_9allocatorIS7_EEEE",
+          "__ZN2ux12_GLOBAL__N_115rejectTransientERNS_7ContextERNS_17PreviewResultGateERK6QImageRK7QString",
+          "__ZN2ux12_GLOBAL__N_116checkNewResponseERKNS_15thumbnail_trace8SnapshotERKNS0_3PinEiRK5QSizey",
+          "__ZN2ux12_GLOBAL__N_13oneERKNS_15thumbnail_trace8SnapshotEyNS1_4KindE",
+          "__ZN2ux12_GLOBAL__N_14heldERNS_15thumbnail_trace7SessionERKNS0_3PinERK5QSizeb",
+          "__ZN2ux12_GLOBAL__N_14heldERNS_15thumbnail_trace7SessionERKNS0_3PinERK5QSizebRKNSt3__16vectorINS0_12RowReferenceENSA_9allocatorISC_EEEE",
+          "__ZN2ux12_GLOBAL__N_14heldERNS_15thumbnail_trace7SessionERKNS0_3PinERK5QSizebb",
+          "__ZN2ux12_GLOBAL__N_16cpuOneERKNS_15thumbnail_trace8SnapshotEyNS1_8CpuStageE",
+          "__ZN2ux12_GLOBAL__N_16cpuOneERKNS_15thumbnail_trace8SnapshotEyNS1_8CpuStageE.cold.1",
+          "__ZN2ux12_GLOBAL__N_19heldFinalERNS_7ContextERNS_17PreviewResultGateERK6QImageRK7QString",
+          "__ZN2ux12_GLOBAL__N_19traceJSONERKNS_15thumbnail_trace8SnapshotE",
+          "__ZN2ux13MergeJobProbe3jobERK16EditorController",
+          "__ZN2ux14LoadResultGate7releaseEv",
+          "__ZN2ux14LoadResultGateC1ER16EditorController",
+          "__ZN2ux14LoadResultGateC2ER16EditorController",
+          "__ZN2ux14LoadResultGateD1Ev",
+          "__ZN2ux14LoadResultGateD2Ev",
+          "__ZN2ux15holdLoadSuccessERKNS_13LoadOperationE",
+          "__ZN2ux15thumbnail_trace12_GLOBAL__N_112appendLockedERNS0_5StateEyNS0_4KindEyb",
+          "__ZN2ux15thumbnail_trace12_GLOBAL__N_116FirstRowObserver17firstRowCompletedERKN4luma12DisplayImageE",
+          "__ZN2ux15thumbnail_trace12_GLOBAL__N_116FirstRowObserverD0Ev",
+          "__ZN2ux15thumbnail_trace12_GLOBAL__N_116FirstRowObserverD1Ev",
+          "__ZN2ux15thumbnail_trace21observeActualResponseERKNSt3__110shared_ptrINS0_4SlotEEEP19QQuickImageResponseRK7QStringRK5QSize",
+          "__ZN2ux15thumbnail_trace27renderThumbnailWithCpuProbeERKNS0_5TokenEyRKN4luma10FloatImageENS4_12EditDocumentEiNSt3__14spanIKhLm18446744073709551615EEENS4_17CancellationTokenENS4_19RawColorCalibrationENS4_16DetailDiagnosticEdNS4_13PhotoMetadataENS4_11MaskOverlayE",
+          "__ZN2ux15thumbnail_trace5StateD2Ev",
+          "__ZN2ux15thumbnail_trace5TokenC1ENSt3__110shared_ptrINS0_5StateEEEy",
+          "__ZN2ux15thumbnail_trace5TokenC2ENSt3__110shared_ptrINS0_5StateEEEy",
+          "__ZN2ux15thumbnail_trace5TokenD1Ev",
+          "__ZN2ux15thumbnail_trace7RequestD1Ev",
+          "__ZN2ux15thumbnail_trace7Session7releaseEv",
+          "__ZN2ux15thumbnail_trace7SessionC1ENSt3__110shared_ptrINS0_4SlotEEENS2_8optionalINS0_8GateSpecEEE",
+          "__ZN2ux15thumbnail_trace7SessionC2ENSt3__110shared_ptrINS0_4SlotEEENS2_8optionalINS0_8GateSpecEEE",
+          "__ZN2ux15thumbnail_trace7SessionD1Ev",
+          "__ZN2ux15thumbnail_trace7SessionD2Ev",
+          "__ZN2ux15thumbnail_trace8SnapshotC2ERKS1_",
+          "__ZN2ux15thumbnail_trace8SnapshotD2Ev",
+          "__ZN2ux15thumbnail_trace8makeSlotEv",
+          "__ZN2ux16PreviewOperationD1Ev",
+          "__ZN2ux17LoadProbeSnapshotD2Ev",
+          "__ZN2ux17MetalPreviewProbe7developERKN4luma10FloatImageERKNS1_15DevelopPipelineENS1_17CancellationTokenE",
+          "__ZN2ux17MetalPreviewProbe7installER16EditorController",
+          "__ZN2ux17MetalPreviewProbe7installER16EditorController.cold.1",
+          "__ZN2ux17MetalPreviewProbeD0Ev",
+          "__ZN2ux17MetalPreviewProbeD1Ev",
+          "__ZN2ux17PreviewResultGate7releaseEv",
+          "__ZN2ux17PreviewResultGateC1ER16EditorControlleri",
+          "__ZN2ux17PreviewResultGateC2ER16EditorControlleri",
+          "__ZN2ux17PreviewResultGateD1Ev",
+          "__ZN2ux17PreviewResultGateD2Ev",
+          "__ZN2ux17RetouchResultGate7releaseEv",
+          "__ZN2ux17RetouchResultGateC1ER16EditorController",
+          "__ZN2ux17RetouchResultGateC2ER16EditorController",
+          "__ZN2ux17RetouchResultGateD1Ev",
+          "__ZN2ux17RetouchResultGateD2Ev",
+          "__ZN2ux18PreviewResultStateD2Ev",
+          "__ZN2ux19deferPreviewSuccessERKNS_16PreviewOperationERK6QImageNSt3__18functionIFvvEEE",
+          "__ZN2ux19deferRetouchSuccessEPK16EditorControlleryRKN4luma13RetouchStrokeENSt3__18functionIFvvEEE",
+          "__ZN2ux21PreviewResultSnapshotC2ERKS0_",
+          "__ZN2ux21PreviewResultSnapshotD1Ev",
+          "__ZN2ux21RetouchResultSnapshotD1Ev",
+          "__ZN2ux22observePreviewDeliveryERKNS_16PreviewOperationE",
+          "__ZN2ux22observeRetouchDeliveryEPK16EditorControlleryb",
+          "__ZN2ux23observePreviewRejectionERKNS_16PreviewOperationEy",
+          "__ZN2ux26observeLoadSuccessDeliveryERKNS_13LoadOperationE",
+          "__ZN4luma19renderCPUWithUxRowsERNS_7ux_test14CpuRowObserverERKNS_10FloatImageENS_12EditDocumentEiNSt3__14spanIKhLm18446744073709551615EEENS_17CancellationTokenENS_19RawColorCalibrationENS_16DetailDiagnosticEdNS_13PhotoMetadataENS_11MaskOverlayE",
+          "__ZN9QtPrivate15QCallableObjectIZN2ux12_GLOBAL__N_110BatchAuditC1ERNS1_7ContextERNS1_15thumbnail_trace7SessionEEUlvE_NS_4ListIJEEEvE4implEiPNS_15QSlotObjectBaseEP7QObjectPPvPb",
+          "__ZN9QtPrivate15QCallableObjectIZN2ux12_GLOBAL__N_117InvalidationAuditC1ERNS1_7ContextERNS1_15thumbnail_trace7SessionEEUlRK11QModelIndexSB_RK5QListIiEE_NS_4ListIJSB_SB_SF_EEEvE4implEiPNS_15QSlotObjectBaseEP7QObjectPPvPb",
+          "__ZN9QtPrivate15QCallableObjectIZN2ux15thumbnail_trace21observeActualResponseERKNSt3__110shared_ptrINS2_4SlotEEEP19QQuickImageResponseRK7QStringRK5QSizeE3$_0NS_4ListIJEEEvE4implEiPNS_15QSlotObjectBaseEP7QObjectPPvPb",
+          "__ZN9QtPrivate15QCallableObjectIZN2ux15thumbnail_trace21observeActualResponseERKNSt3__110shared_ptrINS2_4SlotEEEP19QQuickImageResponseRK7QStringRK5QSizeE3$_1NS_4ListIJP7QObjectEEEvE4implEiPNS_15QSlotObjectBaseESK_PPvPb",
+          "__ZNK2ux14LoadResultGate8snapshotEv",
+          "__ZNK2ux15thumbnail_trace5Token12noteCpuStageENS0_8CpuStageEyii",
+          "__ZNK2ux15thumbnail_trace5Token12noteCpuStageENS0_8CpuStageEyii.cold.1",
+          "__ZNK2ux15thumbnail_trace5Token17afterActualCpuRowEyiiNSt3__14spanIKhLm18446744073709551615EEE",
+          "__ZNK2ux15thumbnail_trace5Token19beforeFinishedQueueEb",
+          "__ZNK2ux15thumbnail_trace5Token23requiresPartialCpuProbeEv",
+          "__ZNK2ux15thumbnail_trace5Token4noteENS0_4KindEy",
+          "__ZNK2ux15thumbnail_trace7Session8snapshotEv",
+          "__ZNK2ux16PreviewOperation6sameAsERKS0_",
+          "__ZNK2ux17PreviewResultGate8snapshotEv",
+          "__ZNK2ux17RetouchResultGate8snapshotEv",
+          "__ZNKSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE11target_typeEv",
+          "__ZNKSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE6targetERKSt9type_info",
+          "__ZNKSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE7__cloneEPNS0_6__baseISF_EE",
+          "__ZNKSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE7__cloneEv",
+          "__ZNKSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE11target_typeEv",
+          "__ZNKSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE6targetERKSt9type_info",
+          "__ZNKSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE7__cloneEPNS0_6__baseISF_EE",
+          "__ZNKSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE7__cloneEv",
+          "__ZNKSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEE11target_typeEv",
+          "__ZNKSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEE6targetERKSt9type_info",
+          "__ZNKSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEE7__cloneEPNS0_6__baseISL_EE",
+          "__ZNKSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEE7__cloneEv",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE18destroy_deallocateEv",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE7destroyEv",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEED0Ev",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEED1Ev",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEEclEv",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE18destroy_deallocateEv",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEE7destroyEv",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEED0Ev",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEED1Ev",
+          "__ZNSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEEclEv",
+          "__ZNSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEE18destroy_deallocateEv",
+          "__ZNSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEE7destroyEv",
+          "__ZNSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEED0Ev",
+          "__ZNSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEED1Ev",
+          "__ZNSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEEclEOiSN_",
+          "__ZNSt3__110shared_ptrIN2ux14LoadProbeStateEED1B9nqe220106Ev",
+          "__ZNSt3__110shared_ptrIN2ux15thumbnail_trace4SlotEED1B9nqe220106Ev",
+          "__ZNSt3__110shared_ptrIN2ux15thumbnail_trace5StateEED1B9nqe220106Ev",
+          "__ZNSt3__110shared_ptrIN2ux17MetalPreviewProbeEED1B9nqe220106Ev",
+          "__ZNSt3__110shared_ptrIN2ux18PreviewResultStateEED1B9nqe220106Ev",
+          "__ZNSt3__110shared_ptrIN2ux18RetouchResultStateEED1B9nqe220106Ev",
+          "__ZNSt3__110unique_ptrIN2ux15thumbnail_trace7SessionENS_14default_deleteIS3_EEED1B9nqe220106Ev",
+          "__ZNSt3__111make_uniqueB9nqe220106IN2ux15thumbnail_trace7SessionEJNS_10shared_ptrINS2_4SlotEEENS2_8GateSpecEELi0EEENS_10unique_ptrIT_NS_14default_deleteIS9_EEEEDpOT0_",
+          "__ZNSt3__114__split_bufferIN2ux15thumbnail_trace7RequestERNS_9allocatorIS3_EEED1Ev",
+          "__ZNSt3__118condition_variable10wait_untilB9nqe220106INS_6chrono12steady_clockENS2_8durationIxNS_5ratioILl1ELl1000000000EEEEEZNK2ux15thumbnail_trace5Token17afterActualCpuRowEyiiNS_4spanIKhLm18446744073709551615EEEE3$_0EEbRNS_11unique_lockINS_5mutexEEERKNS2_10time_pointIT_T0_EET1_",
+          "__ZNSt3__118condition_variable10wait_untilB9nqe220106INS_6chrono12steady_clockENS2_8durationIxNS_5ratioILl1ELl1000000000EEEEEZNK2ux15thumbnail_trace5Token19beforeFinishedQueueEbE3$_0EEbRNS_11unique_lockINS_5mutexEEERKNS2_10time_pointIT_T0_EET1_",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux14LoadProbeStateENS_9allocatorIS2_EEE16__on_zero_sharedEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux14LoadProbeStateENS_9allocatorIS2_EEE21__on_zero_shared_weakEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux14LoadProbeStateENS_9allocatorIS2_EEED0Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux14LoadProbeStateENS_9allocatorIS2_EEED1Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace4SlotENS_9allocatorIS3_EEE16__on_zero_sharedEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace4SlotENS_9allocatorIS3_EEE21__on_zero_shared_weakEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace4SlotENS_9allocatorIS3_EEED0Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace4SlotENS_9allocatorIS3_EEED1Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace5StateENS_9allocatorIS3_EEE16__on_zero_sharedEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace5StateENS_9allocatorIS3_EEE21__on_zero_shared_weakEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace5StateENS_9allocatorIS3_EEED0Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace5StateENS_9allocatorIS3_EEED1Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux17MetalPreviewProbeENS_9allocatorIS2_EEE16__on_zero_sharedEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux17MetalPreviewProbeENS_9allocatorIS2_EEE21__on_zero_shared_weakEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux17MetalPreviewProbeENS_9allocatorIS2_EEED0Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux17MetalPreviewProbeENS_9allocatorIS2_EEED1Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux18PreviewResultStateENS_9allocatorIS2_EEE16__on_zero_sharedEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux18PreviewResultStateENS_9allocatorIS2_EEE21__on_zero_shared_weakEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux18PreviewResultStateENS_9allocatorIS2_EEED0Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux18PreviewResultStateENS_9allocatorIS2_EEED1Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux18RetouchResultStateENS_9allocatorIS2_EEE16__on_zero_sharedEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux18RetouchResultStateENS_9allocatorIS2_EEE21__on_zero_shared_weakEv",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux18RetouchResultStateENS_9allocatorIS2_EEED0Ev",
+          "__ZNSt3__120__shared_ptr_emplaceIN2ux18RetouchResultStateENS_9allocatorIS2_EEED1Ev",
+          "__ZNSt3__123__optional_storage_baseIN2ux16PreviewOperationELb0EED2Ev",
+          "__ZNSt3__128__exception_guard_exceptionsINS_6vectorIN2ux15thumbnail_trace14CpuRenderEventENS_9allocatorIS4_EEE16__destroy_vectorEED1B9nqe220106Ev",
+          "__ZNSt3__128__exception_guard_exceptionsINS_6vectorIN2ux15thumbnail_trace7RequestENS_9allocatorIS4_EEE16__destroy_vectorEED1B9nqe220106Ev",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace14CpuRenderEventENS_9allocatorIS3_EEE18__assign_with_sizeB9nqe220106INS_17_ClassicAlgPolicyEPS3_S9_EEvT0_T1_l",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace14CpuRenderEventENS_9allocatorIS3_EEE20__throw_length_errorB9nqe220106Ev",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace14CpuRenderEventENS_9allocatorIS3_EEE24__emplace_back_slow_pathIJS3_EEEPS3_DpOT_",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace14CpuRenderEventENS_9allocatorIS3_EEE9push_backB9nqe220106EOS3_",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace5EventENS_9allocatorIS3_EEE18__assign_with_sizeB9nqe220106INS_17_ClassicAlgPolicyEPS3_S9_EEvT0_T1_l",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace5EventENS_9allocatorIS3_EEE20__throw_length_errorB9nqe220106Ev",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace7RequestENS_9allocatorIS3_EEE16__init_with_sizeB9nqe220106IPS3_S8_EEvT_T0_m",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace7RequestENS_9allocatorIS3_EEE18__assign_with_sizeB9nqe220106INS_17_ClassicAlgPolicyEPS3_S9_EEvT0_T1_l",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace7RequestENS_9allocatorIS3_EEE20__throw_length_errorB9nqe220106Ev",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace7RequestENS_9allocatorIS3_EEE24__emplace_back_slow_pathIJRKS3_EEEPS3_DpOT_",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace7RequestENS_9allocatorIS3_EEE24__emplace_back_slow_pathIJS3_EEEPS3_DpOT_",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace7RequestENS_9allocatorIS3_EEE26__swap_out_circular_bufferERNS_14__split_bufferIS3_RS5_EE",
+          "__ZNSt3__16vectorIN2ux15thumbnail_trace7RequestENS_9allocatorIS3_EEED1B9nqe220106Ev",
+          "__ZNSt3__18optionalIN2ux15thumbnail_trace8SnapshotEEaSB9nqe220106IRKS3_Li0EEERS4_OT_",
+          "__ZNSt3__18optionalIN2ux16PreviewOperationEED1Ev",
+          "__ZNSt3__18optionalIN2ux16PreviewOperationEEaSB9nqe220106IRKS2_Li0EEERS3_OT_",
+          "__ZNSt3__18weak_ptrIN2ux14LoadProbeStateEED1Ev",
+          "__ZNSt3__18weak_ptrIN2ux18PreviewResultStateEED1Ev",
+          "__ZNSt3__18weak_ptrIN2ux18RetouchResultStateEED1Ev",
+          "__ZTIN2ux15thumbnail_trace12_GLOBAL__N_116FirstRowObserverE",
+          "__ZTIN2ux17MetalPreviewProbeE",
+          "__ZTIN4luma7ux_test14CpuRowObserverE",
+          "__ZTINSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEEE",
+          "__ZTINSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEEE",
+          "__ZTINSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEEE",
+          "__ZTINSt3__120__shared_ptr_emplaceIN2ux14LoadProbeStateENS_9allocatorIS2_EEEE",
+          "__ZTINSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace4SlotENS_9allocatorIS3_EEEE",
+          "__ZTINSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace5StateENS_9allocatorIS3_EEEE",
+          "__ZTINSt3__120__shared_ptr_emplaceIN2ux17MetalPreviewProbeENS_9allocatorIS2_EEEE",
+          "__ZTINSt3__120__shared_ptr_emplaceIN2ux18PreviewResultStateENS_9allocatorIS2_EEEE",
+          "__ZTINSt3__120__shared_ptr_emplaceIN2ux18RetouchResultStateENS_9allocatorIS2_EEEE",
+          "__ZTIZN2ux12_GLOBAL__N_115rejectTransientERNS_7ContextERNS_17PreviewResultGateERK6QImageRK7QStringE3$_0",
+          "__ZTIZN2ux12_GLOBAL__N_19heldFinalERNS_7ContextERNS_17PreviewResultGateERK6QImageRK7QStringE3$_0",
+          "__ZTIZN4luma19renderCPUWithUxRowsERNS_7ux_test14CpuRowObserverERKNS_10FloatImageENS_12EditDocumentEiNSt3__14spanIKhLm18446744073709551615EEENS_17CancellationTokenENS_19RawColorCalibrationENS_16DetailDiagnosticEdNS_13PhotoMetadataENS_11MaskOverlayEE3$_2",
+          "__ZTSN2ux15thumbnail_trace12_GLOBAL__N_116FirstRowObserverE",
+          "__ZTSN2ux17MetalPreviewProbeE",
+          "__ZTSN4luma7ux_test14CpuRowObserverE",
+          "__ZTSNSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEEE",
+          "__ZTSNSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEEE",
+          "__ZTSNSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEEE",
+          "__ZTSNSt3__120__shared_ptr_emplaceIN2ux14LoadProbeStateENS_9allocatorIS2_EEEE",
+          "__ZTSNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace4SlotENS_9allocatorIS3_EEEE",
+          "__ZTSNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace5StateENS_9allocatorIS3_EEEE",
+          "__ZTSNSt3__120__shared_ptr_emplaceIN2ux17MetalPreviewProbeENS_9allocatorIS2_EEEE",
+          "__ZTSNSt3__120__shared_ptr_emplaceIN2ux18PreviewResultStateENS_9allocatorIS2_EEEE",
+          "__ZTSNSt3__120__shared_ptr_emplaceIN2ux18RetouchResultStateENS_9allocatorIS2_EEEE",
+          "__ZTSZN2ux12_GLOBAL__N_115rejectTransientERNS_7ContextERNS_17PreviewResultGateERK6QImageRK7QStringE3$_0",
+          "__ZTSZN2ux12_GLOBAL__N_19heldFinalERNS_7ContextERNS_17PreviewResultGateERK6QImageRK7QStringE3$_0",
+          "__ZTSZN4luma19renderCPUWithUxRowsERNS_7ux_test14CpuRowObserverERKNS_10FloatImageENS_12EditDocumentEiNSt3__14spanIKhLm18446744073709551615EEENS_17CancellationTokenENS_19RawColorCalibrationENS_16DetailDiagnosticEdNS_13PhotoMetadataENS_11MaskOverlayEE3$_2",
+          "__ZTVN2ux15thumbnail_trace12_GLOBAL__N_116FirstRowObserverE",
+          "__ZTVN2ux17MetalPreviewProbeE",
+          "__ZTVNSt3__110__function6__funcIZN2ux12_GLOBAL__N_115rejectTransientERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEEE",
+          "__ZTVNSt3__110__function6__funcIZN2ux12_GLOBAL__N_19heldFinalERNS2_7ContextERNS2_17PreviewResultGateERK6QImageRK7QStringE3$_0FbvEEE",
+          "__ZTVNSt3__110__function6__funcIZN4luma19renderCPUWithUxRowsERNS2_7ux_test14CpuRowObserverERKNS2_10FloatImageENS2_12EditDocumentEiNS_4spanIKhLm18446744073709551615EEENS2_17CancellationTokenENS2_19RawColorCalibrationENS2_16DetailDiagnosticEdNS2_13PhotoMetadataENS2_11MaskOverlayEE3$_2FNS_5arrayIfLm3EEEiiEEE",
+          "__ZTVNSt3__120__shared_ptr_emplaceIN2ux14LoadProbeStateENS_9allocatorIS2_EEEE",
+          "__ZTVNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace4SlotENS_9allocatorIS3_EEEE",
+          "__ZTVNSt3__120__shared_ptr_emplaceIN2ux15thumbnail_trace5StateENS_9allocatorIS3_EEEE",
+          "__ZTVNSt3__120__shared_ptr_emplaceIN2ux17MetalPreviewProbeENS_9allocatorIS2_EEEE",
+          "__ZTVNSt3__120__shared_ptr_emplaceIN2ux18PreviewResultStateENS_9allocatorIS2_EEEE",
+          "__ZTVNSt3__120__shared_ptr_emplaceIN2ux18RetouchResultStateENS_9allocatorIS2_EEEE",
+          "__ZZN2ux15thumbnail_trace21observeActualResponseERKNSt3__110shared_ptrINS0_4SlotEEEP19QQuickImageResponseRK7QStringRK5QSizeEN3$_0D1Ev",
+          "__ZZN2ux15thumbnail_trace21observeActualResponseERKNSt3__110shared_ptrINS0_4SlotEEEP19QQuickImageResponseRK7QStringRK5QSizeEN3$_1D1Ev",
+          "__ZZN4luma19renderCPUWithUxRowsERNS_7ux_test14CpuRowObserverERKNS_10FloatImageENS_12EditDocumentEiNSt3__14spanIKhLm18446744073709551615EEENS_17CancellationTokenENS_19RawColorCalibrationENS_16DetailDiagnosticEdNS_13PhotoMetadataENS_11MaskOverlayEENK3$_3clEii",
+          "__ZZNSt3__16vectorIN2ux15thumbnail_trace5EventENS_9allocatorIS3_EEE12emplace_backIJS3_EEERS3_DpOT_ENKUlvE0_clEv"
+        ],
+        "observer_symbol_scope": "all_defined_including_local",
+        "nm_stderr": "",
+        "observer_nm_stderr": ""
+      },
+      "status": "PASS"
+    },
+    "native_screenshots_visually_inspected": [
+      "remove-committed.png",
+      "semantic-Night.png.png"
+    ]
+  },
+  "logs": [
+    {
+      "path": ".tools/final-remove-semantic-app-build.log",
+      "sha256": "04069222ad2deefe159fa399a8f589084c277790e362adc2365412790ab54fd3",
+      "bytes": 4593
+    },
+    {
+      "path": ".tools/final-remove-semantic-ctest.log",
+      "sha256": "f44722ef4bc16ba9e8b57cac74224e63677ef48b06cd0f4cff174c7e5748fc72",
+      "bytes": 885
+    },
+    {
+      "path": ".tools/final-remove-semantic-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".tools/final-remove-semantic-tidy.log",
+      "sha256": "692f2b2cd3662f4a031e448460f2f03013128b2a97fa55ed78a5167929ec6336",
+      "bytes": 20547
+    },
+    {
+      "path": ".tools/final-remove-probe-safe-build.log",
+      "sha256": "d23a18a0fbe1865cd4181184551ba305cd597a2de2582169c6eed63f41de35c8",
+      "bytes": 635
+    },
+    {
+      "path": ".tools/final-remove-probe-safe-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".tools/final-remove-probe-safe-tidy.log",
+      "sha256": "492775442434a0cac6730b58a7f28ae382dd890276f5ebfa8721ba94558d3263",
+      "bytes": 18799
+    },
+    {
+      "path": ".tools/final-local-ai-app-build.log",
+      "sha256": "af8376d515eacc12c9af583b2455bde0f5c6960e79a897d3a9dbe75e69d51c45",
+      "bytes": 724
+    },
+    {
+      "path": ".tools/final-local-ai-graph.log",
+      "sha256": "ad543bc518d0b9bb1f480621b344e550ed7baa4bbae6c8ae182f37715857d373",
+      "bytes": 1356
+    },
+    {
+      "path": ".tools/final-local-ai-graph-health.log",
+      "sha256": "e22225233c54de7e7211fccf620886b2204dbc55b7e7feaa87c0d75ce1c66161",
+      "bytes": 1154
+    }
+  ],
+  "graph": {
+    "nodes": 7810,
+    "edges": 20217,
+    "self_loops": 8,
+    "missing_or_dangling": 0,
+    "exact_duplicates": 0,
+    "qml_structurally_parsed": false
+  },
+  "limits": [
+    "The held success dispatch qualifies cancellation of a real computed but unapplied result; it is not a measurement of mid-inference cancellation latency.",
+    "The synthetic defect checks the covered center; feathered edges and broad photographic removal quality are not certified by this fixture.",
+    "Three semantic queries certify this deterministic fixture neighborhood, not arbitrary search quality, all languages/models, large indexes or network privacy tracing.",
+    "No pressure callback, gate, timeout or numeric tolerance was weakened. Hardware remains one 8 GiB M3 Mac; no external-display/16 GiB qualification.",
+    "10 applicable blocking IDs remain without adapters; full release qualification and artifact/update gates remain open."
+  ]
+}

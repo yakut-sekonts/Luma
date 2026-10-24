@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "date": "2026-10-23",
+  "base_commit": "88089a27c218d29adb6915c756bdaccb6f43292e",
+  "result": "PASS",
+  "scope": "Deterministic DevelopAccelerator interface fault contracts plus existing actual Metal numerical tests; no windows",
+  "junit": {
+    "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/final-develop-fallback.xml",
+    "sha256": "9027c30478b378e167088a72e4a98eb53806d25611c3e58954230eab65b4fbd8",
+    "bytes": 1578,
+    "attributes": {
+      "name": "Darwin-c++",
+      "tests": "1",
+      "failures": "0",
+      "disabled": "0",
+      "skipped": "0",
+      "hostname": "MacBook-Pro.local",
+      "time": "0",
+      "timestamp": "2026-10-23T11:35:46"
+    },
+    "cases": [
+      {
+        "name": "metal-develop-equivalence",
+        "classname": "metal-develop-equivalence",
+        "time": "0.631089",
+        "status": "run"
+      }
+    ]
+  },
+  "source": {
+    "path": "/Users/semenkontsevoy/Documents/New project/Luma/tests/unit/MetalDevelopTests.cpp",
+    "sha256": "e84f4190b978222ab1f87d6e9360753ba2ccbf65d3ac872698b06f06cb70ce24",
+    "bytes": 14600
+  },
+  "binary": {
+    "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_metal_develop_tests",
+    "sha256": "850daf808f45947133a738fc5ae11f0b68059e4410149c76f57f3d4f996de0c1",
+    "bytes": 4751816
+  },
+  "logs": [
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-develop-fallback-build.log",
+      "sha256": "1fcd233d18cc37d4ca82e31f9b5179d02b136e7514d77de51e03c23428dfb4ca",
+      "bytes": 260
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-develop-fallback.log",
+      "sha256": "04dca72aea49c3e6af2c26ba1c68a96854b73a7279d74a3d2e56068a680181c0",
+      "bytes": 521
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-develop-fallback-full.log",
+      "sha256": "c1e53062da363633ab7dc16b1d3d6e17bc3f41ad21040e1f3be3b32118fe61f9",
+      "bytes": 2422
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-develop-fallback-tidy.log",
+      "sha256": "f8f367c54739808d07ea730f0cf229cb20a13efcf26ae5628ffc7e1dd5126913",
+      "bytes": 3378
+    }
+  ],
+  "contracts": [
+    "Unavailable backend returns the exact CPU geometry/RGBA and every histogram field, with clipping overlay enabled, for neutral and Noise/Sharpen/Crop/Exposure documents.",
+    "Short/long buffers, backend exceptions and cancellation after backend entry reject without returning partial pixels; exact actionable messages checked (8 cases).",
+    "Subsequent renders recover exact CPU output; source RGB and alpha remain unchanged.",
+    "Existing 13 actual Metal cases and 2 explicit combined-Curve/HSL CPU fallbacks still pass unchanged fixed numerical budgets."
+  ],
+  "limits": [
+    "Injected interface return values/errors are not actual MTLCommandBuffer, driver, allocation or device failures.",
+    "The bounded synthetic input is 257x193 with HDR/negative values and fractional alpha; no RAW, stress, memory-pressure, latency or hardware-UI claim.",
+    "No official phase 0.6 UX ID or full release gate is marked passed by this unit test.",
+    "Blocking clang-tidy checks pass; non-blocking optional-access warnings remain behind throwing require preconditions."
+  ]
+}

@@ -1,3 +1,4 @@
+#include "core/render/DevelopPipeline.h"
 #include "tests/ux/UxContext.h"
 #include "tests/ux/UxPixels.h"
 #include <QCryptographicHash>
@@ -38,8 +39,13 @@ bool recoveryExtraScenario(Context &c, const QString &id) {
     const auto assetID = c.editor.photoID().toStdString();
     const auto saved = c.editor.currentSettings();
     const auto rendered = fixtureReference(c);
-    d.wait([&] { return c.provider->requestImage({}, nullptr, {}) == rendered; },
-           "removable source has current preview");
+    const auto pixelsAgree = [&](const QImage &expected) {
+        return previewPixelsAgree(
+            c.provider->requestImage({}, nullptr, {}), expected,
+            c.editor.metalPreview() &&
+                luma::DevelopPipeline(c.editor.currentSettings()).gpuCompatible());
+    };
+    d.wait([&] { return pixelsAgree(rendered); }, "removable source has current preview");
     require(QFile::remove(source), "Cannot remove isolated source while Develop is open");
     d.log({{"action", "isolated_source_removed"}, {"source", source}});
     const auto durable = luma::Catalog(c.catalogFile.toStdString()).assetByID(assetID);
@@ -63,11 +69,23 @@ bool recoveryExtraScenario(Context &c, const QString &id) {
         auto *preview = d.item("develop.preview");
         return c.editor.previewUrl() != previousUrl && preview->isVisible() &&
                preview->property("status").toInt() == 1 &&
-               preview->property("source").toUrl() == c.editor.previewUrl() &&
-               c.provider->requestImage({}, nullptr, {}) == pixels;
+               preview->property("source").toUrl() == c.editor.previewUrl() && pixelsAgree(pixels);
     };
-    d.wait([&] { return ready(afterPixels, beforeContrastUrl); },
-           "new Contrast pixels render from retained image after source removal");
+    try {
+        d.wait([&] { return ready(afterPixels, beforeContrastUrl); },
+               "new Contrast pixels render from retained image after source removal");
+    } catch (...) {
+        recordPreviewDifference(c, afterPixels, "retained source Contrast preview");
+        auto *preview = d.item("develop.preview");
+        writeJson(c.root + "/retained-source-preview.json",
+                  {{"previous_url", beforeContrastUrl},
+                   {"current_url", c.editor.previewUrl()},
+                   {"image_source", preview->property("source").toUrl().toString()},
+                   {"image_status", preview->property("status").toInt()},
+                   {"image_visible", preview->isVisible()},
+                   {"editor_error", c.editor.error()}});
+        throw;
+    }
     const auto beforeUndoUrl = c.editor.previewUrl();
     d.click("main.undoButton");
     require(c.editor.currentSettings() == saved, "Missing source damaged Undo history");

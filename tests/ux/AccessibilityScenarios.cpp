@@ -1,5 +1,6 @@
 #include "tests/ux/UxContext.h"
 #include <QAccessible>
+#include <QGuiApplication>
 #include <QJsonArray>
 #include <QSet>
 #include <cmath>
@@ -44,8 +45,12 @@ void iconNames(Context &c, QStringList &failures) {
 }
 } // namespace
 bool accessibilityScenario(Context &c, const QString &id) {
-    if (id != "UX-KEY-012" && id != "UX-KEY-013" && id != "UX-KEY-014")
+    const bool primaryRoles = id == "UX-P10-A11Y-002";
+    if (id != "UX-KEY-012" && id != "UX-KEY-013" && id != "UX-KEY-014" && !primaryRoles)
         return false;
+    if (primaryRoles)
+        require(QGuiApplication::platformName() == "cocoa" && c.localization->language() == "en",
+                "Primary AX contract requires an actual Cocoa window with fresh English settings");
     // Process-local Qt AX activation; this does not enable system VoiceOver or alter permissions.
     QAccessible::setActive(true);
     c.openFirst();
@@ -105,9 +110,13 @@ bool accessibilityScenario(Context &c, const QString &id) {
         }
         return true;
     }
-    const QStringList primary{"main.libraryButton", "main.developButton", "settingsButton",
-                              "updates.bell",       "main.undoButton",    "main.redoButton",
-                              "exportButton"};
+    const QMap<QString, QString> names{
+        {"main.libraryButton", "Library"}, {"main.developButton", "Develop"},
+        {"settingsButton", "Settings"},    {"updates.bell", "Luma updates"},
+        {"main.undoButton", "Undo"},       {"main.redoButton", "Redo"},
+        {"exportButton", "Export"},        {"openPhotoButton", "+  Open photo"}};
+    const auto primary = names.keys();
+    QJsonArray controls;
     QMap<QString, int> counts;
     QSet<QAccessibleInterface *> visited;
     std::function<void(QAccessibleInterface *)> visit = [&](QAccessibleInterface *interface) {
@@ -119,6 +128,18 @@ bool accessibilityScenario(Context &c, const QString &id) {
             ++counts[object->objectName()];
             require(readable(interface->text(QAccessible::Name)),
                     "Primary accessible control is unlabeled: " + object->objectName());
+            if (primaryRoles) {
+                const auto name = object->objectName();
+                require(interface->role() == QAccessible::Button &&
+                            interface->text(QAccessible::Name) == names.value(name) &&
+                            interface->state().disabled == !d.item(name)->isEnabled(),
+                        "Primary AX role/name/enabled state differs from its visible control: " +
+                            name);
+                controls.append(QJsonObject{{"id", name},
+                                            {"name", interface->text(QAccessible::Name)},
+                                            {"role", int(interface->role())},
+                                            {"disabled", bool(interface->state().disabled)}});
+            }
         }
         require(visited.size() < 5000, "Accessible tree is unexpectedly unbounded for ten photos");
         for (int index = 0; index < interface->childCount(); ++index)
@@ -130,7 +151,10 @@ bool accessibilityScenario(Context &c, const QString &id) {
                 "Primary control is absent or duplicated in the accessible tree: " + name);
     d.log({{"action", "accessible_tree_valid"},
            {"nodes", visited.size()},
-           {"primary_controls", primary.size()}});
+           {"primary_controls", primary.size()},
+           {"primary_role_contract", primaryRoles},
+           {"controls", controls},
+           {"system_voiceover_navigation", false}});
     return true;
 }
 } // namespace ux

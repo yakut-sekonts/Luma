@@ -1,4 +1,5 @@
 #include "platform/macos/ExportMetadata.h"
+#include "platform/macos/PhotoMetadataIO.h"
 #import <Foundation/Foundation.h>
 #include <set>
 #include <stdexcept>
@@ -61,7 +62,8 @@ void set(CGMutableImageMetadataRef metadata, CFStringRef dictionary, CFStringRef
 } // namespace
 CFHandle<CGMutableImageMetadataRef> exportMetadata(const std::filesystem::path &source,
                                                    const ExportOptions &options, int width,
-                                                   int height) {
+                                                   int height,
+                                                   const std::optional<MetadataOverlay> &overlay) {
     CFHandle<CGMutableImageMetadataRef> result(CGImageMetadataCreateMutable());
     if (!result)
         throw std::runtime_error("Cannot allocate export metadata.");
@@ -77,6 +79,11 @@ CFHandle<CGMutableImageMetadataRef> exportMetadata(const std::filesystem::path &
         throw std::runtime_error("ImageIO cannot read source metadata.");
     CFHandle metadata(CGImageSourceCopyMetadataAtIndex(
         input.get(), CGImageSourceGetPrimaryImageIndex(input.get()), nullptr));
+    if (overlay) {
+        auto overridden = applyMetadataOverlay(metadata.get(), *overlay);
+        metadata = CFHandle<CGImageMetadataRef>(
+            overridden ? static_cast<CGImageMetadataRef>(CFRetain(overridden.get())) : nullptr);
+    }
     if (metadata) {
         result =
             CFHandle<CGMutableImageMetadataRef>(CGImageMetadataCreateMutableCopy(metadata.get()));
@@ -139,11 +146,36 @@ CFHandle<CGMutableImageMetadataRef> exportMetadata(const std::filesystem::path &
                   CFArrayAppendValue(paths, path);
               return true;
             });
-        // Child paths are removed first, then any filtered parent structure.
-        for (CFIndex i = CFArrayGetCount(paths); i > 0; --i)
-            CGImageMetadataRemoveTagWithPath(
-                result.get(), nullptr,
-                static_cast<CFStringRef>(CFArrayGetValueAtIndex(paths, i - 1)));
+        std::vector<std::string> pathNames;
+        std::set<std::string> filteredPaths;
+        for (CFIndex i = 0; i < CFArrayGetCount(paths); ++i) {
+            auto path = static_cast<CFStringRef>(CFArrayGetValueAtIndex(paths, i));
+            const char *name = [(__bridge NSString *)path UTF8String];
+            if (!name)
+                throw std::runtime_error("Cannot read export metadata path.");
+            pathNames.emplace_back(name);
+            filteredPaths.emplace(name);
+        }
+        // Remove an entire filtered branch once. Removing its array members or
+        // qualifiers first can invalidate ImageIO's parent storage (notably
+        // localized dc:title/dc:description values). Keep reverse order for
+        // independent sibling array members, whose indices can otherwise shift.
+        for (CFIndex i = CFArrayGetCount(paths); i > 0; --i) {
+            const auto &name = pathNames[static_cast<std::size_t>(i - 1)];
+            bool parentFiltered = false;
+            for (auto boundary = name.find_first_of("[/?"); boundary != std::string::npos;
+                 boundary = name.find_first_of("[/?", boundary + 1)) {
+                if (filteredPaths.contains(name.substr(0, boundary))) {
+                    parentFiltered = true;
+                    break;
+                }
+            }
+            if (!parentFiltered &&
+                !CGImageMetadataRemoveTagWithPath(
+                    result.get(), nullptr,
+                    static_cast<CFStringRef>(CFArrayGetValueAtIndex(paths, i - 1))))
+                throw std::runtime_error("Cannot remove private export metadata.");
+        }
     }
     if (options.metadata != MetadataPolicy::copyrightOnly) {
         set(result.get(), kCGImagePropertyTIFFDictionary, kCGImagePropertyTIFFOrientation, 1);

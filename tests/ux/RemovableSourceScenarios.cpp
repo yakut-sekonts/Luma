@@ -133,7 +133,12 @@ void ready(Context &c, const QImage &expected, const QString &reason) {
                preview->property("source").toUrl().toString() == c.editor.previewUrl() &&
                c.provider->requestImage({}, nullptr, {}) == expected;
     };
-    c.driver->wait(condition, reason);
+    try {
+        c.driver->wait(condition, reason);
+    } catch (...) {
+        recordPreviewDifference(c, expected, reason);
+        throw;
+    }
     c.driver->frame();
     require(condition(), "Preview changed after its accepted removable-source boundary");
 }
@@ -312,7 +317,7 @@ bool removableSourceScenario(Context &c, const QString &id) {
         require(!volumeID.isEmpty(), "Own mounted filesystem has no accepted VolumeUUID");
 
         phase = "actual_add_import";
-        require(d.object("library.pane")
+        require(d.object("library.importDialog")
                     ->setProperty("sources",
                                   QVariant::fromValue(QList<QUrl>{QUrl::fromLocalFile(local),
                                                                   QUrl::fromLocalFile(external)})),

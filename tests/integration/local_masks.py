@@ -21,9 +21,9 @@ with tempfile.TemporaryDirectory(prefix='luma-local-') as temporary:
     assert (root/'first.png').read_bytes()==(root/'second.png').read_bytes()
     assert (root/'local.png').stat().st_size>10000
     with sqlite3.connect(catalog) as db:
-        assert db.execute('PRAGMA user_version').fetchone()==(11,)
+        assert db.execute('PRAGMA user_version').fetchone()==(21,)
         text=db.execute('SELECT document FROM edit_local_masks').fetchone()[0]
-        assert text.startswith('LUMA_LOCAL_MASKS 2 2\n')
+        assert text.startswith('LUMA_LOCAL_MASKS 3 2\n')
         assert db.execute('SELECT exposure,transform_rotate FROM edit_documents').fetchone()==(.3,8.)
     for code in ('ru','zh_CN','hy','de','es','it','fr'):
         folder=root/code;folder.mkdir();(folder/'language.json').write_text(json.dumps({'schema':1,'language':code}))

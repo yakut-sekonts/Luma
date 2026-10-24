@@ -1,0 +1,171 @@
+{
+  "schema": 1,
+  "date": "2026-10-23",
+  "base_commit": "58147e8",
+  "release_status": "NOT_QUALIFIED",
+  "product_code_changed": false,
+  "report": {
+    "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-final-card-preview-settled/UX_REPORT.json",
+    "bytes": 8952,
+    "sha256": "a8ef1b6c5981ba5ac26c4f66df1b5d785da10caf380c16f8fdd8a4d4b3c1f332"
+  },
+  "summary": {
+    "PASS": 3
+  },
+  "hardware": {
+    "chip": "Apple M3",
+    "model": "Mac15,3",
+    "ram_bytes": "8589934592",
+    "macos": "27.0.1",
+    "qt": "6.10.3",
+    "commit": "58147e894a0d30171555a75dc6eeb899bb446653",
+    "worktree_dirty": true,
+    "source_tree_sha256": "e93ac09b6e31467d19d01f5849dd455161d6c60ba20ef5f25addf267947c8edf",
+    "test_executable_sha256": "52e00312a8fd530ee1466949aae41196d2b87bc6836cae3eaa3b64fc608f9a6b",
+    "native_bundle_info": {
+      "status": "PASS",
+      "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+      "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+      "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+      "bundle_identifier": "app.luma.ux-tests",
+      "bundle_executable": "luma_ux_tests",
+      "bundle_name": "LumaUXTests",
+      "bundle_display_name": "LumaUXTests",
+      "package_type": "APPL",
+      "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+      "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+      "executable_sha256": "52e00312a8fd530ee1466949aae41196d2b87bc6836cae3eaa3b64fc608f9a6b"
+    },
+    "source_snapshot_point": "suite_end",
+    "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+    "hosted_ci": true,
+    "performance_mode": "MEASURE_ONLY"
+  },
+  "source_consistency": "PASS",
+  "build_provenance": {
+    "status": "PASS",
+    "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+    "source_commit": "58147e894a0d30171555a75dc6eeb899bb446653",
+    "reason": ""
+  },
+  "original_hashes": "PASS",
+  "cases": [
+    {
+      "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+      "status": "PASS",
+      "message": "",
+      "platform": "offscreen",
+      "graphics_api": "software",
+      "device_pixel_ratio": 1,
+      "warnings": [],
+      "catalog_integrity": "PASS",
+      "original_integrity": "PASS",
+      "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T110855Z-46641/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-1",
+      "actions": {
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T110855Z-46641/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-1/actions.jsonl",
+        "bytes": 13477,
+        "sha256": "ab3b92cac1f58ee1b969757459cb0fdd0b7b6dce00a0742322b47919df92399b"
+      },
+      "control": [
+        {
+          "action": "card_flags_final_readiness_control",
+          "deliveries": 1,
+          "final_url": "image://preview/current?v=3",
+          "identical_pixels": true,
+          "interactive_url": "image://preview/current?v=2",
+          "pending_final_rejected": true,
+          "rejections": 0
+        }
+      ]
+    },
+    {
+      "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+      "status": "PASS",
+      "message": "",
+      "platform": "offscreen",
+      "graphics_api": "software",
+      "device_pixel_ratio": 1,
+      "warnings": [],
+      "catalog_integrity": "PASS",
+      "original_integrity": "PASS",
+      "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T110855Z-46641/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-2",
+      "actions": {
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T110855Z-46641/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-2/actions.jsonl",
+        "bytes": 13477,
+        "sha256": "291c7b365c277d087156d223996e8f9f367892a5d33e5a3ce809273c67a0dd7e"
+      },
+      "control": [
+        {
+          "action": "card_flags_final_readiness_control",
+          "deliveries": 1,
+          "final_url": "image://preview/current?v=3",
+          "identical_pixels": true,
+          "interactive_url": "image://preview/current?v=2",
+          "pending_final_rejected": true,
+          "rejections": 0
+        }
+      ]
+    },
+    {
+      "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+      "status": "PASS",
+      "message": "",
+      "platform": "offscreen",
+      "graphics_api": "software",
+      "device_pixel_ratio": 1,
+      "warnings": [],
+      "catalog_integrity": "PASS",
+      "original_integrity": "PASS",
+      "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T110855Z-46641/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-3",
+      "actions": {
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T110855Z-46641/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-3/actions.jsonl",
+        "bytes": 13477,
+        "sha256": "abf4b077b6e7212a7240805d51d7819ca4cc61b2680a9bfc26bc92a4718e4ea8"
+      },
+      "control": [
+        {
+          "action": "card_flags_final_readiness_control",
+          "deliveries": 1,
+          "final_url": "image://preview/current?v=3",
+          "identical_pixels": true,
+          "interactive_url": "image://preview/current?v=2",
+          "pending_final_rejected": true,
+          "rejections": 0
+        }
+      ]
+    }
+  ],
+  "source": {
+    "path": "/Users/semenkontsevoy/Documents/New project/Luma/tests/ux/CardFlagLocalizationCandidate.cpp",
+    "bytes": 40979,
+    "sha256": "5542370d982c376510ae81662ae3ad27a8f521f665aa9b7e347dc1c9a56bda02"
+  },
+  "logs": [
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-card-preview-settled-build.log",
+      "bytes": 471,
+      "sha256": "b10634052689574380bf427a47f108ed02d142d6a0ed83e800b1faa82e63db6d"
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-card-preview-settled-format.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-card-preview-settled-tidy.log",
+      "bytes": 11736,
+      "sha256": "bcd9a2d9829803ea3f396cb01b1f834c20b031dc41b9c13bdf5010aa159ea810"
+    },
+    {
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/.tools/final-card-preview-settled.log",
+      "bytes": 365,
+      "sha256": "b15429d321a06eab2bfb5438edb2eb47ef560c6b2d6125a5b082b06237c2201f"
+    }
+  ],
+  "finding": "Small fixtures have identical interactive/final pixels. The previous pixel-only predicate accepts the interactive image while EndEdit final completion remains pending. A real Qt slider gesture plus the existing UX-only success-dispatch gate deterministically demonstrates this condition. Readiness now also requires histogramPending=false. Actual job/pixel identity, exact one-time current delivery and a changed preview URL are verified before pinning the stable baseline. Worker and original callback are unchanged; no synthetic pixels or sleeps are used.",
+  "limits": [
+    "This establishes a harness readiness gap, not the exact cause of the historical aggregate BUG045 failure. No field-level evidence exists for that original failure; it remains open.",
+    "Three repetitions cover the bounded two-PNG/eight-language caption workflow and complete document/history/source/catalog invariants; not full localization or physical/native UI qualification.",
+    "No product behavior, pixel budget, watchdog or release gate was changed. Native follow-up and independent CI for this change remain pending."
+  ]
+}

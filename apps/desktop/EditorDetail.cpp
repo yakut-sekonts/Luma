@@ -27,7 +27,8 @@ void EditorController::setDetailControl(const QString &parameter) {
             const auto correction = luma::EditDocument::correction(parameter.toStdString());
             if (correction != luma::Correction::sharpening &&
                 correction != luma::Correction::luminanceNoise &&
-                correction != luma::Correction::colorNoise)
+                correction != luma::Correction::colorNoise &&
+                parameter != QStringLiteral("whites") && parameter != QStringLiteral("blacks"))
                 return;
             history_.current().parameter(parameter.toStdString());
         } catch (const std::exception &) {
@@ -57,9 +58,20 @@ void EditorController::refreshDetailDiagnostic() {
         else if (detailControl_.startsWith(QStringLiteral("noise.color")))
             next = luma::DetailDiagnostic::noiseColor;
     }
-    if (next == diagnostic_)
+    auto clipping = static_cast<luma::ClippingPreview>((shadowClipping_ ? 1 : 0) |
+                                                       (highlightClipping_ ? 2 : 0));
+    if (optionHeld_ && editable() && !original_ &&
+        (detailControl_ == QStringLiteral("whites") ||
+         detailControl_ == QStringLiteral("blacks")) &&
+        history_.current().enabled(luma::EditDocument::correction(detailControl_.toStdString())))
+        clipping = detailControl_ == QStringLiteral("whites") ? luma::ClippingPreview::highlights
+                                                              : luma::ClippingPreview::shadows;
+    if (next != luma::DetailDiagnostic::none)
+        clipping = luma::ClippingPreview::none;
+    if (next == diagnostic_ && clipping == clippingPreview_)
         return;
     diagnostic_ = next;
+    clippingPreview_ = clipping;
     render();
     emit stateChanged();
 }
@@ -75,7 +87,9 @@ bool EditorController::eventFilter(QObject *watched, QEvent *event) {
             refreshDetailDiagnostic();
         }
     } else if (event->type() == QEvent::ApplicationDeactivate) {
-        if (localGesture_)
+        cancelWhiteBalance();
+        cancelCreative();
+        if (localGesture_ || histogramGesture_)
             endEdit();
         optionHeld_ = false;
         clearDetailDiagnostic();

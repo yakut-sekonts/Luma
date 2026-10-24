@@ -1,0 +1,761 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-24T01:21:56.509252+00:00",
+  "base_commit": "91caa174925c91a3a1b51074eeaf0af3bfcfefaa",
+  "release_gate": "NOT_QUALIFIED",
+  "change": "Wait for the actual debounced Library filter reload before selection, including same-result filters. No production behavior or timeout changed.",
+  "retained_failure": {
+    "file": {
+      "path": "build-verify/ux-phase1-hosted-route/UX_REPORT.json",
+      "sha256": "3033cc6ab41cfa71119b93341f7530da71b313b79b63cf84bbfefe6924c463e9",
+      "bytes": 213800
+    },
+    "summary": {
+      "PASS": 29,
+      "FAIL": 1
+    },
+    "source_consistency": "PASS",
+    "build_provenance": {
+      "status": "PASS",
+      "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+      "source_commit": "91caa174925c91a3a1b51074eeaf0af3bfcfefaa",
+      "reason": ""
+    },
+    "hardware": {
+      "chip": "Apple M3",
+      "model": "Mac15,3",
+      "ram_bytes": "8589934592",
+      "macos": "27.0.1",
+      "qt": "6.10.3",
+      "commit": "91caa174925c91a3a1b51074eeaf0af3bfcfefaa",
+      "worktree_dirty": true,
+      "source_tree_sha256": "0c1bd8d3df3ac5512c71d97c2888cd17cd656395dbd08b240d756f65aae04af6",
+      "test_executable_sha256": "8f608606048eb1adf148cb94fdeb1d481fd9738fee443fc0f83bed25b221af83",
+      "native_bundle_info": {
+        "status": "PASS",
+        "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+        "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+        "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+        "bundle_identifier": "app.luma.ux-tests",
+        "bundle_executable": "luma_ux_tests",
+        "bundle_name": "LumaUXTests",
+        "bundle_display_name": "LumaUXTests",
+        "package_type": "APPL",
+        "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+        "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+        "executable_sha256": "8f608606048eb1adf148cb94fdeb1d481fd9738fee443fc0f83bed25b221af83"
+      },
+      "source_snapshot_point": "suite_end",
+      "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+      "hosted_ci": true,
+      "performance_mode": "MEASURE_ONLY"
+    },
+    "results": [
+      {
+        "id": "UX-P10-DAY-003",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-003/repeat-1",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-003",
+        "status": "FAIL",
+        "message": "Cannot click unavailable control: libraryAddToCollection",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-003/repeat-2",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-003",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-003/repeat-3",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-007",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-007/repeat-1",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-007",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-007/repeat-2",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-007",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-007/repeat-3",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-009",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-009/repeat-1",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-009",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-009/repeat-2",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-009",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-009/repeat-3",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-010",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-010/repeat-1",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-010",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-010/repeat-2",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-010",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-010/repeat-3",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-011",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-011/repeat-1",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-011",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-011/repeat-2",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-011",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-011/repeat-3",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-012",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-012/repeat-1",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-012",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-012/repeat-2",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-012",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-012/repeat-3",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-013",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-013/repeat-1",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-013",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-013/repeat-2",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAY-013",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAY-013/repeat-3",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-UPG-012",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-UPG-012/repeat-1",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-UPG-012",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-UPG-012/repeat-2",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-UPG-012",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-UPG-012/repeat-3",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAT-004",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAT-004/repeat-1",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAT-004",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAT-004/repeat-2",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAT-004",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAT-004/repeat-3",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAT-005",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAT-005/repeat-1",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAT-005",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAT-005/repeat-2",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      },
+      {
+        "id": "UX-P10-DAT-005",
+        "status": "PASS",
+        "message": "",
+        "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011214Z-34106/UX-P10-DAT-005/repeat-3",
+        "catalog_integrity": "PASS",
+        "original_integrity": "PASS"
+      }
+    ]
+  },
+  "retests": [
+    {
+      "file": {
+        "path": "build-verify/ux-day003-filter-settled/UX_REPORT.json",
+        "sha256": "2baf196215737b0a9de978893270ee912c00e66b2fdb6f6a7d3e60e4dcf6e209",
+        "bytes": 16462
+      },
+      "summary": {
+        "PASS": 5
+      },
+      "source_consistency": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "91caa174925c91a3a1b51074eeaf0af3bfcfefaa",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "91caa174925c91a3a1b51074eeaf0af3bfcfefaa",
+        "worktree_dirty": true,
+        "source_tree_sha256": "59417f5e7934fc090cc1e7aeffe0dc4b4e12287b9b83799a5437bd08e2d32a5d",
+        "test_executable_sha256": "61dcdbd158ea5fc5499323fb4d64f65159ec20d1f4153aabf0fec053f2cf47c6",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "61dcdbd158ea5fc5499323fb4d64f65159ec20d1f4153aabf0fec053f2cf47c6"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011834Z-35461/UX-P10-DAY-003/repeat-1",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011834Z-35461/UX-P10-DAY-003/repeat-2",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011834Z-35461/UX-P10-DAY-003/repeat-3",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011834Z-35461/UX-P10-DAY-003/repeat-4",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011834Z-35461/UX-P10-DAY-003/repeat-5",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    },
+    {
+      "file": {
+        "path": "build-verify/ux-phase1-hosted-confirmed/UX_REPORT.json",
+        "sha256": "21c14bfd983ae2a823521365b7b05dd9b42860417b83281487a28cbc473eb70b",
+        "bytes": 213748
+      },
+      "summary": {
+        "PASS": 30
+      },
+      "source_consistency": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "91caa174925c91a3a1b51074eeaf0af3bfcfefaa",
+        "reason": ""
+      },
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "91caa174925c91a3a1b51074eeaf0af3bfcfefaa",
+        "worktree_dirty": true,
+        "source_tree_sha256": "59417f5e7934fc090cc1e7aeffe0dc4b4e12287b9b83799a5437bd08e2d32a5d",
+        "test_executable_sha256": "61dcdbd158ea5fc5499323fb4d64f65159ec20d1f4153aabf0fec053f2cf47c6",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "61dcdbd158ea5fc5499323fb4d64f65159ec20d1f4153aabf0fec053f2cf47c6"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "results": [
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-003/repeat-1",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-003/repeat-2",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-003",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-003/repeat-3",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-007",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-007/repeat-1",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-007",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-007/repeat-2",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-007",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-007/repeat-3",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-009",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-009/repeat-1",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-009",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-009/repeat-2",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-009",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-009/repeat-3",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-010",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-010/repeat-1",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-010",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-010/repeat-2",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-010",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-010/repeat-3",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-011",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-011/repeat-1",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-011",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-011/repeat-2",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-011",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-011/repeat-3",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-012",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-012/repeat-1",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-012",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-012/repeat-2",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-012",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-012/repeat-3",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-013",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-013/repeat-1",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-013",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-013/repeat-2",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAY-013",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAY-013/repeat-3",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-UPG-012",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-UPG-012/repeat-1",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-UPG-012",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-UPG-012/repeat-2",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-UPG-012",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-UPG-012/repeat-3",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAT-004",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAT-004/repeat-1",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAT-004",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAT-004/repeat-2",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAT-004",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAT-004/repeat-3",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAT-005",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAT-005/repeat-1",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAT-005",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAT-005/repeat-2",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-P10-DAT-005",
+          "status": "PASS",
+          "message": "",
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261024T011904Z-35718/UX-P10-DAT-005/repeat-3",
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    }
+  ],
+  "ci_changes": "Both standard and release workflows explicitly execute the ten implemented offscreen-compatible phase 1.0 IDs three times; source version remains 0.9.0. Native-only A11Y002 retains its Cocoa requirement.",
+  "validation": {
+    "affected_clang_tidy": {
+      "status": "PASS",
+      "file": {
+        "path": ".tools/day003-tidy.log",
+        "sha256": "574394b37262c00a6853988d07dec1656c701c2fce180c9d3b8ea32ace846dd7",
+        "bytes": 15172
+      },
+      "advisories_retained": true
+    },
+    "format_and_diff": "PASS",
+    "workflow_yaml_parse": "PASS"
+  },
+  "candidate": {
+    "scope": "Local 0.9.0 candidate only; no 1.0 qualification or public upload",
+    "source_commit": "91caa174925c91a3a1b51074eeaf0af3bfcfefaa",
+    "archive_sha256": "bc73cf319f10c4aa04bc2c2a8448f06ecddf0088887470b45fe4b889853a9fba",
+    "archive_bytes": 434015893,
+    "checks": {
+      "actual_archive_valid": true,
+      "one_byte_tamper_rejected": true,
+      "unrelated_public_key_rejected": true,
+      "truncated_signature_rejected": true,
+      "original_archive_unchanged": true,
+      "feed_version": true,
+      "feed_length": true,
+      "feed_url": true,
+      "complete_manifest": true,
+      "manifest_hashes": true
+    },
+    "manifest": {
+      "BUILD_INFO.json": "1bc78e8dc92ca318939f30d4e374026fd0a0d490fd8a8e1f5d015ab9273ecf64",
+      "Luma-0.9.0-macos-arm64.dmg": "3532e8e09fba4f82154b12bfb766dea4f9deb8ca515156d633919edf9732f408",
+      "Luma-0.9.0-macos-arm64.zip": "bc73cf319f10c4aa04bc2c2a8448f06ecddf0088887470b45fe4b889853a9fba",
+      "appcast.xml": "9cd940546471cf172f81c7484a9b6b2e134942145067cba3f741e4f18c852a71"
+    },
+    "status": "PASS"
+  },
+  "candidate_verification_logs": [
+    {
+      "path": ".tools/candidate-package-build.log",
+      "sha256": "d1a400701d09d597cbea7929c515e563aac87184a83ab4bdbdaaadadb1cd42e5",
+      "bytes": 249
+    },
+    {
+      "path": ".tools/candidate-package.log",
+      "sha256": "f85bf5a23ce0a02b1d517b851fbb45efb32265ee2ba7c01035b94e73fef18a1e",
+      "bytes": 4398
+    },
+    {
+      "path": ".tools/candidate-standalone.log",
+      "sha256": "11a3a7e8d408fd3cd3e970107a0a0a20ffdd3008fccc7990c6ca665e20f299ac",
+      "bytes": 383
+    },
+    {
+      "path": ".tools/candidate-dmg.log",
+      "sha256": "1f5a1c0e144520c095f5dd517d174b523cb49e83c55c881c86924faa9decc718",
+      "bytes": 152
+    },
+    {
+      "path": ".tools/candidate-signature.log",
+      "sha256": "d56e1a60f2c0a057ccd4b93abab54cf3c5792716c18b1757b617aa8db730a239",
+      "bytes": 44
+    },
+    {
+      "path": ".tools/candidate-signature-negative.log",
+      "sha256": "180c6c98d07a00b4faf04fdb70edce4ee35727b716caaf687fc41ca6ef7801dd",
+      "bytes": 1034
+    }
+  ],
+  "completed_ci": {
+    "id": 40037519005,
+    "head": "1c1c37e",
+    "conclusion": "success",
+    "jobs": {
+      "path": ".tools/ci-40037519005-jobs-completed.json",
+      "sha256": "386a0a55f77ff9a20096ce4cb2a384e2f0f992529e1efe740734fc45617663f5",
+      "bytes": 13284
+    },
+    "does_not_qualify_latest_head": true
+  },
+  "limitations": [
+    "No new native PASS: foreground UserNotificationCenter cannot be operated by the computer-use tool; manual dismissal remains pending.",
+    "Local candidate version is 0.9.0 at source 91caa17, not final 1.0.0; signed local appcast has not been published.",
+    "Final installation, actual replacement update, long-running/load/chaos/hardware and remaining adapter gates stay open."
+  ]
+}

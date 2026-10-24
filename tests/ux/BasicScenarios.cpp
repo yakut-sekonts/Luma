@@ -9,6 +9,7 @@
 #include <cmath>
 namespace ux {
 bool selectionScenario(Context &, const QString &);
+bool libraryScrollCandidate(Context &, const QString &);
 bool libraryScaleScenario(Context &, const QString &);
 bool accessibilityScenario(Context &, const QString &);
 bool cropScenario(Context &, const QString &);
@@ -42,6 +43,27 @@ bool maskHandleCropLossCandidate(Context &, const QString &);
 bool panelDetailStressScenario(Context &, const QString &);
 bool thumbnailRemainingScenario(Context &, const QString &);
 bool retinaScenario(Context &, const QString &);
+bool previewBackendScenario(Context &, const QString &);
+bool zoomScenario(Context &, const QString &);
+bool memoryPressureScenario(Context &, const QString &);
+bool previewCacheBudgetScenario(Context &, const QString &);
+bool catalogMaintenanceScenario(Context &, const QString &);
+bool metadataScenario(Context &, const QString &);
+bool mergeWorkflowScenario(Context &, const QString &);
+bool xmpAtomicScenario(Context &, const QString &, const QString &);
+bool semanticScenario(Context &, const QString &);
+bool retouchScenario(Context &, const QString &);
+bool aiMaskScenario(Context &, const QString &);
+bool denoiseWorkflowScenario(Context &, const QString &);
+bool mergeOptionsScenario(Context &, const QString &);
+bool relinkScenario(Context &, const QString &);
+bool zoomInteractionScenario(Context &, const QString &);
+bool zoomToolsScenario(Context &, const QString &);
+bool zoomSwitchScenario(Context &, const QString &);
+bool progressiveRaceScenario(Context &, const QString &);
+bool progressiveTransientScenario(Context &, const QString &);
+bool progressiveExportScenario(Context &, const QString &);
+bool progressiveFeedbackScenario(Context &, const QString &);
 void basicScenario(Context &c, const QString &id) {
     auto &d = *c.driver;
     if (id == "UX-EXP-011") {
@@ -49,7 +71,17 @@ void basicScenario(Context &c, const QString &id) {
                 "The complete export-failure readability scenario is unavailable");
         return;
     }
-    if (maskHandleCropLossCandidate(c, id) || keyboardActivationCandidate(c, id) ||
+    if (xmpAtomicScenario(c, id, {}) || semanticScenario(c, id) || retouchScenario(c, id) ||
+        aiMaskScenario(c, id) || denoiseWorkflowScenario(c, id) || mergeOptionsScenario(c, id) ||
+        mergeWorkflowScenario(c, id) || metadataScenario(c, id) || relinkScenario(c, id))
+        return;
+    if (catalogMaintenanceScenario(c, id) || previewCacheBudgetScenario(c, id) ||
+        memoryPressureScenario(c, id) || progressiveTransientScenario(c, id) ||
+        progressiveRaceScenario(c, id) || zoomToolsScenario(c, id) ||
+        zoomInteractionScenario(c, id) || zoomSwitchScenario(c, id) ||
+        progressiveFeedbackScenario(c, id) || progressiveExportScenario(c, id) ||
+        zoomScenario(c, id) || previewBackendScenario(c, id) || libraryScrollCandidate(c, id) ||
+        maskHandleCropLossCandidate(c, id) || keyboardActivationCandidate(c, id) ||
         copyDestinationScenario(c, id, {}) || removableDestinationScenario(c, id, {}) ||
         removableSourceScenario(c, id) || exportResizeScenario(c, id) || retinaScenario(c, id) ||
         thumbnailRemainingScenario(c, id) || panelDetailStressScenario(c, id) ||

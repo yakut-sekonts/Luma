@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "case_id": "UX-P06-PRG-001",
+  "measurement": {
+    "name": "clarity-input-to-current-frame-queued",
+    "unit": "ms",
+    "direction": "lower"
+  },
+  "hardware": {
+    "model": "Mac15,3",
+    "chip": "Apple M3",
+    "macos": "27.0.1",
+    "qt": "6.10.3",
+    "ram_bytes": 8589934592,
+    "platform": "cocoa",
+    "graphics_api": "metal",
+    "device_pixel_ratio": 2,
+    "window_width": 1320,
+    "window_height": 840
+  },
+  "source": {
+    "commit": "cc007dbf1049f4a585bf6d651c0c44153fd07971",
+    "tree_sha256": "6aea458d7afed681ad6e8f74aa3ae00dd223b9fef112b25a008c5f1c2a0129d0",
+    "executable_sha256": "41d5784d1b15c259d684060c6187ec29323b7b756cd542b432f4aa06545c2234",
+    "worktree_dirty": true
+  },
+  "workload": {
+    "description": "3072x2048 chart; 10 distinct held Clarity edits per repetition; queued native frame, separate CPU pixel/readback check; observed OS pressure is retained in hashed measurement evidence",
+    "fixture_sha256": "152c31c8f0045d97638fac4f9fda574f28c92e8f8c4e86ef883d665e8cbbc2a8"
+  },
+  "samples": [
+    18.661959,
+    31.225167,
+    21.042959,
+    26.757458,
+    37.612584,
+    26.445209,
+    20.279208,
+    26.735958,
+    23.392583,
+    24.561833,
+    25.365375,
+    22.364916,
+    21.192833,
+    27.023834,
+    25.982625,
+    30.448625,
+    23.8835,
+    19.831708,
+    25.184125,
+    27.653709,
+    27.824459,
+    42.000666,
+    24.340917,
+    23.8155,
+    22.56275,
+    19.545875,
+    19.190542,
+    20.501667,
+    24.748458,
+    19.111375
+  ],
+  "statistics": {
+    "count": 30,
+    "minimum": 18.661959,
+    "maximum": 42.000666,
+    "p50": 24.340917,
+    "p95": 37.612584,
+    "p99": 42.000666
+  },
+  "evidence": {
+    "report_sha256": "a4ae3cb54469380d6224fc0d30a2d3363af82e10991530e3f54ca614eb1403cc",
+    "measurement_sha256": [
+      "e1909ccef47962728220178b1c36e1ad49b6f26137ad5073a94bc28c68f47eb1",
+      "afa1523cc46561efe75004d3002316777608dd78fe2954a41d23fe6aed8e4d2f",
+      "fb79a189a2dd39ead852c564d4addbd2851553456b2d0d1f77d246eca59fc42c"
+    ]
+  },
+  "qualification": "candidate"
+}

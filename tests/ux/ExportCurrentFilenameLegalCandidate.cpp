@@ -187,7 +187,7 @@ void importOwned(Context &c, const std::array<QString, count> &sources) {
     for (const auto &source : sources)
         urls.append(QUrl::fromLocalFile(source));
     // Only native chooser RESULT is the fixture boundary. Import acceptance is actual UI input.
-    require(d.object("library.pane")->setProperty("sources", QVariant::fromValue(urls)),
+    require(d.object("library.importDialog")->setProperty("sources", QVariant::fromValue(urls)),
             "VIS003 chooser-result boundary rejected owned source URLs");
     d.log({{"action", "fixture_file_chooser_result"},
            {"source_count", count},

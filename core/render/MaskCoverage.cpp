@@ -114,6 +114,8 @@ double PrimitiveCoverage::coverage(double x, double y, std::array<float, 3> refe
     const auto &g = geometry_;
     const double softness = g.feather / 100;
     switch (g.shape) {
+    case MaskShape::bitmap:
+        return g.bitmap.coverage(x, y);
     case MaskShape::linear: {
         const double dx = g.x2 - g.x1, dy = g.y2 - g.y1,
                      t = ((x - g.x1) * dx + (y - g.y1) * dy) / (dx * dx + dy * dy);

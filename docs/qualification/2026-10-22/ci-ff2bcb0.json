@@ -1,0 +1,66 @@
+{
+  "source_commit": "ff2bcb0d0e548baaef55f941f78256923d67c6cd",
+  "run_id": 39762926272,
+  "job_id": 119771265930,
+  "conclusion": "FAIL",
+  "blocking_summary": {
+    "PASS": 195,
+    "SKIPPED": 29,
+    "NOT_IMPLEMENTED": 92
+  },
+  "keyboard_summary": {
+    "PASS": 5,
+    "FAIL": 1
+  },
+  "failure": "Keypad repetition 3 retained a destroyed PhotoCard pointer while actual forward/backward Tab reached the same expected UUID.",
+  "expected_uuid": "81f2894c-93f5-42bb-9c60-15818e8cc594",
+  "retained_card": {
+    "present": false
+  },
+  "focus_observations": [
+    {
+      "after_actual_tab": true,
+      "focus": {
+        "active_focus": true,
+        "active_focus_on_tab": true,
+        "center_visible_under_clips": true,
+        "class": "PhotoCard_QMLTYPE_52",
+        "enabled": true,
+        "object_name": "library.card.81f2894c-93f5-42bb-9c60-15818e8cc594",
+        "present": true,
+        "visible": true
+      },
+      "grid_is_exact_focus": false,
+      "inside_expected_card": false,
+      "label": "forward_tab",
+      "library_mode": true,
+      "open_requested_count": 0,
+      "photo_loaded_count": 0,
+      "selected_count": 1
+    },
+    {
+      "after_actual_tab": true,
+      "focus": {
+        "active_focus": true,
+        "active_focus_on_tab": true,
+        "center_visible_under_clips": true,
+        "class": "PhotoCard_QMLTYPE_52",
+        "enabled": true,
+        "object_name": "library.card.81f2894c-93f5-42bb-9c60-15818e8cc594",
+        "present": true,
+        "visible": true
+      },
+      "grid_is_exact_focus": false,
+      "inside_expected_card": false,
+      "label": "backward_tab",
+      "library_mode": true,
+      "open_requested_count": 0,
+      "photo_loaded_count": 0,
+      "selected_count": 1
+    }
+  ],
+  "evidence": ".tools/final-ci-ff2bcb0/ux-artifacts/20261022T110827Z-78560/CANDIDATE-KEYBOARD-KEYPAD-ASSET-ACTIVATION/repeat-3/keyboard-activation.json",
+  "evidence_sha256": "0bc42e3274093baf5f55ae54333a3dc92c2888413a157b3e301da79c6c7cb60a",
+  "artifact_sha256": "9ce07b96fc53351036ee139a0d286b22ec6b49647ac6545fb200e1f37505e7a1",
+  "not_run": "Later supplemental tests and static analysis skipped after keyboard failure; not a complete release gate."
+}

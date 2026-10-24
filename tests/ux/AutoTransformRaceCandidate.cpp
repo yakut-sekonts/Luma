@@ -327,7 +327,7 @@ bool autoTransformRaceCandidate(Context &c, const QString &id) {
             "RACE005 needs fresh catalog, calibrated 320x240 Building and one small public PNG");
     const auto aHash = hash(aPath), bHash = hash(bPath);
     // Declared file-chooser fixture seam only. Import processing/opening use actual controls.
-    d.object("library.pane")
+    d.object("library.importDialog")
         ->setProperty("sources", QVariant::fromValue(QList<QUrl>{QUrl::fromLocalFile(aPath),
                                                                  QUrl::fromLocalFile(bPath)}));
     d.click("library.importButton");

@@ -1,0 +1,204 @@
+{
+  "schema": 1,
+  "source_commit": "d5bb59bbf63140d38696072633e050462a750e69",
+  "execution_identity": "Executed against these code bytes before committing; no runtime/model code changed after the accepted photographic run.",
+  "scope": "DRUNet Haar MAD noise estimator, bounded developed-photograph quality and actual runtime tiling/contracts",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "ram_gib": 8,
+  "bundle_verification": {
+    "build-verify/models-v4": {
+      "status": "PASS",
+      "manifest_sha256": "a56ce5ccee2cae55dbbee1ebb8cd8095ec70c74307e9452e4266753297ae6f19",
+      "recipe_sha256": "dc0aca29905295600d5fee025de624fa08e7ed52c2bcc519f4b4caf48da945e3"
+    },
+    "build-verify/Luma.app/Contents/Resources/Models": {
+      "status": "PASS",
+      "manifest_sha256": "a56ce5ccee2cae55dbbee1ebb8cd8095ec70c74307e9452e4266753297ae6f19",
+      "recipe_sha256": "dc0aca29905295600d5fee025de624fa08e7ed52c2bcc519f4b4caf48da945e3"
+    },
+    "build-verify/luma_ux_tests.app/Contents/Resources/Models": {
+      "status": "PASS",
+      "manifest_sha256": "a56ce5ccee2cae55dbbee1ebb8cd8095ec70c74307e9452e4266753297ae6f19",
+      "recipe_sha256": "dc0aca29905295600d5fee025de624fa08e7ed52c2bcc519f4b4caf48da945e3"
+    }
+  },
+  "previous_v3_result": {
+    "status": "FAIL",
+    "noisy_photographic_pass": 4,
+    "noisy_photographic_fail": 2,
+    "numerical_comparisons_pass": 9,
+    "failed_samples": [
+      "portrait-sigma-0.01",
+      "landscape-sigma-0.01"
+    ]
+  },
+  "v4_results": {
+    "noisy_photographic_quality": {
+      "status": "PASS",
+      "cases": 6
+    },
+    "source_native_tiling": {
+      "status": "PASS",
+      "cases": 9
+    },
+    "unmodified_photographs": {
+      "status": "OBSERVATIONAL",
+      "cases": 3,
+      "quality_pass_count": 0
+    },
+    "native_contracts": {
+      "amount_zero_identity": true,
+      "cancelled_after_first_tile": true,
+      "half_amount_max_error": 2.9802322387695312e-08,
+      "invalid_amounts_rejected": true,
+      "pre_cancelled_rejected": true
+    },
+    "source_synthetic": {
+      "status": "PASS",
+      "cases": 7
+    },
+    "CPU_ONLY": {
+      "status": "PASS",
+      "cases": 11
+    },
+    "ALL": {
+      "status": "PASS",
+      "cases": 11
+    },
+    "adaptation_units": {
+      "status": "PASS",
+      "tests": 13
+    },
+    "synthetic_oracle_units": {
+      "status": "PASS",
+      "tests": 7
+    },
+    "photographic_oracle_units": {
+      "status": "PASS",
+      "tests": 6
+    },
+    "thresholds_unchanged": true,
+    "actual_device_placement": "UNOBSERVED"
+  },
+  "accepted_runtime_probe": {
+    "sha256": "803e64068f6a49890329ee9eb1125be57ef9c84074e9a83fc4d28086d6311fe9",
+    "matches_post_build_binary": true
+  },
+  "superseded_runtime_attempt": {
+    "status": "ABORTED_NOT_COUNTED",
+    "path": ".tools/final-denoise-photographs-v4",
+    "reason": "Native probe was rebuilt while this first runtime attempt was executing. Terminated and repeated into a fresh directory after the complete build; the stable-probe run is the accepted evidence."
+  },
+  "ctest": {
+    "status": "PASS",
+    "cases": [
+      "model-xcode-preflight",
+      "ux-native-bundle-provenance",
+      "ux-cpu-probe-shipping-isolation",
+      "qml-shell",
+      "signed-update-feed",
+      "release-publisher",
+      "release-dmg-recovery",
+      "release-build-verification"
+    ]
+  },
+  "static_checks": {
+    "format": "PASS",
+    "native_probe_clang_tidy": "PASS",
+    "workflow_yaml_parse": "PASS",
+    "existing_nonblocking_warnings": true
+  },
+  "visual_review": {
+    "status": "BOUNDED_INSPECTION_NOT_FINAL_ACCEPTANCE",
+    "reviewer": "assistant image inspection",
+    "sheets": {
+      "portrait-sigma-0.01": "ebffcec57688214df6779be8ececc61d5bbff910587ec9a44e85e6ab8aa00f6b",
+      "landscape-sigma-0.01": "1f60d8c62ffb9a4d30f757d3d97531ce6dd024f721f409407dc686fd93521d16",
+      "night-sigma-0.05": "e615d98896ac69a07bb87b0b7d60b2f03240fe2b3b93ea1d34b4e1faf9c89389"
+    },
+    "observations": [
+      "Portrait weak-noise output retains facial/hair/helmet structure; smoothing is still visible on fabric/skin relative to the developed reference.",
+      "Landscape weak-noise output retains river/cloud/tree structure; no obvious vertical tile discontinuity in the 512px sheet.",
+      "Night strong-noise output reduces colored background noise while retaining the clock/building outline; no obvious horizontal tile discontinuity in the 384x512px sheet."
+    ],
+    "limitations": "This is not a calibrated-display human sign-off, a complete visual suite, or assessment of full-resolution RAW texture and actual sensor noise."
+  },
+  "independent_ci": "PENDING_FOR_V4",
+  "native_ui": "NOT_RUN_IN_THIS_FOLLOWUP",
+  "full_resolution_raw_noise": "NOT_RUN",
+  "sky_photographic_quality": "NOT_RUN",
+  "load_stress": "NOT_RUN",
+  "signed_distribution": "NOT_RUN",
+  "release_gate": "NOT_QUALIFIED",
+  "stable_release": "0.5.1",
+  "source_sha256": {
+    "scripts/check-denoise-photographs.py": "2fb602238e070b5c69c6628caf1e7d94dc99cc4dee7b33df9ade3f4f27492762",
+    "scripts/models/drunet.py": "fb8285e6e504d14ffd6abc4f04b945d733a297e17764c407c198cd64a068b0c6",
+    "tests/models/DenoiseRuntime.cpp": "9ac5fb6dd4a04f9adffa3276e5ea8d836e49cf6d256bac878c1eccf215bdcad2",
+    "tests/models/test_denoise_conversion.py": "0f1178c49fbde614cdc2f38d98556c2f2ddc4926bde1550abc93fab889cc869a",
+    "tests/models/test_denoise_photographs.py": "08e28daf8f671fd328455c68cedc532c88a6e882033bbade6d5d5056a197238b",
+    "platform/macos/CoreMLDenoise.mm": "55f82d4110375a4f9efddc88ebbbc0392b896dc3e3ccc4903f717576ef99d43b"
+  },
+  "retained_reports": {
+    "denoise-photographs-v4.json": "00815ebe2b25f3784c3959cd1362a5e914bfe30a6b7ca4dec9c72a39b5d5cebe",
+    "denoise-quality-v4.json": "e165c17715c544e7f97cc675643a010e4dd3f09320e438dc25eb6884ee048391",
+    "model-numerics-v4-cpu.json": "ca9cfab4f64e5d33d54c839e819e1269defa50fb532d1e465b423fe547ca01b3",
+    "model-numerics-v4-all.json": "7179ea0070ef1ce8c3ee9dd76003974291d562b303f2a44cf1053afb2846509d",
+    "denoise-photographs-v3-failure.json": "0e33ae98d403398e480e6f9d4b8eeeeda29f6c52aabfa3934355455df1ab62f2",
+    "denoise-mad-source-exploration.json": "85a7e78daed59ddee87edf959e8eb0c5ee45826ab2c435f0baea823fafe7c03e",
+    "denoise-median-export-probe.json": "410770c0de82f94a5afc827e3d5089b20354805a6148d4c8a45a39ebcd06e052"
+  },
+  "logs": {
+    ".tools/final-model-build-v4.log": {
+      "sha256": "dc9a4ce3f7446b9aa0074f158100b7b8dcd07fc7ce80ac40300a42918658541c"
+    },
+    ".tools/final-denoise-conversion-v4-tests.log": {
+      "sha256": "c248edf2081020305fc7b28e1af2256191c6e626c86e8c3a0f596cbe67d31ae6"
+    },
+    ".tools/final-denoise-quality-oracle-v4-tests.log": {
+      "sha256": "21c7e48d0b1ec908feef784bbce1fa55f2c9a7acf76382fa7578754a78bd1ed8"
+    },
+    ".tools/final-denoise-photo-oracle-v4-tests.log": {
+      "sha256": "ec5c7a14d020c8e93eee133ecd150e04f42663449263b4b674806c0ee47247b9"
+    },
+    ".tools/final-denoise-v4-source-quality.log": {
+      "sha256": "cbeeecba207dc937453c66fa2e63dde1c411e341bfdef3d63bae1b5be85daf9c"
+    },
+    ".tools/final-denoise-v4-cpu.log": {
+      "sha256": "d11c888bd4a878a9aff8099840f6eb141c5b972f46c03cdb5824a5ac55865236"
+    },
+    ".tools/final-denoise-v4-all.log": {
+      "sha256": "fcfa213a7affa0a432316f43fec21f769b13bee4573d4e179b394f6243c8afd0"
+    },
+    ".tools/final-denoise-v4-photographs-final.log": {
+      "sha256": "4eda96eed46b3ce072814b61829c693246b1bb25324aa7c06905e4ab65d10329"
+    },
+    ".tools/final-model-v4-app-configure.log": {
+      "sha256": "bae0de712b19d8b4141cc01eb8f4f8220e8f99170d18c9500feb52abd2c574ce"
+    },
+    ".tools/final-model-v4-app-build.log": {
+      "sha256": "352f93ce939b505bfae65887ea99b5f8fd1ed75540ac89ac98f9d19335f32ea2"
+    },
+    ".tools/final-model-v4-affected-ctest.log": {
+      "sha256": "92ffae5808d6945d085576e15b1902f848be9f8baf0914d47fa1d4fa5dd4a586"
+    },
+    ".tools/final-model-v4-affected-ctest.xml": {
+      "sha256": "dedd912b11789b4fbca80838e4d2a47b5a794c91bf5899fc6fcb1f31ad9fd294"
+    },
+    ".tools/final-denoise-runtime-v4-tidy.log": {
+      "sha256": "e43c3ad567f51b1b8fc6008b83394fb97cf3656ab8ac7be53c2bd9278c6d45ca"
+    },
+    ".tools/final-denoise-v4-format.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".tools/final-denoise-v4-yaml.log": {
+      "sha256": "7260e2ae04bc67cc6a65918ef7132888f34513a508fc8981cdcebd67aac346cf"
+    },
+    ".tools/final-denoise-v4-campaign.json": {
+      "sha256": "d00aa099566bd703f6dea102839882533f00f724f5312efea1e887122a0c3fb4"
+    },
+    ".tools/final-denoise-v4-photographs.log": {
+      "sha256": "b00eaf713334ce6533dcf7104602ecf4a862595e40f087194ea4a503554dd96e"
+    }
+  }
+}

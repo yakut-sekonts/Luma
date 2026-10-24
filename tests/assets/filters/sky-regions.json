@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "annotation": "Conservative rectangular interiors selected by visual inspection before Sky prediction. Unannotated pixels are unknown, not background. This is not a dense boundary or dataset annotation.",
+  "coordinates": "half-open pixel rectangles in the existing oriented source PNG; samples use projected output pixel centers",
+  "limits": {"sky_min_mean": 0.9, "sky_min_fraction_over_half": 0.98, "non_sky_max_mean": 0.1, "non_sky_max_fraction_over_half": 0.02},
+  "fixtures": [
+    {"file": "portrait.png", "size": [512, 512], "regions": [{"name": "entire indoor studio portrait", "sky": false, "rect": [0, 0, 512, 512]}]},
+    {"file": "landscape.png", "size": [512, 384], "regions": [{"name": "daylight sky and clouds above treetops", "sky": true, "rect": [0, 0, 512, 74]}, {"name": "river reflections, rocks and ground", "sky": false, "rect": [0, 200, 512, 384]}]},
+    {"file": "night.png", "size": [384, 512], "regions": [{"name": "night sky right of tower", "sky": true, "rect": [285, 10, 374, 315]}, {"name": "night sky left of tower", "sky": true, "rect": [72, 80, 112, 240]}, {"name": "illuminated tower masonry", "sky": false, "rect": [155, 80, 230, 430]}]}
+  ]
+}

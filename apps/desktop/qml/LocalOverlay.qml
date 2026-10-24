@@ -1,6 +1,7 @@
 import QtQuick
 Item {
     id: overlay
+    property rect paintBounds: Qt.rect(0,0,width,height)
     objectName: "localPhotoOverlay"
     visible: editor.localMode && editor.hasPhoto && !editor.original
     clip: true
@@ -65,12 +66,18 @@ Item {
     onHandlesChanged: if(canvas)canvas.requestPaint()
     Canvas {
         id: canvas
-        anchors.fill: parent
+        objectName: "LocalOverlay.canvas"
+        x: overlay.paintBounds.x; y: overlay.paintBounds.y
+        width: Math.max(1, overlay.paintBounds.width); height: Math.max(1, overlay.paintBounds.height)
+        onXChanged: requestPaint()
+        onYChanged: requestPaint()
         onWidthChanged: requestPaint()
         onHeightChanged: requestPaint()
         onPaint: {
             const ctx = getContext("2d")
-            ctx.clearRect(0,0,width,height)
+            ctx.clearRect(0,0,canvas.width,canvas.height)
+            const width=overlay.width, height=overlay.height
+            ctx.save();ctx.translate(-canvas.x,-canvas.y)
             if (overlay.handles.length === 3) {
             // Guides describe the stored mask, not the relocated hit targets.
             ctx.save();ctx.beginPath();ctx.rect(overlay.photoX,overlay.photoY,overlay.photoWidth,overlay.photoHeight);ctx.clip()
@@ -95,9 +102,10 @@ Item {
                 for(let i=0;i<overlay.brushOutline.length;++i){const p=overlay.brushOutline[i];const x=overlay.photoX+p.x*overlay.photoWidth,y=overlay.photoY+p.y*overlay.photoHeight;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)}
                 ctx.closePath();ctx.stroke();ctx.restore()
             }
+            ctx.restore()
         }
     }
-    Connections { target: editor; function onStateChanged() { if(gesture.adjusting&&!editor.localGestureActive){gesture.adjusting=false;gesture.proxyDrag=false}overlay.refreshBrush() } }
+    Connections { target: editor; function onPreviewChanged() { if(gesture.adjusting&&!editor.localGestureActive){gesture.adjusting=false;gesture.proxyDrag=false}overlay.refreshBrush() } }
     MouseArea {
         id: gesture
         objectName: "localMaskGestureArea"

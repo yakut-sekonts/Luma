@@ -194,7 +194,7 @@ void documentTests() {
         mutation(root);
         throws([&] { luma::decodePreset(QJsonDocument(root).toJson()); });
     };
-    change([](auto &root) { root["schemaVersion"] = 8; });
+    change([](auto &root) { root["schemaVersion"] = 10; });
     change([](auto &root) { root["unexpected"] = true; });
     change([](auto &root) { root["name"] = ""; });
     change([](auto &root) { root["settings"] = QJsonObject{}; });
@@ -228,7 +228,30 @@ void documentTests() {
     });
     throws([&] { luma::decodePreset(QByteArray(1024 * 1024 + 1, ' ')); });
     throws([&] { luma::mergeSettings(current, source, 0); });
-    throws([&] { luma::mergeSettings(current, source, 256); });
+    throws([&] { luma::mergeSettings(current, source, 4096); });
+    auto creativeSource = source;
+    creativeSource.setParameter("presence.texture", 37);
+    creativeSource.setParameter("point.hue", -45);
+    creativeSource.setParameter("grading.shadows.saturation", 25);
+    creativeSource.setParameter("vignette.amount", -34);
+    creativeSource.setParameter("grain.amount", 48);
+    creativeSource.setEnabled(luma::Correction::presence, false);
+    creativeSource.setEnabled(luma::Correction::grain, false);
+    for (const std::uint32_t groups : {256U, 512U, 1024U, 2048U, 257U, 4095U}) {
+        const auto decoded =
+            luma::decodePreset(luma::encodePreset({"Creative", {}, creativeSource, groups}));
+        require(luma::mergeSettings(current, decoded.settings, decoded.groups) ==
+                    luma::mergeSettings(current, creativeSource, groups),
+                "Creative preset lost selected parameters or bypass flags.");
+    }
+    const luma::DevelopPreset sparse{
+        "Creative sparse", {}, creativeSource, 256, {"presence.texture"}};
+    const auto decodedSparse = luma::decodePreset(luma::encodePreset(sparse));
+    require(decodedSparse.parameters == sparse.parameters &&
+                luma::mergeSettings(current, decodedSparse.settings, decodedSparse.groups,
+                                    decodedSparse.parameters) ==
+                    luma::mergeSettings(current, creativeSource, sparse.groups, sparse.parameters),
+            "Sparse creative preset changed unselected settings or bypass flags.");
 }
 void storeTests(const QString &root) {
     const auto path = root + "/store.json";
@@ -271,7 +294,7 @@ void storeTests(const QString &root) {
     throws([&] { a.load(); });
     throws([&] { a.put(preset); });
     auto future = QJsonDocument::fromJson(before).object();
-    future["schemaVersion"] = 8;
+    future["schemaVersion"] = 10;
     const auto futureBytes = QJsonDocument(future).toJson();
     write(path, futureBytes);
     throws([&] { a.put(preset); });
@@ -347,14 +370,14 @@ void qmlTests(EditorController &editor, PresetController &presets, const QString
     child("presetGroup0")->setProperty("checked", false);
     require(QMetaObject::invokeMethod(child("presetGroup0"), "clicked"),
             "Cannot select subset group.");
-    require(child("presetEditor")->property("groups").toInt() == 254,
+    require(child("presetEditor")->property("groups").toInt() == 4094,
             "Group checkbox ignored subset.");
     require(QMetaObject::invokeMethod(child("presetSave"), "clicked"),
             "Cannot update from QML dialog.");
     for (const auto &item : presets.items())
         if (item.toMap()["id"].toString() == id)
             require(item.toMap()["name"].toString() == "QML renamed" &&
-                        item.toMap()["groups"].toInt() == 254,
+                        item.toMap()["groups"].toInt() == 4094,
                     "QML update lost name or group selection.");
     QCoreApplication::processEvents();
     require(child("presetTitle")->property("textFormat").toInt() == Qt::PlainText &&

@@ -1,4 +1,7 @@
 #include "apps/desktop/BatchController.h"
+#include "apps/desktop/CatalogStartup.h"
+#include "apps/desktop/DiagnosticSession.h"
+#include "apps/desktop/DiagnosticsController.h"
 #include "apps/desktop/EditorController.h"
 #include "apps/desktop/ExportController.h"
 #include "apps/desktop/LibraryAcceptance.h"
@@ -17,6 +20,7 @@
 #include <QQuickStyle>
 #include <QStandardPaths>
 #include <QTimer>
+#include <algorithm>
 #include <cmath>
 #include <iostream>
 
@@ -83,26 +87,65 @@ int main(int argc, char **argv) {
     parser.addOption({QStringLiteral("test-close-import"),
                       QStringLiteral("Integration test: close during import")});
     parser.process(app);
-    const auto catalog =
-        parser.isSet(QStringLiteral("catalog"))
+    const auto options = parser.optionNames();
+    const bool unattended = std::any_of(options.begin(), options.end(), [](const QString &option) {
+        return option.startsWith(QStringLiteral("test-")) || option == QStringLiteral("smoke-test");
+    });
+    luma::desktop::DiagnosticSession diagnosticSession(!unattended);
+    const auto remembered = unattended ? QString() : CatalogStartup::rememberedCatalog();
+    const bool explicitCatalog = parser.isSet(QStringLiteral("catalog"));
+    const auto initialCatalog =
+        explicitCatalog
             ? parser.value(QStringLiteral("catalog"))
-            : QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) +
-                  QStringLiteral("/catalog.sqlite");
+            : (!remembered.isEmpty()
+                   ? remembered
+                   : QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) +
+                         QStringLiteral("/catalog.sqlite"));
+    CatalogStartup startup;
+    QObject::connect(&startup, &CatalogStartup::changed, &startup,
+                     [&, recoveryObserved = false]() mutable {
+                         if (startup.recoveryPending() && !recoveryObserved)
+                             diagnosticSession.record(luma::desktop::LogLevel::warning,
+                                                      luma::desktop::LogEvent::recoveryRequested);
+                         recoveryObserved = startup.recoveryPending();
+                     });
+    if (!startup.prepare(initialCatalog, !explicitCatalog && remembered.isEmpty(), !unattended)) {
+        if (!unattended && startup.quitting())
+            diagnosticSession.markCleanExit();
+        return unattended ? 1 : 0;
+    }
+    diagnosticSession.record(luma::desktop::LogLevel::info, luma::desktop::LogEvent::catalogReady);
+    const auto catalog = startup.catalogPath();
     auto *provider = new PreviewProvider;
     EditorController editor(std::filesystem::path(catalog.toStdString()), provider);
+    DiagnosticsController diagnostics(std::filesystem::path(catalog.toStdString()), editor,
+                                      diagnosticSession);
     PresetController presets(QFileInfo(catalog).absolutePath() + QStringLiteral("/presets.json"),
                              editor);
     LibraryModel library(std::filesystem::path(catalog.toStdString()));
     BatchController batch(std::filesystem::path(catalog.toStdString()), editor, library, presets);
     ExportController exporter(std::filesystem::path(catalog.toStdString()), editor, library);
+    QObject::connect(&library, &LibraryModel::stateChanged, &library, [&] {
+        diagnosticSession.observe(luma::desktop::LoggedWorkflow::library, library.working(),
+                                  !library.error().isEmpty());
+    });
+    QObject::connect(&editor, &EditorController::stateChanged, &editor, [&] {
+        diagnosticSession.observe(luma::desktop::LoggedWorkflow::editor,
+                                  editor.busy() || editor.saving() || editor.aiBusy() ||
+                                      editor.retouchBusy(),
+                                  !editor.error().isEmpty());
+    });
+    QObject::connect(&exporter, &ExportController::changed, &exporter, [&] {
+        diagnosticSession.observe(luma::desktop::LoggedWorkflow::exportQueue, exporter.working(),
+                                  !exporter.error().isEmpty());
+    });
     const bool testing = parser.isSet(QStringLiteral("smoke-test")) ||
                          parser.isSet(QStringLiteral("test-edit")) ||
                          parser.isSet(QStringLiteral("test-restore")) ||
                          parser.isSet(QStringLiteral("test-library"));
     UpdateController updates(
         [&] {
-            return !editor.transformAutoBusy() && !editor.busy() && !editor.saving() &&
-                   !editor.exporting() && !library.working() && !batch.working() &&
+            return editor.readyForUpdate() && !library.working() && !batch.working() &&
                    !exporter.working();
         },
         !testing);
@@ -133,6 +176,7 @@ int main(int argc, char **argv) {
                             new ThumbnailProvider(std::filesystem::path(catalog.toStdString())));
     engine.addImageProvider(QStringLiteral("preview"), provider);
     engine.rootContext()->setContextProperty(QStringLiteral("editor"), &editor);
+    engine.rootContext()->setContextProperty(QStringLiteral("diagnostics"), &diagnostics);
     engine.rootContext()->setContextProperty(QStringLiteral("library"), &library);
     engine.rootContext()->setContextProperty(QStringLiteral("updates"), &updates);
     engine.rootContext()->setContextProperty(QStringLiteral("presets"), &presets);
@@ -335,8 +379,10 @@ int main(int argc, char **argv) {
         const auto exportPath = parser.value(QStringLiteral("test-export"));
         auto exportStarted = std::make_shared<bool>(false);
         const auto screenshot = parser.value(QStringLiteral("test-screenshot"));
+        // This acceptance state machine waits for previewUrl as well as edits.
+        // previewChanged includes stateChanged and the independent render completion.
         QObject::connect(
-            &editor, &EditorController::stateChanged, &app,
+            &editor, &EditorController::previewChanged, &app,
             [&editor, &app, window, editing, target, applied, finished, screenshot, develop,
              exportPath, exportStarted, cancelExport, closeDuringExport, testSource, advanced, lens,
              transform, localMasks, &presets, filter, xmp] {
@@ -686,8 +732,13 @@ int main(int argc, char **argv) {
         } else {
             editor.restore();
         }
-    } else {
+    } else if (startup.restorePhoto()) {
         editor.restore();
     }
-    return app.exec();
+    const int result = app.exec();
+    if (result == 0) {
+        startup.markCleanExit();
+        diagnosticSession.markCleanExit();
+    }
+    return result;
 }

@@ -31,19 +31,79 @@ by desktop, CLI and integration tests. macOS-specific code lives under
 - `core/image`: Float32 Bayer data, bilinear interpolation, camera color matrix.
 - `core/render`: area-averaged camera RGB preview and shared CPU Develop reference path.
 - `core/color`: scene-linear sRGB to arbitrary RGB monitor ICC, via LittleCMS.
-- `core/metadata`: typed EXIF values; absent numbers remain `std::optional`.
+- `core/metadata`: typed EXIF and descriptive/XMP values, ordered creators and exact label text; absent numbers remain `std::optional`.
 - `core/edits`: validated typed Develop document; global schema version 8.
 - `core/presets`: validated subset merge of implemented settings groups.
-- `core/catalog`: SQLite connection per worker operation and migrations through 8.
+- `core/catalog`: SQLite connection per worker operation and migrations through 21, with pre-migration backups.
 - `core/jobs`: bounded queue, interactive priority, cancellation, state, progress
   and error storage.
 - `apps/shared`: open/restore/save and import/recovery workflows independent of GUI.
 - `apps/desktop`: Qt editor controller, bounded paged LibraryModel and asynchronous thumbnail provider.
 - `apps/cli`: explicit-catalog machine-readable commands.
 
-Future `core/masks`, `cache`, `search`, `ai` are described by
-the roadmap and will be created with their first implementation. Empty feature
-classes are not counted as functionality.
+Source implementations of masks, bounded caches, local AI and category-based
+semantic search are described in the phase 0.6–0.9 development records. They are
+unbuilt and unqualified until the final release campaign.
+
+## Named processing versions
+
+`EditSnapshot` is an explicit, bounded, versioned serialization of the complete
+EditDocument, including local masks and retouch. It is independent of sparse
+presets and does not include original image pixels or photo metadata. Catalog
+schema 18 stores immutable documents in `edit_versions`, with per-photo name
+uniqueness, quotas and revision-guarded rename/delete. Serialization and SQLite
+work run on the editor I/O worker; lists read metadata only. Restore enters the
+existing Undo/autosave/render path after geometry and generation checks.
+See [phase-0.9 version semantics](docs/PHASE9_DEVELOPMENT.md#named-processing-versions).
+The implementation has not been built or qualified.
+
+## Preview histogram and clipping
+
+`ImageHistogram` consumes processed linear-sRGB samples after geometry, noise,
+sharpening and local adjustments, before monitor conversion and display overlays.
+An optional renderer analysis request enables a bounded regular sampling grid
+and transient clipping overlays. Existing non-desktop renderer callers use the
+default disabled analysis request. Export options/documents remain independent.
+`RenderedPreview` couples the QImage and histogram in the same bounded cache
+entry; cache accounting includes both. The existing render generation check
+publishes them together and rejects superseded work. The pipeline-v4 cache key
+includes clipping and Point Color range modes as well as ICC, resolution and diagnostic/mask state.
+See [ADR 0028](docs/adr/0028-preview-histogram.md) and the unqualified
+[workflow/limits](docs/PHASE9_DEVELOPMENT.md#histogram-and-clipping).
+
+## White balance estimation
+
+`WhiteBalance` shares the existing manual gain model between DevelopPipeline
+and a bounded Temperature/Tint fit. `WhiteBalanceSampler` uses optics/retouch
+source-preview RGB and CropGeometry for a gray-world crop estimate or a neutral
+patch, with alpha-aware interpolation and conservative As Shot sample admission.
+`EditorWhiteBalance` owns cancellation/generation guards and commits one ordinary
+EditHistory change. The resolved Custom values use the existing document,
+catalog, preset and export representation; no new persisted mode is introduced.
+The picker waits for its stable Fit canvas. See [ADR 0029](docs/adr/0029-white-balance-estimation.md).
+All runtime and photographic qualification is deferred.
+
+## Local diagnostics and crash capture
+
+`DiagnosticSession` owns a private, unique process directory and a bounded
+asynchronous JSONL writer. Its API accepts event/level enums and boolean state,
+never free-form errors, photo names, paths or credentials. Log rotation is per
+process; retention only visits recognized inactive sessions under Luma's own
+diagnostics root while holding their session locks. Acceptance launches do not
+start capture or modify the user's diagnostic history.
+
+The macOS adapter uses a pinned source build of PLCrashReporter 1.12.2. Each
+process gets its own reporter base path, capped binary report and no in-process
+symbolication. Existing reports are converted to text on a background worker
+after their owning process exits; raw reports are retained. Crash capture never
+calls SQLite or the Qt logger from a signal/exception callback. The existing
+catalog marker and pre-migration backups remain responsible for recovery.
+
+Preferences exposes the local diagnostic folder. The shareable diagnostic JSON
+includes capability/status counts only; logs and raw/text crash reports are not
+automatically included or uploaded. Crash records can contain process/OS details
+and binary paths. Keep them private and preserve dSYMs separately for final
+symbolication. All capture, rotation and crash/recovery behavior is unqualified.
 
 ## RAW and color pipeline
 
@@ -140,6 +200,13 @@ Independent correction bits disable processing while retaining parameter values.
 The bounded per-session history records one slider gesture as one operation.
 Undo/Redo updates the same document and uses the same autosave/render path.
 Session changes establish a new history baseline; history is not durable yet.
+`EditHistory` associates retained documents with stable IDs and commit-time
+descriptions. Its browser reads metadata only; arbitrary navigation moves the
+existing stack states and performs one autosave/render update. Generation-scoped
+UI handles and revision-guarded clear refuse stale requests. A historical state
+can be captured by the named-version worker without replacing the current edit.
+The eight-language dialog exposes the session lifetime and preserves viewport
+across model refreshes. See [ADR 0027](docs/adr/0027-session-history-browser.md).
 
 Export rechecks source SHA-256 and decodes full resolution on the I/O lane.
 ImageIO encodes JPEG/PNG/TIFF16, using an explicitly embedded deterministic sRGB
@@ -377,3 +444,21 @@ absent features. No unexecuted blocking case qualifies a release; every applicab
 blocking case requires three clean repetitions. See [ADR 0025](docs/adr/0025-ux-regression-release-gate.md)
 and [runner documentation](tests/ux/README.md). Local performance measurements are
 kept separate from hosted CI and from input dispatch timing.
+
+## Creative controls and Library extensions
+
+`CreativeSettings` is a typed parameter registry plus bounded codec. Schema 19
+stores it separately from the existing scalar edit table. The shared CPU pipeline
+adds Point Color/Grading, Presence and post-crop effects; active creative color
+selects the CPU fallback. Snapshot codec 2 and preset codecs 8/9 retain older readers.
+`EditorCreative` performs cancellable source sampling and local Auto Adjust; its
+results enter ordinary edit history. `EditorCompare` freezes two edit documents
+and publishes two temporary images through the existing PreviewProvider.
+
+`SmartRule` compiles bounded recursive predicates to bound SQL. Schema 20 stores
+revisioned rules; the Library reuses its pagination/filtering and refresh lifecycle.
+`ImportOptions` stores immutable source workflow choices. Schema 21 adds session
+options and per-item plans/metadata/Move state to the existing journal. Metadata
+and Develop settings commit with asset registration; source removal follows file
+and backup completion. [ADR 0030](docs/adr/0030-functional-completion.md) specifies
+recovery, naming, backup scope and preservation behavior. All are unqualified.

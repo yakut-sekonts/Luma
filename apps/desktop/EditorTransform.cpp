@@ -55,6 +55,8 @@ void EditorController::setGuidedMode(bool enabled) {
     cancelAutoTransform();
     endEdit();
     if (enabled) {
+        setRetouchMode(QStringLiteral("off"));
+        cancelAI();
         setLocalMode(false);
         setCropMode(false);
         targetedTool_ = QStringLiteral("none");

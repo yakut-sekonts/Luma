@@ -77,6 +77,8 @@ void PointCurve::validate() const {
 }
 void EditDocument::validate() const {
     validateLocalMasks(localMasks);
+    validateRetouch(retouch);
+    creative.validate();
     for (const auto &parameter : parameters) {
         const auto value = this->*parameter.member;
         if (!std::isfinite(value) || value < parameter.minimum || value > parameter.maximum)
@@ -96,6 +98,8 @@ void EditDocument::validate() const {
     }
 }
 double EditDocument::parameter(std::string_view name) const {
+    if (isCreativeParameter(name))
+        return creative.parameter(name);
     if (name.starts_with("transform."))
         return transform.parameter(name);
     if (name.starts_with("lens."))
@@ -115,7 +119,9 @@ void EditDocument::setParameters(const std::vector<std::pair<std::string, double
     auto next = *this;
     std::vector<std::pair<std::string, double>> cropValues, transformValues;
     for (const auto &[name, value] : values) {
-        if (name.starts_with("transform."))
+        if (isCreativeParameter(name))
+            next.creative.setParameter(name, value);
+        else if (name.starts_with("transform."))
             transformValues.emplace_back(name, value);
         else if (name.starts_with("lens."))
             next.lens.setParameter(name, value);
@@ -135,6 +141,18 @@ void EditDocument::setParameters(const std::vector<std::pair<std::string, double
     *this = next;
 }
 Correction EditDocument::correction(std::string_view name) {
+    if (isCreativeParameter(name))
+        return static_cast<Correction>(creativeParameter(name).correction);
+    if (name == "presence")
+        return Correction::presence;
+    if (name == "pointColor")
+        return Correction::pointColor;
+    if (name == "grading")
+        return Correction::grading;
+    if (name == "vignette")
+        return Correction::vignette;
+    if (name == "grain")
+        return Correction::grain;
     if (name == "transform")
         return Correction::transform;
     if (name.starts_with("transform.")) {

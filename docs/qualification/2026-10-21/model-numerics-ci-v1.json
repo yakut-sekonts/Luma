@@ -1,0 +1,121 @@
+{
+  "schema": 1,
+  "scope": "synthetic-adapted-source-vs-coreml-cpu",
+  "status": "FAIL",
+  "photographic_quality": "NOT_RUN",
+  "python": "3.12.10",
+  "platform": "macOS-15.7.9-arm64-arm-64bit",
+  "machine": "arm64",
+  "compute_units": "CPU_ONLY",
+  "manifest_sha256": "9ab44ea58505916f60356c49997bde45036abb752cf266544b19219b9513a152",
+  "recipe_sha256": "57c485aae29bb00646344e1de9b45e79f35dc3b61cb8b31cf20a63cda2d21dd4",
+  "limits": {
+    "max_absolute_error": 0.0005,
+    "rmse": 5e-05
+  },
+  "cases": [
+    {
+      "model": "nafnet-sidd-width32-v1",
+      "sample": "gradient-noise",
+      "input_sha256": "7a0f11bce4b64aa41bd243fb1cab86326522952934db7420b332f241fd646804",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 2.5033950805664062e-06,
+      "rmse": 1.3966561112580675e-07,
+      "domain_contract": true,
+      "status": "PASS"
+    },
+    {
+      "model": "nafnet-sidd-width32-v1",
+      "sample": "black",
+      "input_sha256": "bbd05cf6097ac9b1f89ea29d2542c1b7b67ee46848393895f5a9e43fa1f621e5",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 0.0007249712944030762,
+      "rmse": 6.466311946314532e-05,
+      "domain_contract": true,
+      "status": "FAIL"
+    },
+    {
+      "model": "nafnet-sidd-width32-v1",
+      "sample": "negative-hdr",
+      "input_sha256": "8cd50f6e314fb3936e8065556b5fd5dbeaa2f96c44d5f7b6d0da469c420d23d8",
+      "output_shape": [
+        1,
+        3,
+        512,
+        512
+      ],
+      "max_absolute_error": 1.9669532775878906e-06,
+      "rmse": 1.2196108387265456e-07,
+      "domain_contract": true,
+      "status": "PASS"
+    },
+    {
+      "model": "u2net-sky-v1",
+      "sample": "gradient-noise",
+      "input_sha256": "c93ca62a2583086500b452628f69644cca00f4ea75e545af120d6e2ae62b490a",
+      "output_shape": [
+        1,
+        1,
+        320,
+        320
+      ],
+      "max_absolute_error": 4.172325134277344e-07,
+      "rmse": 1.8081094720248247e-08,
+      "domain_contract": true,
+      "status": "PASS"
+    },
+    {
+      "model": "u2net-sky-v1",
+      "sample": "black",
+      "input_sha256": "3630e065eb7b4540fbab11dbfd2619e8500f211b9c404380a1867fdc44b77c0c",
+      "output_shape": [
+        1,
+        1,
+        320,
+        320
+      ],
+      "max_absolute_error": 1.1920928955078125e-07,
+      "rmse": 2.526614808710392e-09,
+      "domain_contract": true,
+      "status": "PASS"
+    },
+    {
+      "model": "u2net-sky-v1",
+      "sample": "white",
+      "input_sha256": "af0fc1bd3503bcef802e67a7994c5de3e02973c3f49eab20999ffabe3f454fa3",
+      "output_shape": [
+        1,
+        1,
+        320,
+        320
+      ],
+      "max_absolute_error": 1.1920928955078125e-07,
+      "rmse": 1.935717620963839e-09,
+      "domain_contract": true,
+      "status": "PASS"
+    }
+  ],
+  "xcode": "Xcode 16.4\nBuild version 16F6",
+  "toolchain": {
+    "coremltools": "9.0",
+    "torch": "2.10.0",
+    "torchvision": "0.25.0",
+    "onnx": "1.17.0",
+    "onnx2torch": "1.5.15",
+    "numpy": "1.26.4",
+    "protobuf": "4.25.5",
+    "certifi": "2026.7.22"
+  },
+  "prediction_bridge_sha256": "e28c012f7363c98bdefadbd1c531f38e4e9acaf44f2abdd8eead7801337ced5e",
+  "prediction_api": "native-MLModel-owned-MLMultiArray"
+}

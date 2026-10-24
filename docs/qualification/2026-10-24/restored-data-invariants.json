@@ -1,0 +1,632 @@
+{
+  "status": "NOT_QUALIFIED",
+  "scope": "DAT005 post-exit data invariants after actual backup/restore in a fresh process",
+  "production_behavior_changed": false,
+  "reports": {
+    "ux-restore-data-first": {
+      "path": "build-verify/ux-restore-data-first/UX_REPORT.json",
+      "sha256": "41ec5e69e60c45aec29dea91cf2685352e8aff93e59a30a0d18b6b1796eb1aa8",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "1c1c37ef3962df6cfd80ef19901c8c674c7efa58",
+        "worktree_dirty": true,
+        "source_tree_sha256": "957dd32796d47696f01961434487bd8eda49bc9f03d8f9656598eeb87d28fa0b",
+        "test_executable_sha256": "cd075ea57e0ebd9d641bc0ecc7d508e1985fc633df0446bc3454a4420374d2eb",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "cd075ea57e0ebd9d641bc0ecc7d508e1985fc633df0446bc3454a4420374d2eb"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "PASS": 1
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "1c1c37ef3962df6cfd80ef19901c8c674c7efa58",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "UX-P10-DAT-005",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 1440,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "data_invariants": {
+            "status": "PASS",
+            "catalog": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231050Z-85341/UX-P10-DAT-005/repeat-1/state/restored/catalog.sqlite",
+            "tables": 22,
+            "numeric_values": 158,
+            "asset_ids": [
+              "a5763918-2be5-4b24-aad8-d9f630f4e769"
+            ],
+            "original_sha256": {
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231050Z-85341/public-fixtures-quality/Photo-0000.png": "28ea74087f553ab8cc1d1e421240fa98a0820139804b2c699d72a69f1a5307e0"
+            },
+            "readable_backups": {
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231050Z-85341/UX-P10-DAT-005/repeat-1/state/catalog.sqlite.luma-backups/auto-4987ed34-d5d0-4f3e-8da2-440f0d236e90.sqlite3": {
+                "sha256": "7c1a00ed257c83c62d9a03cd4a6ea5136d548d5ae31f2a51cbaf464daca75d37",
+                "asset_count": 1
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231050Z-85341/UX-P10-DAT-005/repeat-1/state/catalog.sqlite.luma-backups/auto-fab7cb84-bb14-4d69-8299-c5235a577671.sqlite3": {
+                "sha256": "7c1a00ed257c83c62d9a03cd4a6ea5136d548d5ae31f2a51cbaf464daca75d37",
+                "asset_count": 1
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231050Z-85341/UX-P10-DAT-005/repeat-1/state/catalog.sqlite.luma-backups/auto-41333e07-bc49-4434-a215-d5008219a0d7.sqlite3": {
+                "sha256": "74d5a49a52c97ea094fa88875571d77db97346480b3bb3a77d19af7c580c64bb",
+                "asset_count": 0
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231050Z-85341/UX-P10-DAT-005/repeat-1/state/restored/catalog.sqlite.luma-backups/auto-f0baf2fd-6d62-4b8f-8fb3-8905ea24c3dc.sqlite3": {
+                "sha256": "7c1a00ed257c83c62d9a03cd4a6ea5136d548d5ae31f2a51cbaf464daca75d37",
+                "asset_count": 1
+              }
+            },
+            "serialized_documents": {
+              "asset_ids": [
+                "a5763918-2be5-4b24-aad8-d9f630f4e769"
+              ],
+              "pid": 85451,
+              "status": "PASS",
+              "versions_validated": 0
+            },
+            "clean_shutdown": true,
+            "orphan_staging_files": 0,
+            "unfinished_imports": 0,
+            "unfinished_derived_images": 0
+          }
+        }
+      ]
+    },
+    "ux-restore-data-final-offscreen": {
+      "path": "build-verify/ux-restore-data-final-offscreen/UX_REPORT.json",
+      "sha256": "de5ec5f2aa3d1357e9c183a0604e6b3ee6c39f3de226c7412f539a245f735cbe",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "1c1c37ef3962df6cfd80ef19901c8c674c7efa58",
+        "worktree_dirty": true,
+        "source_tree_sha256": "957dd32796d47696f01961434487bd8eda49bc9f03d8f9656598eeb87d28fa0b",
+        "test_executable_sha256": "cd075ea57e0ebd9d641bc0ecc7d508e1985fc633df0446bc3454a4420374d2eb",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "cd075ea57e0ebd9d641bc0ecc7d508e1985fc633df0446bc3454a4420374d2eb"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "PASS": 6
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "1c1c37ef3962df6cfd80ef19901c8c674c7efa58",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "UX-P10-DAY-010",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 1434,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "data_invariants": null
+        },
+        {
+          "id": "UX-P10-DAY-010",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 1417,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "data_invariants": null
+        },
+        {
+          "id": "UX-P10-DAY-010",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 1442,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "data_invariants": null
+        },
+        {
+          "id": "UX-P10-DAT-005",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 1390,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "data_invariants": {
+            "status": "PASS",
+            "catalog": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231117Z-85529/UX-P10-DAT-005/repeat-1/state/restored/catalog.sqlite",
+            "tables": 22,
+            "numeric_values": 158,
+            "asset_ids": [
+              "8fdd81ff-cf25-4b25-a2e6-0f7819a6d802"
+            ],
+            "original_sha256": {
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231117Z-85529/public-fixtures-quality/Photo-0000.png": "28ea74087f553ab8cc1d1e421240fa98a0820139804b2c699d72a69f1a5307e0"
+            },
+            "readable_backups": {
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231117Z-85529/UX-P10-DAT-005/repeat-1/state/catalog.sqlite.luma-backups/auto-8662db06-4dc6-4262-8967-1b45ff069ad7.sqlite3": {
+                "sha256": "ff5ee45b26fa893633b15bb518457981772c2744b8fa038566c63d3a7211032e",
+                "asset_count": 1
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231117Z-85529/UX-P10-DAT-005/repeat-1/state/catalog.sqlite.luma-backups/auto-e8e0276b-d3ae-42c3-bead-0cb0e17c52e9.sqlite3": {
+                "sha256": "ff5ee45b26fa893633b15bb518457981772c2744b8fa038566c63d3a7211032e",
+                "asset_count": 1
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231117Z-85529/UX-P10-DAT-005/repeat-1/state/catalog.sqlite.luma-backups/auto-e15e568c-d754-4733-99be-023aa5ed8be0.sqlite3": {
+                "sha256": "5b9c4f9bd75e6dbfa9cfa9a7807f9a16877a8637aaca88f259a0fad45f2ee230",
+                "asset_count": 0
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231117Z-85529/UX-P10-DAT-005/repeat-1/state/restored/catalog.sqlite.luma-backups/auto-774c1f93-6a53-4251-8aef-aff6183bae4f.sqlite3": {
+                "sha256": "ff5ee45b26fa893633b15bb518457981772c2744b8fa038566c63d3a7211032e",
+                "asset_count": 1
+              }
+            },
+            "serialized_documents": {
+              "asset_ids": [
+                "8fdd81ff-cf25-4b25-a2e6-0f7819a6d802"
+              ],
+              "pid": 85663,
+              "status": "PASS",
+              "versions_validated": 0
+            },
+            "clean_shutdown": true,
+            "orphan_staging_files": 0,
+            "unfinished_imports": 0,
+            "unfinished_derived_images": 0
+          }
+        },
+        {
+          "id": "UX-P10-DAT-005",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 1405,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "data_invariants": {
+            "status": "PASS",
+            "catalog": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231117Z-85529/UX-P10-DAT-005/repeat-2/state/restored/catalog.sqlite",
+            "tables": 22,
+            "numeric_values": 158,
+            "asset_ids": [
+              "448857a7-260a-4ecc-a723-7bd3c21c13ba"
+            ],
+            "original_sha256": {
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231117Z-85529/public-fixtures-quality/Photo-0000.png": "28ea74087f553ab8cc1d1e421240fa98a0820139804b2c699d72a69f1a5307e0"
+            },
+            "readable_backups": {
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231117Z-85529/UX-P10-DAT-005/repeat-2/state/catalog.sqlite.luma-backups/auto-68a8136e-85da-49bd-b849-c66bbce16f9c.sqlite3": {
+                "sha256": "89f0085fec6ce04110b5542c72c8f672c08fbfa3e1b891fe9e71ed1f0b6ca4ee",
+                "asset_count": 0
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231117Z-85529/UX-P10-DAT-005/repeat-2/state/catalog.sqlite.luma-backups/auto-393429f9-5cd7-44cc-ada3-c9cb8d96d8c2.sqlite3": {
+                "sha256": "f37b78d5f9442152b2ceed9d3e9871d42fe798c53d739a4bf9d56a575fde8c39",
+                "asset_count": 1
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231117Z-85529/UX-P10-DAT-005/repeat-2/state/catalog.sqlite.luma-backups/auto-cfeedb96-0eb4-40b0-965a-6b4a1ae0bf60.sqlite3": {
+                "sha256": "f37b78d5f9442152b2ceed9d3e9871d42fe798c53d739a4bf9d56a575fde8c39",
+                "asset_count": 1
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231117Z-85529/UX-P10-DAT-005/repeat-2/state/restored/catalog.sqlite.luma-backups/auto-6f558e27-238f-478d-bcd0-ce1decbdc743.sqlite3": {
+                "sha256": "f37b78d5f9442152b2ceed9d3e9871d42fe798c53d739a4bf9d56a575fde8c39",
+                "asset_count": 1
+              }
+            },
+            "serialized_documents": {
+              "asset_ids": [
+                "448857a7-260a-4ecc-a723-7bd3c21c13ba"
+              ],
+              "pid": 85703,
+              "status": "PASS",
+              "versions_validated": 0
+            },
+            "clean_shutdown": true,
+            "orphan_staging_files": 0,
+            "unfinished_imports": 0,
+            "unfinished_derived_images": 0
+          }
+        },
+        {
+          "id": "UX-P10-DAT-005",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 1398,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "data_invariants": {
+            "status": "PASS",
+            "catalog": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231117Z-85529/UX-P10-DAT-005/repeat-3/state/restored/catalog.sqlite",
+            "tables": 22,
+            "numeric_values": 158,
+            "asset_ids": [
+              "7f8fc60a-960f-4b46-b0e1-9b2a14ac940a"
+            ],
+            "original_sha256": {
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231117Z-85529/public-fixtures-quality/Photo-0000.png": "28ea74087f553ab8cc1d1e421240fa98a0820139804b2c699d72a69f1a5307e0"
+            },
+            "readable_backups": {
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231117Z-85529/UX-P10-DAT-005/repeat-3/state/catalog.sqlite.luma-backups/auto-77d186d2-0cbc-4448-ac9c-30d2a524ffb4.sqlite3": {
+                "sha256": "89757f8640cd9cba4adb87f94bd666d93cab51fef351550bca2b2ec24a4bd2dc",
+                "asset_count": 1
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231117Z-85529/UX-P10-DAT-005/repeat-3/state/catalog.sqlite.luma-backups/auto-d9d0f6ba-fc8d-4093-bb83-2718922210b8.sqlite3": {
+                "sha256": "89757f8640cd9cba4adb87f94bd666d93cab51fef351550bca2b2ec24a4bd2dc",
+                "asset_count": 1
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231117Z-85529/UX-P10-DAT-005/repeat-3/state/catalog.sqlite.luma-backups/auto-6686a6e3-1645-4e58-8f6c-59dd59b88fee.sqlite3": {
+                "sha256": "ba48b224437baee55e5be6284228f6a8c67ae3d01095135f26ab9ebe3b343662",
+                "asset_count": 0
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231117Z-85529/UX-P10-DAT-005/repeat-3/state/restored/catalog.sqlite.luma-backups/auto-b85b23b8-0986-474a-8677-083f2487aa45.sqlite3": {
+                "sha256": "89757f8640cd9cba4adb87f94bd666d93cab51fef351550bca2b2ec24a4bd2dc",
+                "asset_count": 1
+              }
+            },
+            "serialized_documents": {
+              "asset_ids": [
+                "7f8fc60a-960f-4b46-b0e1-9b2a14ac940a"
+              ],
+              "pid": 85729,
+              "status": "PASS",
+              "versions_validated": 0
+            },
+            "clean_shutdown": true,
+            "orphan_staging_files": 0,
+            "unfinished_imports": 0,
+            "unfinished_derived_images": 0
+          }
+        }
+      ]
+    },
+    "ux-restore-data-final-native": {
+      "path": "build-verify/ux-restore-data-final-native/UX_REPORT.json",
+      "sha256": "794aaa98349cc159e6e2b657b0a659f7c8f17fd0413c86ce9149dde57a758651",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "1c1c37ef3962df6cfd80ef19901c8c674c7efa58",
+        "worktree_dirty": true,
+        "source_tree_sha256": "957dd32796d47696f01961434487bd8eda49bc9f03d8f9656598eeb87d28fa0b",
+        "test_executable_sha256": "cd075ea57e0ebd9d641bc0ecc7d508e1985fc633df0446bc3454a4420374d2eb",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "cd075ea57e0ebd9d641bc0ecc7d508e1985fc633df0446bc3454a4420374d2eb"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "PASS": 6
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "1c1c37ef3962df6cfd80ef19901c8c674c7efa58",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "UX-P10-DAY-010",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 2227,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "data_invariants": null
+        },
+        {
+          "id": "UX-P10-DAY-010",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 2107,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "data_invariants": null
+        },
+        {
+          "id": "UX-P10-DAY-010",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 2283,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "data_invariants": null
+        },
+        {
+          "id": "UX-P10-DAT-005",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 2222,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "data_invariants": {
+            "status": "PASS",
+            "catalog": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231151Z-85516/UX-P10-DAT-005/repeat-1/state/restored/catalog.sqlite",
+            "tables": 22,
+            "numeric_values": 158,
+            "asset_ids": [
+              "d3f9d237-8fac-4bf5-9bba-58f6c2002639"
+            ],
+            "original_sha256": {
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231151Z-85516/public-fixtures-quality/Photo-0000.png": "28ea74087f553ab8cc1d1e421240fa98a0820139804b2c699d72a69f1a5307e0"
+            },
+            "readable_backups": {
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231151Z-85516/UX-P10-DAT-005/repeat-1/state/catalog.sqlite.luma-backups/auto-880cd8bf-1f87-4456-86f3-f4542ccb64c3.sqlite3": {
+                "sha256": "4050b796d382d2a4cf39fe78565f668c9ba902364cf5df90b83de146156fe803",
+                "asset_count": 1
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231151Z-85516/UX-P10-DAT-005/repeat-1/state/catalog.sqlite.luma-backups/auto-0e69c39b-dba7-4dbf-af2c-5916e7d17931.sqlite3": {
+                "sha256": "4050b796d382d2a4cf39fe78565f668c9ba902364cf5df90b83de146156fe803",
+                "asset_count": 1
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231151Z-85516/UX-P10-DAT-005/repeat-1/state/catalog.sqlite.luma-backups/auto-8190c14a-074c-4382-a912-870ae2d78e51.sqlite3": {
+                "sha256": "35ff2e04280b562489a01e50dae58f76325518182c96d4e9e7bcdd76e00e1abc",
+                "asset_count": 0
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231151Z-85516/UX-P10-DAT-005/repeat-1/state/restored/catalog.sqlite.luma-backups/auto-7e9033cd-a1ee-40dc-8b6b-626d0f989a89.sqlite3": {
+                "sha256": "4050b796d382d2a4cf39fe78565f668c9ba902364cf5df90b83de146156fe803",
+                "asset_count": 1
+              }
+            },
+            "serialized_documents": {
+              "asset_ids": [
+                "d3f9d237-8fac-4bf5-9bba-58f6c2002639"
+              ],
+              "pid": 85980,
+              "status": "PASS",
+              "versions_validated": 0
+            },
+            "clean_shutdown": true,
+            "orphan_staging_files": 0,
+            "unfinished_imports": 0,
+            "unfinished_derived_images": 0
+          }
+        },
+        {
+          "id": "UX-P10-DAT-005",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 2467,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "data_invariants": {
+            "status": "PASS",
+            "catalog": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231151Z-85516/UX-P10-DAT-005/repeat-2/state/restored/catalog.sqlite",
+            "tables": 22,
+            "numeric_values": 158,
+            "asset_ids": [
+              "81143901-3278-4335-ac5a-9f1b476c8d96"
+            ],
+            "original_sha256": {
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231151Z-85516/public-fixtures-quality/Photo-0000.png": "28ea74087f553ab8cc1d1e421240fa98a0820139804b2c699d72a69f1a5307e0"
+            },
+            "readable_backups": {
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231151Z-85516/UX-P10-DAT-005/repeat-2/state/catalog.sqlite.luma-backups/auto-9dd70bab-6038-4be7-8a51-c09a07d0fba5.sqlite3": {
+                "sha256": "629bbe82e2b984c741c68647b2da68955b0b0ca1e7fe3095d495b3133ac574ca",
+                "asset_count": 1
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231151Z-85516/UX-P10-DAT-005/repeat-2/state/catalog.sqlite.luma-backups/auto-50ab6260-1a34-4924-815c-2c932ec120bf.sqlite3": {
+                "sha256": "629bbe82e2b984c741c68647b2da68955b0b0ca1e7fe3095d495b3133ac574ca",
+                "asset_count": 1
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231151Z-85516/UX-P10-DAT-005/repeat-2/state/catalog.sqlite.luma-backups/auto-9fbf9f42-c34e-40cc-a626-3530e214ef32.sqlite3": {
+                "sha256": "439dd5101d820628b195aead0c1196ada73d5989677289057290cff69ab8df28",
+                "asset_count": 0
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231151Z-85516/UX-P10-DAT-005/repeat-2/state/restored/catalog.sqlite.luma-backups/auto-5eb66b11-aa8b-4b66-8788-a652dcfb13ba.sqlite3": {
+                "sha256": "629bbe82e2b984c741c68647b2da68955b0b0ca1e7fe3095d495b3133ac574ca",
+                "asset_count": 1
+              }
+            },
+            "serialized_documents": {
+              "asset_ids": [
+                "81143901-3278-4335-ac5a-9f1b476c8d96"
+              ],
+              "pid": 86021,
+              "status": "PASS",
+              "versions_validated": 0
+            },
+            "clean_shutdown": true,
+            "orphan_staging_files": 0,
+            "unfinished_imports": 0,
+            "unfinished_derived_images": 0
+          }
+        },
+        {
+          "id": "UX-P10-DAT-005",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 1927,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS",
+          "data_invariants": {
+            "status": "PASS",
+            "catalog": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231151Z-85516/UX-P10-DAT-005/repeat-3/state/restored/catalog.sqlite",
+            "tables": 22,
+            "numeric_values": 158,
+            "asset_ids": [
+              "ba5640aa-98d5-4d2e-b0a6-e9770aca1031"
+            ],
+            "original_sha256": {
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231151Z-85516/public-fixtures-quality/Photo-0000.png": "28ea74087f553ab8cc1d1e421240fa98a0820139804b2c699d72a69f1a5307e0"
+            },
+            "readable_backups": {
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231151Z-85516/UX-P10-DAT-005/repeat-3/state/catalog.sqlite.luma-backups/auto-2081c7f5-36f8-4014-aa90-2dff83fe2b26.sqlite3": {
+                "sha256": "7c0018939c5ff7e8a2573972c7bcaf31e8e0d11f294644c54fbc2b2b4393d50f",
+                "asset_count": 0
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231151Z-85516/UX-P10-DAT-005/repeat-3/state/catalog.sqlite.luma-backups/auto-4dbc8223-42e7-4323-83aa-ee485eb2cf2e.sqlite3": {
+                "sha256": "2235ecdde1fb0769f7b5a1f86045ab4331edcb41ad8fafcd4457535c74cbcd06",
+                "asset_count": 1
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231151Z-85516/UX-P10-DAT-005/repeat-3/state/catalog.sqlite.luma-backups/auto-c9239951-1274-400d-bd8f-db7d4f7fbc3b.sqlite3": {
+                "sha256": "2235ecdde1fb0769f7b5a1f86045ab4331edcb41ad8fafcd4457535c74cbcd06",
+                "asset_count": 1
+              },
+              "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T231151Z-85516/UX-P10-DAT-005/repeat-3/state/restored/catalog.sqlite.luma-backups/auto-9dcf4ef8-7c9b-4cbd-a278-c83aed7726a7.sqlite3": {
+                "sha256": "2235ecdde1fb0769f7b5a1f86045ab4331edcb41ad8fafcd4457535c74cbcd06",
+                "asset_count": 1
+              }
+            },
+            "serialized_documents": {
+              "asset_ids": [
+                "ba5640aa-98d5-4d2e-b0a6-e9770aca1031"
+              ],
+              "pid": 86060,
+              "status": "PASS",
+              "versions_validated": 0
+            },
+            "clean_shutdown": true,
+            "orphan_staging_files": 0,
+            "unfinished_imports": 0,
+            "unfinished_derived_images": 0
+          }
+        }
+      ]
+    }
+  },
+  "assertions": [
+    "Actual backup/restore reuses DAY010 workflow: committed global/local edits, new restored file, fresh process, complete document/revision/identity comparison, continued edit/Undo/Redo, exact full sRGB PNG pixels.",
+    "Child decodes and validates every restored EditDocument and retained edit version; marker is bound to child PID and exact asset IDs. This fixture has no saved versions, so version-history coverage is not claimed.",
+    "Supervisor requires completed context/application destruction and independently opens the actual restored catalog read-only after child exit. All 22 tables, 158 numeric SQL values, foreign keys, edit ownership, original hashes, import/derived journals and owned staging/derived files are checked.",
+    "Every owned automatic backup opens with valid schema/integrity/foreign keys/numeric values. Original live catalog, snapshot and source remain unchanged.",
+    "Any post-exit invariant failure overrides a child PASS and preserves a failed catalog snapshot."
+  ],
+  "checks": {
+    "ux_build": "PASS",
+    "affected_ctest": "20 PASS",
+    "new_audit_units": 15,
+    "runner_units": 47,
+    "quality_policy_units": 12,
+    "format": "PASS",
+    "mandatory_affected_tidy": "PASS; nonblocking diagnostics retained",
+    "graph": {
+      "nodes": 8001,
+      "edges": 20885,
+      "self_loops": 5,
+      "dangling_endpoints": 0,
+      "exact_duplicates": 0
+    },
+    "logs": {
+      ".tools/restore-data-build.log": "e3f01e33d7bb07e389af1d9fdf5b88aa02b23867401db222a27ade212b70acce",
+      ".tools/restore-data-reattest.log": "03d4f6d5046cd9d270a79e86eb044206e697f6a97d9e79def0307ac143532997",
+      ".tools/restore-data-units.log": "728d055a9e51d7ec029994fa64def7d6bfec71ab3278686e5ce71770fc2925eb",
+      ".tools/restore-data-final-units.log": "b04920dfd7b855e2017bd0797c9cf2d2cb99f7d5a6516801732d42da4db510a4",
+      ".tools/restore-data-runner.log": "d4ba305b48f881fa13a1f6fed5b8b34ea483d698e030db69d274d85f02a8c734",
+      ".tools/restore-data-policy.log": "3370476b0549511fc334d2378a54649ccb1b4deab734ed22c3cc46825de0ac43",
+      ".tools/restore-data-ctest.log": "76dd26cba3709cfde1b478ecf37a6d71371353ab78311d54d746c2d76c5dd3fc",
+      ".tools/restore-data-tidy.log": "480c475ef942ab10d63c3c2bd46fabafc9ef7a6bd1177bc32604c6ad4834c3e0",
+      ".tools/restore-data-graph-diagnostics.log": "ac98f91c7074c12f04863a69250b81f32f55df3d186feb624251daeabb0d999f"
+    }
+  },
+  "history": "Initial new audit unit tests passed but reported unclosed SQLite fixture connections. Fixture transactions now use explicit closing; final 15 tests have no ResourceWarning. Native/offscreen restore runs passed without product changes.",
+  "limits": [
+    "This is the owned current-schema backup/restore workflow, not qualification of every golden/chaos/migration scenario.",
+    "Native chooser results remain an explicit fixture boundary; native file navigation is not exercised.",
+    "Final release installation/update, hardware/display and other missing gates remain separate."
+  ],
+  "unadapted_applicable": {
+    "total": 306,
+    "blocking": 21
+  }
+}

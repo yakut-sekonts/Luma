@@ -1,4 +1,5 @@
 #include "apps/shared/SessionService.h"
+#include "apps/shared/MetadataService.h"
 #include "apps/shared/PhotoDecoder.h"
 #include "core/image/Bayer.h"
 #include "core/render/CpuRenderer.h"
@@ -13,12 +14,28 @@ PhotoSession SessionService::open(const std::filesystem::path &source, luma::Can
     const auto path = std::filesystem::canonical(source);
     const auto originalSize = std::filesystem::file_size(path);
     const auto originalTime = std::filesystem::last_write_time(path);
-    if (originalSize > 512'000'000) {
-        throw std::runtime_error("Image exceeds the 512 MB input budget.");
+    if (originalSize > 1'300'000'000) {
+        throw std::runtime_error("Image exceeds the input budget.");
     }
     const auto checksum = macos::sha256File(path, stop);
-    auto decoded = PhotoDecoder().decode(path, stop, progress);
-    auto preview = std::make_shared<FloatImage>(standardPreview(decoded.image, 2560, stop));
+    // Only decoded pixels are cached. Selection and saved edits always come
+    // from the current catalog transaction, including on a cache hit.
+    const auto key = checksum + "|decode-v1|preview-2560-1024-512";
+    const auto generation = previews_->generation();
+    auto cached = previews_->get(key);
+    if (!cached) {
+        auto decoded = PhotoDecoder().decode(path, stop, progress);
+        auto preview = std::make_shared<FloatImage>(standardPreview(decoded.image, 2560, stop));
+        auto interactive = std::make_shared<FloatImage>(standardPreview(decoded.image, 1024, stop));
+        auto quick = std::make_shared<FloatImage>(standardPreview(decoded.image, 512, stop));
+        const auto scale = [&](const FloatImage &image) {
+            return std::min(static_cast<double>(image.width) / decoded.image.width,
+                            static_cast<double>(image.height) / decoded.image.height);
+        };
+        cached = std::make_shared<PreviewSource>(
+            PreviewSource{preview, interactive, decoded.metadata, decoded.calibration,
+                          scale(*preview), scale(*interactive), quick, scale(*quick)});
+    }
     checkCancellation(stop);
     if (originalSize != std::filesystem::file_size(path) ||
         originalTime != std::filesystem::last_write_time(path)) {
@@ -26,10 +43,50 @@ PhotoSession SessionService::open(const std::filesystem::path &source, luma::Can
             "Original changed while it was being decoded. Import was not committed.");
     }
     Catalog catalog(catalogPath_);
-    auto asset = catalog.addAndSelect(path, checksum, decoded.metadata);
-    const auto scale = std::min(static_cast<double>(preview->width) / decoded.image.width,
-                                static_cast<double>(preview->height) / decoded.image.height);
-    return {std::move(asset), std::move(preview), decoded.calibration, scale};
+    auto metadata = cached->metadata;
+    MetadataService::readSourceMetadata(path, metadata, stop);
+    auto asset = catalog.addAndSelect(path, checksum, metadata);
+    const auto bytes =
+        (cached->standard->rgb.capacity() + cached->standard->alpha.capacity() +
+         cached->interactive->rgb.capacity() + cached->interactive->alpha.capacity() +
+         cached->quick->rgb.capacity() + cached->quick->alpha.capacity()) *
+        sizeof(float);
+    previews_->put(key, cached, bytes, generation);
+    if (progress)
+        progress(1);
+    return {std::move(asset),      cached->standard,    cached->calibration,
+            cached->standardScale, cached->interactive, cached->interactiveScale,
+            cached->quick,         cached->quickScale};
+}
+std::shared_ptr<const DecodedImage> SessionService::fullResolution(const AssetRecord &asset,
+                                                                   CancellationToken stop) const {
+    const auto path = std::filesystem::canonical(asset.path);
+    const auto size = std::filesystem::file_size(path);
+    const auto time = std::filesystem::last_write_time(path);
+    if (size > 1'300'000'000)
+        throw std::runtime_error("Image exceeds the input budget.");
+    if (macos::sha256File(path, stop) != asset.checksum)
+        throw std::runtime_error("Original changed; full-resolution preview refused.");
+    const auto key = asset.checksum + "|decode-v1|full";
+    const auto generation = originals_->generation();
+    auto decoded = originals_->get(key);
+    if (!decoded)
+        decoded = std::make_shared<DecodedImage>(PhotoDecoder().decode(path, stop));
+    checkCancellation(stop);
+    if (size != std::filesystem::file_size(path) || time != std::filesystem::last_write_time(path))
+        throw std::runtime_error("Original changed during full-resolution decoding.");
+    const auto bytes =
+        (decoded->image.rgb.capacity() + decoded->image.alpha.capacity()) * sizeof(float);
+    originals_->put(key, decoded, bytes, generation);
+    return decoded;
+}
+void SessionService::setCacheBudget(std::size_t bytes) {
+    previews_->setBudget(bytes / 3);
+    originals_->setBudget(bytes - bytes / 3);
+}
+void SessionService::clearCache() {
+    previews_->clear();
+    originals_->clear();
 }
 std::optional<PhotoSession>
 SessionService::restore(luma::CancellationToken stop,
@@ -65,9 +122,9 @@ void SessionService::exportPhoto(const AssetRecord &asset, EditDocument edits,
         throw std::runtime_error("Export cannot replace the original image.");
     if (Catalog(catalogPath_).originalAtPath(target, stop))
         throw std::runtime_error("Export cannot replace a catalog original.");
-    for (const auto &name :
-         {catalog.filename().string() + "-wal", catalog.filename().string() + "-shm",
-          std::string("presets.json"), std::string("export-settings.json")}) {
+    for (const auto &name : {catalog.filename().string() + "-wal",
+                             catalog.filename().string() + "-shm", std::string("presets.json"),
+                             std::string("export-settings.json"), std::string("preview.ini")}) {
         const auto state = catalog.parent_path() / name;
         if (target == state || (std::filesystem::exists(target) && std::filesystem::exists(state) &&
                                 std::filesystem::equivalent(target, state)))
@@ -99,7 +156,8 @@ void SessionService::exportPhoto(const AssetRecord &asset, EditDocument edits,
     const auto guard = [&](const std::function<void()> &install) {
         Catalog(catalogPath_).installExport(target, stop, install);
     };
-    macos::writeImage(decoded, edits, destination, options, stop, progress, source, guard);
+    macos::writeImage(decoded, edits, destination, options, stop, progress, source, guard,
+                      asset.descriptive);
 }
 void SessionService::verify() const {
     Catalog(catalogPath_).verify();

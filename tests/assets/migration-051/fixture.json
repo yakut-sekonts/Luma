@@ -1,0 +1,907 @@
+{
+  "schema": 1,
+  "stable_version": "0.5.1",
+  "stable_commit": "d113495cb1d92bf8232e0a6943d972c9fbf0e01a",
+  "stable_executable_sha256": "9c2ae0582ed8647c8180f5f40d225f3a0ec86be6e8e9dad3005afa65afa67f5d",
+  "stable_strict_signature": "PASS",
+  "normalization": "Only owned original_path prefix is replaced by @ORIGINALS@; all historical values retained.",
+  "sql": [
+    "CREATE TRIGGER initialize_local_masks AFTER INSERT ON edit_documents BEGIN\n            INSERT INTO edit_local_masks VALUES(NEW.asset_id,'LUMA_LOCAL_MASKS 2 0'||char(10));\n        END",
+    "CREATE TABLE assets(\n                    id TEXT PRIMARY KEY, original_path TEXT NOT NULL UNIQUE, filename TEXT NOT NULL,\n                    extension TEXT NOT NULL, filesize INTEGER NOT NULL CHECK(filesize>=0), checksum TEXT NOT NULL,\n                    capture_date INTEGER, import_date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,\n                    width INTEGER NOT NULL CHECK(width>0), height INTEGER NOT NULL CHECK(height>0),\n                    orientation INTEGER NOT NULL, camera TEXT, lens TEXT, focal_length REAL,\n                    aperture REAL, shutter_seconds REAL, iso REAL, gps_latitude REAL, gps_longitude REAL,\n                    rating INTEGER NOT NULL DEFAULT 0 CHECK(rating BETWEEN 0 AND 5),\n                    flag INTEGER NOT NULL DEFAULT 0 CHECK(flag IN (-1,0,1)), color_label TEXT)",
+    "CREATE TABLE collection_assets(collection_id TEXT NOT NULL REFERENCES collections(id) ON DELETE CASCADE,\n                    asset_id TEXT NOT NULL REFERENCES assets(id) ON DELETE CASCADE,PRIMARY KEY(collection_id,asset_id))",
+    "CREATE TABLE collections(id TEXT PRIMARY KEY,name TEXT NOT NULL UNIQUE\n                    CHECK(length(trim(name)) BETWEEN 1 AND 128),created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)",
+    "CREATE TABLE edit_curve_points(\n                    asset_id TEXT NOT NULL REFERENCES assets(id) ON DELETE CASCADE,\n                    channel INTEGER NOT NULL CHECK(channel BETWEEN 0 AND 3),\n                    position INTEGER NOT NULL CHECK(position BETWEEN 0 AND 31),\n                    x REAL NOT NULL CHECK(x BETWEEN 0 AND 1), y REAL NOT NULL CHECK(y BETWEEN 0 AND 1),\n                    PRIMARY KEY(asset_id,channel,position))",
+    "CREATE TABLE \"edit_documents\"(\n                    asset_id TEXT PRIMARY KEY REFERENCES assets(id) ON DELETE CASCADE,\n                    schema_version INTEGER NOT NULL DEFAULT 8 CHECK(schema_version=8),\n                    exposure REAL NOT NULL DEFAULT 0 CHECK(exposure BETWEEN -5 AND 5),\n                    temperature REAL NOT NULL DEFAULT 6500 CHECK(temperature BETWEEN 2000 AND 25000),\n                    tint REAL NOT NULL DEFAULT 0 CHECK(tint BETWEEN -150 AND 150),\n                    custom_wb INTEGER NOT NULL DEFAULT 0 CHECK(custom_wb IN (0,1)),\n                    contrast REAL NOT NULL DEFAULT 0 CHECK(contrast BETWEEN -100 AND 100),\n                    highlights REAL NOT NULL DEFAULT 0 CHECK(highlights BETWEEN -100 AND 100),\n                    shadows REAL NOT NULL DEFAULT 0 CHECK(shadows BETWEEN -100 AND 100),\n                    whites REAL NOT NULL DEFAULT 0 CHECK(whites BETWEEN -100 AND 100),\n                    blacks REAL NOT NULL DEFAULT 0 CHECK(blacks BETWEEN -100 AND 100),\n                    vibrance REAL NOT NULL DEFAULT 0 CHECK(vibrance BETWEEN -100 AND 100),\n                    saturation REAL NOT NULL DEFAULT 0 CHECK(saturation BETWEEN -100 AND 100),\n                    enabled INTEGER NOT NULL DEFAULT 98303 CHECK(typeof(enabled)='integer' AND enabled BETWEEN 0 AND 131071),\n                    curve_shadows REAL NOT NULL DEFAULT 0 CHECK(curve_shadows BETWEEN -100 AND 100),\n                    curve_darks REAL NOT NULL DEFAULT 0 CHECK(curve_darks BETWEEN -100 AND 100),\n                    curve_lights REAL NOT NULL DEFAULT 0 CHECK(curve_lights BETWEEN -100 AND 100),\n                    curve_highlights REAL NOT NULL DEFAULT 0 CHECK(curve_highlights BETWEEN -100 AND 100),\n                    advanced_saved INTEGER NOT NULL DEFAULT 0 CHECK(advanced_saved IN (0,1)),\n                    sharpen_amount REAL NOT NULL DEFAULT 0 CHECK(sharpen_amount BETWEEN 0 AND 150),\n                    sharpen_radius REAL NOT NULL DEFAULT 1 CHECK(sharpen_radius BETWEEN 0.5 AND 3),\n                    sharpen_detail REAL NOT NULL DEFAULT 25 CHECK(sharpen_detail BETWEEN 0 AND 100),\n                    sharpen_masking REAL NOT NULL DEFAULT 0 CHECK(sharpen_masking BETWEEN 0 AND 100),\n                    noise_luminance REAL NOT NULL DEFAULT 0 CHECK(noise_luminance BETWEEN 0 AND 100),\n                    noise_luminance_detail REAL NOT NULL DEFAULT 50 CHECK(noise_luminance_detail BETWEEN 0 AND 100),\n                    noise_luminance_contrast REAL NOT NULL DEFAULT 0 CHECK(noise_luminance_contrast BETWEEN 0 AND 100),\n                    noise_color REAL NOT NULL DEFAULT 0 CHECK(noise_color BETWEEN 0 AND 100),\n                    noise_color_detail REAL NOT NULL DEFAULT 50 CHECK(noise_color_detail BETWEEN 0 AND 100),\n                    noise_color_smoothness REAL NOT NULL DEFAULT 50 CHECK(noise_color_smoothness BETWEEN 0 AND 100),\n                    crop_x REAL NOT NULL DEFAULT 0 CHECK(crop_x>=0),\n                    crop_y REAL NOT NULL DEFAULT 0 CHECK(crop_y>=0),\n                    crop_width REAL NOT NULL DEFAULT 1 CHECK(crop_width>=0.00005 AND crop_x+crop_width<=1.000000000001),\n                    crop_height REAL NOT NULL DEFAULT 1 CHECK(crop_height>=0.00005 AND crop_y+crop_height<=1.000000000001),\n                    crop_angle REAL NOT NULL DEFAULT 0 CHECK(crop_angle BETWEEN -45 AND 45),\n                    crop_aspect REAL NOT NULL DEFAULT 0 CHECK(crop_aspect IN (-1,0) OR crop_aspect BETWEEN 0.01 AND 100),\n                    crop_quarter_turns INTEGER NOT NULL DEFAULT 0 CHECK(typeof(crop_quarter_turns)='integer' AND crop_quarter_turns BETWEEN 0 AND 3),\n                    crop_flip_h INTEGER NOT NULL DEFAULT 0 CHECK(crop_flip_h IN (0,1)),\n                    crop_flip_v INTEGER NOT NULL DEFAULT 0 CHECK(crop_flip_v IN (0,1)),\n                    lens_profile TEXT NOT NULL DEFAULT '' CHECK(typeof(lens_profile)='text' AND (lens_profile='' OR (length(lens_profile)=32 AND lens_profile NOT GLOB '*[^0-9a-f]*'))),\n                    lens_distortion REAL NOT NULL DEFAULT 100 CHECK(lens_distortion BETWEEN 0 AND 200),\n                    lens_vignetting REAL NOT NULL DEFAULT 100 CHECK(lens_vignetting BETWEEN 0 AND 200),\n                    lens_ca INTEGER NOT NULL DEFAULT 1 CHECK(lens_ca IN (0,1)),\n                    transform_rotate REAL NOT NULL DEFAULT 0 CHECK(transform_rotate BETWEEN -45 AND 45),\n                    transform_horizontal REAL NOT NULL DEFAULT 0 CHECK(transform_horizontal BETWEEN -100 AND 100),\n                    transform_vertical REAL NOT NULL DEFAULT 0 CHECK(transform_vertical BETWEEN -100 AND 100),\n                    transform_aspect REAL NOT NULL DEFAULT 0 CHECK(transform_aspect BETWEEN -100 AND 100),\n                    transform_scale REAL NOT NULL DEFAULT 100 CHECK(transform_scale BETWEEN 50 AND 200),\n                    transform_x_offset REAL NOT NULL DEFAULT 0 CHECK(transform_x_offset BETWEEN -100 AND 100),\n                    transform_y_offset REAL NOT NULL DEFAULT 0 CHECK(transform_y_offset BETWEEN -100 AND 100),\n                    transform_constrain_crop INTEGER NOT NULL DEFAULT 1 CHECK(transform_constrain_crop IN (0,1)),\n                    transform_guided INTEGER NOT NULL DEFAULT 0 CHECK(transform_guided IN (0,1)),\n                    transform_m11 REAL NOT NULL DEFAULT 1 CHECK(transform_m11 BETWEEN -32 AND 32),\n                    transform_m12 REAL NOT NULL DEFAULT 0 CHECK(transform_m12 BETWEEN -32 AND 32),\n                    transform_m13 REAL NOT NULL DEFAULT 0 CHECK(transform_m13 BETWEEN -32 AND 32),\n                    transform_m21 REAL NOT NULL DEFAULT 0 CHECK(transform_m21 BETWEEN -32 AND 32),\n                    transform_m22 REAL NOT NULL DEFAULT 1 CHECK(transform_m22 BETWEEN -32 AND 32),\n                    transform_m23 REAL NOT NULL DEFAULT 0 CHECK(transform_m23 BETWEEN -32 AND 32),\n                    transform_m31 REAL NOT NULL DEFAULT 0 CHECK(transform_m31 BETWEEN -32 AND 32),\n                    transform_m32 REAL NOT NULL DEFAULT 0 CHECK(transform_m32 BETWEEN -32 AND 32),\n                    revision INTEGER NOT NULL DEFAULT 0,\n                    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)",
+    "CREATE TABLE edit_hsl_bands(\n                    asset_id TEXT NOT NULL REFERENCES assets(id) ON DELETE CASCADE,\n                    band INTEGER NOT NULL CHECK(band BETWEEN 0 AND 7),\n                    hue REAL NOT NULL CHECK(hue BETWEEN -100 AND 100),\n                    saturation REAL NOT NULL CHECK(saturation BETWEEN -100 AND 100),\n                    luminance REAL NOT NULL CHECK(luminance BETWEEN -100 AND 100),\n                    PRIMARY KEY(asset_id,band))",
+    "CREATE TABLE edit_local_masks(\n            asset_id TEXT PRIMARY KEY REFERENCES edit_documents(asset_id) ON DELETE CASCADE,\n            document TEXT NOT NULL CHECK(typeof(document)='text' AND length(CAST(document AS BLOB)) BETWEEN 1 AND 1048576))",
+    "CREATE TABLE import_items(session_id TEXT NOT NULL REFERENCES import_sessions(id),\n                    position INTEGER NOT NULL CHECK(position>=0),source_path TEXT NOT NULL,target_path TEXT NOT NULL DEFAULT '',\n                    temporary_path TEXT NOT NULL DEFAULT '',checksum TEXT NOT NULL DEFAULT '',filesize INTEGER NOT NULL DEFAULT 0,\n                    state TEXT NOT NULL CHECK(state IN ('queued','staged','committed','duplicate','failed','cancelled')),\n                    asset_id TEXT REFERENCES assets(id),error TEXT NOT NULL DEFAULT '',PRIMARY KEY(session_id,position))",
+    "CREATE TABLE import_sessions(id TEXT PRIMARY KEY,mode TEXT NOT NULL CHECK(mode IN ('add','copy')),\n                    destination TEXT NOT NULL,state TEXT NOT NULL CHECK(state IN ('running','completed','cancelled','interrupted')),\n                    owner_pid INTEGER NOT NULL,skip_duplicates INTEGER NOT NULL DEFAULT 1 CHECK(skip_duplicates IN (0,1)),created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,\n                    finished_at TEXT)",
+    "CREATE TABLE schema_migrations(version INTEGER PRIMARY KEY, applied_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)",
+    "CREATE TABLE session(slot INTEGER PRIMARY KEY CHECK(slot=1), asset_id TEXT NOT NULL REFERENCES assets(id))",
+    "CREATE INDEX assets_capture_date ON assets(capture_date)",
+    "CREATE INDEX assets_checksum ON assets(checksum,filesize)",
+    "CREATE INDEX assets_filename ON assets(filename COLLATE NOCASE,id)",
+    "CREATE INDEX assets_flag ON assets(flag,id)",
+    "CREATE INDEX assets_rating ON assets(rating,id)",
+    "CREATE INDEX collection_assets_asset ON collection_assets(asset_id,collection_id)"
+  ],
+  "baseline": {
+    "schema": 11,
+    "tables": {
+      "schema_migrations": {
+        "columns": [
+          "version",
+          "applied_at"
+        ],
+        "rows": [
+          [
+            1,
+            "2026-10-24 00:45:25"
+          ],
+          [
+            2,
+            "2026-10-24 00:45:25"
+          ],
+          [
+            3,
+            "2026-10-24 00:45:25"
+          ],
+          [
+            4,
+            "2026-10-24 00:45:25"
+          ],
+          [
+            5,
+            "2026-10-24 00:45:25"
+          ],
+          [
+            6,
+            "2026-10-24 00:45:25"
+          ],
+          [
+            7,
+            "2026-10-24 00:45:25"
+          ],
+          [
+            8,
+            "2026-10-24 00:45:25"
+          ],
+          [
+            9,
+            "2026-10-24 00:45:25"
+          ],
+          [
+            10,
+            "2026-10-24 00:45:25"
+          ],
+          [
+            11,
+            "2026-10-24 00:45:25"
+          ]
+        ]
+      },
+      "assets": {
+        "columns": [
+          "id",
+          "original_path",
+          "filename",
+          "extension",
+          "filesize",
+          "checksum",
+          "capture_date",
+          "import_date",
+          "width",
+          "height",
+          "orientation",
+          "camera",
+          "lens",
+          "focal_length",
+          "aperture",
+          "shutter_seconds",
+          "iso",
+          "gps_latitude",
+          "gps_longitude",
+          "rating",
+          "flag",
+          "color_label"
+        ],
+        "rows": [
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            "@ORIGINALS@/02-global-local.DNG",
+            "02-global-local.DNG",
+            ".DNG",
+            25164,
+            "3ebfe4d8e5ec6c5baa1da69d2f33d6e08d27f3516b7a4a85d2645592644cf40c",
+            null,
+            "2026-10-24 00:45:28",
+            128,
+            96,
+            6,
+            "Luma Synthetic Bayer Camera",
+            "",
+            35.0,
+            2.799999952316284,
+            0.00800000037997961,
+            null,
+            null,
+            null,
+            0,
+            0,
+            null
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            "@ORIGINALS@/01-complete.DNG",
+            "01-complete.DNG",
+            ".DNG",
+            25164,
+            "3ebfe4d8e5ec6c5baa1da69d2f33d6e08d27f3516b7a4a85d2645592644cf40c",
+            null,
+            "2026-10-24 00:45:26",
+            128,
+            96,
+            6,
+            "Luma Synthetic Bayer Camera",
+            "",
+            35.0,
+            2.799999952316284,
+            0.00800000037997961,
+            null,
+            null,
+            null,
+            0,
+            0,
+            null
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            "@ORIGINALS@/03-common.webp",
+            "03-common.webp",
+            ".webp",
+            74,
+            "e16b022b9f7b496c96737a8f36784dd780ea229b136addd469f6d43b53fd6738",
+            null,
+            "2026-10-24 00:45:30",
+            32,
+            24,
+            0,
+            "",
+            "",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            0,
+            0,
+            null
+          ]
+        ]
+      },
+      "session": {
+        "columns": [
+          "slot",
+          "asset_id"
+        ],
+        "rows": [
+          [
+            1,
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80"
+          ]
+        ]
+      },
+      "collections": {
+        "columns": [
+          "id",
+          "name",
+          "created_at"
+        ],
+        "rows": []
+      },
+      "collection_assets": {
+        "columns": [
+          "collection_id",
+          "asset_id"
+        ],
+        "rows": []
+      },
+      "import_sessions": {
+        "columns": [
+          "id",
+          "mode",
+          "destination",
+          "state",
+          "owner_pid",
+          "skip_duplicates",
+          "created_at",
+          "finished_at"
+        ],
+        "rows": []
+      },
+      "import_items": {
+        "columns": [
+          "session_id",
+          "position",
+          "source_path",
+          "target_path",
+          "temporary_path",
+          "checksum",
+          "filesize",
+          "state",
+          "asset_id",
+          "error"
+        ],
+        "rows": []
+      },
+      "edit_curve_points": {
+        "columns": [
+          "asset_id",
+          "channel",
+          "position",
+          "x",
+          "y"
+        ],
+        "rows": [
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            0,
+            0,
+            0.0,
+            0.0
+          ],
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            0,
+            1,
+            0.4,
+            0.62
+          ],
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            0,
+            2,
+            1.0,
+            1.0
+          ],
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            1,
+            0,
+            0.0,
+            0.0
+          ],
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            1,
+            1,
+            1.0,
+            1.0
+          ],
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            2,
+            0,
+            0.0,
+            0.0
+          ],
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            2,
+            1,
+            1.0,
+            1.0
+          ],
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            3,
+            0,
+            0.0,
+            0.0
+          ],
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            3,
+            1,
+            1.0,
+            1.0
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            0,
+            0,
+            0.0,
+            0.0
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            0,
+            1,
+            1.0,
+            1.0
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            1,
+            0,
+            0.0,
+            0.0
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            1,
+            1,
+            1.0,
+            1.0
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            2,
+            0,
+            0.0,
+            0.0
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            2,
+            1,
+            1.0,
+            1.0
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            3,
+            0,
+            0.0,
+            0.0
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            3,
+            1,
+            1.0,
+            1.0
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            0,
+            0,
+            0.0,
+            0.0
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            0,
+            1,
+            1.0,
+            1.0
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            1,
+            0,
+            0.0,
+            0.0
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            1,
+            1,
+            1.0,
+            1.0
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            2,
+            0,
+            0.0,
+            0.0
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            2,
+            1,
+            1.0,
+            1.0
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            3,
+            0,
+            0.0,
+            0.0
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            3,
+            1,
+            1.0,
+            1.0
+          ]
+        ]
+      },
+      "edit_hsl_bands": {
+        "columns": [
+          "asset_id",
+          "band",
+          "hue",
+          "saturation",
+          "luminance"
+        ],
+        "rows": [
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            0,
+            12.0,
+            0.0,
+            0.0
+          ],
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            1,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            2,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            3,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            4,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            5,
+            0.0,
+            0.0,
+            25.0
+          ],
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            6,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            7,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            1,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            2,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            3,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            4,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            5,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            6,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            7,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            1,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            2,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            3,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            4,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            5,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            6,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            7,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "edit_documents": {
+        "columns": [
+          "asset_id",
+          "schema_version",
+          "exposure",
+          "temperature",
+          "tint",
+          "custom_wb",
+          "contrast",
+          "highlights",
+          "shadows",
+          "whites",
+          "blacks",
+          "vibrance",
+          "saturation",
+          "enabled",
+          "curve_shadows",
+          "curve_darks",
+          "curve_lights",
+          "curve_highlights",
+          "advanced_saved",
+          "sharpen_amount",
+          "sharpen_radius",
+          "sharpen_detail",
+          "sharpen_masking",
+          "noise_luminance",
+          "noise_luminance_detail",
+          "noise_luminance_contrast",
+          "noise_color",
+          "noise_color_detail",
+          "noise_color_smoothness",
+          "crop_x",
+          "crop_y",
+          "crop_width",
+          "crop_height",
+          "crop_angle",
+          "crop_aspect",
+          "crop_quarter_turns",
+          "crop_flip_h",
+          "crop_flip_v",
+          "lens_profile",
+          "lens_distortion",
+          "lens_vignetting",
+          "lens_ca",
+          "transform_rotate",
+          "transform_horizontal",
+          "transform_vertical",
+          "transform_aspect",
+          "transform_scale",
+          "transform_x_offset",
+          "transform_y_offset",
+          "transform_constrain_crop",
+          "transform_guided",
+          "transform_m11",
+          "transform_m12",
+          "transform_m13",
+          "transform_m21",
+          "transform_m22",
+          "transform_m23",
+          "transform_m31",
+          "transform_m32",
+          "revision",
+          "updated_at"
+        ],
+        "rows": [
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            8,
+            0.35,
+            5100.0,
+            12.0,
+            1,
+            18.0,
+            -40.0,
+            25.0,
+            0.0,
+            0.0,
+            35.0,
+            0.0,
+            98287,
+            0.0,
+            0.0,
+            15.0,
+            0.0,
+            1,
+            0.0,
+            1.0,
+            25.0,
+            0.0,
+            0.0,
+            50.0,
+            0.0,
+            0.0,
+            50.0,
+            50.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            0.0,
+            0.0,
+            0,
+            0,
+            0,
+            "",
+            100.0,
+            100.0,
+            1,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            1,
+            0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1,
+            "2026-10-24 00:45:29"
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            8,
+            0.35,
+            6500.0,
+            0.0,
+            0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            98303,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1,
+            0.0,
+            1.0,
+            25.0,
+            0.0,
+            0.0,
+            50.0,
+            0.0,
+            0.0,
+            50.0,
+            50.0,
+            0.08,
+            0.06,
+            0.84,
+            0.88,
+            0.0,
+            0.0,
+            0,
+            0,
+            0,
+            "",
+            100.0,
+            100.0,
+            1,
+            6.0,
+            16.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            1,
+            0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1,
+            "2026-10-24 00:45:27"
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            8,
+            0.35,
+            5100.0,
+            12.0,
+            1,
+            18.0,
+            -40.0,
+            25.0,
+            0.0,
+            0.0,
+            35.0,
+            0.0,
+            98287,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1,
+            0.0,
+            1.0,
+            25.0,
+            0.0,
+            0.0,
+            50.0,
+            0.0,
+            0.0,
+            50.0,
+            50.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            0.0,
+            0.0,
+            0,
+            0,
+            0,
+            "",
+            100.0,
+            100.0,
+            1,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            100.0,
+            0.0,
+            0.0,
+            1,
+            0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1,
+            "2026-10-24 00:45:30"
+          ]
+        ]
+      },
+      "edit_local_masks": {
+        "columns": [
+          "asset_id",
+          "document"
+        ],
+        "rows": [
+          [
+            "596642c9-f983-4180-869b-8b86547f3857",
+            "LUMA_LOCAL_MASKS 2 2\n\"dc93991b-df50-42ad-b8e7-849aebde7465\" \"Linear gradient\" 1 0 100 0.69999999999999996 0 0 0 0 0 0 0 0\nG 0 0.5 0.25 0.5 0.75 0 100 0.25 0.75 0.14999999999999999 0.5 0.5 0.5 0\n\"bf33097b-36e9-4ade-a3e0-b0b7c8dedba7\" \"Radial gradient\" 1 0 100 -0.40000000000000002 0 0 0 0 0 0 0 0\nG 1 0.5 0.5 0.29999999999999999 0.25 25 100 0.25 0.75 0.14999999999999999 0.5 0.5 0.5 0\n"
+          ],
+          [
+            "b8bb91be-a2ee-4c32-8ce9-216372c7e231",
+            "LUMA_LOCAL_MASKS 2 2\n\"ad144e5b-b9bd-4bfe-a350-57ad41cc9c23\" \"Brush\" 1 0 100 0.69999999999999996 0 0 0 0 0 0 0 1\nG 2 0.5 0.25 0.5 0.75 0 75 0.25 0.75 0.14999999999999999 0.5 0.5 0.5 2\nS 0 0.12 80 3 0.37430216820085976 0.72220655018910984 0.46655152566992258 0.53950926112246878 0.59501105691618217 0.27138560377994586\nS 1 0.050000000000000003 50 2 0.48547300436284424 0.50203579835620149 0.49616095363475132 0.45129855163248739\nC \"cf4fbedf-c5ab-4862-adb8-6e437a68507b\" 2 1 0\nG 3 0.5 0.25 0.5 0.75 0 50 0.19067822447745619 1 0.14999999999999999 0.5 0.5 0.5 0\n\"a2ff5286-454e-41be-bfcc-9720c551b555\" \"Color range\" 1 0 100 -0.40000000000000002 0 0 0 0 0 0 0 2\nG 4 0.5 0.25 0.5 0.75 0 50 0.25 0.75 0.34999999999999998 0.7004009965995156 0.68440700919850883 0.66792523201288734 0\nC \"c43a35c7-6f14-4954-927d-dbe92e776090\" 1 1 0\nG 1 0.40054403489586998 0.61747715775343437 0.23853216481531991 0.24339733883236109 0 100 0.25 0.75 0.14999999999999999 0.5 0.5 0.5 0\nC \"97b0ac44-832b-4cef-a0db-2cf51a0b8659\" 0 1 1\nG 0 0.3036980884367449 0.73187136747275527 0.55771117948202309 0.2767399513121907 0 100 0.25 0.75 0.14999999999999999 0.5 0.5 0.5 0\n"
+          ],
+          [
+            "bd39fb27-aaca-4296-9c84-1f2016eb8c80",
+            "LUMA_LOCAL_MASKS 2 2\n\"926f9bc2-2d28-4d81-bb1b-700053ff3d2e\" \"Linear gradient\" 1 0 100 0.69999999999999996 0 0 0 0 0 0 0 0\nG 0 0.5 0.25 0.5 0.75 0 100 0.25 0.75 0.14999999999999999 0.5 0.5 0.5 0\n\"9ec71d21-502e-4d83-93f3-5a19dbfafb0c\" \"Radial gradient\" 1 0 100 -0.40000000000000002 0 0 0 0 0 0 0 0\nG 1 0.5 0.5 0.29999999999999999 0.25 25 100 0.25 0.75 0.14999999999999999 0.5 0.5 0.5 0\n"
+          ]
+        ]
+      }
+    }
+  },
+  "files": {
+    "01-complete.DNG": {
+      "sha256": "3ebfe4d8e5ec6c5baa1da69d2f33d6e08d27f3516b7a4a85d2645592644cf40c",
+      "size": 25164
+    },
+    "01-complete.DNG.png": {
+      "sha256": "2d224aade0c5464de63fefd158cba34e712e3294f75f83e50d550af8a657dcff",
+      "size": 6642
+    },
+    "02-global-local.DNG": {
+      "sha256": "3ebfe4d8e5ec6c5baa1da69d2f33d6e08d27f3516b7a4a85d2645592644cf40c",
+      "size": 25164
+    },
+    "02-global-local.DNG.png": {
+      "sha256": "cb908dcdd256bdaf65be323ea883c8a57e4d246b6bc54c0bb035405b63be1df5",
+      "size": 6357
+    },
+    "03-common.webp": {
+      "sha256": "e16b022b9f7b496c96737a8f36784dd780ea229b136addd469f6d43b53fd6738",
+      "size": 74
+    },
+    "03-common.webp.png": {
+      "sha256": "5d47cec2058f1c4dfbd6891a5e6bc87517238e93cb44567331ab71be59a9516b",
+      "size": 456
+    }
+  }
+}

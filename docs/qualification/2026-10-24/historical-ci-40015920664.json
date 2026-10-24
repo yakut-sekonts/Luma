@@ -1,0 +1,91 @@
+{
+  "status": "HISTORICAL_FAILURE",
+  "run": 40015920664,
+  "head": "2e9e8b4ab07e3d456039b332d856d098205f74ec",
+  "merge_build": "863eb852744182316dba4fe6bb1c65311512271e",
+  "summary": {
+    "SKIPPED": 34,
+    "PASS": 351,
+    "FAIL": 12,
+    "NOT_IMPLEMENTED": 31
+  },
+  "report_sha256": "6788f859fc6e1ccf68d4c7e602dc4298170f2770450784d78efd2350566b0540",
+  "artifact": 12533675266,
+  "artifact_sha256": "ae477f84a40ecdc721a6f063faf93ee497bcecf02502af5809514b6d678fa47a",
+  "full_clang_tidy": "PASS",
+  "failures": [
+    {
+      "id": "UX-P06-GPU-002",
+      "status": "FAIL",
+      "message": "Disabled Metal still executed the accelerator",
+      "child_returncode": 1
+    },
+    {
+      "id": "UX-P06-GPU-002",
+      "status": "FAIL",
+      "message": "Disabled Metal still executed the accelerator",
+      "child_returncode": 1
+    },
+    {
+      "id": "UX-P06-GPU-002",
+      "status": "FAIL",
+      "message": "Disabled Metal still executed the accelerator",
+      "child_returncode": 1
+    },
+    {
+      "id": "UX-P07-DNS-001",
+      "status": "FAIL",
+      "message": "Child exited -10 (SIGBUS)",
+      "child_returncode": -10
+    },
+    {
+      "id": "UX-P07-DNS-001",
+      "status": "FAIL",
+      "message": "Child exited -10 (SIGBUS)",
+      "child_returncode": -10
+    },
+    {
+      "id": "UX-P07-DNS-001",
+      "status": "FAIL",
+      "message": "Child exited -10 (SIGBUS)",
+      "child_returncode": -10
+    },
+    {
+      "id": "UX-P07-DNS-002",
+      "status": "FAIL",
+      "message": "Child exited -10 (SIGBUS)",
+      "child_returncode": -10
+    },
+    {
+      "id": "UX-P07-DNS-002",
+      "status": "FAIL",
+      "message": "Child exited -10 (SIGBUS)",
+      "child_returncode": -10
+    },
+    {
+      "id": "UX-P07-DNS-002",
+      "status": "FAIL",
+      "message": "Child exited -10 (SIGBUS)",
+      "child_returncode": -10
+    },
+    {
+      "id": "UX-P07-DNS-008",
+      "status": "FAIL",
+      "message": "Child exited -10 (SIGBUS)",
+      "child_returncode": -10
+    },
+    {
+      "id": "UX-P07-DNS-008",
+      "status": "FAIL",
+      "message": "Child exited -10 (SIGBUS)",
+      "child_returncode": -10
+    },
+    {
+      "id": "UX-P07-DNS-008",
+      "status": "FAIL",
+      "message": "Child exited -10 (SIGBUS)",
+      "child_returncode": -10
+    }
+  ],
+  "interpretation": "Old pre-fix GPU002 and Denoise failures are retained. Hosted Denoise 40028704668 on 44397a9 passes 9/9. Current full CI remains pending/running; this does not qualify current HEAD."
+}

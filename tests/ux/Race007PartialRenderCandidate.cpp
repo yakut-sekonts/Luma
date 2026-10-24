@@ -148,7 +148,9 @@ QString cachePath(Context &c, const Pin &pin) {
         luma::encodePreset({"Thumbnail", {}, asset.edits, luma::allSettingsGroups});
     const auto key = QByteArray::fromStdString(asset.checksum) + "|" +
                      QByteArray::number(saved.revision) + "|" + encoded + "|local-v2|" +
-                     QByteArray::fromStdString(luma::encodeLocalMasks(asset.edits.localMasks));
+                     QByteArray::fromStdString(luma::encodeLocalMasks(asset.edits.localMasks)) +
+                     "|retouch-v1|" +
+                     QByteArray::fromStdString(luma::encodeRetouch(asset.edits.retouch));
     return c.catalogFile + ".luma-cache/thumbnails/" +
            QString::fromLatin1(QCryptographicHash::hash(key, QCryptographicHash::Sha256).toHex()) +
            "-edited-v4.jpg";
@@ -699,7 +701,7 @@ Pins importHidden(Context &c) {
                 "Cannot copy identical private RACE007 source");
         sources.append(QUrl::fromLocalFile(target));
     }
-    require(d.object("library.pane")->setProperty("sources", QVariant::fromValue(sources)),
+    require(d.object("library.importDialog")->setProperty("sources", QVariant::fromValue(sources)),
             "Cannot provide declared Import file-chooser-result boundary");
     d.click("library.importButton");
     d.wait([&] { return d.object("library.importDialog")->property("opened").toBool(); },
@@ -1263,13 +1265,13 @@ bool race007PartialRenderCandidate(Context &c, const QString &identifier) {
         d.wait([&] { return d.object("presetEditor")->property("opened").toBool(); },
                "RACE007 actual Copy settings dialog opened", 5000);
         require(d.object("presetEditor")->property("copyMode").toBool() &&
-                    d.object("presetEditor")->property("groups").toInt() == 255,
-                "RACE007 actual Copy dialog not all groups255");
+                    d.object("presetEditor")->property("groups").toInt() == luma::allSettingsGroups,
+                "RACE007 actual Copy dialog did not select all current settings groups");
         d.click("presetSave");
         d.wait([&] { return !d.object("presetEditor")->property("visible").toBool(); },
                "RACE007 real Copy dialog closed", 5000);
         const auto copied = c.presets.copiedSettings();
-        require(copied && copied->groups == 255 && copied->parameters.empty() &&
+        require(copied && copied->groups == luma::allSettingsGroups && copied->parameters.empty() &&
                     copied->settings == before[2].saved.asset.edits && c.presets.error().isEmpty(),
                 "RACE007 actual Copy did not capture exact literal all-groups C snapshot");
         durable(c, baseline, before, journalBefore, initialFacts);

@@ -1,3 +1,7 @@
+#include "core/io/StagingFile.h"
+#ifndef _DARWIN_C_SOURCE
+#define _DARWIN_C_SOURCE
+#endif
 #include "apps/shared/LibraryService.h"
 #include "apps/shared/PhotoDecoder.h"
 #include "core/image/Bayer.h"
@@ -7,7 +11,9 @@
 #include <cctype>
 #include <cerrno>
 #include <csignal>
+#include <cstdio>
 #include <cstring>
+#include <ctime>
 #include <fcntl.h>
 #include <map>
 #include <set>
@@ -20,7 +26,7 @@ struct DiscoveryResult {
     std::map<std::filesystem::path, std::string> failures;
 };
 DiscoveryResult discover(const std::vector<std::filesystem::path> &roots, bool recursive,
-                         CancellationToken stop) {
+                         CancellationToken stop, bool allowFileSymlinks = true) {
     std::set<std::filesystem::path> paths;
     std::map<std::filesystem::path, std::string> failures;
     auto failed = [&](const std::filesystem::path &path, const std::error_code &error) {
@@ -30,6 +36,14 @@ DiscoveryResult discover(const std::vector<std::filesystem::path> &roots, bool r
     };
     auto file = [&](const std::filesystem::path &path) {
         std::error_code error;
+        if (!allowFileSymlinks &&
+            std::filesystem::is_symlink(std::filesystem::symlink_status(path, error))) {
+            const auto normalized = path.lexically_normal();
+            paths.insert(normalized);
+            failures[normalized] =
+                "Move does not follow source file symlinks. Select the original file explicitly.";
+            return;
+        }
         const auto canonical = std::filesystem::canonical(path, error);
         if (error)
             failed(path, error);
@@ -98,10 +112,12 @@ DiscoveryResult discover(const std::vector<std::filesystem::path> &roots, bool r
 }
 class Descriptor {
   public:
-    explicit Descriptor(int value) : value(value) {
-        if (value < 0)
-            throw std::runtime_error("Import file access failed: " +
-                                     std::string(std::strerror(errno)));
+    Descriptor(int value, const std::filesystem::path &path) : value(value) {
+        if (value < 0) {
+            const auto error = errno;
+            throw std::runtime_error("Import file access failed: " + path.string() + ": " +
+                                     std::string(std::strerror(error)));
+        }
     }
     ~Descriptor() {
         close(value);
@@ -133,8 +149,9 @@ class CopyCleanup {
 };
 void copyAndInstall(const std::filesystem::path &source, CopyCleanup &copy,
                     CancellationToken stop) {
-    Descriptor input(open(source.c_str(), O_RDONLY));
-    Descriptor output(open(copy.temporary.c_str(), O_WRONLY | O_CREAT | O_EXCL, 0600));
+    Descriptor input(open(source.c_str(), O_RDONLY), source);
+    Descriptor output(open(copy.temporary.c_str(), O_WRONLY | O_CREAT | O_EXCL, 0600),
+                      copy.temporary);
     copy.temporaryOwned = true;
     std::vector<char> buffer(1024 * 1024);
     while (true) {
@@ -173,9 +190,194 @@ void copyAndInstall(const std::filesystem::path &source, CopyCleanup &copy,
     if (unlink(copy.temporary.c_str()) != 0)
         throw std::runtime_error("Cannot remove imported Copy temporary.");
     copy.temporaryOwned = false;
-    Descriptor directory(open(copy.target.parent_path().c_str(), O_RDONLY));
+    Descriptor directory(open(copy.target.parent_path().c_str(), O_RDONLY),
+                         copy.target.parent_path());
     if (fsync(directory.value) != 0)
         throw std::runtime_error("Cannot sync Copy directory.");
+}
+std::filesystem::path existingDirectory(const std::filesystem::path &path) {
+    if (path.empty() || !std::filesystem::is_directory(path))
+        throw std::runtime_error("Choose an existing import destination folder.");
+    return std::filesystem::canonical(path);
+}
+bool inside(const std::filesystem::path &path, const std::filesystem::path &root) {
+    const auto relative = std::filesystem::weakly_canonical(path).lexically_relative(
+        std::filesystem::canonical(root));
+    return !relative.empty() && !relative.is_absolute() && *relative.begin() != ".." &&
+           relative != ".";
+}
+std::filesystem::path backupTemporary(const ImportJournalItem &item) {
+    return item.backup.empty()
+               ? std::filesystem::path{}
+               : item.backup.parent_path() /
+                     (".luma-backup-" + item.sessionID + "-" + std::to_string(item.index) + ".tmp");
+}
+void chooseImportPaths(ImportJournalItem &item, const std::filesystem::path &relative,
+                       const ImportOptions &options) {
+    for (int suffix = 0; suffix < 10000; ++suffix) {
+        auto name = relative.filename();
+        if (suffix)
+            name = relative.stem().string() + "-" + std::to_string(suffix) +
+                   relative.extension().string();
+        const auto leaf = relative.parent_path() / name;
+        const auto target =
+            options.mode == ImportMode::add ? item.source : options.destination / leaf;
+        const auto backup = options.backupDestination.empty() ? std::filesystem::path{}
+                                                              : options.backupDestination / leaf;
+        if ((options.mode != ImportMode::add && std::filesystem::exists(target)) ||
+            (!backup.empty() && std::filesystem::exists(backup)))
+            continue;
+        if (options.mode != ImportMode::add) {
+            std::filesystem::create_directories(target.parent_path());
+            if (!inside(target, options.destination))
+                throw std::runtime_error("Import destination escaped its selected folder.");
+        }
+        if (!backup.empty()) {
+            std::filesystem::create_directories(backup.parent_path());
+            if (!inside(backup, options.backupDestination))
+                throw std::runtime_error("Backup destination escaped its selected folder.");
+        }
+        item.target = target;
+        item.backup = backup;
+        if (options.mode != ImportMode::add)
+            item.temporary = target.parent_path() / (".luma-copy-" + item.sessionID + "-" +
+                                                     std::to_string(item.index) + ".tmp");
+        return;
+    }
+    throw std::runtime_error("Too many import filename collisions.");
+}
+void applyImportMetadata(PhotoMetadata &metadata, const ImportOptions &options) {
+    if (options.metadata == DescriptiveMetadata{})
+        return;
+    metadata.descriptive =
+        importMetadata(metadata.descriptive.value_or(DescriptiveMetadata{}), options.metadata);
+    metadata.descriptiveSource.clear();
+    metadata.sidecarHash.clear();
+}
+void verified(const std::filesystem::path &path, const ImportJournalItem &item,
+              CancellationToken stop = {}) {
+    if (std::filesystem::is_symlink(std::filesystem::symlink_status(path)) ||
+        !std::filesystem::is_regular_file(path) ||
+        std::filesystem::file_size(path) != static_cast<std::uintmax_t>(item.size) ||
+        macos::sha256File(path, stop) != item.checksum)
+        throw std::runtime_error("Import file is missing or changed; files preserved.");
+}
+void syncParent(const std::filesystem::path &path) {
+    Descriptor directory(open(path.parent_path().c_str(), O_RDONLY), path.parent_path());
+    if (fsync(directory.value) != 0)
+        throw std::runtime_error("Cannot sync Move source directory.");
+}
+void completeMove(Catalog &catalog, const ImportJournalItem &item, bool recovering = false) {
+    // Do not cancel between quarantine and deletion. Journal recovery handles a process crash.
+    try {
+        verified(item.target, item);
+        if (!item.backup.empty())
+            verified(item.backup, item);
+        if (catalog.referencesSource(item.source))
+            throw std::runtime_error("Move source is used by this catalog; original retained.");
+        if (!recovering && std::filesystem::exists(item.sourceHold))
+            throw std::runtime_error("Move source hold path already exists; original retained.");
+        if (!std::filesystem::exists(item.sourceHold)) {
+            if (!std::filesystem::exists(item.source)) {
+                catalog.finishImportMove(item, "done");
+                return;
+            }
+            verified(item.source, item);
+            if (renamex_np(item.source.c_str(), item.sourceHold.c_str(), RENAME_EXCL) != 0)
+                throw std::runtime_error("Cannot reserve Move source; original retained.");
+            syncParent(item.source);
+        }
+        try {
+            verified(item.sourceHold, item);
+        } catch (...) {
+            // Restore without replacing a newly-created source at the old path.
+            renamex_np(item.sourceHold.c_str(), item.source.c_str(), RENAME_EXCL);
+            throw;
+        }
+        if (unlink(item.sourceHold.c_str()) != 0)
+            throw std::runtime_error(
+                "Cannot finish Move; original retained in the journal's source hold path.");
+        syncParent(item.source);
+        catalog.finishImportMove(item, "done");
+    } catch (const std::exception &failure) {
+        // A registered target stays usable. The report identifies preserved source material.
+        const auto detail = std::string(failure.what()) + " Source: " + item.source.string() +
+                            "; hold: " + item.sourceHold.string();
+        catalog.finishImportMove(item, "retained", detail);
+    }
+}
+void validatePlan(const ImportJournal &journal, const ImportJournalItem &item) {
+    if (!journal.options || journal.id.size() != 36 ||
+        journal.id.find_first_not_of("0123456789abcdef-") != std::string::npos || item.index < 0 ||
+        !item.source.is_absolute())
+        throw std::runtime_error("Invalid import recovery plan; files preserved.");
+    const auto &options = *journal.options;
+    if (options.mode == ImportMode::add) {
+        if (item.target != item.source || !item.temporary.empty())
+            throw std::runtime_error("Invalid Add journal path.");
+    } else if (!inside(item.target, options.destination) ||
+               item.temporary != item.target.parent_path() / (".luma-copy-" + journal.id + "-" +
+                                                              std::to_string(item.index) + ".tmp"))
+        throw std::runtime_error("Invalid import destination plan; files preserved.");
+    if (options.backupDestination.empty() != item.backup.empty() ||
+        (!item.backup.empty() &&
+         (!inside(item.backup, options.backupDestination) || item.backup == item.target)))
+        throw std::runtime_error("Invalid backup recovery plan; files preserved.");
+    const auto expectedHold =
+        item.source.parent_path() / (".luma-move-" + journal.id + "-" + std::to_string(item.index));
+    if ((options.mode == ImportMode::move && item.sourceHold != expectedHold) ||
+        (options.mode != ImportMode::move && !item.sourceHold.empty()))
+        throw std::runtime_error("Invalid Move recovery plan; files preserved.");
+}
+void recoverPlannedImport(Catalog &catalog, const ImportJournal &journal,
+                          const ImportJournalItem &item, CancellationToken stop) {
+    validatePlan(journal, item);
+    const auto &options = *journal.options;
+    if (item.state == "committed") {
+        completeMove(catalog, item, true);
+        return;
+    }
+    const auto resumeCopy = [&](const std::filesystem::path &destination,
+                                const std::filesystem::path &temporary) {
+        if (std::filesystem::exists(destination)) {
+            verified(destination, item, stop);
+            return;
+        }
+        verified(item.source, item, stop);
+        // Never remove an unknown temporary. Recover a verified completed temporary;
+        // otherwise preserve it and use an exclusive new name for the restarted copy.
+        if (std::filesystem::exists(temporary)) {
+            try {
+                verified(temporary, item, stop);
+                if (link(temporary.c_str(), destination.c_str()) == 0) {
+                    syncParent(destination);
+                    return;
+                }
+            } catch (const std::exception &) {
+                checkCancellation(stop);
+            }
+        }
+        CopyCleanup copy(destination, temporary.string() + ".resume-" + std::to_string(getpid()),
+                         item.checksum);
+        copyAndInstall(item.source, copy, stop);
+        copy.registered = true;
+    };
+    if (options.mode != ImportMode::add)
+        resumeCopy(item.target, item.temporary);
+    else
+        verified(item.target, item, stop);
+    if (!item.backup.empty())
+        resumeCopy(item.backup, backupTemporary(item));
+    auto metadata = PhotoDecoder().inspect(item.target, stop);
+    metadata.descriptive = decodeImportOptions(item.metadataDocument).metadata;
+    metadata.descriptiveSource.clear();
+    metadata.sidecarHash.clear();
+    checkCancellation(stop);
+    const bool inserted =
+        catalog.commitImport(item, metadata, journal.skipDuplicates, options.develop);
+    // Recovery never removes a published destination whose ownership may be ambiguous.
+    if (inserted && options.mode == ImportMode::move)
+        completeMove(catalog, item);
 }
 bool deadOwner(std::int64_t owner) {
     if (owner <= 0 || owner == getpid() || owner > 2147483647)
@@ -188,35 +390,35 @@ ImportSummary
 LibraryService::import(const std::vector<std::filesystem::path> &roots, ImportOptions options,
                        CancellationToken stop,
                        const std::function<void(double, const std::string &)> &progress) const {
-    if (options.mode != ImportMode::add && options.mode != ImportMode::copy)
-        throw std::runtime_error("Invalid import mode.");
-    const auto discovery = discover(roots, options.recursive, stop);
+    options.startedAt = static_cast<std::int64_t>(std::time(nullptr));
+    options.validate();
+    const auto discovery =
+        discover(roots, options.recursive, stop, options.mode != ImportMode::move);
     const auto &sources = discovery.sources;
-    if (options.mode == ImportMode::copy) {
-        if (options.destination.empty() || !std::filesystem::is_directory(options.destination))
-            throw std::runtime_error("Choose an existing destination folder for Copy.");
-        options.destination = std::filesystem::canonical(options.destination);
+    if (options.mode != ImportMode::add)
+        options.destination = existingDirectory(options.destination);
+    if (!options.backupDestination.empty()) {
+        options.backupDestination = existingDirectory(options.backupDestination);
+        if (options.mode != ImportMode::add && options.backupDestination == options.destination)
+            throw std::runtime_error("Backup and import destinations must be different folders.");
     }
     Catalog catalog(catalog_);
     const auto session = catalog.beginImport(options.mode, options.destination, sources, getpid(),
-                                             options.skipDuplicates, discovery.failures);
+                                             options.skipDuplicates, discovery.failures, options);
     for (std::size_t index = 0; index < sources.size(); ++index) {
         if (stop.isCancelled())
             break;
         const auto &source = sources[index];
-        if (discovery.failures.contains(source)) {
-            if (progress)
-                progress(static_cast<double>(index + 1) / sources.size(),
-                         source.filename().string());
-            continue; // Already recorded atomically as failed when the session was created.
-        }
+        if (discovery.failures.contains(source))
+            continue;
+        bool committed = false;
         try {
             const auto initialTime = std::filesystem::last_write_time(source);
             const auto size = std::filesystem::file_size(source);
             if (size > 512'000'000)
                 throw std::runtime_error("Image exceeds the 512 MB import budget.");
             const auto checksum = macos::sha256File(source, stop);
-            const auto metadata = PhotoDecoder().inspect(source, stop);
+            auto metadata = PhotoDecoder().inspect(source, stop);
             if (initialTime != std::filesystem::last_write_time(source) ||
                 size != std::filesystem::file_size(source))
                 throw std::runtime_error("Original changed while being inspected.");
@@ -238,31 +440,46 @@ LibraryService::import(const std::vector<std::filesystem::path> &roots, ImportOp
             item.target = source;
             item.checksum = checksum;
             item.size = static_cast<std::int64_t>(size);
-            if (options.mode == ImportMode::copy) {
-                const auto directory =
-                    options.destination / ("Luma-" + session) / std::to_string(index);
-                std::filesystem::create_directories(directory);
-                item.target = directory / source.filename();
-                item.temporary =
-                    directory / (".luma-copy-" + session + "-" + std::to_string(index) + ".tmp");
+            if (options.mode != ImportMode::add || !options.backupDestination.empty()) {
+                const auto relative =
+                    importRelativePath(source, metadata.captureTimestamp, item.index, options);
+                chooseImportPaths(item, relative, options);
             }
-            catalog.stageImport(item);
+            if (options.mode == ImportMode::move) {
+                if (catalog.referencesSource(source))
+                    throw std::runtime_error(
+                        "Move source is already used by this catalog. Use Copy instead.");
+                if (!metadata.descriptiveError.empty())
+                    throw std::runtime_error("Cannot Move while source metadata is unreadable.");
+                item.sourceHold =
+                    source.parent_path() / (".luma-move-" + session + "-" + std::to_string(index));
+            }
+            applyImportMetadata(metadata, options);
+            ImportOptions metadataSnapshot;
+            metadataSnapshot.metadata = metadata.descriptive.value_or(DescriptiveMetadata{});
+            item.metadataDocument = encodeImportOptions(metadataSnapshot);
+            catalog.stageImportPlan(item);
+            CopyCleanup primary(item.target, item.temporary, checksum);
+            CopyCleanup backup(item.backup, backupTemporary(item), checksum);
+            if (options.mode != ImportMode::add)
+                copyAndInstall(source, primary, stop);
+            if (!item.backup.empty())
+                copyAndInstall(source, backup, stop);
             if (initialTime != std::filesystem::last_write_time(source) ||
-                size != std::filesystem::file_size(source))
-                throw std::runtime_error("Original changed while being inspected.");
-            if (options.mode == ImportMode::copy) {
-                CopyCleanup copy(item.target, item.temporary, checksum);
-                copyAndInstall(source, copy, stop);
-                if (initialTime != std::filesystem::last_write_time(source) ||
-                    size != std::filesystem::file_size(source))
-                    throw std::runtime_error("Original changed during Copy.");
-                checkCancellation(stop);
-                copy.registered = catalog.commitImport(item, metadata, options.skipDuplicates);
-            } else {
-                checkCancellation(stop);
-                catalog.commitImport(item, metadata, options.skipDuplicates);
-            }
+                size != std::filesystem::file_size(source) ||
+                macos::sha256File(source, stop) != checksum)
+                throw std::runtime_error("Original changed during import; source preserved.");
+            checkCancellation(stop);
+            const bool inserted =
+                catalog.commitImport(item, metadata, options.skipDuplicates, options.develop);
+            committed = true;
+            primary.registered = inserted;
+            backup.registered = inserted;
+            if (inserted && options.mode == ImportMode::move)
+                completeMove(catalog, item);
         } catch (const std::exception &error) {
+            if (committed)
+                throw; // Keep the session recoverable if post-commit journaling fails.
             catalog.finishImportItem(session, static_cast<int>(index),
                                      stop.isCancelled() ? "cancelled" : "failed", error.what());
         }
@@ -274,6 +491,31 @@ LibraryService::import(const std::vector<std::filesystem::path> &roots, ImportOp
 }
 std::vector<ImportSummary> LibraryService::recover(CancellationToken stop) const {
     Catalog catalog(catalog_);
+    const auto derivedFolder =
+        std::filesystem::weakly_canonical(std::filesystem::absolute(catalog_).parent_path() /
+                                          (catalog_.filename().string() + ".luma-derived"));
+    for (const auto &record : catalog.pendingDerived()) {
+        checkCancellation(stop);
+        if (!deadOwner(record.ownerPID))
+            continue;
+        if (std::filesystem::weakly_canonical(record.path).parent_path() != derivedFolder ||
+            record.path.extension() != ".dng")
+            throw std::runtime_error(
+                "Derived image journal path is outside the managed folder; files preserved.");
+        if (!std::filesystem::exists(record.path)) {
+            catalog.discardDerived(record.path);
+            continue;
+        }
+        if (!std::filesystem::is_regular_file(record.path) ||
+            macos::sha256File(record.path, stop) != record.checksum)
+            throw std::runtime_error(
+                "Interrupted derived image changed; file and journal preserved.");
+        catalog.finishDerived(record);
+    }
+    (void)StagingFile::cleanup(derivedFolder, ".luma-derived-");
+    (void)StagingFile::cleanup(std::filesystem::absolute(catalog_).parent_path() /
+                                   (catalog_.filename().string() + ".luma-backups"),
+                               ".luma-backup-");
     std::vector<ImportSummary> summaries;
     for (const auto &journal : catalog.unfinishedImports()) {
         checkCancellation(stop);
@@ -288,6 +530,10 @@ std::vector<ImportSummary> LibraryService::recover(CancellationToken stop) const
                 continue;
             }
             try {
+                if (journal.options) {
+                    recoverPlannedImport(catalog, journal, item, stop);
+                    continue;
+                }
                 if (journal.mode == ImportMode::copy) {
                     if (journal.id.size() != 36 ||
                         journal.id.find_first_not_of("0123456789abcdef-") != std::string::npos ||
@@ -326,7 +572,10 @@ std::vector<ImportSummary> LibraryService::recover(CancellationToken stop) const
             } catch (const std::exception &error) {
                 if (stop.isCancelled())
                     throw;
-                catalog.finishImportItem(journal.id, item.index, "failed", error.what());
+                if (item.state == "committed")
+                    catalog.finishImportMove(item, "retained", error.what());
+                else
+                    catalog.finishImportItem(journal.id, item.index, "failed", error.what());
             }
         }
         catalog.finishImport(journal.id, "interrupted");

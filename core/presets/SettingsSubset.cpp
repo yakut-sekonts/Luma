@@ -31,6 +31,9 @@ std::uint32_t settingsCorrections(std::uint32_t groups) {
         mask |= flag(Correction::lens);
     if (groups & 128)
         mask |= flag(Correction::transform);
+    for (const auto &parameter : creativeParameters)
+        if (groups & parameter.group)
+            mask |= parameter.correction;
     return mask;
 }
 std::uint32_t settingsParameterGroup(std::string_view name) {
@@ -40,6 +43,8 @@ std::uint32_t settingsParameterGroup(std::string_view name) {
     }
     if (name == "whiteBalance")
         return 2;
+    if (isCreativeParameter(name))
+        return creativeParameter(name).group;
     // Sparse presets currently support Light/Color/Curves/HSL/Detail only.
     EditDocument{}.parameter(name);
     const auto correction = static_cast<std::uint32_t>(EditDocument::correction(name));
@@ -91,6 +96,8 @@ EditDocument mergeSettings(const EditDocument &current, const EditDocument &sour
             result.customWhiteBalance = source.customWhiteBalance;
         result.enabledCorrections = (current.enabledCorrections & ~selectedCorrections) |
                                     (source.enabledCorrections & selectedCorrections);
+        result.creative.enabled = (current.creative.enabled & ~selectedCorrections) |
+                                  (source.creative.enabled & selectedCorrections);
         result.validate();
         return result;
     }
@@ -136,6 +143,10 @@ EditDocument mergeSettings(const EditDocument &current, const EditDocument &sour
         result.lens = source.lens;
     if (groups & 128)
         result.transform = source.transform;
+    for (std::size_t i = 0; i < creativeParameters.size(); ++i)
+        if (groups & creativeParameters[i].group)
+            result.creative.values[i] = source.creative.values[i];
+    result.creative.enabled = (current.creative.enabled & ~mask) | (source.creative.enabled & mask);
     result.enabledCorrections =
         (current.enabledCorrections & ~mask) | (source.enabledCorrections & mask);
     result.validate();

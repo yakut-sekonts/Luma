@@ -1,0 +1,1969 @@
+{
+  "status": "NOT_QUALIFIED",
+  "production_behavior_changed": true,
+  "scope": "Native regression crash, responsive Library scroll and acceptance-observer fixes",
+  "initial_interrupted_campaign": {
+    "interrupted": true,
+    "reason": "Stopped after ImageIO crash caused AppKit restoration modal in following processes",
+    "source_commit": "c12e7f9",
+    "completed": 184,
+    "counts": {
+      "PASS": 168,
+      "FAIL": 16
+    },
+    "cases": [
+      {
+        "id": "UX-LNS-006",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SLD-018",
+        "status": "FAIL",
+        "message": "Timeout: All Basic boundary controls reached the final preview"
+      },
+      {
+        "id": "UX-EXP-012",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SLD-011",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-LNS-008",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SLD-016",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-IMP-005",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-UND-007",
+        "status": "FAIL",
+        "message": "P0 hard hang: no main-loop heartbeat for >5s"
+      },
+      {
+        "id": "UX-CRP-009",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-CRP-007",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-UND-009",
+        "status": "FAIL",
+        "message": "P0 hard hang: no main-loop heartbeat for >5s"
+      },
+      {
+        "id": "UX-SLD-017",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-EXP-014",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-EXP-013",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SLD-010",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-LNS-009",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-EXP-025",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SLD-019",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-EXP-022",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-LNS-007",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SEL-003",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-CRP-006",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-UND-008",
+        "status": "FAIL",
+        "message": "P0 hard hang: no main-loop heartbeat for >5s"
+      },
+      {
+        "id": "UX-UND-006",
+        "status": "FAIL",
+        "message": "P0 hard hang: no main-loop heartbeat for >5s"
+      },
+      {
+        "id": "UX-CRP-008",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-TRN-008",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-LIB-014",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-ADV-011",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-FLT-009",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-PRS-017",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-NAV-010",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-BAT-008",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-PRS-010",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-FLT-007",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-LIB-015",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-TRN-009",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-LIB-012",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-BAT-007",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-FLT-006",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-PRS-018",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-APP-011",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-BAT-009",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-PRS-011",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-ADV-010",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-PRS-016",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-NAV-011",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-FLT-008",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-BAT-013",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-FLT-015",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-FLT-012",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-ADV-003",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-PRS-002",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-NAV-005",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-ADV-004",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-LIB-008",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-LIB-006",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-PRS-003",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-ADV-005",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-NAV-003",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-ADV-002",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-APP-004",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-BAT-015",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-BAT-012",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-APP-003",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-FLT-014",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-TRN-012",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-PRV-003",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-PRV-004",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-CRP-012",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-UND-012",
+        "status": "FAIL",
+        "message": "P0 hard hang: no main-loop heartbeat for >5s"
+      },
+      {
+        "id": "UX-IMP-010",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-DSC-006",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SEL-019",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SEL-010",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-DTL-002",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-EXP-009",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SEL-017",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-DSC-008",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-DTL-005",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-UND-013",
+        "status": "FAIL",
+        "message": "P0 hard hang: no main-loop heartbeat for >5s"
+      },
+      {
+        "id": "UX-CRP-013",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-CRP-014",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SEL-016",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-DTL-004",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-DSC-009",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SEL-011",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-DSC-007",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-IMP-016",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-EXP-006",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SLD-005",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SEL-018",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-IMP-011",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-UND-003",
+        "status": "FAIL",
+        "message": "P0 hard hang: no main-loop heartbeat for >5s"
+      },
+      {
+        "id": "UX-UND-004",
+        "status": "FAIL",
+        "message": "P0 hard hang: no main-loop heartbeat for >5s"
+      },
+      {
+        "id": "UX-CRP-003",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-CRP-004",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-PRV-012",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-LNS-002",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-EXP-027",
+        "status": "FAIL",
+        "message": "Child exited -5 (SIGTRAP)"
+      },
+      {
+        "id": "UX-IMP-008",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-EXP-018",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SEL-006",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-LNS-005",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SEL-008",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SLD-015",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-EXP-016",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-IMP-006",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-EXP-029",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-EXP-011",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SLD-012",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-CRP-005",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-UND-005",
+        "status": "FAIL",
+        "message": "P0 hard hang: no main-loop heartbeat for >5s"
+      },
+      {
+        "id": "UX-EXP-010",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-EXP-017",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SEL-009",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-EXP-028",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-IMP-007",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-EXP-021",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-IMP-009",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-LNS-003",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-EXP-026",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SEL-007",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-EXP-019",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-ADV-015",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-NAV-014",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-PRS-014",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-NAV-013",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-FLT-003",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-FLT-004",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-LIB-017",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-TRN-002",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-TRN-005",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-FLT-005",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-APP-012",
+        "status": "FAIL",
+        "message": "Returning to the same window geometry reset a nonzero scroll position"
+      },
+      {
+        "id": "UX-APP-015",
+        "status": "FAIL",
+        "message": "Returning to the same window geometry reset a nonzero scroll position"
+      },
+      {
+        "id": "UX-BAT-004",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-PRS-015",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-NAV-012",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-ADV-014",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-NAV-015",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-PRS-012",
+        "status": "FAIL",
+        "message": "Preset row did not select its own UUID"
+      },
+      {
+        "id": "UX-TRN-004",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-LIB-018",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-LIB-016",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-TRN-010",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-LIB-005",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-ADV-009",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-FLT-011",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-NAV-008",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-BAT-010",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-PRS-008",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-NAV-006",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-PRS-006",
+        "status": "FAIL",
+        "message": "Stale A/B render replaced the acknowledged C hover"
+      },
+      {
+        "id": "UX-LIB-004",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-TRN-011",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-PRS-007",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-NAV-007",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-PRS-009",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-ADV-008",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-NAV-009",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-IMP-014",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-DTL-008",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-DSC-005",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SLD-007",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-IMP-013",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-EXP-003",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SEL-014",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-DTL-006",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SEL-013",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-PRV-007",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-CRP-011",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SEL-012",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SEL-015",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SLD-008",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-IMP-012",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-DSC-003",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-EXP-002",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-DSC-004",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-IMP-015",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-DTL-009",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-SLD-006",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-UND-010",
+        "status": "FAIL",
+        "message": "P0 hard hang: no main-loop heartbeat for >5s"
+      },
+      {
+        "id": "UX-CRP-017",
+        "status": "PASS",
+        "message": ""
+      },
+      {
+        "id": "UX-CRP-010",
+        "status": "PASS",
+        "message": ""
+      }
+    ]
+  },
+  "reports": {
+    "ux-regression-diagnostics": {
+      "path": "build-verify/ux-regression-diagnostics/UX_REPORT.json",
+      "sha256": "14a446df601ccd48786f854f66950a681efda1be837ca642e4beb343ca3e1b94",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "c12e7f942a2818d94014609d424ff2339001a5d5",
+        "worktree_dirty": true,
+        "source_tree_sha256": "508bfe3d67baa178383dbdb324b8d5472875525fcbdb85737f9293a8419176ed",
+        "test_executable_sha256": "02854d09e163331f11df5d9cc073a7c00a4aa338881432a4267a3f59063605c6",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "02854d09e163331f11df5d9cc073a7c00a4aa338881432a4267a3f59063605c6"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "FAIL": 5
+      },
+      "execution_status": "FAIL",
+      "release_gate": "FAIL",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "c12e7f942a2818d94014609d424ff2339001a5d5",
+        "reason": ""
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "results": [
+        {
+          "id": "UX-APP-012",
+          "status": "FAIL",
+          "message": "Timeout: native window active",
+          "platform": null,
+          "graphics_api": null,
+          "duration_ms": null,
+          "warnings": null,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-SLD-018",
+          "status": "FAIL",
+          "message": "Timeout: native window active",
+          "platform": null,
+          "graphics_api": null,
+          "duration_ms": null,
+          "warnings": null,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-006",
+          "status": "FAIL",
+          "message": "Timeout: native window active",
+          "platform": null,
+          "graphics_api": null,
+          "duration_ms": null,
+          "warnings": null,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-012",
+          "status": "FAIL",
+          "message": "Timeout: native window active",
+          "platform": null,
+          "graphics_api": null,
+          "duration_ms": null,
+          "warnings": null,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-EXP-027",
+          "status": "FAIL",
+          "message": "Timeout: native window active",
+          "platform": null,
+          "graphics_api": null,
+          "duration_ms": null,
+          "warnings": null,
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    },
+    "ux-regression-diagnostics-recovered": {
+      "path": "build-verify/ux-regression-diagnostics-recovered/UX_REPORT.json",
+      "sha256": "044e500349a7cb8fa233043a3ab4ccef7ba059db66b63a6e4c6bf9e05441e48b",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "c12e7f942a2818d94014609d424ff2339001a5d5",
+        "worktree_dirty": true,
+        "source_tree_sha256": "508bfe3d67baa178383dbdb324b8d5472875525fcbdb85737f9293a8419176ed",
+        "test_executable_sha256": "02854d09e163331f11df5d9cc073a7c00a4aa338881432a4267a3f59063605c6",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "02854d09e163331f11df5d9cc073a7c00a4aa338881432a4267a3f59063605c6"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "FAIL": 4,
+        "PASS": 1
+      },
+      "execution_status": "FAIL",
+      "release_gate": "FAIL",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "c12e7f942a2818d94014609d424ff2339001a5d5",
+        "reason": ""
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "results": [
+        {
+          "id": "UX-APP-012",
+          "status": "FAIL",
+          "message": "Returning to the same window geometry reset a nonzero scroll position",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 6553,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-SLD-018",
+          "status": "FAIL",
+          "message": "Timeout: All Basic boundary controls reached the final preview",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 36515,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-006",
+          "status": "FAIL",
+          "message": "Stale A/B render replaced the acknowledged C hover",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 2996,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-012",
+          "status": "FAIL",
+          "message": "Control outside window: preset.6e0e4cc2-8615-49df-98f5-053ecdf4b57f",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 4536,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-EXP-027",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 6403,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    },
+    "ux-regression-fixes-first": {
+      "path": "build-verify/ux-regression-fixes-first/UX_REPORT.json",
+      "sha256": "40a5959970af7839c2a66e783de5e87fbdc22f17942280fea6cce60e68552974",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "c12e7f942a2818d94014609d424ff2339001a5d5",
+        "worktree_dirty": true,
+        "source_tree_sha256": "f4e6670ee628747f77141ace838c65ac0720aebe6831eebb61f26d94704b4e04",
+        "test_executable_sha256": "545988c80446a524024bd2f3d597a58fde974d3fdf3e31f021666a164a613c5c",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "545988c80446a524024bd2f3d597a58fde974d3fdf3e31f021666a164a613c5c"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "FAIL": 2,
+        "PASS": 4
+      },
+      "execution_status": "FAIL",
+      "release_gate": "NOT_QUALIFIED",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "c12e7f942a2818d94014609d424ff2339001a5d5",
+        "reason": ""
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "results": [
+        {
+          "id": "UX-APP-012",
+          "status": "FAIL",
+          "message": "Returning to the same window geometry reset a nonzero scroll position",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 6365,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-APP-015",
+          "status": "FAIL",
+          "message": "Returning to the same window geometry reset a nonzero scroll position",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 6356,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-SLD-018",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 10143,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 2941,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-012",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 5256,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-EXP-027",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 6416,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    },
+    "ux-regression-fixes-native": {
+      "path": "build-verify/ux-regression-fixes-native/UX_REPORT.json",
+      "sha256": "e9e00add0e972c8a943b386293c24198c463fee9e7da978bdc389c92c03c8d2b",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "c12e7f942a2818d94014609d424ff2339001a5d5",
+        "worktree_dirty": true,
+        "source_tree_sha256": "33eb3fb217697a0e79eab6ad6129e6503db66f4ca19580e2fdff9d830e9cffcf",
+        "test_executable_sha256": "160b1c3a1027aa79a93102ea3147a882b0bb688839a22c3f39e37507492bfdaa",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "160b1c3a1027aa79a93102ea3147a882b0bb688839a22c3f39e37507492bfdaa"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "PASS": 18
+      },
+      "execution_status": "PASS",
+      "release_gate": "NOT_QUALIFIED",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "c12e7f942a2818d94014609d424ff2339001a5d5",
+        "reason": ""
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "results": [
+        {
+          "id": "UX-APP-012",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 143100,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-APP-012",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 138940,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-APP-012",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 134064,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-APP-015",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 139013,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-APP-015",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 135465,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-APP-015",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 137141,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-SLD-018",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 6770,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-SLD-018",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 6039,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-SLD-018",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 6582,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 2386,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 2347,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 2315,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-012",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 5350,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-012",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 5255,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-012",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 5333,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-EXP-027",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 6748,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-EXP-027",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 6938,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-EXP-027",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 6890,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    },
+    "ux-regression-fixes-offscreen": {
+      "path": "build-verify/ux-regression-fixes-offscreen/UX_REPORT.json",
+      "sha256": "4d53dea216c78bafc914b37b65bb1cd73b306275bcd6eae2133ca5bd54c8172f",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "c12e7f942a2818d94014609d424ff2339001a5d5",
+        "worktree_dirty": true,
+        "source_tree_sha256": "33eb3fb217697a0e79eab6ad6129e6503db66f4ca19580e2fdff9d830e9cffcf",
+        "test_executable_sha256": "160b1c3a1027aa79a93102ea3147a882b0bb688839a22c3f39e37507492bfdaa",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "160b1c3a1027aa79a93102ea3147a882b0bb688839a22c3f39e37507492bfdaa"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "PASS": 12
+      },
+      "execution_status": "PASS",
+      "release_gate": "NOT_QUALIFIED",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "c12e7f942a2818d94014609d424ff2339001a5d5",
+        "reason": ""
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "results": [
+        {
+          "id": "UX-SLD-018",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 3721,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-SLD-018",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 3453,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-SLD-018",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 3477,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 1207,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 1162,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 1184,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-012",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 4336,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-012",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 4800,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-012",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 4492,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-EXP-027",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 6018,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-EXP-027",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 5917,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "UX-EXP-027",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 5966,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    },
+    "ux-resize-selection-native": {
+      "path": "build-verify/ux-resize-selection-native/UX_REPORT.json",
+      "sha256": "9040f0b18dac82bbf498c2ef39c8ad7dd07d850fd46658e195b6661c4743391b",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "c12e7f942a2818d94014609d424ff2339001a5d5",
+        "worktree_dirty": true,
+        "source_tree_sha256": "33eb3fb217697a0e79eab6ad6129e6503db66f4ca19580e2fdff9d830e9cffcf",
+        "test_executable_sha256": "160b1c3a1027aa79a93102ea3147a882b0bb688839a22c3f39e37507492bfdaa",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "160b1c3a1027aa79a93102ea3147a882b0bb688839a22c3f39e37507492bfdaa"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "PASS": 6
+      },
+      "execution_status": "PASS",
+      "release_gate": "NOT_QUALIFIED",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "c12e7f942a2818d94014609d424ff2339001a5d5",
+        "reason": ""
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "results": [
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 4168,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 3884,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 4090,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 3632,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 3420,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "cocoa",
+          "graphics_api": "metal",
+          "duration_ms": 3684,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    },
+    "ux-resize-selection-offscreen": {
+      "path": "build-verify/ux-resize-selection-offscreen/UX_REPORT.json",
+      "sha256": "49f5b25fec47c99ea457e92df713abe3a9e386c1fd8e869ab861bfcef57bc872",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "c12e7f942a2818d94014609d424ff2339001a5d5",
+        "worktree_dirty": true,
+        "source_tree_sha256": "33eb3fb217697a0e79eab6ad6129e6503db66f4ca19580e2fdff9d830e9cffcf",
+        "test_executable_sha256": "160b1c3a1027aa79a93102ea3147a882b0bb688839a22c3f39e37507492bfdaa",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "160b1c3a1027aa79a93102ea3147a882b0bb688839a22c3f39e37507492bfdaa"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": false,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "summary": {
+        "PASS": 6
+      },
+      "execution_status": "PASS",
+      "release_gate": "NOT_QUALIFIED",
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "c12e7f942a2818d94014609d424ff2339001a5d5",
+        "reason": ""
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "results": [
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 2104,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 1942,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-LIBRARY-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 1918,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 1124,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 1175,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-FILMSTRIP-SELECTION-SCROLL",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "duration_ms": 1141,
+          "warnings": [],
+          "catalog_integrity": "PASS",
+          "original_integrity": "PASS"
+        }
+      ]
+    }
+  },
+  "crash_regression": {
+    "before_fix_exit_code": 133,
+    "after_fix_exit_code": 0,
+    "test": "luma_export_tests with descriptive metadata overlay and copyright-only policy",
+    "native_before": "UX-EXP-027 SIGTRAP in CFRelease / CGImageMetadataRemoveTagWithPath",
+    "cause": "Repeated removal of nested XMP members followed by their filtered parent",
+    "fix": "Remove only maximal filtered branches, in reverse order; fail closed on removal errors"
+  },
+  "limits": [
+    "Partial broad campaign is not a complete release gate",
+    "Ten later startup failures reached AppKit persistent-state recovery before scenarios",
+    "LaunchServices diagnostic restored native activation; no global OS setting changed",
+    "No relaxation of Metal numeric budgets, watchdogs or release requirements",
+    "21 blocking and 306 total applicable IDs remain unadapted"
+  ],
+  "checks": {
+    "build": "PASS",
+    "ctest": {
+      "tests": 71,
+      "passed": 70,
+      "skipped": 1,
+      "failed": 0,
+      "skip": "Private Nikon D7500 fixture unavailable"
+    },
+    "format": "PASS",
+    "mandatory_tidy": "PASS; existing optional-access/widening warnings remain"
+  },
+  "validation_logs": {
+    ".tools/metadata-crash-reproduce-build.log": "b678ff62cad11e150c8dd7d9d60f9b2636cb729d46fa88ada197609c064da9c1",
+    ".tools/metadata-crash-fixed-build.log": "ffb15fefc8451057c4b649601e80457d5751beeaa09c80721d02e0c7da7a83bc",
+    ".tools/metadata-crash-fixed.log": "31db7b969e7d4f326b677b8cd486ef048263c980e0c44166be0fbf0933120238",
+    ".tools/regression-fixes-ctest.log": "b980cc90e87dd48a11d30566e04747f7d8fe795df27261f10d5aca6e98f736be",
+    ".tools/regression-fixes-tidy.log": "baa35abc8b271ebf7c1b578b7805ee96b179e10d65298b27a17a958ca68b7e58",
+    "build-verify/regression-fixes-ctest.xml": "3f1b67787c13c0da56ae2e171a15feff103b119f993c0a3781d4716802772840"
+  },
+  "diagnostic_findings": {
+    "SLD018": "Exactly one RGB channel differed by one quantization level; the unchanged existing Metal budget is RGB <= 1 and exact alpha. CPU still requires exact pixels.",
+    "PRS006": {
+      "acknowledged_c": false,
+      "stale_after_c": false,
+      "pixels_equal_c": true,
+      "fix": "Observe previewChanged for frame publication"
+    },
+    "PRS012": "A nested ancestor Flickable was still moving with contentY=-605; the first row center was outside the window at y=1165. Wait for every actual scroll ancestor before clipping check and click.",
+    "fullscreen": "Before fix first visible row 24 became row 0. After fix row/asset/pixel offset survive; GridView may rebase originY, so the test compares normalized offset plus exact identity."
+  },
+  "graphify": {
+    "nodes": 7996,
+    "edges": 20897,
+    "dangling_endpoints": 0,
+    "exact_duplicates": 0,
+    "self_loops": 5,
+    "scope": "Code navigation only; five diagnostic self-loop warnings remain, QML manually inspected"
+  }
+}

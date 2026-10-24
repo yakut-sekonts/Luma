@@ -1,0 +1,114 @@
+{
+  "status": "NOT_QUALIFIED",
+  "hosted_before": {
+    "run": 40027066662,
+    "head": "d5f7531",
+    "artifact_sha256": "1655b871a060ea3888a151c3e253dcf25c40a5e185f3b8fb7919b61e563caae8",
+    "summary": {
+      "FAIL": 1,
+      "PASS": 2
+    },
+    "failure": "DNS001 unchanged >5s GUI watchdog; samples place GUI in QML/EditorController::parameters map construction while AI worker has reached held stageDerived write",
+    "sample_limit": "three GUI samples; read with source evidence, not a complete CPU profile"
+  },
+  "change": "Coalesce per-row DNG progress into at most one queued GUI callback, retaining latest value and original revision guard. Parameter-map caching was committed separately in 63e224c.",
+  "reports": {
+    "offscreen": {
+      "path": "build-verify/ux-denoise-coalesced/UX_REPORT.json",
+      "sha256": "f78ba7d96b41ce00db7078c4a7ae8d2fae3756d7784bf889bb874bacb62f5bd5",
+      "source_tree_sha256": "6241a7fae181c6ac84f487085ff3f7b6b421b34650f126eacd681dbb2c7c3e3f",
+      "test_executable_sha256": "34cc33e1a162d316f3091f98a5b5d3c8f66c8159f9fb835578005b1c6b85d1b3",
+      "summary": {
+        "PASS": 9
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": "PASS",
+      "max_main_loop_stall_ms": 132,
+      "ids": [
+        "UX-P07-DNS-001",
+        "UX-P07-DNS-001",
+        "UX-P07-DNS-001",
+        "UX-P07-DNS-002",
+        "UX-P07-DNS-002",
+        "UX-P07-DNS-002",
+        "UX-P07-DNS-008",
+        "UX-P07-DNS-008",
+        "UX-P07-DNS-008"
+      ]
+    },
+    "native": {
+      "path": "build-verify/ux-denoise-coalesced-native/UX_REPORT.json",
+      "sha256": "ccc2388efe768d73e3149bbdd16f3190dea43a20b6f5ec70ce224e2abdbd9596",
+      "source_tree_sha256": "6241a7fae181c6ac84f487085ff3f7b6b421b34650f126eacd681dbb2c7c3e3f",
+      "test_executable_sha256": "34cc33e1a162d316f3091f98a5b5d3c8f66c8159f9fb835578005b1c6b85d1b3",
+      "summary": {
+        "PASS": 3
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": "PASS",
+      "max_main_loop_stall_ms": 2388,
+      "ids": [
+        "UX-P07-DNS-001",
+        "UX-P07-DNS-002",
+        "UX-P07-DNS-008"
+      ]
+    },
+    "batch_history_offscreen": {
+      "path": "build-verify/ux-batch-history-final/UX_REPORT.json",
+      "sha256": "a69c3ed9890e4895787ff225024f67c3280254629d45f14028ba2936ceb596b5",
+      "source_tree_sha256": "cde2c27cb157707c41f6d05de34a58270fc867b3cdfb886947e835106bdc2abd",
+      "test_executable_sha256": "8443f9c1447582665f87e24f116331a8e0e0c402217be39b254cc2f8f5b3df95",
+      "summary": {
+        "PASS": 4
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": "PASS",
+      "max_main_loop_stall_ms": 39,
+      "ids": [
+        "UX-BAT-001",
+        "UX-BAT-002",
+        "UX-UND-001",
+        "UX-UND-002"
+      ]
+    },
+    "batch_history_native": {
+      "path": "build-verify/ux-batch-history-native/UX_REPORT.json",
+      "sha256": "219966179e696d3fbc6377b737614fdee15d28986d8278456ead45550d0dca5f",
+      "source_tree_sha256": "cde2c27cb157707c41f6d05de34a58270fc867b3cdfb886947e835106bdc2abd",
+      "test_executable_sha256": "8443f9c1447582665f87e24f116331a8e0e0c402217be39b254cc2f8f5b3df95",
+      "summary": {
+        "PASS": 4
+      },
+      "source_consistency": "PASS",
+      "original_hashes": "PASS",
+      "build_provenance": "PASS",
+      "max_main_loop_stall_ms": 256,
+      "ids": [
+        "UX-BAT-001",
+        "UX-BAT-002",
+        "UX-UND-001",
+        "UX-UND-002"
+      ]
+    }
+  },
+  "validation": {
+    "full_build": {
+      "status": "PASS",
+      "log": ".tools/denoise-coalescing-full-build.log"
+    },
+    "ctest": {
+      "pass": 4,
+      "log": ".tools/denoise-coalescing-ctest.log"
+    },
+    "mandatory_tidy": {
+      "status": "PASS",
+      "log": ".tools/denoise-coalescing-tidy.log",
+      "nonblocking_warnings_retained": true
+    }
+  },
+  "hosted_after": "pending",
+  "remaining": "Full release, original pressure-affected zoom failures and all other unqualified work remain open."
+}

@@ -13,7 +13,15 @@ bool publishedCopy(const std::string &root, std::size_t position) noexcept {
     try {
         std::error_code error;
         std::filesystem::directory_iterator session(root, error), end;
+        std::size_t published = 0;
         while (!error && session != end) {
+            // Current default Copy publishes directly into the fresh, private
+            // destination. The Nth completed PNG arms the next catalog write.
+            // Keep the old session-directory branch for legacy recovery fixtures.
+            if (session->path().extension() == ".png" && session->is_regular_file(error)) {
+                if (published++ == position)
+                    return true;
+            }
             if (session->path().filename().string().starts_with("Luma-") &&
                 session->is_directory(error)) {
                 // A fresh owned destination contains one import session. Check

@@ -1,0 +1,508 @@
+{
+  "schema": 1,
+  "status": "NOT_QUALIFIED",
+  "scope": "completed-baseline-and-model-numerics",
+  "source_commit": "f55ea104c9245f2fa2120936cb6a1ea188034003",
+  "source_version": "0.9.0",
+  "stable_release": "0.5.1",
+  "environment": {
+    "architecture": "arm64",
+    "ram_gib": 8,
+    "macos": "27.0.1 (26A434)",
+    "xcode": "27.1 (27A9275)",
+    "qt": "6.10.3",
+    "build_type": "RelWithDebInfo",
+    "application_compiler": "CommandLineTools/usr/bin/c++",
+    "application_sdk": "MacOSX27.0.sdk"
+  },
+  "tests": [
+    {
+      "name": "model-xcode-preflight",
+      "status": "PASS",
+      "seconds": 0.528211,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "creative-settings-render-auto",
+      "status": "PASS",
+      "seconds": 0.097817,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "smart-collection-query-backup",
+      "status": "PASS",
+      "seconds": 0.076198,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "advanced-import-copy-move-backup",
+      "status": "PASS",
+      "seconds": 0.20898,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "ux-metric-accounting",
+      "status": "PASS",
+      "seconds": 0.0113557,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "ux-runner-accounting",
+      "status": "PASS",
+      "seconds": 7.63943,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "ux-quality-workload-policy",
+      "status": "PASS",
+      "seconds": 0.428459,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "ux-thumbnail-fixture-accounting",
+      "status": "PASS",
+      "seconds": 1.2298,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "ux-thumbnail-invalidation-fixture-accounting",
+      "status": "PASS",
+      "seconds": 2.16015,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "ux-thumbnail-away-back-fixture-accounting",
+      "status": "PASS",
+      "seconds": 3.01973,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "ux-watermark-snapshot-fixture-accounting",
+      "status": "PASS",
+      "seconds": 1.62178,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "ux-crop-done-fixture-backend-accounting",
+      "status": "PASS",
+      "seconds": 2.23354,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "ux-export-current-filename-fixture-accounting",
+      "status": "PASS",
+      "seconds": 1.6239,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "ux-mask-transparent-fixture-accounting",
+      "status": "PASS",
+      "seconds": 0.24364,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "ux-native-bundle-provenance",
+      "status": "PASS",
+      "seconds": 0.267865,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "ux-history-chaos-plan",
+      "status": "PASS",
+      "seconds": 4.90956,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "ux-history-chaos-routing",
+      "status": "PASS",
+      "seconds": 0.994826,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "ux-cpu-partial-row-equivalence",
+      "status": "PASS",
+      "seconds": 0.0821728,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "ux-thumbnail-partial-render-fixture-accounting",
+      "status": "PASS",
+      "seconds": 4.50408,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "ux-cpu-probe-shipping-isolation",
+      "status": "PASS",
+      "seconds": 3.12547,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "language-runtime-preferences",
+      "status": "PASS",
+      "seconds": 7.40649,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "update-restart-guard",
+      "status": "PASS",
+      "seconds": 1.01828,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "raster-native-color-alpha",
+      "status": "PASS",
+      "seconds": 1.58626,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "advanced-export-options-color-resize",
+      "status": "PASS",
+      "seconds": 0.296001,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "builtin-filter-photographic-quality",
+      "status": "PASS",
+      "seconds": 5.949,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "local-mask-render-storage",
+      "status": "PASS",
+      "seconds": 0.294796,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "perspective-transform-unit",
+      "status": "PASS",
+      "seconds": 0.273458,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "lens-calibration-unit",
+      "status": "PASS",
+      "seconds": 0.0717882,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "crop-geometry-unit",
+      "status": "PASS",
+      "seconds": 0.039783,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "noise-reduction-unit",
+      "status": "PASS",
+      "seconds": 0.0747326,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "sharpening-unit",
+      "status": "PASS",
+      "seconds": 0.0546771,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "core-unit",
+      "status": "PASS",
+      "seconds": 0.0885744,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "advanced-color-unit",
+      "status": "PASS",
+      "seconds": 0.0674321,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "copy-publication-single-link",
+      "status": "PASS",
+      "seconds": 0.26163,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "qml-shell",
+      "status": "PASS",
+      "seconds": 2.28833,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "common-image-workflow",
+      "status": "PASS",
+      "seconds": 18.0606,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "language-catalog-coverage",
+      "status": "PASS",
+      "seconds": 0.124122,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "export-settings-immutable-queue",
+      "status": "PASS",
+      "seconds": 4.79814,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "batch-settings-atomic-history",
+      "status": "PASS",
+      "seconds": 2.74215,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "edited-thumbnail-snapshot-cache",
+      "status": "PASS",
+      "seconds": 2.25651,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "presets-storage-preview-history",
+      "status": "PASS",
+      "seconds": 6.795,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "signed-update-feed",
+      "status": "PASS",
+      "seconds": 3.17086,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "release-publisher",
+      "status": "PASS",
+      "seconds": 1.90185,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "release-dmg-recovery",
+      "status": "PASS",
+      "seconds": 0.792076,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "release-build-verification",
+      "status": "PASS",
+      "seconds": 1.76673,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "library-import-restart",
+      "status": "PASS",
+      "seconds": 4.59734,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "synthetic-raw-restart",
+      "status": "PASS",
+      "seconds": 1.76634,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "develop-export-restart",
+      "status": "PASS",
+      "seconds": 4.21122,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "transform-export-migration",
+      "status": "PASS",
+      "seconds": 1.44868,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "lens-export-migration",
+      "status": "PASS",
+      "seconds": 0.875413,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "crop-export-migration",
+      "status": "PASS",
+      "seconds": 0.732367,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "noise-export-migration",
+      "status": "PASS",
+      "seconds": 1.07121,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "sharpening-export-migration",
+      "status": "PASS",
+      "seconds": 0.696495,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "advanced-export-restart",
+      "status": "PASS",
+      "seconds": 3.65836,
+      "source_report": "final-offscreen-tests-1.xml"
+    },
+    {
+      "name": "language-native-ui",
+      "status": "PASS",
+      "seconds": 14.2542,
+      "source_report": "final-native-tests-1.xml"
+    },
+    {
+      "name": "complete-mask-native-restart",
+      "status": "PASS",
+      "seconds": 77.1808,
+      "source_report": "final-native-tests-1.xml"
+    },
+    {
+      "name": "local-mask-native-restart",
+      "status": "PASS",
+      "seconds": 58.6036,
+      "source_report": "final-native-tests-1.xml"
+    },
+    {
+      "name": "nikon-d7500-restart",
+      "status": "SKIP",
+      "reason": "Private Nikon RAW fixture is not configured.",
+      "source_report": "final-app-tests-1.xml"
+    }
+  ],
+  "evidence": [
+    {
+      "local_file": ".tools/final-offscreen-tests-1.xml",
+      "sha256": "443561fc2bd374069668211e37799721b3b0b649e372b998fd826cca1a613732"
+    },
+    {
+      "local_file": ".tools/final-native-tests-1.xml",
+      "sha256": "27ff9591c0e0bd779a40fe38e6f2ca9cc5fb813316d8ebd9c0e166b272ca0f20"
+    },
+    {
+      "local_file": ".tools/final-app-tests-1.xml",
+      "sha256": "2d7c44801c7933a26f7a6bbe4779061fd03ff044b21b31aee0fd375e06310bc7"
+    },
+    {
+      "local_file": ".tools/final-full-tidy-1.log",
+      "sha256": "d12244ceb0daa884f8d1b7b3e5554b705cae64ee2f390ea87978f88bdf11de52"
+    },
+    {
+      "local_file": ".tools/final-tidy-fixes-1.log",
+      "sha256": "07e9b623d32a45032b5af7904f94a29069f9c76d466bc4b94f62a2203a096d89"
+    },
+    {
+      "local_file": ".tools/final-merge-tidy.log",
+      "sha256": "b4ae2b9146da9a4d988784754388fbadb10e9af025ae21fc05bf9bf1c8559b07"
+    },
+    {
+      "local_file": ".tools/final-retouch-test-tidy.log",
+      "sha256": "547955a899cbbc7b407157bb583cacca04ce0592ae52c3360e8ebbdabd45bf78"
+    },
+    {
+      "local_file": ".tools/final-model-probe-tidy.log",
+      "sha256": "61fe7746c78aba7e8ee39c74f882976303586e0f1a14654a05b1aa26228906ea"
+    },
+    {
+      "local_file": ".tools/final-model-build-2.log",
+      "sha256": "4ebbe399c68f5087fe41031d6b78ab6e39856aaf43f8e8a94574887af9a7ac5b"
+    },
+    {
+      "local_file": ".tools/final-model-numerics-3.json",
+      "sha256": "07a4d8332a964717e49229ae03d7740e135d1787c31d03e4dea18e9e5953cac2"
+    }
+  ],
+  "test_counts": {
+    "pass": 57,
+    "skip": 1,
+    "fail": 0
+  },
+  "affected_retests": {
+    "status": "PASS",
+    "cases": [
+      "qml-shell",
+      "batch-settings-atomic-history",
+      "presets-storage-preview-history"
+    ],
+    "evidence": {
+      "local_file": ".tools/final-merge-regression.log",
+      "sha256": "ffed1fb15cb8b1b9484e06360747510a8d55d773be31ac113dd83d79e24519c0"
+    }
+  },
+  "static_analysis": {
+    "status": "PASS_WITH_NON_BLOCKING_WARNINGS_AFTER_TARGETED_RETESTS",
+    "strategy": "Full initial pass followed by fixes and affected-file retests; no second full pass.",
+    "unique_translation_units": 251,
+    "initial_exit_code": 1,
+    "initial_findings": [
+      "core/render/RetouchPass.cpp:197:5: error: Variable 'dy' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter,-warnings-as-errors]",
+      "core/render/RetouchPass.cpp:199:9: error: Variable 'dx' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter,-warnings-as-errors]",
+      "core/render/RetouchPass.cpp:209:5: error: Variable 'stride' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter,-warnings-as-errors]",
+      "core/catalog/Catalog.cpp:401:13: error: Value stored to 'current' is never read [clang-analyzer-deadcode.DeadStores,-warnings-as-errors]",
+      "platform/macos/SystemDiagnostics.mm:35:13: error: Nullable pointer is passed to a callee that requires a non-null 1st parameter [clang-analyzer-nullability.NullablePassedToNonnull,-warnings-as-errors]",
+      "platform/macos/MetalDevelop.mm:98:13: error: Nullable pointer is passed to a callee that requires a non-null 1st parameter [clang-analyzer-nullability.NullablePassedToNonnull,-warnings-as-errors]",
+      "platform/macos/VisionSegmentation.mm:108:36: error: Nullable pointer is dereferenced [clang-analyzer-nullability.NullableDereferenced,-warnings-as-errors]",
+      "platform/macos/VisionSegmentation.mm:135:40: error: Nullable pointer is dereferenced [clang-analyzer-nullability.NullableDereferenced,-warnings-as-errors]",
+      "platform/macos/CoreMLDenoise.mm:54:20: error: Nullable pointer is passed to a callee that requires a non-null 1st parameter [clang-analyzer-nullability.NullablePassedToNonnull,-warnings-as-errors]",
+      "platform/macos/CoreMLSky.mm:43:20: error: Nullable pointer is passed to a callee that requires a non-null 1st parameter [clang-analyzer-nullability.NullablePassedToNonnull,-warnings-as-errors]",
+      "platform/macos/PhotoMetadataIO.mm:176:18: error: Nullable pointer is passed to a callee that requires a non-null 2nd parameter [clang-analyzer-nullability.NullablePassedToNonnull,-warnings-as-errors]",
+      "platform/macos/ApplicationAlert.mm:11:15: error: User-facing text should use localized string macro [clang-analyzer-optin.osx.cocoa.localizability.NonLocalizedStringChecker,-warnings-as-errors]",
+      "apps/desktop/EditorMerge.cpp:53:13: error: Potential leak of memory pointed to by field '__f_' [clang-analyzer-cplusplus.NewDeleteLeaks,-warnings-as-errors]"
+    ],
+    "fixed_files": [
+      "apps/desktop/EditorMerge.cpp",
+      "core/catalog/Catalog.cpp",
+      "core/render/RetouchPass.cpp",
+      "platform/macos/ApplicationAlert.mm",
+      "platform/macos/CoreMLDenoise.mm",
+      "platform/macos/CoreMLSky.mm",
+      "platform/macos/MetalDevelop.mm",
+      "platform/macos/PhotoMetadataIO.mm",
+      "platform/macos/SystemDiagnostics.mm",
+      "platform/macos/VisionSegmentation.mm"
+    ],
+    "fixed_source_sha256": {
+      "apps/desktop/EditorMerge.cpp": "bf000d575612dbc455b047adabacfec2d5777693778cfd4fe8fb3899988fab7d",
+      "core/catalog/Catalog.cpp": "f9a8976c7e2404e99ec12878cc90ae47c250b2b07ef205ce28e340257b5f22e3",
+      "core/render/RetouchPass.cpp": "f849e618be85f6c94c2a7542909c32073085ebcb8684c7d85594572af8bedce0",
+      "platform/macos/ApplicationAlert.mm": "389df3762ce227999be899c7e15feaec1b9e40f6d35fb235a41bf2a393e95ae3",
+      "platform/macos/CoreMLDenoise.mm": "55f82d4110375a4f9efddc88ebbbc0392b896dc3e3ccc4903f717576ef99d43b",
+      "platform/macos/CoreMLSky.mm": "7a35a45ffd47bd7d7b8c07f8c966c310b0b2744fb422983462d51dd4d07bb190",
+      "platform/macos/MetalDevelop.mm": "cf5785a55770fb941c2a1d0338497c4ca380234bb116b2ad95af4b6e60925a50",
+      "platform/macos/PhotoMetadataIO.mm": "cabcd8a4eef831aebcc3e2a2058a39fdb8b1721af57616bd491196bfe633a21c",
+      "platform/macos/SystemDiagnostics.mm": "343521155ce32f88ada67d7b8ae81c96255602301e8cfeace1a53eb3a95227b8",
+      "platform/macos/VisionSegmentation.mm": "bab53e8e6877cb9eb025e07da264e52c526e66569fdf5c805574ae0e10cedb76"
+    },
+    "retest_exit_codes": {
+      "final-tidy-fixes-1.log": 0,
+      "final-merge-tidy.log": 0,
+      "final-retouch-test-tidy.log": 0,
+      "final-model-probe-tidy.log": 0
+    }
+  },
+  "build": {
+    "status": "PASS",
+    "evidence": {
+      "local_file": ".tools/final-full-build-6.log",
+      "sha256": "ac5436aef71b4585f5f366c5dfbcdca0e837edca1f4c53e7d2707b611f9e5907"
+    },
+    "distribution_qualified": false
+  },
+  "format": {
+    "status": "PASS",
+    "evidence": {
+      "local_file": ".tools/final-format-4.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "models": {
+    "compilation": "PASS",
+    "numerical_comparison": "FAIL",
+    "numerical_report": "model-numerics.json",
+    "photographic_quality": "NOT_RUN",
+    "blocker": "LUMA-BUG-036"
+  },
+  "open_scope": [
+    "Complete new 0.6–0.9 workflow qualification",
+    "23 legacy 0.5.1 quality gaps",
+    "LUMA-BUG-035 scroll fix final verification",
+    "Photographic AI quality and fallback/resource qualification",
+    "Load/stress/recovery qualification",
+    "Developer ID/notarization/installation/Sparkle end-to-end qualification"
+  ]
+}

@@ -18,11 +18,19 @@ namespace {
 constexpr qint64 maxBytes = 1'048'576;
 constexpr std::size_t maxPresets = 512;
 const QStringList &groupNames() {
-    static const QStringList names{"Light",  "Color", "Curve",  "HSL",
-                                   "Detail", "Crop",  "Optics", "Geometry"};
+    static const QStringList names{"Light",    "Color",       "Curve",         "HSL",
+                                   "Detail",   "Crop",        "Optics",        "Geometry",
+                                   "Presence", "Point Color", "Color Grading", "Effects"};
     return names;
 }
 QStringList parameters(int group) {
+    if (group >= 8 && group < 12) {
+        QStringList names;
+        for (const auto &p : creativeParameters)
+            if (p.group == (1U << group))
+                names.append(QString::fromUtf8(p.name.data(), p.name.size()));
+        return names;
+    }
     switch (group) {
     case 0:
         return {"exposure", "contrast", "highlights", "shadows", "whites", "blacks"};
@@ -80,21 +88,22 @@ int header(const QJsonObject &root, const QString &format) {
             "Unsupported preset format.");
     const auto version = number(root.value("schemaVersion"));
     require(version == 1 || version == 2 || version == 3 || version == 4 || version == 5 ||
-                version == 6 || version == 7,
+                version == 6 || version == 7 || version == 8 || version == 9,
             "Unsupported preset schema version.");
     return static_cast<int>(version);
 }
 QJsonObject toJson(const DevelopPreset &preset) {
     preset.validate();
     QJsonObject settings;
-    for (int group = 0; group < 8; ++group) {
+    for (int group = 0; group < 12; ++group) {
         const auto bit = std::uint32_t{1} << group;
         if (!(preset.groups & bit))
             continue;
         QJsonObject values;
         for (const auto &name : parameters(group))
             values.insert(name, preset.settings.parameter(name.toStdString()));
-        values.insert("enabledCorrections", static_cast<int>(preset.settings.enabledCorrections &
+        values.insert("enabledCorrections", static_cast<int>((preset.settings.enabledCorrections |
+                                                              preset.settings.creative.enabled) &
                                                              settingsCorrections(bit)));
         if (group == 6)
             values.insert("profile", QString::fromStdString(preset.settings.lens.profile));
@@ -113,7 +122,7 @@ QJsonObject toJson(const DevelopPreset &preset) {
         settings.insert(groupNames()[group], values);
     }
     QJsonObject result{{"format", "luma.develop-preset"},
-                       {"schemaVersion", preset.parameters.empty() ? 6 : 7},
+                       {"schemaVersion", preset.parameters.empty() ? 8 : 9},
                        {"name", preset.name},
                        {"folder", preset.folder},
                        {"settings", settings}};
@@ -128,7 +137,7 @@ QJsonObject toJson(const DevelopPreset &preset) {
 DevelopPreset fromJson(const QJsonObject &root) {
     const auto version = header(root, "luma.develop-preset");
     QStringList fields{"format", "schemaVersion", "name", "folder", "settings"};
-    if (version == 7)
+    if (version == 7 || version == 9)
         fields.append("parameters");
     keys(root, fields);
     require(root.value("name").isString() && root.value("folder").isString(),
@@ -138,7 +147,8 @@ DevelopPreset fromJson(const QJsonObject &root) {
     for (auto entry = settings.begin(); entry != settings.end(); ++entry) {
         const auto index = groupNames().indexOf(entry.key());
         require(index >= 0 && (version >= 2 || index < 4) && (version >= 4 || index < 5) &&
-                    (version >= 5 || index < 6) && (version >= 6 || index < 7),
+                    (version >= 5 || index < 6) && (version >= 6 || index < 7) &&
+                    (version >= 8 || index < 8),
                 "Unsupported preset settings group.");
         const auto bit = std::uint32_t{1} << index;
         preset.groups |= bit;
@@ -165,11 +175,14 @@ DevelopPreset fromJson(const QJsonObject &root) {
         preset.settings.setParameters(parametersToApply);
         const auto flags = number(values.value("enabledCorrections"));
         const auto mask = version < 3 && index == 4 ? 2048U : settingsCorrections(bit);
-        require(flags >= 0 && flags <= 131071 && std::floor(flags) == flags &&
+        require(flags >= 0 && flags <= 4194303 && std::floor(flags) == flags &&
                     !(static_cast<std::uint32_t>(flags) & ~mask),
                 "Invalid preset correction flags.");
-        preset.settings.enabledCorrections =
-            (preset.settings.enabledCorrections & ~mask) | static_cast<std::uint32_t>(flags);
+        const auto selectedFlags = static_cast<std::uint32_t>(flags);
+        preset.settings.enabledCorrections = (preset.settings.enabledCorrections & ~mask) |
+                                             (selectedFlags & ~creativeCorrectionMask);
+        preset.settings.creative.enabled =
+            (preset.settings.creative.enabled & ~mask) | (selectedFlags & creativeCorrectionMask);
         if (index == 1) {
             require(values.value("customWhiteBalance").isBool(), "Invalid white balance mode.");
             preset.settings.customWhiteBalance = values.value("customWhiteBalance").toBool();
@@ -193,7 +206,7 @@ DevelopPreset fromJson(const QJsonObject &root) {
             }
         }
     }
-    if (version == 7) {
+    if (version == 7 || version == 9) {
         require(root.value("parameters").isArray(), "Sparse preset parameters must be an array.");
         const auto selection = root.value("parameters").toArray();
         require(!selection.isEmpty() && selection.size() <= 128,
@@ -284,7 +297,7 @@ void PresetStore::save(const std::vector<StoredPreset> &presets) const {
         return !entry.preset.parameters.empty();
     });
     write(path_, QJsonDocument(QJsonObject{{"format", "luma.preset-library"},
-                                           {"schemaVersion", sparse ? 7 : 6},
+                                           {"schemaVersion", sparse ? 9 : 8},
                                            {"presets", entries}})
                      .toJson());
 }

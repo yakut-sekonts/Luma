@@ -244,8 +244,9 @@ bool localizedDialogCandidate(Context &c, const QString &id) {
         historyEvidence = {{"edited_exposure", edited.exposure}, {"completed", false}};
         d.resize({1000, 640}); // Geometry fixture, not native APP014 resize qualification.
         constexpr std::array codes{"en", "ru", "zh_CN", "hy", "de", "es", "it", "fr"};
-        constexpr std::array groups{"Light",  "Color", "Curve",  "HSL",
-                                    "Detail", "Crop",  "Optics", "Geometry"};
+        constexpr std::array groups{"Light",    "Color",       "Curve",         "HSL",
+                                    "Detail",   "Crop",        "Optics",        "Geometry",
+                                    "Presence", "Point Color", "Color Grading", "Effects"};
         for (int language = 0; language < 8; ++language) {
             const QString code = codes.at(static_cast<std::size_t>(language));
             d.click("settingsButton");
@@ -283,11 +284,12 @@ bool localizedDialogCandidate(Context &c, const QString &id) {
                                                              : "Save preset"),
                         "Preset dialog title has wrong translation/mode");
                 keyboardToggle(c, "presetGroup7");
-                require(d.object("presetEditor")->property("groups").toInt() == 255,
+                require(d.object("presetEditor")->property("groups").toUInt() ==
+                            luma::allSettingsGroups,
                         "Keyboard group round trip did not preserve all preset groups");
                 if (scene == "edit")
                     keyboardToggle(c, "preset.capture");
-                for (int group = 0; group < 8; ++group) {
+                for (std::size_t group = 0; group < groups.size(); ++group) {
                     const auto control = "presetGroup" + QString::number(group);
                     reveal(c, control);
                     // HSL is a deliberately untranslated technical identifier.

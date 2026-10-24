@@ -6,7 +6,7 @@ namespace ux {
 void openKnownLens(Context &c) {
     auto &d = *c.driver;
     const QList<QUrl> sources{QUrl::fromLocalFile(c.fixture + "/stress/Lens.DNG")};
-    d.object("library.pane")->setProperty("sources", QVariant::fromValue(sources));
+    d.object("library.importDialog")->setProperty("sources", QVariant::fromValue(sources));
     d.click("library.importButton");
     d.wait([&] { return d.object("library.importDialog")->property("opened").toBool(); },
            "lens fixture import opened");

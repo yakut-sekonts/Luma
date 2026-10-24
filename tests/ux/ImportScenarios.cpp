@@ -6,6 +6,7 @@
 #include <QDirIterator>
 #include <QFile>
 #include <QJsonDocument>
+#include <QSignalSpy>
 
 namespace ux {
 namespace {
@@ -22,10 +23,13 @@ void start(Context &c, const QList<QUrl> &sources, const QString &destination = 
     if (!c.window->property("libraryMode").toBool())
         d.click("main.libraryButton");
     // Native file-panel selection is a fixture boundary; all subsequent UI is real.
-    d.object("library.pane")->setProperty("sources", QVariant::fromValue(sources));
+    require(d.object("library.importDialog")->setProperty("sources", QVariant::fromValue(sources)),
+            "Import dialog rejected fixture selection");
     if (!destination.isEmpty()) {
         require(QDir().mkpath(destination), "Cannot create import destination fixture");
-        d.object("library.pane")->setProperty("destination", QUrl::fromLocalFile(destination));
+        require(d.object("library.importDialog")
+                    ->setProperty("destination", QUrl::fromLocalFile(destination)),
+                "Import dialog rejected fixture selection");
     }
     d.click("library.importButton");
     d.wait([&] { return d.object("library.importDialog")->property("opened").toBool(); },
@@ -132,14 +136,26 @@ bool copyRestartScenario(Context &c, const QString &id, const QString &stage) {
 bool importScenario(Context &c, const QString &id) {
     auto &d = *c.driver;
     if (id == "UX-IMP-001") {
-        d.click("library.importButton");
-        d.wait([&] { return d.object("library.importDialog")->property("opened").toBool(); },
-               "import opened");
-        d.key(Qt::Key_Escape);
-        d.wait([&] { return !d.object("library.importDialog")->property("visible").toBool(); },
-               "import cancelled");
-        require(c.library.count() == 0 && !c.library.working() && !c.editor.hasPhoto(),
-                "Cancel import changed data");
+        auto *dialog = d.object("library.importDialog");
+        QSignalSpy rejected(dialog, SIGNAL(rejected()));
+        QSignalSpy accepted(dialog, SIGNAL(accepted()));
+        QSignalSpy closed(dialog, SIGNAL(closed()));
+        require(rejected.isValid() && accepted.isValid() && closed.isValid(),
+                "Import cancellation signals are unavailable");
+        for (int cycle = 1; cycle <= 2; ++cycle) {
+            d.click("library.importButton");
+            d.wait([&] { return dialog->property("opened").toBool(); }, "import opened");
+            if (cycle == 1)
+                d.click("library.importCancel");
+            else
+                d.key(Qt::Key_Escape);
+            d.wait([&] { return !dialog->property("visible").toBool() && closed.count() == cycle; },
+                   "import cancelled");
+            require(rejected.count() == cycle && accepted.isEmpty(),
+                    "Cancel button/Escape must reject exactly once without accepting");
+            require(c.library.count() == 0 && !c.library.working() && !c.editor.hasPhoto(),
+                    "Cancel import changed data");
+        }
         return true;
     }
     if (id == "UX-IMP-002" || id == "UX-IMP-003" || id == "UX-IMP-007" || id == "UX-IMP-008") {

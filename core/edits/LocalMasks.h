@@ -1,4 +1,5 @@
 #pragma once
+#include "core/edits/BitmapMask.h"
 #include <array>
 #include <cstdint>
 #include <string>
@@ -6,7 +7,7 @@
 #include <vector>
 
 namespace luma {
-enum class MaskShape : std::uint8_t { linear, radial, brush, luminance, color };
+enum class MaskShape : std::uint8_t { linear, radial, brush, luminance, color, bitmap };
 enum class MaskOperation : std::uint8_t { add, subtract, intersect };
 inline constexpr std::array<std::string_view, 8> localParameters{
     "exposure", "contrast", "highlights", "shadows", "whites", "blacks", "vibrance", "saturation"};
@@ -27,6 +28,7 @@ struct MaskGeometry {
     double rangeLow = 0.25, rangeHigh = 0.75, colorTolerance = 0.15;
     std::array<double, 3> referenceColor{0.5, 0.5, 0.5};
     std::vector<BrushStroke> strokes;
+    BitmapMask bitmap;
     bool operator==(const MaskGeometry &) const = default;
     void validate() const;
     double parameter(std::string_view name) const;

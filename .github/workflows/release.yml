@@ -14,6 +14,7 @@ jobs:
     timeout-minutes: 5
     outputs:
       configured: ${{ steps.configuration.outputs.configured }}
+      apple_configured: ${{ steps.apple.outputs.configured }}
     steps:
       - name: Check signing availability without exposing the key
         id: configuration
@@ -23,6 +24,20 @@ jobs:
       - name: Sparkle signing key is configured
         if: steps.configuration.outputs.configured == 'true'
         run: echo 'Release archives will be signed and verified against the embedded public key.'
+      - name: Check Developer ID and notarization configuration
+        id: apple
+        env:
+          APPLE_CONFIGURED: ${{ secrets.APPLE_CERTIFICATE_P12 != '' && secrets.APPLE_CERTIFICATE_PASSWORD != '' && secrets.APPLE_NOTARY_KEY_P8 != '' && secrets.APPLE_NOTARY_KEY_ID != '' && secrets.APPLE_NOTARY_ISSUER_ID != '' && vars.APPLE_SIGNING_IDENTITY != '' }}
+          APPLE_REQUESTED: ${{ vars.APPLE_SIGNING_IDENTITY != '' }}
+        run: |
+          echo "configured=$APPLE_CONFIGURED" >> "$GITHUB_OUTPUT"
+          if [[ "$APPLE_REQUESTED" == true && "$APPLE_CONFIGURED" != true ]]; then
+            echo 'Optional Developer ID signing was requested, but its credentials are incomplete.' >&2
+            exit 1
+          fi
+          if [[ "$APPLE_CONFIGURED" != true ]]; then
+            echo 'GitHub open-source release: ad-hoc signature, without Apple notarization.'
+          fi
       - name: Sparkle signing key is missing
         if: steps.configuration.outputs.configured != 'true'
         env:
@@ -36,7 +51,9 @@ jobs:
   build-package:
     needs: signing-configuration
     runs-on: macos-15
-    timeout-minutes: 90
+    # The equivalent qualified CI run takes ~124 minutes before packaging.
+    # Keep all checks and allow room for DMG/model/signature verification.
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4.2.2
         with:
@@ -56,6 +73,21 @@ jobs:
           fi
       - name: Install fixed toolchain and Qt
         run: ./scripts/bootstrap.sh
+      - name: Build pinned offline Denoise and Sky models
+        run: bash scripts/build-bundled-models.sh build/models
+      - name: Check source Denoise against analytical clean images
+        run: .tools/model-venv/bin/python scripts/check-denoise-quality.py build/models --report build/denoise-quality.json
+      - name: Check native Core ML numerical agreement
+        run: .tools/model-venv/bin/python scripts/check-model-conversion.py build/models --report build/model-numerics.json
+      - name: Upload model conversion evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: release-model-numerics
+          path: |
+            build/model-numerics.json
+            build/denoise-quality.json
+          if-no-files-found: warn
       - name: Configure
         run: |
           .tools/venv/bin/cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_MAKE_PROGRAM="$PWD/.tools/venv/bin/ninja"
@@ -66,6 +98,32 @@ jobs:
         run: .tools/venv/bin/python scripts/create-appcast.py --check-key --signer build/_deps/sparkle-src/bin/sign_update
       - name: Build
         run: .tools/venv/bin/cmake --build build --parallel 3
+      - name: Check photographic Denoise and actual runtime tiling
+        run: .tools/model-venv/bin/python scripts/check-denoise-photographs.py build/models --probe build/luma_denoise_runtime_probe --output build/denoise-photographs
+      - name: Check Sky photographic interiors and native provider contracts
+        run: |
+          .tools/model-venv/bin/python -m unittest discover -s tests/models -p test_sky_photographs.py
+          .tools/model-venv/bin/python scripts/check-sky-photographs.py build/models --probe build/luma_sky_runtime_probe --output build/sky-photographs
+      - name: Upload photographic model evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: release-denoise-photographs
+          path: |
+            build/denoise-photographs/report.json
+            build/denoise-photographs/*/comparison.png
+            build/denoise-photographs/*/native.log
+          if-no-files-found: warn
+      - name: Upload Sky photographic evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: release-sky-photographs
+          path: |
+            build/sky-photographs/report.json
+            build/sky-photographs/*/comparison.png
+            build/sky-photographs/*/native.log
+          if-no-files-found: warn
       - name: Tests and static analysis
         run: |
           .tools/venv/bin/ctest --test-dir build --output-on-failure --label-exclude load
@@ -75,8 +133,20 @@ jobs:
         run: .tools/venv/bin/python tests/ux/build_ux.py --build build
       - name: Bounded functional blocking UX checks before packaging
         run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --suite blocking --quality-only --runs 3 --require-build-provenance
+      - name: Preserve blocking UX summary before supplemental checks
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ux-blocking-summary
+          path: |
+            build/ux-report/
+            build/ux-build-provenance.json
+          if-no-files-found: warn
+          retention-days: 7
       - name: Supplemental selected-asset keyboard regression
         run: .tools/venv/bin/python tests/ux/run_keyboard_regression.py --build build --runs 3 --require-build-provenance
+      - name: Library and filmstrip selection preserve deep scroll
+        run: .tools/venv/bin/python tests/ux/run_library_scroll_regression.py --build build --runs 3 --require-build-provenance
       - name: Keyboard import edit export at minimum window
         run: .tools/venv/bin/python tests/ux/run_keyboard_workflow_regression.py --build build --runs 3 --require-build-provenance
       - name: Localized preset dialogs at minimum window
@@ -97,8 +167,22 @@ jobs:
         run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-EXP-028 --runs 3 --require-build-provenance --report build/ux-watermark-snapshot-report
       - name: Legal UTF-8 current export filename regression
         run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-VIS-003 --runs 3 --require-build-provenance --report build/ux-export-current-filename-report
+      - name: Preview revision ordering and photo-switch zoom
+        run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-P06-PRG-004 --case UX-P06-PRG-007 --case UX-P06-PRG-008 --case UX-P06-PRG-009 --case UX-P06-ZOM-002 --case UX-P06-ZOM-005 --runs 3 --require-build-provenance --report build/ux-preview-ordering-report
+      - name: Viewer scale and pointer input regression
+        run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-PRV-012 --case UX-P06-ZOM-003 --case UX-P06-ZOM-004 --case UX-P06-ZOM-012 --runs 3 --require-build-provenance --report build/ux-viewer-input-report
       - name: Auto Transform completion regression
         run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-RACE-005 --runs 3 --require-build-provenance --report build/ux-auto-transform-report
+      - name: Metadata forms and XMP preservation regression
+        run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-P09-META-002 --case UX-P09-META-007 --case UX-P09-XMP-002 --case UX-P09-XMP-003 --case UX-P09-XMP-004 --case UX-P09-XMP-005 --runs 3 --require-build-provenance --report build/ux-metadata-xmp-report
+      - name: Catalog backup and restore regression
+        run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --quality-only --case UX-P09-BKP-001 --case UX-P09-BKP-002 --case UX-P09-BKP-006 --case UX-P09-BKP-007 --runs 3 --require-build-provenance --report build/ux-catalog-backup-report
+      - name: Implemented phase 1.0 daily and data workflows
+        run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --through 1.0 --suite blocking --quality-only --case UX-P10-DAT-004 --case UX-P10-DAT-005 --case UX-P10-DAY-003 --case UX-P10-DAY-007 --case UX-P10-DAY-009 --case UX-P10-DAY-010 --case UX-P10-DAY-011 --case UX-P10-DAY-012 --case UX-P10-DAY-013 --case UX-P10-UPG-012 --runs 3 --require-build-provenance --report build/ux-phase-1-report
+      - name: Implemented stress workloads
+        run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --through 1.0 --suite stress --case UX-APP-005 --case UX-IMP-019 --case UX-SLD-013 --case UX-SLD-014 --case UX-PRV-008 --case UX-ADV-013 --case UX-TRN-014 --case UX-DTL-011 --case UX-PRS-019 --case UX-BAT-014 --case UX-EXP-023 --case UX-EXP-024 --case UX-UND-016 --case UX-PERF-017 --case UX-PERF-018 --runs 1 --require-build-provenance --report build/ux-stress-report
+      - name: Seeded history chaos - 10000 actions
+        run: .tools/venv/bin/python tests/ux/run_ux_suite.py --build build --through 1.0 --suite chaos --case UX-UND-017 --actions 10000 --seed 123456 --require-build-provenance --report build/ux-history-chaos-report
       - name: Upload release UX evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -107,10 +191,18 @@ jobs:
           path: |
             build/ux-report/
             build/ux-keyboard-report/
+            build/ux-library-scroll-report/
             build/ux-keyboard-workflow-report/
             build/ux-localized-dialog-report/
             build/ux-mask-handles-report/
             build/ux-auto-transform-report/
+            build/ux-preview-ordering-report/
+            build/ux-viewer-input-report/
+            build/ux-metadata-xmp-report/
+            build/ux-catalog-backup-report/
+            build/ux-phase-1-report/
+            build/ux-stress-report/
+            build/ux-history-chaos-report/
             build/ux-card-flags-report/
             build/ux-thumbnail-response-report/
             build/ux-thumbnail-away-back-report/
@@ -122,9 +214,18 @@ jobs:
             build/ux-artifacts/20*/fixture-manifest.json
             build/ux-artifacts/20*/**/result.json
             build/ux-artifacts/20*/**/child-result.json
+            build/ux-artifacts/20*/**/data-invariants.json
+            build/ux-artifacts/20*/**/serialized-audit.json
+            build/ux-artifacts/20*/**/activation-failure.json
+            build/ux-artifacts/20*/**/measurements.json
+            build/ux-artifacts/20*/**/replay.jsonl
+            build/ux-artifacts/20*/**/chaos-execution.jsonl
+            build/ux-artifacts/20*/**/panel-stress-failure.json
             build/ux-artifacts/20*/**/metrics.json
             build/ux-artifacts/20*/**/actions.jsonl
             build/ux-artifacts/20*/**/keyboard-activation.json
+            build/ux-artifacts/20*/**/library-selection-scroll.json
+            build/ux-artifacts/20*/**/auto-cancel-delivery.json
             build/ux-artifacts/20*/**/keyboard-workflow.json
             build/ux-artifacts/20*/**/localized-dialogs.json
             build/ux-artifacts/20*/**/dialog-*.png
@@ -146,13 +247,32 @@ jobs:
             build/ux-artifacts/20*/**/lib005-*.json
             build/ux-artifacts/20*/**/msk023-*.png
             build/ux-artifacts/20*/**/app.log
+            build/ux-artifacts/20*/**/model-resets.jsonl
+            build/ux-artifacts/20*/**/preview-pixel-difference.json
+            build/ux-artifacts/20*/**/zoom-*-sample.png
+            build/ux-artifacts/20*/**/zoom-1600-scene.png
+            build/ux-artifacts/20*/**/expected-preview.png
+            build/ux-artifacts/20*/**/actual-preview.png
             build/ux-artifacts/20*/**/command.json
             build/ux-artifacts/20*/**/failure.png
             build/ux-artifacts/20*/**/thread-sample.txt
           if-no-files-found: warn
           retention-days: 7
+      - name: Prepare isolated Apple signing Keychain
+        if: needs.signing-configuration.outputs.apple_configured == 'true'
+        env:
+          APPLE_CERTIFICATE_P12: ${{ secrets.APPLE_CERTIFICATE_P12 }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          APPLE_NOTARY_KEY_P8: ${{ secrets.APPLE_NOTARY_KEY_P8 }}
+          APPLE_NOTARY_KEY_ID: ${{ secrets.APPLE_NOTARY_KEY_ID }}
+          APPLE_NOTARY_ISSUER_ID: ${{ secrets.APPLE_NOTARY_ISSUER_ID }}
+          APPLE_SIGNING_IDENTITY: ${{ vars.APPLE_SIGNING_IDENTITY }}
+        run: .tools/venv/bin/python scripts/configure-apple-signing.py
       - name: Package ZIP and DMG
         run: ./scripts/release-artifacts.sh build
+      - name: Remove isolated Apple signing Keychain
+        if: always() && needs.signing-configuration.outputs.apple_configured == 'true'
+        run: python3 scripts/configure-apple-signing.py --clean
       - name: Verify standalone application
         run: .tools/venv/bin/python scripts/verify-bundle.py
       - name: Verify mounted installer and version

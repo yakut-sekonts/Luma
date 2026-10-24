@@ -1,0 +1,74 @@
+{
+  "status": "BOUNDED_DEVELOPMENT_MIGRATION_PASS_NOT_INSTALL_OR_UPGRADE_QUALIFIED",
+  "report": {
+    "status": "PASS",
+    "old_version": "0.5.1",
+    "source_commit": "70c030adcc61823c1b166c370e00f9cc5766c44a",
+    "old_executable_sha256": "9c2ae0582ed8647c8180f5f40d225f3a0ec86be6e8e9dad3005afa65afa67f5d",
+    "new_executable_sha256": "be82f6f854a16ac0272effedcecfb990c6ed3218a8ce5a490e349495c0eaa910",
+    "cases": [
+      {
+        "case": "raw-complete-masks",
+        "status": "PASS",
+        "original_sha256": "3ebfe4d8e5ec6c5baa1da69d2f33d6e08d27f3516b7a4a85d2645592644cf40c",
+        "old_schema": 11,
+        "new_schema": 21,
+        "backup_sha256": "a4563a5e3460fbd51b85ee9f7d785e072b8e8caf8f7cf538e96b50760e34cd75",
+        "export_sha256": "2d224aade0c5464de63fefd158cba34e712e3294f75f83e50d550af8a657dcff",
+        "historical_tables": 11
+      },
+      {
+        "case": "raw-global-local",
+        "status": "PASS",
+        "original_sha256": "3ebfe4d8e5ec6c5baa1da69d2f33d6e08d27f3516b7a4a85d2645592644cf40c",
+        "old_schema": 11,
+        "new_schema": 21,
+        "backup_sha256": "4f7145b96fde25dfb7960ad49db4579e4f92934d76f77af1511b1c3f553b51db",
+        "export_sha256": "cb908dcdd256bdaf65be323ea883c8a57e4d246b6bc54c0bb035405b63be1df5",
+        "historical_tables": 11
+      },
+      {
+        "case": "webp-develop-local",
+        "status": "PASS",
+        "original_sha256": "e16b022b9f7b496c96737a8f36784dd780ea229b136addd469f6d43b53fd6738",
+        "old_schema": 11,
+        "new_schema": 21,
+        "backup_sha256": "b39913827baa0acbff6b8dbcd1a562563caab7d0f123b8d57c111372a239dd46",
+        "export_sha256": "5d47cec2058f1c4dfbd6891a5e6bc87517238e93cb44567331ab71be59a9516b",
+        "historical_tables": 11
+      }
+    ]
+  },
+  "artifacts": "build-verify/stable-migration-20261024T003338Z",
+  "recipe": {
+    "path": ".tools/check-stable-migration.py",
+    "sha256": "33c941a226f6d2bed3eb12f384b2f8da3dc6e4c4d7f22eecacf850c833a0894d",
+    "platform": "Cocoa software backend",
+    "previous_app": "dist/Luma.previous.1792796353.app",
+    "current_app": "build-verify/Luma.app",
+    "checks": [
+      "Strict signature and pinned version/commit of 0.5.1",
+      "Old create/restore with exact exported PNG bytes",
+      "Schema 11 to 21 and unchanged historical tables except explicit mask-format migration",
+      "Complete typed global/local restore acceptance in actual executables",
+      "Exact original PNG bytes across versions and restart",
+      "Exactly one schema-11 backup matching the entire old database snapshot",
+      "Original file hashes and SQL integrity/foreign keys"
+    ]
+  },
+  "earlier_attempts": [
+    {
+      "path": "build-verify/stable-migration-20261024T003227Z",
+      "outcome": "Harness setup failed: published bundle has Cocoa only, no offscreen plugin."
+    },
+    {
+      "path": "build-verify/stable-migration-20261024T003251Z",
+      "outcome": "Two RAW migrations PASS; old 0.5.1 HSL acceptance rejected the WebP target-color fixture before migration. Final WebP scope covers Develop/local masks; advanced-color migration is exercised by RAW."
+    }
+  ],
+  "limits": [
+    "Development executable is hash-recorded, not final packaged installer.",
+    "Does not test clean DMG installation, machine restart, Sparkle download/replacement or arbitrary user catalogs.",
+    "Official missing-adapter inventory unchanged."
+  ]
+}

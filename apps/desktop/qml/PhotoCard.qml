@@ -13,6 +13,7 @@ Rectangle {
     required property string colorLabel
     required property bool selected
     required property bool activePhoto
+    required property bool sourceMissing
     property bool compact: false
     property int retryCount: 0
     readonly property var keyboardView: compact ? card.ListView.view : card.GridView.view
@@ -62,7 +63,7 @@ Rectangle {
         interval: 1500; running: thumbnail.status === Image.Error && card.retryCount < 2; repeat: false
         onTriggered: card.retryCount++
     }
-    Label { anchors.centerIn: thumbnail; visible: thumbnail.status !== Image.Ready; text: thumbnail.status === Image.Error ? qsTranslate("Luma", "No preview") : "…"; color: "#68717f"; font.pixelSize: 11 }
+    Label { objectName: (card.compact ? "filmstrip.availability." : "library.availability.") + card.assetID; anchors.centerIn: thumbnail; visible: card.sourceMissing || thumbnail.status !== Image.Ready; text: card.sourceMissing ? qsTranslate("Luma", "Missing") : thumbnail.status === Image.Error ? qsTranslate("Luma", "No preview") : "…"; color: "#68717f"; font.pixelSize: 11 }
     Column {
         id: caption
         anchors { left: parent.left; right: parent.right; bottom: parent.bottom; margins: 10 }
@@ -79,7 +80,20 @@ Rectangle {
     MouseArea {
         anchors.fill: parent
         onClicked: function(mouse) {
+            // Set the actual clicked item before activating the view's focus
+            // scope; otherwise it may reveal its stale current item (row zero).
+            const view = card.keyboardView
+            const previousX = view ? view.contentX : 0
+            const previousY = view ? view.contentY : 0
+            if (view) view.currentIndex = card.index
             card.forceActiveFocus(Qt.MouseFocusReason)
+            // Mouse selection must retain the viewport, including a partly
+            // visible row. Explicit positioning also cancels Qt's deferred
+            // current-cell reveal; keyboard navigation still follows its item.
+            if (view) {
+                if (card.compact) view.contentX = previousX
+                else view.contentY = previousY
+            }
             library.select(card.index, (mouse.modifiers & (Qt.ControlModifier | Qt.MetaModifier)) !== 0, (mouse.modifiers & Qt.ShiftModifier) !== 0)
             if (card.compact && mouse.modifiers === Qt.NoModifier && !editor.busy) library.activate(card.index)
         }

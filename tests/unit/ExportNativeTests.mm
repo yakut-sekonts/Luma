@@ -119,6 +119,24 @@ void metadataTests(const std::filesystem::path &source) {
     auto none = luma::macos::exportMetadata(source, options, 64, 48);
     require(luma::macos::metadataXMP(none.get(), options.metadata).empty(),
             "Metadata None produced source XMP.");
+
+    luma::MetadataOverlay overlay;
+    overlay.includeText = true;
+    overlay.values.title = "Private title";
+    overlay.values.caption = "Private caption";
+    overlay.values.creators = {"First creator", "Second creator"};
+    overlay.values.copyright = "Retained rights";
+    overlay.values.location = "Private location";
+    overlay.values.keywords = {"Private keyword one", "Private keyword two"};
+    options.metadata = luma::MetadataPolicy::copyrightOnly;
+    auto filtered = luma::macos::exportMetadata(source, options, 64, 48, overlay);
+    const auto filteredText = xmp(filtered.get(), options.metadata);
+    require(filteredText.find("First creator") != std::string::npos &&
+                filteredText.find("Second creator") != std::string::npos &&
+                filteredText.find("Retained rights") != std::string::npos &&
+                filteredText.find("Private") == std::string::npos &&
+                filteredText.find("Secret") == std::string::npos,
+            "Copyright-only export did not filter nested catalog metadata safely.");
 }
 std::vector<std::uint8_t> rgba(const std::filesystem::path &path, int width, int height) {
     auto input = url(path);

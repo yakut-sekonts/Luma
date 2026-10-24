@@ -1,0 +1,1772 @@
+{
+  "schema": 1,
+  "recorded_date": "2026-10-23",
+  "source_base": "60e0f971fbcd859e074461b634160f6b1a215759",
+  "status": "BOUNDED_FIXES_RETESTED_WITH_OPEN_INTERMITTENT_OBSERVATION",
+  "release_gate": "NOT_QUALIFIED",
+  "execution": "Local offscreen/software only. GITHUB_ACTIONS=true selects the backend; hardware.hosted_ci=true in these raw reports does not identify a hosted run. Local Metal unit test separately executes the actual Metal device. No new native window interval was performed.",
+  "retained_runs": [
+    {
+      "classification": "Original bounded functional baseline: 240 PASS, 16 FAIL; skipped/unimplemented are not passes",
+      "path": "build-verify/ux-final-release-functional/UX_REPORT.json",
+      "sha256": "8332b63a9d8842d489be83657a9bd22b029f6006cb543886d99aa94aa05e828e",
+      "summary": {
+        "SKIPPED": 188,
+        "PASS": 240,
+        "FAIL": 16,
+        "NOT_IMPLEMENTED": 326
+      },
+      "source_consistency": "PASS",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "1bcec07c9b525f0a44abd5f50d0df6d02b9d212e",
+        "worktree_dirty": false,
+        "source_tree_sha256": "9db6a9493c10bc1ff0d73f40406bdaa4edc2d79f6fabdead0f6122e6724703e9",
+        "test_executable_sha256": "07da9c0c5aeefd6af59aa5c46989a156a8f3d71518c2ebc5ee5db2863d8a56ba",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "07da9c0c5aeefd6af59aa5c46989a156a8f3d71518c2ebc5ee5db2863d8a56ba"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "1bcec07c9b525f0a44abd5f50d0df6d02b9d212e",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "UX-LIB-004",
+          "status": "FAIL",
+          "message": "Actual provider cache differs from independent original/document JPEG pixels",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115925Z-85518/UX-LIB-004/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-LIB-005",
+          "status": "FAIL",
+          "message": "LIB005 held OLD result cache differs from independent original/neutral document",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115925Z-85518/UX-LIB-005/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-IMP-011",
+          "status": "FAIL",
+          "message": "Held Copy boundary lacks the exact owned first-file staged/published evidence",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115925Z-85518/UX-IMP-011/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-IMP-012",
+          "status": "FAIL",
+          "message": "Held Copy boundary lacks the exact owned first-file staged/published evidence",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115925Z-85518/UX-IMP-012/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRV-007",
+          "status": "FAIL",
+          "message": "Late decode Cancel is not an available actual UI action",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115925Z-85518/UX-PRV-007/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-ADV-015",
+          "status": "FAIL",
+          "message": "Export did not enter its wait-for-pending-edits boundary",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115925Z-85518/UX-ADV-015/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-CRP-005",
+          "status": "FAIL",
+          "message": "Extreme custom Crop frame cannot be manipulated along its long dimension",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115925Z-85518/UX-CRP-005/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-015",
+          "status": "FAIL",
+          "message": "Timeout: preset document pixels ready",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115925Z-85518/UX-PRS-015/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-KEY-012",
+          "status": "FAIL",
+          "message": "develop.actualPixels [100%] has no descriptive accessible name",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115925Z-85518/UX-KEY-012/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-MAC-007",
+          "status": "FAIL",
+          "message": "Timeout: external B has exact saved-document current-source pixels",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115925Z-85518/UX-MAC-007/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-MAC-008",
+          "status": "FAIL",
+          "message": "Copy staged/committed fields crossed published-path/SHA/size identities",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115925Z-85518/UX-MAC-008/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-RACE-002",
+          "status": "FAIL",
+          "message": "RACE002 actual saved cache differs from independent original/expected-document JPEG",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115925Z-85518/UX-RACE-002/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-RACE-006",
+          "status": "FAIL",
+          "message": "Export did not enter its wait-for-pending-edits boundary",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115925Z-85518/UX-RACE-006/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-RACE-007",
+          "status": "FAIL",
+          "message": "RACE007 actual Copy dialog not all groups255",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115925Z-85518/UX-RACE-007/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-VIS-001",
+          "status": "FAIL",
+          "message": "Visual fixture Import has incorrect error/cardinality state",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115925Z-85518/UX-VIS-001/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-VIS-003",
+          "status": "FAIL",
+          "message": "Timeout: VIS003 four owned sources actually imported",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T115925Z-85518/UX-VIS-003/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        }
+      ]
+    },
+    {
+      "classification": "Intermediate retest: 7 PASS, 9 FAIL",
+      "path": "build-verify/ux-final-release-fixes/UX_REPORT.json",
+      "sha256": "8a561016c0406f0a94888abd34a9cc78c77d8e9cf71b296f4cd508d162b9d8d2",
+      "summary": {
+        "FAIL": 9,
+        "PASS": 7
+      },
+      "source_consistency": "PASS",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "1bcec07c9b525f0a44abd5f50d0df6d02b9d212e",
+        "worktree_dirty": true,
+        "source_tree_sha256": "d6a35ebe92299b6f2ab3bf4519c8da7b532c875b6eb725efd627b5a865200d20",
+        "test_executable_sha256": "c3e2fa3172d55e99e67ffc893f8bdeb1d9bea9fdb58c7205f7ded254f567b418",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "c3e2fa3172d55e99e67ffc893f8bdeb1d9bea9fdb58c7205f7ded254f567b418"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "1bcec07c9b525f0a44abd5f50d0df6d02b9d212e",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "UX-LIB-004",
+          "status": "FAIL",
+          "message": "Card rebound/destroyed during Image-node capture",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T122635Z-91703/UX-LIB-004/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-LIB-005",
+          "status": "FAIL",
+          "message": "LIB005 race reset/reopened/unloaded the asset or changed effective DPR",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T122635Z-91703/UX-LIB-005/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-IMP-011",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T122635Z-91703/UX-IMP-011/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-IMP-012",
+          "status": "FAIL",
+          "message": "Copy report omitted the denied destination path",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T122635Z-91703/UX-IMP-012/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRV-007",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T122635Z-91703/UX-PRV-007/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-ADV-015",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T122635Z-91703/UX-ADV-015/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-CRP-005",
+          "status": "FAIL",
+          "message": "Extreme custom Crop frame cannot be manipulated along its long dimension",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T122635Z-91703/UX-CRP-005/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-015",
+          "status": "FAIL",
+          "message": "Timeout: preset document pixels ready",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T122635Z-91703/UX-PRS-015/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-KEY-012",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T122635Z-91703/UX-KEY-012/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-MAC-007",
+          "status": "FAIL",
+          "message": "Timeout: external B has exact saved-document current-source pixels",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T122635Z-91703/UX-MAC-007/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-MAC-008",
+          "status": "FAIL",
+          "message": "Timeout: destination loss retained exact current-document Develop pixels",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T122635Z-91703/UX-MAC-008/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-RACE-002",
+          "status": "FAIL",
+          "message": "RACE002 current visible filmstrip UUID/row/path/source/Ready/retry/metadata ownership is invalid",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T122635Z-91703/UX-RACE-002/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-RACE-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T122635Z-91703/UX-RACE-006/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-RACE-007",
+          "status": "FAIL",
+          "message": "RACE007 late OLD delivery changed current visible UUID/viewport geometry",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T122635Z-91703/UX-RACE-007/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-VIS-001",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T122635Z-91703/UX-VIS-001/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-VIS-003",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T122635Z-91703/UX-VIS-003/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        }
+      ]
+    },
+    {
+      "classification": "Diagnostic retest: import/crop pass, four real watcher-reset failures",
+      "path": "build-verify/ux-final-release-fixes-2/UX_REPORT.json",
+      "sha256": "f868e874a1cdc306507dd296000b4599499a05800980d6b21143114b7b018307",
+      "summary": {
+        "FAIL": 4,
+        "PASS": 2
+      },
+      "source_consistency": "PASS",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "1bcec07c9b525f0a44abd5f50d0df6d02b9d212e",
+        "worktree_dirty": true,
+        "source_tree_sha256": "804a7e74b56d5995f347750a6aa57a8b95216d4bd7a42b38187a11e9269cc9a3",
+        "test_executable_sha256": "80e7315c62c03be29a8b8e24e6c831400b8acd34dfa1165666e77af98a4bb83a",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "80e7315c62c03be29a8b8e24e6c831400b8acd34dfa1165666e77af98a4bb83a"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "1bcec07c9b525f0a44abd5f50d0df6d02b9d212e",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "UX-LIB-004",
+          "status": "FAIL",
+          "message": "Image-node readback completed without one valid image: LIB004 actual Image-node readback",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T123655Z-93858/UX-LIB-004/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-LIB-005",
+          "status": "FAIL",
+          "message": "LIB005 race reset/reopened/unloaded the asset or changed effective DPR",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T123655Z-93858/UX-LIB-005/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-IMP-012",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T123655Z-93858/UX-IMP-012/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-CRP-005",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T123655Z-93858/UX-CRP-005/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-RACE-002",
+          "status": "FAIL",
+          "message": "RACE002 editor/history/selection/filter/job state differs from exact expected state",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T123655Z-93858/UX-RACE-002/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-RACE-007",
+          "status": "FAIL",
+          "message": "RACE007 current Image rebound during actual ready-acknowledged readback",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T123655Z-93858/UX-RACE-007/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        }
+      ]
+    },
+    {
+      "classification": "All original sixteen failures: three repeats each, 48 PASS",
+      "path": "build-verify/ux-final-release-fixes-3/UX_REPORT.json",
+      "sha256": "da232d11370ec82c299f385a3ffe472b51e3ded73541fe0e46c45cf49c345d1e",
+      "summary": {
+        "PASS": 48
+      },
+      "source_consistency": "PASS",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "60e0f971fbcd859e074461b634160f6b1a215759",
+        "worktree_dirty": true,
+        "source_tree_sha256": "c07c5b02a0a3e48c13c2281a0677ac89336dcf2d6fc89139fd271a4361ea6b83",
+        "test_executable_sha256": "e66c2dddc5520cfb55bdba816b2197c7e5ddfcbbf1b93a0211a85f35c87f74e2",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "e66c2dddc5520cfb55bdba816b2197c7e5ddfcbbf1b93a0211a85f35c87f74e2"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "60e0f971fbcd859e074461b634160f6b1a215759",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "UX-LIB-004",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-LIB-004/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-LIB-004",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-LIB-004/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-LIB-004",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-LIB-004/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-LIB-005",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-LIB-005/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-LIB-005",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-LIB-005/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-LIB-005",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-LIB-005/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-IMP-011",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-IMP-011/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-IMP-011",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-IMP-011/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-IMP-011",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-IMP-011/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-IMP-012",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-IMP-012/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-IMP-012",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-IMP-012/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-IMP-012",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-IMP-012/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRV-007",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-PRV-007/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRV-007",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-PRV-007/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRV-007",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-PRV-007/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-ADV-015",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-ADV-015/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-ADV-015",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-ADV-015/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-ADV-015",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-ADV-015/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-CRP-005",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-CRP-005/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-CRP-005",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-CRP-005/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-CRP-005",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-CRP-005/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-015",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-PRS-015/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-015",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-PRS-015/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-PRS-015",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-PRS-015/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-KEY-012",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-KEY-012/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-KEY-012",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-KEY-012/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-KEY-012",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-KEY-012/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-MAC-007",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-MAC-007/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-MAC-007",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-MAC-007/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-MAC-007",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-MAC-007/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-MAC-008",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-MAC-008/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-MAC-008",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-MAC-008/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-MAC-008",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-MAC-008/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-RACE-002",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-RACE-002/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-RACE-002",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-RACE-002/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-RACE-002",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-RACE-002/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-RACE-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-RACE-006/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-RACE-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-RACE-006/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-RACE-006",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-RACE-006/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-RACE-007",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-RACE-007/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-RACE-007",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-RACE-007/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-RACE-007",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-RACE-007/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-VIS-001",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-VIS-001/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-VIS-001",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-VIS-001/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-VIS-001",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-VIS-001/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-VIS-003",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-VIS-003/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-VIS-003",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-VIS-003/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "UX-VIS-003",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130005Z-95893/UX-VIS-003/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        }
+      ]
+    },
+    {
+      "classification": "Cache identity corrected; independent aggregate invariant failure retained: 2 PASS, 1 FAIL",
+      "path": "build-verify/ux-final-card-flags/UX_REPORT.json",
+      "sha256": "52a62bf2d47547e0f15ee4a4358110b9ce096ff6b8c17a78e80eeb0297ad4bd8",
+      "summary": {
+        "PASS": 2,
+        "FAIL": 1
+      },
+      "source_consistency": "PASS",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "60e0f971fbcd859e074461b634160f6b1a215759",
+        "worktree_dirty": true,
+        "source_tree_sha256": "c07c5b02a0a3e48c13c2281a0677ac89336dcf2d6fc89139fd271a4361ea6b83",
+        "test_executable_sha256": "e66c2dddc5520cfb55bdba816b2197c7e5ddfcbbf1b93a0211a85f35c87f74e2",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "e66c2dddc5520cfb55bdba816b2197c7e5ddfcbbf1b93a0211a85f35c87f74e2"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "60e0f971fbcd859e074461b634160f6b1a215759",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130418Z-98442/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "FAIL",
+          "message": "Language/reveal mutated current full document/history/flags/selection/membership",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130418Z-98442/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261022T130418Z-98442/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        }
+      ]
+    },
+    {
+      "classification": "Failure-only diagnostics added: 10 PASS, aggregate invariant failure not reproduced",
+      "path": "build-verify/ux-final-card-flags-diagnostic/UX_REPORT.json",
+      "sha256": "dfdb268948c6bd59c40d79960c2aceb8772040854f25632a288612926c51796a",
+      "summary": {
+        "PASS": 10
+      },
+      "source_consistency": "PASS",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "60e0f971fbcd859e074461b634160f6b1a215759",
+        "worktree_dirty": true,
+        "source_tree_sha256": "30c0d7badbbbc47b46ad17bae0f2517a49dec2265982dc0154b14e3ec26f1f38",
+        "test_executable_sha256": "5b96712184ae5882049e1d9f19c56276efa1a68f229194b43d4d97b327a4533b",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "5b96712184ae5882049e1d9f19c56276efa1a68f229194b43d4d97b327a4533b"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "60e0f971fbcd859e074461b634160f6b1a215759",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072033Z-7834/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072033Z-7834/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072033Z-7834/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072033Z-7834/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-4",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072033Z-7834/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-5",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072033Z-7834/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-6",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072033Z-7834/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-7",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072033Z-7834/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-8",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072033Z-7834/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-9",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072033Z-7834/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-10",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        }
+      ]
+    },
+    {
+      "classification": "Further diagnostic run during clang-tidy: 20 PASS; not proof of fixing rare invariant failure",
+      "path": "build-verify/ux-final-card-flags-diagnostic-2/UX_REPORT.json",
+      "sha256": "f6bbc295be45ca3f445e6873f99bc6f2560d6ca964b3b90c055cf7d5f7c4a6b6",
+      "summary": {
+        "PASS": 20
+      },
+      "source_consistency": "PASS",
+      "hardware": {
+        "chip": "Apple M3",
+        "model": "Mac15,3",
+        "ram_bytes": "8589934592",
+        "macos": "27.0.1",
+        "qt": "6.10.3",
+        "commit": "60e0f971fbcd859e074461b634160f6b1a215759",
+        "worktree_dirty": true,
+        "source_tree_sha256": "30c0d7badbbbc47b46ad17bae0f2517a49dec2265982dc0154b14e3ec26f1f38",
+        "test_executable_sha256": "5b96712184ae5882049e1d9f19c56276efa1a68f229194b43d4d97b327a4533b",
+        "native_bundle_info": {
+          "status": "PASS",
+          "bundle_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app",
+          "info_plist_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/Info.plist",
+          "info_plist_sha256": "b810d7e2e286fa8ea73bad661b79ae4b141650543f374c5fc07e244be9066510",
+          "bundle_identifier": "app.luma.ux-tests",
+          "bundle_executable": "luma_ux_tests",
+          "bundle_name": "LumaUXTests",
+          "bundle_display_name": "LumaUXTests",
+          "package_type": "APPL",
+          "cli_path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests",
+          "canonical_executable": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/luma_ux_tests.app/Contents/MacOS/luma_ux_tests",
+          "executable_sha256": "5b96712184ae5882049e1d9f19c56276efa1a68f229194b43d4d97b327a4533b"
+        },
+        "source_snapshot_point": "suite_end",
+        "build_directory": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify",
+        "hosted_ci": true,
+        "performance_mode": "MEASURE_ONLY"
+      },
+      "build_provenance": {
+        "status": "PASS",
+        "path": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-build-provenance.json",
+        "source_commit": "60e0f971fbcd859e074461b634160f6b1a215759",
+        "reason": ""
+      },
+      "results": [
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-1",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-2",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-3",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-4",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-5",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-6",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-7",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-8",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-9",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-10",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-11",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-12",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-13",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-14",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-15",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-16",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-17",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-18",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-19",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        },
+        {
+          "id": "CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION",
+          "status": "PASS",
+          "message": "",
+          "platform": "offscreen",
+          "graphics_api": "software",
+          "warnings": [],
+          "artifacts": "/Users/semenkontsevoy/Documents/New project/Luma/build-verify/ux-artifacts/20261023T072157Z-8202/CANDIDATE-PHOTOCARD-FLAG-LOCALIZATION/repeat-20",
+          "original_integrity": "PASS",
+          "catalog_integrity": "PASS"
+        }
+      ]
+    }
+  ],
+  "changes": [
+    "Add mode without backup uses the existing source name; valid 255-byte existing names no longer pass through generated-destination validation. Copy/Move/backup validation unchanged.",
+    "Import descriptor errors retain errno and include the actual failed destination/source path.",
+    "Directory watchers asynchronously update cached Missing roles without modelReset. Actual remove/restore unit test preserves selection, UUID, edits and source hash.",
+    "Metal HSL avoids black/white cancellation. Combined Curve+HSL HDR pipelines explicitly fall back to CPU because their FP32 error still exceeds the original fixed limit. No numeric/pixel tolerance was relaxed.",
+    "Actual-pixels controls have localized accessible names. UX fixtures include the existing retouch cache identity, current import paths and all twelve preset groups.",
+    "Load cancellation observes the actual successful worker result in the UX executable only. Export checks use an actual held WAL transaction instead of a timing race. Crop grip input starts within its real hit area.",
+    "Passive model-reset and exact preview-difference evidence is retained by CI/release artifact uploads."
+  ],
+  "metal": {
+    "fixed_linear_limit": "absolute_error <= 2e-5 + 2e-5 * abs(CPU_reference)",
+    "fixed_rgba8_limit": 1,
+    "alpha_limit": 0,
+    "real_metal_cases_passed": 7,
+    "explicit_cpu_fallback_cases_passed": 2,
+    "limitations": "Bounded deterministic HDR/negative/dark/color/crop fixtures; combined curves/HSL is not qualified for Metal. CPU fallback may reduce speed. Full photographic and performance coverage remains open."
+  },
+  "local_evidence": [
+    {
+      "path": ".tools/final-release-publisher-policy.log",
+      "sha256": "3a8603a207e1414dfdfc0463ed8ecc964939678c5c070f73985e7ca54924cdd4"
+    },
+    {
+      "path": ".tools/final-release-appcast-policy.log",
+      "sha256": "481502d9369c6803a2ef52712d08d55b75aba392842802fef549fb905178ba2d"
+    },
+    {
+      "path": ".tools/final-release-policy-syntax.log",
+      "sha256": "123a573b05fef2084578df6e698777f4291955435b0304dd83123d6e5cd82663"
+    },
+    {
+      "path": ".tools/final-release-quality-unit.log",
+      "sha256": "07e3b4870257538a33787cd105de9d7162b6709bae06d34febedd029edeaecf3"
+    },
+    {
+      "path": ".tools/final-metal-isolation.log",
+      "sha256": "d1e3bf94229dc162ad6b3b4304e8054fedbb38b0829818b8caa9eab22adcc757"
+    },
+    {
+      "path": ".tools/final-metal-stable-hsl.log",
+      "sha256": "def5846fbf800f9c42a9a1e46f0920045083864b23402e434a7b86a09216ebd6"
+    },
+    {
+      "path": ".tools/final-metal-precision.log",
+      "sha256": "3129bfe972d8c465bbb6544c315ccc4a6c88d0228090a1e03ff81f2df72c2e63"
+    },
+    {
+      "path": ".tools/final-metal-stable-extremes.log",
+      "sha256": "def5846fbf800f9c42a9a1e46f0920045083864b23402e434a7b86a09216ebd6"
+    },
+    {
+      "path": ".tools/final-metal-stage.log",
+      "sha256": "18a80aef604f042b7a11bbd2b79c5be544496af7e36176649eefdc824f29d7da"
+    },
+    {
+      "path": ".tools/final-release-quality-unit-2.log",
+      "sha256": "b308dd2845fafb578ee5c335c1096b13da0c768f5589e4359dbee9b875aad9d0"
+    },
+    {
+      "path": "build-verify/final-quality-unit-2.xml",
+      "sha256": "d3e36437f5a692c8eccf2f86aa18a05cf6216932d8a8cd0622a6e59c995a05d8"
+    },
+    {
+      "path": ".tools/final-release-probe-isolation.json",
+      "sha256": "4b6ed7a1d57c4938810f99be4ea09c91bd3954e62bdb30b0cee78b5a27770fbd"
+    },
+    {
+      "path": ".tools/final-qml-shell-2.log",
+      "sha256": "b0782e7ee691ffab6e8842631b0a991fd2bea214324d1879d6a80aaf0ff1eb6a"
+    },
+    {
+      "path": "build-verify/final-qml-shell-2.xml",
+      "sha256": "0d09cd076c031512d368be691baff7c0a6660f09f143dd0b80911219ec2c1c0f"
+    },
+    {
+      "path": ".tools/final-release-fixes-tidy.log",
+      "sha256": "144a0f6a026bb4318b09d5e3954ebdda5aaedfb86249cd9ca8209d08e86971db"
+    },
+    {
+      "path": ".tools/final-release-fixes-tidy-remaining.log",
+      "sha256": "b1e1ea79ba78f75cf8f2b3f04b772d889e54a2c0b617f9c20467f2591e47f023"
+    },
+    {
+      "path": ".tools/final-release-fixes-format-2.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".tools/final-release-fixes-workflows.log",
+      "sha256": "edfb636e57f1e825e61bc897076c1442c5313cc7109bc7829a97bfa5f7c3bdb7"
+    },
+    {
+      "path": ".tools/final-release-library-scale-100k.log",
+      "sha256": "2ff9b0f70077f2ffead71e80e8c70643cc9bdcc92d0e8d0a142a8fe5c13ad403"
+    },
+    {
+      "path": ".tools/final-ci-1bcec07.log",
+      "sha256": "d3bce55fd4868dd234cafabf55cf5434d18a99f97d5d4c5cc4cddc1a5c88be98"
+    }
+  ],
+  "hosted_baseline": {
+    "commit": "1bcec07c9b525f0a44abd5f50d0df6d02b9d212e",
+    "run_url": "https://github.com/yakut-sekonts/Luma/actions/runs/39774239377",
+    "job_id": 119809054354,
+    "conclusion": "failure",
+    "passed_stages": [
+      "model conversion/numerical/source/photographic Denoise/Sky",
+      "app build",
+      "unit/integration",
+      "blocking UX: 195 PASS / 29 SKIPPED / 92 NOT_IMPLEMENTED result entries",
+      "selected-asset keyboard",
+      "grid/filmstrip scroll",
+      "keyboard workflow",
+      "localized preset dialogs",
+      "gradient handles"
+    ],
+    "failed_stage": "PhotoCard flag localization: 3/3 FAIL at obsolete thumbnail cache identity",
+    "later_stages": "Skipped, including thumbnail regressions and lint",
+    "artifact_id": 12427447214,
+    "artifact_sha256": "d6f810f9b051657592558a7cebb695f75c1a691b4788a54ce9b37e70267e81a7"
+  },
+  "remaining": [
+    "Rare aggregate PhotoCard invariant failure after locale/reveal is not explained by the 30 later passing diagnostic repetitions. Failure-only per-field evidence remains enabled.",
+    "Native retests, new 0.6–0.9 workflow UX, legacy gaps, full photographic/RAW boundaries, load/stress/recovery, 8/16 GB and external-display coverage, actual DMG install and Sparkle upgrade remain incomplete.",
+    "Developer ID/notarization removed from mandatory release requirements by the owner; this waives no other gate."
+  ]
+}

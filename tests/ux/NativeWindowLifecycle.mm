@@ -25,6 +25,34 @@ struct Counts {
     QJsonArray focusEvents;
 };
 } // namespace
+QJsonObject nativeActivationSnapshot(QQuickWindow &window) {
+    @autoreleasepool {
+        NSWindow *native = ownedWindow(window);
+        NSRunningApplication *own = NSRunningApplication.currentApplication;
+        NSRunningApplication *front = NSWorkspace.sharedWorkspace.frontmostApplication;
+        QJsonArray windows;
+        for (NSWindow *item in NSApp.windows)
+            windows.append(QJsonObject{{"title", QString::fromUtf8(item.title.UTF8String)},
+                                       {"visible", static_cast<bool>(item.visible)},
+                                       {"key", static_cast<bool>(item.keyWindow)},
+                                       {"miniaturized", static_cast<bool>(item.miniaturized)}});
+        return {{"application_active", static_cast<bool>(NSApp.active)},
+                {"application_hidden", static_cast<bool>(NSApp.hidden)},
+                {"finished_launching", static_cast<bool>(own.finishedLaunching)},
+                {"activation_policy", static_cast<int>(own.activationPolicy)},
+                {"frontmost_bundle", QString::fromUtf8(front.bundleIdentifier.UTF8String)},
+                {"frontmost_pid", static_cast<int>(front.processIdentifier)},
+                {"own_pid", static_cast<int>(own.processIdentifier)},
+                {"window_visible", static_cast<bool>(native.visible)},
+                {"window_key", static_cast<bool>(native.keyWindow)},
+                {"window_can_become_key", static_cast<bool>(native.canBecomeKeyWindow)},
+                {"window_miniaturized", static_cast<bool>(native.miniaturized)},
+                {"window_occlusion", static_cast<int>(native.occlusionState)},
+                {"qt_active", window.isActive()},
+                {"qt_visible", window.isVisible()},
+                {"owned_windows", windows}};
+    }
+}
 struct NativeWindowLifecycle::Impl {
     QQuickWindow &window;
     NSWindow *__weak original;

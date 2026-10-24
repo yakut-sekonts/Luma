@@ -1,6 +1,7 @@
 #pragma once
 #include "core/edits/EditDocument.h"
 #include <array>
+#include <span>
 #include <vector>
 
 namespace luma {
@@ -10,6 +11,15 @@ class ToneCurve {
   public:
     explicit ToneCurve(const PointCurve &curve = {});
     double value(double x) const;
+    std::span<const double> samples() const {
+        return samples_;
+    }
+    double startSlope() const {
+        return startSlope_;
+    }
+    double endSlope() const {
+        return endSlope_;
+    }
 
   private:
     std::vector<double> samples_;

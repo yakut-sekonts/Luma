@@ -6,6 +6,8 @@ void EditorController::applySettings(const luma::EditDocument &settings, std::ui
     if (!editable())
         return;
     try {
+        setRetouchMode(QStringLiteral("off"));
+        cancelAI();
         setLocalMode(false);
         closeTransformTool();
         setCropMode(false);
@@ -14,7 +16,7 @@ void EditorController::applySettings(const luma::EditDocument &settings, std::ui
         endEdit();
         if (next == history_.current())
             return;
-        history_.apply(next);
+        history_.apply(next, "Apply settings");
         editsChanged();
     } catch (const std::exception &failure) {
         advancedFailure(failure);
@@ -25,6 +27,8 @@ void EditorController::previewSettings(const luma::EditDocument &settings, std::
     if (!editable() || original_)
         return;
     try {
+        setRetouchMode(QStringLiteral("off"));
+        cancelAI();
         setLocalMode(false);
         closeTransformTool();
         setCropMode(false);
@@ -49,13 +53,15 @@ void EditorController::clearPreviewSettings() {
 }
 
 bool EditorController::canPrepareBatch() const {
-    return !transformAutoBusy_ && !busy_ && !exporting_ && !closing_ && !editingLocked_ &&
+    return !transformAutoBusy_ && !busy() && !exporting_ && !closing_ && !editingLocked_ &&
            deferredOpen_.isEmpty();
 }
 QString EditorController::photoID() const {
     return session_ ? QString::fromStdString(session_->asset.id) : QString();
 }
 void EditorController::prepareExternalEdits() {
+    cancelAI();
+    setRetouchMode(QStringLiteral("off"));
     setLocalMode(false);
     closeTransformTool();
     setCropMode(false);
@@ -68,7 +74,9 @@ void EditorController::finishExternalEdits(const std::optional<luma::EditDocumen
     if (edits && session_) {
         edits->validate();
         session_->asset.edits = *edits;
-        history_ = luma::EditHistory(*edits);
+        history_ = luma::EditHistory(*edits, "After batch change");
+        ++historyGeneration_;
+        historyError_.clear();
         render();
     }
     editingLocked_ = false;

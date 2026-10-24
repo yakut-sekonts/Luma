@@ -31,7 +31,7 @@ ColumnLayout {
         editDialog.copyMode = false
         nameField.text = create ? "" : selected.name
         folderField.text = create ? "" : selected.folder
-        editDialog.groups = create ? 255 : selected.groups
+        editDialog.groups = create ? 4095 : selected.groups
         capture.checked = create
         editDialog.open()
     }
@@ -132,7 +132,7 @@ ColumnLayout {
     RowLayout {
         Layout.fillWidth: true; spacing: 4
         Button { objectName: "preset.copy"; implicitWidth: 80; Layout.minimumWidth: 0; text: qsTranslate("Luma", "Copy…"); enabled: editor.hasPhoto && !editor.busy; Layout.fillWidth: true
-            onClicked: { panel.clearHoveredPreview(); editDialog.copyMode = true; editDialog.groups = 255; editDialog.open() }
+            onClicked: { panel.clearHoveredPreview(); editDialog.copyMode = true; editDialog.groups = 4095; editDialog.open() }
         }
         Button { objectName: "preset.paste"; implicitWidth: 80; Layout.minimumWidth: 0; text: qsTranslate("Luma", "Paste"); enabled: presets.hasCopiedSettings && editor.hasPhoto && !editor.busy; onClicked: presets.pasteSettings(); Layout.fillWidth: true }
     }
@@ -141,7 +141,7 @@ ColumnLayout {
         objectName: "presetEditor"
         property string presetId: ""
         property bool copyMode: false
-        property int groups: 255
+        property int groups: 4095
         parent: Overlay.overlay
         anchors.centerIn: parent
         width: 430; implicitWidth: 430; modal: true
@@ -161,7 +161,7 @@ ColumnLayout {
                 TextField { id: folderField; objectName: "presetFolder"; visible: !editDialog.copyMode; placeholderText: qsTranslate("Luma", "Folder (optional)"); maximumLength: 80; Layout.fillWidth: true }
                 Label { text: qsTranslate("Luma", "Settings groups"); color: "#d5d8de" }
                 Repeater {
-                    model: [qsTranslate("Luma", "Light"), qsTranslate("Luma", "Color"), qsTranslate("Luma", "Curve"), "HSL", qsTranslate("Luma", "Detail"), qsTranslate("Luma", "Crop"), qsTranslate("Luma", "Optics"), qsTranslate("Luma", "Geometry")]
+                    model: [qsTranslate("Luma", "Light"), qsTranslate("Luma", "Color"), qsTranslate("Luma", "Curve"), "HSL", qsTranslate("Luma", "Detail"), qsTranslate("Luma", "Crop"), qsTranslate("Luma", "Optics"), qsTranslate("Luma", "Geometry"), qsTranslate("Luma", "Presence"), qsTranslate("Luma", "Point Color"), qsTranslate("Luma", "Color Grading"), qsTranslate("Luma", "Effects")]
                     CheckBox {
                         required property string modelData
                         required property int index

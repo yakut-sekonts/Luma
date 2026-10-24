@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check real defined global renderer symbols; never launches either application."""
+"""Check defined renderer and observer symbols; never launches either application."""
 import argparse
 import hashlib
 import json
@@ -24,15 +24,34 @@ def inspect_binary(argument):
         text=True,
         timeout=10,
     )
+    all_defined = subprocess.run(
+        ["/usr/bin/nm", "-U", str(path)],
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=10,
+    )
     after = digest(path)
     if before != after:
         raise RuntimeError(f"Executable changed during symbol inspection: {path}")
     # nm -gU exposes only defined external symbols. Compare mangled names;
     # symbol addresses and linker layout may differ between the two binaries.
     names = sorted({line.split()[-1] for line in completed.stdout.splitlines() if line.split()})
+    # Inline C++ observers may have local definitions after linking. Include
+    # these when checking both presence in UX and absence from shipping; keep
+    # renderer signature equivalence restricted to the original global symbols.
+    defined = sorted({line.split()[-1] for line in all_defined.stdout.splitlines() if line.split()})
     original = [name for name in names if name.lstrip("_").startswith("ZN4luma9renderCPUE")]
     alternate = [name for name in names if "renderCPUWithUxRows" in name]
-    observers = [name for name in names if "CpuRowObserver" in name or "thumbnail_trace" in name]
+    observers = [name for name in defined if "CpuRowObserver" in name or "thumbnail_trace" in name
+                 or "LoadProbe" in name or "LoadResultGate" in name
+                 or "holdLoadSuccess" in name or "observeLoadSuccessDelivery" in name
+                 or "PreviewResult" in name or "PreviewOperation" in name
+                 or "deferPreviewSuccess" in name or "observePreview" in name
+                 or "MetalPreviewProbe" in name or "MergeJobProbe" in name
+                 or "RetouchResult" in name or "deferRetouchSuccess" in name
+                 or "observeRetouchDelivery" in name or "PersistenceGate" in name
+                 or "PersistenceState" in name or "observePersistenceCheckpoint" in name]
     if not original:
         raise RuntimeError(f"Original renderCPU definition is absent: {path}")
     return {
@@ -41,7 +60,9 @@ def inspect_binary(argument):
         "original_renderer_symbols": original,
         "alternate_renderer_symbols": alternate,
         "test_observer_symbols": observers,
+        "observer_symbol_scope": "all_defined_including_local",
         "nm_stderr": completed.stderr,
+        "observer_nm_stderr": all_defined.stderr,
     }
 
 
@@ -52,7 +73,7 @@ def main():
     args = parser.parse_args()
     result = {
         "schema": 1,
-        "scope": "Defined global symbols only; no signing, distribution or runtime qualification",
+        "scope": "Global renderer signatures and all defined observer symbols; no signing, distribution or runtime qualification",
     }
     try:
         shipping = inspect_binary(args.shipping)
@@ -62,6 +83,16 @@ def main():
             raise RuntimeError("Shipping and UX executables must be distinct files")
         if shipping["alternate_renderer_symbols"] or shipping["test_observer_symbols"]:
             raise RuntimeError("UX renderer or thumbnail observation symbols leaked into shipping")
+        if not any("deferPreviewSuccess" in name for name in ux["test_observer_symbols"]):
+            raise RuntimeError("UX actual preview dispatch probe is absent")
+        if not any("MetalPreviewProbe" in name for name in ux["test_observer_symbols"]):
+            raise RuntimeError("UX actual Metal observation probe is absent")
+        if not any("MergeJobProbe" in name for name in ux["test_observer_symbols"]):
+            raise RuntimeError("UX actual merge handle probe is absent")
+        if not any("deferRetouchSuccess" in name for name in ux["test_observer_symbols"]):
+            raise RuntimeError("UX actual retouch dispatch probe is absent")
+        if not any("observePersistenceCheckpoint" in name for name in ux["test_observer_symbols"]):
+            raise RuntimeError("UX actual filesystem persistence probe is absent")
         if not ux["alternate_renderer_symbols"]:
             raise RuntimeError("UX alternate renderer definition is absent")
         if shipping["original_renderer_symbols"] != ux["original_renderer_symbols"]:

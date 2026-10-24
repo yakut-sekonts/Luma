@@ -9,6 +9,7 @@ import tempfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "assets"))
 from generate_dng import create_dng
+from catalog_fixtures import remove_post_v11_features
 from develop import png_info, tiff_info
 
 cli = Path(sys.argv[1])
@@ -36,6 +37,7 @@ with tempfile.TemporaryDirectory(prefix="luma-transform-") as temporary:
         run("export", root / f"before.{extension}")
     with sqlite3.connect(catalog) as db:
         db.execute("PRAGMA foreign_keys=OFF")
+        remove_post_v11_features(db)
         columns = [row[1] for row in db.execute("PRAGMA table_info(edit_documents)") if not row[1].startswith("transform_")]
         selection = ",".join("7 AS schema_version" if name == "schema_version" else
                              "enabled & 65535 AS enabled" if name == "enabled" else name for name in columns)
@@ -50,7 +52,7 @@ with tempfile.TemporaryDirectory(prefix="luma-transform-") as temporary:
         children = [db.execute(f"SELECT * FROM {table}").fetchall() for table in ("edit_curve_points", "edit_hsl_bands")]
     assert run("restore") == before, "Neutral Transform migration changed prior settings"
     with sqlite3.connect(catalog) as db:
-        assert db.execute("PRAGMA user_version").fetchone()[0] == 11
+        assert db.execute("PRAGMA user_version").fetchone()[0] == 21
         assert db.execute("SELECT schema_version,transform_rotate,transform_scale,transform_constrain_crop,transform_guided FROM edit_documents").fetchone() == (8, 0, 100, 1, 0)
         assert db.execute("SELECT revision,updated_at FROM edit_documents").fetchone() == durable
         assert db.execute("SELECT rating FROM assets").fetchone()[0] == 4
@@ -109,6 +111,7 @@ with tempfile.TemporaryDirectory(prefix="luma-transform-") as temporary:
             db.execute(f"UPDATE edit_documents SET {column}=?", (old,))
     with sqlite3.connect(catalog) as db:
         db.execute("PRAGMA foreign_keys=OFF")
+        remove_post_v11_features(db)
         selection = ",".join("7 AS schema_version" if name == "schema_version" else "9.0 AS exposure" if name == "exposure" else
                              "enabled & 65535 AS enabled" if name == "enabled" else name for name in columns)
         db.execute("CREATE TABLE bad_edits AS SELECT " + selection + " FROM edit_documents")

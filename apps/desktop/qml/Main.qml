@@ -22,8 +22,10 @@ ApplicationWindow {
     palette.highlight: "#dfae77"
     palette.button: "#252a32"
     font.family: "Helvetica Neue"
-    onLibraryModeChanged: {if(libraryMode) { editor.localMode=false; editor.cropMode=false }}
+    onLibraryModeChanged: {if(libraryMode) { editor.cancelWhiteBalance(); editor.cancelCreative(); editor.cancelAI(); editor.retouchMode="off"; editor.localMode=false; editor.cropMode=false }}
     property bool libraryMode: true
+    VersionsDialog { id: processingVersions }
+    HistoryDialog { id: processingHistory }
     function ensureActiveFocusVisible(scroll) {
         const item = root.activeFocusItem
         const view = scroll ? scroll.contentItem : null
@@ -50,6 +52,7 @@ ApplicationWindow {
         ensureActiveFocusVisible(adjustmentsScroll)
         ensureActiveFocusVisible(exportSettings.contentItem)
         ensureActiveFocusVisible(presetSettings.editorScrollView)
+        ensureActiveFocusVisible(processingHistory.editorScrollView)
     }
     onActiveFocusItemChanged: Qt.callLater(root.revealActiveFocus)
     Connections {
@@ -95,9 +98,10 @@ ApplicationWindow {
     Connections { target: editor; function onPhotoLoaded(id) { root.libraryMode = false } }
     Connections { target: editor; function onCloseReady() { root.close() } }
     Shortcut { enabled: !updates.restartPending && !batch.working; sequences: [StandardKey.Open]; onActivated: fileDialog.open() }
-    Shortcut { sequences: [StandardKey.Undo]; enabled: !editor.busy && !updates.restartPending && !batch.working && (root.libraryMode ? batch.canUndo : editor.canUndo || batch.canUndo); onActivated: root.libraryMode || !editor.canUndo ? batch.undo() : editor.undo() }
-    Shortcut { sequences: [StandardKey.Redo]; enabled: !editor.busy && !updates.restartPending && !batch.working && (root.libraryMode ? batch.canRedo : editor.canRedo || batch.canRedo); onActivated: root.libraryMode || !editor.canRedo ? batch.redo() : editor.redo() }
+    Shortcut { sequences: [StandardKey.Undo]; enabled: !editor.busy && !updates.restartPending && !batch.working && (processingHistory.visible ? editor.canUndo : root.libraryMode ? batch.canUndo : editor.canUndo || batch.canUndo); onActivated: !processingHistory.visible && (root.libraryMode || !editor.canUndo) ? batch.undo() : editor.undo() }
+    Shortcut { sequences: [StandardKey.Redo]; enabled: !editor.busy && !updates.restartPending && !batch.working && (processingHistory.visible ? editor.canRedo : root.libraryMode ? batch.canRedo : editor.canRedo || batch.canRedo); onActivated: !processingHistory.visible && (root.libraryMode || !editor.canRedo) ? batch.redo() : editor.redo() }
     Shortcut { enabled: !updates.restartPending; context: Qt.ApplicationShortcut; sequences: [StandardKey.Quit]; onActivated: root.close() }
+    Shortcut { enabled: editor.aiBusy || editor.aiObjectPicking || editor.retouchBusy || editor.retouchState.drawing || editor.whiteBalanceBusy || editor.whiteBalancePicking || editor.creativeBusy || editor.pointColorPicking; sequence: "Escape"; onActivated: { editor.cancelAI(); editor.cancelRetouch(); editor.cancelWhiteBalance(); editor.cancelCreative() } }
     Shortcut { enabled: editor.hasPhoto && !editor.busy && !updates.restartPending && !batch.working; sequence: "\\"; onActivated: editor.original = !editor.original }
     Shortcut { enabled: !updates.restartPending && !batch.working; sequence: "Ctrl+Shift+F"; onActivated: root.visibility = root.visibility === Window.FullScreen ? Window.Windowed : Window.FullScreen }
     Shortcut {
@@ -218,6 +222,20 @@ ApplicationWindow {
                         Label { objectName: "develop.sourceFilename"; text: editor.hasPhoto ? editor.filename : qsTranslate("Luma", "No photo selected"); color: "#d5d8de"; font.pixelSize: 12; wrapMode: Text.Wrap; Layout.fillWidth: true }
                         Label { text: editor.dimensions; color: "#777f8b"; font.pixelSize: 11 }
                         Label { text: qsTranslate("Luma", "Original unchanged"); color: "#858c97"; font.pixelSize: 10; visible: editor.hasPhoto }
+                        Button {
+                            objectName: "develop.history"
+                            text: qsTranslate("Luma", "History")
+                            enabled: editor.hasPhoto && !editor.busy && !batch.working && !exporter.working && !updates.restartPending
+                            Layout.fillWidth: true
+                            onClicked: processingHistory.open()
+                        }
+                        Button {
+                            objectName: "develop.versions"
+                            text: qsTranslate("Luma", "Processing versions")
+                            enabled: editor.hasPhoto && !editor.busy && !batch.working && !exporter.working && !updates.restartPending
+                            Layout.fillWidth: true
+                            onClicked: processingVersions.open()
+                        }
                         PresetPanel { id: presetSettings; Layout.fillWidth: true; Layout.fillHeight: true }
                         Label { text: qsTranslate("Luma", "CATALOG"); color: "#777f8b"; font.pixelSize: 9; font.letterSpacing: 1 }
                         Label { text: editor.catalogPath; color: "#777f8b"; font.pixelSize: 10; wrapMode: Text.WrapAnywhere; Layout.fillWidth: true }
@@ -232,17 +250,117 @@ ApplicationWindow {
                     anchors.fill: parent; anchors.margins: 24; spacing: 18
                     RowLayout {
                         Layout.fillWidth: true
-                        Label { text: editor.detailDiagnostic.length ? qsTranslate("Luma", editor.detailDiagnostic) : editor.original ? qsTranslate("Luma", "ORIGINAL PHOTO") : editor.presetPreview ? qsTranslate("Luma", "PRESET PREVIEW") : qsTranslate("Luma", "PREVIEW"); color: "#777f8b"; font.pixelSize: 9; font.letterSpacing: 2 }
-                        Item { Layout.fillWidth: true }
-                        Label { text: qsTranslate("Luma", "FIT"); color: "#777f8b"; font.pixelSize: 10 }
+                        Label { Layout.fillWidth: true; Layout.minimumWidth: 0; elide: Text.ElideRight; text: editor.detailDiagnostic.length ? qsTranslate("Luma", editor.detailDiagnostic) : editor.original ? qsTranslate("Luma", "ORIGINAL PHOTO") : editor.presetPreview ? qsTranslate("Luma", "PRESET PREVIEW") : qsTranslate("Luma", "PREVIEW"); color: "#777f8b"; font.pixelSize: 9; font.letterSpacing: 2 }
+                        Button {
+                            objectName: "develop.fit"
+                            text: qsTranslate("Luma", "FIT")
+                            checkable: true; checked: editor.zoomMode === "fit"
+                            enabled: editor.hasPhoto && !editor.busy
+                            onClicked: editor.zoomMode = "fit"
+                        }
+                        Button {
+                            objectName: "develop.fill"
+                            text: qsTranslate("Luma", "FILL")
+                            checkable: true; checked: editor.zoomMode === "fill"
+                            enabled: editor.zoomAvailable
+                            onClicked: editor.zoomMode = "fill"
+                        }
+                        TextField {
+                            id: zoomPercent
+                            objectName: "develop.zoomPercent"
+                            Layout.preferredWidth: 64; Layout.minimumWidth: 64
+                            enabled: editor.zoomAvailable
+                            horizontalAlignment: Text.AlignRight
+                            Accessible.name: qsTranslate("Luma", "Zoom") + " %"
+                            property bool modified: false
+                            validator: DoubleValidator { bottom: editor.minimumZoomFactor * 100; top: editor.maximumZoomFactor * 100; decimals: 2; notation: DoubleValidator.StandardNotation; locale: "C" }
+                            Binding {
+                                target: zoomPercent; property: "text"
+                                value: Number((previewViewport.effectiveZoom * 100).toFixed(2)).toString()
+                                when: !zoomPercent.activeFocus
+                            }
+                            function commitZoom() {
+                                if (modified && acceptableInput) previewViewport.requestScale(Number(text) / 100)
+                                modified = false
+                            }
+                            onTextEdited: modified = true
+                            onAccepted: { commitZoom(); previewViewport.forceActiveFocus() }
+                            onEditingFinished: commitZoom()
+                            Keys.onEscapePressed: { modified = false; previewViewport.forceActiveFocus() }
+                        }
+                        Label { text: "%" }
+                        Button {
+                            objectName: "develop.actualPixels"
+                            text: "100%"
+                            Accessible.name: qsTranslate("Luma", "Zoom") + " 100%"
+                            checkable: true; checked: editor.oneToOne
+                            enabled: editor.zoomAvailable
+                            onClicked: editor.oneToOne = true
+                        }
                     }
                     Item {
                         Layout.fillWidth: true; Layout.fillHeight: true
                         Layout.minimumWidth: 84; Layout.minimumHeight: 84
+                        PhotoViewport {
+                            id: previewViewport
+                            objectName: "develop.viewport"
+                            controller: editor
+                            anchors.fill: parent
                         Image {
                             id: previewImage
                             objectName: "develop.preview"
-                            anchors.fill: parent; source: editor.previewUrl; fillMode: Image.PreserveAspectFit; cache: false; visible: editor.hasPhoto && !editor.busy
+                            width: previewViewport.imageItemWidth
+                            height: previewViewport.imageItemHeight
+                            x: (previewViewport.contentWidth - width) / 2
+                            y: (previewViewport.contentHeight - height) / 2
+                            source: editor.previewUrl; fillMode: Image.PreserveAspectFit; cache: false; visible: editor.hasPhoto && !editor.busy
+                            horizontalAlignment: Image.AlignHCenter
+                            verticalAlignment: Image.AlignVCenter
+                            MouseArea {
+                                anchors.fill: parent
+                                enabled: editor.aiObjectPicking && !editor.busy
+                                z: 1
+                                cursorShape: Qt.CrossCursor
+                                onClicked: function(mouse) {
+                                    const left = (width - previewImage.paintedWidth) / 2
+                                    const top = (height - previewImage.paintedHeight) / 2
+                                    if (previewImage.paintedWidth > 0 && previewImage.paintedHeight > 0 &&
+                                        mouse.x >= left && mouse.x <= left + previewImage.paintedWidth &&
+                                        mouse.y >= top && mouse.y <= top + previewImage.paintedHeight)
+                                        editor.generateAIMask("object", (mouse.x - left) / previewImage.paintedWidth,
+                                                              (mouse.y - top) / previewImage.paintedHeight)
+                                }
+                            }
+                            MouseArea {
+                                objectName: "develop.whiteBalance.sampleArea"
+                                anchors.fill: parent
+                                enabled: editor.whiteBalancePicking && editor.hasPhoto && !editor.busy
+                                z: 2
+                                cursorShape: editor.whiteBalanceCanvasReady ? Qt.CrossCursor : Qt.WaitCursor
+                                onClicked: function(mouse) {
+                                    if (!editor.whiteBalanceCanvasReady || previewImage.status !== Image.Ready) return
+                                    const left = (width - previewImage.paintedWidth) / 2
+                                    const top = (height - previewImage.paintedHeight) / 2
+                                    if (previewImage.paintedWidth > 0 && previewImage.paintedHeight > 0 &&
+                                        mouse.x >= left && mouse.x <= left + previewImage.paintedWidth &&
+                                        mouse.y >= top && mouse.y <= top + previewImage.paintedHeight)
+                                        editor.sampleWhiteBalance((mouse.x - left) / previewImage.paintedWidth,
+                                                                  (mouse.y - top) / previewImage.paintedHeight)
+                                }
+                            }
+                            MouseArea {
+                                objectName: "develop.pointColor.sampleArea"
+                                anchors.fill: parent; z: 3
+                                enabled: editor.pointColorPicking && editor.hasPhoto && !editor.busy
+                                cursorShape: editor.pointColorCanvasReady ? Qt.CrossCursor : Qt.WaitCursor
+                                onClicked: function(mouse) {
+                                    if (!editor.pointColorCanvasReady || previewImage.status !== Image.Ready) return
+                                    const left=(width-previewImage.paintedWidth)/2, top=(height-previewImage.paintedHeight)/2
+                                    if(previewImage.paintedWidth>0 && previewImage.paintedHeight>0 && mouse.x>=left && mouse.y>=top &&
+                                       mouse.x<=left+previewImage.paintedWidth && mouse.y<=top+previewImage.paintedHeight)
+                                        editor.samplePointColor((mouse.x-left)/previewImage.paintedWidth,(mouse.y-top)/previewImage.paintedHeight)
+                                }
+                            }
                             MouseArea {
                                 objectName: "develop.targetedArea"
                                 anchors.fill: parent
@@ -260,22 +378,36 @@ ApplicationWindow {
                                 onCanceled: { adjusting=false;editor.endTargeted() }
                             }
                         }
+                        RetouchOverlay {
+                            x: (previewImage.width-previewImage.paintedWidth)/2
+                            y: (previewImage.height-previewImage.paintedHeight)/2
+                            // These tools currently operate in Fit. Do not allocate
+                            // hidden Canvas backing images at magnified dimensions.
+                            width: previewViewport.pixelMode ? 0 : previewImage.paintedWidth
+                            height: previewViewport.pixelMode ? 0 : previewImage.paintedHeight
+                        }
                         LocalOverlay {
-                            photoWidth: previewImage.paintedWidth
-                            photoHeight: previewImage.paintedHeight
+                            photoWidth: editor.localMode || !previewViewport.pixelMode ? previewImage.paintedWidth : 0
+                            photoHeight: editor.localMode || !previewViewport.pixelMode ? previewImage.paintedHeight : 0
                             width: Math.max(84, photoWidth); height: Math.max(84, photoHeight)
-                            x: (previewImage.width-width)/2
-                            y: (previewImage.height-height)/2
+                            x: previewImage.x + (previewImage.width-width)/2
+                            y: previewImage.y + (previewImage.height-height)/2
+                            paintBounds: previewViewport.visibleBounds(x,y,width,height)
                         }
                         TransformOverlay {
-                            x: (previewImage.width-previewImage.paintedWidth)/2
-                            y: (previewImage.height-previewImage.paintedHeight)/2
-                            width: previewImage.paintedWidth; height: previewImage.paintedHeight
+                            x: previewImage.x + (previewImage.width-previewImage.paintedWidth)/2
+                            y: previewImage.y + (previewImage.height-previewImage.paintedHeight)/2
+                            width: editor.guidedMode || !previewViewport.pixelMode ? previewImage.paintedWidth : 0
+                            height: editor.guidedMode || !previewViewport.pixelMode ? previewImage.paintedHeight : 0
+                            paintBounds: previewViewport.visibleBounds(x,y,width,height)
                         }
                         CropOverlay {
-                            x: (previewImage.width-previewImage.paintedWidth)/2
-                            y: (previewImage.height-previewImage.paintedHeight)/2
-                            width: previewImage.paintedWidth; height: previewImage.paintedHeight
+                            x: previewImage.x + (previewImage.width-previewImage.paintedWidth)/2
+                            y: previewImage.y + (previewImage.height-previewImage.paintedHeight)/2
+                            width: editor.cropMode || !previewViewport.pixelMode ? previewImage.paintedWidth : 0
+                            height: editor.cropMode || !previewViewport.pixelMode ? previewImage.paintedHeight : 0
+                            paintBounds: previewViewport.visibleBounds(x,y,width,height)
+                        }
                         }
                         ColumnLayout {
                             anchors.centerIn: parent; spacing: 18; visible: !editor.hasPhoto && !editor.busy
@@ -298,6 +430,13 @@ ApplicationWindow {
                         Button { objectName: "develop.processedButton"; text: qsTranslate("Luma", "Develop"); checkable: true; checked: !editor.original; enabled: editor.hasPhoto && !editor.busy; onClicked: editor.original = false }
                         Button { objectName: "develop.originalButton"; text: qsTranslate("Luma", "Original"); checkable: true; checked: editor.original; enabled: editor.hasPhoto && !editor.busy; onClicked: editor.original = true }
                     }
+                    Label {
+                        visible: editor.whiteBalancePicking
+                        text: qsTranslate("Luma", "Click a neutral gray area. Escape cancels the eyedropper.")
+                        color: "#dfae77"; font.pixelSize: 11
+                        wrapMode: Text.Wrap; horizontalAlignment: Text.AlignHCenter
+                        Layout.fillWidth: true
+                    }
                     Label { visible:editor.targetedTool!=="none";text:qsTranslate("Luma", "Click a tone or color and drag up / down");color:"#dfae77";font.pixelSize:11;Layout.alignment:Qt.AlignHCenter }
                 }
             }
@@ -315,7 +454,9 @@ ApplicationWindow {
                     ColumnLayout {
                         width: adjustmentsScroll.availableWidth
                         spacing: 14
+                        HistogramPanel { Layout.fillWidth: true; Layout.minimumWidth: 0; Layout.maximumWidth: adjustmentsScroll.availableWidth }
                         LocalPanel { Layout.fillWidth: true }
+                        CreativePanel { Layout.fillWidth: true }
                         Label { text: qsTranslate("Luma", "Adjustments"); font.pixelSize: 17; font.weight: Font.DemiBold; color: "#e5e7ec" }
                         RowLayout {
                             CheckBox { objectName: "develop.whiteBalance.enabled"; Accessible.name: qsTranslate("Luma", "Enable white balance"); checked: editor.correctionStates.whiteBalance; enabled: editor.hasPhoto && !editor.busy; onToggled: editor.setCorrectionEnabled("whiteBalance",checked); padding: 0 }
@@ -329,6 +470,45 @@ ApplicationWindow {
                             currentIndex: editor.customWhiteBalance ? 6 : 0
                             enabled: editor.hasPhoto && !editor.busy && editor.correctionStates.whiteBalance
                             onActivated: editor.setWhiteBalancePreset(model[currentIndex].value)
+                        }
+                        RowLayout {
+                            Layout.fillWidth: true
+                            Button {
+                                objectName: "develop.whiteBalance.auto"
+                                text: qsTranslate("Luma", "Auto")
+                                Accessible.name: qsTranslate("Luma", "Auto white balance")
+                                Layout.fillWidth: true
+                                enabled: editor.hasPhoto && !editor.busy && !editor.original &&
+                                         !editor.exporting && !editor.whiteBalanceBusy && editor.correctionStates.whiteBalance
+                                onClicked: editor.autoWhiteBalance()
+                                ToolTip.visible: hovered
+                                ToolTip.text: qsTranslate("Luma", "Estimates white balance from the visible crop. Strongly colored scenes may need manual adjustment.")
+                            }
+                            Button {
+                                objectName: "develop.whiteBalance.eyedropper"
+                                text: qsTranslate("Luma", "Eyedropper")
+                                Accessible.name: qsTranslate("Luma", "White balance eyedropper")
+                                Layout.fillWidth: true
+                                checkable: true; checked: editor.whiteBalancePicking
+                                enabled: editor.hasPhoto && !editor.busy && !editor.original &&
+                                         !editor.exporting && !editor.whiteBalanceBusy && editor.correctionStates.whiteBalance
+                                onClicked: editor.whiteBalancePicking = !editor.whiteBalancePicking
+                            }
+                        }
+                        RowLayout {
+                            visible: editor.whiteBalanceBusy || editor.whiteBalancePicking
+                            Layout.fillWidth: true
+                            BusyIndicator { running: editor.whiteBalanceBusy; visible: running; implicitWidth: 22; implicitHeight: 22 }
+                            Label {
+                                text: editor.whiteBalanceBusy ? qsTranslate("Luma", "Estimating white balance…") : qsTranslate("Luma", "Select a neutral area")
+                                Layout.fillWidth: true; wrapMode: Text.Wrap; font.pixelSize: 11; color: "#858c97"
+                            }
+                            Button { text: qsTranslate("Luma", "Cancel"); onClicked: editor.cancelWhiteBalance() }
+                        }
+                        Label {
+                            objectName: "develop.whiteBalance.message"
+                            visible: text.length > 0; text: editor.whiteBalanceMessage
+                            Layout.fillWidth: true; wrapMode: Text.Wrap; font.pixelSize: 11; color: "#dfae77"
                         }
                         DevelopSlider { parameter: "temperature"; label: qsTranslate("Luma", "Temperature"); minimum: 2000; maximum: 25000; step: 50; defaultValue: 6500; suffix: " K"; correction: "whiteBalance"; allowDisable: false; Layout.fillWidth: true }
                         DevelopSlider { parameter: "tint"; label: qsTranslate("Luma", "Tint"); minimum: -150; maximum: 150; correction: "whiteBalance"; allowDisable: false; Layout.fillWidth: true }
@@ -354,15 +534,16 @@ ApplicationWindow {
                         TransformPanel { Layout.fillWidth: true; Layout.minimumWidth:0; Layout.maximumWidth:adjustmentsScroll.availableWidth }
                         LensPanel { Layout.fillWidth: true; Layout.minimumWidth:0; Layout.maximumWidth:adjustmentsScroll.availableWidth }
                         DetailPanel { Layout.fillWidth:true; Layout.minimumWidth:0; Layout.maximumWidth:adjustmentsScroll.availableWidth }
+                        RetouchPanel { Layout.fillWidth:true; Layout.minimumWidth:0; Layout.maximumWidth:adjustmentsScroll.availableWidth }
                         Button { objectName: "develop.resetButton"; text: qsTranslate("Luma", "Reset all edits"); enabled: editor.hasPhoto && !editor.busy; onClicked: editor.resetEdits(); Layout.fillWidth: true }
                         Rectangle { Layout.fillWidth: true; implicitHeight: 1; color: "#30343b" }
                         Label { text: qsTranslate("Luma", "CAPTURE DATA"); color: "#858c97"; font.pixelSize: 9; font.letterSpacing: 1.5 }
-                        MetadataRow { label: qsTranslate("Luma", "Camera"); value: editor.camera; Layout.fillWidth: true }
-                        MetadataRow { label: qsTranslate("Luma", "Lens"); value: { const language = Qt.uiLanguage; return editor.lens } Layout.fillWidth: true }
-                        MetadataRow { label: "ISO"; value: editor.iso; Layout.fillWidth: true }
-                        MetadataRow { label: qsTranslate("Luma", "Shutter speed"); value: editor.shutter; Layout.fillWidth: true }
-                        MetadataRow { label: qsTranslate("Luma", "Aperture"); value: editor.aperture; Layout.fillWidth: true }
-                        MetadataRow { label: qsTranslate("Luma", "Focal length"); value: editor.focalLength; Layout.fillWidth: true }
+                        MetadataRow { objectName: "develop.metadata.camera"; label: qsTranslate("Luma", "Camera"); value: editor.camera; Layout.fillWidth: true }
+                        MetadataRow { objectName: "develop.metadata.lens"; label: qsTranslate("Luma", "Lens"); value: { const language = Qt.uiLanguage; return editor.lens } Layout.fillWidth: true }
+                        MetadataRow { objectName: "develop.metadata.iso"; label: "ISO"; value: editor.iso; Layout.fillWidth: true }
+                        MetadataRow { objectName: "develop.metadata.shutter"; label: qsTranslate("Luma", "Shutter speed"); value: editor.shutter; Layout.fillWidth: true }
+                        MetadataRow { objectName: "develop.metadata.aperture"; label: qsTranslate("Luma", "Aperture"); value: editor.aperture; Layout.fillWidth: true }
+                        MetadataRow { objectName: "develop.metadata.focalLength"; label: qsTranslate("Luma", "Focal length"); value: editor.focalLength; Layout.fillWidth: true }
                         Label { text: editor.saving ? qsTranslate("Luma", "Saving changes…") : qsTranslate("Luma", "Changes are saved automatically"); color: "#858c97"; font.pixelSize: 10; wrapMode: Text.Wrap; Layout.fillWidth: true }
                     }
                 }
@@ -374,6 +555,17 @@ ApplicationWindow {
             visible: !root.libraryMode && (library.count > 0 || (library.loading && editor.hasPhoto))
             Layout.fillWidth: true; Layout.preferredHeight: visible ? 112 : 0
             orientation: ListView.Horizontal; clip: true; spacing: 6; model: library; cacheBuffer: 300
+            function moveCurrentPhoto(direction, event) {
+                event.accepted = event.modifiers === Qt.NoModifier
+                if (!event.accepted) return
+                if (direction > 0) incrementCurrentIndex()
+                else decrementCurrentIndex()
+                // Mouse clicks retain their viewport. Keyboard navigation must
+                // explicitly reveal its item even after that positioning.
+                if (currentIndex >= 0) positionViewAtIndex(currentIndex, ListView.Contain)
+            }
+            Keys.onRightPressed: function(event) { moveCurrentPhoto(1, event) }
+            Keys.onLeftPressed: function(event) { moveCurrentPhoto(-1, event) }
             delegate: PhotoCard { width: 128; height: 104; compact: true }
             ScrollBar.horizontal: ScrollBar { objectName: "develop.filmstripBar" }
         }

@@ -38,9 +38,9 @@ with tempfile.TemporaryDirectory(prefix="luma-complete-masks-") as temporary:
                "--test-screenshot", str(root / "masks.png")])
     check_screenshots(root)
     with sqlite3.connect(root / "catalog.sqlite") as database:
-        assert database.execute("PRAGMA user_version").fetchone() == (11,)
+        assert database.execute("PRAGMA user_version").fetchone() == (21,)
         before = database.execute("SELECT document FROM edit_local_masks").fetchone()[0]
-        assert before.startswith("LUMA_LOCAL_MASKS 2 2\n") and "\nS 1 " in before
+        assert before.startswith("LUMA_LOCAL_MASKS 3 2\n") and "\nS 1 " in before
     run(root, ["--test-restore", ".35", "--test-export", str(root / "second.png")])
     assert (root / "first.png").read_bytes() == (root / "second.png").read_bytes()
     with sqlite3.connect(root / "catalog.sqlite") as database:
