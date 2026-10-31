@@ -69,7 +69,7 @@ target_link_libraries(luma_macos PRIVATE "-framework Vision" "-framework CoreVid
 set_source_files_properties(platform/macos/MetalDevelop.mm PROPERTIES COMPILE_OPTIONS "-fobjc-arc")
 target_link_libraries(luma_macos PRIVATE luma_core "-framework Metal")
 target_include_directories(luma_macos PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
-target_link_libraries(luma_macos PRIVATE luma_lcms "-framework AppKit" "-framework ColorSync" "-framework ImageIO" "-framework CoreText" "-framework UniformTypeIdentifiers")
+target_link_libraries(luma_macos PRIVATE luma_lcms "-framework AppKit" "-framework ColorSync" "-framework CoreImage" "-framework ImageIO" "-framework CoreText" "-framework UniformTypeIdentifiers")
 target_compile_options(luma_macos PRIVATE -Wall -Wextra -Wpedantic -Werror)
 
 add_library(luma_services STATIC apps/shared/DerivedImage.cpp apps/shared/MergeService.cpp apps/shared/BackupService.cpp apps/shared/MetadataService.cpp apps/shared/RelinkService.cpp apps/shared/PhotoDecoder.cpp apps/shared/SessionService.cpp apps/shared/LibraryService.cpp)
