@@ -57,17 +57,30 @@ QVariantList PresetController::quickStack() const {
     QVariantList result;
     for (const auto &layer : editor_.currentSettings().creative.quickLooks) {
         const auto custom = layer.recipe.empty();
+        const auto generated = !layer.provider.empty();
         const auto *recipe = custom ? nullptr : &luma::quickLookRecipe(layer.recipe);
+        QString provenance;
+        if (generated) {
+            provenance = QString::fromStdString(layer.provider) + " · " +
+                         QString::fromStdString(layer.providerVersion);
+            if (!layer.model.empty())
+                provenance += " · " + QString::fromStdString(layer.model) + " · sha256:" +
+                              QString::fromStdString(layer.modelDigest.substr(0, 12));
+            else if (layer.deterministicFallback)
+                provenance += QStringLiteral(" · deterministic CPU · no model");
+        }
         result.append(QVariantMap{
             {"id", QString::fromStdString(layer.id)},
             {"recipe", QString::fromStdString(layer.recipe)},
             {"name", custom ? QString::fromStdString(layer.name) : QString::fromUtf8(recipe->name)},
-            {"category",
-             custom ? QStringLiteral("Match Look") : QString::fromUtf8(recipe->category)},
+            {"category", generated ? QStringLiteral("AI Enhance")
+                         : custom  ? QStringLiteral("Match Look")
+                                   : QString::fromUtf8(recipe->category)},
             {"amount", layer.amount},
             {"enabled", layer.enabled},
             {"adaptive", !layer.mask.empty()},
-            {"custom", custom}});
+            {"custom", custom},
+            {"provenance", provenance}});
     }
     return result;
 }

@@ -72,6 +72,12 @@ void settings() {
     require(options.dimensions(22, 32) == std::pair{22, 32},
             "DNG minimum reader boundary is wrong.");
     options = {};
+    options.format = luma::ExportFormat::heicHDR;
+    require(options.advanced() && options.extension() == ".heic",
+            "Adaptive HDR does not use its explicit HEIC export path.");
+    options.colorSpace = luma::ExportColorSpace::displayP3;
+    rejects([&] { options.validate(); });
+    options = {};
     options.watermark.kind = luma::WatermarkKind::text;
     rejects([&] { options.validate(); });
     options.watermark.text = "Luma";
@@ -239,6 +245,13 @@ void dng() {
                     raw->imgdata.color.maximum == 65535,
                 "DNG samples/depth/geometry are incorrect.");
         const auto decoded = luma::RawDecoder().decode(path);
+        require(decoded.diagnostics.decoder == "LibRaw" &&
+                    !decoded.diagnostics.decoderVersion.empty() &&
+                    decoded.diagnostics.source == luma::DecodeSource::renderedLinearDNG &&
+                    decoded.diagnostics.reconstruction == luma::DecodeReconstruction::none &&
+                    decoded.diagnostics.color == luma::DecodeColorPath::dngProfileToLinearSRGB &&
+                    decoded.diagnostics.activeWidth == 64 && decoded.diagnostics.activeHeight == 48,
+                "Rendered DNG decoder diagnostics are incomplete or incorrect.");
         const auto inspected = luma::RawDecoder().inspect(path);
         require(inspected.width == 64 && inspected.height == 48 &&
                     decoded.metadata.orientation == 0,

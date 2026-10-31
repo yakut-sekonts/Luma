@@ -44,12 +44,13 @@ void EditorController::prepareCompare(const QStringList &ids, bool fullResolutio
     const auto catalogPath = catalog_;
     const auto service = service_;
     const auto profile = displayProfile_;
+    const auto hdrToneMapping = hdrToneMapping_;
     const QPointer<EditorController> self(this);
     try {
         compareJob_ = compareJobs_.submit(
             luma::JobPriority::interactive,
             [self, revision, ids, fullResolution, active, activeEdits, catalogPath, service,
-             profile](const luma::JobContext &context) {
+             profile, hdrToneMapping](const luma::JobContext &context) {
                 std::array<QImage, 2> images;
                 QStringList names;
                 QString error;
@@ -80,7 +81,9 @@ void EditorController::prepareCompare(const QStringList &ids, bool fullResolutio
                         const auto rendered = luma::renderCPU(
                             input, assets[i].edits, assets[i].metadata.orientation, profile,
                             context.stopToken(), decoded->calibration, luma::DetailDiagnostic::none,
-                            scale, assets[i].metadata);
+                            scale, assets[i].metadata, {}, nullptr, {}, 4,
+                            hdrToneMapping ? luma::DisplayMapping::adaptiveHDR
+                                           : luma::DisplayMapping::clip);
                         images[i] = QImage(rendered.rgba.data(), rendered.width, rendered.height,
                                            rendered.width * 4, QImage::Format_RGBA8888)
                                         .copy();

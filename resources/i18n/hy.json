@@ -67,6 +67,7 @@
     "CROP / STRAIGHTEN": "ԿՏՐՈՒՄ / ՀԱՎԱՍԱՐԵՑՈՒՄ",
     "CURVES": "ԿՈՐԵՐ",
     "Camera": "Տեսախցիկ",
+    "Decode": "Ապակոդավորում",
     "Camera not in the database; no profile applied": "Տեսախցիկը բազայում չկա․ պրոֆիլ չի կիրառվել",
     "Cancel": "Չեղարկել",
     "Cancel export": "Չեղարկել արտահանումը",
@@ -814,6 +815,8 @@
     "Invalid appearance preferences; system theme is active.": "Արտաքին տեսքի կարգավորումները անվավեր են․ ակտիվ է համակարգային թեման։",
     "Quick": "Արագ",
     "Automatic Light and Color": "Լույսի և գույնի ավտոմատ կարգավորում",
+    "Enhance": "Բարելավել",
+    "Editable local enhancement with explicit processing provenance": "Խմբագրվող տեղային բարելավում՝ մշակման բացահայտ ծագմամբ",
     "B&W": "Սև և սպիտակ",
     "Straighten": "Ուղղել",
     "Layers": "Շերտեր",
@@ -900,6 +903,11 @@
     "Face": "Դեմք",
     "Eyes": "Աչքեր",
     "Lips": "Շուրթեր",
-    "Click a face in the photo.": "Սեղմեք լուսանկարի դեմքին։"
+    "Click a face in the photo.": "Սեղմեք լուսանկարի դեմքին։",
+    "Adaptive HDR includes an SDR-compatible base and ISO gain map. Requires macOS 15 or later.": "Adaptive HDR-ը ներառում է SDR-համատեղելի հիմք և ISO gain map։ Պահանջվում է macOS 15 կամ ավելի նոր տարբերակ։",
+    "HEIC · Adaptive HDR": "HEIC · Adaptive HDR",
+    "HEIC quality": "HEIC որակ",
+    "Map HDR highlights into the preview": "HDR լուսավոր հատվածները տեղավորել նախադիտման մեջ",
+    "Preview-only tone mapping preserves detail above SDR white. Histogram, clipping warnings and exports remain scene-linear.": "Միայն նախադիտման tone mapping-ը պահպանում է SDR սպիտակից բարձր մանրամասները։ Հիստոգրամը, clipping-ի զգուշացումները և արտահանումը մնում են scene-linear։"
   }
 }

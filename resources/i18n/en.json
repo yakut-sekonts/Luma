@@ -67,6 +67,7 @@
     "CROP / STRAIGHTEN": "CROP / STRAIGHTEN",
     "CURVES": "CURVES",
     "Camera": "Camera",
+    "Decode": "Decode",
     "Camera not in the database; no profile applied": "Camera not in the database; no profile applied",
     "Cancel": "Cancel",
     "Cancel export": "Cancel export",
@@ -814,6 +815,8 @@
     "Invalid appearance preferences; system theme is active.": "Invalid appearance preferences; system theme is active.",
     "Quick": "Quick",
     "Automatic Light and Color": "Automatic Light and Color",
+    "Enhance": "Enhance",
+    "Editable local enhancement with explicit processing provenance": "Editable local enhancement with explicit processing provenance",
     "B&W": "B&W",
     "Straighten": "Straighten",
     "Layers": "Layers",
@@ -900,6 +903,11 @@
     "Face": "Face",
     "Eyes": "Eyes",
     "Lips": "Lips",
-    "Click a face in the photo.": "Click a face in the photo."
+    "Click a face in the photo.": "Click a face in the photo.",
+    "Adaptive HDR includes an SDR-compatible base and ISO gain map. Requires macOS 15 or later.": "Adaptive HDR includes an SDR-compatible base and ISO gain map. Requires macOS 15 or later.",
+    "HEIC · Adaptive HDR": "HEIC · Adaptive HDR",
+    "HEIC quality": "HEIC quality",
+    "Map HDR highlights into the preview": "Map HDR highlights into the preview",
+    "Preview-only tone mapping preserves detail above SDR white. Histogram, clipping warnings and exports remain scene-linear.": "Preview-only tone mapping preserves detail above SDR white. Histogram, clipping warnings and exports remain scene-linear."
   }
 }

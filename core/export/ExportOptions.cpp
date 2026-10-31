@@ -24,8 +24,8 @@ void WatermarkOptions::validate() const {
 }
 void ExportOptions::validate() const {
     if (quality < 1 || quality > 100)
-        throw std::runtime_error("JPEG quality must be 1–100.");
-    if (!within(format, ExportFormat::dng) || !within(colorSpace, ExportColorSpace::proPhoto) ||
+        throw std::runtime_error("Lossy export quality must be 1–100.");
+    if (!within(format, ExportFormat::heicHDR) || !within(colorSpace, ExportColorSpace::proPhoto) ||
         !within(compression, TiffCompression::zip) || !within(resize, ResizeMode::percentage) ||
         !within(outputMedium, OutputMedium::glossy) || !within(outputAmount, SharpenAmount::high) ||
         !within(metadata, MetadataPolicy::removeLocation) || !std::isfinite(resizeValue) ||
@@ -34,14 +34,16 @@ void ExportOptions::validate() const {
     if (compression != TiffCompression::none && format != ExportFormat::tiff8 &&
         format != ExportFormat::tiff16)
         throw std::runtime_error("TIFF compression requires TIFF output.");
+    if (format == ExportFormat::heicHDR && colorSpace != ExportColorSpace::srgb)
+        throw std::runtime_error("Adaptive HDR HEIC requires the linear sRGB working space.");
     watermark.validate();
 }
 bool ExportOptions::advanced() const {
     validate();
     return format == ExportFormat::tiff8 || format == ExportFormat::dng ||
-           colorSpace != ExportColorSpace::srgb || compression != TiffCompression::none ||
-           resize != ResizeMode::original || outputMedium != OutputMedium::off ||
-           metadata != MetadataPolicy::none ||
+           format == ExportFormat::heicHDR || colorSpace != ExportColorSpace::srgb ||
+           compression != TiffCompression::none || resize != ResizeMode::original ||
+           outputMedium != OutputMedium::off || metadata != MetadataPolicy::none ||
            (watermark.kind != WatermarkKind::none && watermark.opacity > 0);
 }
 std::pair<int, int> ExportOptions::dimensions(int width, int height) const {
@@ -96,6 +98,8 @@ std::string ExportOptions::extension() const {
         return ".tif";
     case ExportFormat::dng:
         return ".dng";
+    case ExportFormat::heicHDR:
+        return ".heic";
     }
     throw std::runtime_error("Unsupported export format.");
 }

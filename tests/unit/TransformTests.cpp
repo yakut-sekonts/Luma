@@ -227,7 +227,7 @@ void encodedTransparency() {
             std::filesystem::remove_all(path, error);
         }
     } cleanup{root};
-    luma::DecodedRaw decoded{luma::FloatImage(121, 81), {}, {}};
+    luma::DecodedRaw decoded{luma::FloatImage(121, 81), {}, {}, {}};
     std::fill(decoded.image.rgb.begin(), decoded.image.rgb.end(), 0.25F);
     luma::EditDocument edits;
     edits.transform.scale = 50;

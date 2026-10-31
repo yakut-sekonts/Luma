@@ -1,4 +1,5 @@
 #pragma once
+#include "core/color/DisplayTransform.h"
 #include "core/color/RawColorCalibration.h"
 #include "core/edits/EditDocument.h"
 #include "core/image/FloatImage.h"
@@ -27,6 +28,7 @@ DisplayImage renderCPU(const FloatImage &input, EditDocument edits, int orientat
                        DetailDiagnostic diagnostic = DetailDiagnostic::none, double detailScale = 1,
                        PhotoMetadata metadata = {}, MaskOverlay overlay = {},
                        DevelopAccelerator *accelerator = nullptr,
-                       PreviewAnalysisOptions analysis = {}, unsigned maximumWorkers = 4);
+                       PreviewAnalysisOptions analysis = {}, unsigned maximumWorkers = 4,
+                       DisplayMapping displayMapping = DisplayMapping::clip);
 float applyExposure(float linearValue, double ev);
 } // namespace luma

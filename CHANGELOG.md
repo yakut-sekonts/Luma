@@ -1,5 +1,28 @@
 # Changelog
 
+## 1.6.0 / 2026-10-31
+
+- RAW Pipeline 2.0 now uses a deterministic two-pass edge-aware Bayer
+  reconstruction. It chooses green interpolation by local sensor gradients and
+  reconstructs chroma from color differences, reducing false color across hard
+  edges while preserving linear highlights and the original sensor samples.
+- Raster import now requests the HDR representation from ImageIO. Adaptive HDR
+  JPEG/HEIF gain maps and ISO HDR images expand into the existing scene-linear
+  working space while ordinary SDR files retain their previous values.
+- Added Adaptive HDR HEIC export on macOS 15 or later. ImageIO creates the
+  SDR-compatible base and ISO gain map, and Apertone verifies the auxiliary
+  gain-map data before atomically installing the output.
+- Added optional preview-only HDR tone mapping through the shared CPU/Metal
+  display transform. Histogram, clipping warnings and exports continue to use
+  the unmodified scene-linear image.
+- Added editable **Enhance** Quick Look layers with saved provider, version,
+  model and digest provenance. The current provider uses an explicit
+  deterministic CPU fallback because the bundled denoise model does not emit
+  editable Develop parameters.
+- Added typed source diagnostics for decoder identity, source kind,
+  reconstruction, CFA, color path, HDR handling, sensor dimensions and clipped
+  samples without retaining source paths or image content.
+
 ## 1.5.0 / 2026-10-30
 
 - Added **Match Look** as an editable Quick Look layer. It averages the

@@ -1,4 +1,5 @@
 #include "core/edits/CreativeSettings.h"
+#include <algorithm>
 #include <cmath>
 #include <iomanip>
 #include <limits>
@@ -45,14 +46,34 @@ bool validParameter(std::string_view value) {
             return false;
     return true;
 }
+bool validProvider(std::string_view value) {
+    if (value.empty() || value.size() > 80)
+        return false;
+    for (const char c : value)
+        if (!((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '-' || c == '.'))
+            return false;
+    return true;
+}
+bool validDigest(std::string_view value) {
+    return value.size() == 64 && std::all_of(value.begin(), value.end(), [](const char c) {
+               return (c >= '0' && c <= '9') || (c >= 'a' && c <= 'f');
+           });
+}
 } // namespace
 void QuickLookLayer::validate() const {
     const bool custom = recipe.empty();
+    const bool generated = !provider.empty();
     if (!validID(id) || !validRecipe(recipe) || !std::isfinite(amount) || amount < 0 ||
         amount > 200 || (!mask.empty() && !validID(mask)) ||
         (custom && (!mask.empty() || !validText(name) || deltas.empty() ||
                     deltas.size() > maxQuickLookParameterDeltas)) ||
-        (!custom && (!name.empty() || !deltas.empty())))
+        (!custom && (!name.empty() || !deltas.empty() || generated)) ||
+        (!generated && (!providerVersion.empty() || !model.empty() || !modelDigest.empty() ||
+                        deterministicFallback)) ||
+        (generated && (!custom || !validProvider(provider) || !validText(providerVersion) ||
+                       (model.empty() != modelDigest.empty()) ||
+                       (!model.empty() && (!validText(model) || !validDigest(modelDigest))) ||
+                       (model.empty() != deterministicFallback))))
         throw std::runtime_error("Invalid Quick Look layer.");
     for (const auto &delta : deltas)
         if (!validParameter(delta.parameter) || !std::isfinite(delta.value) ||
@@ -104,7 +125,7 @@ std::string encodeCreative(const CreativeSettings &settings) {
     settings.validate();
     std::ostringstream out;
     out.imbue(std::locale::classic());
-    out << "LUMA_CREATIVE 3 " << settings.enabled
+    out << "LUMA_CREATIVE 4 " << settings.enabled
         << std::setprecision(std::numeric_limits<double>::max_digits10);
     for (const auto value : settings.values)
         out << ' ' << value;
@@ -115,6 +136,9 @@ std::string encodeCreative(const CreativeSettings &settings) {
             << std::quoted(layer.name) << ' ' << layer.deltas.size();
         for (const auto &delta : layer.deltas)
             out << ' ' << std::quoted(delta.parameter) << ' ' << delta.value;
+        out << ' ' << std::quoted(layer.provider) << ' ' << std::quoted(layer.providerVersion)
+            << ' ' << std::quoted(layer.model) << ' ' << std::quoted(layer.modelDigest) << ' '
+            << layer.deterministicFallback;
         out << '\n';
     }
     return out.str();
@@ -130,7 +154,7 @@ CreativeSettings decodeCreative(std::string_view text) {
     in >> magic >> version >> result.enabled;
     for (auto &value : result.values)
         in >> value;
-    if (!in || magic != "LUMA_CREATIVE" || (version < 1 || version > 3))
+    if (!in || magic != "LUMA_CREATIVE" || (version < 1 || version > 4))
         throw std::runtime_error("Invalid creative adjustment document.");
     if (version >= 2) {
         std::int64_t count = -1;
@@ -145,7 +169,7 @@ CreativeSettings decodeCreative(std::string_view text) {
             if (!in || (enabled != 0 && enabled != 1))
                 throw std::runtime_error("Invalid creative adjustment document.");
             layer.enabled = enabled == 1;
-            if (version == 3) {
+            if (version >= 3) {
                 std::int64_t deltaCount = -1;
                 in >> std::quoted(layer.name) >> deltaCount;
                 if (!in || deltaCount < 0 ||
@@ -158,6 +182,14 @@ CreativeSettings decodeCreative(std::string_view text) {
                         throw std::runtime_error("Invalid creative adjustment document.");
                     layer.deltas.push_back(std::move(delta));
                 }
+            }
+            if (version >= 4) {
+                int fallback = -1;
+                in >> std::quoted(layer.provider) >> std::quoted(layer.providerVersion) >>
+                    std::quoted(layer.model) >> std::quoted(layer.modelDigest) >> fallback;
+                if (!in || (fallback != 0 && fallback != 1))
+                    throw std::runtime_error("Invalid creative adjustment document.");
+                layer.deterministicFallback = fallback == 1;
             }
             result.quickLooks.push_back(std::move(layer));
         }
@@ -173,9 +205,27 @@ CreativeSettings decodeCreative(std::string_view text) {
         legacy << '\n';
         if (legacy.str() != text)
             throw std::runtime_error("Invalid creative adjustment document.");
-    } else if (version == 3 && encodeCreative(result) != text)
+    } else if (version == 4 && encodeCreative(result) != text)
         throw std::runtime_error("Invalid creative adjustment document.");
-    else if (version == 2) {
+    else if (version == 3) {
+        std::ostringstream legacy;
+        legacy.imbue(std::locale::classic());
+        legacy << "LUMA_CREATIVE 3 " << result.enabled
+               << std::setprecision(std::numeric_limits<double>::max_digits10);
+        for (const auto value : result.values)
+            legacy << ' ' << value;
+        legacy << ' ' << result.quickLooks.size() << '\n';
+        for (const auto &layer : result.quickLooks) {
+            legacy << std::quoted(layer.id) << ' ' << std::quoted(layer.recipe) << ' '
+                   << layer.amount << ' ' << layer.enabled << ' ' << std::quoted(layer.mask) << ' '
+                   << std::quoted(layer.name) << ' ' << layer.deltas.size();
+            for (const auto &delta : layer.deltas)
+                legacy << ' ' << std::quoted(delta.parameter) << ' ' << delta.value;
+            legacy << '\n';
+        }
+        if (legacy.str() != text)
+            throw std::runtime_error("Invalid creative adjustment document.");
+    } else if (version == 2) {
         std::ostringstream legacy;
         legacy.imbue(std::locale::classic());
         legacy << "LUMA_CREATIVE 2 " << result.enabled

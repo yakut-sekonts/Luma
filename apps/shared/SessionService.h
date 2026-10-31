@@ -14,6 +14,7 @@ struct PhotoSession {
     AssetRecord asset;
     std::shared_ptr<const FloatImage> preview;
     RawColorCalibration calibration;
+    DecodeDiagnostics diagnostics;
     double previewScale = 1;
     std::shared_ptr<const FloatImage> interactivePreview;
     double interactiveScale = 1;
@@ -50,6 +51,7 @@ class SessionService {
         std::shared_ptr<const FloatImage> standard, interactive;
         PhotoMetadata metadata;
         RawColorCalibration calibration;
+        DecodeDiagnostics diagnostics;
         double standardScale, interactiveScale;
         std::shared_ptr<const FloatImage> quick;
         double quickScale;

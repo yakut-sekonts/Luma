@@ -67,6 +67,7 @@
     "CROP / STRAIGHTEN": "RITAGLIO / RADDRIZZAMENTO",
     "CURVES": "CURVE",
     "Camera": "Fotocamera",
+    "Decode": "Decodifica",
     "Camera not in the database; no profile applied": "Fotocamera non nel database; nessun profilo applicato",
     "Cancel": "Annulla",
     "Cancel export": "Annulla esportazione",
@@ -814,6 +815,8 @@
     "Invalid appearance preferences; system theme is active.": "Preferenze dell’aspetto non valide; è attivo il tema di sistema.",
     "Quick": "Rapido",
     "Automatic Light and Color": "Luce e colore automatici",
+    "Enhance": "Migliora",
+    "Editable local enhancement with explicit processing provenance": "Miglioramento locale modificabile con provenienza di elaborazione esplicita",
     "B&W": "B/N",
     "Straighten": "Raddrizza",
     "Layers": "Livelli",
@@ -900,6 +903,11 @@
     "Face": "Viso",
     "Eyes": "Occhi",
     "Lips": "Labbra",
-    "Click a face in the photo.": "Fai clic su un volto nella foto."
+    "Click a face in the photo.": "Fai clic su un volto nella foto.",
+    "Adaptive HDR includes an SDR-compatible base and ISO gain map. Requires macOS 15 or later.": "Adaptive HDR include una base compatibile con SDR e una mappa di guadagno ISO. Richiede macOS 15 o versioni successive.",
+    "HEIC · Adaptive HDR": "HEIC · Adaptive HDR",
+    "HEIC quality": "Qualità HEIC",
+    "Map HDR highlights into the preview": "Mappa le alte luci HDR nell’anteprima",
+    "Preview-only tone mapping preserves detail above SDR white. Histogram, clipping warnings and exports remain scene-linear.": "Il tone mapping solo per l’anteprima conserva i dettagli oltre il bianco SDR. Istogramma, avvisi di clipping ed esportazioni restano lineari rispetto alla scena."
   }
 }

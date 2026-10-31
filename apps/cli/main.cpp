@@ -273,8 +273,10 @@ int main(int argc, char **argv) {
                 options.format = luma::ExportFormat::png;
             else if (extension == ".tif" || extension == ".tiff")
                 options.format = luma::ExportFormat::tiff16;
-            if (extension == ".dng")
+            else if (extension == ".dng")
                 options.format = luma::ExportFormat::dng;
+            else if (extension == ".heic")
+                options.format = luma::ExportFormat::heicHDR;
             for (std::size_t i = 2; i < arguments.size(); ++i) {
                 const auto key = arguments[i];
                 if (key == "--overwrite") {
@@ -291,7 +293,7 @@ int main(int argc, char **argv) {
                         throw std::runtime_error("Invalid JPEG quality.");
                 } else if (key == "--format")
                     options.format = exportChoice<luma::ExportFormat>(
-                        value, std::array{"jpeg", "png", "tiff16", "tiff8", "dng"});
+                        value, std::array{"jpeg", "png", "tiff16", "tiff8", "dng", "heic-hdr"});
                 else if (key == "--color-space")
                     options.colorSpace = exportChoice<luma::ExportColorSpace>(
                         value, std::array{"srgb", "p3", "adobe-rgb", "prophoto"});

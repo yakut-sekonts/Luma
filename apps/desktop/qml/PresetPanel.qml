@@ -67,10 +67,12 @@ ColumnLayout {
         RowLayout {
             Layout.fillWidth: true; spacing: 4
             ApertoneButton {
-                objectName: "quick.auto"; text: qsTranslate("Apertone", "Auto")
-                enabled: editor.hasPhoto && !editor.busy; Layout.fillWidth: true
-                onClicked: editor.autoAdjust()
-                ToolTip.visible: hovered; ToolTip.text: qsTranslate("Apertone", "Automatic Light and Color")
+                objectName: "quick.enhance"; text: qsTranslate("Apertone", "Enhance")
+                enabled: editor.hasPhoto && !editor.busy && !editor.original && !editor.creativeBusy
+                Layout.fillWidth: true
+                onClicked: editor.applyEnhance()
+                ToolTip.visible: hovered
+                ToolTip.text: qsTranslate("Apertone", "Editable local enhancement with explicit processing provenance")
             }
             ApertoneButton {
                 objectName: "quick.mono"; text: qsTranslate("Apertone", "B&W")
@@ -143,7 +145,7 @@ ColumnLayout {
                 id: layerRow
                 required property var modelData
                 required property int index
-                width: quickStack.width; height: 66; radius: 4
+                width: quickStack.width; height: layerRow.modelData.provenance.length ? 80 : 66; radius: 4
                 color: Theme.panelRaised; border.color: Theme.divider; border.width: 1
                 ColumnLayout {
                     anchors.fill: parent; anchors.margins: 5; spacing: 2
@@ -168,6 +170,12 @@ ColumnLayout {
                             onPressedChanged: if (!pressed) presets.setQuickLookAmount(layerRow.modelData.id, value)
                         }
                         Label { text: Math.round(amount.value) + "%"; color: Theme.muted; font.pixelSize: 9; Layout.preferredWidth: 34; horizontalAlignment: Text.AlignRight }
+                    }
+                    Label {
+                        visible: layerRow.modelData.provenance.length > 0
+                        Layout.fillWidth: true; text: layerRow.modelData.provenance
+                        color: Theme.muted; font.pixelSize: 8; elide: Text.ElideMiddle
+                        textFormat: Text.PlainText
                     }
                 }
             }

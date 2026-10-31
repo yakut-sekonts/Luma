@@ -6,6 +6,7 @@
 #include "platform/macos/ExportMetadata.h"
 #include "platform/macos/FileHasher.h"
 #include "platform/macos/ImageExporter.h"
+#include "platform/macos/RasterDecoder.h"
 #include "platform/macos/Watermark.h"
 #import <Foundation/Foundation.h>
 #import <ImageIO/ImageIO.h>
@@ -155,7 +156,7 @@ std::vector<std::uint8_t> rgba(const std::filesystem::path &path, int width, int
     return result;
 }
 void outputTests(const std::filesystem::path &folder, const std::filesystem::path &source) {
-    luma::DecodedRaw decoded{luma::FloatImage(128, 96), {}, {}};
+    luma::DecodedRaw decoded{luma::FloatImage(128, 96), {}, {}, {}};
     decoded.metadata.width = 128;
     decoded.metadata.height = 96;
     for (int y = 0; y < 96; ++y)
@@ -254,6 +255,54 @@ void outputTests(const std::filesystem::path &folder, const std::filesystem::pat
     for (const auto &entry : std::filesystem::directory_iterator(folder))
         require(!entry.path().filename().string().starts_with(".luma-export-"),
                 "Cancelled export leaked a temporary file.");
+}
+void adaptiveHDRTests(const std::filesystem::path &folder,
+                      const std::filesystem::path &metadataSource) {
+    if (@available(macOS 15.0, *)) {
+        constexpr int width = 64, height = 32;
+        luma::DecodedRaw decoded{luma::FloatImage(width, height), {}, {}, {}};
+        decoded.metadata.width = width;
+        decoded.metadata.height = height;
+        for (int y = 0; y < height; ++y)
+            for (int x = 0; x < width; ++x) {
+                const float value = x < width / 2 ? .18F : 2.F;
+                const auto offset = (static_cast<std::size_t>(y) * width + x) * 3;
+                decoded.image.rgb[offset] = decoded.image.rgb[offset + 1] =
+                    decoded.image.rgb[offset + 2] = value;
+            }
+        luma::ExportOptions options;
+        options.format = luma::ExportFormat::heicHDR;
+        options.quality = 100;
+        options.metadata = luma::MetadataPolicy::all;
+        const auto rendered = luma::renderLinearOutput(decoded, {});
+        const auto expectedShadow =
+            rendered.rgba[(static_cast<std::size_t>(height / 2) * width + width / 4) * 4];
+        const auto expectedHighlight =
+            rendered.rgba[(static_cast<std::size_t>(height / 2) * width + width * 3 / 4) * 4];
+        require(expectedHighlight > 1, "Adaptive HDR fixture has no rendered HDR highlight.");
+        const auto path = folder / "adaptive-hdr.heic";
+        luma::macos::writeImage(decoded, {}, path, options, {}, {}, metadataSource);
+        auto inputURL = url(path);
+        CFHandle source(CGImageSourceCreateWithURL(inputURL.get(), nullptr));
+        CFHandle gainMap(source ? CGImageSourceCopyAuxiliaryDataInfoAtIndex(
+                                      source.get(), 0, kCGImageAuxiliaryDataTypeISOGainMap)
+                                : nullptr);
+        CFHandle base(source ? CGImageSourceCreateImageAtIndex(source.get(), 0, nullptr) : nullptr);
+        require(source && CGImageSourceGetStatus(source.get()) == kCGImageStatusComplete &&
+                    gainMap && base,
+                "Adaptive HDR export lacks a readable SDR base or ISO gain map.");
+        const auto imported = luma::macos::RasterDecoder().decode(path);
+        const auto sample = [&](int x) {
+            return imported.image.rgb[(static_cast<std::size_t>(height / 2) * width + x) * 3];
+        };
+        const auto shadow = sample(width / 4), highlight = sample(width * 3 / 4);
+        if (std::abs(shadow - expectedShadow) >= .04F || highlight <= 1.1F ||
+            highlight <= shadow * 5 || highlight > expectedHighlight + .1F)
+            throw std::runtime_error(
+                "Adaptive HDR round trip lost HDR headroom or SDR shadow accuracy: rendered " +
+                std::to_string(expectedShadow) + "/" + std::to_string(expectedHighlight) +
+                ", decoded " + std::to_string(shadow) + "/" + std::to_string(highlight));
+    }
 }
 void watermarkTests(const std::filesystem::path &folder) {
     luma::LinearOutput original(256, 192);
@@ -413,6 +462,7 @@ void exportNativeTests() {
         metadataTests(source);
         watermarkTests(folder.path);
         outputTests(folder.path, source);
+        adaptiveHDRTests(folder.path, source);
         originalProtection(folder.path);
         require(luma::macos::sha256File(source) == hash,
                 "Native export altered its metadata source.");

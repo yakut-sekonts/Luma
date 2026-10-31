@@ -67,6 +67,7 @@
     "CROP / STRAIGHTEN": "裁剪 / 拉直",
     "CURVES": "曲线",
     "Camera": "相机",
+    "Decode": "解码",
     "Camera not in the database; no profile applied": "数据库中无此相机；未应用配置文件",
     "Cancel": "取消",
     "Cancel export": "取消导出",
@@ -814,6 +815,8 @@
     "Invalid appearance preferences; system theme is active.": "外观设置无效；已启用系统主题。",
     "Quick": "快速",
     "Automatic Light and Color": "自动调整光线和颜色",
+    "Enhance": "增强",
+    "Editable local enhancement with explicit processing provenance": "可编辑的本地增强，包含明确的处理来源",
     "B&W": "黑白",
     "Straighten": "拉直",
     "Layers": "图层",
@@ -900,6 +903,11 @@
     "Face": "面部",
     "Eyes": "眼睛",
     "Lips": "嘴唇",
-    "Click a face in the photo.": "点按照片中的面部。"
+    "Click a face in the photo.": "点按照片中的面部。",
+    "Adaptive HDR includes an SDR-compatible base and ISO gain map. Requires macOS 15 or later.": "Adaptive HDR 包含兼容 SDR 的基础图像和 ISO 增益图。需要 macOS 15 或更高版本。",
+    "HEIC · Adaptive HDR": "HEIC · Adaptive HDR",
+    "HEIC quality": "HEIC 质量",
+    "Map HDR highlights into the preview": "在预览中映射 HDR 高光",
+    "Preview-only tone mapping preserves detail above SDR white. Histogram, clipping warnings and exports remain scene-linear.": "仅用于预览的色调映射会保留高于 SDR 白点的细节。直方图、裁切警告和导出仍保持场景线性。"
   }
 }

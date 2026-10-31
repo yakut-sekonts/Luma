@@ -67,6 +67,7 @@
     "CROP / STRAIGHTEN": "КАДРИРОВАНИЕ / ВЫРАВНИВАНИЕ",
     "CURVES": "КРИВЫЕ",
     "Camera": "Камера",
+    "Decode": "Декодирование",
     "Camera not in the database; no profile applied": "Камеры нет в базе; профиль не применён",
     "Cancel": "Отменить",
     "Cancel export": "Отменить экспорт",
@@ -814,6 +815,8 @@
     "Invalid appearance preferences; system theme is active.": "Настройки оформления повреждены; используется системная тема.",
     "Quick": "Быстро",
     "Automatic Light and Color": "Автокоррекция света и цвета",
+    "Enhance": "Улучшить",
+    "Editable local enhancement with explicit processing provenance": "Редактируемое локальное улучшение с явными данными об обработке",
     "B&W": "Ч/Б",
     "Straighten": "Выровнять",
     "Layers": "Слои",
@@ -900,6 +903,11 @@
     "Face": "Лицо",
     "Eyes": "Глаза",
     "Lips": "Губы",
-    "Click a face in the photo.": "Нажмите на лицо на фотографии."
+    "Click a face in the photo.": "Нажмите на лицо на фотографии.",
+    "Adaptive HDR includes an SDR-compatible base and ISO gain map. Requires macOS 15 or later.": "Adaptive HDR включает SDR-совместимую базу и ISO gain map. Требуется macOS 15 или новее.",
+    "HEIC · Adaptive HDR": "HEIC · Adaptive HDR",
+    "HEIC quality": "Качество HEIC",
+    "Map HDR highlights into the preview": "Отображать HDR-света в предпросмотре",
+    "Preview-only tone mapping preserves detail above SDR white. Histogram, clipping warnings and exports remain scene-linear.": "Тональное отображение только для предпросмотра сохраняет детали выше белого SDR. Гистограмма, предупреждения о клиппинге и экспорт остаются scene-linear."
   }
 }

@@ -1,4 +1,6 @@
 #include "core/color/DisplayTransform.h"
+#include <algorithm>
+#include <cmath>
 #include <lcms2.h>
 #include <limits>
 #include <stdexcept>
@@ -38,10 +40,27 @@ DisplayTransform::~DisplayTransform() {
         cmsDeleteTransform(transform_);
     }
 }
-void DisplayTransform::convert(std::span<const float> rgb, std::span<std::uint8_t> rgba) const {
+void DisplayTransform::convert(std::span<const float> rgb, std::span<std::uint8_t> rgba,
+                               DisplayMapping mapping) {
     if (rgb.size() % 3 != 0 || rgba.size() != rgb.size() / 3 * 4 ||
-        rgb.size() / 3 > std::numeric_limits<cmsUInt32Number>::max()) {
-        throw std::runtime_error("Invalid display buffer sizes.");
+        rgb.size() / 3 > std::numeric_limits<cmsUInt32Number>::max() ||
+        (mapping != DisplayMapping::clip && mapping != DisplayMapping::adaptiveHDR)) {
+        throw std::runtime_error("Invalid display transform inputs.");
+    }
+    if (mapping == DisplayMapping::adaptiveHDR) {
+        constexpr float shoulder = .7F, range = 1 - shoulder;
+        mapped_.assign(rgb.begin(), rgb.end());
+        for (std::size_t index = 0; index < mapped_.size(); index += 3) {
+            const float peak =
+                std::max({0.F, mapped_[index], mapped_[index + 1], mapped_[index + 2]});
+            if (peak <= shoulder)
+                continue;
+            const float compressed = shoulder + range * (1 - std::exp(-(peak - shoulder) / range));
+            const float scale = compressed / peak;
+            for (std::size_t channel = 0; channel < 3; ++channel)
+                mapped_[index + channel] *= scale;
+        }
+        rgb = mapped_;
     }
     cmsDoTransform(transform_, rgb.data(), rgba.data(),
                    static_cast<cmsUInt32Number>(rgb.size() / 3));

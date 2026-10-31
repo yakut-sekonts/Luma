@@ -72,8 +72,25 @@ void stackChecks() {
                  << ' ' << layer.enabled << ' ' << std::quoted(layer.mask) << '\n';
     require(luma::decodeCreative(version2.str()) == source.creative,
             "Creative codec stopped reading version 2 Quick Look stacks.");
+    std::ostringstream version3;
+    version3.imbue(std::locale::classic());
+    version3 << "LUMA_CREATIVE 3 " << source.creative.enabled
+             << std::setprecision(std::numeric_limits<double>::max_digits10);
+    for (const auto value : source.creative.values)
+        version3 << ' ' << value;
+    version3 << ' ' << source.creative.quickLooks.size() << '\n';
+    for (const auto &layer : source.creative.quickLooks) {
+        version3 << std::quoted(layer.id) << ' ' << std::quoted(layer.recipe) << ' ' << layer.amount
+                 << ' ' << layer.enabled << ' ' << std::quoted(layer.mask) << ' '
+                 << std::quoted(layer.name) << ' ' << layer.deltas.size();
+        for (const auto &delta : layer.deltas)
+            version3 << ' ' << std::quoted(delta.parameter) << ' ' << delta.value;
+        version3 << '\n';
+    }
+    require(luma::decodeCreative(version3.str()) == source.creative,
+            "Creative codec stopped reading version 3 Quick Look stacks.");
     const auto legacy = luma::encodeCreative(luma::CreativeSettings{});
-    require(legacy.starts_with("LUMA_CREATIVE 3 "), "Creative codec was not upgraded.");
+    require(legacy.starts_with("LUMA_CREATIVE 4 "), "Creative codec was not upgraded.");
 }
 void matchLookChecks() {
     luma::EditDocument target;
@@ -126,6 +143,20 @@ void matchLookChecks() {
             "Match Look Amount did not scale embedded deltas.");
     require(luma::decodeCreative(luma::encodeCreative(matched.creative)) == matched.creative,
             "Match Look layer did not survive the creative codec.");
+    matched.creative.quickLooks.front().provider = "apertone.histogram-enhance";
+    matched.creative.quickLooks.front().providerVersion = "1.0";
+    matched.creative.quickLooks.front().deterministicFallback = true;
+    matched.creative.quickLooks.front().name = "AI Enhance · CPU";
+    matched.validate();
+    require(luma::decodeCreative(luma::encodeCreative(matched.creative)) == matched.creative,
+            "Generated-layer provenance did not survive the creative codec.");
+    auto invalidProvenance = matched;
+    invalidProvenance.creative.quickLooks.front().model = "Unpinned model";
+    rejects([&] { invalidProvenance.validate(); },
+            "Generated layer accepted a model without its SHA-256 digest.");
+    invalidProvenance.creative.quickLooks.front().modelDigest = std::string(64, 'a');
+    rejects([&] { invalidProvenance.validate(); },
+            "Generated layer marked a pinned model as a deterministic fallback.");
     auto invalid = matched;
     invalid.creative.quickLooks.front().deltas.push_back({"crop.x", 1});
     rejects([&] { invalid.validate(); },

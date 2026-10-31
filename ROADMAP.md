@@ -249,3 +249,22 @@ Apple Vision supplies click-selected Face, Eyes and Lips regions with confidence
 checks. Skin, hair, teeth and clothing remain deliberately deferred because the
 current local provider does not expose reliable semantic regions for them; the
 editor does not substitute geometric approximations.
+
+## 1.6 — Imaging quality
+
+- RAW Pipeline 2.0: edge-aware Bayer reconstruction, improved highlight/color
+  handling and explicit decoder diagnostics without changing source files.
+- HDR and gain-map import, display and export with an SDR-compatible base image.
+- AI Enhance as an editable local operation with explicit model provenance and
+  deterministic CPU fallback where the bundled model contract allows it.
+
+The first RAW Pipeline 2.0 block replaces bilinear Bayer interpolation with a
+bounded two-pass edge-aware reconstruction. Adaptive HDR gain maps and ISO HDR
+expand during raster import into scene-linear working pixels. Export now writes
+HEIC with an SDR-compatible base and verified ISO gain map on macOS 15 or later.
+Preview-only Adaptive HDR tone mapping preserves highlight separation above SDR
+white through the shared CPU/Metal display transform. AI Enhance now adds an
+editable Quick Look layer in one Undo step. The saved layer records provider,
+provider version, model identity and digest when present, or an explicit
+deterministic CPU fallback with no model. The bundled denoise model is not reused
+for Enhance because its pixel-output contract cannot produce editable parameters.

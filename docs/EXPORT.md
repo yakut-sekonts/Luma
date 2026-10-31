@@ -8,8 +8,8 @@ all settings; changing them never changes a running queue.
 
 ## Files and color
 
-JPEG quality 1–100, PNG, TIFF 8/16 bit with None/LZW/ZIP compression, and processed
-Linear RGB DNG are available. Output uses embedded sRGB, Display P3, Adobe RGB
+JPEG quality 1–100, PNG, TIFF 8/16 bit with None/LZW/ZIP compression, processed
+Linear RGB DNG, and Adaptive HDR HEIC are available. Output uses embedded sRGB, Display P3, Adobe RGB
 (1998), or ProPhoto RGB profiles from the operating system. DNG stores the selected
 linear primaries with D50 calibration and an sRGB rendered preview. JPEG and DNG
 flatten transparent Transform corners and source-image transparency against black;
@@ -22,6 +22,11 @@ identified DNG calibration; general RGB/float or multi-illuminant DNG remains
 unsupported. DNG requires at least 22 px on each side for the LibRaw roundtrip,
 and its unpacked dimensions must fit 512 MB including LibRaw's allocation border.
 Integer output clips values outside the selected space's representable range.
+Adaptive HDR HEIC requires macOS 15 or later and uses the linear sRGB working
+space. ImageIO creates an SDR-compatible base and ISO gain map from the rendered
+float image; the exporter verifies the completed gain-map auxiliary data before
+atomic installation. Transparent areas flatten against black. This lossy format
+retains HDR headroom but does not promise exact scene-linear sample round trips.
 
 Resize preserves the post-Crop/Transform aspect ratio: original, width, height,
 long/short edge, megapixels or percentage. Dimensions round to the nearest pixel;
@@ -85,10 +90,10 @@ build/bin/apertone export /absolute/output.tif --catalog /absolute/catalog.sqlit
   --metadata remove-location --watermark-text '© Author' --watermark-anchor 8
 ```
 
-Format: jpeg/png/tiff16/tiff8/dng (inferred from extension by default).
+Format: jpeg/png/tiff16/tiff8/dng/heic-hdr (inferred from extension by default).
 Color: srgb/p3/adobe-rgb/prophoto. Resize: original/width/height/long/short/mp/percent.
 Metadata: none/all/copyright/remove-location. Watermark: `--watermark-text` or
 `--watermark-image`, plus `--watermark-opacity`, `--watermark-size`,
 `--watermark-margin`, `--watermark-anchor` 0–8 in row-major order.
-`--quality` affects JPEG; `--overwrite` explicitly permits replacement.
+`--quality` affects JPEG and HEIC; `--overwrite` explicitly permits replacement.
 Reusable profiles and multi-photo queue controls belong to the desktop interface.

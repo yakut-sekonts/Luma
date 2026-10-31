@@ -7,19 +7,20 @@ Qt 6/QML, LibRaw, SQLite and LittleCMS. No account or cloud service is required.
 
 ![Apertone Develop viewer with a project-generated test DNG](docs/screenshot.png)
 
-## Release: v1.5.0
+## Release: v1.6.0
 
 [Download the latest published release for macOS Apple Silicon](https://github.com/yakut-sekonts/Apertone/releases/latest) ·
-[1.5.0 release notes](docs/releases/v1.5.0.md)
+[1.6.0 release notes](docs/releases/v1.6.0.md)
 
 DMG and ZIP contain a standalone application; Qt SDK and Homebrew are not needed.
 The build is ad-hoc signed and not notarized. Installation instructions and
-checksums accompany the release. Version 1.5.0 adds editable Match Look transfer,
-persistent bitmap-mask edge refinement, local Face/Eyes/Lips selections and
-independent copies of combined mask stacks. Version 1.4 import-source management,
-the Intelligent Library, broad camera support and 70 stackable Quick Looks are
-included. Existing Luma and Apertone catalogs, settings, presets, DNG output and
-Sparkle update installations are upgraded in place.
+checksums accompany the release. Version 1.6.0 adds edge-aware RAW
+reconstruction, Adaptive HDR import/display/export, editable Enhance layers with
+provenance and typed decode diagnostics. Version 1.5 adaptive editing, Version
+1.4 import-source management, the Intelligent Library, broad camera support and
+70 stackable Quick Looks are included. Existing Luma and Apertone catalogs,
+settings, presets, DNG output and Sparkle update installations are upgraded in
+place.
 
 Version 1.0 and future releases use the same open-source GitHub distribution:
 standalone DMG/ZIP, ad-hoc signing, explicit absence of Apple notarization and
@@ -27,7 +28,7 @@ Sparkle-signed updates. Apple Developer Program membership is not required.
 The release acceptance boundary is recorded in
 [release and first-launch policy](docs/OPEN_SOURCE_RELEASE.md).
 
-## Included in source: phases 0.4–1.5
+## Included in source: phases 0.4–1.6
 
 Version 1.0 contains Metal/caches, local AI/retouch/search, HDR/panorama,
 metadata/XMP, backups/recovery, relinking, named versions, session History and
@@ -41,10 +42,11 @@ evidence and owner-accepted exceptions.
 
 - ✅ CMake project and Qt/QML application shell.
 - ✅ Real sensor decode through LibRaw, with a project-owned floating-point Bayer pipeline.
-- ✅ As Shot white balance, bilinear demosaic and camera-to-linear-sRGB transform.
+- ✅ As Shot white balance, edge-aware Bayer reconstruction and camera-to-linear-sRGB transform.
 - ✅ Temperature/Tint, As Shot and WB presets evaluated before the camera color matrix.
 - ✅ Exposure, Contrast, Highlights, Shadows, Whites, Blacks, Vibrance and Saturation.
 - ✅ Independent correction switches, gesture-based Undo/Redo, reset and original comparison.
+- ✅ Editable local Enhance layers with persisted provider/model provenance and deterministic CPU fallback.
 - ✅ Full-resolution JPEG, PNG and 16-bit TIFF export with embedded sRGB ICC.
 - ✅ Camera, lens information, ISO, shutter, aperture and focal length.
 - ✅ SQLite catalog with WAL, foreign keys, migration, transactions and durable autosave.
@@ -70,7 +72,7 @@ evidence and owner-accepted exceptions.
 - ✅ Calibrated Lens Corrections with automatic/manual profiles in source.
 - ✅ Manual, Auto and Guided perspective Transform in source.
 - ✅ Eight ready-made Curve/HSL filters with hover and Undo in source.
-- ✅ Advanced JPEG/PNG/TIFF8/16/DNG export, color/resize/metadata/watermark settings and sequential queue.
+- ✅ Advanced JPEG/PNG/TIFF8/16/DNG and Adaptive HDR HEIC export, color/resize/metadata/watermark settings and sequential queue.
 - ✅ Linear/Radial/Brush/Luminance/Color local masks, boolean composition and shared persistent rendering.
 - 🗓 Metal image processing.
 
@@ -92,14 +94,14 @@ and system-supported AVIF, with ICC color conversion, EXIF orientation and alpha
 See [ordinary image support](docs/IMAGE_SUPPORT.md) for behavior and limits.
 Develop never uses the embedded JPEG as its image source.
 
-The current bilinear demosaic is a reference implementation; advanced demosaic,
-highlight reconstruction and additional camera-specific qualification remain
-planned.
+The current two-pass edge-aware Bayer reconstruction keeps a bilinear reference
+path for regression comparison. Camera-specific highlight reconstruction and
+additional qualification remain planned.
 
 ## Build and run
 
 ```bash
-git clone --branch v1.5.0 https://github.com/yakut-sekonts/Apertone.git
+git clone --branch v1.6.0 https://github.com/yakut-sekonts/Apertone.git
 cd Apertone
 ./scripts/bootstrap.sh
 export PATH="$PWD/.tools/venv/bin:$PATH"
@@ -414,8 +416,8 @@ See [ADR 0017](docs/adr/0017-edited-thumbnails.md).
 
 ## Advanced export and queue / 0.4.10
 
-The Export panel supports JPEG, PNG, TIFF8/16 with None/LZW/ZIP, and processed
-Linear RGB DNG; sRGB/Display P3/Adobe RGB/ProPhoto; seven resize modes; output
+The Export panel supports JPEG, PNG, TIFF8/16 with None/LZW/ZIP, processed
+Linear RGB DNG, and Adaptive HDR HEIC on macOS 15+; sRGB/Display P3/Adobe RGB/ProPhoto; seven resize modes; output
 sharpening; metadata/location policies; Unicode text and image watermarks.
 Destination/naming/conflict settings can be saved as reusable profiles.
 Active/selected-photo export runs sequentially from immutable saved snapshots,

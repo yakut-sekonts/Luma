@@ -1,8 +1,10 @@
 #include "apps/desktop/EditorController.h"
+#include "core/catalog/Identity.h"
 #include "core/image/Bayer.h"
 #include "core/lens/LensCorrection.h"
 #include "core/render/AutoAdjust.h"
 #include "core/render/CreativeColor.h"
+#include "core/render/Enhance.h"
 #include "core/render/RetouchPass.h"
 #include <QPointer>
 #include <algorithm>
@@ -56,6 +58,90 @@ void EditorController::autoAdjust() {
         return;
     finishHistoryTools();
     runCreative(std::nullopt);
+}
+void EditorController::applyEnhance() {
+    if (!editable() || !session_ || original_ || exporting_ || creativeBusy_)
+        return;
+    if (history_.current().creative.quickLooks.size() >= 32) {
+        error_ = QStringLiteral("A photo supports at most 32 Quick Look layers.");
+        emit stateChanged();
+        return;
+    }
+    finishHistoryTools();
+    creativeBusy_ = true;
+    error_.clear();
+    const auto revision = ++creativeRevision_, edit = editRevision_, load = loadRevision_,
+               history = history_.revision();
+    const auto &session = session_.value();
+    const auto image = session.preview;
+    const auto metadata = session.asset.metadata;
+    const auto calibration = session.calibration;
+    const auto current = history_.current();
+    const QPointer<EditorController> self(this);
+    try {
+        creativeJob_ = creativeJobs_.submit(
+            luma::JobPriority::interactive, [self, image, metadata, calibration, current, revision,
+                                             edit, load, history](const luma::JobContext &context) {
+                std::optional<luma::EnhanceResult> result;
+                QString error;
+                try {
+                    result = luma::DeterministicEnhance{}.estimate(
+                        *image, current, metadata, calibration, context.stopToken());
+                } catch (const std::exception &failure) {
+                    error = QString::fromUtf8(failure.what());
+                }
+                if (!self || context.stopToken().isCancelled())
+                    return;
+                QMetaObject::invokeMethod(
+                    self,
+                    [self, result = std::move(result), error, revision, edit, load,
+                     history]() mutable {
+                        if (!self || self->creativeRevision_ != revision)
+                            return;
+                        self->creativeBusy_ = false;
+                        if (!self->editable() || self->original_ || self->editRevision_ != edit ||
+                            self->loadRevision_ != load || self->history_.revision() != history ||
+                            self->history_.gestureActive()) {
+                            self->cancelCreative();
+                            emit self->stateChanged();
+                            return;
+                        }
+                        if (result) {
+                            auto next = self->history_.current();
+                            if (next.creative.quickLooks.size() >= 32) {
+                                self->error_ = QStringLiteral(
+                                    "A photo supports at most 32 Quick Look layers.");
+                            } else {
+                                next.creative.quickLooks.push_back(
+                                    {luma::newID(),
+                                     "",
+                                     100,
+                                     true,
+                                     {},
+                                     "AI Enhance · CPU",
+                                     std::move(result->deltas),
+                                     std::move(result->provider),
+                                     std::move(result->providerVersion),
+                                     std::move(result->model),
+                                     std::move(result->modelDigest),
+                                     result->deterministicFallback});
+                                next.validate();
+                                self->endEdit();
+                                self->history_.apply(next, "AI Enhance");
+                                self->editsChanged();
+                            }
+                        } else {
+                            self->error_ = error;
+                        }
+                        emit self->stateChanged();
+                    },
+                    Qt::QueuedConnection);
+            });
+    } catch (const std::exception &failure) {
+        creativeBusy_ = false;
+        error_ = QString::fromUtf8(failure.what());
+    }
+    emit stateChanged();
 }
 void EditorController::samplePointColor(double x, double y) {
     if (!pointColorCanvasReady() || !editable() || original_ || !std::isfinite(x) ||

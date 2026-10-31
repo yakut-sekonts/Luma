@@ -1,6 +1,9 @@
+#include "core/catalog/Identity.h"
 #include "core/edits/EditSnapshot.h"
+#include "core/quick/QuickLooks.h"
 #include "core/render/AutoAdjust.h"
 #include "core/render/CreativeColor.h"
+#include "core/render/Enhance.h"
 #include "core/render/Presence.h"
 #include <algorithm>
 #include <cmath>
@@ -129,6 +132,35 @@ void presenceAndAuto() {
             "Auto Adjust changed unrelated creative settings.");
     require(provider.estimate(scene, edits, metadata, {}) == adjusted,
             "Auto Adjust is not deterministic for identical input.");
+    const luma::DeterministicEnhance enhance;
+    const auto generated = enhance.estimate(scene, edits, metadata, {});
+    require(generated == enhance.estimate(scene, edits, metadata, {}),
+            "Enhance fallback is not deterministic for identical input.");
+    require(generated.provider == "apertone.histogram-enhance" &&
+                generated.providerVersion == "1.0" && generated.model.empty() &&
+                generated.modelDigest.empty() && generated.deterministicFallback,
+            "Enhance fallback provenance is incomplete or ambiguous.");
+    auto layered = edits;
+    layered.creative.quickLooks.push_back({luma::newID(),
+                                           "",
+                                           100,
+                                           true,
+                                           {},
+                                           "AI Enhance · CPU",
+                                           generated.deltas,
+                                           generated.provider,
+                                           generated.providerVersion,
+                                           generated.model,
+                                           generated.modelDigest,
+                                           generated.deterministicFallback});
+    layered.validate();
+    const auto resolved = luma::resolveQuickLooks(layered);
+    require(std::abs(resolved.exposure - adjusted.exposure) < 1e-9 &&
+                std::abs(resolved.contrast - adjusted.contrast) < 1e-9 &&
+                std::abs(resolved.vibrance - adjusted.vibrance) < 1e-9,
+            "Editable Enhance layer does not reproduce its estimated parameters.");
+    require(luma::decodeCreative(luma::encodeCreative(layered.creative)) == layered.creative,
+            "Enhance provenance did not survive serialization.");
     rejects([&] { provider.estimate(scene, edits, metadata, {}, cancelled.token()); });
     std::fill(scene.rgb.begin(), scene.rgb.end(), 0);
     rejects([&] { provider.estimate(scene, edits, metadata, {}); });

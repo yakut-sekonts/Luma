@@ -20,7 +20,7 @@ PhotoSession SessionService::open(const std::filesystem::path &source, luma::Can
     const auto checksum = macos::sha256File(path, stop);
     // Only decoded pixels are cached. Selection and saved edits always come
     // from the current catalog transaction, including on a cache hit.
-    const auto key = checksum + "|decode-v1|preview-2560-1024-512";
+    const auto key = checksum + "|decode-v2|preview-2560-1024-512";
     const auto generation = previews_->generation();
     auto cached = previews_->get(key);
     if (!cached) {
@@ -32,9 +32,9 @@ PhotoSession SessionService::open(const std::filesystem::path &source, luma::Can
             return std::min(static_cast<double>(image.width) / decoded.image.width,
                             static_cast<double>(image.height) / decoded.image.height);
         };
-        cached = std::make_shared<PreviewSource>(
-            PreviewSource{preview, interactive, decoded.metadata, decoded.calibration,
-                          scale(*preview), scale(*interactive), quick, scale(*quick)});
+        cached = std::make_shared<PreviewSource>(PreviewSource{
+            preview, interactive, decoded.metadata, decoded.calibration, decoded.diagnostics,
+            scale(*preview), scale(*interactive), quick, scale(*quick)});
     }
     checkCancellation(stop);
     if (originalSize != std::filesystem::file_size(path) ||
@@ -54,9 +54,9 @@ PhotoSession SessionService::open(const std::filesystem::path &source, luma::Can
     previews_->put(key, cached, bytes, generation);
     if (progress)
         progress(1);
-    return {std::move(asset),      cached->standard,    cached->calibration,
-            cached->standardScale, cached->interactive, cached->interactiveScale,
-            cached->quick,         cached->quickScale};
+    return {std::move(asset),         cached->standard,      cached->calibration,
+            cached->diagnostics,      cached->standardScale, cached->interactive,
+            cached->interactiveScale, cached->quick,         cached->quickScale};
 }
 std::shared_ptr<const DecodedImage> SessionService::fullResolution(const AssetRecord &asset,
                                                                    CancellationToken stop) const {
@@ -67,7 +67,7 @@ std::shared_ptr<const DecodedImage> SessionService::fullResolution(const AssetRe
         throw std::runtime_error("Image exceeds the input budget.");
     if (macos::sha256File(path, stop) != asset.checksum)
         throw std::runtime_error("Original changed; full-resolution preview refused.");
-    const auto key = asset.checksum + "|decode-v1|full";
+    const auto key = asset.checksum + "|decode-v2|full";
     const auto generation = originals_->generation();
     auto decoded = originals_->get(key);
     if (!decoded)
@@ -134,10 +134,11 @@ void SessionService::exportPhoto(const AssetRecord &asset, EditDocument edits,
     std::transform(extension.begin(), extension.end(), extension.begin(),
                    [](unsigned char c) { return std::tolower(c); });
     const bool validExtension =
-        options.format == ExportFormat::jpeg  ? (extension == ".jpg" || extension == ".jpeg")
-        : options.format == ExportFormat::png ? extension == ".png"
-        : options.format == ExportFormat::dng ? extension == ".dng"
-                                              : (extension == ".tif" || extension == ".tiff");
+        options.format == ExportFormat::jpeg      ? (extension == ".jpg" || extension == ".jpeg")
+        : options.format == ExportFormat::png     ? extension == ".png"
+        : options.format == ExportFormat::dng     ? extension == ".dng"
+        : options.format == ExportFormat::heicHDR ? extension == ".heic"
+                                                  : (extension == ".tif" || extension == ".tiff");
     if (!validExtension)
         throw std::runtime_error("Destination extension does not match export format.");
     if (!options.overwrite && std::filesystem::exists(target))

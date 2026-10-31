@@ -95,6 +95,75 @@ void verifyTIFF(const std::filesystem::path &path, const ExportOptions &options)
             "ImageIO did not honor TIFF depth/compression: bits=" + std::to_string(bits) +
             ", compression=" + std::to_string(compression));
 }
+void writeAdaptiveHDR(const LinearOutput &surface, const std::filesystem::path &path, int quality,
+                      CGImageMetadataRef metadata, CancellationToken stop,
+                      const std::function<void(double)> &progress) {
+    if (@available(macOS 15.0, *)) {
+        surface.validate();
+        const auto count = pixelCount(surface.width, surface.height);
+        std::vector<float> pixels(count * 4);
+        float headroom = 1;
+        for (int y = 0; y < surface.height; ++y) {
+            checkCancellation(stop);
+            for (int x = 0; x < surface.width; ++x) {
+                const auto offset = (static_cast<std::size_t>(y) * surface.width + x) * 4;
+                const float alpha = surface.rgba[offset + 3];
+                for (std::size_t c = 0; c < 3; ++c) {
+                    const float value = std::max(0.F, surface.rgba[offset + c] * alpha);
+                    pixels[offset + c] = value;
+                    headroom = std::max(headroom, value);
+                }
+                pixels[offset + 3] = 1;
+            }
+            if (progress)
+                progress(.86 + .05 * (y + 1.0) / surface.height);
+        }
+        CFHandle space(CGColorSpaceCreateWithName(kCGColorSpaceExtendedLinearSRGB));
+        CFHandle provider(CGDataProviderCreateWithData(nullptr, pixels.data(),
+                                                       pixels.size() * sizeof(float), nullptr));
+        const auto bitmap = static_cast<CGBitmapInfo>(kCGImageAlphaLast) |
+                            kCGBitmapFloatComponents | kCGBitmapByteOrder32Little;
+        CFHandle linear(
+            space && provider
+                ? CGImageCreate(surface.width, surface.height, 32, 128,
+                                static_cast<std::size_t>(surface.width) * 4 * sizeof(float),
+                                space.get(), bitmap, provider.get(), nullptr, false,
+                                kCGRenderingIntentRelativeColorimetric)
+                : nullptr);
+        CFHandle image(linear ? CGImageCreateCopyWithContentHeadroom(headroom, linear.get())
+                              : nullptr);
+        CFHandle url(CFURLCreateFromFileSystemRepresentation(
+            nullptr, reinterpret_cast<const UInt8 *>(path.c_str()),
+            static_cast<CFIndex>(path.native().size()), false));
+        CFHandle writer(
+            url ? CGImageDestinationCreateWithURL(url.get(), CFSTR("public.heic"), 1, nullptr)
+                : nullptr);
+        if (!image || !writer)
+            throw std::runtime_error("Cannot create Adaptive HDR HEIC output.");
+        NSDictionary *properties = @{
+            (__bridge NSString *)kCGImageDestinationEncodeRequest :
+                (__bridge NSString *)kCGImageDestinationEncodeToISOGainmap,
+            (__bridge NSString *)kCGImageDestinationLossyCompressionQuality : @(quality / 100.0),
+            (__bridge NSString *)kCGImagePropertyOrientation : @1
+        };
+        CGImageDestinationAddImageAndMetadata(writer.get(), image.get(), metadata,
+                                              (__bridge CFDictionaryRef)properties);
+        checkCancellation(stop);
+        if (!CGImageDestinationFinalize(writer.get()))
+            throw std::runtime_error("ImageIO could not finish Adaptive HDR HEIC export.");
+        checkCancellation(stop);
+        CFHandle source(CGImageSourceCreateWithURL(url.get(), nullptr));
+        CFHandle gainMap(source ? CGImageSourceCopyAuxiliaryDataInfoAtIndex(
+                                      source.get(), 0, kCGImageAuxiliaryDataTypeISOGainMap)
+                                : nullptr);
+        if (!source || CGImageSourceGetStatus(source.get()) != kCGImageStatusComplete || !gainMap)
+            throw std::runtime_error("Encoded HEIC does not contain a complete ISO gain map.");
+        if (progress)
+            progress(.99);
+        return;
+    }
+    throw std::runtime_error("Adaptive HDR HEIC export requires macOS 15 or later.");
+}
 } // namespace
 void writeAdvancedImage(const DecodedRaw &decoded, const EditDocument &edits,
                         const std::filesystem::path &destination, const ExportOptions &options,
@@ -146,6 +215,9 @@ void writeAdvancedImage(const DecodedRaw &decoded, const EditDocument &edits,
                     if (progress)
                         progress(.86 + .13 * value);
                 });
+        } else if (options.format == ExportFormat::heicHDR) {
+            writeAdaptiveHDR(surface, temporary.path, options.quality, metadata.get(), stop,
+                             progress);
         } else {
             const bool tiff =
                 options.format == ExportFormat::tiff8 || options.format == ExportFormat::tiff16;

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.25)
 if(NOT CMAKE_OSX_DEPLOYMENT_TARGET)
     set(CMAKE_OSX_DEPLOYMENT_TARGET 14.0 CACHE STRING "Minimum supported macOS" FORCE)
 endif()
-project(Apertone VERSION 1.5.0 LANGUAGES C CXX OBJCXX)
+project(Apertone VERSION 1.6.0 LANGUAGES C CXX OBJCXX)
 
 if(NOT APPLE OR NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^(arm64|aarch64)$")
     message(FATAL_ERROR "Apertone currently supports macOS Apple Silicon only.")
@@ -25,7 +25,7 @@ add_library(luma_core STATIC
     core/ai/Culling.cpp core/catalog/IntelligentLibrary.cpp
     core/io/StagingFile.cpp
     core/library/ImportOptions.cpp core/catalog/ImportPlans.cpp core/library/SmartCollection.cpp core/catalog/SmartCollections.cpp
-    core/render/CreativeColor.cpp core/render/Presence.cpp core/render/AutoAdjust.cpp core/quick/QuickLooks.cpp core/quick/MatchLook.cpp
+    core/render/CreativeColor.cpp core/render/Presence.cpp core/render/AutoAdjust.cpp core/render/Enhance.cpp core/quick/QuickLooks.cpp core/quick/MatchLook.cpp
     core/edits/CreativeSettings.cpp core/catalog/CreativeStorage.cpp
     core/edits/EditSnapshot.cpp core/edits/EditHistory.cpp core/render/ImageHistogram.cpp core/color/WhiteBalance.cpp core/render/WhiteBalanceSampler.cpp core/catalog/EditVersions.cpp
     core/merge/HdrMerge.cpp core/merge/PanoramaMerge.cpp
@@ -69,7 +69,7 @@ target_link_libraries(luma_macos PRIVATE "-framework Vision" "-framework CoreVid
 set_source_files_properties(platform/macos/MetalDevelop.mm PROPERTIES COMPILE_OPTIONS "-fobjc-arc")
 target_link_libraries(luma_macos PRIVATE luma_core "-framework Metal")
 target_include_directories(luma_macos PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
-target_link_libraries(luma_macos PRIVATE luma_lcms "-framework AppKit" "-framework ColorSync" "-framework ImageIO" "-framework CoreText" "-framework UniformTypeIdentifiers")
+target_link_libraries(luma_macos PRIVATE luma_lcms "-framework AppKit" "-framework ColorSync" "-framework CoreImage" "-framework ImageIO" "-framework CoreText" "-framework UniformTypeIdentifiers")
 target_compile_options(luma_macos PRIVATE -Wall -Wextra -Wpedantic -Werror)
 
 add_library(luma_services STATIC apps/shared/DerivedImage.cpp apps/shared/MergeService.cpp apps/shared/BackupService.cpp apps/shared/MetadataService.cpp apps/shared/RelinkService.cpp apps/shared/PhotoDecoder.cpp apps/shared/SessionService.cpp apps/shared/LibraryService.cpp)

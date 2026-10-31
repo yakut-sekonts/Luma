@@ -230,6 +230,7 @@ ApplicationWindow {
                         Label { text: qsTranslate("Apertone", "SOURCE PHOTO"); color: Theme.faint; font.pixelSize: 9; font.letterSpacing: 1; Layout.topMargin: 10 }
                         Label { objectName: "develop.sourceFilename"; text: editor.hasPhoto ? editor.filename : qsTranslate("Apertone", "No photo selected"); color: Theme.text; font.pixelSize: 12; wrapMode: Text.Wrap; Layout.fillWidth: true }
                         Label { text: editor.dimensions; color: Theme.faint; font.pixelSize: 11 }
+                        MetadataRow { objectName: "develop.decode"; visible: editor.hasPhoto; label: qsTranslate("Apertone", "Decode"); value: editor.decoderSummary; Layout.fillWidth: true }
                         Label { text: qsTranslate("Apertone", "Original unchanged"); color: Theme.muted; font.pixelSize: 10; visible: editor.hasPhoto }
                         ApertoneButton {
                             objectName: "develop.history"

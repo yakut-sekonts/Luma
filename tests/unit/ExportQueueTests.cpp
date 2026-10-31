@@ -136,14 +136,15 @@ void qmlTest(ExportController &exporter, EditorController &editor, LibraryModel 
     auto *format = window->findChild<QObject *>("exportFormat");
     auto *naming = window->findChild<QObject *>("exportNaming");
     require(panel && format && naming, "Export panel controls are missing.");
-    require(format->setProperty("currentIndex", 4), "Cannot select DNG in QML.");
-    require(QMetaObject::invokeMethod(format, "activated", Q_ARG(int, 4)),
+    require(format->setProperty("currentIndex", 5), "Cannot select Adaptive HDR in QML.");
+    require(QMetaObject::invokeMethod(format, "activated", Q_ARG(int, 5)),
             "Cannot activate export format.");
     naming->setProperty("text", "QML-{sequence}");
     require(QMetaObject::invokeMethod(naming, "editingFinished"), "Cannot edit QML naming.");
     require(exporter.configure(panel->property("form").toMap()),
             "Cannot apply actual export QML settings.");
-    require(exporter.settings().value("format").toInt() == 4 &&
+    require(exporter.settings().value("format").toInt() == 5 &&
+                exporter.settings().value("colorSpace").toInt() == 0 &&
                 exporter.settings().value("naming").toString() == "QML-{sequence}",
             "QML did not update export settings.");
     if (!warnings.isEmpty())

@@ -5,7 +5,7 @@
 
 namespace luma {
 // Preserve the original public format values used by desktop/CLI integration.
-enum class ExportFormat { jpeg, png, tiff16, tiff8, dng };
+enum class ExportFormat { jpeg, png, tiff16, tiff8, dng, heicHDR };
 enum class ExportColorSpace { srgb, displayP3, adobeRGB, proPhoto };
 enum class TiffCompression { none, lzw, zip };
 enum class ResizeMode { original, width, height, longEdge, shortEdge, megapixels, percentage };

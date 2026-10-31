@@ -44,15 +44,16 @@ Dialog {
             ApertoneTextField { objectName: "exportNaming"; text: panel.form.naming; Layout.fillWidth: true; onEditingFinished: panel.update("naming", text) }
             ApertoneComboBox { objectName: "export.conflict"; model: [qsTranslate("Apertone", "Existing files: skip"), qsTranslate("Apertone", "Existing files: unique name"), qsTranslate("Apertone", "Existing files: replace")]; currentIndex: panel.form.conflict; onActivated: panel.update("conflict", currentIndex); Layout.fillWidth: true }
             Label { visible: panel.form.conflict === 2; text: qsTranslate("Apertone", "Files with matching names will be replaced."); color: Theme.negative; wrapMode: Text.Wrap; Layout.fillWidth: true }
-            ApertoneComboBox { objectName: "exportFormat"; model: ["JPEG", "PNG", "TIFF · 16 bit", "TIFF · 8 bit", qsTranslate("Apertone", "DNG · processed Linear RGB")]; currentIndex: panel.form.format; onActivated: { panel.update("format", currentIndex); if (currentIndex !== 2 && currentIndex !== 3) panel.update("compression", 0) } Layout.fillWidth: true }
+            ApertoneComboBox { objectName: "exportFormat"; model: ["JPEG", "PNG", "TIFF · 16 bit", "TIFF · 8 bit", qsTranslate("Apertone", "DNG · processed Linear RGB"), qsTranslate("Apertone", "HEIC · Adaptive HDR")]; currentIndex: panel.form.format; onActivated: { panel.update("format", currentIndex); if (currentIndex !== 2 && currentIndex !== 3) panel.update("compression", 0); if (currentIndex === 5) panel.update("colorSpace", 0) } Layout.fillWidth: true }
             Label { visible: panel.form.format === 4; text: qsTranslate("Apertone", "DNG contains applied edits, not archived camera sensor data. Minimum 22 px on each side."); wrapMode: Text.Wrap; Layout.fillWidth: true; font.pixelSize: 12 }
+            Label { visible: panel.form.format === 5; text: qsTranslate("Apertone", "Adaptive HDR includes an SDR-compatible base and ISO gain map. Requires macOS 15 or later."); wrapMode: Text.Wrap; Layout.fillWidth: true; font.pixelSize: 12 }
             RowLayout {
-                visible: panel.form.format === 0
-                Label { text: qsTranslate("Apertone", "JPEG quality") }
+                visible: panel.form.format === 0 || panel.form.format === 5
+                Label { text: panel.form.format === 5 ? qsTranslate("Apertone", "HEIC quality") : qsTranslate("Apertone", "JPEG quality") }
                 ApertoneSpinBox { from: 1; to: 100; value: panel.form.quality; editable: true; onValueModified: panel.update("quality", value) }
             }
             ApertoneComboBox { objectName: "export.compression"; visible: panel.form.format === 2 || panel.form.format === 3; model: [qsTranslate("Apertone", "TIFF · uncompressed"), "TIFF · LZW", "TIFF · ZIP"]; currentIndex: panel.form.compression; onActivated: panel.update("compression", currentIndex); Layout.fillWidth: true }
-            ApertoneComboBox { objectName: "export.colorSpace"; model: ["sRGB", "Display P3", "Adobe RGB (1998)", "ProPhoto RGB"]; currentIndex: panel.form.colorSpace; onActivated: panel.update("colorSpace", currentIndex); Layout.fillWidth: true }
+            ApertoneComboBox { objectName: "export.colorSpace"; enabled: panel.form.format !== 5; model: ["sRGB", "Display P3", "Adobe RGB (1998)", "ProPhoto RGB"]; currentIndex: panel.form.colorSpace; onActivated: panel.update("colorSpace", currentIndex); Layout.fillWidth: true }
             Label { text: qsTranslate("Apertone", "Size after Crop / Transform") }
             RowLayout {
                 ApertoneComboBox { objectName: "export.resize"; model: [qsTranslate("Apertone", "Original size"), qsTranslate("Apertone", "Width, px"), qsTranslate("Apertone", "Height, px"), qsTranslate("Apertone", "Long edge, px"), qsTranslate("Apertone", "Short edge, px"), qsTranslate("Apertone", "Megapixels"), qsTranslate("Apertone", "Percentage")]; currentIndex: panel.form.resize; onActivated: panel.update("resize", currentIndex); Layout.fillWidth: true }

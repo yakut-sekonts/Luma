@@ -93,12 +93,13 @@ DisplayImage renderCPU(const FloatImage &source, EditDocument edits, int orienta
 #if !defined(LUMA_UX_CPU_RENDER_ROWS)
                                  ,
                                  DevelopAccelerator *accelerator, PreviewAnalysisOptions analysis,
-                                 unsigned maximumWorkers
+                                 unsigned maximumWorkers, DisplayMapping displayMapping
 #endif
 ) {
 #if defined(LUMA_UX_CPU_RENDER_ROWS)
     const PreviewAnalysisOptions analysis{};
     constexpr unsigned maximumWorkers = 1;
+    DisplayMapping displayMapping = DisplayMapping::clip;
 #endif
     if (maximumWorkers < 1 || maximumWorkers > 4)
         throw std::runtime_error("Render worker budget must be between one and four.");
@@ -109,6 +110,9 @@ DisplayImage renderCPU(const FloatImage &source, EditDocument edits, int orienta
     const LensCorrectionPass optics(source, edits, metadata, stop);
     const RetouchPass retouch(optics.image(), edits.retouch, stop);
     const auto &input = retouch.image();
+    if (displayMapping == DisplayMapping::adaptiveHDR &&
+        std::none_of(input.rgb.begin(), input.rgb.end(), [](float value) { return value > 1; }))
+        displayMapping = DisplayMapping::clip;
     edits.validate();
     if (orientation < 0 || orientation > 7 ||
         input.rgb.size() != pixelCount(input.width, input.height) * 3) {
@@ -245,7 +249,7 @@ DisplayImage renderCPU(const FloatImage &source, EditDocument edits, int orienta
             auto destination = std::span(result.rgba)
                                    .subspan(static_cast<std::size_t>(y) * width * 4,
                                             static_cast<std::size_t>(width) * 4);
-            transform.convert(row, destination);
+            transform.convert(row, destination, displayMapping);
             if (!input.alpha.empty()) {
                 for (int x = 0; x < width; ++x) {
                     const auto alpha = geometry.sample(x, y, [&](int sx, int sy) {

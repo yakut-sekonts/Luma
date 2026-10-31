@@ -64,8 +64,8 @@ int main(int argc, char **argv) {
             // Supply the read-only state consumed by the expanded preferences UI.
             QQmlPropertyMap editor, library, diagnostics;
             for (const auto &name :
-                 {"saving", "metalPreview", "denoiseModelConfigured", "denoiseModelBundled",
-                  "skyModelConfigured", "skyModelBundled"})
+                 {"saving", "metalPreview", "hdrToneMapping", "denoiseModelConfigured",
+                  "denoiseModelBundled", "skyModelConfigured", "skyModelBundled"})
                 editor.insert(name, false);
             editor.insert("catalogPath", QString{});
             editor.insert("previewCacheMiB", 64);

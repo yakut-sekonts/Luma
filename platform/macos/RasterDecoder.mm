@@ -1,16 +1,27 @@
 #include "platform/macos/RasterDecoder.h"
 #include "core/image/Bayer.h"
 #include "platform/macos/CFHandle.h"
+#import <CoreImage/CoreImage.h>
 #import <Foundation/Foundation.h>
 #import <ImageIO/ImageIO.h>
 #import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
 #include <algorithm>
 #include <cmath>
+#include <dlfcn.h>
 #include <set>
+#include <span>
 
 namespace luma::macos {
 namespace {
 constexpr std::array orientation{0, 0, 1, 3, 2, 4, 6, 7, 5};
+CFStringRef computeHDRStatsKey() {
+    static const CFStringRef key = [] {
+        const auto *symbol =
+            reinterpret_cast<const CFStringRef *>(dlsym(RTLD_DEFAULT, "kCGComputeHDRStats"));
+        return symbol ? *symbol : nullptr;
+    }();
+    return key;
+}
 bool allowed(CFStringRef type) {
     if (!type)
         return false;
@@ -21,6 +32,43 @@ bool allowed(CFStringRef type) {
     NSString *value = (__bridge NSString *)type;
     const char *bytes = value.UTF8String;
     return bytes && types.contains(bytes);
+}
+bool hasGainMap(CGImageSourceRef source, std::size_t index) {
+    if (@available(macOS 15.0, *)) {
+        CFHandle iso(CGImageSourceCopyAuxiliaryDataInfoAtIndex(
+            source, index, kCGImageAuxiliaryDataTypeISOGainMap));
+        if (iso)
+            return true;
+    }
+    CFHandle apple(CGImageSourceCopyAuxiliaryDataInfoAtIndex(source, index,
+                                                             kCGImageAuxiliaryDataTypeHDRGainMap));
+    return bool(apple);
+}
+bool renderExpandedGainMap(const std::filesystem::path &path, int width, int height,
+                           std::span<float> pixels, CGColorSpaceRef colorSpace) {
+    if (@available(macOS 14.0, *)) {
+        CFHandle url(CFURLCreateFromFileSystemRepresentation(
+            nullptr, reinterpret_cast<const UInt8 *>(path.c_str()),
+            static_cast<CFIndex>(path.native().size()), false));
+        CIImage *image = url ? [CIImage imageWithContentsOfURL:(__bridge NSURL *)url.get()
+                                                       options:@{
+                                                           kCIImageExpandToHDR : @YES,
+                                                           kCIImageApplyOrientationProperty : @NO
+                                                       }]
+                             : nil;
+        const CGRect bounds = CGRectMake(0, 0, width, height);
+        if (!image || !CGRectEqualToRect(image.extent, bounds))
+            return false;
+        CIContext *context = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer : @YES}];
+        [context render:image
+               toBitmap:pixels.data()
+               rowBytes:static_cast<std::size_t>(width) * 4 * sizeof(float)
+                 bounds:bounds
+                 format:kCIFormatRGBAf
+             colorSpace:colorSpace];
+        return true;
+    }
+    return false;
 }
 CFHandle<CGImageSourceRef> source(const std::filesystem::path &path) {
     if (!std::filesystem::is_regular_file(path) || std::filesystem::file_size(path) > 512000000)
@@ -191,12 +239,20 @@ DecodedImage RasterDecoder::decode(const std::filesystem::path &path, Cancellati
         if (progress)
             progress(.05);
         checkCancellation(stop);
-        NSDictionary *options = @{
+        NSMutableDictionary *options = [@{
             (__bridge NSString *)kCGImageSourceShouldAllowFloat : @YES,
-            (__bridge NSString *)kCGImageSourceShouldCache : @NO
-        };
+            (__bridge NSString *)kCGImageSourceShouldCache : @NO,
+            (__bridge NSString *)
+            kCGImageSourceDecodeRequest : (__bridge NSString *)kCGImageSourceDecodeToHDR
+        } mutableCopy];
+        if (@available(macOS 16.0, *)) {
+            if (const auto key = computeHDRStatsKey())
+                options[(__bridge NSString *)kCGImageSourceDecodeRequestOptions] =
+                    @{(__bridge NSString *)key : @YES};
+        }
         CFHandle image(
             CGImageSourceCreateImageAtIndex(input.get(), index, (__bridge CFDictionaryRef)options));
+        [options release];
         checkCancellation(stop);
         if (!image || CGImageGetWidth(image.get()) != static_cast<std::size_t>(info.width) ||
             CGImageGetHeight(image.get()) != static_cast<std::size_t>(info.height) ||
@@ -205,23 +261,31 @@ DecodedImage RasterDecoder::decode(const std::filesystem::path &path, Cancellati
         const auto count = pixelCount(info.width, info.height);
         std::vector<float> pixels(count * 4);
         CFHandle color(CGColorSpaceCreateWithName(kCGColorSpaceExtendedLinearSRGB));
-        const auto bitmap = static_cast<CGBitmapInfo>(kCGImageAlphaPremultipliedLast) |
-                            kCGBitmapFloatComponents | kCGBitmapByteOrder32Little;
-        CFHandle context(color ? CGBitmapContextCreate(pixels.data(), info.width, info.height, 32,
-                                                       static_cast<std::size_t>(info.width) * 16,
-                                                       color.get(), bitmap)
-                               : nullptr);
-        if (!context)
-            throw std::runtime_error("Cannot allocate color-managed image raster.");
-        CGContextSetBlendMode(context.get(), kCGBlendModeCopy);
-        CGContextSetRenderingIntent(context.get(), kCGRenderingIntentRelativeColorimetric);
-        CGContextDrawImage(context.get(), CGRectMake(0, 0, info.width, info.height), image.get());
+        const bool expanded =
+            color && hasGainMap(input.get(), index) &&
+            renderExpandedGainMap(path, info.width, info.height, pixels, color.get());
+        if (!expanded) {
+            const auto bitmap = static_cast<CGBitmapInfo>(kCGImageAlphaPremultipliedLast) |
+                                kCGBitmapFloatComponents | kCGBitmapByteOrder32Little;
+            CFHandle context(color
+                                 ? CGBitmapContextCreate(pixels.data(), info.width, info.height, 32,
+                                                         static_cast<std::size_t>(info.width) * 16,
+                                                         color.get(), bitmap)
+                                 : nullptr);
+            if (!context)
+                throw std::runtime_error("Cannot allocate color-managed image raster.");
+            CGContextSetBlendMode(context.get(), kCGBlendModeCopy);
+            CGContextSetRenderingIntent(context.get(), kCGRenderingIntentRelativeColorimetric);
+            CGContextDrawImage(context.get(), CGRectMake(0, 0, info.width, info.height),
+                               image.get());
+        }
         checkCancellation(stop);
         if (CGImageSourceGetStatusAtIndex(input.get(), index) != kCGImageStatusComplete)
             throw std::runtime_error("Image data became incomplete during decoding.");
         FloatImage result(info.width, info.height);
         result.alpha.resize(count);
         bool opaque = true;
+        bool hdr = false;
         for (std::size_t i = 0; i < count; ++i) {
             if (i % static_cast<std::size_t>(info.width) == 0) {
                 checkCancellation(stop);
@@ -238,13 +302,26 @@ DecodedImage RasterDecoder::decode(const std::filesystem::path &path, Cancellati
                 if (!std::isfinite(value))
                     throw std::runtime_error("Non-finite decoded image color.");
                 result.rgb[i * 3 + c] = value;
+                hdr = hdr || value > 1.000001F;
             }
         }
         if (opaque)
             std::vector<float>().swap(result.alpha);
         if (progress)
             progress(1);
-        return {std::move(result), info, {}};
+        DecodeDiagnostics diagnostics;
+        diagnostics.decoder = "ImageIO";
+        const auto version = NSProcessInfo.processInfo.operatingSystemVersion;
+        diagnostics.decoderVersion = std::to_string(version.majorVersion) + "." +
+                                     std::to_string(version.minorVersion) + "." +
+                                     std::to_string(version.patchVersion);
+        diagnostics.source = DecodeSource::raster;
+        diagnostics.color = DecodeColorPath::embeddedProfileToLinearSRGB;
+        diagnostics.highlights =
+            hdr ? DecodeHighlightPath::adaptiveHDR : DecodeHighlightPath::sourceRange;
+        diagnostics.sourceWidth = diagnostics.activeWidth = info.width;
+        diagnostics.sourceHeight = diagnostics.activeHeight = info.height;
+        return {std::move(result), info, {}, std::move(diagnostics)};
     }
 }
 } // namespace luma::macos

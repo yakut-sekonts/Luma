@@ -83,6 +83,16 @@ Dialog {
             checked: editor.metalPreview
             onToggled: editor.metalPreview = checked
         }
+        CheckBox {
+            objectName: "settings.hdrToneMapping"
+            text: qsTranslate("Apertone", "Map HDR highlights into the preview")
+            checked: editor.hdrToneMapping
+            onToggled: editor.hdrToneMapping = checked
+        }
+        Label {
+            text: qsTranslate("Apertone", "Preview-only tone mapping preserves detail above SDR white. Histogram, clipping warnings and exports remain scene-linear.")
+            wrapMode: Text.Wrap; Layout.fillWidth: true; font.pixelSize: 11
+        }
         Label {
             text: qsTranslate("Apertone", "Local AI Denoise model") + ": " +
                   (editor.denoiseModelConfigured ? editor.denoiseModelName : qsTranslate("Apertone", "Not configured")) +

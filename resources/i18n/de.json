@@ -67,6 +67,7 @@
     "CROP / STRAIGHTEN": "ZUSCHNITT / AUSRICHTEN",
     "CURVES": "KURVEN",
     "Camera": "Kamera",
+    "Decode": "Dekodierung",
     "Camera not in the database; no profile applied": "Kamera nicht in der Datenbank; kein Profil angewendet",
     "Cancel": "Abbrechen",
     "Cancel export": "Export abbrechen",
@@ -814,6 +815,8 @@
     "Invalid appearance preferences; system theme is active.": "Ungültige Darstellungseinstellungen; das Systemdesign ist aktiv.",
     "Quick": "Schnell",
     "Automatic Light and Color": "Automatisches Licht und Farbe",
+    "Enhance": "Verbessern",
+    "Editable local enhancement with explicit processing provenance": "Bearbeitbare lokale Verbesserung mit expliziter Verarbeitungsherkunft",
     "B&W": "S/W",
     "Straighten": "Ausrichten",
     "Layers": "Ebenen",
@@ -900,6 +903,11 @@
     "Face": "Gesicht",
     "Eyes": "Augen",
     "Lips": "Lippen",
-    "Click a face in the photo.": "Klicken Sie auf ein Gesicht im Foto."
+    "Click a face in the photo.": "Klicken Sie auf ein Gesicht im Foto.",
+    "Adaptive HDR includes an SDR-compatible base and ISO gain map. Requires macOS 15 or later.": "Adaptive HDR enthält eine SDR-kompatible Basis und eine ISO-Gain-Map. Erfordert macOS 15 oder neuer.",
+    "HEIC · Adaptive HDR": "HEIC · Adaptive HDR",
+    "HEIC quality": "HEIC-Qualität",
+    "Map HDR highlights into the preview": "HDR-Lichter in die Vorschau abbilden",
+    "Preview-only tone mapping preserves detail above SDR white. Histogram, clipping warnings and exports remain scene-linear.": "Das Tone Mapping nur für die Vorschau erhält Details oberhalb von SDR-Weiß. Histogramm, Clipping-Warnungen und Exporte bleiben szenenlinear."
   }
 }

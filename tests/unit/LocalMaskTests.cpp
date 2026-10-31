@@ -230,7 +230,7 @@ void pixels() {
     for (std::size_t i = 0; i < image.alpha.size(); ++i)
         image.alpha[i] = static_cast<float>(i % 5) / 4;
     for (int orientation = 0; orientation < 8; ++orientation) {
-        luma::DecodedRaw decoded{image, {}, {}};
+        luma::DecodedRaw decoded{image, {}, {}, {}};
         decoded.metadata.orientation = orientation;
         const auto linear = luma::renderLinearOutput(decoded, edit);
         const auto preview = luma::renderCPU(image, edit, orientation);

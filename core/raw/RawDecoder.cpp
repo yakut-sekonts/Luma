@@ -5,6 +5,7 @@
 #include <cmath>
 #include <cstring>
 #include <libraw/libraw.h>
+#include <limits>
 #include <memory>
 #include <sstream>
 
@@ -283,8 +284,20 @@ DecodedRaw RawDecoder::decode(const std::filesystem::path &path, luma::Cancellat
                 progress(0.45 + .55 * (y + 1.0) / image.height);
         }
         auto metadata = metadataFrom(data);
+        DecodeDiagnostics diagnostics;
+        diagnostics.decoder = "LibRaw";
+        diagnostics.decoderVersion = LibRaw::version();
+        diagnostics.source = DecodeSource::renderedLinearDNG;
+        diagnostics.color = DecodeColorPath::dngProfileToLinearSRGB;
+        diagnostics.highlights = DecodeHighlightPath::sourceRange;
+        diagnostics.sourceWidth = sizes.raw_width;
+        diagnostics.sourceHeight = sizes.raw_height;
+        diagnostics.activeWidth = sizes.width;
+        diagnostics.activeHeight = sizes.height;
+        diagnostics.leftMargin = sizes.left_margin;
+        diagnostics.topMargin = sizes.top_margin;
         decoder.recycle();
-        return {std::move(image), std::move(metadata), calibration};
+        return {std::move(image), std::move(metadata), calibration, std::move(diagnostics)};
     }
     if (!data.rawdata.raw_image || data.idata.filters == 0 || data.idata.filters == 9 ||
         data.idata.colors != 3 || sizes.width < 2 || sizes.height < 2) {
@@ -311,6 +324,9 @@ DecodedRaw RawDecoder::decode(const std::filesystem::path &path, luma::Cancellat
     const auto &color = data.color;
     const auto calibration = bayerCalibration(color);
     const auto stride = sizes.raw_pitch / sizeof(unsigned short);
+    double blackMinimum = std::numeric_limits<double>::infinity();
+    double blackMaximum = -std::numeric_limits<double>::infinity();
+    std::uint64_t samplesAtOrAboveWhite = 0;
     for (int y = 0; y < sizes.height; ++y) {
         checkCancellation(stop);
         for (int x = 0; x < sizes.width; ++x) {
@@ -325,26 +341,51 @@ DecodedRaw RawDecoder::decode(const std::filesystem::path &path, luma::Cancellat
                 black += color.cblack[index];
             }
             const double white = color.maximum;
+            blackMinimum = std::min(blackMinimum, black);
+            blackMaximum = std::max(blackMaximum, black);
             if (black >= white) {
                 throw std::runtime_error("Invalid RAW black/white levels.");
             }
             const double sample =
                 data.rawdata.raw_image[(y + sizes.top_margin) * stride + x + sizes.left_margin];
+            if (sample >= white)
+                ++samplesAtOrAboveWhite;
             frame.samples[static_cast<std::size_t>(y) * sizes.width + x] =
                 static_cast<float>(std::max(0.0, sample - black) / (white - black));
         }
     }
+    DecodeDiagnostics diagnostics;
+    diagnostics.decoder = "LibRaw";
+    diagnostics.decoderVersion = LibRaw::version();
+    diagnostics.source = DecodeSource::integerBayerRaw;
+    diagnostics.reconstruction = DecodeReconstruction::edgeAware;
+    diagnostics.color = DecodeColorPath::cameraToLinearSRGB;
+    diagnostics.highlights = DecodeHighlightPath::normalizedSensorHeadroom;
+    diagnostics.sourceWidth = sizes.raw_width;
+    diagnostics.sourceHeight = sizes.raw_height;
+    diagnostics.activeWidth = sizes.width;
+    diagnostics.activeHeight = sizes.height;
+    diagnostics.leftMargin = sizes.left_margin;
+    diagnostics.topMargin = sizes.top_margin;
+    constexpr std::array names{'R', 'G', 'B'};
+    for (const int channel : cfa)
+        diagnostics.cfa.push_back(names[static_cast<std::size_t>(channel)]);
+    diagnostics.blackMinimum = blackMinimum;
+    diagnostics.blackMaximum = blackMaximum;
+    diagnostics.whiteLevel = color.maximum;
+    diagnostics.sensorSamples = pixelCount(sizes.width, sizes.height);
+    diagnostics.samplesAtOrAboveWhite = samplesAtOrAboveWhite;
     decoder.recycle();
     if (progress) {
         progress(0.45);
     }
-    auto image = demosaicBilinear(frame, stop);
+    auto image = demosaicEdgeAware(frame, stop);
     frame.samples.clear();
     frame.samples.shrink_to_fit();
 
     if (progress) {
         progress(1);
     }
-    return {std::move(image), std::move(metadata), calibration};
+    return {std::move(image), std::move(metadata), calibration, std::move(diagnostics)};
 }
 } // namespace luma

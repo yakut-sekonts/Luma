@@ -65,6 +65,45 @@ void write(const std::filesystem::path &path, CGImageRef image, CFStringRef type
         CGImageDestinationAddImage(writer.get(), image, (__bridge CFDictionaryRef)properties);
     require(CGImageDestinationFinalize(writer.get()), "Native fixture encoding failed.");
 }
+void writeGainMap(const std::filesystem::path &path) {
+    if (@available(macOS 15.0, *)) {
+        constexpr int width = 16, height = 8;
+        std::vector<float> pixels(static_cast<std::size_t>(width) * height * 4);
+        for (int y = 0; y < height; ++y)
+            for (int x = 0; x < width; ++x) {
+                const float value = x < width / 2 ? .18F : 2.F;
+                const auto offset = (static_cast<std::size_t>(y) * width + x) * 4;
+                pixels[offset] = pixels[offset + 1] = pixels[offset + 2] = value;
+                pixels[offset + 3] = 1;
+            }
+        CFHandle color(CGColorSpaceCreateWithName(kCGColorSpaceExtendedLinearSRGB));
+        CFHandle provider(CGDataProviderCreateWithData(nullptr, pixels.data(),
+                                                       pixels.size() * sizeof(float), nullptr));
+        CFHandle original(
+            CGImageCreate(width, height, 32, 128, width * 4 * sizeof(float), color.get(),
+                          static_cast<CGBitmapInfo>(kCGImageAlphaLast) | kCGBitmapFloatComponents |
+                              kCGBitmapByteOrder32Little,
+                          provider.get(), nullptr, false, kCGRenderingIntentRelativeColorimetric));
+        CFHandle hdr(CGImageCreateCopyWithContentHeadroom(4, original.get()));
+        auto target = url(path);
+        CFHandle writer(
+            CGImageDestinationCreateWithURL(target.get(), CFSTR("public.heic"), 1, nullptr));
+        require(bool(hdr) && bool(writer), "Cannot prepare Adaptive HDR fixture.");
+        NSDictionary *properties = @{
+            (__bridge NSString *)kCGImageDestinationEncodeRequest :
+                (__bridge NSString *)kCGImageDestinationEncodeToISOGainmap,
+            (__bridge NSString *)kCGImageDestinationLossyCompressionQuality : @1
+        };
+        CGImageDestinationAddImage(writer.get(), hdr.get(), (__bridge CFDictionaryRef)properties);
+        require(CGImageDestinationFinalize(writer.get()), "Adaptive HDR fixture encoding failed.");
+        auto input = url(path);
+        CFHandle source(input ? CGImageSourceCreateWithURL(input.get(), nullptr) : nullptr);
+        CFHandle gain(source ? CGImageSourceCopyAuxiliaryDataInfoAtIndex(
+                                   source.get(), 0, kCGImageAuxiliaryDataTypeISOGainMap)
+                             : nullptr);
+        require(bool(gain), "Adaptive HDR fixture has no ISO gain map.");
+    }
+}
 std::array<float, 3> pixel(const luma::FloatImage &image, int x, int y) {
     const auto i = (static_cast<std::size_t>(y) * image.width + x) * 3;
     return {image.rgb[i], image.rgb[i + 1], image.rgb[i + 2]};
@@ -143,6 +182,7 @@ void fixtures(const std::filesystem::path &folder) {
                                      cmykData.get(), nullptr, false,
                                      kCGRenderingIntentRelativeColorimetric));
     write(folder / "cmyk.tif", cmykImage.get(), CFSTR("public.tiff"));
+    writeGainMap(folder / "adaptive-hdr.heic");
     for (const auto &[name, space] : std::array{std::pair{"p3", kCGColorSpaceDisplayP3},
                                                 std::pair{"adobe", kCGColorSpaceAdobeRGB1998},
                                                 std::pair{"prophoto", kCGColorSpaceROMMRGB}}) {
@@ -164,6 +204,13 @@ void nativeTests(const std::filesystem::path &folder, const std::filesystem::pat
                 "Raster color/row orientation is incorrect.");
     }
     const auto decoded = decoder.decode(folder / "rgba.png");
+    require(decoded.diagnostics.decoder == "ImageIO" &&
+                !decoded.diagnostics.decoderVersion.empty() &&
+                decoded.diagnostics.source == luma::DecodeSource::raster &&
+                decoded.diagnostics.color == luma::DecodeColorPath::embeddedProfileToLinearSRGB &&
+                decoded.diagnostics.highlights == luma::DecodeHighlightPath::sourceRange &&
+                decoded.diagnostics.activeWidth == 64 && decoded.diagnostics.activeHeight == 48,
+            "Raster decoder diagnostics are incomplete or incorrect.");
     require(decoded.metadata.camera == "Luma Raster Test" &&
                 decoded.metadata.lens == "Luma Test Lens" && decoded.metadata.iso == 200 &&
                 decoded.metadata.aperture == 4 && decoded.metadata.focalLength == 35 &&
@@ -245,6 +292,15 @@ void nativeTests(const std::filesystem::path &folder, const std::filesystem::pat
         require(red[0] > .9 && red[1] < .03 && blue[2] > .9 && blue[0] < .03,
                 "HEIC/AVIF primary pixels changed.");
     }
+    if (@available(macOS 15.0, *)) {
+        const auto hdr = decoder.decode(folder / "adaptive-hdr.heic");
+        const auto shadow = pixel(hdr.image, 2, 2);
+        const auto highlight = pixel(hdr.image, 12, 2);
+        require(shadow[0] > .12 && shadow[0] < .25 && highlight[0] > 1.25 && highlight[0] <= 4.1,
+                "Adaptive HDR gain map did not decode to bounded linear headroom.");
+        require(hdr.diagnostics.highlights == luma::DecodeHighlightPath::adaptiveHDR,
+                "Adaptive HDR decoder diagnostics did not report expanded headroom.");
+    }
     const auto gif = decoder.decode(assets / "two-frames.gif");
     require(pixel(gif.image, 2, 2)[0] > .99 && pixel(gif.image, 31, 23)[2] > .99,
             "GIF did not select the first frame.");
@@ -283,7 +339,7 @@ void nativeTests(const std::filesystem::path &folder, const std::filesystem::pat
             "Image extension discovery changed.");
 }
 void coverageTests(const std::filesystem::path &folder) {
-    luma::DecodedImage source{luma::FloatImage(64, 48), {}, {}};
+    luma::DecodedImage source{luma::FloatImage(64, 48), {}, {}, {}};
     source.metadata.width = 64;
     source.metadata.height = 48;
     source.image.alpha.resize(64 * 48);
@@ -400,8 +456,9 @@ int main(int argc, char **argv) {
             nativeTests(folder.path, argv[1]);
             coverageTests(folder.path);
             rawFormatTests(folder.path);
-            std::cout << "Raster decode: ICC, metadata, EXIF orientations, 16-bit, WebP/GIF, "
-                         "coverage/spatial/export, RAW registry/XMP and invalid inputs passed.\n";
+            std::cout << "Raster decode: ICC, metadata, EXIF orientations, 16-bit, Adaptive HDR, "
+                         "WebP/GIF, coverage/spatial/export, RAW registry/XMP and invalid inputs "
+                         "passed.\n";
             return 0;
         } catch (const std::exception &error) {
             std::cerr << error.what() << '\n';
